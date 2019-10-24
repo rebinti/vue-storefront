@@ -18,16 +18,12 @@
             @click="toggleSubMenu(category.id)"
             @mouseenter="activeSubMenu = category.id"
             @mouseleave="activeSubMenu = null"
-          >
-            {{ category.name }}
-          </button>
+          >{{ category.name }}</button>
           <router-link
             v-else
             class="menu-link"
             :to="localizedRoute({ name: 'category', params: { id: category.id, slug: category.slug }})"
-          >
-            {{ category.name }}
-          </router-link>
+          >{{ category.name }}</router-link>
 
           <sub-category
             v-show="activeSubMenu === category.id"
@@ -37,7 +33,7 @@
             class="left-0"
           />
         </li>
-        <li>
+        <!-- <li>
           <router-link
             class="menu-link"
             :to="localizedRoute('/sale')"
@@ -45,15 +41,27 @@
           >
             {{ $t('Sale') }}
           </router-link>
+        </li>-->
+
+        <li>
+          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('Test Menu') }}</router-link>
+          <div
+            class="main-item row cms-block-menu"
+            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
+             <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'test-menu1'" />
+              </div>
+             </div> 
+          </div>
         </li>
+
         <li>
           <router-link
             class="menu-link"
             :to="localizedRoute('/magazine')"
             exact
-          >
-            {{ $t('Magazine') }}
-          </router-link>
+          >{{ $t('Magazine') }}</router-link>
         </li>
       </ul>
     </div>
@@ -61,68 +69,83 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
-import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
-import SubCategory from 'theme/components/core/blocks/HeaderMenu/SubCategory'
-import CurrentPage from 'theme/mixins/currentPage'
+import { mapGetters, mapState } from "vuex";
+import onEscapePress from "@vue-storefront/core/mixins/onEscapePress";
+import SubCategory from "theme/components/core/blocks/HeaderMenu/SubCategory";
+import CurrentPage from "theme/mixins/currentPage";
+import CmsBlock from '../Cms/Block'
 
 export default {
-  name: 'HeaderMenu',
+  name: "HeaderMenu",
   components: {
-    SubCategory
+    SubCategory,
+    CmsBlock
+
   },
-  mixins: [CurrentPage, onEscapePress],
-  data () {
+  mixins: [CurrentPage, onEscapePress, CmsBlock],
+  data() {
     return {
       allCategories: [],
       activeSubMenu: null
-    }
+    };
   },
   computed: {
-    ...mapGetters('category', ['getCategories']),
-    categories () {
-      return this.allCategories.filter((op) => {
-        return op.level === (this.$store.state.config.entities.category.categoriesDynamicPrefetchLevel ? this.$store.state.config.entities.category.categoriesDynamicPrefetchLevel : 2) // display only the root level (level =1 => Default Category), categoriesDynamicPrefetchLevel = 2 by default
-      })
+    ...mapGetters("category", ["getCategories"]),
+    categories() {
+      return this.allCategories.filter(op => {
+        return (
+          op.level ===
+          (this.$store.state.config.entities.category
+            .categoriesDynamicPrefetchLevel
+            ? this.$store.state.config.entities.category
+                .categoriesDynamicPrefetchLevel
+            : 2)
+        ); // display only the root level (level =1 => Default Category), categoriesDynamicPrefetchLevel = 2 by default
+      });
     },
     ...mapState({
       currentUser: state => state.user.current
     }),
-    visibleCategories () {
+    visibleCategories() {
       return this.categories.filter(category => {
-        return category.product_count > 0 || category.children_count > 0
-      })
+        return category.product_count > 0 || category.children_count > 0;
+      });
     }
   },
-  created () {
-    this.allCategories = this.getCategories
+  created() {
+    this.allCategories = this.getCategories;
   },
-  async mounted () {
-    let categories = await this.$store.dispatch('category/list', { skipCache: true, includeFields: this.$store.state.config.entities.optimize ? this.$store.state.config.entities.category.includeFields : null })
+  async mounted() {
+    let categories = await this.$store.dispatch("category/list", {
+      skipCache: true,
+      includeFields: this.$store.state.config.entities.optimize
+        ? this.$store.state.config.entities.category.includeFields
+        : null
+    });
 
-    this.allCategories = categories.items
+    this.allCategories = categories.items;
   },
   methods: {
-    onEscapePress () {
-      this.closeMenu()
+    onEscapePress() {
+      this.closeMenu();
     },
-    openMenu (id) {
-      this.activeSubMenu = id
+    openMenu(id) {
+      this.activeSubMenu = id;
       // this.$store.commit('ui/setOverlay', true)
     },
-    closeMenu () {
-      this.activeSubMenu = null
+    closeMenu() {
+      this.activeSubMenu = null;
       // this.$store.commit('ui/setOverlay', false)
     },
-    toggleSubMenu (id) {
+    toggleSubMenu(id) {
       if (this.activeSubMenu === id) {
-        this.closeMenu()
+        this.closeMenu();
       } else {
-        this.openMenu(id)
+        this.openMenu(id);
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -136,12 +159,14 @@ export default {
     line-height: 1.25rem;
     text-decoration: none;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       @apply text-primary bg-grey-lighter;
       outline: none;
     }
 
-    &.active, &.router-link-active {
+    &.active,
+    &.router-link-active {
       @apply text-primary bg-grey-lighter border-t-2 border-solid border-primary;
       padding-top: 13px;
     }
@@ -156,5 +181,8 @@ export default {
   > .submenu {
     display: block !important;
   }
+}
+.groupdrop-banner.img_bg{
+  padding: 10px !important;
 }
 </style>
