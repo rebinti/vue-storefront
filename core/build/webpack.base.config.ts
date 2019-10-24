@@ -37,7 +37,7 @@ const postcssConfig = {
   options: {
     ident: 'postcss',
     plugins: (loader) => [
-	  require('tailwindcss')(path.join(themeRoot, 'tailwind.config.js')), 	
+	    require('tailwindcss')(path.join(themeRoot, 'tailwind.config.js')), 	
       require('postcss-flexbugs-fixes'),
       require('autoprefixer')({
         flexbox: 'no-2009'
