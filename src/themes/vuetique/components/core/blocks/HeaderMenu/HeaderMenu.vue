@@ -3,7 +3,7 @@
     <div class="container">
       <ul class="flex menu">
 
-       <!-- <li :class="{active: activeSubMenu == 'new-in-cmsmenu'}" 
+       <li :class="{active: activeSubMenu == 'new-in-cmsmenu'}" 
            @mouseenter="activeSubMenu = 'new-in-cmsmenu'"
            @mouseleave="activeSubMenu = null">
           <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('NEW IN') }}</router-link>
@@ -16,7 +16,7 @@
               </div>
              </div> 
           </div>
-        </li> -->
+        </li>
 
        <li :class="{active: activeSubMenu == 'dresses-cmsmenu'}" 
            @mouseenter="activeSubMenu = 'dresses-cmsmenu'"
@@ -33,7 +33,7 @@
           </div>
       </li>
 
-      <!-- <li :class="{active: activeSubMenu == 'womens-cmsmenu'}" 
+      <li :class="{active: activeSubMenu == 'womens-cmsmenu'}" 
            @mouseenter="activeSubMenu = 'womens-cmsmenu'"
            @mouseleave="activeSubMenu = null">
           <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('WOMENS') }}</router-link>
@@ -46,7 +46,7 @@
               </div>
              </div> 
           </div>
-      </li>   -->
+      </li>  
 
 
 
@@ -56,6 +56,8 @@
           :key="category.slug"
           v-for="category in visibleCategories"
           :class="{'with-submenu': (category.children_data && category.children_data.length)}"
+          @mouseenter="activeSubMenu = category.id"
+          @mouseleave="activeSubMenu = null"
         >
           <button
             v-if="category.children_count > 0"
@@ -65,8 +67,7 @@
             :aria-label="$t('Show subcategories')"
             data-testid="categoryButton"
             @click="toggleSubMenu(category.id)"
-            @mouseenter="activeSubMenu = category.id"
-            @mouseleave="activeSubMenu = null"
+
           >{{ category.name }}</button>
           <router-link
             v-else
