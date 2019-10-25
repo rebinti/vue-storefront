@@ -43,9 +43,11 @@
           </router-link>
         </li>-->
 
-        <li>
+        <li :class="{active: activeSubMenu == 'test-menu1'}" 
+           @mouseenter="activeSubMenu = 'test-menu1'"
+           @mouseleave="activeSubMenu = null">
           <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('Test Menu') }}</router-link>
-          <div
+          <div v-show="activeSubMenu === 'test-menu1'"
             class="main-item row cms-block-menu"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
