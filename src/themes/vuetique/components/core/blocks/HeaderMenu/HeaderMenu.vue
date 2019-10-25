@@ -3,10 +3,9 @@
     <div class="container">
       <ul class="flex menu">
 
-       <li :class="{active: activeSubMenu == 'new-in-cmsmenu'}" 
-           @mouseenter="activeSubMenu = 'new-in-cmsmenu'"
+       <li @mouseenter="activeSubMenu = 'new-in-cmsmenu'"
            @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('NEW IN') }}</router-link>
+          <router-link class="menu-link" :class="{active: activeSubMenu == 'new-in-cmsmenu'}"  :to="localizedRoute('/sale')" exact>{{ $t('NEW IN') }}</router-link>
           <div v-show="activeSubMenu === 'new-in-cmsmenu'"
             class="main-item row cms-block-menu"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
@@ -16,12 +15,11 @@
               </div>
              </div> 
           </div>
-        </li>
+      </li>
 
-       <li :class="{active: activeSubMenu == 'dresses-cmsmenu'}" 
-           @mouseenter="activeSubMenu = 'dresses-cmsmenu'"
+       <li @mouseenter="activeSubMenu = 'dresses-cmsmenu'"
            @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('DRESSES') }}</router-link>
+          <router-link class="menu-link" :class="{active: activeSubMenu == 'dresses-cmsmenu'}" :to="localizedRoute('/sale')" exact>{{ $t('DRESSES') }}</router-link>
           <div v-show="activeSubMenu === 'dresses-cmsmenu'"
             class="main-item row cms-block-menu"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
@@ -33,10 +31,9 @@
           </div>
       </li>
 
-      <li :class="{active: activeSubMenu == 'womens-cmsmenu'}" 
-           @mouseenter="activeSubMenu = 'womens-cmsmenu'"
+      <li  @mouseenter="activeSubMenu = 'womens-cmsmenu'"
            @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('WOMENS') }}</router-link>
+          <router-link class="menu-link" :class="{active: activeSubMenu == 'womens-cmsmenu'}"  :to="localizedRoute('/sale')" exact>{{ $t('WOMENS') }}</router-link>
           <div v-show="activeSubMenu === 'womens-cmsmenu'"
             class="main-item row cms-block-menu"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
