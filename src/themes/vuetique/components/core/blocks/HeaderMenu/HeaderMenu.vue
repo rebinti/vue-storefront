@@ -2,6 +2,55 @@
   <div v-if="!isCheckoutPage" class="hidden lg:block w-full bg-white border-b border-solid">
     <div class="container">
       <ul class="flex menu">
+
+       <!-- <li :class="{active: activeSubMenu == 'new-in-cmsmenu'}" 
+           @mouseenter="activeSubMenu = 'new-in-cmsmenu'"
+           @mouseleave="activeSubMenu = null">
+          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('NEW IN') }}</router-link>
+          <div v-show="activeSubMenu === 'new-in-cmsmenu'"
+            class="main-item row cms-block-menu"
+            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
+             <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'new-in-cmsmenu'" />
+              </div>
+             </div> 
+          </div>
+        </li> -->
+
+       <li :class="{active: activeSubMenu == 'dresses-cmsmenu'}" 
+           @mouseenter="activeSubMenu = 'dresses-cmsmenu'"
+           @mouseleave="activeSubMenu = null">
+          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('DRESSES') }}</router-link>
+          <div v-show="activeSubMenu === 'dresses-cmsmenu'"
+            class="main-item row cms-block-menu"
+            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
+             <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'dresses-cmsmenu'" />
+              </div>
+             </div> 
+          </div>
+      </li>
+
+      <!-- <li :class="{active: activeSubMenu == 'womens-cmsmenu'}" 
+           @mouseenter="activeSubMenu = 'womens-cmsmenu'"
+           @mouseleave="activeSubMenu = null">
+          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('WOMENS') }}</router-link>
+          <div v-show="activeSubMenu === 'womens-cmsmenu'"
+            class="main-item row cms-block-menu"
+            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
+             <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'womens-cmsmenu'" />
+              </div>
+             </div> 
+          </div>
+      </li>   -->
+
+
+
+
         <li
           class="relative"
           :key="category.slug"
@@ -43,20 +92,6 @@
           </router-link>
         </li>-->
 
-        <li :class="{active: activeSubMenu == 'test-menu1'}" 
-           @mouseenter="activeSubMenu = 'test-menu1'"
-           @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :to="localizedRoute('/sale')" exact>{{ $t('Test Menu') }}</router-link>
-          <div v-show="activeSubMenu === 'test-menu1'"
-            class="main-item row cms-block-menu"
-            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
-             <div class="container">
-              <div class="menu-list col-6">
-                    <cms-block :identifier="'test-menu1'" />
-              </div>
-             </div> 
-          </div>
-        </li>
 
         <li>
           <router-link
