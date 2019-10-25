@@ -67,3 +67,18 @@ export default {
   }
 }
 </script>
+
+
+<style >
+.vue-cms-home-block1 .card {
+    padding: 0px 20px;
+    position: relative;
+}
+.vue-cms-home-block1 .card button.p_btn{
+    position: absolute;
+    left: 20%;
+    width: 60%;
+    bottom: 5px;
+}
+
+</style>

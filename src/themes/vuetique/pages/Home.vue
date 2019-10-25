@@ -1,7 +1,11 @@
 <template>
   <div id="home">
     <main-slider />
-
+     <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'vue-cms-home-block1'" />
+              </div>
+    </div> 
     <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" />
 
     <section class="new-collection container mb-16">
@@ -52,15 +56,18 @@ import Onboard from 'theme/components/theme/blocks/Home/Onboard'
 import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
 import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 import { Logger } from '@vue-storefront/core/lib/logger'
+import CmsBlock from '../components/core/blocks/Cms/Block'
+
 export default {
-  mixins: [Home],
+  mixins: [Home , CmsBlock],
   components: {
     MainSlider,
     Onboard,
     ProductListing,
     ProductsSlider,
     PromotedOffers,
-    TileLinks
+    TileLinks,
+    CmsBlock
   },
   data () {
     return {
