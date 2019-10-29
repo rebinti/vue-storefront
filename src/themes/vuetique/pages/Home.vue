@@ -6,6 +6,12 @@
                     <cms-block :identifier="'vue-cms-home-block1'" />
               </div>
     </div> 
+    <div class="container">
+              <div class="menu-list col-6">
+                   <prismic-cms-block :identifier="'homepage'"  />
+              </div>
+    </div> 
+
     <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" />
 
     <section class="new-collection container mb-16">
@@ -57,9 +63,11 @@ import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/Promote
 import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import CmsBlock from '../components/core/blocks/Cms/Block'
+import PrismicCmsBlock from '../../../modules/dnd-prismic-cms/components/CmsBlock/View.vue'
+
 
 export default {
-  mixins: [Home , CmsBlock],
+  mixins: [Home , CmsBlock , PrismicCmsBlock],
   components: {
     MainSlider,
     Onboard,
@@ -67,7 +75,8 @@ export default {
     ProductsSlider,
     PromotedOffers,
     TileLinks,
-    CmsBlock
+    CmsBlock,
+    PrismicCmsBlock
   },
   data () {
     return {

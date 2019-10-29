@@ -25,6 +25,8 @@ import { RawOutputExample } from './raw-output-example'
 import { InstantCheckout } from './instant-checkout'
 import { OrderHistory } from './order-history'
 
+import { DndPrismicCMS } from './dnd-prismic-cms'
+
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -76,6 +78,7 @@ export const registerModules: VueStorefrontModule[] = [
   AmpRenderer,
   InstantCheckout,
   Url,
-  OrderHistory
+  OrderHistory,
+  DndPrismicCMS
   // Example
 ]
