@@ -81,4 +81,36 @@ export default {
     bottom: 5px;
 }
 
+.vue-cms-home-offer-banner  .offer-line {
+    width: 100%;
+    height: 1px;
+    background: #e5e5e5;
+    margin-bottom: 75px;
+}
+.vue-cms-home-offer-banner .offer-border {
+    border-right: 1px solid #a0a0a0;
+}
+.vue-cms-home-offer-banner{
+    width: 100%;
+    color: #414142;
+    font-size: 22px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'brandon_grotesque', sans-serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.vue-cms-home-offer-banner span {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: none;
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+    font-weight: normal;
+}
+.vue-cms-home-offer-banner .offer-active {
+    color: #dc3939;
+}
+
 </style>

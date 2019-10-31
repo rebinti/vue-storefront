@@ -8,7 +8,8 @@
     </div> 
     <div class="container">
               <div class="menu-list col-6">
-                   <prismic-cms-block :identifier="'homepage'"  />
+                   <!-- <prismic-cms-block :identifier="'homepagecmsheading'"  /> -->
+                   <prismic-cms-page :identifier="'homepagecmsheading'"  />
               </div>
     </div> 
 
@@ -42,6 +43,11 @@
       <tile-links />
     </section>
     <Onboard />
+    <div class="container">
+            <div class="menu-list col-6">
+                    <cms-block :identifier="'vue-cms-home-offer-banner'" />
+           </div>
+    </div> 
   </div>
 </template>
 
@@ -64,10 +70,11 @@ import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import CmsBlock from '../components/core/blocks/Cms/Block'
 import PrismicCmsBlock from '../../../modules/dnd-prismic-cms/components/CmsBlock/View.vue'
+import PrismicCmsPage from '../../../modules/dnd-prismic-cms/components/CmsPage/View.vue'
 
 
 export default {
-  mixins: [Home , CmsBlock , PrismicCmsBlock],
+  mixins: [Home , CmsBlock , PrismicCmsBlock , PrismicCmsPage],
   components: {
     MainSlider,
     Onboard,
@@ -76,7 +83,8 @@ export default {
     PromotedOffers,
     TileLinks,
     CmsBlock,
-    PrismicCmsBlock
+    PrismicCmsBlock,
+    PrismicCmsPage
   },
   data () {
     return {
