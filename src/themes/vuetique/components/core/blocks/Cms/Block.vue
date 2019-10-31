@@ -128,4 +128,53 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+/*  vue-home-2banner  */
+
+.vue-home-2banner .im_bx{
+  position: relative;
+}
+
+.vue-home-2banner .img-bx-title{
+  position: absolute;
+  width:100%;
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width:100%;
+  font-family: Noto Serif SC, Lucida Bright, Lucidabright, Lucida Serif, Lucida, DejaVu Serif, Bitstream Vera Serif, Liberation Serif, Georgia, serif;
+}
+
+.vue-home-2banner .btn-main{
+  background-color: #4fce76;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #ffffff;
+  -webkit-transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vue-home-2banner .img-bx-btn{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom:3.5rem;
+}
+
+.vue-home-2banner .col-6.pb-5.im_bx {
+    max-height: 420px;
+    overflow: hidden;
+}
+
+
 </style>
