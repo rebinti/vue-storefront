@@ -70,6 +70,7 @@ export default {
 
 
 <style >
+/* @import '~theme/css/animations/transitions';
 /*  vue-cms-home-block1 */
 .vue-cms-home-block1 .card {
     padding: 0px 5px;
@@ -117,4 +118,14 @@ export default {
     color: #dc3939;
 }
 
+
+/* 6 banner block */ 
+.tile {
+  display: flex;
+  overflow: hidden;
+}
+.tile-image {
+  width: 100%;
+  height: 100%;
+}
 </style>

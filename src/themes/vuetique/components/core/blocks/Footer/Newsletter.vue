@@ -10,7 +10,7 @@
           <div class="bx-form_out">
 
             <h3 class="text-center lg:text-left">
-              {{ $t('Subscribe to the newsletter and receive a coupon for 10% off') }}
+              {{ $t('SIGN UP AND GET 10% OFF YOUR FIRST ORDER!') }}
             </h3>
 
             <button-full

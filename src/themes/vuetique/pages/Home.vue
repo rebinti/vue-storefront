@@ -2,15 +2,15 @@
   <div id="home">
     <main-slider />
      <div class="container">
-              <div class="menu-list col-6">
-                    <cms-block :identifier="'vue-cms-home-block1'" />
-              </div>
+          <div class="menu-list col-6">
+                <cms-block :identifier="'vue-cms-home-block1'" />
+          </div>
     </div> 
     <div class="container">
-              <div class="menu-list col-6">
-                   <!-- <prismic-cms-block :identifier="'homepagecmsheading'"  /> -->
-                   <prismic-cms-page :identifier="'homepagecmsheading'"  />
-              </div>
+          <div class="menu-list col-6">
+                <!-- <prismic-cms-block :identifier="'homepagecmsheading'"  /> -->
+                <prismic-cms-page :identifier="'homepagecmsheading'"  />
+          </div>
     </div> 
 
     <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" />
@@ -40,13 +40,14 @@
           </h2>
         </header>
       </div>
-      <tile-links />
+      <!-- <tile-links /> -->
+      <cms-block :identifier="'vue-home-6banner'" />
     </section>
     <Onboard />
     <div class="container">
-            <div class="menu-list col-6">
-                    <cms-block :identifier="'vue-cms-home-offer-banner'" />
-           </div>
+        <div class="menu-list col-6">
+              <cms-block :identifier="'vue-cms-home-offer-banner'" />
+        </div>
     </div> 
   </div>
 </template>

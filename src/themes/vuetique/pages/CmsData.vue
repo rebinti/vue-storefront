@@ -26,9 +26,11 @@ export default {
   mixins: [CmsData],
   computed: {
     data () {
+      console.log('cms--' , this.type , 'id--' , this.id , 'identifier--' , this.identifier , 'route_slug--' , this.$route.params.slug );
       if (this.id) {
         return this.$store.getters[`cms/get${this.type}`](this.id)
       } else if (this.identifier) {
+        console.log('cms--' , `cms/get${this.type}Identifier` );
         return this.$store.getters[`cms/get${this.type}Identifier`](this.identifier)
       } else {
         return this.$store.getters[`cms/get${this.type}Identifier`](this.$route.params.slug)
