@@ -123,7 +123,7 @@ module.exports = {
       'sm': '576px',
       'md': '768px',
       'lg': '992px',
-      'xl': '1201px'
+      'xl': '1600px'
     },
 
     /*
