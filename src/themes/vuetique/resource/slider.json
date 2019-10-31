@@ -4,16 +4,23 @@
       "title": "Simple, yet impressive",
       "subtitle": "",
       "button_text": "Find your purpose",
-      "image": "/assets/vuetique-homepage-slider-1.jpg",
+      "image": "/assets/slider/emptyname-21.jpg",
       "link": "/c/gear"
+    },
+    {
+      "title": "Dresses, find stylish",
+      "subtitle": "",
+      "button_text": "Find your purpose",
+      "image": "/assets/slider/hp_2.jpg",
+      "link": "/c/women-20"
     },
     {
       "title": "Unique Experience",
       "subtitle": "Collection",
       "button_text": "Fitness with style",
-      "image": "/assets/vuetique-homepage-slider-2.jpg",
+      "image": "/assets/slider/emptyname-354.jpg",
       "link": "/c/training"
     }
   ],
-  "total": "2"
+  "total": "3"
 }
