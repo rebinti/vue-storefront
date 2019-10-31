@@ -70,8 +70,9 @@ export default {
 
 
 <style >
+/*  vue-cms-home-block1 */
 .vue-cms-home-block1 .card {
-    padding: 0px 20px;
+    padding: 0px 5px;
     position: relative;
 }
 .vue-cms-home-block1 .card button.p_btn{
@@ -80,8 +81,11 @@ export default {
     width: 60%;
     bottom: 5px;
 }
+.vue-cms-home-block1 .card.h-100.img-alnleft{ left:-15px; }
+.vue-cms-home-block1 .card.h-100.img-alnright{ right:-15px; }
 
-.vue-cms-home-offer-banner  .offer-line {
+/*  vue-cms-home-offer-banner */
+.offer-line {
     width: 100%;
     height: 1px;
     background: #e5e5e5;
