@@ -1,10 +1,6 @@
 <template>
   <footer :class="{ 'border-top border-secondary': isCheckoutPage }">
-    <div class="container-fluid" style="color: white; min-height: auto;
-    height: 155px;
-    padding-top: 30px;
-    padding-bottom: 40px;
-    background: #000;">
+    <div class="container-fluid" style="color: white; min-height: auto; height: 155px; padding-top: 30px; padding-bottom: 40px; background: #000;">
               <Newsletter />
     </div> 
     <div
