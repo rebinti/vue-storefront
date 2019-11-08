@@ -1,10 +1,6 @@
 <template>
   <footer :class="{ 'border-top border-secondary': isCheckoutPage }">
-    <div class="container-fluid" style="color: white; min-height: auto;
-    height: 155px;
-    padding-top: 30px;
-    padding-bottom: 40px;
-    background: #000;">
+    <div class="container-fluid news-letter" >
               <Newsletter />
     </div> 
     <div
@@ -337,6 +333,13 @@ export default {
   height: 30px;
   text-align: center;
   margin: 0 2.5px;
+}
+
+.news-letter {
+    color: white; min-height: auto; height: 155px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    background: #000;
 }
 
 .footer-menu {

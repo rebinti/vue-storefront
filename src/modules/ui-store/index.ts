@@ -8,6 +8,7 @@ const store = {
     sidebar: false,
     microcart: false,
     wishlist: false,
+    reviewPanel: false,
     searchpanel: false,
     newsletterPopup: false,
     overlay: false,
@@ -50,6 +51,10 @@ const store = {
       state.wishlist = action === true
       state.overlay = action === true
     },
+    setReviewPanel (state, action) {
+      state.reviewPanel = action === true
+      state.overlay = action === true
+    },
     setOverlay (state, action) {
       state.overlay = action === true
     },
@@ -66,6 +71,9 @@ const store = {
     },
     toggleWishlist ({ commit, state }) {
       commit('setWishlist', !state.wishlist)
+    },
+    toggleReviewPanel ({ commit, state }) {
+      commit('setReviewPanel', !state.reviewPanel)
     }
   }
 }

@@ -14,6 +14,7 @@
         <microcart v-if="isMicrocartOpen" />
         <search-panel v-if="isSearchPanelOpen" />
         <wishlist v-if="isWishlistOpen" />
+        <review-panel v-if="isReviewPanelOpen" />
       </transition>
       <slot />
       <main-footer />
@@ -52,11 +53,14 @@ import Announcement from 'theme/components/theme/blocks/Header/Announcement.vue'
 import Icons from 'theme/components/theme/Icons.vue'
 
 import Head from 'theme/head'
+import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
 
 const SearchPanel = () => import(/* webpackChunkName: "vsf-search-panel" */ 'theme/components/core/blocks/SearchPanel/SearchPanel.vue')
 const SidebarMenu = () => import(/* webpackChunkName: "vsf-sidebar-menu" */ 'theme/components/core/blocks/SidebarMenu/SidebarMenu.vue')
 const Microcart = () => import(/* webpackChunkName: "vsf-microcart" */ 'theme/components/core/blocks/Microcart/Microcart.vue')
 const Wishlist = () => import(/* webpackChunkName: "vsf-wishlist" */ 'theme/components/core/blocks/Wishlist/Wishlist.vue')
+// const ReviewPanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue')
+
 const OrderConfirmation = () => import(/* webpackChunkName: "vsf-order-confirmation" */ 'theme/components/core/blocks/Checkout/OrderConfirmation.vue')
 
 export default {
@@ -79,7 +83,8 @@ export default {
       isSearchPanelOpen: state => state.ui.searchpanel,
       isSidebarOpen: state => state.ui.sidebar,
       isMicrocartOpen: state => state.ui.microcart,
-      isWishlistOpen: state => state.ui.wishlist
+      isWishlistOpen: state => state.ui.wishlist,
+      isReviewPanelOpen: state => state.ui.reviewPanel
     })
   },
   methods: {
@@ -150,7 +155,8 @@ export default {
     ModalSwitcher,
     OrderConfirmation,
     Announcement,
-    Icons
+    Icons,
+    ReviewPanel
   }
 }
 </script>
