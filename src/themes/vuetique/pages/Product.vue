@@ -47,6 +47,15 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
+	<div
+         class="yotpo yotpo-main-widget"
+         data-product-id="product.id"
+         data-price="product.price"
+         data-currency="product.currency"
+         data-name="product.name"
+         data-url="product.url_path"
+         data-image-url="product.image">
+</div>
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
               <meta itemprop="price" :content="parseFloat(product.priceInclTax).toFixed(2)">
