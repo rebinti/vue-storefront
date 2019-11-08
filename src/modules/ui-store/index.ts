@@ -19,7 +19,8 @@ const store = {
     submenu: {
       depth: false,
       path: []
-    }
+    },
+    yoptoProduct: null
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -63,6 +64,9 @@ const store = {
     },
     setAuthElem (state, action) {
       state.authElem = action
+    },
+    setYoptoProduct (state, data) {
+      state.yoptoProduct = data
     }
   },
   actions: {
@@ -74,6 +78,9 @@ const store = {
     },
     toggleReviewPanel ({ commit, state }) {
       commit('setReviewPanel', !state.reviewPanel)
+    },
+    updateYoptoProduct ({commit}, state) {
+      commit('setYoptoProduct', state)
     }
   }
 }

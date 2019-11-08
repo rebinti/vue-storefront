@@ -11,13 +11,22 @@
         <use xlink:href="#close" />
       </svg>
     </button>
-        Review panel Demo
+        Review yotpo panel Demo
+        <div v-if="yoptoProduct !== null"
+          class="yotpo yotpo-main-widget"
+          data-product-id="yoptoProduct.id"
+          data-price="yoptoProduct.price"
+          data-currency="yoptoProduct.currency"
+          data-name="yoptoProduct.name"
+          data-url="yoptoProduct.url_path"
+          data-image-url="yoptoProduct.image">
+        </div> 
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
-
 export default {
   name: 'ReviewPanel',
   props: {
@@ -27,7 +36,11 @@ export default {
   
   },
   computed: {
+    ...mapState({
+      yoptoProduct: state => state.ui.yoptoProduct
+    }),
     isReviewPanelOpen () {
+      console.log('state all data' , this.$store.state);
       return this.$store.state.ui.reviewPanel
     }
   },
@@ -35,6 +48,7 @@ export default {
   methods: {
     closeReviewPanel () {
       // this.$store.dispatch('ui/closeReviewPanel')
+      console.log('yoptoProduct' , this.yoptoProduct)
       this.$store.commit('ui/setSidebar', false)
 
       this.$store.dispatch('ui/toggleReviewPanel')
