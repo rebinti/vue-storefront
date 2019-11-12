@@ -51,7 +51,7 @@
       <cms-block :identifier="'vue-home-6banner'" />
     </section>
     <Onboard />
-    <div class="container">
+    <div class="container mr_kst">
         <div class="menu-list col-6">
               <cms-block :identifier="'vue-cms-home-offer-banner'" />
         </div>
@@ -100,7 +100,7 @@ export default {
         perPage: 1,
         perPageCustom: [[0, 2], [1024, 4]],
         paginationEnabled: true,
-        loop: false,
+        loop: true,
         paginationSize: 6
       }
     }
@@ -135,9 +135,9 @@ export default {
     return new Promise((resolve, reject) => {
       Logger.info('Calling asyncData in Home (theme)')()
 
-      let newProductsQuery = prepareQuery({ queryConfig: 'newProducts' })
+      let newProductsQuery = prepareQuery({ queryConfig: 'Accessories' })
       let salesQuery = prepareQuery({ queryConfig: 'inspirations' })
-
+      console.log('dataaaaaaaaaaa ===' , newProductsQuery);
       store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }).then((categories) => {
         store.dispatch('product/list', {
           query: newProductsQuery,
@@ -147,6 +147,7 @@ export default {
         }).catch(err => {
           reject(err)
         }).then((res) => {
+          console.log('newProductsQuery --- ress' , res);
           if (res) {
             store.state.homepage.new_collection = res.items
           }
@@ -174,3 +175,16 @@ export default {
   }
 }
 </script>
+<style>
+
+menu-list button.btn.btn-primary.p_btn{
+ color: red !important;
+ font-size: 26px;
+}
+@media screen and (max-width: 480px) {
+    menu-list button.btn.btn-primary.p_btn{
+        color: green !important;
+        font-size: 42px;
+       }
+  }
+</style>

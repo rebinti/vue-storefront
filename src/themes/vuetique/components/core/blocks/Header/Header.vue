@@ -24,9 +24,9 @@
           <div class="col-auto sm:col-4 lg:col-grow justify-end">
             <div class="right-icons flex">
               <search-icon class="p-3 hidden md:block lg:hidden" />
-              <account-icon class="p-3 hidden sm:block" />
+              <account-icon class="p-3" />
               <compare-icon class="p-3 hidden sm:block" />
-              <wishlist-icon class="p-3 hidden sm:block" />
+              <wishlist-icon class="p-3" />
               <microcart-icon class="p-3" />
             </div>
           </div>
