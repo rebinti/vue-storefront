@@ -47,6 +47,15 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
+	<div
+         class="yotpo yotpo-main-widget"
+         data-product-id="product.id"
+         data-price="product.price"
+         data-currency="product.currency"
+         data-name="product.name"
+         data-url="product.url_path"
+         data-image-url="product.image">
+</div>
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
               <meta itemprop="price" :content="parseFloat(product.priceInclTax).toFixed(2)">
@@ -175,6 +184,7 @@
               <div class="col-6">
                 <wishlist-button :product="product" />
               </div>
+
               <div class="col-6">
                 <button
                   @click="isOnCompare ? removeFromList('compare') : addToList('compare')"
@@ -191,6 +201,22 @@
                   <template v-else>
                     {{ $t('Remove from compare') }}
                   </template>
+                </button>
+              </div>
+            </div>
+
+            <div class="row text-sm md:py-5 text-center add-to-buttons">
+               <div class="col-6">
+                <button
+                  @click="toggleReviewPanel"
+                  class="inline-flex items-center text-grey-dark"
+                  type="button"
+                  data-testid="showReviews"
+                  style="border: 1px solid;
+                  padding: 5px;
+                  border-radius: 5px;"
+                >
+                    {{ $t('Show Reviews') }}
                 </button>
               </div>
             </div>
@@ -354,7 +380,11 @@ export default {
         message: this.$t('No such configuration for the product. Please do choose another combination of attributes.'),
         action1: { label: this.$t('OK') }
       })
-    }
+    },
+    toggleReviewPanel () {
+      this.$store.dispatch('ui/updateYoptoProduct' , this.product)
+      this.$store.dispatch('ui/toggleReviewPanel')
+    },
   }
 }
 </script>

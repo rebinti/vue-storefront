@@ -1,8 +1,25 @@
 <template>
   <div id="home">
     <main-slider />
+     <div class="container">
+          <div class="menu-list col-6">
+                <cms-block :identifier="'vue-cms-home-block1'" />
+          </div>
+    </div> 
+    <div class="container">
+          <div class="menu-list col-6">
+                <!-- <prismic-cms-block :identifier="'homepagecmsheading'"  /> -->
+                <prismic-cms-page :identifier="'homepagecmsheading'"  />
+          </div>
+    </div> 
 
-    <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" />
+    <!-- <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> -->
+
+    <div class="container">
+              <div class="menu-list col-6">
+                    <cms-block :identifier="'vue-home-2banner'"  />
+              </div>
+    </div> 
 
     <section class="new-collection container mb-16">
       <div>
@@ -17,7 +34,8 @@
       </div>
     </section>
 
-    <promoted-offers collection="smallBanners" :limit="2" :offset="2" :columns="2" class="mt-2 mb-16 sm:my-8" />
+    <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> 
+    <!-- <promoted-offers collection="smallBanners" :limit="2" :offset="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> -->
 
     <products-slider class="mb-16" :title="$t('Sale and discount')" :products="salesCollection" :config="sliderConfig" />
 
@@ -29,9 +47,15 @@
           </h2>
         </header>
       </div>
-      <tile-links />
+      <!-- <tile-links /> -->
+      <cms-block :identifier="'vue-home-6banner'" />
     </section>
     <Onboard />
+    <div class="container mr_kst">
+        <div class="menu-list col-6">
+              <cms-block :identifier="'vue-cms-home-offer-banner'" />
+        </div>
+    </div> 
   </div>
 </template>
 
@@ -52,15 +76,23 @@ import Onboard from 'theme/components/theme/blocks/Home/Onboard'
 import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
 import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 import { Logger } from '@vue-storefront/core/lib/logger'
+import CmsBlock from '../components/core/blocks/Cms/Block'
+import PrismicCmsBlock from '../../../modules/dnd-prismic-cms/components/CmsBlock/View.vue'
+import PrismicCmsPage from '../../../modules/dnd-prismic-cms/components/CmsPage/View.vue'
+
+
 export default {
-  mixins: [Home],
+  mixins: [Home , CmsBlock , PrismicCmsBlock , PrismicCmsPage],
   components: {
     MainSlider,
     Onboard,
     ProductListing,
     ProductsSlider,
     PromotedOffers,
-    TileLinks
+    TileLinks,
+    CmsBlock,
+    PrismicCmsBlock,
+    PrismicCmsPage
   },
   data () {
     return {
@@ -68,7 +100,7 @@ export default {
         perPage: 1,
         perPageCustom: [[0, 2], [1024, 4]],
         paginationEnabled: true,
-        loop: false,
+        loop: true,
         paginationSize: 6
       }
     }
@@ -103,9 +135,9 @@ export default {
     return new Promise((resolve, reject) => {
       Logger.info('Calling asyncData in Home (theme)')()
 
-      let newProductsQuery = prepareQuery({ queryConfig: 'newProducts' })
+      let newProductsQuery = prepareQuery({ queryConfig: 'Accessories' })
       let salesQuery = prepareQuery({ queryConfig: 'inspirations' })
-
+      console.log('dataaaaaaaaaaa ===' , newProductsQuery);
       store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }).then((categories) => {
         store.dispatch('product/list', {
           query: newProductsQuery,
@@ -115,6 +147,7 @@ export default {
         }).catch(err => {
           reject(err)
         }).then((res) => {
+          console.log('newProductsQuery --- ress' , res);
           if (res) {
             store.state.homepage.new_collection = res.items
           }
@@ -142,3 +175,16 @@ export default {
   }
 }
 </script>
+<style>
+
+menu-list button.btn.btn-primary.p_btn{
+ color: red !important;
+ font-size: 26px;
+}
+@media screen and (max-width: 480px) {
+    menu-list button.btn.btn-primary.p_btn{
+        color: green !important;
+        font-size: 42px;
+       }
+  }
+</style>

@@ -1,55 +1,15 @@
 <template>
   <footer :class="{ 'border-top border-secondary': isCheckoutPage }">
+    <div class="container-fluid news-letter" >
+              <Newsletter />
+    </div> 
     <div
       class="flex pt-8 pb-auto sm:pb-8 lg:pb-10 bg-grey-lighter mt-5"
       v-if="!isCheckoutPage"
     >
       <div class="container">
         <div class="row justify-center md:justify-between">
-          <div class="col-12 lg:col-3 flex flex-col">
-            <div class="">
-              <Newsletter />
-            </div>
-
-            <div class="flex justify-center lg:justify-start social-footer mt-12">
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mr-1 rounded-full"
-                href="https://www.facebook.com/"
-                :aria-label="$t('Go to Facebook')"
-              >
-                <img src="/assets/icons/social-f.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.instagram.com"
-                :aria-label="$t('Go to Instagram')"
-              >
-                <img src="/assets/icons/social-i.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.pinterest.com"
-                :aria-label="$t('Go to Pinterest')"
-              >
-                <img src="/assets/icons/social-p.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.youtube.com"
-                :aria-label="$t('Go to Youtube')"
-              >
-                <img src="/assets/icons/social-y.svg" alt="">
-              </a>
-            </div>
-          </div>
+      
           <div class="footer-menu sm:flex col-12 lg:col-9 justify-around mt-8 lg:mt-0">
             <div class="hidden md:block">
               <h3>
@@ -206,6 +166,52 @@
               </div>
             </Accordion>
           </div>
+
+              <div class="col-12 lg:col-3 flex flex-col">
+            <div class="">
+              <!-- <Newsletter /> --> 
+              <h3> Join in on the chit chat </h3>
+            </div>
+
+            <div class="flex justify-center lg:justify-start social-footer mt-12">
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mr-1 rounded-full"
+                href="https://www.facebook.com/"
+                :aria-label="$t('Go to Facebook')"
+              >
+                <img src="/assets/icons/social-f.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.instagram.com"
+                :aria-label="$t('Go to Instagram')"
+              >
+                <img src="/assets/icons/social-i.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.pinterest.com"
+                :aria-label="$t('Go to Pinterest')"
+              >
+                <img src="/assets/icons/social-p.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.youtube.com"
+                :aria-label="$t('Go to Youtube')"
+              >
+                <img src="/assets/icons/social-y.svg" alt="">
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -327,6 +333,13 @@ export default {
   height: 30px;
   text-align: center;
   margin: 0 2.5px;
+}
+
+.news-letter {
+    color: white; min-height: auto; height: 155px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    background: #000;
 }
 
 .footer-menu {

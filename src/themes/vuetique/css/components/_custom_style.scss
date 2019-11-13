@@ -1,0 +1,123 @@
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .vue-cms-home-block1{
+
+        .card{
+
+            button {
+                &.p_btn {
+                    
+                    font-size: 10px;
+                }
+              }
+
+        } 
+
+    }
+
+}
+
+@media (min-width: 768px){
+}
+
+@media (max-width: 767px) {
+
+    .vue-cms-home-block1{
+
+        .card{
+
+            button {
+                &.p_btn {
+                    
+                    font-size: 12px;
+                    line-height: 16px;
+                }
+              }
+
+        } 
+
+    }
+    .vue-home-2banner{
+        .img-bx-title{
+            font-size: 20px;
+            top:75px;
+        }
+        .col-6{
+            &.pb-5{
+                &.im_bx{
+                    -ms-flex-preferred-size: 100%;
+                    flex-basis: 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+    .mr_kst{
+        display: none!important;
+    }
+    .vue-cms-home-offer-banner{
+        display: none!important;
+    }
+    .cms-content{
+        &.py-10{
+            padding-bottom: 0px!important;
+        }
+    }
+    .news-letter{
+        .bx-form_out_main{
+            position: relative;
+            top: auto;
+            -webkit-transform: translateY(0%);
+            -ms-transform: translateY(0%);
+            transform: translateY(0%);
+            text-align: center;
+            .bx-form_out{
+                h3{
+                 font-size: 14px; 
+                 width:100%;
+                }
+                .newsletter-btn{
+                    margin-left: 0px;
+                    display: inline-block;
+                    float: none;
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width: 479px) {
+
+    .vue-cms-home-block1{
+    
+        .new-offer-top{
+                .row{
+                    .col-4{
+
+                        -ms-flex-preferred-size: 100%;
+                        flex-basis: 100%;
+                        max-width: 100%;
+
+                        .card{
+                            &.h-100 {
+                                left:0px!important;
+                                right:0px!important;
+                                margin-top: 20px;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+
+

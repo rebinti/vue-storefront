@@ -8,6 +8,7 @@ const store = {
     sidebar: false,
     microcart: false,
     wishlist: false,
+    reviewPanel: false,
     searchpanel: false,
     newsletterPopup: false,
     overlay: false,
@@ -18,7 +19,8 @@ const store = {
     submenu: {
       depth: false,
       path: []
-    }
+    },
+    yoptoProduct: null
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -50,6 +52,10 @@ const store = {
       state.wishlist = action === true
       state.overlay = action === true
     },
+    setReviewPanel (state, action) {
+      state.reviewPanel = action === true
+      state.overlay = action === true
+    },
     setOverlay (state, action) {
       state.overlay = action === true
     },
@@ -58,6 +64,9 @@ const store = {
     },
     setAuthElem (state, action) {
       state.authElem = action
+    },
+    setYoptoProduct (state, data) {
+      state.yoptoProduct = data
     }
   },
   actions: {
@@ -66,6 +75,12 @@ const store = {
     },
     toggleWishlist ({ commit, state }) {
       commit('setWishlist', !state.wishlist)
+    },
+    toggleReviewPanel ({ commit, state }) {
+      commit('setReviewPanel', !state.reviewPanel)
+    },
+    updateYoptoProduct ({commit}, state) {
+      commit('setYoptoProduct', state)
     }
   }
 }
