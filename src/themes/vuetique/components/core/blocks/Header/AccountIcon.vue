@@ -1,5 +1,5 @@
 <template>
-  <div class="relative dropdown cursor-pointer"
+  <div class="relative dropdown cursor-pointer acc_ico"
        data-testid="accountButton"
        @click.self="goToAccount"
   >
@@ -8,9 +8,10 @@
       class="bg-transparent border-0 p-0"
       :aria-label="$t('Open my account')"
     >
-      <svg viewBox="0 0 25 25" class="vt-icon">
+      <!-- <svg viewBox="0 0 25 25" class="vt-icon">
         <use xlink:href="#user" />
-      </svg>
+      </svg> -->
+    <div class="ic_list_m"><img src="assets/u_s_account.png" /></div>
     </button>
     <ul v-if="currentUser" class="dropdown-content">
       <li v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">

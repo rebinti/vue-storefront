@@ -5,9 +5,10 @@
     @click="toggleWishlistPanel"
     :aria-label="$t('Open wishlist')"
   >
-    <svg viewBox="0 0 25 25" class="vt-icon">
+    <!-- <svg viewBox="0 0 25 25" class="vt-icon">
       <use xlink:href="#wishlist" />
-    </svg>
+    </svg> -->
+    <div class="ic_list_m"><img src="assets/heart_bold.png" /></div>
   </button>
 </template>
 

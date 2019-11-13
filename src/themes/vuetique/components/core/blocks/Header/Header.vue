@@ -5,7 +5,7 @@
     >
       <div class="container h-full">
         <div class="row gutter-md items-center h-full" v-if="!isCheckoutPage">
-          <div class="col-auto sm:col-4 lg:col-auto">
+          <div class="col-auto sm:col-4 lg:col-auto lg_mnu">
             <div>
               <template v-if="!canGoBack">
                 <hamburger-icon class="p-3" />

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="localizedRoute('/')" :title="$t('Home Page')" class="no-underline">
+  <router-link :to="localizedRoute('/')" :title="$t('Home Page')" class="no-underline lg_blk">
     <img
       class="logo hidden md:block"
       src="/assets/logo.svg"
