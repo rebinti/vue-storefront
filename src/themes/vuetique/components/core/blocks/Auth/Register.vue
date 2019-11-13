@@ -29,9 +29,9 @@
             }
           ]"
         />
-        <div class="row mb-5 -mx-2 tx_bx_out">
+        <div class="row mb-5 tx_bx_out">
           <base-input
-            class="w-full sm:w-1/2 px-2 tx_bx_out"
+            class="w-full sm:w-1/2 tx_bx_out"
             type="text"
             name="fist-name"
             autocomplete="given-name"
@@ -47,7 +47,7 @@
           <div class="w-full sm:hidden md:hidden lg:hidden" />
 
           <base-input
-            class="w-full sm:w-1/2 px-2 tx_bx_out"
+            class="w-full sm:w-1/2 tx_bx_out"
             type="text"
             name="last-name"
             autocomplete="last-name"
@@ -116,13 +116,34 @@
         </base-checkbox>
         </div>
 
+        <div class="chk_out_blk">
+        <base-checkbox
+          class="mb-3 text-black"
+          id="terms"
+          v-model="conditions"
+          @click="conditions = !conditions"
+          @blur="$v.conditions.$reset()"
+          @change="$v.conditions.$touch()"
+          :validation="{
+            condition: !$v.conditions.required && $v.conditions.$error,
+            text: $t('You must accept the terms and conditions.')
+          }"
+        >
+          {{ $t('I would like to receive the latest news from iCLOTHING by email') }} *
+        </base-checkbox>
+        </div>
+
        
         <button-full class="mb-2 w-full l_login" type="submit">
           {{ $t('Register an account') }}
         </button-full>
+
+        <button-full class="mb-2 w-full d_lgn" type="submit">
+          {{ $t('Register an account') }}
+        </button-full>
         
 
-        <div class="text-center">
+        <div class="text-center log_txt">
           <span>
             {{ $t('or') }}
             <a href="#" @click.prevent="switchElem">

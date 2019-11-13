@@ -162,7 +162,7 @@
 
                     button{
                         &.text-grey-dark{
-                            top:40px;
+                            top:25px;
                         }
                     }
 
@@ -170,7 +170,7 @@
                         background: #fafafa;
                         border:0px;
                         border-bottom: 1px solid #e0e0e0;
-                        height: 100px;
+                        height: 80px;
                         color: #bbbbbb;
                         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                             color: #bbbbbb;
@@ -188,12 +188,17 @@
 
                 }
                 .l_login{
-                    width:70%;
-                    margin-left: 15%;
+                    width:315px;
+                    margin:0 auto;
                     background: #000;
                     color:#ffffff;
-                    font-size:14px;
-                    margin-top: 20px;
+                    font-family: Roboto;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 15px;
+                    line-height: 15px;
+                    margin-top: 50px;
+                    height:48px;
 
                 }
                 .l_rmer{
@@ -220,7 +225,16 @@
                     border-bottom: 1px solid #e0e0e0;
                     .text-black{
                         margin-bottom: 0px!important;
-                        color:#939393;
+                        color:#000000;
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 11px;
+                        line-height: 15px;
+                        margin-top: 10px;
+                        label{
+                           
+                        }
                     }
                 }
                 .checkbox-wrap input[type="radio"] + label::before, .checkbox-wrap input[type="checkbox"] + label::before{
@@ -228,8 +242,14 @@
                     height:25px;
                     background-color: #e2e2e2;
                     border-color:#e2e2e2;
+                    top:-5px;
                 }
-                
+                .d_lgn{
+                    display: none;
+                }
+                .log_txt{
+                    display: none;
+                }
                 
             }
 
