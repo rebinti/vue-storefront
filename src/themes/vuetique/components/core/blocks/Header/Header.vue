@@ -15,7 +15,7 @@
               </template>
             </div>
           </div>
-          <div class="col-grow sm:col-4 lg:col-grow flex items-center justify-center lg:justify-start">
+          <div class="col-grow m_logo sm:col-4 lg:col-grow flex items-center justify-center lg:justify-start">
             <logo />
           </div>
           <div class="col-6 hidden lg:block">

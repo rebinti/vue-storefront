@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login_out_bx">
     <header class="modal-header">
       <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close">
         <use xlink:href="#close" />
@@ -7,9 +7,18 @@
       <h2>{{ $t('Login') }}</h2>
     </header>
     <div class="modal-content">
+      <div class="mobile-signup">
+        <p>Dont have an account? 
+          <b>  
+            <a href="#" @click.prevent="switchElem" data-testid="registerLink">Sign up
+            </a>
+              </b> 
+            </p>
+      </div>
+
       <form @submit.prevent="login" novalidate>
         <base-input
-          class="mb-5"
+          class="mb-5 tx_bx_out"
           type="email"
           name="email"
           focus
@@ -28,7 +37,7 @@
           ]"
         />
         <base-input
-          class="mb-5"
+          class="mb-5 tx_bx_out"
           type="password"
           name="password"
           v-model="password"
@@ -39,23 +48,26 @@
             text: $t('Field is required.')
           }"
         />
-        <div class="row mt-5 mb-5 lg:mb-10">
+         <button-full class="mb-2 w-full l_login" type="submit" data-testid="loginSubmit">
+          {{ $t('Login') }}
+        </button-full>
+        <div class="row mt-5 mb-5 lg:mb-10 mr_btm">
           <base-checkbox
-            class="col-12 sm:col-6 text-black"
+            class="col-12 sm:col-6 text-black l_rmer"
             id="remember"
             v-model="remember"
             @click="remember = !remember"
           >
             {{ $t('Remember me') }}
           </base-checkbox>
-          <div class="col-12 sm:col-6 mt-2 sm:mt-0 sm:text-right">
+          <div class="col-12 sm:col-6 mt-2 sm:mt-0 sm:text-right l_rk">
             <a href="#" @click.prevent="remindPassword">
               {{ $t('Forgot your password?') }}
             </a>
           </div>
         </div>
-
-        <button-full class="mb-2 w-full" type="submit" data-testid="loginSubmit">
+        <div class="l_g_rm">
+        <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit">
           {{ $t('Log in to your account') }}
         </button-full>
 
@@ -64,6 +76,7 @@
           <a href="#" @click.prevent="switchElem" data-testid="registerLink">
             {{ $t('register an account') }}
           </a>
+        </div>
         </div>
       </form>
     </div>

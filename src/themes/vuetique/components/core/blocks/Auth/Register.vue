@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login_out_bx">
     <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary">
       <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close">
         <use xlink:href="#close" />
@@ -10,7 +10,7 @@
     <div class="modal-content pt30 pb60 px65 cl-secondary">
       <form @submit.prevent="register" novalidate>
         <base-input
-          class="mb-5"
+          class="mb-5 tx_bx_out"
           type="email"
           name="email"
           autocomplete="email"
@@ -29,9 +29,9 @@
             }
           ]"
         />
-        <div class="row mb-5 -mx-2">
+        <div class="row mb-5 -mx-2 tx_bx_out">
           <base-input
-            class="w-full sm:w-1/2 px-2"
+            class="w-full sm:w-1/2 px-2 tx_bx_out"
             type="text"
             name="fist-name"
             autocomplete="given-name"
@@ -44,10 +44,10 @@
             }"
           />
 
-          <div class="w-full sm:hidden md:hidden lg:hidden mb-5" />
+          <div class="w-full sm:hidden md:hidden lg:hidden" />
 
           <base-input
-            class="w-full sm:w-1/2 px-2"
+            class="w-full sm:w-1/2 px-2 tx_bx_out"
             type="text"
             name="last-name"
             autocomplete="last-name"
@@ -61,7 +61,7 @@
           />
         </div>
         <base-input
-          class="mb-5"
+          class="mb-5 tx_bx_out"
           type="password"
           name="password"
           ref="password"
@@ -81,7 +81,7 @@
           ]"
         />
         <base-input
-          class="mb-5"
+          class="mb-5 tx_bx_out"
           type="password"
           name="password-confirm"
           autocomplete="new-password"
@@ -99,6 +99,7 @@
             }
           ]"
         />
+        <div class="chk_out_blk">
         <base-checkbox
           class="mb-3 text-black"
           id="terms"
@@ -113,10 +114,13 @@
         >
           {{ $t('I accept terms and conditions') }} *
         </base-checkbox>
+        </div>
 
-        <button-full class="mb-2 w-full" type="submit">
+       
+        <button-full class="mb-2 w-full l_login" type="submit">
           {{ $t('Register an account') }}
         </button-full>
+        
 
         <div class="text-center">
           <span>
