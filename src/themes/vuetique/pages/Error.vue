@@ -1,5 +1,5 @@
 <template>
-  <div id="page_not_found" class="page_not_found">
+  <div id="page_not_found" class="page_not_foundddd">
     <section class="bg-grey-lighter py-12 px-12">
       <div class="container">
         <div class="text-center mb-20">
