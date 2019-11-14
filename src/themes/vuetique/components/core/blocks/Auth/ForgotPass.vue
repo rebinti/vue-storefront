@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login_out_bx">
     <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary">
       <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close">
         <use xlink:href="#close" />
@@ -10,11 +10,12 @@
     <div class="modal-content pt30 pb60 px65 cl-secondary">
       <template v-if="!passwordSent">
         <form @submit.prevent="sendEmail" novalidate>
-          <div class="mb-5">
-            <p class="mb-5">
+          <div class="mb-5 tx_bx_out">
+            <p class="mb-5 m_hide">
               {{ $t('Enter your email to receive instructions on how to reset your password.') }}
             </p>
             <base-input
+              class="tx_bx_out"
               type="email"
               name="email"
               v-model="email"
@@ -32,10 +33,10 @@
               ]"
             />
           </div>
-          <button-full class="mb-5 w-full" type="submit">
+          <button-full class="mb-5 w-full l_login" type="submit">
             {{ $t('Reset password') }}
           </button-full>
-          <div class="text-center">
+          <div class="text-center t_mrg">
             {{ $t('or') }}
             <a href="#" @click.prevent="switchElem">
               {{ $t('return to log in') }}

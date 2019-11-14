@@ -108,6 +108,7 @@
     .lrge_btn{ width:100%; }
     .l_g_rm{ display: inline-block; width:100%; }
     .mr_btm{ margin-bottom: 20px!important;}
+    .login_box_out{ display: none; }
     
 }
 
@@ -123,10 +124,10 @@
             height: 15px;
         }
         .m_logo{
-            /*width:60%!important;
-            flex: inherit;
-            -ms-flex: inherit;*/
             margin-top: 1px;
+            .logo-text{
+                height:18px;
+            }
         }
         .right-icons{
             position: absolute;
@@ -134,11 +135,22 @@
             right:0px;
             .p-3{
                 padding: 5px !important;
-                padding-left: 0px!important;
+            }
+            .minicart-count{
+                top: 10px;
+                left: 50%;
+                min-width: 11px;
+                min-height: 11px;
+                border-radius: 50%;
+                float: right;
+                height: 15px;
+                font-size: 9px;
             }
         }
 
     }
+
+    .m_hide{ display: none; }
 
     .modal{
         .login_out_bx{
@@ -233,6 +245,10 @@
                 }
                 .text-error{
                     padding-left: 10px;
+                    position: absolute;
+                    width:100%;
+                    bottom:0px;
+                    left:0px;
                 }
                 .chk_out_blk{
                     width:100%;
@@ -265,7 +281,23 @@
                 .log_txt{
                     display: none;
                 }
-                
+                .login_box_out{
+                    width:100%;
+                    text-align: center;
+                    .login_bx{
+                        img{
+                            display: inline-block;
+                        }
+                        padding-bottom: 15px;
+                    }
+                    
+                }
+                .right-icons{
+                    margin-right: 5px;
+                }
+                .t_mrg{
+                    margin-top: 10px;
+                }
             }
 
         }

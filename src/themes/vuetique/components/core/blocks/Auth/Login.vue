@@ -66,6 +66,18 @@
             </a>
           </div>
         </div>
+
+        <div class="login_box_out">
+
+          <div class="login_bx">
+             <a href="#"><img src="assets/fcbk_login.png" /></a>
+          </div>
+           <div class="login_bx">
+             <a href="#"><img src="assets/gle_login.png" /></a>
+          </div>
+
+        </div>
+
         <div class="l_g_rm">
         <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit">
           {{ $t('Log in to your account') }}
@@ -77,6 +89,9 @@
             {{ $t('register an account') }}
           </a>
         </div>
+
+        
+
         </div>
       </form>
     </div>
