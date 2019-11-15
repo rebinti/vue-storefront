@@ -99,13 +99,28 @@
             }
           ]"
         />
+         <base-input
+          class="mb-5 tx_bx_out"
+          type="text"
+          name="mobile"
+          ref="mobile"
+          autocomplete="mobile"
+          v-model="mobile"
+          @blur="$v.mobile.$touch()"
+          :placeholder="$t('Mobile *')"
+          :validations="[
+            {
+              condition: !$v.mobile.required && $v.mobile.$error,
+              text: $t('Field is required.')
+            },
+          ]"
+        />
         <div class="chk_out_blk">
         <base-checkbox
           class="mb-3 text-black"
           id="terms"
           v-model="conditions"
           @click="conditions = !conditions"
-          @blur="$v.conditions.$reset()"
           @change="$v.conditions.$touch()"
           :validation="{
             condition: !$v.conditions.required && $v.conditions.$error,
@@ -119,14 +134,13 @@
         <div class="chk_out_blk">
         <base-checkbox
           class="mb-3 text-black"
-          id="terms"
-          v-model="conditions"
-          @click="conditions = !conditions"
-          @blur="$v.conditions.$reset()"
-          @change="$v.conditions.$touch()"
+          id="news"
+          v-model="newsLatest"
+          @click="newsLatest = !newsLatest"
+          @change="$v.newsLatest.$touch()"
           :validation="{
-            condition: !$v.conditions.required && $v.conditions.$error,
-            text: $t('You must accept the terms and conditions.')
+            condition: !$v.newsLatest.required && $v.newsLatest.$error,
+            text: $t('You must accept the news.')
           }"
         >
           {{ $t('I would like to receive the latest news from iCLOTHING by email') }} *
@@ -182,8 +196,14 @@ export default {
       required,
       sameAsPassword: sameAs('password')
     },
+    mobile: {
+      required
+    },
     conditions: {
       required
+    },
+    newsLatest: {
+
     }
   },
   mixins: [Register],

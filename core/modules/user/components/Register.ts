@@ -10,7 +10,9 @@ export const Register = {
       lastName: '',
       password: '',
       rPassword: '',
-      conditions: false
+      mobile: '',
+      conditions: false,
+      newsLatest: false
     }
   },
   methods: {
@@ -25,7 +27,7 @@ export const Register = {
     callRegister () {
       // TODO Move to theme
       this.$bus.$emit('notification-progress-start', i18n.t('Registering the account ...'))
-      this.$store.dispatch('user/register', { email: this.email, password: this.password, firstname: this.firstName, lastname: this.lastName }).then((result) => {
+      this.$store.dispatch('user/register', { email: this.email, password: this.password, firstname: this.firstName, lastname: this.lastName, mobile: this.mobile }).then((result) => {
         Logger.debug(result, 'user')()
         // TODO Move to theme
         this.$bus.$emit('notification-progress-stop')
@@ -38,6 +40,16 @@ export const Register = {
             this.rPassword = ''
           }
         } else {
+          /* 
+          For Subscribe the Newsletter subscription Action to Server
+          */
+          if(this.newsLatest && this.email){
+            this.$store.dispatch('newsletter/subscribe', this.email).then(res => {
+              console.log('Newsletter Subscribed', res);
+            }).catch(err => {
+              console.log('Error in subscripton', err);
+            });
+          }
           this.$store.dispatch('user/login', { username: this.email, password: this.password })
           this.onSuccess()
           this.close()
