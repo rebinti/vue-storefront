@@ -18,6 +18,10 @@
     height: 15px;
     width: 15px;
     font-size: 9px;
+    background: #F57073;
+}
+.btn-primary, .vue-home-2banner .btn-main{
+    background: #F57073!important;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -120,11 +124,15 @@
     .l_g_rm{ display: inline-block; width:100%; }
     .mr_btm{ margin-bottom: 20px!important;}
     .login_box_out{ display: none; }
+    .search_out_pop{ display: none; }
     
 }
 
 @media (max-width: 576px) {
 
+    #app{
+        background: #fafafa;
+    }
     .header{
 
         .vt-icon {
@@ -157,6 +165,7 @@
                 height: 15px;
                 width:15px;
                 font-size: 9px;
+                background: #F57073;
             }
         }
 
@@ -165,6 +174,9 @@
     .m_hide{ display: none; }
 
     .modal{
+        .modal-container{
+            background: #fafafa;
+        }
         .login_out_bx{
 
             background: #fafafa;
@@ -326,10 +338,82 @@
             font-weight: 500;
             font-size: 13px!important;
             line-height: 15px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
 
+        }
+        .inline-block{
+            width:100%;
+            height:auto;
+            button{
+                
+                    width: 100%;
+                    margin: 0 auto;
+                    background: #000;
+                    color: #ffffff;
+                    font-family: Roboto;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 15px;
+                    line-height: 15px;
+                    margin-top: 10px;
+                    height: 48px;
+                    max-width: 315px;
+             
+            }
         }
 
     }
+    #home{
+        position: relative;
+        .search_out_pop{
+            width:90%;
+            position: absolute;
+            top:10px;
+            left:5%;
+            text-align: center;
+            z-index: 1;
+            .search_out_pop_inner{
+                float: left;
+                width:100%;
+                background: #fff;
+                padding: 5px 15px;
+                .vt-icon{
+                    float: left;
+                    width: 15px;
+                    opacity: 0.5;
+                }
+                .icon_bg{
+                    float: left;
+                    font-size: 12px;
+                    padding-left: 10px;
+                    outline: 0px!important;
+                }
+            }
+        }
+        .VueCarousel{
+            .btn-primary{
+                background: transparent!important;
+                border:1px solid #ffffff;    
+                font-weight: normal;            
+            }
+            .VueCarousel-pagination{
+                .VueCarousel-dot{
+                    width: 5px!important;
+                    height: 5px!important;
+                    padding: 2px!important;
+                    border-radius:0px!important;
+                }
+                
+            }
+            .VueCarousel-inner{
+                .text-hero{ font-size:35px;}
+            }
+            
+        }
+
+    }
+    
     
     
 }

@@ -1,6 +1,20 @@
 <template>
   <div id="home">
+
+    <div class="search_out_pop">
+
+      <div class="search_out_pop_inner">
+        <svg viewBox="0 0 25 25" class="vt-icon">
+          <use xlink:href="#search" />
+        </svg>
+       <input type="text" class="icon_bg" placeholder="Search for Products">
+       
+      </div>
+
+    </div>
+    
     <main-slider />
+    
      <div class="container">
           <div class="menu-list col-6">
                 <cms-block :identifier="'vue-cms-home-block1'" />
