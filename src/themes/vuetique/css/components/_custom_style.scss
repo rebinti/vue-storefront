@@ -8,6 +8,17 @@
 .acc_ico .ic_list_m img{
     margin-top: 5px;
 }
+.header .right-icons .minicart-count {
+    top: 12px;
+    left: 52%;
+    min-width: 11px;
+    min-height: 11px;
+    border-radius: 100%;
+    float: right;
+    height: 15px;
+    width: 15px;
+    font-size: 9px;
+}
 
 @media (min-width: 992px) and (max-width: 1199px) {
 }
@@ -132,18 +143,19 @@
         .right-icons{
             position: absolute;
             top: 20px;
-            right:0px;
+            right:5px;
             .p-3{
                 padding: 5px !important;
             }
             .minicart-count{
-                top: 10px;
+                top: 1px;
                 left: 50%;
                 min-width: 11px;
                 min-height: 11px;
-                border-radius: 50%;
+                border-radius: 100%;
                 float: right;
                 height: 15px;
+                width:15px;
                 font-size: 9px;
             }
         }
@@ -224,7 +236,7 @@
                     font-weight: bold;
                     font-size: 15px;
                     line-height: 15px;
-                    margin-top: 50px;
+                    margin-top: 40px;
                     height:48px;
 
                 }
@@ -255,6 +267,7 @@
                     padding: 30px 15px;
                     position: relative;
                     border-bottom: 1px solid #e0e0e0;
+                    position: relative;
                     .text-black{
                         margin-bottom: 0px!important;
                         color:#000000;
@@ -304,6 +317,20 @@
         }
     }
 
+    .notification{
+
+        .message{
+            text-align: left;
+            color:#000000;
+            font-family: Roboto!important;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 13px!important;
+            line-height: 15px;
+
+        }
+
+    }
     
     
 }
