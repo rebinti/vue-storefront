@@ -157,7 +157,7 @@
         </button-full>
         
 
-        <div class="text-center log_txt">
+        <div class="text-center">
           <span>
             {{ $t('or') }}
             <a href="#" @click.prevent="switchElem">

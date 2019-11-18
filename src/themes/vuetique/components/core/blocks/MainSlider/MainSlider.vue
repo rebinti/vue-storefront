@@ -35,7 +35,8 @@ export default {
     return {
       currentSlide: 1,
       slides: [],
-      totalSlides: 1
+      totalSlides: 1,
+      windowWidth: 0
     }
   },
   components: {
@@ -48,15 +49,33 @@ export default {
     updateSliderData (data) {
       this.slides = data.slides
       this.totalSlides = data.total
+    },
+    checkSliderData() {
+      if( this.windowWidth <= 760 ) {
+         this.updateSliderData(sliderData.mobile)
+      }
+      else {
+          this.updateSliderData(sliderData.web)
+      }
     }
   },
   mounted () {
+    window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+        this.checkSliderData();
+    });
+    this.windowWidth =  window.innerWidth;
+    this.checkSliderData();
     setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % (this.totalSlides)
     }, 5000)
   },
   created () {
-    this.updateSliderData(sliderData)
+    this.checkSliderData();
+    //this.updateSliderData(sliderData.web)
+  },
+  destroyed () {
+    window.removeEventListener('resize');
   }
 }
 </script>

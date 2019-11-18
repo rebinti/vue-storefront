@@ -1,5 +1,5 @@
 <template>
-  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isWishlistOpen }">
+  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isWishlistOpen }" style="text-align: center;">
     <button
       type="button"
       :aria-label="$t('Close')"
@@ -12,6 +12,10 @@
       </svg>
     </button>
 
+    <div>
+      <img style="margin: 0px auto;" src="assets/wishlisticon.png" />
+    </div>
+
     <h2 v-if="productsInWishlist.length" class="mb-8">
       {{ $t('Wishlist') }}
     </h2>
@@ -19,13 +23,22 @@
     <h4 v-if="!productsInWishlist.length" class="mb-2">
       {{ $t('Your wishlist is empty.') }}
     </h4>
-
+<!-- 
     <div v-if="!productsInWishlist.length" class="mb-2">
       {{ $t("Don't hesitate and") }}
       <router-link class="text-primary" :to="localizedRoute('/')">
         {{ $t('browse our catalog') }}
       </router-link>
       {{ $t('to find something beautiful for You!') }}
+    </div> -->
+
+    <div>
+       <p>Tap heart button to start saving your favorite items </p>
+       <router-link class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
+       :to="localizedRoute('/')"
+       style="margin: 0px auto;top: 10px;background: white;color: black;border: 2px solid #bfbfbf"
+       > Add now
+       </router-link>
     </div>
     <ul class="products p-0 m-0">
       <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
@@ -65,5 +78,9 @@ export default {
     &:hover {
       opacity: 1;
     }
+  }
+
+  .add-now-button{
+    width: 100px;
   }
 </style>

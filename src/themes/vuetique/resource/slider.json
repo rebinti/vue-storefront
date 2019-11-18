@@ -1,26 +1,54 @@
 {
-  "slides": [
-    {
-      "title": "Simple, yet impressive",
-      "subtitle": "",
-      "button_text": "Find your purpose",
-      "image": "/assets/slider/emptyname-21.jpg",
-      "link": "/c/gear"
-    },
-    {
-      "title": "Dresses, find stylish",
-      "subtitle": "",
-      "button_text": "Find your purpose",
-      "image": "/assets/slider/hp_2.jpg",
-      "link": "/c/women-20"
-    },
-    {
-      "title": "Unique Experience",
-      "subtitle": "Collection",
-      "button_text": "Fitness with style",
-      "image": "/assets/slider/emptyname-354.jpg",
-      "link": "/c/training"
-    }
-  ],
-  "total": "3"
+  "mobile": {
+    "slides": [
+      {
+        "title": "Simple, yet impressive",
+        "subtitle": "",
+        "button_text": "Find your purpose",
+        "image": "/assets/slide1.jpg",
+        "link": "/c/gear"
+      },
+      {
+        "title": "Dresses, find stylish",
+        "subtitle": "",
+        "button_text": "Find your purpose",
+        "image": "/assets/slide2.jpg",
+        "link": "/c/women-20"
+      },
+      {
+        "title": "Unique Experience",
+        "subtitle": "Collection",
+        "button_text": "Fitness with style",
+        "image": "/assets/slide3.jpg",
+        "link": "/c/training"
+      }
+    ],
+    "total": "3"
+  },
+  "web": {
+    "slides": [
+      {
+        "title": "Simple, yet impressive",
+        "subtitle": "",
+        "button_text": "Find your purpose",
+        "image": "/assets/slider/emptyname-21.jpg",
+        "link": "/c/gear"
+      },
+      {
+        "title": "Dresses, find stylish",
+        "subtitle": "",
+        "button_text": "Find your purpose",
+        "image": "/assets/slider/hp_2.jpg",
+        "link": "/c/women-20"
+      },
+      {
+        "title": "Unique Experience",
+        "subtitle": "Collection",
+        "button_text": "Fitness with style",
+        "image": "/assets/slider/emptyname-354.jpg",
+        "link": "/c/training"
+      }
+    ],
+    "total": "3"
+  }
 }
