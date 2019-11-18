@@ -43,6 +43,13 @@
       </div>
     </div>
     <div class="absolute bottom-0 right-0 mb-3">
+      <div class="flex-grow flex">
+            <add-to-cart
+              :product="product"
+              :productname="'Add to Bag'"
+              class="py-3 text-sm"
+            />
+      </div>
       <span @click="removeFromWishlist(product)"><remove-button class="cl-accent" /></span>
     </div>
   </li>
@@ -51,10 +58,12 @@
 <script>
 import Product from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Product'
 import RemoveButton from './RemoveButton'
+import AddToCart from 'theme/components/core/AddToCart.vue'
 
 export default {
   components: {
-    RemoveButton
+    RemoveButton,
+    AddToCart
   },
   mixins: [Product]
 }

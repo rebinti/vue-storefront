@@ -12,7 +12,7 @@
       </svg>
     </button>
 
-    <div>
+    <div v-if="!productsInWishlist.length">
       <img style="margin: 0px auto;" src="assets/wishlisticon.png" />
     </div>
 
@@ -32,7 +32,7 @@
       {{ $t('to find something beautiful for You!') }}
     </div> -->
 
-    <div>
+    <div v-if="!productsInWishlist.length">
        <p>Tap heart button to start saving your favorite items </p>
        <router-link class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
        :to="localizedRoute('/')"
