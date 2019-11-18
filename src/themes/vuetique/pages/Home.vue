@@ -7,7 +7,7 @@
         <svg viewBox="0 0 25 25" class="vt-icon">
           <use xlink:href="#search" />
         </svg>
-       <input type="text" class="icon_bg" placeholder="Search for Products">
+       <input type="text" @click="toggleSearchpanel" class="icon_bg"  style="width: 94%;" placeholder="Search for Products">
        
       </div>
 
@@ -117,6 +117,12 @@ export default {
         loop: true,
         paginationSize: 6
       }
+    }
+  },
+  methods: {
+    toggleSearchpanel () {
+      this.$store.commit('ui/setSearchpanel', true)
+      this.$bus.$emit('HomefocusSearchInput') 
     }
   },
   computed: {

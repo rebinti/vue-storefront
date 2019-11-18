@@ -36,7 +36,7 @@ export const Search = {
       this.$store.commit('ui/setSidebar', false)
       this.$store.commit('ui/setMicrocart', false)
       this.$store.commit('ui/setSearchpanel', false)
-      this.$store.dispatch('ui/toggleReviewPanel' , false)
+      this.$store.commit('ui/setReviewPanel' , false)
     },
     buildSearchQuery (queryText) {
       let searchQuery = prepareQuickSearchQuery(queryText)

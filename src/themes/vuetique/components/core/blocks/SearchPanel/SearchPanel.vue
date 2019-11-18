@@ -22,12 +22,14 @@
     <div class="flex items-center relative mb-4">
       <base-input
         ref="search"
+        name="search"
         type="text"
         id="search_panel_input"
         :placeholder="$t('Type what you are looking for...')"
         class="w-full"
         v-model="search"
         @input="makeSearch"
+        focus
         @focus="searchFocus = true"
         @blur="searchFocus = false"
       />
