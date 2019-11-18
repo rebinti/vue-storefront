@@ -122,4 +122,16 @@ export default {
     height: 359px;
   }
 }
+@media (max-width: 576px) {
+  .main-slider {
+    height: 450px;
+  }
+  .slide {
+    background-position: left;
+  }
+  .slide-content {
+    height: 450px;
+  }
+  
+}
 </style>
