@@ -15,7 +15,7 @@
     
     <main-slider />
     
-     <div class="container">
+     <div class="container banner_3_sec">
           <div class="menu-list col-6">
                 <cms-block :identifier="'vue-cms-home-block1'" />
           </div>
