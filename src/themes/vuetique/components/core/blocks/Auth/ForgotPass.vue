@@ -49,7 +49,7 @@
           <p class="py30 mb80">
             {{ $t("We've sent password reset instructions to your email. Check your inbox and follow the link.") }}
           </p>
-          <button-full class="mb-5" type="submit">
+          <button-full class="mb-5 align-buttton-center" type="submit">
             {{ $t('Back to login') }}
           </button-full>
         </form>
@@ -96,7 +96,7 @@ export default {
           this.passwordSent = true
         } else {
           this.$store.dispatch('notification/spawnNotification', {
-            type: 'error',
+            type: 'success',
             message: i18n.t(response.result) || i18n.t('Error while sending reset password e-mail'),
             action1: { label: i18n.t('OK'), action: 'close' }
           })
@@ -126,6 +126,11 @@ export default {
 
 <style lang="scss" scoped>
   .modal-content {
+    .align-buttton-center {
+      margin: 0px auto;
+      top: 10px;
+      background: #000;
+    }
     @media (max-width: 400px) {
       padding-left: 20px;
       padding-right: 20px;
