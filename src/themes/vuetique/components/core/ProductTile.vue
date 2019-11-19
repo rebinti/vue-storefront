@@ -16,7 +16,7 @@
       data-testid="productLink"
     >
       <div
-        class="product-image w-full relative"
+        class="product-image w-full relative prod_list"
         :class="[{ sale: labelsActive && isOnSale }, { new: labelsActive && isNew }]"
       >
         <img
@@ -38,6 +38,7 @@
           data-testid="productHoverImage"
           class="hover-image"
         >
+        <wishlist-button :product="product" />
       </div>
 
       <p class="product-name mb-0 font-medium text-grey-dark mt-3" v-if="!onlyImage">
@@ -63,18 +64,24 @@
           v-if="!product.special_price && parseFloat(product.priceInclTax) > 0 && !onlyImage"
         >
           {{ product.priceInclTax | price }}
-        </span>
+        </span> 
+        
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
+import NoSSR from 'vue-no-ssr'
 import rootStore from '@vue-storefront/core/store'
 import { ProductTile } from '@vue-storefront/core/modules/catalog/components/ProductTile.ts'
 
 export default {
   mixins: [ProductTile],
+  components: {
+    'no-ssr': NoSSR,
+    'WishlistButton': () => import(/* webpackChunkName: "wishlist" */'theme/components/core/blocks/Wishlist/AddToWishlist'),
+  },
   props: {
     labelsActive: {
       type: Boolean,
