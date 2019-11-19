@@ -15,7 +15,7 @@
       </svg>
     </button>
 
-    <h2 class="mb-2 align-text-center">
+    <h2 class="mb-2 align-text-center upper-letter">
       {{ $t('Search') }}
     </h2>
 
@@ -134,6 +134,11 @@ export default {
     }
     .align-text-center{
       text-align: center;
+    }
+    .upper-letter{
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 20px;
     }
 }
 </style>
