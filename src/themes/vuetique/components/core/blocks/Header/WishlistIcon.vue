@@ -8,7 +8,7 @@
     <!-- <svg viewBox="0 0 25 25" class="vt-icon">
       <use xlink:href="#wishlist" />
     </svg> -->
-    <div class="ic_list_m"><img src="assets/heart_bold.png" /></div>
+    <div class="ic_list_m"><img src="/assets/heart_bold.png" alt=""/></div>
   </button>
 </template>
 

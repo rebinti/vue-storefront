@@ -11,7 +11,7 @@
       <!-- <svg viewBox="0 0 25 25" class="vt-icon">
         <use xlink:href="#user" />
       </svg> -->
-    <div class="ic_list_m"><img src="assets/u_s_account.png" /></div>
+    <div class="ic_list_m"><img src="/assets/u_s_account.png" alt=""/></div>
     </button>
     <ul v-if="currentUser" class="dropdown-content">
       <li v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">
