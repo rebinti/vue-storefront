@@ -72,8 +72,15 @@ export default {
      .prod_list .wishlist-bx.act .vt-icon{
        fill: #f10;
      }
-    
-
-  }
+    .mob_add_wish_btn .wishlist-bx span{
+      display: none;
+    }
+    .mob_add_wish_btn .wishlist-bx .vt-icon{
+      display: inline-block;
+    }
+    .mob_add_wish_btn .wishlist-bx.act .vt-icon{
+        fill: #f10;
+    }
+  } 
 
 </style>
