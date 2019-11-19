@@ -81,6 +81,6 @@ export default {
     .mob_add_wish_btn .wishlist-bx.act .vt-icon{
         fill: #f10;
     }
-  }
+  } 
 
 </style>
