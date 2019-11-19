@@ -39,6 +39,7 @@ export default {
   .wishlist-bx{ display: inline-block; }
   .wishlist-bx span{ display: inline-block;}
   .wishlist-bx .vt-icon{ display: inline-block;}
+  .prod_list .wishlist-bx{ display:none}
 }
 
   @media (max-width: 576px) {
