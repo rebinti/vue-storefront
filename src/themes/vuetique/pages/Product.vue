@@ -1,6 +1,6 @@
 <template>
   <div id="product" itemscope itemtype="http://schema.org/Product">
-    <breadcrumbs
+    <breadcrumbs class="brd_out"
       :routes="breadcrumbs.routes"
       :active-route="breadcrumbs.name"
     />
@@ -40,14 +40,149 @@
               </div>
             </div>
           </div>
-          <div class="w-full md:w-2/5 md:px-10">
+
+          <!-- mobile product details sec -->
+          <div class="w-full m_item p_detail_box">
+
+              <div class="mob_headline_out">
+                  <div class="mob_headline">
+
+                    <h1 data-testid="productName" itemprop="name">
+                      {{ product.name | htmlDecode }}
+                    </h1>
+                    <div class="text-grey text-sm sku_txt">
+                      sku: {{ product.sku }}
+                    </div>
+
+                  </div>
+
+                  <div class="mob_price">
+                        <div
+                          class="font-serif font-bold text-h1 pb-5 price"
+                          v-if="product.type_id !== 'grouped'"
+                        >
+                          <div
+                            class="text-h1 gg mob_p"
+                            v-if="product.special_price && product.priceInclTax && product.originalPriceInclTax"
+                          >
+                            <span class="font-bold">
+                              {{ product.priceInclTax * product.qty | price }}
+                            </span>
+                            <span class="text-h2 text-grey line-through">
+                              {{ product.originalPriceInclTax * product.qty | price }}
+                            </span>
+                          </div>
+                          <div
+                            v-if="!product.special_price && product.priceInclTax"
+                          >
+                            {{ product.priceInclTax * product.qty | price }}
+                          </div>
+                        </div>
+                  </div>      
+              </div>    
+
+              <div class="mob_pro_varients">
+
+                    <div class="variants" v-if="product.type_id =='configurable' && !loading">
+                    <div class="error" v-if="product.errors && Object.keys(product.errors).length > 0">
+                      {{ product.errors | formatProductMessages }}
+                    </div>
+                    <div
+                      class="relative mob_size_box"
+                      v-for="(option, index) in product.configurable_options"
+                      v-if="(!product.errors || Object.keys(product.errors).length === 0) && Object.keys(configuration).length > 0"
+                      :key="index"
+                    >
+                      <div class="pt-4 pb-2 mob_size_box_label" data-testid="variantsLabel">
+                        <span class="font-bold">{{ option.label }}</span>:
+                        <span>
+                          {{ configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()] ? configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()].label : null }}
+                        </span>
+                      </div>
+                      <div class="variants-wrapper">
+                        <div v-if="option.label == 'Color'">
+                          <color-selector
+                            v-for="(c, i) in options[option.attribute_code]"
+                            v-if="isOptionAvailable(c)"
+                            :key="i"
+                            :id="c.id"
+                            :label="c.label"
+                            context="product"
+                            :code="option.attribute_code"
+                            :class="{ active: c.id == configuration[option.attribute_code].id }"
+                          />
+                        </div>
+                        <div class="sizes" v-else-if="option.label == 'Size'">
+                          <router-link
+                            to="/size-guide"
+                            target="_blank"
+                            v-if="option.label == 'Size'"
+                            class="text-sm font-medium text-black pt-4 absolute top-0 right-0 size_link"
+                          >
+                            {{ $t('Size guide') }}
+                          </router-link>
+                          <size-selector
+                            v-for="(s, i) in options[option.attribute_code]"
+                            v-if="isOptionAvailable(s)"
+                            :key="i"
+                            :id="s.id"
+                            :label="s.label"
+                            context="product"
+                            :code="option.attribute_code"
+
+                            :class="{ active: s.id == configuration[option.attribute_code].id }"
+                            v-focus-clean
+                          />
+                        </div>
+                        <div :class="option.attribute_code" v-else>
+                          <generic-selector
+                            v-for="(s, i) in options[option.attribute_code]"
+                            v-if="isOptionAvailable(s)"
+                            :key="i"
+                            :id="s.id"
+                            :label="s.label"
+                            context="product"
+                            :code="option.attribute_code"
+
+                            :class="{ active: s.id == configuration[option.attribute_code].id }"
+                            v-focus-clean
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+              </div>
+
+              <div class="mob_crt_button_out">
+
+                  <div class="mob_add_cart_btn">
+
+                    <add-to-cart :product="product" class="py-3 text-sm"/>
+
+                  </div>
+                  <div class="mob_add_wish_btn">
+                      <wishlist-button :product="product" />
+                  </div>
+
+                 
+                
+                
+              </div> 
+
+          </div>
+          <!-- mobile product details sec ends -->
+
+
+
+          <div class="w-full md:w-2/5 md:px-10 ds_item">
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
-	<div
+	<!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
          data-price="product.price"
@@ -55,16 +190,20 @@
          data-name="product.name"
          data-url="product.url_path"
          data-image-url="product.image">
-</div>
+</div> -->
+
+
+
+
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
               <meta itemprop="price" :content="parseFloat(product.priceInclTax).toFixed(2)">
               <div
-                class="font-serif font-bold text-h1 pb-5 price"
+                class="font-serif font-bold text-h1 pb-5 price ds_item"
                 v-if="product.type_id !== 'grouped'"
               >
                 <div
-                  class="text-h1"
+                  class="text-h1 gg"
                   v-if="product.special_price && product.priceInclTax && product.originalPriceInclTax"
                 >
                   <span class="font-bold">
@@ -478,6 +617,140 @@ export default {
       }
     }
   }
+}
+
+@media (min-width: 576px) {
+
+  .m_item{
+    display: none;
+  }
+  .ds_item{
+    display: block;
+  }
+
+}
+
+@media (max-width: 576px) {
+  
+  .ds_item{
+    display: none;
+  }
+  
+  .brd_out{
+    display: none!important;
+  }
+
+  .mob_headline{
+    width:60%;
+    float:left;
+    padding-top: 15px;
+   
+  }
+  .mob_headline h1{
+    font-size:14px;
+    color:#000;
+    line-height: 16px;
+    font-weight: bold;
+     padding-bottom: 5px;
+  }
+  .mob_headline .sku_txt{
+    font-size:12px;
+    color:#7c7c7c;
+    line-height: 14px;
+  }
+  .mob_price{
+    width:40%;
+    float:left;
+    padding-top: 15px;
+    text-align: right;
+  }
+  .mob_price .text-h1{ border:0px; }
+
+  .mob_price .mob_p, .mob_price div{
+    font-size:14px;
+    line-height: 18px;
+  }
+  .mob_price .mob_p span{
+    width:100%;
+    float: left;
+  }
+  .mob_p .text-h2{
+    font-size:14px;
+    line-height: 18px;
+  }
+  .mob_pro_varients{
+    display: inline-block;
+    width:100%;
+  }
+  .mob_headline_out{
+    display: inline-block;
+    width:100%;
+  }
+  
+  .mob_size_box .mob_size_box_label{
+    padding: 5px 0px;
+    margin: 0px;
+    font-size: 12px;
+  }
+  .mob_size_box .size_link{
+    width:100%;
+    display: none;
+
+  }
+
+  .mob_size_box {
+        float: right;
+        width: 50%;
+  }
+
+  .mob_crt_button_out{
+    display: inline-block;
+    width: 108%;
+    background: #fff;
+    padding: 10px 0px;
+    position: relative;
+    left: -5%;
+  } 
+  .mob_add_cart_btn{
+    float: left;
+    width: 80%;
+    padding: 0 10%;
+  }
+
+  .mob_add_wish_btn{
+     float: left;
+    width: 20%;
+    text-align: center;
+  }
+
+  .mob_add_cart_btn button{
+    background: #000;
+    color: #ffffff;
+
+  }
+  .mob_add_wish_btn .wishlist-bx{
+    background: #ffffff;
+    border:1px solid #bfbfbf;
+    width: 48px;
+    height:48px;
+    display: inline-block;
+    text-align: center;
+  }
+  .mob_add_wish_btn .wishlist-bx span{
+    display: none;
+  }
+  
+  .mob_pro_varients .mob_size_box .size-selector{
+    height: 20px;
+    min-width: 40px;
+    line-height: 20px;
+    float: left;
+  }
+  .mob_pro_varients .mob_size_box .color{ 
+    width:30px;
+    height:30px;
+  }
+
 }
 
 </style>

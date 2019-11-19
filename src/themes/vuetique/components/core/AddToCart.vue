@@ -34,7 +34,7 @@ export default {
     productname: {
       type: String,
       required: false,
-      default: 'Added to cart'
+      default: 'Add to cart'
     }
   },
   computed: {

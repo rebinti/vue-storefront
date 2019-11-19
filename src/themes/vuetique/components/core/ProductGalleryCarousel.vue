@@ -289,4 +289,37 @@ img[lazy=loaded] {
     }
   }
 }
+
+
+@media (max-width: 576px) {
+  .VueCarousel{
+      .btn-primary{
+          background: transparent!important;
+          border:1px solid #ffffff;    
+          font-weight: normal;            
+      }
+      .VueCarousel-pagination{
+          position: absolute;
+          left:0px;
+          bottom:0px;
+          .VueCarousel-dot{
+              width: 5px!important;
+              height: 5px!important;
+              padding: 2px!important;
+              border-radius:0px!important;
+              outline: none!important;
+          }
+          
+      }
+      .VueCarousel-inner{
+          .text-hero{ font-size:35px;}
+      }
+  }
+  .zoom-in.material-icons.p-4.cursor-pointer{
+    display: none!important;
+  }
+
+}
+
+
 </style>
