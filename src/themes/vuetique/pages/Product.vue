@@ -759,6 +759,7 @@ export default {
 
   .mob_size_box.only-single-item{
       float: left;
+      width:100%;
   }
 
   .mob_p_cart_list{
