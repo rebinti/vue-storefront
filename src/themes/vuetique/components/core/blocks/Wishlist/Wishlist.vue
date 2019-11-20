@@ -15,10 +15,10 @@
     <div  class="wish_wrap_box" :class="{'item-in-it': productsInWishlist.length>0}">
 
     <div v-if="!productsInWishlist.length" class="wish_ico_box">
-      <img  src="assets/wishlisticon.png" />
+      <img  src="/assets/wishlisticon.png" alt=""/>
     </div>
 
-    <h2 v-if="productsInWishlist.length" class="mb-8">
+    <h2 v-if="productsInWishlist.length" class="mb-8 upper-letter" >
       {{ $t('Wishlist') }}
     </h2>
 
@@ -144,6 +144,12 @@ export default {
 .wishlist.wishlist_out{
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.upper-letter{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 
 </style>

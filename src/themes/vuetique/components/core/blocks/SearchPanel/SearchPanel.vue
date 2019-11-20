@@ -6,7 +6,7 @@
     <button
       type="button"
       :aria-label="$t('Close')"
-      class="absolute top-0 right-0 m-4 h-4"
+      class="absolute top-0 right-0 m-4 h-4 align-to-left"
       @click="closeSearchpanel"
       data-testid="closeSearchPanel"
     >
@@ -15,7 +15,7 @@
       </svg>
     </button>
 
-    <h2 class="mb-2">
+    <h2 class="mb-2 align-text-center upper-letter">
       {{ $t('Search') }}
     </h2>
 
@@ -126,3 +126,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media (max-width: 576px) {
+    .align-to-left {
+      left: 0;
+    }
+    .align-text-center{
+      text-align: center;
+    }
+    .upper-letter{
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+}
+</style>
