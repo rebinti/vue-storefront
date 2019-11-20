@@ -1,7 +1,19 @@
 <template>
   <div class="sidebar">
-    <div>
-      <Accordion
+    <div >
+
+      <div class="mob_price_filter Accordion mob_fltr list_">
+          <h5 class="Accordion__trigger k_head" >Sort BY</h5>
+          <a hrf="#">Newest</a>
+          <a hrf="#">Price: Low to High</a>
+          <a hrf="#">Price: High to Low</a>
+      </div>
+
+      <div class="Accordion mob_fltr list_hd list_">
+          <h5 class="Accordion__trigger k_head" >Filter By</h5>
+      </div>
+  
+      <Accordion class="mob_fltr"
         v-for="(filter, filterIndex) in filters"
         :key="filterIndex"
         v-if="filter.length"
@@ -90,6 +102,8 @@ import PriceSelector from 'theme/components/core/PriceSelector'
 import GenericSelector from 'theme/components/core/GenericSelector'
 import Accordion from 'theme/components/theme/Accordion'
 
+import SortBy from 'theme/components/core/SortBy.vue'
+
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 
 export default {
@@ -99,7 +113,8 @@ export default {
     PriceSelector,
     GenericSelector,
     Accordion,
-    ButtonFull
+    ButtonFull,
+    SortBy
   },
   mixins: [Sidebar],
   data () {
@@ -119,3 +134,58 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+  @media (max-width: 576px) {
+
+    .mob_fltr{     
+      .Accordion__trigger{
+        color:#000;
+        font-size:13px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .size-selector{
+          height:20px;
+          line-height: 20px;
+      }
+      .price-select{       
+        font-size:13px;
+      }
+    } 
+    .mobile_filter{
+      
+      .ripple{
+        background: #000000;
+        border:1px solid #000;
+        color:#ffffff;
+        &.disabled{
+          background: #ffffff;
+          border:1px solid #000;
+          color:#000;
+        }
+      }
+      .list_hd{
+        padding-bottom: 10px;
+      }
+      .mob_price_filter{
+        padding-bottom: 20px;
+        a{
+          width:100%;
+          color:#000;
+          font-size:13px;
+          display: inline-block;
+          margin-bottom: 3px;
+        }
+        .k_head{
+          padding-bottom: 10px;
+        }
+      }
+
+    }
+
+  }
+
+
+</style>

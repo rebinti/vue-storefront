@@ -25,7 +25,7 @@
         </div>
       </div>
     </header>
-    <div class="mobile-filters lg:hidden" v-show="mobileFilters">
+    <div class="mobile-filters lg:hidden mobile_filter" v-show="mobileFilters">
       <button
         type="button"
         :aria-label="$t('Close')"
@@ -122,4 +122,23 @@ export default {
     top: 73px;
   }
 }
+</style>
+
+<style lang="scss" scoped>
+
+@media (max-width: 576px) {
+
+  .mobile_filter{
+    width: 75vw;
+    left:auto;
+    right:0px;
+  }
+  
+  .mobile_filter .sidebar .Accordion{
+    background: #000;
+  }
+
+}
+  
+
 </style>

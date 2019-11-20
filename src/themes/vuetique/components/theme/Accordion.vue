@@ -53,5 +53,26 @@ export default {
       @apply max-h-screen;
     }
   }
+  }
+
+  
+  @media (max-width: 576px) {
+
+    .mob_fltr{
+     
+      .Accordion__trigger{
+        color:#000;
+        font-size:13px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .size-selector{
+          height:20px;
+          line-height: 20px;
+      }
+    } 
+
+
+
 }
 </style>

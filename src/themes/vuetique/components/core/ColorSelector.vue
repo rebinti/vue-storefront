@@ -46,4 +46,20 @@ export default {
     top: 50%;
     transform: translate(-50%,-50%)
   }
+
+
+@media (max-width: 576px) {
+
+  .mobile_filter h5.Accordion__trigger{
+    color:#000;
+    font-size:18px;
+    font-weight: 600;
+  }
+
+
+}
+
+
+
+
 </style>
