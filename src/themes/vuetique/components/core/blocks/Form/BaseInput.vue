@@ -213,4 +213,9 @@ export default {
     right: 6px;
     top: 8px;
   }
+
+  .mob_summary .mob_rw_list .mob_t_bx input[type="text"]{
+      border:1px solid #000;
+    }
+
 </style>

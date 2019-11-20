@@ -21,7 +21,9 @@
     background: #F57073;
 }
 .btn-primary, .vue-home-2banner .btn-main{
-    background: #F57073!important;
+    background: #000000!important;
+    color:#ffffff!important;
+    border:0px;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -70,6 +72,10 @@
         .img-bx-title{
             font-size: 20px;
             top:75px;
+            left:0px;
+        }
+        .img-bx-btn{
+            left:0px;
         }
         .col-6{
             &.pb-5{
@@ -413,10 +419,15 @@
             
         }
 
+        
+
     }
     .banner_3_sec .cms-content.py-10{
         padding-top:0px!important;
-      }
+    }
+    .news-letter .btn-primary.newsletter-btn{
+        border:1px solid #ffffff;
+    }
     
     
     

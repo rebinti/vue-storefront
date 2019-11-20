@@ -1,6 +1,6 @@
 <template>
   <div
-    class="right-sidebar microcart max-w-full fixed p-8 pt-10"
+    class="right-sidebar microcart max-w-full fixed p-8 pt-10 mob_microcart"
     :class="{ active: showMicrocart }"
     data-testid="microcart"
   >
@@ -16,7 +16,7 @@
       </svg>
     </button>
 
-    <h2 v-if="productsInCart.length" class="mb-8">
+    <h2 v-if="productsInCart.length" class="mb-8 h_title">
       {{ $t('Your cart') }}:
     </h2>
 
@@ -33,31 +33,31 @@
     <ul v-if="productsInCart.length" class="products p-0 m-0">
       <product v-for="product in productsInCart" :key="product.sku" :product="product" />
     </ul>
-    <div v-if="productsInCart.length" class="summary pt-8">
-      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium" v-if="segment.code !== 'grand_total'">
+    <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
+      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
         <div class="flex-grow mr-2">
           {{ segment.title }}
           <button v-if="appliedCoupon && segment.code === 'discount'" type="button" class="close delete-button" @click="clearCoupon">
             <i class="material-icons">close</i>
           </button>
         </div>
-        <div v-if="segment.value != null" class="" :class="{'text-primary': segment.code === 'discount'}">
+        <div v-if="segment.value != null" class="mob_d_price" :class="{'text-primary mob_d_price': segment.code === 'discount'}">
           {{ segment.value | price }}
         </div>
       </div>
 
-      <div v-if="OnlineOnly" class="py-3 flex">
+      <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
         <div class="mr-3 flex-grow">
-          <base-input type="text" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
+          <base-input type="text" class="mob_t_bx" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
         </div>
         <div>
-          <button-full :disabled="!couponCode" @click.native="setCoupon">
+          <button-full :disabled="!couponCode" @click.native="setCoupon" class="ht_bx">
             {{ $t('Apply') }}
           </button-full>
         </div>
       </div>
 
-      <div class="row justify-between py-3 font-serif text-h2 font-bold" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
+      <div class="row justify-between py-3 font-serif text-h2 font-bold mob_rw_price" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
         <div class="col-auto total-price-label">
           {{ segment.title }}
         </div>
@@ -68,14 +68,14 @@
     </div>
 
     <div
-      class="row justify-between items-center py-4 actions"
+      class="row justify-between items-center py-4 actions back_sec"
       v-if="productsInCart.length && !isCheckoutMode"
     >
       <div class="col-12 md:col-auto">
         <router-link :to="localizedRoute('/')" class="no-underline text-grey link back-to-shopping font-medium">
           <span @click="closeMicrocartExtend" class="block align-middle">
-            <svg viewBox="0 0 25 25" class="vt-icon--xs align-middle"><use xlink:href="#left" /></svg>
-            <span class="align-middle">{{ $t('Back to shopping') }}</span>
+            <svg viewBox="0 0 25 25" class="vt-icon--xs align-middle ic_l"><use xlink:href="#left" /></svg>
+            <span class="align-middle icl_span">{{ $t('Back to shopping') }}</span>
           </span>
         </router-link>
       </div>
@@ -178,4 +178,85 @@ export default {
       font-size: 24px;
     }
   }
+
+ 
+
+    .mob_microcart .h_title{
+      border-bottom: 0px;
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+      margin: 0px;
+      margin-bottom: 20px;
+    }
+
+    .right-sidebar.microcart{
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .right-sidebar.microcart .summary{
+      padding-top: 0px;
+    }
+
+    .mob_summary .mob_d_item{
+      border-bottom:1px solid #ededed;
+      padding-bottom: 20px;
+    }
+
+    .mob_summary .mob_rw_list{
+      border-bottom:1px solid #ededed;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .mob_summary .mob_rw_list button{
+      background: #000;
+      color: #ffffff;
+      border-color: #000;
+    }
+    
+    .mob_summary .mob_d_price{
+      color:#000;
+    }
+
+    .mob_rw_price .total-price-label{
+        color: #666666;
+        font-size:15px;
+        font-weight: 500;
+    }
+
+    .mob_rw_price .total-price-value{
+       color:#000;
+       font-size:15px;
+        font-weight: 500;
+    }
+
+    .back_sec{
+      padding-top: 0px;
+    }
+
+    .back_sec .ic_l{
+      float: left;
+      margin-right: 10px;
+    }
+    .back_sec .back-to-shopping .icl_span{
+      float: left;
+      line-height: 12px;
+      color: #000;
+
+    }
+
+    .input-number-controls button .vt-icon{
+      margin-left:5px;
+    }
+
+    .ht_bx{
+       background: #000;
+      color: #ffffff;
+      border-color: #000;
+    }
+  
+  
 </style>
+
+
