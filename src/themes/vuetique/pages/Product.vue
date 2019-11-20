@@ -88,7 +88,7 @@
                       {{ product.errors | formatProductMessages }}
                     </div>
                     <div
-                      class="relative mob_size_box"
+                      class="relative mob_size_box" :class="{'only-single-item':product.configurable_options.length==1}"
                       v-for="(option, index) in product.configurable_options"
                       v-if="(!product.errors || Object.keys(product.errors).length === 0) && Object.keys(configuration).length > 0"
                       :key="index"
@@ -714,13 +714,13 @@ export default {
   .mob_add_cart_btn{
     float: left;
     width: 80%;
-    padding: 0 10%;
+    padding: 0 5% 0px 10%;
   }
 
   .mob_add_wish_btn{
      float: left;
     width: 20%;
-    text-align: center;
+    text-align: left;
   }
 
   .mob_add_cart_btn button{
@@ -749,6 +749,14 @@ export default {
   .mob_pro_varients .mob_size_box .color{ 
     width:30px;
     height:30px;
+  }
+
+  .mob_size_box.only-single-item{
+      float: left;
+  }
+
+  .mob_p_cart_list{
+    padding-top: 20px;
   }
 
 }
