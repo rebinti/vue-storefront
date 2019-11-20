@@ -746,6 +746,12 @@ export default {
     line-height: 20px;
     float: left;
   }
+  .mob_pro_varients .mob_size_box .leg_length .generic-selector{
+    height: 20px;
+    min-width: 40px;
+    line-height: 20px;
+    float: left;
+  }
   .mob_pro_varients .mob_size_box .color{ 
     width:30px;
     height:30px;
