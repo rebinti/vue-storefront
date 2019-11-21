@@ -9,9 +9,14 @@ import { once } from '@vue-storefront/core/helpers'
 
 import { extendModule } from '@vue-storefront/core/lib/module'
 import uiStore from 'theme/store/ui'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 once('__VUE_EXTEND_DROPPOINT_VPB__', () => {
   Vue.use(VueProgressBar)
+})
+
+once('__VUE_EXTEND_DROPPOINT_VPB__', () => {
+  Vue.use(Vue2TouchEvents)
 })
 
 const themeEntry = App

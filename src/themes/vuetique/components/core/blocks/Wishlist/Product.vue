@@ -1,5 +1,5 @@
 <template>
-  <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block">
+  <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" :class="{'swipe-left': product.swipedElement}">
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="localizedRoute({
@@ -41,16 +41,20 @@
             {{ product.priceInclTax | price }}
           </div>
         </div>
-        <div class="absolute top-0 right-0 mb-3">
-          <span @click="removeFromWishlist(product)"><remove-button class="cl-accent" /></span>
+        <div class="absolute top-0 right-0 mb-3 button_bx_link_lrg">
+          <div class="ic_dlt_bx">
+              <span @click="removeFromWishlist(product)"><remove-button class="cl-accent" /></span>
+           </div>
         </div>
         <div class="absolute bottom-0 right-0 mb-3 button_bx_link">
             <!-- <a href="#" class="btn_box_lnk">Add to Bag</a> -->
-            <add-to-cart
-              :product="product"
-              :productname="'Add to Bag'"
-              class="btn_box_lnk"
-            />
+            
+              <add-to-cart
+                :product="product"
+                :productname="'Add to Bag'"
+                class="btn_box_lnk"
+              />
+           
         </div>
 
       </div>
@@ -120,12 +124,37 @@ input {
   font-size: 12px;
 }
 .p_list_block .text-grey.cl-accent{
-  color:#000;
+  color:#fff;
 }
 
 .right-sidebar .p_list_block .image{
   width:100%;
 }
 
+.p_list_block{
+  transition: all 0.5s ease;
+}
+.swipe-left{
+  transform: translate(-105px, 0px);
+ /* right:105px; */
+ 
+}
+
+.button_bx_link_lrg{
+  width: 120px;
+  height: 100%;
+  background: #ff3a31;
+  text-align: center;
+  border: 0px;
+  right: -140px;
+}
+.ic_dlt_bx{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color:#fff;
+}
 
 </style>

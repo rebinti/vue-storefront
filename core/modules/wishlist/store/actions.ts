@@ -23,6 +23,7 @@ const actions: ActionTree<WishlistState, RootState> = {
     })
   },
   addItem ({ commit }, product) {
+    product['swipedElement'] = false;
     commit(types.WISH_ADD_ITEM, { product })
     rootStore.dispatch('notification/spawnNotification', {
       type: 'success',

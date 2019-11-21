@@ -42,7 +42,8 @@
        </router-link>
     </div>
     <ul class="products p-0 m-0">
-      <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
+      <product v-for="product in productsInWishlist" :key="product.id" :product="product" 
+      v-touch:swipe="swipeAction(product)" v-touch-class="'active'"/>
     </ul>
      </div>
   </div>
@@ -67,6 +68,16 @@ export default {
   methods: {
     closeWishlist () {
       this.$store.dispatch('ui/closeWishlist')
+    },
+    swipeAction (param) {
+      return function(dir) {
+        if(dir == 'left') {
+          param.swipedElement = true;
+        }
+        if(dir == 'right') {
+          param.swipedElement = false;
+        }
+      }
     }
   }
 }
