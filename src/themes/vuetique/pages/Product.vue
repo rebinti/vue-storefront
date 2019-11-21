@@ -761,6 +761,7 @@ export default {
     line-height: 20px;
     float: left;
     border: 1px solid #909090;
+    margin-right: 0.75rem;
   }
   .mob_pro_varients .mob_size_box .leg_length .generic-selector.active{
     background: #000000;
