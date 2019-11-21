@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block">
+    <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" :class="{'swipe-left': product.swipedElement}">
       <router-link
         class="col-4 bg-grey-lightest"
         :to="localizedRoute({
@@ -100,8 +100,8 @@
 
       </div>
 
-      <div class="absolute top-0 right-0 mb-3 cl-accent" >
-        <div @click="removeItem">
+      <div class="absolute top-0 right-0 mb-3 cl-accent button_bx_link_lrg" >
+        <div @click="removeItem" class="ic_dlt_bx">
           <remove-button />
         </div>
       </div>
@@ -225,5 +225,39 @@ input {
       border-color: #000;
     }
 
+/************** */
 
+.p_list_block{
+  transition: all 0.5s ease;
+}
+.swipe-left{
+  transform: translate(-105px, 0px);
+ /* right:105px; */
+ 
+}
+
+.p_list_block .text-grey.cl-accent { color: #000;}
+
+@media (max-width: 576px) {
+
+
+.button_bx_link_lrg{
+  width: 85px;
+  height: 100%;
+  background: #ff3a31;
+  text-align: center;
+  border: 0px;
+  right: -106px;
+}
+.ic_dlt_bx{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color:#fff;
+}
+
+
+}
 </style>

@@ -328,6 +328,7 @@ const actions: ActionTree<CartState, RootState> = {
         })
       }
       if (result.status === 'ok' || result.status === 'volatile') {
+        product['swipedElement'] = false;
         commit(types.CART_ADD_ITEM, { product })
         productHasBeenAdded = true
       }

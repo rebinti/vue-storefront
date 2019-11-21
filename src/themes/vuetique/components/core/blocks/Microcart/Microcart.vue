@@ -31,7 +31,10 @@
       {{ $t('to find something beautiful for You!') }}
     </div>
     <ul v-if="productsInCart.length" class="products p-0 m-0">
-      <product v-for="product in productsInCart" :key="product.sku" :product="product" />
+      <product v-for="product in productsInCart" :key="product.sku" :product="product" 
+       v-touch:swipe.left="swipeLeftHandler(product)"
+       v-touch:swipe.right="swipeRightHandler(product)"
+      />
     </ul>
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
       <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
@@ -166,7 +169,19 @@ export default {
     },
     onEscapePress () {
       this.closeMicrocart()
-    }
+    },
+    swipeLeftHandler(param) {
+      return function(dir) {
+        console.log('swipeLeftHandler ' , param);
+        param.swipedElement = true;
+      }
+    },
+    swipeRightHandler(param) {
+      return function(dir) {
+        console.log('swipeRightHandler ' , param);
+        param.swipedElement = false;
+      }
+    },
   }
 }
 </script>

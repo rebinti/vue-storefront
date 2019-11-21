@@ -1,5 +1,5 @@
 <template>
-  <button class="border-0 bg-transparent text-grey hover:text-grey-dark">
+  <button class="border-0 bg-transparent textt-black text-grey hover:text-grey-dark">
     <span class="hidden">
       {{ $t('Remove') }}
     </span>
@@ -8,10 +8,14 @@
 </template>
 
 <style lang="scss" scoped>
-
-.button_bx_link_lrg .vt-icon--sm{
-  width:28px;
-  height:28px;
+.textt-black { color:#000!important; }
+@media (max-width: 576px) {
+  .button_bx_link_lrg .vt-icon--sm{
+    width:28px;
+    height:28px;
+    color: #fff;
+  }
+  
 }
 
 </style>

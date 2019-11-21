@@ -140,22 +140,23 @@ input {
  /* right:105px; */
  
 }
-
-.button_bx_link_lrg{
-  width: 85px;
-  height: 100%;
-  background: #ff3a31;
-  text-align: center;
-  border: 0px;
-  right: -106px;
-}
-.ic_dlt_bx{
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  color:#fff;
+@media (max-width: 576px) {
+  .button_bx_link_lrg{
+    width: 85px;
+    height: 100%;
+    background: #ff3a31;
+    text-align: center;
+    border: 0px;
+    right: -106px;
+  }
+  .ic_dlt_bx{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color:#fff;
+  }
 }
 
 
