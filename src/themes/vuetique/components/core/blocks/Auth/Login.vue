@@ -70,10 +70,10 @@
         <div class="login_box_out">
 
           <div class="login_bx">
-             <a href="#"><img src="assets/fcbk_login.png" /></a>
+             <a href="#"><img src="/assets/fcbk_login.png" alt=""/></a>
           </div>
            <div class="login_bx">
-             <a href="#"><img src="assets/gle_login.png" /></a>
+             <a href="#"><img src="/assets/gle_login.png" alt=""/></a>
           </div>
 
         </div>

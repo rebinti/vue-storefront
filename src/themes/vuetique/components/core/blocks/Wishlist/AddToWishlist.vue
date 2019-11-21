@@ -6,9 +6,11 @@
     :class="{'act': isOnWishlist}"
     data-testid="addToWishlist"
   >
-    <svg viewBox="0 0 25 25" class="vt-icon pr-1">
+    <!-- <svg v-if="!isOnWishlist" viewBox="0 0 25 25" class="vt-icon pr-1">
       <use xlink:href="#wishlist" />
-    </svg>
+    </svg> -->
+    <img v-if="!isOnWishlist" class="vt-icon fa-icon-list  v-mobile" src="/assets/wishlist-fav.svg" alt="" />
+    <img v-if="isOnWishlist" class="vt-icon fa-icon-list v-mobile" src="/assets/wishlist-fav-fill.svg" alt="" />
     <template v-if="!isOnWishlist">
      <span class="h-mobile"> {{ $t('Add to Wishlist') }}</span>
     </template>
@@ -40,10 +42,15 @@ export default {
   .wishlist-bx span{ display: inline-block;}
   .wishlist-bx .vt-icon{ display: inline-block;}
   .prod_list .wishlist-bx{ display:none}
+  .v-mobile { display:none}
 }
 
+  .fa-icon-list { margin: 0 auto;}
   @media (max-width: 576px) {
 
+    .hd-mobile{
+      display: none!important;
+    }
     .prod_list .h-mobile {
       display: none!important;
     }
@@ -62,7 +69,7 @@ export default {
     }
 
     .prod_list .wishlist-bx .vt-icon{
-       width: 24px;
+       width: 19px;
       height: 24px;
       fill: currentColor;
       float: none;
@@ -81,6 +88,7 @@ export default {
     .mob_add_wish_btn .wishlist-bx.act .vt-icon{
         fill: #f10;
     }
+    .v-mobile { display:block;}
   } 
 
 </style>
