@@ -641,7 +641,7 @@ export default {
   }
 
   .mob_headline{
-    width:60%;
+    width:80%;
     float:left;
     padding-top: 15px;
    
@@ -651,7 +651,11 @@ export default {
     color:#000;
     line-height: 16px;
     font-weight: bold;
-     padding-bottom: 5px;
+    padding-bottom: 5px;
+    font-family: sans-serif;
+  }
+  div.mob_size_box_label span.font-bold{
+     font-weight: 300;
   }
   .mob_headline .sku_txt{
     font-size:12px;
@@ -659,7 +663,7 @@ export default {
     line-height: 14px;
   }
   .mob_price{
-    width:40%;
+    width:20%;
     float:left;
     padding-top: 15px;
     text-align: right;
