@@ -6,3 +6,12 @@
     <svg viewBox="0 0 25 25" class="vt-icon--sm"><use xlink:href="#trash" /></svg>
   </button>
 </template>
+
+<style lang="scss" scoped>
+
+.button_bx_link_lrg .vt-icon--sm{
+  width:28px;
+  height:28px;
+}
+
+</style>

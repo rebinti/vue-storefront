@@ -125,6 +125,7 @@ input {
 }
 .p_list_block .text-grey.cl-accent{
   color:#fff;
+  
 }
 
 .right-sidebar .p_list_block .image{
@@ -135,18 +136,18 @@ input {
   transition: all 0.5s ease;
 }
 .swipe-left{
-  transform: translate(-105px, 0px);
+  transform: translate(-80px, 0px);
  /* right:105px; */
  
 }
 
 .button_bx_link_lrg{
-  width: 120px;
+  width: 85px;
   height: 100%;
   background: #ff3a31;
   text-align: center;
   border: 0px;
-  right: -140px;
+  right: -106px;
 }
 .ic_dlt_bx{
   position: relative;
@@ -156,5 +157,6 @@ input {
   transform: translateY(-50%);
   color:#fff;
 }
+
 
 </style>
