@@ -221,10 +221,10 @@ export default {
   padding: 10px !important;
 }
 div.groupmenu-drop-content p.groupdrop-title{
-	font-weight: 500;
+	font-weight: 500 !important;
 }
 
-div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li{
+div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li a{
 	font-size: 14px;
 	color: #666666;
 }
