@@ -220,4 +220,12 @@ export default {
 .groupdrop-banner.img_bg{
   padding: 10px !important;
 }
+div.groupmenu-drop-content p.groupdrop-title{
+	font-weight: 500;
+}
+
+div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li{
+	font-size: 14px;
+	color: #666666;
+}
 </style>
