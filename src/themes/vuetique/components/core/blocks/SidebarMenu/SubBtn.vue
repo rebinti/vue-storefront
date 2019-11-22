@@ -1,12 +1,13 @@
 <template>
   <button
-    class="inline-flex justify-between w-full px-5 py-4 pr-4 font-medium"
+    class="inline-flex justify-between w-full px-5 py-4 pr-4 font-medium btn-list_menu"
     v-if="type === 'next'"
     type="button"
     @click.stop="next()"
     :aria-label="$t('Show subcategories')"
     data-testid="categoryButton"
   >
+  <span class="ico_main fab fa-bandcamp"></span>
     {{ name }}
     <svg viewBox="0 0 25 25" class="vt-icon--sm">
       <use xlink:href="#right" />
@@ -78,4 +79,19 @@ button {
     }
   }
 }
+
+@media (max-width: 576px) {
+
+
+  .sidebar-menu__list .menu_li_it .btn-list_menu{
+    padding-left: 65px;
+    font-size: 18px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+}
+
 </style>

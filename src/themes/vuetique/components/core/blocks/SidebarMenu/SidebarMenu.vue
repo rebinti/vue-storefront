@@ -6,6 +6,7 @@
       class="absolute top-0 right-0 m-4 h-4"
       @click="closeMenu"
     >
+
       <svg viewBox="0 0 25 25" class="vt-icon--sm">
         <use xlink:href="#close" />
       </svg>
@@ -17,12 +18,13 @@
 
     <ul class="relative border-t sidebar-menu__list" :style="mainListStyles">
       <li
-        class="border-b flex"
+        class="border-b flex menu_li_it"
         :key="category.slug"
         @click="closeMenu"
         v-for="category in visibleCategories"
       >
         <div v-if="isCurrentMenuShowed" class="w-full">
+          
           <sub-btn
             :id="category.id"
             :name="category.name"
@@ -33,6 +35,7 @@
             class="category-link"
             :to="localizedRoute({ name: 'category', params: { id: category.id, slug: category.slug }})"
           >
+            
             {{ category.name }}
           </router-link>
         </div>
@@ -49,6 +52,7 @@
           :to="localizedRoute('/sale')"
           exact
         >
+
           {{ $t('Sale') }}
         </router-link>
       </li>
@@ -58,6 +62,7 @@
           :to="localizedRoute('/magazine')"
           exact
         >
+          
           {{ $t('Magazine') }}
         </router-link>
       </li>
@@ -88,7 +93,7 @@
           {{ $t('Track my order') }}
         </router-link>
       </li>
-      <li @click="closeMenu" class="flex border-b">
+      <li @click="closeMenu" class="flex border-b menu_li_it">
         <sub-btn
           v-if="currentUser"
           :name="$t('My account')"
@@ -250,4 +255,43 @@ export default {
     }
   }
 }
+
+@media (min-width: 576px){
+
+  .sidebar-menu__list .menu_li_it .ico_main {
+    float: left;
+    margin-top: 4px;
+    margin-right: 8px;
+  }
+  .sidebar-menu__list .menu_li_it .btn-list_menu{
+    text-align: left;
+    display: inline-block;
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .sidebar-menu{
+    z-index: 100;
+  }
+  .sidebar-menu__list .menu_li_it{
+    position: relative;
+    text-transform: uppercase;
+  }
+  .sidebar-menu__list .menu_li_it .ico_main{
+    font-size:35px;
+    position: absolute;
+    left: 15px;
+    top: 25px;
+  }
+  .sidebar-menu__list .menu_li_it .btn-list_menu{
+    text-align: left;
+    display: inline-block;
+  }
+  .sidebar-menu__list .menu_li_it .vt-icon--sm{ float: right; margin-top: 3px;  }
+
+}
+
 </style>
