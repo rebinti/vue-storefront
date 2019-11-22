@@ -4,9 +4,10 @@
 
       <div class="mob_price_filter Accordion mob_fltr list_">
           <h5 class="Accordion__trigger k_head" >Sort BY</h5>
-          <a hrf="#">Newest</a>
-          <a hrf="#">Price: Low to High</a>
-          <a hrf="#">Price: High to Low</a>
+          <p v-for="(option, label) in sortByAttribute" :disabled="sortby === option" :value="option" :key="option" 
+          @click="changeSortOrder(option)" href="">
+           {{ $t(label) }}
+          </p>
       </div>
 
       <div class="Accordion mob_fltr list_hd list_">
@@ -95,6 +96,7 @@
 
 <script>
 import Sidebar from '@vue-storefront/core/compatibility/components/blocks/Category/Sidebar'
+import SortBy from '@vue-storefront/core/compatibility/components/SortBy'
 
 import ColorSelector from 'theme/components/core/ColorSelector'
 import SizeSelector from 'theme/components/core/SizeSelector'
@@ -102,7 +104,7 @@ import PriceSelector from 'theme/components/core/PriceSelector'
 import GenericSelector from 'theme/components/core/GenericSelector'
 import Accordion from 'theme/components/theme/Accordion'
 
-import SortBy from 'theme/components/core/SortBy.vue'
+// import SortBy from 'theme/components/core/SortBy.vue'
 
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 
@@ -114,9 +116,9 @@ export default {
     GenericSelector,
     Accordion,
     ButtonFull,
-    SortBy
+    // SortBy
   },
-  mixins: [Sidebar],
+  mixins: [Sidebar , SortBy],
   data () {
     return {
       openedFilters: []
@@ -130,6 +132,10 @@ export default {
       } else {
         this.openedFilters.splice(index, 1)
       }
+    },
+    changeSortOrder(data) {
+      this.sortby = data;
+      this.changeOrder();
     }
   }
 }
