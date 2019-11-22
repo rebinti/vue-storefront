@@ -127,7 +127,20 @@ export default {
   },
   methods: {
     logout () {
-      this.$bus.$emit('user-before-logout')
+      // this.$bus.$emit('user-before-logout')
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'warning',
+          item: {},
+          message: i18n.t('Are you sure you want to sign out?'),
+          action2: { label: i18n.t('OK'), action: this.logutFromAll},
+          action1: { label: i18n.t('Cancel'), action: 'close' },
+          hasNoTimeout: true
+        })
+    },
+    logutFromAll() {
+      this.$store.dispatch('notification/removeNotification')
+      this.$bus.$emit('user-before-logout');
+      this.$router.push(this.localizedRoute('/'))
     },
     notify (title) {
       if (title === 'My loyalty card' || title === 'My product reviews') {
