@@ -242,12 +242,12 @@ input {
 
 
 .button_bx_link_lrg{
-  width: 85px;
+  width: 100px;
   height: 100%;
   background: #ff3a31;
   text-align: center;
   border: 0px;
-  right: -106px;
+  right: -120px;
 }
 .ic_dlt_bx{
   position: relative;

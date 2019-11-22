@@ -1,8 +1,38 @@
 <template>
-  <div id="category">
-    <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />
-    <header class="pb-16 row bg-grey-lightest mb-6">
-      <div class="container">
+  <div id="category" class="st_brd"> 
+    <div class="b_crumb">
+        <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
+    </div>  
+    
+    <header class="pb-16 row bg-grey-lightest mb-6 head_category">
+
+      <div class="search_out_pop_box">
+          <div class="search_out_pop_inner">
+              <svg viewBox="0 0 25 25" class="vt-icon">
+                <use xlink:href="#search" />
+              </svg>
+              <input type="text" class="icon_bg"  placeholder="Search for Products">       
+          </div>
+
+          <div class="search_bx_it">
+
+              <div class="search_bx_filter">                  
+                  <button-full class="w-full" @click.native="openFilters">
+                    {{ $t('Filters') }}
+                  </button-full>
+
+              </div>
+              <div class="search_bx_sortby">
+
+                  <sort-by />
+
+              </div>
+
+          </div>
+
+      </div>
+
+      <div class="container d_item">
         <div class="row items-center mt-2">
           <h1 class="col-10">
             {{ category.name }}
@@ -12,10 +42,10 @@
           </div>
         </div>
       </div>
-      <div class="container lg:hidden">
+      <div class="container lg:hidden d_item">
         <div class="row gutter-md mt-6">
           <div class="col-6">
-            <button-full class="w-full" @click.native="openFilters">
+           <button-full class="w-full" @click.native="openFilters">
               {{ $t('Filters') }}
             </button-full>
           </div>
@@ -122,9 +152,23 @@ export default {
     top: 73px;
   }
 }
+
+
+
 </style>
 
 <style lang="scss" scoped>
+
+
+@media (min-width: 576px){
+  .search_out_pop_box{    
+      display: none; 
+  }
+  
+ 
+    
+}
+
 
 @media (max-width: 576px) {
 
@@ -137,6 +181,80 @@ export default {
   .mobile_filter .sidebar .Accordion{
     background: #000;
   }
+
+  .b_crumb{ display: none; }
+
+  .search_out_pop_bx{
+       display: block;
+  }
+
+  .d_item{
+    display: none;
+  }
+
+  .search_out_pop_box{
+    width:100%;
+    float: left;
+    padding: 10px 10px;
+    background: #fafafa;
+  }
+  .search_out_pop_inner{
+    width:80%;
+    float: left;
+    background: #f2f2f2;
+    padding: 10px 10px;
+  }
+  .search_bx_it{
+    width:20%;
+    float: left;
+    padding-left: 20px;
+  }
+  .search_out_pop_inner .vt-icon{
+     float: left;
+     width: 20px;
+     margin-right: 5px;
+  }
+   .search_out_pop_inner .icon_bg{
+      float: left;
+      width:85%;
+      font-size:15px;
+      background: #f2f2f2;
+   }
+   .search_out_pop_box .search_bx_filter{
+     float: left;
+     width:100%;
+   }
+   .search_out_pop_box .search_bx_filter button{
+     padding: 10px;
+     font-size:9px;
+     border:0px;
+     background: url("../assets/filter_ico.png") no-repeat;
+     font-size: 1px;
+      text-indent: -200px;
+      overflow: hidden;
+      background-position: center;
+      cursor: pointer;
+   }
+   .search_out_pop_box .search_bx_sortby{
+     float: left;
+     width:50%;
+   }
+   .search_out_pop_box .search_bx_sortby .select{
+     padding:2px;
+     height:40px;
+     overflow: hidden;
+     font-size: 10px;
+     position: relative;
+     top: -4px;
+   }
+
+   .head_category{
+     padding-bottom: 0px;
+   }
+
+   .search_out_pop_box .search_bx_sortby{
+     display: none;
+   }
 
 }
   

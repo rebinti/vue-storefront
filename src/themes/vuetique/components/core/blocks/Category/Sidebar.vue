@@ -4,9 +4,10 @@
 
       <div class="mob_price_filter Accordion mob_fltr list_">
           <h5 class="Accordion__trigger k_head" >Sort BY</h5>
-          <p v-for="(option, label) in sortByAttribute" :disabled="sortby === option" :value="option" :key="option" 
+          <p :class="{'act_df' : sortby == option}" v-for="(option, label) in sortByAttribute" :disabled="sortby === option" :value="option" :key="option" 
           @click="changeSortOrder(option)" href="">
            {{ $t(label) }}
+           <span class="fas fa-check"></span>
           </p>
       </div>
 
@@ -143,6 +144,15 @@ export default {
 
 <style lang="scss" scoped>
 
+ @media (min-width: 576px) {
+  .mob_price_filter{
+    display: none;
+  }
+  .list_hd{
+    display: none; 
+  }
+}
+
   @media (max-width: 576px) {
 
     .mob_fltr{     
@@ -177,12 +187,24 @@ export default {
       }
       .mob_price_filter{
         padding-bottom: 20px;
-        a{
+        p{
           width:100%;
           color:#000;
           font-size:13px;
           display: inline-block;
           margin-bottom: 3px;
+          svg{
+            display: none;
+          }
+          &.act_df{
+            font-weight: bold;
+            svg{
+              display: block;
+              float: right;
+              margin-right: 20%;
+              margin-top: 4px;
+            }
+          }
         }
         .k_head{
           padding-bottom: 10px;
