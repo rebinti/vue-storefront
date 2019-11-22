@@ -12,6 +12,7 @@
   "dependencies": {
     "bodybuilder": "2.2.13",
     "codyhouse-framework": "^1.0.3",
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "vue": "^2.6.6",
     "vue2-touch-events": "^2.0.1",
     "vue-carousel": "^0.17.0",
