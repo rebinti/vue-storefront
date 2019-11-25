@@ -165,6 +165,10 @@ export default {
       .size-selector{
           height:20px;
           line-height: 20px;
+          &.active{
+            background: #000000;
+            color:#ffffff;
+          }
       }
       .price-select{       
         font-size:13px;
