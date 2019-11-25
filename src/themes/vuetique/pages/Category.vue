@@ -230,10 +230,10 @@ export default {
      border:0px;
      background: url("../assets/filter_ico.png") no-repeat;
      font-size: 1px;
-      text-indent: -200px;
-      overflow: hidden;
-      background-position: center;
-      cursor: pointer;
+     text-indent: -200px;
+     overflow: hidden;
+     background-position: center;
+     cursor: pointer;
    }
    .search_out_pop_box .search_bx_sortby{
      float: left;
