@@ -146,4 +146,30 @@ export default {
     display: none;
   }
 }
+
+@media (max-width: 576px) {
+
+      .txt_blk_select{
+            width:100%;
+            float: left;
+            padding-left: 0px;
+            padding-right: 0px;
+            &:after{
+              top:36px;
+            }
+            select{
+              background:#fafafa;
+              border: 0px;
+              border-bottom: 1px solid #e0e0e0;
+              height: 80px;
+              color:#000000;
+            }
+            label{
+              top:28px;
+              left:15px;
+              color:#8d9baf;
+            }
+          }
+}
+
 </style>

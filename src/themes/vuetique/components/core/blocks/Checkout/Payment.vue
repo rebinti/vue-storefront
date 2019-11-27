@@ -1,5 +1,5 @@
 <template>
-  <div class="payment">
+  <div class="payment form_fileds_out">
     <div class="flex flex-wrap">
       <div class="w-1/12 hidden md:block">
         <div
@@ -17,11 +17,11 @@
           >
             3
           </div>
-          <h3 class="ml-3 md:ml-0 mb-0 md:mb-5">
+          <h3 class="ml-3 md:ml-0 mb-0 md:mb-5 form_hd_title">
             {{ $t('Payment') }}
           </h3>
         </div>
-        <div class="mb-2 flex end-lg" v-if="isFilled && !isActive">
+        <div class="mb-2 flex end-lg form_edit_bx" v-if="isFilled && !isActive">
           <a href="#" class="p-2 bg-grey-lightest text-black inline-flex items-center" @click.prevent="edit">
             <span class="pr-1">
               {{ $t('Edit payment') }}
@@ -33,7 +33,7 @@
     </div>
     <!--Fields-->
 
-    <div class="flex flex-wrap justify-end mb-2" v-if="isActive">
+    <div class="flex flex-wrap ed_phone_num justify-end mb-2" v-if="isActive">
       <div class="w-full md:w-11/12">
         <base-checkbox
           class="w-full"
@@ -60,9 +60,9 @@
 
     <div class="flex flex-wrap justify-end w-full">
       <div class="w-full md:w-11/12">
-        <div class="flex flex-wrap -mx-3 mb-3" v-if="isActive">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn" v-if="isActive">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="first-name"
             :placeholder="$t('First name *')"
@@ -82,7 +82,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="last-name"
             :placeholder="$t('Last name *')"
@@ -100,9 +100,9 @@
 
     <div class="flex flex-wrap justify-end w-full">
       <div class="w-full md:w-11/12">
-        <div class="flex flex-wrap -mx-3 mb-3" v-if="isActive">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn" v-if="isActive">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="street-address"
             :placeholder="$t('Street name *')"
@@ -116,7 +116,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="apartment-number"
             :placeholder="$t('House/Apartment number')"
@@ -134,9 +134,9 @@
 
     <div class="flex flex-wrap justify-end w-full">
       <div class="w-full md:w-11/12">
-        <div class="flex flex-wrap -mx-3 mb-3" v-if="isActive">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn" v-if="isActive">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="city"
             :placeholder="$t('City *')"
@@ -150,7 +150,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="state"
             :placeholder="$t('State / Province')"
@@ -163,9 +163,9 @@
 
     <div class="flex flex-wrap justify-end w-full">
       <div class="w-full md:w-11/12">
-        <div class="flex flex-wrap -mx-3 mb-3" v-if="isActive">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn" v-if="isActive">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="zip-code"
             :placeholder="$t('Zip-code *')"
@@ -185,7 +185,7 @@
           />
 
           <base-select
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_select"
             name="countries"
             :options="countryOptions"
             :selected="payment.country"
@@ -209,7 +209,7 @@
       <div class="w-full md:w-11/12">
         <div class="flex flex-wrap -mx-3 mb-3" v-if="isActive">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="phone-number"
             :placeholder="$t('Phone Number')"
@@ -220,7 +220,7 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap justify-end w-full">
+    <div class="flex flex-wrap justify-end w-full ed_phone_num">
       <div class="w-full md:w-11/12">
         <base-checkbox
           v-if="isActive"
@@ -291,7 +291,7 @@
             {{ $t('Payment method') }}
           </h4>
 
-          <div class="w-full mb-4">
+          <div class="w-full mb-4 ed_phone_num">
             <div v-for="(method, index) in paymentMethods" :key="index" class="col-md-6">
               <base-radiobutton
                 :id="'payment-' + method.code"
@@ -313,7 +313,7 @@
     <div class="flex flex-wrap w-full justify-end" v-if="isActive">
       <div class="w-full md:w-11/12">
         <div class="flex flex-wrap -mx-3 mb-3">
-          <div class="w-full lg:w-1/2 px-3">
+          <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">
             <button-full
               @click.native="sendDataToCheckout"
               data-testid="paymentSubmit"
@@ -327,7 +327,7 @@
     </div>
 
     <!--Review payment data-->
-    <div class="flex flex-wrap justify-end" v-if="!isActive && isFilled">
+    <div class="flex flex-wrap justify-end form_after_filled" v-if="!isActive && isFilled">
       <div class="w-full md:w-11/12">
         <p>
           {{ payment.firstName }} {{ payment.lastName }}
@@ -342,17 +342,17 @@
           <span v-if="payment.state">{{ payment.state }}, </span>
           <span>{{ getCountryName() }}</span>
         </p>
-        <div v-if="payment.phoneNumber">
+        <div class="ed_phone_num" v-if="payment.phoneNumber">
           <span>{{ payment.phoneNumber }}</span>
           <tooltip>{{ $t('Phone number may be needed by carrier') }}</tooltip>
         </div>
         <p v-if="generateInvoice">
           {{ payment.company }} {{ payment.taxId }}
         </p>
-        <div class="w-full my-3">
+        <div class="w-full my-3 ed_phone_num">
           <h4>{{ $t('Payment method') }}</h4>
         </div>
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-4 ed_phone_num" >
           <base-radiobutton id="payment-selected" :value="true" :disabled="true">
             {{ getPaymentMethod().title }}
           </base-radiobutton>
@@ -463,3 +463,114 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+  @media (max-width: 576px) {
+
+  .form_fileds_out{
+
+      .form_hd_title{
+          font-size:15px;
+          font-weight: 600;
+      }
+
+      .txt_blk_out{
+        width:100%!important;
+        .text-sm{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+      }
+
+      .txt_blk_select{
+        select{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+        .text-error{
+          position: absolute;
+          left:0px;
+          bottom: 5px;
+          padding: 0 10px;
+        }
+      }
+
+      .form_edit_bx{
+        width:100%;
+        margin-bottom: 5px;
+        a{
+          &.text-black{
+            width:100%;
+            display: inline-block;
+          }
+          .material-icons{
+            float: right;
+            margin-top:2px;
+          }
+        }
+      }
+
+      .ed_phone_num{
+         font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+      }
+
+      .form_after_filled{
+          p{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .ed_phone_num{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .frm_text{
+              font-size:12px;
+              padding-left: 10px;
+          }
+          .checkbox-wrap{
+              margin-top: 15px;
+              font-size:12px;
+            
+          }     
+      }
+
+      .no_bottom_mrgn{
+        margin-bottom: 0px!important;
+      }
+
+      .main_sub_btn_out{
+        width:100%;
+        padding: 0 15px;
+        margin:0px;
+        margin-bottom: 15px;
+        button{
+          background: #000000;
+          color:#ffffff;
+          width:100%;
+          height:50px;
+        }
+      }
+
+      
+
+    }
+
+
+
+  }
+
+</style>

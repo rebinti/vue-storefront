@@ -1,5 +1,5 @@
 <template>
-  <div class="personal-details">
+  <div class="personal-details form_fileds_out">
     <div class="flex flex-wrap">
       <div class="w-1/12 hidden md:block">
         <div
@@ -17,11 +17,11 @@
           >
             1
           </div>
-          <h3 class="mb-0 ml-3 md:ml-0 md:mb-5">
+          <h3 class="mb-0 ml-3 md:ml-0 md:mb-5 form_hd_title">
             {{ $t('Personal Details') }}
           </h3>
         </div>
-        <div class="flex mb-2" v-if="isFilled && !isActive">
+        <div class="flex mb-2 form_edit_bx" v-if="isFilled && !isActive">
           <a href="#" class="p-2 bg-grey-lightest text-black inline-flex items-center" @click.prevent="edit">
             <span class="pr-2">
               {{ $t('Edit personal details') }}
@@ -35,7 +35,7 @@
       <div class="w-full md:w-11/12">
         <div class="flex flex-wrap -mx-3">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             :autofocus="true"
             name="first-name"
@@ -56,7 +56,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="last-name"
             :placeholder="$t('Last name *')"
@@ -70,7 +70,7 @@
           />
 
           <base-input
-            class="w-full mt-3 px-3"
+            class="w-full mt-3 px-3 txt_blk_out"
             type="email"
             name="email-address"
             :placeholder="$t('Email address *')"
@@ -175,7 +175,7 @@
     <div class="flex flex-wrap justify-end pb-3 md:pb-8" v-show="isActive">
       <div class="w-full md:w-11/12">
         <div class="mt-6 flex justify-between items-center">
-          <div class="mr-2 button-container">
+          <div class="mr-2 button-container main_sub_btn_out">
             <button-full
               data-testid="personalDetailsSubmit"
               @click.native="sendDataToCheckout"
@@ -201,12 +201,12 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-end pb-3 md:pb-8" v-if="!isActive && isFilled">
+    <div class="flex flex-wrap justify-end form_after_filled pb-3 md:pb-8" v-if="!isActive && isFilled">
       <div class="w-full md:w-11/12">
         <p>
           {{ personalDetails.firstName }} {{ personalDetails.lastName }}
         </p>
-        <div>
+        <div class="frm_text">
           <span>{{ personalDetails.emailAddress }}</span>
           <tooltip>{{ $t('We will send you details regarding the order') }}</tooltip>
         </div>
@@ -285,4 +285,74 @@ export default {
     margin-top: 30px;
   }
 }
+
+@media (max-width: 576px) {
+
+  .form_fileds_out{
+
+    .form_hd_title{
+        font-size:15px;
+        font-weight: 600;
+    }
+
+    .txt_blk_out{
+      width:100%!important;
+      margin-top:0px;
+      .text-sm{
+        background:#fafafa;
+        border: 0px;
+        border-bottom: 1px solid #e0e0e0;
+        height: 80px;
+        color:#000000;
+      }
+    }
+
+    .form_edit_bx{
+      width:100%;
+      margin-bottom: 5px;
+      a{
+        &.text-black{
+          width:100%;
+          display: inline-block;
+        }
+        .material-icons{
+          float: right;
+          margin-top:2px;
+        }
+      }
+    }
+
+    .form_after_filled{
+        p{
+            font-size:12px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .frm_text{
+            font-size:12px;
+            padding-left: 10px;
+        }     
+    }
+
+    .main_sub_btn_out{
+      width:100%;
+      padding: 0 15px;
+      margin:0px;
+      margin-bottom: 15px;
+      button{
+        background: #000000;
+        color:#ffffff;
+        width:100%;
+        height:50px;
+      }
+    }
+
+
+  }
+
+}
+
+
+
 </style>

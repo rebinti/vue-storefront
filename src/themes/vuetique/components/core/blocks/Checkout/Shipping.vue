@@ -1,5 +1,5 @@
 <template>
-  <div class="shipping">
+  <div class="shipping form_fileds_out">
     <div class="flex flex-wrap">
       <div class="w-1/12 hidden md:block">
         <div
@@ -17,11 +17,11 @@
           >
             2
           </div>
-          <h3 class="ml-3 md:ml-0 mb-0 md:mb-5">
+          <h3 class="ml-3 md:ml-0 mb-0 md:mb-5 form_hd_title">
             {{ $t('Shipping') }}
           </h3>
         </div>
-        <div class="mt-3 md:mt-0 mb-2 flex end-lg" v-if="isFilled && !isActive">
+        <div class="mt-3 md:mt-0 mb-2 flex form_edit_bx end-lg" v-if="isFilled && !isActive">
           <a href="#" class="p-2 bg-grey-lightest text-black inline-flex items-center" @click.prevent="edit">
             <span class="pr-2">
               {{ $t('Edit shipping') }}
@@ -44,9 +44,9 @@
           {{ $t('Ship to my default address') }}
         </base-checkbox>
 
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="first-name"
             :placeholder="$t('First name *')"
@@ -66,7 +66,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="last-name"
             :placeholder="$t('Last name *')"
@@ -79,9 +79,9 @@
             }"
           />
         </div>
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="street-address"
             :placeholder="$t('Street name *')"
@@ -95,7 +95,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="apartment-number"
             :placeholder="$t('House/Apartment number')"
@@ -109,9 +109,9 @@
           />
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="city"
             :placeholder="$t('City *')"
@@ -125,7 +125,7 @@
           />
 
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="state"
             :placeholder="$t('State / Province')"
@@ -134,9 +134,9 @@
           />
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3 mb-3 no_bottom_mrgn">
           <base-input
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_out"
             type="text"
             name="zip-code"
             :placeholder="$t('Zip-code *')"
@@ -156,7 +156,7 @@
           />
 
           <base-select
-            class="w-1/2 px-3"
+            class="w-1/2 px-3 txt_blk_select"
             name="countries"
             :options="countryOptions"
             :selected="shipping.country"
@@ -174,7 +174,7 @@
           />
 
           <base-input
-            class="w-full mt-3 px-3"
+            class="w-full mt-3 px-3 txt_blk_out"
             type="text"
             name="phone-number"
             :placeholder="$t('Phone Number')"
@@ -212,7 +212,7 @@
     <div class="flex flex-wrap justify-end pb-8" v-if="isActive">
       <div class="w-full md:w-11/12">
         <div class="flex -mx-3">
-          <div class="w-full lg:w-1/2 px-3">
+          <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">
             <button-full
               data-testid="shippingSubmit"
               @click.native="sendDataToCheckout"
@@ -225,7 +225,7 @@
       </div>
     </div>
     <!--Review shipping data-->
-    <div class="flex flex-wrap justify-end pb-2 md:pb-8" v-if="!isActive && isFilled">
+    <div class="flex flex-wrap justify-end form_after_filled pb-2 md:pb-8 " v-if="!isActive && isFilled">
       <div class="w-full md:w-11/12">
         <div data-testid="shippingAddressSummary">
           <p>
@@ -241,16 +241,16 @@
             <span v-if="shipping.state">{{ shipping.state }}, </span>
             <span>{{ getCountryName() }}</span>
           </p>
-          <div v-if="shipping.phoneNumber">
+          <div class="ed_phone_num" v-if="shipping.phoneNumber">
             <span>{{ shipping.phoneNumber }}</span>
             <tooltip>{{ $t('Phone number may be needed by carrier') }}</tooltip>
           </div>
-          <div class="w-full mt-3">
+          <div class="w-full mt-3 ed_phone_num">
             <h4>
               {{ $t('Shipping method') }}
             </h4>
           </div>
-          <div class="v-full mt-3">
+          <div class="v-full mt-3 ed_phone_num">
             <base-radiobutton id="shipping-selected" :value="true" :disabled="true">
               {{ getShippingMethod().method_title }} | {{ getShippingMethod().amount | price }}
             </base-radiobutton>
@@ -329,3 +329,107 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+  @media (max-width: 576px) {
+
+  .form_fileds_out{
+
+      .form_hd_title{
+          font-size:15px;
+          font-weight: 600;
+      }
+
+      .txt_blk_out{
+        width:100%!important;
+        .text-sm{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+      }
+
+      .txt_blk_select{
+        select{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+        .text-error{
+          position: absolute;
+          left:0px;
+          bottom: 5px;
+          padding: 0 10px;
+        }
+      }
+
+      .form_edit_bx{
+        width:100%;
+        margin-bottom: 5px;
+        a{
+          &.text-black{
+            width:100%;
+            display: inline-block;
+          }
+          .material-icons{
+            float: right;
+            margin-top:2px;
+          }
+        }
+      }
+
+      .form_after_filled{
+          p{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .ed_phone_num{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .frm_text{
+              font-size:12px;
+              padding-left: 10px;
+          }
+          .checkbox-wrap{
+            
+              font-size:12px;
+            
+          }     
+      }
+
+      .no_bottom_mrgn{
+        margin-bottom: 0px!important;
+      }
+
+      .main_sub_btn_out{
+        width:100%;
+        padding: 0 15px;
+        margin:0px;
+        margin-bottom: 15px;
+        button{
+          background: #000000;
+          color:#ffffff;
+          width:100%;
+          height:50px;
+        }
+      }
+
+      
+
+    }
+
+
+
+  }
+
+</style>

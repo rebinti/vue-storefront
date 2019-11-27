@@ -1,5 +1,5 @@
 <template>
-  <div class="order-review">
+  <div class="order-review form_fileds_out">
     <div class="flex flex-wrap">
       <div class="w-1/12 hidden md:block">
         <div
@@ -17,7 +17,7 @@
           >
             4
           </div>
-          <h3 class="ml-3 mb-0 md:ml-0 md:mb-5">
+          <h3 class="ml-3 mb-0 md:ml-0 md:mb-5 form_hd_title">
             {{ $t('Review order') }}
           </h3>
         </div>
@@ -25,22 +25,22 @@
     </div>
     <!-- HEADER END -->
 
-    <div class="flex flex-wrap justify-end" v-show="isActive">
+    <div class="flex flex-wrap justify-end form_after_filled" v-show="isActive">
       <div class="w-full md:w-11/12">
-        <div id="checkout-order-review-additional-container">
-          <div id="checkout-order-review-additional">
+        <div id="checkout-order-review-additional-container" class="edit_phone_num">
+          <div id="checkout-order-review-additional" class="ed_phone_num">
 &nbsp;
           </div>
         </div>
 
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap form_after_filled">
           <div class="w-full">
-            <p class="text-h4 mb-2">
+            <p class="text-h4 mb-2 edit_phone_num">
               {{ $t('Please verify that you have entered everything correctly') }}
             </p>
             <div class="row">
               <base-checkbox
-                class="w-full"
+                class="w-full ed_phone_num"
                 id="acceptTermsCheckbox"
                 @click="orderReview.terms = !orderReview.terms"
                 @blur="$v.orderReview.terms.$touch()"
@@ -63,10 +63,10 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-end mt-5" v-show="isActive">
+    <div class="flex flex-wrap justify-end mt-5 " v-show="isActive">
       <div class="w-full lg:w-11/12">
         <div class="flex flex-wrap -mx-3">
-          <div class="w-full lg:w-1/2 px-3">
+          <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">
             <slot name="placeOrderButton">
               <button-full
                 @click.native="placeOrder"
@@ -174,4 +174,128 @@ export default {
       }
     }
   }
+</style>
+
+<style lang="scss" scoped>
+
+  @media (max-width: 576px) {
+
+  .form_fileds_out{
+
+      .form_hd_title{
+          font-size:15px;
+          font-weight: 600;
+      }
+
+      .txt_blk_out{
+        width:100%!important;
+        .text-sm{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+      }
+
+      .txt_blk_select{
+        select{
+          background:#fafafa;
+          border: 0px;
+          border-bottom: 1px solid #e0e0e0;
+          height: 80px;
+          color:#000000;
+        }
+        .text-error{
+          position: absolute;
+          left:0px;
+          bottom: 5px;
+          padding: 0 10px;
+        }
+      }
+
+      .form_edit_bx{
+        width:100%;
+        margin-bottom: 5px;
+        a{
+          &.text-black{
+            width:100%;
+            display: inline-block;
+          }
+          .material-icons{
+            float: right;
+            margin-top:2px;
+          }
+        }
+      }
+
+      .ed_phone_num{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+              span{
+                color:#000000;
+                font-weight: bold;
+              }
+      }
+      .edit_phone_num{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 0px;
+              h4{
+                margin-bottom: 10px;
+              }
+      }
+
+      .form_after_filled{
+          p{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .ed_phone_num{
+              font-size:12px;
+              padding-left: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+          }
+          .frm_text{
+              font-size:12px;
+              padding-left: 10px;
+          }
+          .checkbox-wrap{
+              margin-top: 15px;
+              font-size:12px;
+            
+          }     
+      }
+
+      .no_bottom_mrgn{
+        margin-bottom: 0px!important;
+      }
+
+      .main_sub_btn_out{
+        width:100%;
+        padding: 0 15px;
+        margin:0px;
+        margin-bottom: 15px;
+        button{
+          background: #000000;
+          color:#ffffff;
+          width:100%;
+          height:50px;
+        }
+      }
+
+      
+
+    }
+
+
+
+  }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="checkout">
+  <div id="checkout" class="check_out_hd">
     <div class="container mx-auto">
       <div class="flex flex-wrap justify-between w-full" v-show="!isThankYouPage">
         <div class="w-full md:w-3/5 lg:w-1/2 md:px-3">
@@ -190,4 +190,37 @@ export default {
       }
     }
   }
+
+@media (max-width: 576px) {
+
+  .check_out_hd{
+    .checkout-title{
+        padding: 0px;
+        margin:0px;
+        margin-bottom: 10px;
+      h1{
+        border-bottom: 0px;
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+        margin: 0px;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  #checkout .number-circle.bg-cl-th-accent{
+    background: #000000;
+  }
+   #checkout .text-primary{
+     color: #000000;
+   }
+   .checkbox-wrap input[type="radio"]:checked + label:before{
+     background-color: #000000;
+     border:0px;
+   }
+
+}
+  
+
 </style>

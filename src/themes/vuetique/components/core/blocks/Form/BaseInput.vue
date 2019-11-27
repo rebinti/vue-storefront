@@ -218,4 +218,28 @@ export default {
       border:1px solid #000;
     }
 
+
+@media (max-width: 576px) {
+    .txt_blk_out{
+      width:100%!important;
+      position: relative;
+      padding-left: 0px;
+      padding-right: 0px;
+      .text-sm{
+        background:#fafafa;
+        border: 0px;
+        border-bottom: 1px solid #e0e0e0;
+        height: 80px;
+        color:#000000;
+      }
+      .text-error{
+        position: absolute;
+        left:0px;
+        bottom: 0px;
+        width:100%;
+        padding: 0 10px;
+      }
+    }
+}
+
 </style>

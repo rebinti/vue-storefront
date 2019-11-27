@@ -267,6 +267,7 @@ export default {
     text-align: left;
     display: inline-block;
   }
+  .sidebar-menu__list .menu_li_it .vt-icon--sm{ float: right; margin-top: 3px;  }
 
 }
 
