@@ -7,7 +7,8 @@
     :aria-label="$t('Show subcategories')"
     data-testid="categoryButton"
   >
-  <span class="ico_main fab fa-bandcamp"></span>
+   <img v-if="thumbnail" class="ico_main" :src="getThumbnailBaseUrl+thumbnail" alt="" style="width: 30px;height: 30px;"/>
+   <!-- <span class="ico_main fab fa-bandcamp"></span> -->
     {{ name }}
     <svg viewBox="0 0 25 25" class="vt-icon--sm">
       <use xlink:href="#right" />
@@ -27,6 +28,7 @@
   </button>
 </template>
 <script>
+import config from 'config'
 import { mapState } from 'vuex'
 export default {
   name: 'SubBtn',
@@ -42,12 +44,19 @@ export default {
     name: {
       type: String,
       default: ''
+    },
+    thumbnail: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     ...mapState({
       submenu: state => state.ui.submenu
-    })
+    }),
+    getThumbnailBaseUrl() {
+      return config.category_url.img_url
+    }
   },
   methods: {
     next () {

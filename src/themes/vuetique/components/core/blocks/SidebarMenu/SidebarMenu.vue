@@ -28,6 +28,7 @@
           <sub-btn
             :id="category.id"
             :name="category.name"
+            :thumbnail="category.thumbnail"
             v-if="category.children_count > 0"
           />
           <router-link
