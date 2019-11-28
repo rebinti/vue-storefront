@@ -1,5 +1,5 @@
 <template>
-  <div id="my_account">
+  <div id="my_account" class="my_accnt_page_inner">
     <breadcrumbs
       :routes="[{name: 'Homepage', route_link: '/'}]"
       active-route="My Account"
@@ -10,7 +10,7 @@
 
     <div class="container pt-10 pb-16">
       <div class="row gutter-md justify-between">
-        <div class="md:col-3 lg:col-2 mb-8">
+        <div class="md:col-3 lg:col-2 mb-8 cn_it_inner">
           <nav class="static-menu serif h4 mb35">
             <ul class="border-t">
               <li class="border-b py-2" v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">
@@ -101,4 +101,25 @@ $color-tertiary: color(tertiary);
     }
   }
 }
+
+
+@media (min-width: 577px) {
+
+  
+
+}
+
+@media (max-width: 576px) {
+
+.my_accnt_page_inner{
+
+    header{ display: none; }
+    .bg-grey-lightest{ display: none; }
+    .cn_it_inner{ display: none; }
+
+  }
+
+
+}
+
 </style>
