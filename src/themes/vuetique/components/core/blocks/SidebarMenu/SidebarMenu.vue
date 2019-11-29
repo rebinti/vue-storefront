@@ -171,6 +171,12 @@ export default {
           name: i18n.t('My product reviews'),
           url: '#',
           icon: 'fas fa-star-half-alt'
+        },
+        {
+          id: 7,
+          name: i18n.t('My Recently viewed products'),
+          url: '/my-account/recently-viewed',
+          icon: 'fas fa-star-half-alt'
         }
       ],
       componentLoaded: false
