@@ -261,8 +261,10 @@ export default {
 
   .sidebar-menu__list .menu_li_it .ico_main {
     float: left;
-    margin-top: 4px;
-    margin-right: 8px;
+    margin-top: 1px;
+    margin-right: 15px;
+    width: 24px!important;
+    height: auto!important;
   }
   .sidebar-menu__list .menu_li_it .btn-list_menu{
     text-align: left;
@@ -286,7 +288,7 @@ export default {
     font-size:35px;
     position: absolute;
     left: 15px;
-    top: 25px;
+    top: 28px;
   }
   .sidebar-menu__list .menu_li_it .btn-list_menu{
     text-align: left;

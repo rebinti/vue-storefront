@@ -1,6 +1,7 @@
 <template>
   <button
     class="inline-flex justify-between w-full px-5 py-4 pr-4 font-medium btn-list_menu"
+    :class="{'no-img-thumb': thumbnail===''}"
     v-if="type === 'next'"
     type="button"
     @click.stop="next()"
@@ -92,13 +93,19 @@ button {
 @media (max-width: 576px) {
 
 
-  .sidebar-menu__list .menu_li_it .btn-list_menu{
-    padding-left: 65px;
-    font-size: 18px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-transform: uppercase;
-    text-align: left;
+  .sidebar-menu__list{
+
+   .menu_li_it .btn-list_menu{
+      padding-left: 65px;
+      font-size: 18px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      text-transform: uppercase;
+      text-align: left;
+      &.no-img-thumb{
+        padding-left:20px;
+      }
+    }
   }
 
 }
