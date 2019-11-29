@@ -73,7 +73,7 @@
         <div class="col-3 hidden lg:block">
           <sidebar :filters="filters.available" />
         </div>
-        <div class="col-12 lg:col-9">
+        <div class="col-12 lg:col-9 pr_list_sec_main">
           <div v-if="isCategoryEmpty" class="hidden-xs">
             <h3 data-testid="noProductsInfo" class="mb-2">
               {{ $t('No products found!') }}
@@ -176,6 +176,7 @@ export default {
     width: 75vw;
     left:auto;
     right:0px;
+    padding-bottom: 50px;
   }
   
   .mobile_filter .sidebar .Accordion{

@@ -44,11 +44,20 @@
         />
       </li>
     </ul>
+      
     <ul
       v-if="myAccountLinks"
-      class="sidebar-submenu fixed w-full"
+      class="sidebar-submenu fixed w-full mn_ul_bg"
       :style="styles"
     >
+      <div class="login_profile_pic">
+          <img src="/assets/vuetique-small-banners-4.jpg" alt="" />
+
+          <div class="log_text">
+            <span class="top_txt">Hi,</span>
+            <span class="top_txt mn_hd">{{ currentUser.firstname }} {{ currentUser.lastname }}</span>
+          </div>
+      </div>
       <li
         class="border-b flex"
         :key="link.id"
@@ -59,11 +68,14 @@
           class="menu-link"
           :to="localizedRoute(link.url)"
         >
+        <i :class="link.icon"></i>
           {{ link.name }}
+        <svg data-v-24315a35="" viewBox="0 0 25 25" class="vt-icon--sm"><use data-v-24315a35="" xlink:href="#right"></use></svg>
         </router-link>
       </li>
       <li class="border-b flex">
         <a href="#" class="menu-link" @click.prevent="logout">
+          <i class="fas fa-sign-out-alt"></i>
           {{ $t('Logout') }}
         </a>
       </li>
@@ -74,9 +86,11 @@
 import { mapState } from 'vuex'
 import SubBtn from './SubBtn.vue'
 import i18n from '@vue-storefront/i18n'
+import MyProfile from '@vue-storefront/core/compatibility/components/blocks/MyAccount/MyProfile'
 
 export default {
   name: 'SubCategory',
+  mixins: [MyProfile],
   components: {
     SubBtn
   },
@@ -161,4 +175,68 @@ export default {
     min-height: 100%;
     transform: translateX(-100%);
   }
+
+
+
+
+</style>
+
+<style lang="scss" scoped>
+
+// @media (max-width: 576px) {
+
+  .sidebar-menu{
+
+    .menu-link{
+      font-size: 15px;
+      color: #000000;
+      text-transform: capitalize;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      .svg-inline--fa{
+        margin-right: 10px;
+      }
+    }
+
+  }
+
+  .mn_ul_bg{
+    background: #ffffff;
+  }
+
+  .login_profile_pic{
+    display: inline-block;
+    width:100%;
+    position: relative;  
+    background: #ffffff;
+    // margin-top:20px;
+    img{
+      width:100%;
+      -webkit-border-radius: 50px 50px 0px 0px;
+      -moz-border-radius: 50px 50px 0px 0px;
+      border-radius: 50px 50px 0px 0px;
+      float: left;
+    } 
+    .log_text{
+      position: absolute;
+      left:0px;
+      bottom: 20px;
+      width:100%;
+      font-size:20px;
+      color:#fff;
+      padding: 0 10px;
+      span{
+         float: left;
+         width:100%;
+         font-weight: normal;
+         margin-bottom: 5px;
+         letter-spacing: 1.5px;
+         &.mn_hd{
+           font-weight: bold;
+         }
+      }
+    }
+  }
+  
+// }
 </style>

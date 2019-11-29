@@ -73,7 +73,7 @@
       </Accordion>
     </div>
 
-    <div class="mt-8 lg:hidden row gutter-md">
+    <div class="mt-8 lg:hidden row gutter-md bottom_btn_out">
       <div class="col-6">
         <button-full
           class="w-full"
@@ -175,7 +175,7 @@ export default {
       }
     } 
     .mobile_filter{
-      
+      padding-bottom: 52px;
       .ripple{
         background: #000000;
         border:1px solid #000;
@@ -215,6 +215,17 @@ export default {
         }
       }
 
+    }
+
+    .bottom_btn_out{
+      position: fixed;
+      bottom:0px;
+      width:75vw;
+      right:0px;
+      padding-right: 15px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      background: #ffffff;
     }
 
   }

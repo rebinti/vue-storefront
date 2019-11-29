@@ -64,4 +64,6 @@ export default {
       border-color: $white;
     }
   }
+
+  
 </style>

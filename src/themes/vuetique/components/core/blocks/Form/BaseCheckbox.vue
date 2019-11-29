@@ -52,4 +52,25 @@ export default {
     }
   }
 }
+
+
 </script>
+
+<style lang="scss" scoped>
+
+@media (max-width: 576px) {
+
+  .checkbox-wrap{
+
+    input[type="checkbox"]:checked{
+      
+      + label:before{
+        border-color: #000000;
+        background-color: #000000;
+      }
+    }
+
+  } 
+  
+}
+</style>

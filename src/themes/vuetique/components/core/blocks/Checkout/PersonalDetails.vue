@@ -102,8 +102,9 @@
 
           <template v-if="createAccount && !currentUser">
             <div class="flex w-full flex-wrap mt-4">
-              <div class="px-3 w-1/2">
+              <div class="px-3 w-1/2 txt_blk_out">
                 <base-input
+                  class="text-sm"
                   type="password"
                   name="password"
                   ref="password"
@@ -128,8 +129,9 @@
                 />
               </div>
 
-              <div class="px-3 w-1/2">
+              <div class="px-3 w-1/2 txt_blk_out">
                 <base-input
+                  class="text-sm"
                   type="password"
                   name="password-confirm"
                   :placeholder="$t('Repeat password *')"
@@ -174,7 +176,7 @@
     </div>
     <div class="flex flex-wrap justify-end pb-3 md:pb-8" v-show="isActive">
       <div class="w-full md:w-11/12">
-        <div class="mt-6 flex justify-between items-center">
+        <div class="mt-6 flex justify-between items-center text_full">
           <div class="mr-2 button-container main_sub_btn_out">
             <button-full
               data-testid="personalDetailsSubmit"
@@ -294,16 +296,26 @@ export default {
         font-size:15px;
         font-weight: 600;
     }
-
+    .text_full{
+      display: inline-block;
+      width:100%;
+    }
     .txt_blk_out{
       width:100%!important;
       margin-top:0px;
+      padding-left: 0px;
+      padding-right: 0px;
       .text-sm{
         background:#fafafa;
         border: 0px;
         border-bottom: 1px solid #e0e0e0;
         height: 80px;
         color:#000000;
+        button{
+          &.icon{
+            top:25px;
+          }
+        }
       }
     }
 
@@ -348,6 +360,7 @@ export default {
       }
     }
 
+    
 
   }
 

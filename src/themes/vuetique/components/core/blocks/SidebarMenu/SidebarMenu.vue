@@ -139,32 +139,38 @@ export default {
         {
           id: 1,
           name: i18n.t('My profile'),
-          url: '/my-account'
+          url: '/my-account',
+          icon: 'fas fa-user-alt'
         },
         {
           id: 2,
           name: i18n.t('My shipping details'),
-          url: '/my-account/shipping-details'
+          url: '/my-account/shipping-details',
+          icon: 'fas fa-shipping-fast'
         },
         {
           id: 3,
           name: i18n.t('My newsletter'),
-          url: '/my-account/newsletter'
+          url: '/my-account/newsletter',
+          icon: 'fas fa-newspaper'
         },
         {
           id: 4,
           name: i18n.t('My orders'),
-          url: '/my-account/orders'
+          url: '/my-account/orders',
+          icon: 'fas fa-box'
         },
         {
           id: 5,
           name: i18n.t('My loyalty card'),
-          url: '#'
+          url: '#',
+          icon: 'fas fa-gift'
         },
         {
           id: 6,
           name: i18n.t('My product reviews'),
-          url: '#'
+          url: '#',
+          icon: 'fas fa-star-half-alt'
         }
       ],
       componentLoaded: false

@@ -45,7 +45,11 @@
         {{ product.name | htmlDecode }}
       </p>
 
-      <div class="mt-1 text-grey-dark font-medium">
+       <p class="product-category prd_cat" v-if="!onlyImage">
+          Coats & Jackets
+      </p>
+
+      <div class="mt-1 text-grey-dark font-medium price_bx_it">
         <span
           class="text-primary mr-2"
           v-if="product.special_price && parseFloat(product.special_price) > 0 && !onlyImage"
@@ -247,4 +251,57 @@ export default {
     }
   }
 }
+
+
+@media (min-width: 577px) {
+
+  .pr_list_sec_main{
+
+   
+    .prd_cat{
+     display: none;
+    }
+    
+
+  }
+  
+
+}
+
+@media (max-width: 576px) {
+
+.pr_list_sec_main{
+
+    .product-name{
+      font-size: 13px;
+      color: #000;
+      font-weight: bold;
+      line-height: 16px;
+
+    }
+    .prd_cat{
+      font-size: 9px;
+      color: #787878;
+      text-transform: uppercase;
+      line-height: 13px;
+      padding-top: 5px;
+    }
+    .price_bx_it{
+        font-size:14px;
+        color:#000;
+        line-height: 16px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      span{
+        font-size:14px;
+        color:#000;
+        line-height: 16px;
+      }
+    }
+
+  }
+
+
+}
+
 </style>
