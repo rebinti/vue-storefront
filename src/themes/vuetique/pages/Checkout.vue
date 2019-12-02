@@ -200,11 +200,12 @@ export default {
         margin-bottom: 10px;
       h1{
         border-bottom: 0px;
-        font-size: 20px;
+        font-size:17px;
         width: 100%;
         text-align: center;
         margin: 0px;
         margin-top: 20px;
+        text-transform: uppercase;
       }
     }
   }
