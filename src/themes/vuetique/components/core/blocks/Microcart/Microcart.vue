@@ -17,7 +17,7 @@
     </button>
 
     <h2 v-if="productsInCart.length" class="mb-8 h_title">
-      {{ $t('Your cart') }}:
+     <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
     </h2>
 
     <h4 v-if="!productsInCart.length" class="mb-2">
@@ -198,11 +198,13 @@ export default {
 
     .mob_microcart .h_title{
       border-bottom: 0px;
-      font-size: 20px;
+      font-size: 17px;
       width: 100%;
       text-align: center;
       margin: 0px;
       margin-bottom: 20px;
+      text-transform: uppercase;
+
     }
 
     .right-sidebar.microcart{

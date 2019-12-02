@@ -185,6 +185,7 @@ export default {
       .form_hd_title{
           font-size:15px;
           font-weight: 600;
+          text-transform: uppercase;
       }
 
       .txt_blk_out{

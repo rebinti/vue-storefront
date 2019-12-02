@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <div class="cookie fixed w-100 bg-primary cl-tertiary" v-if="isOpen">
+    <div class="cookie fixed w-100 bg-primary cl-tertiary cookie_out" v-if="isOpen">
       <div class="container">
         <div class="p-2 pr-10 md:pr-2">
           <b>
@@ -111,4 +111,11 @@ $bg-icon: color(suva-gray);
   color: $color-icon;
   background-color: $bg-icon;
 }
+
+.cookie_out{
+  background: #F57073;
+  color:#000;
+}
+.cookie_out a { color:#000!important; }
+
 </style>
