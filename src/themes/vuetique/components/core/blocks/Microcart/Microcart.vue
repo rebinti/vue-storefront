@@ -4,6 +4,8 @@
     :class="{ active: showMicrocart }"
     data-testid="microcart"
   >
+
+  <div class="hd_fix">
     <button
       type="button"
       :aria-label="$t('Close')"
@@ -19,6 +21,7 @@
     <h2 v-if="productsInCart.length" class="mb-8 h_title">
      <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
     </h2>
+  </div>
 
     <h4 v-if="!productsInCart.length" class="mb-2">
       {{ $t('Your shopping cart is empty.') }}
@@ -30,12 +33,13 @@
       </router-link>
       {{ $t('to find something beautiful for You!') }}
     </div>
-    <ul v-if="productsInCart.length" class="products p-0 m-0">
+    <ul v-if="productsInCart.length" class="products p-0 m-0 p_crt_list">
       <product v-for="product in productsInCart" :key="product.sku" :product="product" 
        v-touch:swipe.left="swipeLeftHandler(product)"
        v-touch:swipe.right="swipeRightHandler(product)"
       />
     </ul>
+    <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
       <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
         <div class="flex-grow mr-2">
@@ -91,6 +95,7 @@
           {{ $t('Go to checkout') }}
         </button-full>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -194,7 +199,21 @@ export default {
     }
   }
 
- 
+ .mb_smry_out_wrap{
+   background: #ffffff;
+   position: fixed;
+   bottom:0px;
+   right:0px;
+   width:100%;
+   max-width: 480px;
+   padding: 10px 15px;
+   z-index: 100;
+ }
+ .p_crt_list{
+   width:100%;
+   margin-bottom: 150px;
+   margin-top: 15px;
+ }
 
     .mob_microcart .h_title{
       border-bottom: 0px;
@@ -218,11 +237,12 @@ export default {
     .mob_summary .mob_d_item{
       border-bottom:1px solid #ededed;
       padding-bottom: 20px;
+      display: none;
     }
 
     .mob_summary .mob_rw_list{
       border-bottom:1px solid #ededed;
-      padding-top: 15px;
+      padding-top: 4px;
       padding-bottom: 15px;
     }
 
@@ -256,6 +276,7 @@ export default {
       float: left;
       margin-right: 10px;
     }
+    .back_sec .back-to-shopping{ display: none; }
     .back_sec .back-to-shopping .icl_span{
       float: left;
       line-height: 12px;
@@ -272,6 +293,20 @@ export default {
       color: #ffffff;
       border-color: #000;
     }
+
+ @media (max-width: 576px) {
+    .hd_fix{
+      position: fixed;
+      top:70px;
+      left:0px;
+      background:#ffffff;
+      width:100%;
+      z-index: 100;
+    }
+    .hd_fix .h_title{
+      margin-bottom: 3px;
+    }
+ }
   
   
 </style>
