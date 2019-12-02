@@ -9,13 +9,22 @@
       <use xlink:href="#wishlist" />
     </svg> -->
     <div class="ic_list_m"><img src="/assets/heart_bold.png" alt=""/></div>
+    <span
+      class="minicart-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary"
+      v-cloak
+      v-show="productsInWishlist && productsInWishlist.length > 0"
+      data-testid="minicartCount"
+    >
+      {{ productsInWishlist.length }}
+    </span>
   </button>
 </template>
 
 <script>
 import WishlistIcon from '@vue-storefront/core/compatibility/components/blocks/Header/WishlistIcon'
+import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist'
 
 export default {
-  mixins: [WishlistIcon]
+  mixins: [WishlistIcon, Wishlist]
 }
 </script>
