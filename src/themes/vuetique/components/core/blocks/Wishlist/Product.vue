@@ -78,47 +78,51 @@ export default {
   data() {
     return {
       swipedValue: 0,
-      swipedLeft: false
+      swipedLeft: false,
+      windowWidth: 0
     }
   },
   components: {
     RemoveButton,
     AddToCart
   },
+  mounted() {
+     this.windowWidth =  window.innerWidth;
+  },
   methods: {
     movingHandler() {
       //  console.log('movingHandler' , this.swipedValue );
-        if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0) ) {
+        if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0)  && this.windowWidth <= 760 ) {
           this.swipedValue--;
         }
         // if(this.leftSwipe) {
         //  this.swipedValue++;
         // }
     },
-    startHandler() {
-       // this.swipedValue = 0;
-       console.log('startHandler startHandler');
-    },
-    endHandler() {
-       console.log('endHandler endHandler');
-    },
-    swipeAction (param) {
-      return function(dir) {
-        if(dir == 'left') {
-          this.swipedValue = -80;
-          this.swipedLeft =  true;
-        }
-        if(dir == 'right') {
-          this.swipedValue = 0;
-          this.swipedLeft =  false;
-        }
-      }
-    },
+    // startHandler() {
+    //    // this.swipedValue = 0;
+    //    console.log('startHandler startHandler');
+    // },
+    // endHandler() {
+    //    console.log('endHandler endHandler');
+    // },
+    // swipeAction (param) {
+    //   return function(dir) {
+    //     if(dir == 'left') {
+    //       this.swipedValue = -80;
+    //       this.swipedLeft =  true;
+    //     }
+    //     if(dir == 'right') {
+    //       this.swipedValue = 0;
+    //       this.swipedLeft =  false;
+    //     }
+    //   }
+    // },
     swipeLeftHandler() {
-        this.swipedValue = -80;
+        if(this.windowWidth <= 760)  this.swipedValue = -80;
     },
     swipeRightHandler() {
-      this.swipedValue = 0;
+      if(this.windowWidth <= 760)  this.swipedValue = 0;
     }
   },
   mixins: [Product]

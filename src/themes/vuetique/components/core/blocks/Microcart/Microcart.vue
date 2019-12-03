@@ -34,10 +34,11 @@
       {{ $t('to find something beautiful for You!') }}
     </div>
     <ul v-if="productsInCart.length" class="products p-0 m-0 p_crt_list">
-      <product v-for="product in productsInCart" :key="product.sku" :product="product" 
+       <product v-for="product in productsInCart" :key="product.sku" :product="product"  />
+      <!-- <product v-for="product in productsInCart" :key="product.sku" :product="product" 
        v-touch:swipe.left="swipeLeftHandler(product)"
        v-touch:swipe.right="swipeRightHandler(product)"
-      />
+      /> -->
     </ul>
     <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
