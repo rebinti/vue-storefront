@@ -48,8 +48,26 @@
           {{ segment.value | price }}
         </div>
       </div>
+      
+      <Accordion class="mob_fltr" v-if="OnlineOnly"
+              :title="$t('Use Promotional code')"
+              :openType=false
+            >
+          <template >
+              <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
+                <div class="mr-3 flex-grow">
+                  <base-input type="text" class="mob_t_bx" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
+                </div>
+                <div>
+                  <button-full :disabled="!couponCode" @click.native="setCoupon" class="ht_bx">
+                    {{ $t('Apply') }}
+                  </button-full>
+                </div>
+              </div>
+          </template>
+      </Accordion>
 
-      <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
+      <!-- <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
         <div class="mr-3 flex-grow">
           <base-input type="text" class="mob_t_bx" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
         </div>
@@ -58,7 +76,7 @@
             {{ $t('Apply') }}
           </button-full>
         </div>
-      </div>
+      </div> -->
 
       <div class="row justify-between py-3 font-serif text-h2 font-bold mob_rw_price" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
         <div class="col-auto total-price-label">
@@ -105,13 +123,15 @@ import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
 import ButtonFull from 'theme/components/theme/ButtonFull'
 import ButtonOutline from 'theme/components/theme/ButtonOutline'
 import Product from 'theme/components/core/blocks/Microcart/Product'
+import Accordion from 'theme/components/theme/Accordion'
 
 export default {
   components: {
     Product,
     ButtonFull,
     ButtonOutline,
-    BaseInput
+    BaseInput,
+    Accordion
   },
   mixins: [
     Microcart,

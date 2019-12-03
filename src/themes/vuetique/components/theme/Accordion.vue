@@ -21,11 +21,16 @@ export default {
     title: {
       type: String,
       default: 'title'
+    },
+    openType: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   data () {
     return {
-      open: true
+      open: this.openType
     }
   }
 }

@@ -42,8 +42,13 @@
        </router-link>
     </div>
     <ul class="products p-0 m-0">
-      <product v-for="product in productsInWishlist" :key="product.id" :product="product" 
-      v-touch:swipe="swipeAction(product)" v-touch-class="'active'"/>
+      <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
+      <!-- <product v-for="product in productsInWishlist" :key="product.id" :product="product"  :key-val="valueUp" :product-id ="product.id"
+      v-touch:swipe="swipeAction(product)" v-touch-class="'active'"
+      v-touch:moving="movingHandler(product)"
+      v-touch:start="startHandler" 
+      v-touch:end="endHandler"  
+      /> -->
     </ul>
      </div>
   </div>
@@ -61,6 +66,11 @@ export default {
       default: () => { }
     }
   },
+  // data () {
+  //   return {
+  //     valueUp: 106
+  //   }
+  // },
   components: {
     Product
   },
@@ -78,6 +88,18 @@ export default {
           param.swipedElement = false;
         }
       }
+    },
+    movingHandler() {
+      // this.valueUp--;
+      console.log('movingHandler movingHandler' , this.valueUp);
+    },
+    startHandler(){
+      // this.valueUp = 110
+      console.log('startHandler startHandler');
+    },
+    endHandler() {
+      //  this.valueUp = 110
+      console.log('endHandler endHandler');
     }
   }
 }
