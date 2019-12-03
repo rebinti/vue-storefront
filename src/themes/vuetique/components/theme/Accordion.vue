@@ -64,7 +64,14 @@ export default {
   @media (max-width: 576px) {
 
     .mob_fltr{
-     
+      &.cart_filter_hd{
+        border-bottom: 1px solid #ededed;
+        .Accordion__trigger{
+          font-weight: normal;
+          color:#666666;
+          font-weight: 500;
+        }
+      }
       .Accordion__trigger{
         color:#000;
         font-size:13px;

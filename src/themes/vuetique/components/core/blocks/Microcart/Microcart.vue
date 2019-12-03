@@ -53,7 +53,7 @@
         </div>
       </div>
       
-      <Accordion class="mob_fltr" v-if="OnlineOnly"
+      <Accordion class="mob_fltr cart_filter_hd" v-if="OnlineOnly"
               :title="$t('Use Promotional code')"
               :openType=false
             >
@@ -261,7 +261,7 @@ export default {
     }
 
     .mob_summary .mob_rw_list{
-      border-bottom:1px solid #ededed;
+      /*border-bottom:1px solid #ededed;*/
       padding-top: 4px;
       padding-bottom: 15px;
     }
