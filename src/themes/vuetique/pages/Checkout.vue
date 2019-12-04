@@ -21,9 +21,9 @@
         <div class="w-full md:w-2/5 mt-10 md:mt-0 px-4 py-4 lg:px-8 lg:py-8 bg-grey-lighter">
           <cart-summary />
         </div>
-      </div>
+      </div> 
     </div>
-    <thank-you-page v-show="isThankYouPage" />
+    <thank-you-page v-show="isThankYouPage" :cart="productsInCartList"  :totals="totalsAll"/>  
   </div>
 </template>
 
@@ -46,7 +46,20 @@ export default {
     CartSummary,
     ThankYouPage
   },
-  mixins: [Checkout],
+  data() {
+    return {
+      productsInCartList: [],
+      totalsAll: []
+    }
+  },
+  mixins: [Checkout , CartSummary],
+  mounted() {
+      Object.assign(this.productsInCartList , this.productsInCart);
+      Object.assign(this.totalsAll , this.totals);
+      // this.productsInCartList = this.productsInCart;
+      // this.totalsAll = this.totals;
+      // console.log('Mountedddd ====' , this.productsInCartList , this.totalsAll )
+  },
   methods: {
     notifyEmptyCart () {
       this.$store.dispatch('notification/spawnNotification', {

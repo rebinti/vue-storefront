@@ -76,37 +76,73 @@
 
         <div class="inner_thanks_page">
 
-          <div class="inner_thanks_top">
-
+          <div class="inner_thanks_top"  v-if="OnlineOnly">
             <i class="fas fa-check-circle"></i>
             <h3>Congratulations</h3>
             <h6>Your purchase was successful</h6>
-
           </div>
 
-          <div class="inner_thanks_bottom">
+          <div v-if="OfflineOnly" class="inner_thanks_top">
+              <i class="fa fa-exclamation-circle" ></i>
+              <h4 v-if="OfflineOnly" class="my-2">
+                {{ $t('You are offline') }}
+              </h4>
+              <p v-if="OfflineOnly && !isNotificationSupported">
+                {{ $t('To finish the order just come back to our store while online. Your order will be sent to the server as soon as you come back here while online and then confirmed regarding the stock quantities of selected items') }}
+              </p>
+              <p v-if="OfflineOnly && isNotificationSupported && !isPermissionGranted">
+                {{ $t("You can allow us to remind you about the order via push notification after coming back online. You'll only need to click on it to confirm.") }}
+              </p>
+              <p v-if="OfflineOnly && isNotificationSupported && isPermissionGranted">
+                <strong>{{ $t('You will receive Push notification after coming back online. You can confirm the order by clicking on it') }}</strong>
+              </p>
+              <p v-if="!isPermissionGranted && isNotificationSupported">
+                <button class="btn-grey-dark mt-5" @click.native="requestNotificationPermission()">
+                  {{ $t('Keep me notified about this order') }}
+                </button>
+              </p>
+          </div>
+
+          <div class="inner_thanks_bottom" v-if="OnlineOnly">
 
             <div class="inner_prd_box">
 
-              <div class="inner_prd_box_item">
+              <div class="inner_prd_box_item" style="overflow: scroll;clear: both; max-height: 285px;">
 
                       <div class="inner_prd_box_top">
 
-                          <span class="prd_ordr_id">Order ID : Q935-AG45</span>
-                          <span class="prd_ordr_id_it">1Item</span>
+                          <span class="prd_ordr_id"  v-if="OnlineOnly && lastOrderConfirmation">Order ID : {{lastOrderConfirmation.backendOrderId}}</span>
+                          <span class="prd_ordr_id_it"> {{cart.length}} Items</span>
 
                       </div>
-                      <div class="inner_prd_box_middle">
+                      <div class="inner_prd_box_middle" v-for="product in cart" :key="product.sku" style="margin-bottom: 15px;">
                       
                         <div class="prd_bx_pic">
-                          <img src="http://localhost:3000/assets/vuetique-small-banners-2.jpg" alt="" title="">
+                          <img v-lazy="thumbnail(product.image)" alt="" title="">
                         </div>
                         <div class="prd_bx_pic_cnt">
                         
-                        <h5>Pyjama -style trousers</h5>
-                        <div class="prd_bx_details_sec">Item ID:123456</div>
-                        <div class="prd_bx_details_sec">Size:M / Colour :red</div>
-                        <div class="prd_bx_details_right"><b>$35</b> * 1</div>
+                        <h5>{{ product.name | htmlDecode }}</h5>
+                        <div class="prd_bx_details_sec">Item ID:{{ product.sku }}</div>
+
+                        <div v-for="opt in product.totals.options" :key="opt.label" class="prd_bx_details_sec">
+                          {{ opt.label }}:<span class="opv text-grey-dark" v-html="opt.value" />
+                        </div>
+
+                        <div class="prd_bx_details_right">
+                          <b v-if="!product.totals">
+                            <span class="text-error block font-medium" v-if="product.special_price">{{ product.priceInclTax * product.qty | price }} </span>
+                            <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.special_price">{{ product.originalPriceInclTax * product.qty | price }}</span>
+                            <span v-if="!product.special_price" class="h4">{{ product.priceInclTax * product.qty | price }}</span>
+                         </b> 
+                         <b v-if="product.totals">
+                             <span class="text-error font-medium block" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }} </span>
+                             <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax | price }}</span>
+                             <span v-if="!product.totals.discount_amount" class="h4">{{ product.totals.row_total_incl_tax | price }}</span>
+                         </b> 
+                          *  {{ product.qty }}
+                        </div>
+
 
                         </div>
 
@@ -116,12 +152,12 @@
 
               <div class="inner_prd_price_bx">
 
-                  <div class="p_box_item">
+                  <!-- <div class="p_box_item">
                       <span class="p_box_p_label">Sub-total</span>
                       <span class="p_box_p_size">$35.59</span>
-                  </div>
+                  </div> -->
 
-                  <div class="p_box_item">
+                  <!-- <div class="p_box_item">
                       <span class="p_box_p_label">Delivery</span>
                       <span class="p_box_p_size">$0</span>
                   </div>
@@ -134,6 +170,24 @@
                   <div class="p_box_item pr_box">
                       <span class="p_box_p_label">Total</span>
                       <span class="p_box_p_size">$25.59</span>
+                  </div> -->
+
+                 <div v-for="(segment, index) in totals" :key="index" class="p_box_item" v-if="segment.code !== 'grand_total'">
+                    <span class="p_box_p_label">
+                      {{ segment.title }}:
+                    </span>
+                    <span v-if="segment.value != null" class="p_box_p_size" :class="({ 'text-primary': (segment.code == 'discount') })">
+                      {{ segment.value | price }}
+                    </span>
+                  </div>
+
+                  <div class="p_box_item pr_box" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
+                    <span class="p_box_p_label">
+                      {{ segment.title }}:
+                    </span>
+                    <span class="p_box_p_size" >
+                      {{ segment.value | price }}
+                    </span>
                   </div>
 
               </div>
@@ -159,14 +213,27 @@ import BaseTextarea from 'theme/components/core/blocks/Form/BaseTextarea'
 import ButtonOutline from 'theme/components/theme/ButtonOutline'
 import VueOfflineMixin from 'vue-offline/mixin'
 import { EmailForm } from '@vue-storefront/core/modules/mailer/components/EmailForm'
+// import { Product } from '@vue-storefront/core/modules/checkout/components/Product'
 
 export default {
   name: 'ThankYouPage',
-  mixins: [Composite, VueOfflineMixin, EmailForm],
+  mixins: [Composite, VueOfflineMixin, EmailForm ],
   data () {
     return {
       feedback: ''
     }
+  },
+  props: {
+    cart: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    totals: {
+      type: Array,
+      required: false,
+      default: []
+    },
   },
   computed: {
     lastOrderConfirmation () {
@@ -188,6 +255,9 @@ export default {
     }
   },
   methods: {
+    thumbnail (image) {
+      return this.getThumbnail(image, 150, 150)
+    },
     requestNotificationPermission () {
       if (Vue.prototype.$isServer) return false
       if ('Notification' in window && Notification.permission !== 'granted') {
@@ -272,7 +342,7 @@ export default {
 @media (min-width: 577px) {
 
   .thanks_page_mbl{
-    display: none; 
+     display: none; 
   }
 
 }
@@ -284,15 +354,15 @@ export default {
 
 /* for edit purpose */
   .thanks_page_mbl{
-    display: none; 
-  }
-
-  .thanks_page_dsk{
     display: block; 
   }
+
+  // .thanks_page_dsk{
+  //   display: block; 
+  // }
 /*  ---- */
   .thanks_page_mbl{
-    min-height:600px;
+    min-height:510px;
     position: relative;
     background: #e9e9e9;
     .inner_thanks_page{
@@ -377,8 +447,8 @@ export default {
               text-align: left;
               h5{
                 color:#000;
-                font-size:18px;
-                font-weight: bold;
+                font-size: 16px;
+                font-weight: 500;
                 line-height: 18px;
                 margin-bottom: 5px;
               }
