@@ -152,8 +152,10 @@ export default {
       .txt_blk_select{
             width:100%;
             float: left;
-            padding-left: 0px;
-            padding-right: 0px;
+            padding-left: 0px!important;
+            padding-right: 0px!important;
+            margin-top: 0px!important;
+            margin-bottom: 0px!important;
             &:after{
               top:36px;
             }

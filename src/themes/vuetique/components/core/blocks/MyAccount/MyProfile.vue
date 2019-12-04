@@ -22,7 +22,7 @@
     <!-- My profile body (edit mode) -->
     <div class="row gutter-md" v-if="isEdited">
       <base-input
-        class="col-12 md:col-6 mb-6"
+        class="col-12 md:col-6 mb-6 txt_blk_out"
         type="text"
         name="first-name"
         autocomplete="given-name"
@@ -42,7 +42,7 @@
       />
 
       <base-input
-        class="col-12 md:col-6 mb-6"
+        class="col-12 md:col-6 mb-6 txt_blk_out"
         type="text"
         name="last-name"
         autocomplete="family-name"
@@ -56,7 +56,7 @@
       />
 
       <base-input
-        class="col-12 md:col-6 mb-6"
+        class="col-12 md:col-6 mb-6 txt_blk_out"
         type="email"
         name="email-address"
         autocomplete="email"
@@ -76,7 +76,7 @@
 
       <!-- Change password (edit mode) -->
       <base-checkbox
-        class="col-12 mb-4"
+        class="col-12 mb-4 mt-4"
         id="changePassword"
         v-model="changePassword"
         @click="changePassword = !changePassword"
@@ -86,7 +86,7 @@
 
       <template v-if="changePassword">
         <base-input
-          class="col-12 md:col-6 mb-4 mt-2"
+          class="col-12 md:col-6 mb-4 mt-2 txt_blk_out"
           type="password"
           name="old-password"
           autocomplete="current-password"
@@ -102,7 +102,7 @@
         <div class="hidden sm:hidden md:col-6 mb-4 mt-2" />
 
         <base-input
-          class="col-12 md:col-6 mb-4 mt-2"
+          class="col-12 md:col-6 mb-4 mt-2 txt_blk_out"
           type="password"
           name="password"
           autocomplete="new-password"
@@ -116,7 +116,7 @@
         />
 
         <base-input
-          class="col-12 md:col-6 mb-4 mt-2"
+          class="col-12 md:col-6 mb-4 mt-2 txt_blk_out"
           type="password"
           name="password-confirm"
           autocomplete="new-password"
@@ -138,7 +138,7 @@
 
       <!-- Company information (edit mode) -->
       <base-checkbox
-        class="col-12 mb-4 mt-2"
+        class="col-12 mb-4 mt-2 "
         id="addCompany"
         v-model="addCompany"
         @click="addCompany = !addCompany"
@@ -148,7 +148,7 @@
 
       <template v-if="addCompany">
         <base-input
-          class="col-12 mb-6"
+          class="col-12 mb-6 txt_blk_out"
           type="text"
           name="company-name"
           autocomplete="organization"
@@ -162,7 +162,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="street-address"
           autocomplete="address-line1"
@@ -176,7 +176,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="apartment-number"
           autocomplete="address-line2"
@@ -190,7 +190,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="city"
           autocomplete="address-level2"
@@ -204,7 +204,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="state"
           autocomplete="address-level1"
@@ -213,7 +213,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="zip-code"
           autocomplete="postal-code"
@@ -233,7 +233,7 @@
         />
 
         <base-select
-          class="col-12 md:col-6 mb-6"
+          class="col-12 md:col-6 mb-6 txt_blk_select"
           name="countries"
           :options="countryOptions"
           :selected="userCompany.country"
@@ -251,7 +251,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="taxId"
           autocomplete="tax-id"
@@ -271,7 +271,7 @@
         />
 
         <base-input
-          class="col-12 sm:col-6 mb-6"
+          class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="phone-number"
           autocomplete="tel"
