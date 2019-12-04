@@ -46,7 +46,7 @@
     </ul>
       
     <ul
-      v-if="myAccountLinks"
+     v-if="myAccountLinks && !path.length"
       class="sidebar-submenu fixed w-full mn_ul_bg"
       :style="styles"
     >
@@ -124,7 +124,8 @@ export default {
       }
     },
     ...mapState({
-      submenu: state => state.ui.submenu
+      submenu: state => state.ui.submenu,
+      path: state => state.ui.submenu.path
     }),
     getSubmenu () {
       return this.submenu

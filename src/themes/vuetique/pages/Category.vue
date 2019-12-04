@@ -11,7 +11,7 @@
               <svg viewBox="0 0 25 25" class="vt-icon">
                 <use xlink:href="#search" />
               </svg>
-              <input type="text" class="icon_bg"  placeholder="Search for Products">       
+              <input type="text" class="icon_bg" @click="toggleSearchpanel" placeholder="Search for Products">       
           </div>
 
           <div class="search_bx_it">
@@ -134,6 +134,10 @@ export default {
         message: this.$t('Please select the field which You like to sort by'),
         action1: { label: this.$t('OK') }
       })
+    },
+    toggleSearchpanel () {
+      this.$store.commit('ui/setSearchpanel', true)
+      this.$bus.$emit('HomefocusSearchInput') 
     }
   },
   mixins: [Category]

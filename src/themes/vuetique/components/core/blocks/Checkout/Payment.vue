@@ -39,7 +39,7 @@
           class="w-full"
           id="sendToShippingAddressCheckbox"
           v-model="sendToShippingAddress"
-          @click="useShippingAddress"
+          @click="useShippingAddress;sendToShippingAddress = !sendToShippingAddress"
         >
           {{ $t('Copy address data from shipping') }}
         </base-checkbox>

@@ -1,6 +1,11 @@
 <template>
   <transition name="fade" appear>
-    <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" :class="{'swipe-left': product.swipedElement}">
+    <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
+      :style="'transform: translate(' + swipedValue +  'px, 0px);'"
+      v-touch:swipe.left="swipeLeftHandler"
+      v-touch:swipe.right="swipeRightHandler"
+      v-touch:moving="movingHandler"
+  >
       <router-link
         class="col-4 bg-grey-lightest"
         :to="localizedRoute({
@@ -132,8 +137,14 @@ export default {
   mixins: [Product],
   data () {
     return {
-      isEditing: false
+      isEditing: false,
+      swipedValue: -5,
+      swipedLeft: false,
+      windowWidth: 0
     }
+  },
+  mounted() {
+     this.windowWidth =  window.innerWidth;
   },
   methods: {
     switchEdit () {
@@ -142,6 +153,29 @@ export default {
     applyQuantity () {
       this.updateQuantity(this.product.qty)
       this.isEditing = false
+    },
+    movingHandler() {
+        if( !this.swipedLeft && (this.swipedValue > -105  && this.swipedValue <= 0 ) && this.windowWidth <= 760 ) {
+          this.swipedValue--;
+        }
+    },
+    // swipeAction (param) {
+    //   return function(dir) {
+    //     if(dir == 'left') {
+    //       this.swipedValue = -105;
+    //       this.swipedLeft =  true;
+    //     }
+    //     if(dir == 'right') {
+    //       this.swipedValue = -5;
+    //       this.swipedLeft =  false;
+    //     }
+    //   }
+    // },
+    swipeLeftHandler() {
+       if(this.windowWidth <= 760)  this.swipedValue = -105;
+    },
+    swipeRightHandler() {
+      if(this.windowWidth <= 760)  this.swipedValue = -5;
     }
   }
 }

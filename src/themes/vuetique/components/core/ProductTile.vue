@@ -247,7 +247,7 @@ export default {
 
   &:hover {
     .product-name {
-      @apply text-primary;
+      // @apply text-primary;
     }
   }
 }
@@ -273,10 +273,15 @@ export default {
 .pr_list_sec_main{
 
     .product-name{
-      font-size: 13px;
-      color: #000;
-      font-weight: bold;
+      // font-size: 13px;
+      // color: #000;
+      // font-weight: bold;
       line-height: 16px;
+
+      font-size: 12px; 
+      color: #282828;
+      font-weight: 400;
+      text-transform: uppercase;
 
     }
     .prd_cat{
@@ -296,6 +301,7 @@ export default {
         font-size:14px;
         color:#000;
         line-height: 16px;
+        font-weight: 500;
       }
     }
 
