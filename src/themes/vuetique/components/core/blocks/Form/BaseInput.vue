@@ -223,8 +223,10 @@ export default {
     .txt_blk_out{
       width:100%!important;
       position: relative;
-      padding-left: 0px;
-      padding-right: 0px;
+      padding-left: 0px!important;
+      padding-right: 0px!important;
+      margin-bottom: 0px!important;
+      margin-top: 0px!important;
       .text-sm{
         background:#fafafa;
         border: 0px;
@@ -244,6 +246,11 @@ export default {
         width:100%;
         padding: 0 10px;
       }
+      button{
+          &.icon{
+            top:25px;
+          }
+        }
     }
 }
 
