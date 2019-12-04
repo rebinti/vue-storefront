@@ -93,7 +93,7 @@ export default {
     movingHandler() {
       //  console.log('movingHandler' , this.swipedValue );
         if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0)  && this.windowWidth <= 760 ) {
-          this.swipedValue--;
+          this.swipedValue = this.swipedValue - 10 ;
         }
         // if(this.leftSwipe) {
         //  this.swipedValue++;
