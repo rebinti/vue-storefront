@@ -52,4 +52,10 @@ export default {
     pointer-events: none;
   }
 }
+@media (max-width: 576px) {
+  .filter-top .sort-by .w-full{
+      height: 43px !important;
+      font-size: 13px !important;
+  }
+}
 </style>
