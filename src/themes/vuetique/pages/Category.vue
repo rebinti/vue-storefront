@@ -35,18 +35,26 @@
       <div class="category_filter_out_pop_box">
 
           <div class="category_filter_bx_it">
-              <div class="category_filter_bx_sortby">
-
-                  <sort-by />
-
+              <div class="category_filter_bx_sortby filter-top">
+                  <!-- <span>sort</span>
+                  <div class="filter_bx filter_bx_sort">
+                    <sort-by />  
+                  </div>  -->
+                  <sort-by />  
               </div>
-              <div class="category_filter_bx_grid_view">                  
-
+              <div class="category_filter_bx_grid_view filter-top">                  
+                  <span> view</span>
+                  <div class="filter_bx filter_bx_grid">                   
+                  </div>                  
               </div>              
-              <div class="category_filter_bx_filter">                  
+              <div class="category_filter_bx_filter filter-top"> 
+                 <span>filter</span>
+
+                   <div class="filter_bx">               
                   <button-full class="w-full" @click.native="openFilters">
                     {{ $t('Filters') }}
                   </button-full>
+                  </div>   
 
               </div>
 
@@ -307,25 +315,60 @@ export default {
     float: left;
     padding-left: 0px;
   }
-  .category_filter_out_pop_box .category_filter_bx_sortby,
-  .category_filter_out_pop_box .category_filter_bx_grid_view,
-  .category_filter_out_pop_box .category_filter_bx_filter{
-    width: 33%;
+  .filter-top{
+    width: 33.33%;
     border: 1px solid #000;
     float: left;
     height: 45px;
   }
-  .category_filter_out_pop_inner .vt-icon{
-     float: left;
+
+  .filter-top span{
+    float: left;
+    color:#000;
+    padding-left:10px;
+    padding-top:10px;
+    font-size:14px;
+  }
+
+  .filter-top .filter_bx{
+     float: right;
      width: 20px;
+     height:20px;
      margin-right: 5px;
   }
-   .category_filter_out_pop_inner .icon_bg{
-      float: left;
-      width:85%;
-      font-size:15px;
-      background: #f2f2f2;
-   }
+  .filter-top .filter_bx.filter_bx_sort{
+    width: 20px;
+    height:20px;
+    float: left;
+    background-color:transparent;
+    border:0px;
+    background: url("../assets/sort.png") no-repeat;
+  }
+  .filter-top .sort-by .w-full{
+    height: 43px !important;
+    font-size: 13px !important;
+  }
+  .filter-top .filter_bx_grid{
+    width: 32px;
+    height:32px;
+    float: right;
+    background-color:transparent;
+    background-size: 32px 32px;
+    border:0px;
+    background: url("../assets/gridview.jpg") no-repeat;
+    margin-top:8px;
+  }
+  // .category_filter_out_pop_inner .vt-icon{
+  //    float: left;
+  //    width: 20px;
+  //    margin-right: 5px;
+  // }
+  //  .category_filter_out_pop_inner .icon_bg{
+  //     float: left;
+  //     width:85%;
+  //     font-size:15px;
+  //     background: #f2f2f2;
+  //  }
   //  .category_filter_out_pop_box .category_filter_bx_filter{
   //    float: left;
   //    width:100%;
@@ -345,14 +388,14 @@ export default {
   //    float: left;
   //    width:50%;
   //  }
-   .category_filter_out_pop_box .category_filter_bx_sortby .select{
+   /*.category_filter_out_pop_box .category_filter_bx_sortby .select{
      padding:2px;
      height:40px;
      overflow: hidden;
      font-size: 10px;
      position: relative;
      top: -4px;
-   }
+   }*/
   // .category_filter_out_pop_box .category_filter_bx_sortby{
   //    display: block;
   //  }  
