@@ -3,7 +3,7 @@
     <div
       v-for="(product, index) in products"
       :key="product.id"
-      :class="['col-' +  checkGridView(index+1)  +  ' md:col-' + (12/columns)%10]" 
+      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10]" 
     >
     <!-- :class="['md:col-' + (12/columns)%10]" -->
       <product-tile :product="product"/>
@@ -39,39 +39,40 @@ export default {
       default:3
     }
   },
-  mounted() {
-      this.createProductArrayPattern();
-  },
-  watch:{
-     products: {
-      handler () {
-         this.createProductArrayPattern();
-      }
-    },
+  // mounted() {
+  //     this.createProductArrayPattern();
+  // },
+  // watch:{
+  //    products: {
+  //     handler () {
+  //        this.createProductArrayPattern();
+  //     }
+  //   },
 
-  },
+  // },
   methods: {
-   createProductArrayPattern() {
-       for(let i=1;i<=this.products.length;i=i+3){
-          if(!this.arr12.some(val => val === i)){this.arr12.push(i)} 
-          for(let j=i+1;j<=i+2;j++) {
-            if(!this.arr6.some(val => val === j)){ this.arr6.push(j)}
-          }
-       }
-    },
+  //  createProductArrayPattern() {
+  //      for(let i=1;i<=this.products.length;i=i+3){
+  //         if(!this.arr12.some(val => val === i)){this.arr12.push(i)} 
+  //         for(let j=i+1;j<=i+2;j++) {
+  //           if(!this.arr6.some(val => val === j)){ this.arr6.push(j)}
+  //         }
+  //      }
+  //   },
     checkGridView(index) {
       switch(this.mobColumns) {
         case 2: 
               return '6'
         break;
         case 3: 
-              if(this.arr12.some(val => val === index)){
-                return '12';
-              } else if(this.arr6.some(val => val === index)){
-                return '6';
-              } else {
-                return '6';
-              }
+              return index%3 == 0 ? '12' : '6';
+              // if(this.arr12.some(val => val === index)){
+              //   return '12';
+              // } else if(this.arr6.some(val => val === index)){
+              //   return '6';
+              // } else {
+              //   return '6';
+              // }
               break;
         case 4:
               return '3'
