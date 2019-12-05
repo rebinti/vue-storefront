@@ -23,7 +23,8 @@
           </div>
           <div class="col-auto sm:col-4 lg:col-grow justify-end">
             <div class="right-icons flex">
-              <search-icon class="p-3 hidden md:block lg:hidden" />
+              <search-icon class="p-3 xs:block lg:hidden" /> 
+              <!-- p-3 hidden xs:block xsm:block md:block lg:hidden -->
               <account-icon class="p-3" />
               <compare-icon class="p-3 hidden sm:block" />
               <wishlist-icon class="p-3" />
