@@ -32,7 +32,7 @@ export default {
       default: 'lg'
     },
   },
-  mounted() {
+  created() {
     this.columns = this.column;
   },
   data () {
