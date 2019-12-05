@@ -41,7 +41,10 @@
 
               </div>
               <div class="category_filter_bx_grid_view">                  
-
+                    <div class="sorting col-sm-2 align-right mt50">
+                      <label class="mr10">{{ $t('Columns') }}:</label>
+                      <columns @change-column="columnChangeMobile" :products-columns="[2, 3, 4]" :column="defaultColumnMobile" :type="'sm'"/>
+                    </div>
               </div>              
               <div class="category_filter_bx_filter">                  
                   <button-full class="w-full" @click.native="openFilters">
@@ -56,9 +59,13 @@
 
       <div class="container d_item">
         <div class="row items-center mt-2">
-          <h1 class="col-10">
+          <h1 class="col-8">
             {{ category.name }}
           </h1>
+           <div class="col-2 hidden lg:block">
+                <label class="mr10">{{ $t('Columns') }}:</label>
+                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4, 6]" :column="defaultColumn" :type="'lg'"/>
+          </div>
           <div class="col-2 hidden lg:block">
             <sort-by />
           </div>
@@ -104,7 +111,7 @@
               {{ $t('Please change Your search criteria and try again. If you still can\'t find what you\'re looking for, try visiting our homepage to check out our bestsellers!') }}
             </p>
           </div>
-          <product-listing columns="3" :products="products" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="products" />
         </div>
       </div>
     </div>
@@ -118,6 +125,7 @@ import ProductListing from '../components/core/ProductListing.vue'
 import Breadcrumbs from '../components/core/Breadcrumbs.vue'
 import SortBy from '../components/core/SortBy.vue'
 // import builder from 'bodybuilder'
+import Columns from '../components/core/Columns.vue'
 
 import ButtonFull from '../components/theme/ButtonFull.vue'
 
@@ -127,11 +135,14 @@ export default {
     Breadcrumbs,
     Sidebar,
     SortBy,
-    ButtonFull
+    ButtonFull,
+    Columns
   },
   data () {
     return {
-      mobileFilters: false
+      mobileFilters: false,
+      defaultColumn: 3,
+      defaultColumnMobile: 2
     }
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
@@ -160,6 +171,12 @@ export default {
     toggleSearchpanel () {
       this.$store.commit('ui/setSearchpanel', true)
       this.$bus.$emit('HomefocusSearchInput') 
+    },
+    columnChangeWeb (column) {
+      if(column.type === 'lg') this.defaultColumn = column.selected
+    },
+    columnChangeMobile (column) {
+      if(column.type === 'sm') this.defaultColumnMobile = column.selected
     }
   },
   mixins: [Category]
