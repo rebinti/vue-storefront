@@ -2,14 +2,14 @@
   <div class="sidebar">
     <div >
 
-      <div class="mob_price_filter Accordion mob_fltr list_">
+      <!-- <div class="mob_price_filter Accordion mob_fltr list_">
           <h5 class="Accordion__trigger k_head" >Sort BY</h5>
           <p :class="{'act_df' : sortby == option}" v-for="(option, label) in sortByAttribute" :disabled="sortby === option" :value="option" :key="option" 
           @click="changeSortOrder(option)" href="">
            {{ $t(label) }}
            <span class="fas fa-check"></span>
           </p>
-      </div>
+      </div> -->
 
       <div class="Accordion mob_fltr list_hd list_">
           <h5 class="Accordion__trigger k_head" >Filter By</h5>
@@ -97,16 +97,13 @@
 
 <script>
 import Sidebar from '@vue-storefront/core/compatibility/components/blocks/Category/Sidebar'
-import SortBy from '@vue-storefront/core/compatibility/components/SortBy'
+// import SortBy from '@vue-storefront/core/compatibility/components/SortBy'
 
 import ColorSelector from 'theme/components/core/ColorSelector'
 import SizeSelector from 'theme/components/core/SizeSelector'
 import PriceSelector from 'theme/components/core/PriceSelector'
 import GenericSelector from 'theme/components/core/GenericSelector'
 import Accordion from 'theme/components/theme/Accordion'
-
-// import SortBy from 'theme/components/core/SortBy.vue'
-
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 
 export default {
@@ -116,10 +113,9 @@ export default {
     PriceSelector,
     GenericSelector,
     Accordion,
-    ButtonFull,
-    // SortBy
+    ButtonFull,    
   },
-  mixins: [Sidebar , SortBy],
+  mixins: [Sidebar], // mixins: [Sidebar , SortBy],
   data () {
     return {
       openedFilters: []
