@@ -6,7 +6,7 @@
     
     <header class="pb-16 row bg-grey-lightest mb-6 head_category">
 
-      <div class="search_out_pop_box">
+      <!-- <div class="search_out_pop_box">
           <div class="search_out_pop_inner">
               <svg viewBox="0 0 25 25" class="vt-icon">
                 <use xlink:href="#search" />
@@ -30,7 +30,29 @@
 
           </div>
 
-      </div>
+      </div> -->
+
+      <div class="category_filter_out_pop_box">
+
+          <div class="category_filter_bx_it">
+              <div class="category_filter_bx_sortby">
+
+                  <sort-by />
+
+              </div>
+              <div class="category_filter_bx_grid_view">                  
+
+              </div>              
+              <div class="category_filter_bx_filter">                  
+                  <button-full class="w-full" @click.native="openFilters">
+                    {{ $t('Filters') }}
+                  </button-full>
+
+              </div>
+
+          </div>
+
+      </div>      
 
       <div class="container d_item">
         <div class="row items-center mt-2">
@@ -165,10 +187,12 @@ export default {
 
 
 @media (min-width: 576px){
-  .search_out_pop_box{    
-      display: none; 
-  }
-  
+  // .search_out_pop_box{    
+  //     display: none; 
+  // }
+  .category_filter_out_pop_box{    
+       display: none; 
+   }
  
     
 }
@@ -189,47 +213,124 @@ export default {
 
   .b_crumb{ display: none; }
 
-  .search_out_pop_bx{
-       display: block;
-  }
+  // .search_out_pop_bx{
+  //      display: block;
+  // }
 
   .d_item{
     display: none;
   }
 
-  .search_out_pop_box{
+  // .search_out_pop_box{
+  //   width:100%;
+  //   float: left;
+  //   padding: 10px 10px;
+  //   background: #fafafa;
+  // }
+  // .search_out_pop_inner{
+  //   width:80%;
+  //   float: left;
+  //   background: #f2f2f2;
+  //   padding: 10px 10px;
+  // }
+  // .search_bx_it{
+  //   width:20%;
+  //   float: left;
+  //   padding-left: 20px;
+  // }
+  // .search_out_pop_inner .vt-icon{
+  //    float: left;
+  //    width: 20px;
+  //    margin-right: 5px;
+  // }
+  //  .search_out_pop_inner .icon_bg{
+  //     float: left;
+  //     width:85%;
+  //     font-size:15px;
+  //     background: #f2f2f2;
+  //  }
+  //  .search_out_pop_box .search_bx_filter{
+  //    float: left;
+  //    width:100%;
+  //  }
+  //  .search_out_pop_box .search_bx_filter button{
+  //    padding: 10px;
+  //    font-size:9px;
+  //    border:0px;
+  //    background: url("../assets/filter_ico.png") no-repeat;
+  //    font-size: 1px;
+  //    text-indent: -200px;
+  //    overflow: hidden;
+  //    background-position: center;
+  //    cursor: pointer;
+  //  }
+  //  .search_out_pop_box .search_bx_sortby{
+  //    float: left;
+  //    width:50%;
+  //  }
+  //  .search_out_pop_box .search_bx_sortby .select{
+  //    padding:2px;
+  //    height:40px;
+  //    overflow: hidden;
+  //    font-size: 10px;
+  //    position: relative;
+  //    top: -4px;
+  //  }
+
+   .head_category{
+     padding-bottom: 0px;
+   }
+
+  //  .search_out_pop_box .search_bx_sortby{
+  //    display: none;
+  //  }
+
+
+   .category_filter_out_pop_bx{
+        display: block;
+   }
+   
+  .category_filter_out_pop_box{
     width:100%;
     float: left;
     padding: 10px 10px;
     background: #fafafa;
   }
-  .search_out_pop_inner{
+  .category_filter_out_pop_inner{
     width:80%;
     float: left;
     background: #f2f2f2;
     padding: 10px 10px;
   }
-  .search_bx_it{
-    width:20%;
+  .category_filter_bx_it{
+    width:100%;
     float: left;
-    padding-left: 20px;
+    padding-left: 0px;
   }
-  .search_out_pop_inner .vt-icon{
+  .category_filter_out_pop_box .category_filter_bx_sortby,
+  .category_filter_out_pop_box .category_filter_bx_grid_view,
+  .category_filter_out_pop_box .category_filter_bx_filter{
+    width: 33%;
+    border: 1px solid #000;
+    float: left;
+    height: 45px;
+  }
+  .category_filter_out_pop_inner .vt-icon{
      float: left;
      width: 20px;
      margin-right: 5px;
   }
-   .search_out_pop_inner .icon_bg{
+   .category_filter_out_pop_inner .icon_bg{
       float: left;
       width:85%;
       font-size:15px;
       background: #f2f2f2;
    }
-   .search_out_pop_box .search_bx_filter{
-     float: left;
-     width:100%;
-   }
-   .search_out_pop_box .search_bx_filter button{
+  //  .category_filter_out_pop_box .category_filter_bx_filter{
+  //    float: left;
+  //    width:100%;
+  //  }
+   .category_filter_out_pop_box .category_filter_bx_filter button{
      padding: 10px;
      font-size:9px;
      border:0px;
@@ -240,11 +341,11 @@ export default {
      background-position: center;
      cursor: pointer;
    }
-   .search_out_pop_box .search_bx_sortby{
-     float: left;
-     width:50%;
-   }
-   .search_out_pop_box .search_bx_sortby .select{
+  //  .category_filter_out_pop_box .category_filter_bx_sortby{
+  //    float: left;
+  //    width:50%;
+  //  }
+   .category_filter_out_pop_box .category_filter_bx_sortby .select{
      padding:2px;
      height:40px;
      overflow: hidden;
@@ -252,6 +353,9 @@ export default {
      position: relative;
      top: -4px;
    }
+  // .category_filter_out_pop_box .category_filter_bx_sortby{
+  //    display: block;
+  //  }  
 
    .head_category{
      padding-bottom: 0px;
@@ -259,8 +363,7 @@ export default {
 
    .search_out_pop_box .search_bx_sortby{
      display: none;
-   }
-
+   }  
 }
   
 
