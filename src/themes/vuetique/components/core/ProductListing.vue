@@ -43,13 +43,13 @@ export default {
     checkGridView(index) {
       switch(this.mobColumns) {
         case 2: 
-              return '6'
+              return '6 2-6-grid-view'
         break;
         case 3: 
-              return index%3 == 0 ? '12' : '6';
+              return index%3 == 0 ? '12 3-12-grid-view' : '6 3-6-grid-view';
               break;
         case 4:
-              return '3  4-grid-view'
+              return '3  4-3-grid-view'
               break;
         default:
              return '6'
