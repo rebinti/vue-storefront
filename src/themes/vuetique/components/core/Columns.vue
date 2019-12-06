@@ -3,7 +3,7 @@
     <select
       name="column"
       class="cl-secondary"
-      v-model="columns"
+      v-model="column"
       @change="changeColumn"
     >
       <option v-for="(option) in productsColumns" :value="option" :key="option">
@@ -16,7 +16,7 @@
 <script>
 export default {
    props: {
-    column: {
+    dcolumn: {
       type: [Number],
       required: false,
       default: 2
@@ -33,17 +33,17 @@ export default {
     },
   },
   created() {
-    this.columns = this.column;
+    this.column = this.dcolumn;
   },
   data () {
     return {
-      columns: 2,
+      column: 2,
       // productsColumns: [2, 3, 4, 6]
     }
   },
   methods: {
     changeColumn () {
-      this.$emit('change-column', { 'selected': this.columns, 'type': this.type } )
+      this.$emit('change-column', { 'selected': this.column, 'type': this.type } )
     }
   }
 }
