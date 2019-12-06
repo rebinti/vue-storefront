@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     changeColumn () {
-      this.$emit('change-column', { 'selected': this.columns, 'type': this.type } )
+      this.$emit('change-column', { 'selected': this.column, 'type': this.type } )
     }
   }
 }
