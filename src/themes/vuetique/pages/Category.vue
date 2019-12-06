@@ -48,11 +48,11 @@
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
                   </div>                  
               </div>              
-              <div class="category_filter_bx_filter filter-top"> 
+              <div class="category_filter_bx_filter filter-top" @click="openFilters"> 
                  <span>filter</span>
 
                    <div class="filter_bx">               
-                  <button-full class="w-full" @click.native="openFilters">
+                  <button-full class="w-full">  <!-- @click.native="openFilters" -->
                     {{ $t('Filters') }}
                   </button-full>
                   </div>   
