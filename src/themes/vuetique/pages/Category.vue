@@ -43,10 +43,9 @@
                   <sort-by />  
               </div>
 
-              <div class="category_filter_bx_grid_view filter-top">                  
-                  <span> view</span>
-                  <div class="filter_bx filter_bx_grid"> 
-                    <columns @change-column="columnChangeMobile" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnMobile" :type="'sm'"/>                  
+              <div class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+                  <span> view</span> 
+                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
                   </div>                  
               </div>              
               <div class="category_filter_bx_filter filter-top"> 
@@ -149,7 +148,9 @@ export default {
     return {
       mobileFilters: false,
       defaultColumn: 3,
-      defaultColumnMobile: 2
+      defaultColumnMobile: 2,
+      mobileGridData: [ { value: 2 , image: '../assets/grid2.png' , index: 0} , { value: 3 , image: '../assets/grid3.jpg' , index: 1} ,{ value: 4 , image: '../assets/grid4.png' , index: 2}],
+      seletedMobileGrid: { value: 2 , image: '../assets/grid2.png' , index: 0}
     }
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
@@ -182,8 +183,13 @@ export default {
     columnChangeWeb (column) {
       if(column.type === 'lg') this.defaultColumn = column.selected
     },
-    columnChangeMobile (column) {
-      if(column.type === 'sm') this.defaultColumnMobile = column.selected
+    columnChangeMobile (gridData) {
+        if(gridData.index === 2 ) { 
+            this.seletedMobileGrid = this.mobileGridData[0];
+        } else { 
+            this.seletedMobileGrid = this.mobileGridData[gridData.index + 1];
+        }
+        this.defaultColumnMobile = this.seletedMobileGrid.value;
     }
   },
   mixins: [Category]
@@ -371,7 +377,7 @@ export default {
     background-color:transparent;
     background-size: 32px 32px;
     border:0px;
-    background: url("../assets/gridview.jpg") no-repeat;
+    // background: url("../assets/gridview.jpg") no-repeat;
     margin-top:8px;
   }
   // .category_filter_out_pop_inner .vt-icon{
