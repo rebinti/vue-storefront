@@ -49,7 +49,7 @@ export default {
               return index%3 == 0 ? '12' : '6';
               break;
         case 4:
-              return '3'
+              return '3  4-grid-view'
               break;
         default:
              return '6'
