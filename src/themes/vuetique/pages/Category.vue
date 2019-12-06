@@ -46,7 +46,7 @@
               <div class="category_filter_bx_grid_view filter-top">                  
                   <span> view</span>
                   <div class="filter_bx filter_bx_grid"> 
-                    <columns @change-column="columnChangeMobile" :products-columns="[2, 3, 4]" :column="defaultColumnMobile" :type="'sm'"/>                  
+                    <columns @change-column="columnChangeMobile" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnMobile" :type="'sm'"/>                  
                   </div>                  
               </div>              
               <div class="category_filter_bx_filter filter-top"> 
@@ -71,7 +71,7 @@
           </h1>
            <div class="col-2 hidden lg:block">
                 <label class="mr10">{{ $t('Columns') }}:</label>
-                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4, 6]" :column="defaultColumn" :type="'lg'"/>
+                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4, 6]" :dcolumn="defaultColumn" :type="'lg'"/>
           </div>
           <div class="col-2 hidden lg:block">
             <sort-by />
