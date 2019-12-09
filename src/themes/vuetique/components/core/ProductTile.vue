@@ -44,7 +44,7 @@
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>
-            <div v-else-if="product.badge_type === 236"  class="round"> <!-- 236 for round -->
+            <div v-else-if="product.badge_type === 241"  class="round"> <!-- 236 for round -->
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
