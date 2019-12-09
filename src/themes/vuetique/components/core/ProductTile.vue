@@ -38,6 +38,9 @@
           data-testid="productHoverImage"
           class="hover-image"
         >
+        <div v-if="product.badge" :badge="product.badge" class="product-badge">
+          {{product.badge}}
+        </div>  
         <wishlist-button :product="product" />
       </div>
 
@@ -306,8 +309,38 @@ export default {
     }
 
   }
+.product-badge{
+    width: 100%;
+    height: 25px;
+    border: 1px solid #000000;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+}
 
-
+.item-3-12-grid.one-item .product-image img{
+    width: 350px;
+    height: 525px;
+}
+.item-4-3-grid {  
+    .product-name{
+       display: none;
+    }
+    .product-category{
+      display: none;
+    }
+    .price_bx_it{
+      display: none;
+    }
+    .product-image{
+      img{
+        height: 100px;
+      }
+    }
+    .wishlist-bx{
+      display: none;
+    }
+}
 }
 
 </style>
