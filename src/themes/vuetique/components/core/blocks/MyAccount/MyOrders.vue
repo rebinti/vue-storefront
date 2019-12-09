@@ -3,7 +3,7 @@
     <!-- My orders header -->
     <div class="row mb-4">
       <div class="col-12 sm:col-6">
-        <h2 class="mb-1">
+        <h2 class="mb-1 align-C">
           {{ $t('My orders') }}
         </h2>
       </div>
@@ -12,13 +12,13 @@
     <div class="row">
       <div class="col-12" v-show="!isHistoryEmpty">
 
-        <div class="thanks_page_mbl inner_prd_box ">
+        <div class="thanks_page_mbl inner_prd_box bg-gray">
            <div class="inner_thanks_bottom"  v-for="order in ordersHistory" :key="order.entity_id">
             <h2 style="padding-left:5px;"> {{ formatDate (order.created_at)  }}</h2>
              <router-link :to="localizedRoute(`/my-account/orders/${order.entity_id}`)">
             <div class="inner_prd_box">
 
-              <div class="inner_prd_box_item" style="overflow: scroll;clear: both; max-height: 285px;">
+              <div class="inner_prd_box_item" style="clear: both;">
 
                       <div class="inner_prd_box_top">
 
@@ -26,37 +26,39 @@
                           <span class="prd_ordr_id_it"> {{order.items.length}} Items</span>
 
                       </div>
-                      <div class="inner_prd_box_middle"  style="margin-bottom: 15px;" v-for="item in skipGrouped(order.items)" :key="item.item_id"> 
-                      
-                        <div class="prd_bx_pic">
-                          <img v-lazy="thumbnail(item.thumbnail)"  alt="" title="">
-                        </div>
-                        <div class="prd_bx_pic_cnt">
+                      <div class="inner_prd_box_middle-wrap" style="overflow: scroll; max-height: 250px; clear: both;">
+                        <div class="inner_prd_box_middle"  style="margin-bottom: 15px;" v-for="item in skipGrouped(order.items)" :key="item.item_id"> 
                         
-                        <h5>Shirt</h5>
-                        <div class="prd_bx_details_sec">Item ID:  {{ item.sku }}</div>
+                          <div class="prd_bx_pic">
+                            <img v-lazy="thumbnail(item.thumbnail)"  alt="" title="">
+                          </div>
+                          <div class="prd_bx_pic_cnt">
+                          
+                          <h5>Shirt</h5>
+                          <div class="prd_bx_details_sec">Item ID:  {{ item.sku }}</div>
 
-                        <div  class="prd_bx_details_sec">
-                          <!-- Color:<span class="opv text-grey-dark" > Red </span> -->
+                          <div  class="prd_bx_details_sec">
+                            <!-- Color:<span class="opv text-grey-dark" > Red </span> -->
+                          </div>
+
+                          <div class="prd_bx_details_right">
+                            <!-- <b v-if="!product.totals">
+                              <span class="text-error block font-medium" v-if="product.special_price">{{ product.priceInclTax * product.qty | price }} </span>
+                              <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.special_price">{{ product.originalPriceInclTax * product.qty | price }}</span>
+                              <span v-if="!product.special_price" class="h4">{{ product.priceInclTax * product.qty | price }}</span>
+                          </b> 
+                          <b v-if="product.totals">
+                              <span class="text-error font-medium block" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }} </span>
+                              <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax | price }}</span>
+                              <span v-if="!product.totals.discount_amount" class="h4">{{ product.totals.row_total_incl_tax | price }}</span>
+                          </b>  -->
+                          {{ item.price_incl_tax | price }} *    {{ item.qty_ordered }}
+                          </div>
+
+
+                          </div>
+
                         </div>
-
-                        <div class="prd_bx_details_right">
-                          <!-- <b v-if="!product.totals">
-                            <span class="text-error block font-medium" v-if="product.special_price">{{ product.priceInclTax * product.qty | price }} </span>
-                            <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.special_price">{{ product.originalPriceInclTax * product.qty | price }}</span>
-                            <span v-if="!product.special_price" class="h4">{{ product.priceInclTax * product.qty | price }}</span>
-                         </b> 
-                         <b v-if="product.totals">
-                             <span class="text-error font-medium block" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }} </span>
-                             <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax | price }}</span>
-                             <span v-if="!product.totals.discount_amount" class="h4">{{ product.totals.row_total_incl_tax | price }}</span>
-                         </b>  -->
-                         {{ item.price_incl_tax | price }} *    {{ item.qty_ordered }}
-                        </div>
-
-
-                        </div>
-
                       </div>
 
               </div>
@@ -346,7 +348,30 @@ table {
   .thanks_page_mbl{
     display: block; 
   }
+  .thanks_page_mbl.inner_prd_box.bg-gray {
+    background:#fafafa;
+  }
+  .bg-gray .inner_thanks_bottom h2 {
+      font-weight: 600;
+      font-family: Roboto, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+  .thanks_page_mbl.inner_prd_box.bg-gray .inner_thanks_bottom .inner_prd_box {
+    margin:3% 2% 7%;
+  }
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic {
+    text-align:center;
+    border:1px solid #fff5f5;
+    padding:5px;
+  }
 
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic img {
+    width:50px; display:block;
+    margin: auto; 
+  }
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box {
+    padding: 5px 10px;
+  }
+  .align-C { text-align: center; }
   // .thanks_page_dsk{
   //   display: block; 
   // }
@@ -388,6 +413,7 @@ table {
       width:100%;
       float: left;
     }
+    
     .inner_thanks_bottom{
       width:100%;
       float: left;
