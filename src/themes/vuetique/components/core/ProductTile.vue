@@ -39,7 +39,21 @@
           class="hover-image"
         >
         <div v-if="product.badge" :badge="product.badge" class="product-badge">
-          {{product.badge}}
+            <div v-if="product.badge_type === 237" class="rectangle"> <!-- 237 for rectangle -->
+                <span class="badge badge1">
+                  	<span class="badge-inner1">{{product.badge}}</span>
+                </span>
+            </div>
+            <div v-else-if="product.badge_type === 236"  class="round"> <!-- 236 for round -->
+                <span class="badge badge1">
+                  	<span class="badge-inner1">{{product.badge}}</span>
+                </span>
+            </div>
+            <div v-else class="squre">
+                <span class="badge badge1">
+                  	<span class="badge-inner1">{{product.badge}}</span>
+                </span>
+            </div>                  
         </div>  
         <wishlist-button :product="product" />
       </div>
@@ -309,14 +323,6 @@ export default {
     }
 
   }
-.product-badge{
-    width: 100%;
-    height: 25px;
-    border: 1px solid #000000;
-    position: absolute;
-    overflow: hidden;
-    bottom: 0px;
-}
 
 .item-3-12-grid.one-item .product-image img{
     width: 350px;
@@ -341,6 +347,37 @@ export default {
       display: none;
     }
 }
+}
+.product-badge{
+    color: #000;
+    text-transform: uppercase;
+    float: left;
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+    .squre{
+        text-align: center;
+        .badge{
+            display: inline-block;
+            min-width: 10px;
+            padding: 3px 7px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+            line-height: 1;
+            vertical-align: middle;
+            white-space: nowrap;
+            text-align: center;
+            background-color: #777;
+            border-radius: 10px;   
+            width: 100%;
+            float: left;
+            background: rgba(255,255,255, 0.3);
+            padding-top: 8px;
+            padding-bottom: 8px;                   
+        }
+
+  }
 }
 
 </style>
