@@ -199,7 +199,8 @@ export default {
 <style lang="scss" scoped>
 .mobile-filters {
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
-
+  
+  overscroll-behavior: none none;
   padding-top: 52px;
   top: 70px;
   height: calc(100vh - 70px);
