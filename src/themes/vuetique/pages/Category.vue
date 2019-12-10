@@ -429,7 +429,10 @@ export default {
 
    .search_out_pop_box .search_bx_sortby{
      display: none;
-   }  
+   } 
+   .category_filter_bx_sortby .select{
+         background-color: #f9f9f9;
+   } 
 }
   
 
