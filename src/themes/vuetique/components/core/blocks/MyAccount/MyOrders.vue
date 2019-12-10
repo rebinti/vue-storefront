@@ -3,7 +3,7 @@
     <!-- My orders header -->
     <div class="row mb-4">
       <div class="col-12 sm:col-6">
-        <h2 class="mb-1">
+        <h2 class="mb-1 align-C">
           {{ $t('My orders') }}
         </h2>
       </div>
@@ -12,47 +12,53 @@
     <div class="row">
       <div class="col-12" v-show="!isHistoryEmpty">
 
-        <div class="inner_prd_box mb_hide">
+        <div class="thanks_page_mbl inner_prd_box bg-gray">
+           <div class="inner_thanks_bottom"  v-for="order in ordersHistory" :key="order.entity_id">
+            <h2 style="padding-left:5px;"> {{ formatDate (order.created_at)  }}</h2>
+             <router-link :to="localizedRoute(`/my-account/orders/${order.entity_id}`)">
+            <div class="inner_prd_box">
 
-              <div class="inner_prd_box_item" style="overflow: scroll;clear: both; max-height: 285px;">
+              <div class="inner_prd_box_item" style="clear: both;">
 
                       <div class="inner_prd_box_top">
 
-                          <span class="prd_ordr_id"  >Order ID : ffffff</span>
-                          <span class="prd_ordr_id_it"> 1 Items</span>
+                          <span class="prd_ordr_id"  >Order ID : {{ order.entity_id }}</span>
+                          <span class="prd_ordr_id_it"> {{order.items.length}} Items</span>
 
                       </div>
-                      <div class="inner_prd_box_middle"  style="margin-bottom: 15px;">
-                      
-                        <div class="prd_bx_pic">
-                          <img src="/assets/vuetique-small-banners-4.jpg" alt="" title="">
-                        </div>
-                        <div class="prd_bx_pic_cnt">
+                      <div class="inner_prd_box_middle-wrap" style="overflow: scroll; max-height: 250px; clear: both;">
+                        <div class="inner_prd_box_middle"  style="margin-bottom: 15px;" v-for="item in skipGrouped(order.items)" :key="item.item_id"> 
                         
-                        <h5>Shirt</h5>
-                        <div class="prd_bx_details_sec">Item ID: Im-1234</div>
+                          <div class="prd_bx_pic">
+                            <img v-lazy="thumbnail(item.thumbnail)"  alt="" title="">
+                          </div>
+                          <div class="prd_bx_pic_cnt">
+                          
+                          <h5>Shirt</h5>
+                          <div class="prd_bx_details_sec">Item ID:  {{ item.sku }}</div>
 
-                        <div  class="prd_bx_details_sec">
-                          Color:<span class="opv text-grey-dark" > Red </span>
+                          <div  class="prd_bx_details_sec">
+                            <!-- Color:<span class="opv text-grey-dark" > Red </span> -->
+                          </div>
+
+                          <div class="prd_bx_details_right">
+                            <!-- <b v-if="!product.totals">
+                              <span class="text-error block font-medium" v-if="product.special_price">{{ product.priceInclTax * product.qty | price }} </span>
+                              <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.special_price">{{ product.originalPriceInclTax * product.qty | price }}</span>
+                              <span v-if="!product.special_price" class="h4">{{ product.priceInclTax * product.qty | price }}</span>
+                          </b> 
+                          <b v-if="product.totals">
+                              <span class="text-error font-medium block" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }} </span>
+                              <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax | price }}</span>
+                              <span v-if="!product.totals.discount_amount" class="h4">{{ product.totals.row_total_incl_tax | price }}</span>
+                          </b>  -->
+                          {{ item.price_incl_tax | price }} *    {{ item.qty_ordered }}
+                          </div>
+
+
+                          </div>
+
                         </div>
-
-                        <div class="prd_bx_details_right">
-                          <!-- <b v-if="!product.totals">
-                            <span class="text-error block font-medium" v-if="product.special_price">{{ product.priceInclTax * product.qty | price }} </span>
-                            <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.special_price">{{ product.originalPriceInclTax * product.qty | price }}</span>
-                            <span v-if="!product.special_price" class="h4">{{ product.priceInclTax * product.qty | price }}</span>
-                         </b> 
-                         <b v-if="product.totals">
-                             <span class="text-error font-medium block" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }} </span>
-                             <span class="price-original block text-sm text-grey-dark mt-1" v-if="product.totals.discount_amount">{{ product.totals.row_total_incl_tax | price }}</span>
-                             <span v-if="!product.totals.discount_amount" class="h4">{{ product.totals.row_total_incl_tax | price }}</span>
-                         </b>  -->
-                         215 *  1
-                        </div>
-
-
-                        </div>
-
                       </div>
 
               </div>
@@ -61,22 +67,27 @@
 
                   <div class="p_box_item">
                       <span class="p_box_p_label">Sub-total</span>
-                      <span class="p_box_p_size">$35.59</span>
+                      <span class="p_box_p_size">{{ order.subtotal | price }}</span>
                   </div>
 
                   <div class="p_box_item">
-                      <span class="p_box_p_label">Delivery</span>
-                      <span class="p_box_p_size">$0</span>
+                      <span class="p_box_p_label">Shipping</span>
+                      <span class="p_box_p_size">{{ order.shipping_amount | price }}</span>
                   </div>
 
                   <div class="p_box_item">
-                      <span class="p_box_p_label">Delivery</span>
-                      <span class="p_box_p_size red_val">-$10</span>
+                      <span class="p_box_p_label">Tax</span>
+                      <span class="p_box_p_size red_val">{{ order.tax_amount + order.discount_tax_compensation_amount | price }}</span>
+                  </div>
+
+                  <div class="p_box_item">
+                      <span class="p_box_p_label">Discount</span>
+                      <span class="p_box_p_size red_val">{{ order.discount_amount | price }}</span>
                   </div>
 
                   <div class="p_box_item pr_box">
-                      <span class="p_box_p_label">Total</span>
-                      <span class="p_box_p_size">$25.59</span>
+                      <span class="p_box_p_label">Grand total</span>
+                      <span class="p_box_p_size">{{ order.grand_total | price }}</span>
                   </div>
 
                  <!-- <div v-for="(segment, index) in totals" :key="index" class="p_box_item" v-if="segment.code !== 'grand_total'">
@@ -99,12 +110,14 @@
 
               </div>
 
-
+        </div>
+             </router-link>
+                </div>
 
             </div>
         
 
-        <table class="border ">
+        <table class="border mb_hide">
           <thead>
             <tr>
               <th>{{ $t('Order ID') }}</th>
@@ -192,7 +205,25 @@
 import MyOrders from '@vue-storefront/core/compatibility/components/blocks/MyAccount/MyOrders'
 
 export default {
-  mixins: [MyOrders]
+  mixins: [MyOrders],
+  methods: {
+    thumbnail (image) {
+      return this.getThumbnail(image, 150, 150)
+    },
+    skipGrouped (items) {
+      return items.filter((item) => {
+        return !item.parent_item_id
+      })
+    },
+    formatDate(date) {
+        let d = new Date(date);
+        let month =  d.toLocaleString('default', { month: 'long' }).slice(0,3);
+        let day = d.getDate();
+        if (day.length < 2) day = '0' + day;
+        return month + ' ' + day + ',' + ' ' + d.getFullYear();
+    }
+
+ }
 }
 </script>
 
@@ -304,6 +335,198 @@ table {
         text-transform: uppercase;
         font-size: 20px;
     }
+
+
+
+
+
+     .thanks_page_dsk{
+    display: none; 
+  }
+
+/* for edit purpose */
+  .thanks_page_mbl{
+    display: block; 
+  }
+  .thanks_page_mbl.inner_prd_box.bg-gray {
+    background:#fafafa;
+  }
+  .bg-gray .inner_thanks_bottom h2 {
+      font-weight: 600;
+      font-family: Roboto, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+  .thanks_page_mbl.inner_prd_box.bg-gray .inner_thanks_bottom .inner_prd_box {
+    margin:3% 2% 7%;
+  }
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic {
+    text-align:center;
+    border:1px solid #fff5f5;
+    padding:5px;
+  }
+
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic img {
+    width:50px; display:block;
+    margin: auto; 
+  }
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box {
+    padding: 5px 10px;
+  }
+  .align-C { text-align: center; }
+  // .thanks_page_dsk{
+  //   display: block; 
+  // }
+/*  ---- */
+  .thanks_page_mbl{
+    min-height:510px;
+    position: relative;
+    background: #e9e9e9;
+    .inner_thanks_page{
+      width:100%;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      position: absolute;
+      left:0px;
+      text-align: center;
+      .svg-inline--fa{
+        color:#17e3c8;
+        font-size:40px;
+      }
+      h3{
+        font-size:30px;
+        color:#000;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      h6{
+        font-size:12px;
+        color:#7c7c7c;
+        padding-bottom: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+
+    .inner_thanks_top{
+      width:100%;
+      float: left;
+    }
+    
+    .inner_thanks_bottom{
+      width:100%;
+      float: left;
+      .inner_prd_box{
+        width:96%;
+        float: left;
+        padding: 10px;
+        margin: 5% 2%;
+        background: #ffffff;
+       -webkit-box-shadow: -1px -1px 15px 0px #cccccc;
+        -moz-box-shadow: -1px -1px 15px 0px #cccccc;
+        box-shadow: -1px -1px 15px 0px #cccccc;
+        -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+        .inner_prd_box_item{
+          width:100%;
+          float: left;
+
+          .inner_prd_box_top{
+            width:100%;
+            float: left;
+            padding-bottom: 10px;
+
+            .prd_ordr_id{
+              float: left;
+              color:#7f7f7f;
+              font-size:11px;
+            }
+            .prd_ordr_id_it{
+              float: right;
+              color:#7f7f7f;
+              font-size:11px;
+            }
+          }
+          .inner_prd_box_middle{
+            width:100%;
+            float: left;
+            .prd_bx_pic{
+              width:30%;
+              float:left;
+            }
+            .prd_bx_pic_cnt{
+              width:65%;
+              float:left;
+              padding-left: 15px;
+              text-align: left;
+              h5{
+                color:#000;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 18px;
+                margin-bottom: 5px;
+              }
+              .prd_bx_details_sec{
+                font-size:11px;
+                line-height: 14px;
+                color:#7f7f7f;
+                padding-top: 2px;
+              }
+              .prd_bx_details_right{
+                text-align: right;
+                font-size:11px;
+                line-height: 14px;
+                color:#7f7f7f;
+                b{
+                  font-size:13px;
+                  font-weight: bold;
+                  color:#000;
+                  line-height: 12px;
+                }
+              }
+            }
+          }
+        }
+        .inner_prd_price_bx{
+          width:100%;
+          float: left;
+          border-top:1px solid #cccccc;
+          margin-top: 15px;
+          padding-top: 15px;
+          .p_box_item{
+            width:100%;
+            float: left;
+            font-size:11px;
+            line-height: 13px;
+            color:#7f7f7f;
+            margin-bottom: 8px;
+            .p_box_p_label{
+              width:50%;
+              float: left;
+              text-align: left;
+            }
+            .p_box_p_size{
+              width:50%;
+              float: left;
+              text-align: right;
+              &.red_val{
+                color:#f10;
+              }
+            }
+            &.pr_box{
+              font-size:15px;
+              line-height: 17px;
+              color: #000;
+              font-weight: bold;
+              padding-top: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
 
 }
 
