@@ -38,18 +38,19 @@
           data-testid="productHoverImage"
           class="hover-image"
         >
+        
         <div v-if="product.badge" :badge="product.badge" class="product-badge">
-            <div v-if="product.badge_type === 237" class="rectangle"> <!-- 237 for rectangle -->
+            <div v-if="product.badge_type === 241" class="rectangle"> <!-- 237 for rectangle -->
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>
-            <div v-else-if="product.badge_type === 241"  class="round"> <!-- 236 for round -->
+            <div v-else-if="product.badge_type === 237"  class="squre"> <!-- 236 for round -->
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>
-            <div v-else class="squre">
+            <div v-else class="round">
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
@@ -355,7 +356,7 @@ export default {
     width: 100%;
     bottom: 0px;
     position: absolute;
-    .squre{
+    .squre,.rectangle{
         text-align: center;
         .badge{
             display: inline-block;
