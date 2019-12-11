@@ -60,7 +60,7 @@ export default {
     .prod_list .wishlist-bx{
       width:25px;
       height:25px;
-      background: #ffffff;
+      /* background: #ffffff; */
       padding: 2px;
       position: absolute;
       right:10px;  

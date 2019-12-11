@@ -165,9 +165,13 @@ export default {
   methods: {
     openFilters () {
       this.mobileFilters = true
+      const el = document.body; // to fix background scroll issue when the filter opened
+      el.classList.add("openfilter");
     },
     closeFilters () {
       this.mobileFilters = false
+      const el = document.body;
+      el.classList.remove("openfilter");
     },
     notify () {
       this.$store.dispatch('notification/spawnNotification', {
@@ -241,7 +245,9 @@ export default {
   .mobile_filter .sidebar .Accordion{
     background: #000;
   }
-
+  .openfilter{
+    overflow-y: hidden;
+  } 
   .b_crumb{ display: none; }
 
   // .search_out_pop_bx{
@@ -429,7 +435,10 @@ export default {
 
    .search_out_pop_box .search_bx_sortby{
      display: none;
-   }  
+   } 
+   .category_filter_bx_sortby .select{
+         background-color: #f9f9f9;
+   } 
 }
   
 
