@@ -79,7 +79,7 @@
             <div class="sm:col-6 md:col-3 mb-3">
               <h5>{{ $t('Shipping address') }}</h5>
               <address>
-                <p>{{ shippingAddress.firstname }} {{ shippingAddress.lastname }}</p>
+                <p class="name-row">{{ shippingAddress.firstname }} {{ shippingAddress.lastname }}</p>
                 <p>{{ shippingAddress.street[0] }} {{ shippingAddress.street[1] }}</p>
                 <p>{{ shippingAddress.postcode }} {{ shippingAddress.city }}</p>
                 <p>{{ shippingAddress.country }}</p>
@@ -92,7 +92,7 @@
             <div class="sm:col-6 md:col-3 mb-3">
               <h5>{{ $t('Billing address') }}</h5>
               <address>
-                <p>{{ billingAddress.firstname }} {{ billingAddress.lastname }}</p>
+                <p class="name-row">{{ billingAddress.firstname }} {{ billingAddress.lastname }}</p>
                 <p>{{ billingAddress.street[0] }} {{ billingAddress.street[1] }}</p>
                 <p>{{ billingAddress.postcode }} {{ billingAddress.city }}</p>
                 <p>{{ billingAddress.country }}</p>
@@ -112,12 +112,12 @@
           <!-- My orders header -->
       <div class="row mb-4">
         <div class="col-12 sm:col-6">
-          <h2 class="mb-1">
+          <h2 class="mb-1 align-C">
             {{ $t('My orders') }}
           </h2>
         </div>
       </div>
-      <div class="thanks_page_mbl inner_prd_box">
+      <div class="thanks_page_mbl inner_prd_box bg-gray">
         <div class="inner_thanks_bottom">
            <h2>Items</h2>
           <div class="inner_prd_box">
@@ -191,20 +191,19 @@
         <div class="inner_thanks_bottom">
            <h2>{{ $t('Shipping address') }}</h2>
           <div class="inner_prd_box">
-            <div
-              class="inner_prd_box_item row"
-              style="overflow: scroll;clear: both; max-height: 285px;"
-            >
-              <div class="col-3 inner_prd_box_top">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-              </div>
-              <div  class="col-9  inner_prd_box_middle" style="margin-bottom: 15px;">
-                <address>          
-                  <p>{{ shippingAddress.firstname }} {{ shippingAddress.lastname }}</p>
-                  <p>{{ shippingAddress.street[0] }} {{ shippingAddress.street[1] }}</p>
-                  <p>{{ shippingAddress.postcode }} {{ shippingAddress.city }}</p>
-                  <p>{{ shippingAddress.country }}</p>
-                </address>
+            <div class="inner_prd_box_item" style="overflow: scroll;clear: both; max-height: 285px;">
+              <div class="address-info-row">
+                <div class="inner_prd_box_top">
+                  <img src="/assets/map-pointer.png" />
+                </div>
+                <div  class="inner_prd_box_middle" style="margin-bottom: 15px;">
+                  <address>          
+                    <p class="name-row">{{ shippingAddress.firstname }} {{ shippingAddress.lastname }}</p>
+                    <p>{{ shippingAddress.street[0] }} {{ shippingAddress.street[1] }}</p>
+                    <p>{{ shippingAddress.postcode }} {{ shippingAddress.city }}</p>
+                    <p>{{ shippingAddress.country }}</p>
+                  </address>
+                </div>
               </div>
             </div>
 
@@ -215,9 +214,7 @@
            <h2>{{ $t('Shipping method') }}</h2>
           <div class="inner_prd_box">
             <div
-              class="inner_prd_box_item row"
-              style="overflow: scroll;clear: both; max-height: 285px;"
-            >
+              class="inner_prd_box_item row" style="overflow: scroll;clear: both; max-height: 285px;">
               <div class="col-12 inner_prd_box_top">
                 <p>{{ order.shipping_description }}</p>
               </div>
@@ -229,20 +226,19 @@
         <div class="inner_thanks_bottom">
            <h2>{{ $t('Billing address') }}</h2>
           <div class="inner_prd_box">
-            <div
-              class="inner_prd_box_item row"
-              style="overflow: scroll;clear: both; max-height: 285px;"
-            >
-              <div class="col-3 inner_prd_box_top">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-              </div>
-              <div  class="col-9  inner_prd_box_middle" style="margin-bottom: 15px;">
-                  <address>
-                  <p>{{ billingAddress.firstname }} {{ billingAddress.lastname }}</p>
-                  <p>{{ billingAddress.street[0] }} {{ billingAddress.street[1] }}</p>
-                  <p>{{ billingAddress.postcode }} {{ billingAddress.city }}</p>
-                  <p>{{ billingAddress.country }}</p>
-                </address>
+            <div class="inner_prd_box_item" style="overflow: scroll;clear: both; max-height: 285px;">
+              <div class="address-info-row">
+                <div class="inner_prd_box_top">
+                  <img src="/assets/map-pointer.png" /> 
+                </div>
+                <div class="inner_prd_box_middle" style="margin-bottom: 15px;">
+                    <address>
+                    <p class="name-row">{{ billingAddress.firstname }} {{ billingAddress.lastname }}</p>
+                    <p>{{ billingAddress.street[0] }} {{ billingAddress.street[1] }}</p>
+                    <p>{{ billingAddress.postcode }} {{ billingAddress.city }}</p>
+                    <p>{{ billingAddress.country }}</p>
+                  </address>
+                </div>
               </div>
             </div>
 
@@ -468,12 +464,49 @@ address {
   .thanks_page_dsk {
     display: none;
   }
+  
 
   /* for edit purpose */
   .thanks_page_mbl {
     display: block;
   }
+  .thanks_page_mbl.inner_prd_box.bg-gray {
+    background: #fafafa;
+  }
+  .bg-gray .inner_thanks_bottom h2 {
+    font-weight: 600;
+    font-family: Roboto, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding-left: 10px;
+  }
+  .thanks_page_mbl.inner_prd_box.bg-gray .inner_thanks_bottom .inner_prd_box {
+    margin:3% 2% 7%;
+  }
+   .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic {
+    text-align:center;
+    border:1px solid #fff5f5;
+    padding:5px;
+  }
 
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box .inner_prd_box_item .inner_prd_box_middle .prd_bx_pic img {
+    width:50px; display:block;
+    margin: auto; 
+  }
+  .thanks_page_mbl.bg-gray .inner_thanks_bottom .inner_prd_box {
+    padding: 5px 10px;
+  }
+  .align-C { text-align: center; }
+  .address-info-row { display: flex; padding:10px; align-items: center; }
+  .address-info-row .inner_prd_box_top {
+    float: none !important; width: auto !important;
+  }
+  .address-info-row .inner_prd_box_middle {
+    float: none !important; width: auto !important;
+    padding-left: 20px; margin-bottom: 0 !important;
+  }
+  address .name-row {
+    font-size: 16px;
+    font-weight: 600;
+  }
   // .thanks_page_dsk{
   //   display: block;
   // }
