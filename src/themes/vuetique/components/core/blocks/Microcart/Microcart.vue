@@ -315,10 +315,17 @@ export default {
       border-color: #000;
     }
 
+    .right-sidebar{
+    top: 0px;
+    height: 100vh;
+    z-index: 150;
+    max-height: calc(100vh - 0px);
+}
+
  @media (max-width: 576px) {
     .hd_fix{
       position: fixed;
-      top:70px;
+      top:0px;
       left:0px;
       background:#ffffff;
       width:100%;

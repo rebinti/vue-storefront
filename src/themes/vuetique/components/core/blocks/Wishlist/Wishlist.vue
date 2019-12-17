@@ -244,4 +244,12 @@ export default {
   padding-top: 13px;
   display: inline-block;
 }
+
+.right-sidebar{
+    top: 0px;
+    height: 100vh;
+    z-index: 150;
+    max-height: calc(100vh - 0px);
+}
+
 </style>
