@@ -90,3 +90,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+@media (max-width: 576px) {
+.login_out_bx{
+  height:100vh;
+}
+
+}
+</style>
