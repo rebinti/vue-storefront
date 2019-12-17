@@ -7,7 +7,7 @@
       @click.self="close"
     >
       <div class="modal-wrapper">
-        <div class="modal-center">
+        <div class="modal-center" style="background-color: #100f0e73;">
           <div class="modal-container bg-cl-primary" ref="modal-content" :style="style">
             <header class="modal-header py25 px65 h1 serif weight-700 bg-cl-secondary" v-if="$slots.header">
               <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close" data-testid="closeModalButton">

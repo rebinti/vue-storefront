@@ -1,6 +1,6 @@
 <template>
   <div class="wishlist wishlist_out right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isWishlistOpen }" style="text-align: center;">
-    <button
+   <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
@@ -12,44 +12,50 @@
       </svg>
     </button>
 
-    <div  class="wish_wrap_box" :class="{'item-in-it': productsInWishlist.length>0}">
-
-    <div v-if="!productsInWishlist.length" class="wish_ico_box">
-      <img  src="/assets/wishlisticon.png" alt=""/>
-    </div>
-
-    <h2 v-if="productsInWishlist.length" class="mb-8 upper-letter" >
-      {{ $t('Wishlist') }}
+    <h2 v-if="productsInWishlist.length && !hideWishListForBoardFlag" class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
+        {{ $t('Wishlist') }}
     </h2>
 
-    <h4 v-if="!productsInWishlist.length" class="mb-2">
-      {{ $t('Your wishlist is empty.') }}
-    </h4>
-<!-- 
-    <div v-if="!productsInWishlist.length" class="mb-2">
-      {{ $t("Don't hesitate and") }}
-      <router-link class="text-primary" :to="localizedRoute('/')">
-        {{ $t('browse our catalog') }}
-      </router-link>
-      {{ $t('to find something beautiful for You!') }}
-    </div> -->
+    <h2 v-else class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
+        {{ $t('Boards') }}
+    </h2>
 
-    <div class="wish_cnt" v-if="!productsInWishlist.length">
-       <p>Tap heart button to start saving your favorite items </p>
-       <router-link class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
-       :to="localizedRoute('/')"
-       > Add now
-       </router-link>
+    <div class="wishlist-top-button-row clearfix" v-show="!hideWishListForBoardFlag">
+          <span class="button-blck"><button class="button-type1" :class="{'active' : viewType === 'wishlist'}" @click="viewType = 'wishlist'">All items</button></span>
+          <span class="button-blck"><button class="button-type1" :class="{'active' : viewType === 'boards'}"  @click="viewType = 'boards'">Boards</button></span>
     </div>
-    <ul class="products p-0 m-0">
-      <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
-      <!-- <product v-for="product in productsInWishlist" :key="product.id" :product="product"  :key-val="valueUp" :product-id ="product.id"
-      v-touch:swipe="swipeAction(product)" v-touch-class="'active'"
-      v-touch:moving="movingHandler(product)"
-      v-touch:start="startHandler" 
-      v-touch:end="endHandler"  
-      /> -->
-    </ul>
+
+     <!--  Wish list lsiting -->
+    <div  class="wish_wrap_box" :class="{'item-in-it': productsInWishlist.length>0}" v-show="viewType === 'wishlist'">
+
+      <div v-if="!productsInWishlist.length " class="wish_ico_box">
+        <img  src="/assets/wishlisticon.png" alt=""/>
+      </div>
+
+      <!-- <h2 v-if="productsInWishlist.length" class="mb-8 upper-letter" >
+        {{ $t('Wishlist') }}
+      </h2> -->
+
+      <h4 v-if="!productsInWishlist.length" class="mb-2">
+        {{ $t('Your wishlist is empty.') }}
+      </h4>
+
+      <div class="wish_cnt" v-if="!productsInWishlist.length">
+        <p>Tap heart button to start saving your favorite items </p>
+        <router-link class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
+        :to="localizedRoute('/')"
+        > Add now
+        </router-link>
+      </div>
+      <ul class="products p-0 m-0">
+        <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
+
+      </ul>
+     </div>
+
+     <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" />
+     <div class="add_more_btn" v-show="viewType === 'boards'" @click="$store.commit('ui/setBoardsElem', 'create-board');$bus.$emit('modal-show', 'modal-create-boards')" >
+        <a href="#" class="add_more_pls"><i class="fas fa-plus"></i></a>
      </div>
   </div>
 </template>
@@ -57,6 +63,8 @@
 <script>
 import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist'
 import Product from 'theme/components/core/blocks/Wishlist/Product'
+// const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
+import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue'
 
 export default {
   props: {
@@ -66,13 +74,15 @@ export default {
       default: () => { }
     }
   },
-  // data () {
-  //   return {
-  //     valueUp: 106
-  //   }
-  // },
+  data () {
+    return {
+      valueUp: 106,
+      viewType : 'wishlist',
+      hideWishListForBoardFlag: false
+    }
+  },
   components: {
-    Product
+    Product, Boards
   },
   mixins: [Wishlist],
   methods: {
@@ -100,6 +110,10 @@ export default {
     endHandler() {
       //  this.valueUp = 110
       console.log('endHandler endHandler');
+    },
+    chagesInView() {
+      console.log('Changes in view page Wishlist')
+      this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
     }
   }
 }
@@ -185,4 +199,49 @@ export default {
     font-size: 20px;
 }
 
+
+
+/* New style */
+
+.wishlist-top-button-row {
+  max-width: 314px;
+  margin: auto;
+  margin-bottom: 25px;
+}
+.wishlist-top-button-row .button-blck {
+  display: block;
+  float: left;
+}
+.wishlist-top-button-row .button-blck .button-type1 {
+  border:1px solid #000000;
+  padding: 4px 48px;
+  color: #000000;
+  width:157px;
+}
+.wishlist-top-button-row .button-blck .button-type1.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+
+.add_more_btn{
+  width:50px;
+  height:50px;
+  background: #000;
+  -webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 40px;
+  z-index: 100;
+  right: 20px;
+}
+.add_more_btn a{
+  width:100%;
+  height:100%;
+  font-size: 20px;
+  color: #fff;
+  padding-top: 13px;
+  display: inline-block;
+}
 </style>

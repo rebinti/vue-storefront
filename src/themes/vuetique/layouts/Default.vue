@@ -20,6 +20,7 @@
       <main-footer />
       <notification />
       <sign-up />
+      <popup-boards />
       <newsletter-popup />
       <cookie-notification />
       <offline-badge />
@@ -54,6 +55,7 @@ import Icons from 'theme/components/theme/Icons.vue'
 
 import Head from 'theme/head'
 import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
+import PopupBoards  from 'theme/components/core/blocks/Boards/PopupBoards.vue'
 
 const SearchPanel = () => import(/* webpackChunkName: "vsf-search-panel" */ 'theme/components/core/blocks/SearchPanel/SearchPanel.vue')
 const SidebarMenu = () => import(/* webpackChunkName: "vsf-sidebar-menu" */ 'theme/components/core/blocks/SidebarMenu/SidebarMenu.vue')
@@ -62,6 +64,7 @@ const Wishlist = () => import(/* webpackChunkName: "vsf-wishlist" */ 'theme/comp
 // const ReviewPanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue')
 
 const OrderConfirmation = () => import(/* webpackChunkName: "vsf-order-confirmation" */ 'theme/components/core/blocks/Checkout/OrderConfirmation.vue')
+//  const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
 
 export default {
   data () {
@@ -142,6 +145,7 @@ export default {
     HeaderMenu,
     Microcart,
     Wishlist,
+    // Boards,
     SearchPanel,
     SidebarMenu,
     Overlay,
@@ -150,6 +154,7 @@ export default {
     Modal,
     SignUp,
     NewsletterPopup,
+    PopupBoards,
     CookieNotification,
     OfflineBadge,
     ModalSwitcher,

@@ -14,6 +14,8 @@ const store = {
     overlay: false,
     loader: false,
     authElem: 'login',
+    boardsElem: 'add-to-board',
+    selectedBoardItem: null,
     checkoutMode: false,
     openMyAccount: false,
     submenu: {
@@ -65,9 +67,15 @@ const store = {
     setAuthElem (state, action) {
       state.authElem = action
     },
+    setBoardsElem (state, action) {
+      state.boardsElem = action
+    },
     setYoptoProduct (state, data) {
       state.yoptoProduct = data
-    }
+    },
+    setSelectedBoardItem (state, data) {
+      state.selectedBoardItem = data
+    },
   },
   actions: {
     toggleMicrocart ({ commit, state }) {

@@ -1,0 +1,9 @@
+export const SN_BOARDS = 'boards'
+export const BOARDS_ADD_ITEM = SN_BOARDS + '/ADD'
+export const BOARDS_DEL_ITEM = SN_BOARDS + '/DEL'
+export const BOARDS_LOAD_BOARDS = SN_BOARDS + '/LOAD'
+export const SET_BOARDSLISTS_LOADED = `${SN_BOARDS}/SET_BOARDSLIST_LOADED`
+
+
+export const BOARDS_CREATE_BOARD = SN_BOARDS + '/CREATE_BOARD'
+export const BOARDS_DELETE_BOARD = SN_BOARDS + '/DELETE_BOARD'

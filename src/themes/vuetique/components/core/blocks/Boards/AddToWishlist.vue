@@ -1,5 +1,4 @@
 <template>
-<div>
   <button
     @click.prevent="isOnWishlist ? removeFromWishlist(product) : addToWishlist(product)"
     class="inline-flex items-center text-grey-dark wishlist-bx"
@@ -19,23 +18,15 @@
        <span class="h-mobile"> {{ $t('Remove') }} </span>
     </template>
   </button>
-
-  <button v-if="isOnWishlist" class="inline-flex items-center text-grey-dark wishlist-bx" type="button"
-  style="left: 2px;width: 100px;background: black;color: white;padding: 0px 0 1px 6px;font-weight: 500;}"
-  @click.prevent="$store.commit('ui/setSelectedBoardItem', product);$store.commit('ui/setBoardsElem', 'add-to-board');$bus.$emit('modal-show', 'modal-create-boards')"
-  >   Add to board
-  </button>
-</div>
 </template>
 
 <script>
-import { IsOnWishlist } from '@vue-storefront/core/modules/wishlist/components/IsOnWishlist'
-import { AddToWishlist } from '@vue-storefront/core/modules/wishlist/components/AddToWishlist'
-import { RemoveFromWishlist } from '@vue-storefront/core/modules/wishlist/components/RemoveFromWishlist'
-// import { IsOnBoardsWishlist } from '@vue-storefront/core/modules/boards/components/IsOnWishlist'
+import { IsOnWishlist } from '@vue-storefront/core/modules/boards/components/IsOnWishlist'
+import { AddToWishlist } from '@vue-storefront/core/modules/boards/components/AddToWishlist'
+import { RemoveFromWishlist } from '@vue-storefront/core/modules/boards/components/RemoveFromWishlist'
 
 export default {
-  mixins: [ IsOnWishlist , AddToWishlist , RemoveFromWishlist ], // IsOnBoardsWishlist
+  mixins: [ IsOnWishlist, AddToWishlist, RemoveFromWishlist ],
   computed: {
     favoriteIcon () {
       return this.isOnWishlist ? 'favorite' : 'favorite_border'
