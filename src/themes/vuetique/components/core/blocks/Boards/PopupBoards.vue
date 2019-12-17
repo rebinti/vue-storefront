@@ -1,7 +1,7 @@
 <template>
   <modal name="modal-create-boards" :width="620">
-      <add-to-boards-list v-show="activeElem == 'add-to-board'"/>
-      <create-board v-show="activeElem == 'create-board'"/>
+      <add-to-boards-list v-if="activeElem == 'add-to-board'"/>
+      <create-board v-if="activeElem == 'create-board'"/>
   </modal>
 </template>
 

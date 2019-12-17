@@ -87,9 +87,6 @@ export default {
     Product,
     BoardsItem,
   },
-  mounted() {
-    console.log('boardsListItems' , this.boardsListItems);
-  },
   mixins: [Wishlist ],  //Wishlist
   methods: {
     closeWishlist () {
