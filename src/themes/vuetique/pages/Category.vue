@@ -164,14 +164,16 @@ export default {
   },
   methods: {
     openFilters () {
-      this.mobileFilters = true
+      this.mobileFilters = true      
       const el = document.body; // to fix background scroll issue when the filter opened
       el.classList.add("openfilter");
+      alert("filter open");
     },
     closeFilters () {
       this.mobileFilters = false
       const el = document.body;
       el.classList.remove("openfilter");
+      alert("filter closed");
     },
     notify () {
       this.$store.dispatch('notification/spawnNotification', {
