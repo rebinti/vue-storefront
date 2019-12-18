@@ -316,11 +316,11 @@ export default {
     }
 
     .right-sidebar{
-    top: 0px;
-    height: 100vh;
-    z-index: 150;
-    max-height: calc(100vh - 0px);
-}
+        top: 0px;
+        height: 100vh;
+        z-index: 8;
+        max-height: calc(100vh - 0px);
+    }
 
  @media (max-width: 576px) {
     .hd_fix{

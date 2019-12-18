@@ -248,7 +248,7 @@ export default {
 .right-sidebar{
     top: 0px;
     height: 100vh;
-    z-index: 150;
+    z-index: 8;
     max-height: calc(100vh - 0px);
 }
 

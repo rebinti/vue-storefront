@@ -140,5 +140,11 @@ export default {
       text-transform: uppercase;
       font-size: 20px;
     }
+    .right-sidebar{
+        top: 0px;
+        height: 100vh;
+        z-index: 3;
+        max-height: calc(100vh - 0px);
+    }
 }
 </style>

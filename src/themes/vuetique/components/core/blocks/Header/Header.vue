@@ -2,6 +2,7 @@
   <div class="header">
     <header
       class="fixed lg:static top-0 z-header w-full bg-white border-b border-solid"
+      :class="{ 'is-visible': navVisible }"
     >
       <div class="container h-full">
         <div class="row gutter-md items-center h-full" v-if="!isCheckoutPage">
@@ -103,9 +104,39 @@ export default {
       currentUser: state => state.user.current
     })
   },
+  data () {
+    return {
+      navVisible: true,
+      isScrolling: false,
+      scrollTop: 0,
+      lastScrollTop: 0,
+      navbarHeight: 70
+    }
+  },
+  beforeMount () {
+    window.addEventListener('scroll', () => {
+      this.isScrolling = true
+    }, {passive: true})
+
+    setInterval(() => {
+      if (this.isScrolling) {
+        this.hasScrolled()
+        this.isScrolling = false
+      }
+    }, 250)
+  },
   methods: {
     gotoAccount () {
       this.$bus.$emit('modal-toggle', 'modal-signup')
+    },
+    hasScrolled () {
+      this.scrollTop = window.scrollY
+      if (this.scrollTop > this.lastScrollTop && this.scrollTop > this.navbarHeight) {
+        this.navVisible = false
+      } else {
+        this.navVisible = true
+      }
+      this.lastScrollTop = this.scrollTop
     }
   }
 }
@@ -114,10 +145,17 @@ export default {
 <style lang="scss" scoped>
 header {
   height: 70px;
-
-  @screen lg {
-    top: -70px;
+  top: -70px;
+  z-index: 2;
+  transition: top 0.2s ease-in-out;
+  &.is-visible {
+    top: 0;
   }
+
+  // @screen lg {
+  //   top: -70px;
+  // }
+
 }
 
 .header-placeholder {
