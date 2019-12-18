@@ -232,12 +232,12 @@ export default {
 
 .sidebar-menu {
   width: 100vh;
-  top: 70px;
+  top: 0px;
   left: 0;
   overflow: hidden;
   overflow-y: auto;
   z-index: 3;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100vh - 0px);
 
   @screen md {
     width: 350px;

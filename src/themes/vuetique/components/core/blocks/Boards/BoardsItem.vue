@@ -271,6 +271,8 @@ input {
 .image-block-wrapper-out{
   padding-top: 20px;
   /* border-bottom: 1px solid #ccc; */
+  /* margin: 0 auto; */
+  width: 100%;
 }
 
 .add_more_btn{

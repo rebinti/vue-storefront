@@ -103,9 +103,14 @@ export default {
 <style scoped>
 
 @media (max-width: 576px) {
+.modal {
+  top: 0px !important;
+}
 .modal .modal-container{
   background: transparent;
 }
-
+.modal .modal-container .modal-content {
+  background: #ffffff !important;
+}
 }
 </style>
