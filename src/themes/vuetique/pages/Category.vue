@@ -245,15 +245,18 @@ export default {
     /* right: 0px; */
     padding-bottom: 50px;
     top: 0px;
+    overflow: none !important;
     height: 100vh;
     z-index: 1000;
     max-height: calc(100vh - 0px);
     background: #2d292994;
+    -webkit-overflow-scrolling:touch;
+    -ms-scroll-chaining: none none;
+    overscroll-behavior: none none;
   }
 
   .mobile-filters_new {
     width: 75vw;
-    /* width: 100vw; */
     left: auto;
     right: 0px;
     padding-bottom: 50px;
@@ -264,15 +267,13 @@ export default {
     position: fixed;
     overflow: auto;
     background-color: #ffffff;
-    z-index: 10;
-    /* left: 0; */
-    width: 75vw;
+    z-index: 1500;
     padding: 1rem;
+    padding-top: 52px;
+    height: calc(100vh - 0px);
     -ms-scroll-chaining: none none;
     overscroll-behavior: none none;
-    padding-top: 52px;
-    /* top: 70px; */
-    height: calc(100vh - 0px);
+    -webkit-overflow-scrolling:touch;
   }
   
   .mobile_filter .sidebar .Accordion{
