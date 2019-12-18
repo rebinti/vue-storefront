@@ -13,7 +13,7 @@
 
   <!-- popup -->
 
-      <div class="board_bx_out" style="padding-left: 20px;padding-right: 20px;text-align: center;margin-top: 200%">
+      <div class="board_bx_out" >
          <header class="modal-header">
             <div class="board_bx">
                 <div class="cncl_text">
@@ -30,7 +30,7 @@
             </div>
          </header>
 
-        <div class="modal-content" style="padding: 65px 10px;">
+        <div class="modal-content" >
 
           <div class="board_list" v-for="(board, index) in boardsListItems" :key="board.id" @click="addProductToBoard(board, index)">
 
@@ -281,4 +281,34 @@ export default {
   transform: translateY(-50%);
   padding-left: 30%;
 }
+
+
+/* addto board list popup */
+
+.board_bx_out{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 300px;
+  background: rgb(255, 255, 255);
+  overflow-x: scroll;
+  padding: 10px 20px;
+  left:0px;
+}
+
+.modal .modal-container{
+  background: transparent;
+}
+
+.board_bx{
+  text-align: center;
+}
+
+@media (max-width: 576px){
+
+  .modal .modal-container {
+      background:transparent;
+  }
+}
+
 </style>

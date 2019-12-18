@@ -242,6 +242,10 @@ export default {
     left:auto;
     right:0px;
     padding-bottom: 50px;
+    top:0px;
+    height: 100vh;
+    z-index: 150;
+    max-height: calc(100vh - 0px);
   }
   
   .mobile_filter .sidebar .Accordion{
