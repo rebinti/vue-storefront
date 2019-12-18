@@ -91,6 +91,7 @@
       </div>
     </header>
     <div class="mobile-filters lg:hidden mobile_filter" v-show="mobileFilters">
+      <div class="mobile-filters_new">
       <button
         type="button"
         :aria-label="$t('Close')"
@@ -102,6 +103,7 @@
         </svg>
       </button>
       <sidebar :filters="filters.available" @closeFilters="closeFilters" />
+      </div>
     </div>
     <div class="container pb-16">
       <div class="row gutter-md">
@@ -167,13 +169,13 @@ export default {
       this.mobileFilters = true      
       const el = document.body; // to fix background scroll issue when the filter opened
       el.classList.add("openfilter");
-      alert("filter open");
+      //alert("filter open");
     },
     closeFilters () {
       this.mobileFilters = false
       const el = document.body;
       el.classList.remove("openfilter");
-      alert("filter closed");
+      // alert("filter closed");
     },
     notify () {
       this.$store.dispatch('notification/spawnNotification', {
@@ -238,14 +240,39 @@ export default {
 @media (max-width: 576px) {
 
   .mobile_filter{
-    width: 75vw;
-    left:auto;
-    right:0px;
+   width: 100vw;
+    /* left: auto; */
+    /* right: 0px; */
     padding-bottom: 50px;
-    top:0px;
+    top: 0px;
     height: 100vh;
-    z-index: 150;
+    z-index: 1000;
     max-height: calc(100vh - 0px);
+    background: #2d292994;
+  }
+
+  .mobile-filters_new {
+    width: 75vw;
+    /* width: 100vw; */
+    left: auto;
+    right: 0px;
+    padding-bottom: 50px;
+    top: 0px;
+    height: 100vh;
+    z-index: 1500;
+    max-height: calc(100vh - 0px);
+    position: fixed;
+    overflow: auto;
+    background-color: #ffffff;
+    z-index: 10;
+    /* left: 0; */
+    width: 75vw;
+    padding: 1rem;
+    -ms-scroll-chaining: none none;
+    overscroll-behavior: none none;
+    padding-top: 52px;
+    /* top: 70px; */
+    height: calc(100vh - 0px);
   }
   
   .mobile_filter .sidebar .Accordion{

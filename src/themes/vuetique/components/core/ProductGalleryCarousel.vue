@@ -16,7 +16,8 @@
         v-for="(images, index) in gallery"
         :key="images.src"
       >
-        <div class="product-image-container" :class="{'video-container w-full h-full flex relative': images.video}">
+        <div class="product-image-container" :class="{'video-container w-full h-full flex relative': images.video}" 
+        @click="openOverlay" style="cursor: pointer;">
           <img
             v-show="placeholderImagesMap[index]"
             key="placeholderImage"
