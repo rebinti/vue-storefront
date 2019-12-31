@@ -459,7 +459,7 @@
 
       .disable-scrolling {
         height: 100%;
-        position: relative;
+        position: fixed;
         width: 100%;
         -webkit-overflow-scrolling: auto;
     }
