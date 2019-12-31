@@ -53,14 +53,14 @@ const actions: ActionTree<WishlistState, RootState> = {
     //   message: i18n.t('Product {productName} has been added to wishlist!', { productName: htmlDecode(product.name) }),
     //   action1: { label: i18n.t('OK') }
     // })
-    console.log('State data' , this.state);
+    console.log('product', product);
     /** To get the add Item to server */
     const task = await TaskQueue.execute({ url: config.wishlist.add_endpoint, // sync the Wishlist to server
       payload: {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
-        body: JSON.stringify({"pid":product.id,"cid": this.state.user.current.id , "tid":"add"})
+        body: JSON.stringify({"sid":product.parentSku,  "cid": this.state.user.current.id , "tid":"add"})
       },
       silent: false
     }).then(async task => {
