@@ -68,6 +68,7 @@
         <div class="flex flex-wrap -mx-3">
           <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">
             <slot name="placeOrderButton">
+              <!-- <paypal-button  /> -->
               <button-full
                 @click.native="placeOrder"
                 data-testid="orderReviewSubmit"
@@ -121,12 +122,15 @@ import Modal from 'theme/components/core/Modal'
 import { OrderReview } from '@vue-storefront/core/modules/checkout/components/OrderReview'
 import ValidationError from 'theme/components/core/ValidationError'
 
+import PaypalButton from 'src/modules/paypal/components/Button'
+
 export default {
   components: {
     BaseCheckbox,
     ButtonFull,
     CartSummary,
     Modal,
+    PaypalButton,
     ValidationError
   },
   mixins: [OrderReview, Composite],

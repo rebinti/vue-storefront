@@ -298,7 +298,7 @@
                 name="payment-method"
                 :val="method.code"
                 :value="payment.paymentMethod == method.code"
-                @change="$v.payment.paymentMethod.$touch(); changePaymentMethod();"
+                @change="$v.payment.paymentMethod.$touch(); changePaymentMethod(method);"
               >
                 {{ method.title ? method.title : method.name }}
               </base-radiobutton>

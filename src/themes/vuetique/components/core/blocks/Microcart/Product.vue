@@ -140,11 +140,12 @@ export default {
       isEditing: false,
       swipedValue: -5,
       swipedLeft: false,
-      windowWidth: 0
+      windowWidth: 0,
+      oldx: 0
     }
   },
-  mounted() {
-     this.windowWidth =  window.innerWidth;
+  mounted () {
+    this.windowWidth = window.innerWidth;
   },
   methods: {
     switchEdit () {
@@ -154,10 +155,19 @@ export default {
       this.updateQuantity(this.product.qty)
       this.isEditing = false
     },
-    movingHandler() {
-        if( !this.swipedLeft && (this.swipedValue > -105  && this.swipedValue <= 0 ) && this.windowWidth <= 760 ) {
-          this.swipedValue--;
-        }
+    movingHandler (data) {
+      // console.log('movingHandler', data.touches[0])
+      // let direction = '';
+      // if (data.touches[0].pageX < this.oldx) {
+      //   direction = 'left';
+      // } else if (data.touches[0].pageX > this.oldx) {
+      //   direction = 'right'
+      // }
+      // this.oldx = direction != null ? data.touches[0].pageX : 0;
+      // console.log('direction --', direction);
+      if (!this.swipedLeft && (this.swipedValue > -105 && this.swipedValue <= 0) && this.windowWidth <= 760) {
+        this.swipedValue--;
+      }
     },
     // swipeAction (param) {
     //   return function(dir) {
@@ -171,11 +181,11 @@ export default {
     //     }
     //   }
     // },
-    swipeLeftHandler() {
-       if(this.windowWidth <= 760)  this.swipedValue = -105;
+    swipeLeftHandler () {
+      if (this.windowWidth <= 760) this.swipedValue = -105;
     },
-    swipeRightHandler() {
-      if(this.windowWidth <= 760)  this.swipedValue = -5;
+    swipeRightHandler () {
+      if (this.windowWidth <= 760) this.swipedValue = -5;
     }
   }
 }

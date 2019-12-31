@@ -77,6 +77,7 @@ import CategoryPanel from 'theme/components/core/blocks/Category/CategoryPanel'
 
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
 import ButtonFull from 'theme/components/theme/ButtonFull'
+import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
 export default {
   components: {
@@ -85,7 +86,7 @@ export default {
     ButtonFull,
     CategoryPanel
   },
-  mixins: [SearchPanel, VueOfflineMixin],
+  mixins: [SearchPanel, VueOfflineMixin, NoScrollBackground],
   data () {
     return {
       selectedCategoryIds: []

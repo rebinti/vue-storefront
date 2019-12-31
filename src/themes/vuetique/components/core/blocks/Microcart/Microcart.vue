@@ -130,6 +130,7 @@ import ButtonFull from 'theme/components/theme/ButtonFull'
 import ButtonOutline from 'theme/components/theme/ButtonOutline'
 import Product from 'theme/components/core/blocks/Microcart/Product'
 import Accordion from 'theme/components/theme/Accordion'
+import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
 export default {
   components: {
@@ -142,7 +143,8 @@ export default {
   mixins: [
     Microcart,
     VueOfflineMixin,
-    onEscapePress
+    onEscapePress,
+    NoScrollBackground
   ],
   data () {
     return {

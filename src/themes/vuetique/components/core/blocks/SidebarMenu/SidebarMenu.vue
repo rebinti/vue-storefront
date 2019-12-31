@@ -126,13 +126,14 @@ import SidebarMenu from '@vue-storefront/core/compatibility/components/blocks/Si
 import { AccountButton } from '@vue-storefront/core/modules/user/components/AccountButton'
 import SubBtn from 'theme/components/core/blocks/SidebarMenu/SubBtn'
 import SubCategory from 'theme/components/core/blocks/SidebarMenu/SubCategory'
+import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
 export default {
   components: {
     SubCategory,
     SubBtn
   },
-  mixins: [SidebarMenu, AccountButton],
+  mixins: [SidebarMenu, AccountButton, NoScrollBackground],
   data () {
     return {
       myAccountLinks: [

@@ -1,4 +1,12 @@
-
+.disable-scrolling {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    // -webkit-overflow-scrolling: auto;
+    top:0;
+    left:0;
+    overflow: hidden;
+}
 .lg_blk{
     max-width: 166px;
 }
@@ -433,16 +441,28 @@
     }
     
     .openfilter{
-        overflow-y: hidden;
+        overflow-y: hidden!important;
+        position:fixed!important;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
         height: 100%;
         max-height: 100vh;
-        overflow: hidden;
+        overflow: hidden!important;
         padding-bottom: 1px;
-      }    
+      }
+      
+      .to-uppercase-text {
+            text-transform: uppercase;
+      }
+
+      .disable-scrolling {
+        height: 100%;
+        position: relative;
+        width: 100%;
+        -webkit-overflow-scrolling: auto;
+    }
     
 }
 

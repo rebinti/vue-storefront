@@ -166,16 +166,18 @@ export default {
   },
   methods: {
     openFilters () {
-      this.mobileFilters = true      
+      this.mobileFilters = true;
       const el = document.body; // to fix background scroll issue when the filter opened
-      el.classList.add("openfilter");
-      //alert("filter open");
+      el.classList.add('openfilter');
+      el.classList.add('no-scroll');
+      document.documentElement.classList.add('no-scroll');
     },
     closeFilters () {
       this.mobileFilters = false
       const el = document.body;
-      el.classList.remove("openfilter");
-      // alert("filter closed");
+      el.classList.remove('openfilter');
+      el.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
     },
     notify () {
       this.$store.dispatch('notification/spawnNotification', {

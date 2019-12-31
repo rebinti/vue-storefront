@@ -26,7 +26,9 @@ import { InstantCheckout } from './instant-checkout'
 import { OrderHistory } from './order-history'
 
 import { DndPrismicCMS } from './dnd-prismic-cms'
+// import { Braintree } from './payment-braintree';
 
+import { Paypal } from './paypal'
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -79,6 +81,8 @@ export const registerModules: VueStorefrontModule[] = [
   InstantCheckout,
   Url,
   OrderHistory,
-  DndPrismicCMS
+  DndPrismicCMS,
+  Paypal
+  // Braintree
   // Example
 ]

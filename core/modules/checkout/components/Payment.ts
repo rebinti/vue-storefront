@@ -224,14 +224,21 @@ export const Payment = {
       }
       return true
     },
-    changePaymentMethod () {
+    changePaymentMethod (method) {
+      console.log('this.payment.paymentMethod' , this.payment.paymentMethod);
       // reset the additional payment method component container if exists.
       if (document.getElementById('checkout-order-review-additional-container')) {
         document.getElementById('checkout-order-review-additional-container').innerHTML = '<div id="checkout-order-review-additional">&nbsp;</div>' // reset
       }
+      this.payment.paymentMethod = method.code;
 
-      // Let anyone listening know that we've changed payment method, usually a payment extension.
-      this.$bus.$emit('checkout-payment-method-changed', this.payment.paymentMethod)
+     // this.$store.dispach('checkout/savePaymentDetails' , this.payment ).then(val => {
+        
+      
+
+        // Let anyone listening know that we've changed payment method, usually a payment extension.
+        this.$bus.$emit('checkout-payment-method-changed', this.payment.paymentMethod)
+     // })
     }
   }
 }

@@ -27,6 +27,8 @@
 <script>
 import { mapState } from 'vuex'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
+import NoScrollBackground from 'theme/mixins/noScrollBackground'
+
 export default {
   name: 'ReviewPanel',
   props: {
@@ -44,7 +46,7 @@ export default {
       return this.$store.state.ui.reviewPanel
     }
   },
-  mixins: [onEscapePress],
+  mixins: [onEscapePress, NoScrollBackground],
   methods: {
     closeReviewPanel () {
       // this.$store.dispatch('ui/closeReviewPanel')

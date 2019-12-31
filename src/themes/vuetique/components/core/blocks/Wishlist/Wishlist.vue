@@ -65,6 +65,7 @@ import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishl
 import Product from 'theme/components/core/blocks/Wishlist/Product'
 // const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
 import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue'
+import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
 export default {
   props: {
@@ -84,7 +85,7 @@ export default {
   components: {
     Product, Boards
   },
-  mixins: [Wishlist],
+  mixins: [Wishlist, NoScrollBackground],
   methods: {
     closeWishlist () {
       this.$store.dispatch('ui/closeWishlist')

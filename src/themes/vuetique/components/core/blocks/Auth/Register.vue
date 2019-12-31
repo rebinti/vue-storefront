@@ -4,7 +4,7 @@
       <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close">
         <use xlink:href="#close" />
       </svg>
-      <h2>{{ $t('Register') }}</h2>
+      <h2 class="to-uppercase-text">{{ $t('Register') }}</h2>
     </header>
 
     <div class="modal-content pt30 pb60 px65 cl-secondary">
