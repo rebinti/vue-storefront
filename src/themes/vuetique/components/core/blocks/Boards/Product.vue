@@ -1,12 +1,13 @@
 <template>
-  <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
+  <!-- <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
      :style="'transform: translate(' + swipedValue +  'px, 0px);'"
       v-touch:swipe.left="swipeLeftHandler"
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
-  >
+  > -->
    <!-- v-touch:start="startHandler" 
         v-touch:end="endHandler"  -->
+<div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="localizedRoute({
@@ -65,8 +66,8 @@
 
       </div>
     </div>
-    
-  </li>
+</div>
+  <!-- </li> -->
 </template>
 
 <script>
@@ -199,6 +200,7 @@ input {
 }
 @media (max-width: 576px) {
   .button_bx_link_lrg{
+    display: none;
     width: 85px;
     height: 100%;
     background: #ff3a31;

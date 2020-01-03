@@ -33,13 +33,20 @@
       </router-link>
       {{ $t('to find something beautiful for You!') }}
     </div>
-    <ul v-if="productsInCart.length" class="products p-0 m-0 p_crt_list">
+     <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" ref="list" :items="productsInCart" item-key="sku">
+        <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
+          <product :product="item" />
+        </template>
+        <template v-slot:right="{ item }">
+          <div class="swipeout-action red button_bx_link_lrg" @click="removeItem(item)">
+            <!-- <i class="fa fa-trash"></i> -->
+            <remove-button class="cl-accent" />
+          </div>
+        </template>
+     </swipe-list>
+    <!-- <ul v-if="productsInCart.length" class="products p-0 m-0 p_crt_list">
        <product v-for="product in productsInCart" :key="product.sku" :product="product"  />
-      <!-- <product v-for="product in productsInCart" :key="product.sku" :product="product" 
-       v-touch:swipe.left="swipeLeftHandler(product)"
-       v-touch:swipe.right="swipeRightHandler(product)"
-      /> -->
-    </ul>
+    </ul> -->
     <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
       <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
@@ -131,6 +138,9 @@ import ButtonOutline from 'theme/components/theme/ButtonOutline'
 import Product from 'theme/components/core/blocks/Microcart/Product'
 import Accordion from 'theme/components/theme/Accordion'
 import NoScrollBackground from 'theme/mixins/noScrollBackground'
+import { SwipeList, SwipeOut } from 'vue-swipe-actions';
+import RemoveButton from './RemoveButton';
+import config from 'config'
 
 export default {
   components: {
@@ -138,7 +148,9 @@ export default {
     ButtonFull,
     ButtonOutline,
     BaseInput,
-    Accordion
+    Accordion,
+    SwipeList,
+    RemoveButton
   },
   mixins: [
     Microcart,
@@ -150,7 +162,8 @@ export default {
     return {
       addCouponPressed: false,
       couponCode: '',
-      componentLoaded: false
+      componentLoaded: false,
+      selectedRemoveProduct: null
     }
   },
   props: {
@@ -198,18 +211,36 @@ export default {
     onEscapePress () {
       this.closeMicrocart()
     },
-    swipeLeftHandler(param) {
-      return function(dir) {
+    swipeLeftHandler (param) {
+      return function (dir) {
         console.log('swipeLeftHandler ' , param);
         param.swipedElement = true;
       }
     },
-    swipeRightHandler(param) {
-      return function(dir) {
+    swipeRightHandler (param) {
+      return function (dir) {
         console.log('swipeRightHandler ' , param);
         param.swipedElement = false;
       }
     },
+    removeItem (product) {
+      this.selectedRemoveProduct = product;
+      if (config.cart.askBeforeRemoveProduct) {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'warning',
+          item: product,
+          message: i18n.t('Are you sure you would like to remove this item from the shopping cart?'),
+          action2: { label: i18n.t('OK'), action: this.removeFromCart },
+          action1: { label: i18n.t('Cancel'), action: 'close' },
+          hasNoTimeout: true
+        })
+      } else {
+        this.removeFromCart()
+      }
+    },
+    removeFromCart (product) {
+      this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
+    }
   }
 }
 </script>
@@ -337,8 +368,90 @@ export default {
       margin-bottom: 3px;
     }
  }
-  
-  
+
+/*** new Swipe to delete css */
+
+.swipeout-action {
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  cursor: pointer;
+  left: 0;
+}
+.swipeout-action.blue {
+  color: white;
+  background-color: rgb(0, 122, 255);
+}
+.swipeout-action.blue:hover {
+  background-color: darken(rgb(0, 122, 255), 5%);
+}
+.swipeout-action.purple {
+  color: white;
+  background-color: rgb(88, 86, 214);
+}
+.swipeout-action.purple:hover {
+  background-color: darken(rgb(88, 86, 214), 5%);
+}
+
+.swipeout-action.red {
+  color: white;
+  background-color: rgb(255, 59, 48);
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+.swipeout-action.red:hover {
+  background-color: darken(rgb(255, 59, 48), 5%);
+}
+.swipeout-action.green {
+  color: white;
+  background-color: rgb(76, 217, 100);
+}
+.swipeout-action.green:hover {
+  background-color: darken(rgb(76, 217, 100), 5%);
+}
+
+.swipeout-list-item {
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+}
+
+.swipeout-list-item:last-of-type {
+  border-bottom: none;
+}
+
+.card {
+  width: 100%;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: none;
+  border: 1px solid lightgray;
+}
+.card-content {
+  padding: 10px;
+  margin-bottom: 10px;
+  padding-top: 0px;
+}
+.transition-right {
+  transform: translate3d(100%, 0, 0) !important;
+}
+.transition-left {
+  transform: translate3d(-100%, 0, 0) !important;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar .toolbar-section {
+  flex: 0 0 auto;
+}
+
+.toolbar .toolbar-section--center {
+  flex: 1000 1 0%;
+}
+
+.swipeout-right {
+  padding-left: 15px;
+}
 </style>
-
-

@@ -1,6 +1,10 @@
 <template>
-  <div class="wishlist wishlist_out right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isWishlistOpen }" style="text-align: center;">
-   <button
+  <div
+    class="wishlist wishlist_out right-sidebar max-w-full fixed p-8 pt-10"
+    :class="{ active: isWishlistOpen }"
+    style="text-align: center;"
+  >
+    <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
@@ -12,165 +16,212 @@
       </svg>
     </button>
 
-    <h2 v-if="productsInWishlist.length && !hideWishListForBoardFlag" class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
-        {{ $t('Wishlist') }}
+    <h2
+      v-if="productsInWishlist.length && !hideWishListForBoardFlag"
+      class="mb-8 upper-letter"
+      style="margin-bottom: 1rem !important;"
+    >
+      {{ $t('Wishlist') }}
     </h2>
 
     <h2 v-else class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
-        {{ $t('Boards') }}
+      {{ $t('Boards') }}
     </h2>
 
     <div class="wishlist-top-button-row clearfix" v-show="!hideWishListForBoardFlag">
-          <span class="button-blck"><button class="button-type1" :class="{'active' : viewType === 'wishlist'}" @click="viewType = 'wishlist'">All items</button></span>
-          <span class="button-blck"><button class="button-type1" :class="{'active' : viewType === 'boards'}"  @click="viewType = 'boards'">Boards</button></span>
+      <span class="button-blck">
+        <button
+          class="button-type1"
+          :class="{'active' : viewType === 'wishlist'}"
+          @click="viewType = 'wishlist'"
+        >All items</button>
+      </span>
+      <span class="button-blck">
+        <button
+          class="button-type1"
+          :class="{'active' : viewType === 'boards'}"
+          @click="viewType = 'boards'"
+        >Boards</button>
+      </span>
     </div>
 
-     <!--  Wish list lsiting -->
-    <div  class="wish_wrap_box" :class="{'item-in-it': productsInWishlist.length>0}" v-show="viewType === 'wishlist'">
-
+    <!--  Wish list lsiting -->
+    <div
+      class="wish_wrap_box"
+      :class="{'item-in-it': productsInWishlist.length>0}"
+      v-show="viewType === 'wishlist'"
+    >
       <div v-if="!productsInWishlist.length " class="wish_ico_box">
-        <img  src="/assets/wishlisticon.png" alt=""/>
+        <img src="/assets/wishlisticon.png" alt>
       </div>
 
       <!-- <h2 v-if="productsInWishlist.length" class="mb-8 upper-letter" >
         {{ $t('Wishlist') }}
-      </h2> -->
+      </h2>-->
 
       <h4 v-if="!productsInWishlist.length" class="mb-2">
         {{ $t('Your wishlist is empty.') }}
       </h4>
 
       <div class="wish_cnt" v-if="!productsInWishlist.length">
-        <p>Tap heart button to start saving your favorite items </p>
-        <router-link class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
-        :to="localizedRoute('/')"
-        > Add now
+        <p>Tap heart button to start saving your favorite items</p>
+        <router-link
+          class="add-now-button block border-none rounded-none bg-grey-dark px-4 py-2 ripple tracking-md text-sm text-white font-medium leading-base mb-2 w-full"
+          :to="localizedRoute('/')"
+        >
+          Add now
         </router-link>
       </div>
-      <ul class="products p-0 m-0">
-        <product v-for="product in productsInWishlist" :key="product.id" :product="product" />
 
-      </ul>
-     </div>
+      <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist" item-key="id">
+        <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
+          <product :product="item" />
+        </template>
+        <!-- <template v-slot:left="{ item, close, index }">
+        <div class="swipeout-action red" title="remove" @click="remove(item)">
+          <i class="fa fa-trash"></i>
+        </div>
+        </template>-->
+        <template v-slot:right="{ item }">
+          <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item)">
+            <!-- <i class="fa fa-trash"></i> -->
+            <remove-button class="cl-accent" />
+          </div>
+        </template>
+      </swipe-list>
+    </div>
 
-     <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" />
-     <div class="add_more_btn" v-show="viewType === 'boards'" @click="$store.commit('ui/setBoardsElem', 'create-board');$bus.$emit('modal-show', 'modal-create-boards')" >
-        <a href="#" class="add_more_pls"><i class="fas fa-plus"></i></a>
-     </div>
+    <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" />
+    <div
+      class="add_more_btn"
+      v-show="viewType === 'boards'"
+      @click="$store.commit('ui/setBoardsElem', 'create-board');$bus.$emit('modal-show', 'modal-create-boards')"
+    >
+      <a href="#" class="add_more_pls">
+        <i class="fas fa-plus" />
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
-import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist'
-import Product from 'theme/components/core/blocks/Wishlist/Product'
+import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist';
+import Product from 'theme/components/core/blocks/Wishlist/Product';
 // const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
-import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue'
-import NoScrollBackground from 'theme/mixins/noScrollBackground'
+import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue';
+import NoScrollBackground from 'theme/mixins/noScrollBackground';
+import { SwipeList, SwipeOut } from 'vue-swipe-actions';
+import RemoveButton from './RemoveButton';
 
 export default {
   props: {
     product: {
       type: Object,
       required: false,
-      default: () => { }
+      default: () => {}
     }
   },
   data () {
     return {
       valueUp: 106,
-      viewType : 'wishlist',
+      viewType: 'wishlist',
       hideWishListForBoardFlag: false
-    }
+    };
   },
   components: {
-    Product, Boards
+    Product,
+    Boards,
+    SwipeList,
+    RemoveButton
   },
   mixins: [Wishlist, NoScrollBackground],
   methods: {
     closeWishlist () {
-      this.$store.dispatch('ui/closeWishlist')
+      this.$store.dispatch('ui/closeWishlist');
     },
     swipeAction (param) {
-      return function(dir) {
-        if(dir == 'left') {
+      return function (dir) {
+        if (dir == 'left') {
           param.swipedElement = true;
         }
-        if(dir == 'right') {
+        if (dir == 'right') {
           param.swipedElement = false;
         }
-      }
+      };
     },
-    movingHandler() {
+    movingHandler () {
       // this.valueUp--;
-      console.log('movingHandler movingHandler' , this.valueUp);
+      console.log('movingHandler movingHandler', this.valueUp);
     },
-    startHandler(){
+    startHandler () {
       // this.valueUp = 110
       console.log('startHandler startHandler');
     },
-    endHandler() {
+    endHandler () {
       //  this.valueUp = 110
       console.log('endHandler endHandler');
     },
-    chagesInView() {
-      console.log('Changes in view page Wishlist')
+    chagesInView () {
+      console.log('Changes in view page Wishlist');
       this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
+    },
+    removeFromWishlist (product) {
+      return this.$store.state['wishlist']
+        ? this.$store.dispatch('wishlist/removeItem', product)
+        : false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import "~theme/css/animations/transitions";
 
-  i {
-    opacity: 0.6;
-    &:hover {
-      opacity: 1;
-    }
+i {
+  opacity: 0.6;
+  &:hover {
+    opacity: 1;
   }
+}
 
-  .add-now-button{
-    width: 100px;
-  }
+.add-now-button {
+  width: 100px;
+}
 
-.wish_wrap_box{
+.wish_wrap_box {
   text-align: center;
 }
 
-.wish_ico_box{
+.wish_ico_box {
   text-align: center;
 }
-.wish_ico_box img{
+.wish_ico_box img {
   display: inline-block;
 }
-.wish_wrap_box h4{
-  font-size:25px;
+.wish_wrap_box h4 {
+  font-size: 25px;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 15px;
 }
-.wish_cnt{
+.wish_cnt {
   text-align: center;
 }
-.wish_cnt p{
-  font-size:12px;
+.wish_cnt p {
+  font-size: 12px;
   margin-bottom: 15px;
 }
-.wish_cnt a{
-  border:1px solid #000;
-  color:#000;
+.wish_cnt a {
+  border: 1px solid #000;
+  color: #000;
   font-weight: bold;
   display: inline-block;
-  background: transparent!important;
+  background: transparent !important;
   font-size: 15px;
-  width:auto;
+  width: auto;
 }
 
-
-
-.wish_wrap_box
-{
+.wish_wrap_box {
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -180,8 +231,8 @@ export default {
   left: 0px;
 }
 
-.wish_wrap_box.item-in-it{
-  top:0px;
+.wish_wrap_box.item-in-it {
+  top: 0px;
   position: relative;
   -webkit-transform: translateY(0%);
   -ms-transform: translateY(0%);
@@ -189,18 +240,16 @@ export default {
   left: 0px;
 }
 
-.wishlist.wishlist_out{
+.wishlist.wishlist_out {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.upper-letter{
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 20px;
+.upper-letter {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 20px;
 }
-
-
 
 /* New style */
 
@@ -214,43 +263,127 @@ export default {
   float: left;
 }
 .wishlist-top-button-row .button-blck .button-type1 {
-  border:1px solid #000000;
+  border: 1px solid #000000;
   padding: 4px 48px;
   color: #000000;
-  width:157px;
+  width: 157px;
 }
 .wishlist-top-button-row .button-blck .button-type1.active {
   background: #000000;
   color: #ffffff;
 }
 
-
-.add_more_btn{
-  width:50px;
-  height:50px;
+.add_more_btn {
+  width: 50px;
+  height: 50px;
   background: #000;
   -webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
   position: fixed;
   bottom: 40px;
   z-index: 100;
   right: 20px;
 }
-.add_more_btn a{
-  width:100%;
-  height:100%;
+.add_more_btn a {
+  width: 100%;
+  height: 100%;
   font-size: 20px;
   color: #fff;
   padding-top: 13px;
   display: inline-block;
 }
 
-.right-sidebar{
-    top: 0px;
-    height: 100vh;
-    z-index: 8;
-    max-height: calc(100vh - 0px);
+.right-sidebar {
+  top: 0px;
+  height: 100vh;
+  z-index: 8;
+  max-height: calc(100vh - 0px);
 }
 
+/*** new Swipe to delete css */
+
+.swipeout-action {
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  cursor: pointer;
+  left: 0;
+}
+.swipeout-action.blue {
+  color: white;
+  background-color: rgb(0, 122, 255);
+}
+.swipeout-action.blue:hover {
+  background-color: darken(rgb(0, 122, 255), 5%);
+}
+.swipeout-action.purple {
+  color: white;
+  background-color: rgb(88, 86, 214);
+}
+.swipeout-action.purple:hover {
+  background-color: darken(rgb(88, 86, 214), 5%);
+}
+
+.swipeout-action.red {
+  color: white;
+  background-color: rgb(255, 59, 48);
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+.swipeout-action.red:hover {
+  background-color: darken(rgb(255, 59, 48), 5%);
+}
+.swipeout-action.green {
+  color: white;
+  background-color: rgb(76, 217, 100);
+}
+.swipeout-action.green:hover {
+  background-color: darken(rgb(76, 217, 100), 5%);
+}
+
+.swipeout-list-item {
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+}
+
+.swipeout-list-item:last-of-type {
+  border-bottom: none;
+}
+
+.card {
+  width: 100%;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: none;
+  border: 1px solid lightgray;
+}
+.card-content {
+  padding: 10px;
+  margin-bottom: 10px;
+  padding-top: 0px;
+}
+.transition-right {
+  transform: translate3d(100%, 0, 0) !important;
+}
+.transition-left {
+  transform: translate3d(-100%, 0, 0) !important;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar .toolbar-section {
+  flex: 0 0 auto;
+}
+
+.toolbar .toolbar-section--center {
+  flex: 1000 1 0%;
+}
+
+.swipeout-right {
+  padding-left: 15px;
+}
 </style>

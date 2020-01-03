@@ -1,12 +1,11 @@
 <template>
-  <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
+  <!-- <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
      :style="'transform: translate(' + swipedValue +  'px, 0px);'"
       v-touch:swipe.left="swipeLeftHandler"
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
-  >
-   <!-- v-touch:start="startHandler" 
-        v-touch:end="endHandler"  -->
+     > -->
+  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="localizedRoute({
@@ -54,19 +53,17 @@
            </div>
         </div>
         <div class="absolute bottom-0 right-0 mb-3 button_bx_link">
-            <!-- <a href="#" class="btn_box_lnk">Add to Bag</a> -->
-              <add-to-cart
-                :product="product"
-                :productname="'Add to Bag'"
-                class="btn_box_lnk"
-              />
-           
+          <!-- <a href="#" class="btn_box_lnk">Add to Bag</a> -->
+          <add-to-cart
+            :product="product"
+            :productname="'Add to Bag'"
+            class="btn_box_lnk"
+          />
         </div>
-
       </div>
     </div>
-    
-  </li>
+  </div>
+  <!-- </li> -->
 </template>
 
 <script>
@@ -75,7 +72,7 @@ import RemoveButton from './RemoveButton'
 import AddToCart from 'theme/components/core/AddToCart.vue'
 
 export default {
-  data() {
+  data () {
     return {
       swipedValue: 0,
       swipedLeft: false,
@@ -86,11 +83,11 @@ export default {
     RemoveButton,
     AddToCart
   },
-  mounted() {
+  mounted () {
      this.windowWidth =  window.innerWidth;
   },
   methods: {
-    movingHandler() {
+    movingHandler () {
       //  console.log('movingHandler' , this.swipedValue );
         if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0)  && this.windowWidth <= 760 ) {
           this.swipedValue = this.swipedValue - 10 ;
@@ -118,11 +115,11 @@ export default {
     //     }
     //   }
     // },
-    swipeLeftHandler() {
-        if(this.windowWidth <= 760)  this.swipedValue = -80;
+    swipeLeftHandler () {
+      if (this.windowWidth <= 760) this.swipedValue = -80;
     },
-    swipeRightHandler() {
-      if(this.windowWidth <= 760)  this.swipedValue = 0;
+    swipeRightHandler () {
+      if (this.windowWidth <= 760) this.swipedValue = 0;
     }
   },
   mixins: [Product]
@@ -194,6 +191,7 @@ input {
 }
 @media (max-width: 576px) {
   .button_bx_link_lrg{
+    display: none;
     width: 85px;
     height: 100%;
     background: #ff3a31;
@@ -210,6 +208,4 @@ input {
     color:#fff;
   }
 }
-
-
 </style>

@@ -1,11 +1,12 @@
 <template>
   <transition name="fade" appear>
-    <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
+    <!-- <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
       :style="'transform: translate(' + swipedValue +  'px, 0px);'"
       v-touch:swipe.left="swipeLeftHandler"
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
-  >
+  > -->
+  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
       <router-link
         class="col-4 bg-grey-lightest"
         :to="localizedRoute({
@@ -114,7 +115,8 @@
       </div>
       
       
-    </li>
+    <!-- </li> -->
+  </div>
   </transition>
 </template>
 
@@ -192,116 +194,114 @@ export default {
 </script>
 
 <style scoped>
-.col-xs {
-  flex-direction: column;
-}
-input {
-  width: 30px;
-}
-.prdct_cnt{
-  text-align: left;
-  padding-left: 15px;
-}
-.prdct_cnt .price_left_out{
-  text-align: left;
-  position: absolute;
-  bottom: 10px;
-  z-index: 1;
-}
-.button_bx_link{
-  z-index: 10;
-}
-.button_bx_link .btn_box_lnk{
-  border:1px solid #000;
-  color:#fff;
-  font-weight: normal;
-  display: inline-block;
-  background: #000!important;
-  font-size: 12px;
-  width:auto;
-  padding: 2px 10px;
-  display: inline-block;
-}
-.p_list_block .product-title{
-  color: #000;
-  padding-right: 18px;
-  line-height: 20px;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-.price_left_out .text-grey-dark{
-  color:#000;
-  font-size:13px;
-}
-.p_list_block .text-grey{
-  color: #7c7c7c;
-  font-size: 12px;
-}
-.p_list_block .cl-accent .text-grey{
-  color:#000;
-}
+  .col-xs {
+    flex-direction: column;
+  }
+  input {
+    width: 30px;
+  }
+  .prdct_cnt{
+    text-align: left;
+    padding-left: 15px;
+  }
+  .prdct_cnt .price_left_out{
+    text-align: left;
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+  }
+  .button_bx_link{
+    z-index: 10;
+  }
+  .button_bx_link .btn_box_lnk{
+    border:1px solid #000;
+    color:#fff;
+    font-weight: normal;
+    display: inline-block;
+    background: #000!important;
+    font-size: 12px;
+    width:auto;
+    padding: 2px 10px;
+    display: inline-block;
+  }
+  .p_list_block .product-title{
+    color: #000;
+    padding-right: 18px;
+    line-height: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .price_left_out .text-grey-dark{
+    color:#000;
+    font-size:13px;
+  }
+  .p_list_block .text-grey{
+    color: #7c7c7c;
+    font-size: 12px;
+  }
+  .p_list_block .cl-accent .text-grey{
+    color:#000;
+  }
 
-.right-sidebar .p_list_block .image{
-  width:100%;
-}
-.mob_p_cart_list{
-  float: left;
-  width: 100%;
-  padding-top: 10px;
-}
-
-.mob_p_cart_list .text-sm.qty{
-    width: 50%;
+  .right-sidebar .p_list_block .image{
+    width:100%;
+  }
+  .mob_p_cart_list{
     float: left;
-}
-.mob_p_cart_list .pb_b_text{
-  width:50%;
-  text-align: right;
-  position: relative;
-  top:auto;
-  bottom: auto;
-  float: left;
-}
+    width: 100%;
+    padding-top: 10px;
+  }
 
-.ht_bx{
-       background: #000;
-      color: #ffffff;
-      border-color: #000;
+  .mob_p_cart_list .text-sm.qty{
+      width: 50%;
+      float: left;
+  }
+  .mob_p_cart_list .pb_b_text{
+    width:50%;
+    text-align: right;
+    position: relative;
+    top:auto;
+    bottom: auto;
+    float: left;
+  }
+
+  .ht_bx{
+        background: #000;
+        color: #ffffff;
+        border-color: #000;
+      }
+
+  /************** */
+
+  .p_list_block{
+    transition: all 0.5s ease;
+  }
+  .swipe-left{
+    transform: translate(-105px, 0px);
+  /* right:105px; */
+
+  }
+
+  .p_list_block .text-grey.cl-accent { color: #000;}
+
+  @media (max-width: 576px) {
+
+    .button_bx_link_lrg{
+      display: none;
+      width: 100px;
+      height: 100%;
+      background: #ff3a31;
+      text-align: center;
+      border: 0px;
+      right: -120px;
     }
-
-/************** */
-
-.p_list_block{
-  transition: all 0.5s ease;
-}
-.swipe-left{
-  transform: translate(-105px, 0px);
- /* right:105px; */
- 
-}
-
-.p_list_block .text-grey.cl-accent { color: #000;}
-
-@media (max-width: 576px) {
-
-
-.button_bx_link_lrg{
-  width: 100px;
-  height: 100%;
-  background: #ff3a31;
-  text-align: center;
-  border: 0px;
-  right: -120px;
-}
-.ic_dlt_bx{
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  color:#fff;
-}
-
-
-}
+    .ic_dlt_bx{
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      color:#fff;
+    }
+  }
 </style>
