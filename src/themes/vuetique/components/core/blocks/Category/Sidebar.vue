@@ -12,7 +12,16 @@
       </div> -->
 
       <div class="Accordion mob_fltr list_hd list_">
-          <h5 class="Accordion__trigger k_head" >Filter By</h5>
+        <h5 class="Accordion__trigger k_head"> Filter By </h5>
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4 close-filter"
+          @click="$emit('closeFilters')">
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
       </div>
   
       <Accordion class="mob_fltr"
@@ -113,7 +122,7 @@ export default {
     PriceSelector,
     GenericSelector,
     Accordion,
-    ButtonFull,    
+    ButtonFull   
   },
   mixins: [Sidebar], // mixins: [Sidebar , SortBy],
   data () {
@@ -184,6 +193,21 @@ export default {
       }
       .list_hd{
         padding-bottom: 10px;
+        position: fixed;
+        top: 0px;
+        right: 0;
+        width: 75vw;
+        padding-left: 15px;
+        background: #ffffff;
+        z-index: 100;
+        border-bottom: 1px solid #ededed;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+      .close-filter {
+          top: 0px;
+          position: fixed;
+
       }
       .mob_price_filter{
         padding-bottom: 20px;

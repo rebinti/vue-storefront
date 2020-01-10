@@ -91,7 +91,7 @@ const actions: ActionTree<UserState, RootState> = {
         if (resp.code === 200) {
           rootStore.state.userTokenInvalidateLock = 0
           context.commit(types.USER_TOKEN_CHANGED, { newToken: resp.result, meta: resp.meta }) // TODO: handle the "Refresh-token" header
-          context.dispatch('me', { refresh: true, useCache: false }).then(result => {})
+          context.dispatch('me', { refresh: true, useCache: false }).then(result => { rootStore.dispatch('wishlist/load' , true); })
           context.dispatch('getOrdersHistory', { refresh: true, useCache: false }).then(result => {})
         }
         return resp
@@ -348,6 +348,7 @@ const actions: ActionTree<UserState, RootState> = {
           }
         }).then((resp: any) => {
           if (resp.code === 200) {
+            console.log('USER_ORDERS_HISTORY_LOADED' , resp.result);
             context.commit(types.USER_ORDERS_HISTORY_LOADED, resp.result) // this also stores the current user to localForage
             Vue.prototype.$bus.$emit('user-after-loaded-orders', resp.result)
           }

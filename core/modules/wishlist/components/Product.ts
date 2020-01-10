@@ -12,7 +12,7 @@ export const WishlistProduct = {
   },
   computed: {
     thumbnail () {
-      return this.getThumbnail(this.product.image, 150, 150)
+      return this.getThumbnail(this.product.image ? this.product.image : this.product.thumbnail ? this.product.thumbnail : null, 150, 150)
     }
   },
   methods: {

@@ -7,25 +7,25 @@
       <h2 style="text-transform: uppercase;">{{ $t('Create Board') }}</h2>
     </header>
     <div class="modal-content">
-        <p style="padding: 0 0 0 8px;font-weight: 400;">Board name </p>
-        <form @submit.prevent="createNewBoard" novalidate>
-            <base-input
-            class="mb-5 tx_bx_out"
-            type="text"
-            name="boardname"
-            v-model="boardname"
-            @blur="$v.boardname.$touch()"
-            :placeholder="$t('Enter a name for this board')"
-            :validation="{
-                condition: !$v.boardname.required && $v.boardname.$error,
-                text: $t('Field is required.')
-            }"
-            />
+      <p style="padding: 0 0 0 8px;font-weight: 400;">Board name </p>
+      <form @submit.prevent="createNewBoard" novalidate>
+        <base-input
+          class="mb-5 tx_bx_out"
+          type="text"
+          name="boardname"
+          v-model="boardname"
+          @blur="$v.boardname.$touch()"
+          :placeholder="$t('Enter a name for this board')"
+          :validation="{
+            condition: !$v.boardname.required && $v.boardname.$error,
+            text: $t('Field is required.')
+          }"
+        />
 
-            <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit" style="position: fixed;bottom: 15px; background: black;">
-            {{ $t('Create Board') }}
-            </button-full>
-        </form>
+        <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit" style="position: fixed;bottom: 15px; background: black;">
+          {{ $t('Create Board') }}
+        </button-full>
+      </form>
     </div>
   </div>
 </template>
@@ -52,22 +52,22 @@ export default {
   },
   validations: {
     boardname: {
-      required,
-    },
+      required
+    }
   },
   components: {
-     ButtonFull,
-     BaseInput
+    ButtonFull,
+    BaseInput
   },
   methods: {
     close (e) {
       if (e) localStorage.removeItem('redirect')
-      console.log('this.selectedBoardItem' , this.selectedBoardItem);
-      if(this.selectedBoardItem === null) {
-          this.$store.commit('ui/setSelectedBoardItem', null);
-          this.$bus.$emit('modal-hide', 'modal-create-boards')
+      console.log('this.selectedBoardItem', this.selectedBoardItem);
+      if (this.selectedBoardItem === null) {
+        this.$store.commit('ui/setSelectedBoardItem', null);
+        this.$bus.$emit('modal-hide', 'modal-create-boards')
       } else {
-          this.$store.commit('ui/setBoardsElem', 'add-to-board');
+        this.$store.commit('ui/setBoardsElem', 'add-to-board');
       }
     },
     createNewBoard () {
@@ -80,13 +80,18 @@ export default {
         })
         return
       }
-      this.$store.dispatch('boards/createBoard', { name: this.boardname , items: []  });
-      if(this.selectedBoardItem === null) {
-          this.$bus.$emit('modal-hide', 'modal-create-boards')
+      let Boarddata = { name: this.boardname, items: [] };
+      if (this.selectedBoardItem) Boarddata.items.push(this.selectedBoardItem);
+      this.$store.dispatch('boards/createBoard', Boarddata);
+      if (this.selectedBoardItem === null) {
+        this.$bus.$emit('modal-hide', 'modal-create-boards')
       } else {
-          this.$store.commit('ui/setBoardsElem', 'add-to-board');
+        this.$bus.$emit('modal-hide', 'modal-create-boards')
       }
-    },
+      // else {
+      //   this.$store.commit('ui/setBoardsElem', 'add-to-board');
+      // }
+    }
   }
 }
 </script>

@@ -143,18 +143,22 @@ export default {
   methods: {
     logout () {
       // this.$bus.$emit('user-before-logout')
-        this.$store.dispatch('notification/spawnNotification', {
-          type: 'warning',
-          item: {},
-          message: i18n.t('Are you sure you want to sign out?'),
-          action2: { label: i18n.t('OK'), action: this.logutFromAll},
-          action1: { label: i18n.t('Cancel'), action: 'close' },
-          hasNoTimeout: true
-        })
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'warning',
+        item: {},
+        message: i18n.t('Are you sure you want to sign out?'),
+        action2: { label: i18n.t('OK'), action: this.logutFromAll},
+        action1: { label: i18n.t('Cancel'), action: 'close' },
+        hasNoTimeout: true
+      })
     },
-    logutFromAll() {
+    logutFromAll () {
       this.$store.dispatch('notification/removeNotification')
       this.$bus.$emit('user-before-logout');
+      this.$store.dispatch('wishlist/clear')
+      if (this.$store.state.boards) {
+        this.$store.dispatch('boards/clear')
+      }
       this.$router.push(this.localizedRoute('/'))
     },
     notify (title) {

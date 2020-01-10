@@ -15,6 +15,7 @@ import config from 'config'
 const actions: ActionTree<BoardsState, RootState> = {
   clear (context) {
     context.commit(types.BOARDS_LOAD_BOARDS, [])
+    cacheStorage.removeItem('current-boards');
   },
   async load ({ commit, getters }, force: boolean = false) {
     if (!force && getters.isBoardsLoaded) return
@@ -26,6 +27,8 @@ const actions: ActionTree<BoardsState, RootState> = {
     })
 
     /** To sync board from server    */
+    // if(this.state.user && this.state.user.current === null && !force) return
+    // commit(types.SET_BOARDSLISTS_LOADED)
     // const task = await TaskQueue.execute({ url: config.wishlist.sync_endpoint, // sync Board with server
     //   payload: {
     //     method: 'GET',
@@ -38,7 +41,8 @@ const actions: ActionTree<BoardsState, RootState> = {
     //   if (task.resultCode === 200) {
     //     console.log('api dataaaa Sucesss' , task.result)
     //   } else {
-    //     console.log('api dataaaa Errrrrr')
+    //     console.log('api dataaaa Errrrrr');
+    //     commit(types.SET_BOARDSLISTS_LOADED , false);
     //   }
     // })
   },

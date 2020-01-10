@@ -20,7 +20,11 @@ const mutations: MutationTree<WishlistState> = {
     state.items = state.items.filter(p => p.sku !== product.sku)
   },
   [types.WISH_LOAD_WISH] (state, storedItems) {
-    state.items = storedItems || []
+    // state.items = storedItems || []
+    state.items.push(storedItems)
+  },
+  [types.WISH_CLEAR_ITEM] (state) {
+    state.items = [];
   },
   [types.SET_WISHLIST_LOADED] (state, isLoaded: boolean = true) {
     state.loaded = isLoaded

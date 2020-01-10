@@ -41,16 +41,19 @@ const mutations: MutationTree<BoardsState> = {
 
   /* New mutation for Boards */
   [types.BOARDS_CREATE_BOARD] (state,  boardData ) {
-    console.log('boardData' , state, boardData);
     const record = state.items.find(p => p.name === boardData.name)
     if (!record) {
       state.items.push({
         ...boardData,
         qty: 1
       });
+      rootStore.commit('ui/setSelectedBoardItem', null);
+      let messageData = i18n.t('Board has been created succesfully!', { productName: htmlDecode(boardData.name) });
+      if(boardData.items.length > 0) messageData = i18n.t('Product has been succesfully added to the created board!', { productName: htmlDecode(boardData.name) });
       rootStore.dispatch('notification/spawnNotification', {
         type: 'success',
-        message: i18n.t('Board has been succesfully to created!', { productName: htmlDecode(boardData.name) }), // {productName}
+        // message: i18n.t('Board has been succesfully to created and added the item in it', { productName: htmlDecode(boardData.name) }), // {productName}
+        message: messageData,
         action1: { label: i18n.t('OK') }
       })
     }else {

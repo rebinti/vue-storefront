@@ -20,11 +20,11 @@
     </template>
   </button>
 
-  <button v-if="isOnWishlist" class="inline-flex items-center text-grey-dark wishlist-bx" type="button"
+  <!-- <button v-if="isOnWishlist" class="inline-flex items-center text-grey-dark wishlist-bx" type="button"
   style="left: 2px;width: 100px;background: black;color: white;padding: 0px 0 1px 6px;font-weight: 500;}"
   @click.prevent="$store.commit('ui/setSelectedBoardItem', product);$store.commit('ui/setBoardsElem', 'add-to-board');$bus.$emit('modal-show', 'modal-create-boards')"
   >   Add to board
-  </button>
+  </button> -->
 </div>
 </template>
 

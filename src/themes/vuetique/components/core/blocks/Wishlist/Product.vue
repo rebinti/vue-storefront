@@ -25,7 +25,7 @@
               class="text-black product-title"
               :to="localizedRoute({
                 name: product.type_id + '-product',
-                params: { parentSku: product.parentSku ? product.parentSku : product.sku, slug: product.slug, childSku: product.sku }
+                params: { parentSku: product.parentSku ? product.parentSku : product.sku, slug: product.slug ? product.slug : product.url_key, childSku: product.sku }
               })"
             >
               {{ product.name | htmlDecode }}

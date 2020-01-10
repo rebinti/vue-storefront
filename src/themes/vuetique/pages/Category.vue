@@ -92,7 +92,7 @@
     </header>
     <div class="mobile-filters lg:hidden mobile_filter" v-show="mobileFilters">
       <div class="mobile-filters_new">
-      <button
+      <!-- <button
         type="button"
         :aria-label="$t('Close')"
         class="absolute top-0 right-0 m-4 h-4"
@@ -101,7 +101,7 @@
         <svg viewBox="0 0 25 25" class="vt-icon--sm">
           <use xlink:href="#close" />
         </svg>
-      </button>
+      </button> -->
       <sidebar :filters="filters.available" @closeFilters="closeFilters" />
       </div>
     </div>
