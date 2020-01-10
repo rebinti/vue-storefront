@@ -43,7 +43,7 @@
                   <sort-by />  
               </div>
 
-              <div class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
                   <span> view</span> 
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
                   </div>                  
@@ -136,6 +136,9 @@ import SortBy from '../components/core/SortBy.vue'
 import Columns from '../components/core/Columns.vue'
 
 import ButtonFull from '../components/theme/ButtonFull.vue'
+import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import config from 'config'
 
 export default {
   components: {
@@ -149,10 +152,11 @@ export default {
   data () {
     return {
       mobileFilters: false,
-      defaultColumn: 3,
-      defaultColumnMobile: 2,
-      mobileGridData: [ { value: 2 , image: '../assets/grid2.png' , index: 0} , { value: 3 , image: '../assets/grid3.jpg' , index: 1} ,{ value: 4 , image: '../assets/grid4.png' , index: 2}],
-      seletedMobileGrid: { value: 2 , image: '../assets/grid2.png' , index: 0}
+      defaultColumn: 3
+      // defaultColumnMobile: 2,
+      // mobileGridData: config.mobileGridData
+      // [{value: 2, image: '../assets/grid2.png', index: 0}, {value: 3, image: '../assets/grid3.jpg', index: 1}, {value: 4, image: '../assets/grid4.png', index: 2}],
+      // seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0}
     }
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
@@ -163,6 +167,26 @@ export default {
       })
       resolve()
     })
+  },
+  computed: {
+    ...mapState({
+      seletedMobileGrid: state => state.ui.seletedMobileGrid,
+      defaultColumnMobile: state => state.ui.defaultColumnMobile,
+      mobileGridData: state => state.ui.mobileGridData
+    })
+    // ...mapGetters({
+    //   mobileGrid: 'ui/getSelectedGridView',
+    //   defaultGrid: 'ui/getDefaultColumnMobile'
+    // }),
+    // seletedMobileGrid () {
+    //   return this.$store.state.ui.seletedMobileGrid
+    // },
+    // defaultColumnMobile () {
+    //   return this.$store.state.ui.defaultColumnMobile
+    // },
+    // mobileGridData () {
+    //   return this.$store.state.ui.mobileGridData
+    // }
   },
   methods: {
     openFilters () {
@@ -191,15 +215,18 @@ export default {
       this.$bus.$emit('HomefocusSearchInput') 
     },
     columnChangeWeb (column) {
-      if(column.type === 'lg') this.defaultColumn = column.selected
+      if (column.type === 'lg') this.defaultColumn = column.selected
     },
     columnChangeMobile (gridData) {
-        if(gridData.index === 2 ) { 
-            this.seletedMobileGrid = this.mobileGridData[0];
-        } else { 
-            this.seletedMobileGrid = this.mobileGridData[gridData.index + 1];
-        }
-        this.defaultColumnMobile = this.seletedMobileGrid.value;
+      // console.log('this.mobileGridData', this.mobileGridData)
+      let tdata;
+      if (gridData.index === 2) {
+        tdata = this.mobileGridData[0];
+      } else {
+        tdata = this.mobileGridData[gridData.index + 1];
+      }
+      // this.defaultColumnMobile = tdata.value;
+      this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);
     }
   },
   mixins: [Category]

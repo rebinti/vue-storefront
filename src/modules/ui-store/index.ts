@@ -22,7 +22,16 @@ const store = {
       depth: false,
       path: []
     },
+    mobileGridData: [{value: 2, image: '../assets/grid2.png', 'index': 0},
+                    {'value': 3, 'image': '../assets/grid3.jpg', 'index': 1},
+                    {'value': 4, 'image': '../assets/grid4.png', 'index': 2}],
+    seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0},
+    defaultColumnMobile: 2,
     yoptoProduct: null
+  },
+  getter: {
+    getSelectedGridView: state => state.seletedMobileGrid,
+    getDefaultColumnMobile: state => state.defaultColumnMobile
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -76,6 +85,10 @@ const store = {
     setSelectedBoardItem (state, data) {
       state.selectedBoardItem = data
     },
+    setSeletedMobileGrid (state, data) {
+      state.seletedMobileGrid = data
+      state.defaultColumnMobile = data.value
+    }
   },
   actions: {
     toggleMicrocart ({ commit, state }) {
@@ -89,6 +102,9 @@ const store = {
     },
     updateYoptoProduct ({commit}, state) {
       commit('setYoptoProduct', state)
+    },
+    UpdateSeletedMobileGrid ({commit}, state) {
+      commit('setSeletedMobileGrid', state)
     }
   }
 }
