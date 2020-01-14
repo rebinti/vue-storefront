@@ -61,7 +61,23 @@
 
           </div>
 
-      </div>      
+      </div>   
+
+      <div class="category_filter_out_pop_box" v-if="getCurrentSubCategory.length>0">
+        <div v-for="link in getCurrentSubCategory" class="sub-cat-box" :key="link.slug">
+        <router-link class="menu-link"
+          :to="localizedRoute({ name: 'category', params: { id: link.id, slug: link.slug }})"
+        >
+        {{ link.name }}
+      </router-link>
+        </div>
+        <!-- <div class="sub-cat-box">
+        test 2
+      </div>
+         <div class="sub-cat-box">
+        test 3
+      </div> -->
+      </div>   
 
       <div class="container d_item">
         <div class="row items-center mt-2">
@@ -152,7 +168,8 @@ export default {
   data () {
     return {
       mobileFilters: false,
-      defaultColumn: 3
+      defaultColumn: 3,
+      allCategories: []
       // defaultColumnMobile: 2,
       // mobileGridData: config.mobileGridData
       // [{value: 2, image: '../assets/grid2.png', index: 0}, {value: 3, image: '../assets/grid3.jpg', index: 1}, {value: 4, image: '../assets/grid4.png', index: 2}],
@@ -168,12 +185,17 @@ export default {
       resolve()
     })
   },
+  created () {
+    this.allCategories = this.getCategories;
+  },
+
   computed: {
     ...mapState({
       seletedMobileGrid: state => state.ui.seletedMobileGrid,
       defaultColumnMobile: state => state.ui.defaultColumnMobile,
       mobileGridData: state => state.ui.mobileGridData
-    })
+    }),
+    ...mapGetters("category", ["getCategories" , "getCurrentCategory"]),
     // ...mapGetters({
     //   mobileGrid: 'ui/getSelectedGridView',
     //   defaultGrid: 'ui/getDefaultColumnMobile'
@@ -187,6 +209,31 @@ export default {
     // mobileGridData () {
     //   return this.$store.state.ui.mobileGridData
     // }
+    categories () {
+      return this.allCategories.filter(op => {
+        return (
+          op.level ===
+          (this.$store.state.config.entities.category
+            .categoriesDynamicPrefetchLevel
+            ? this.$store.state.config.entities.category
+              .categoriesDynamicPrefetchLevel
+            : 2)
+        ); // display only the root level (level =1 => Default Category), categoriesDynamicPrefetchLevel = 2 by default
+      });
+    },
+
+    category () {
+      return this.getCurrentCategory
+    },
+
+    getCurrentSubCategory () {
+      // console.log('getCurrentSubCategory', this.category, this.allCategories);
+      if (this.category.children_count > 0 && this.category.children_data) {
+        return this.$store.state.category.list.filter(c => { return this.category.children_data.some(({id}) => id === c.id) })
+      } else {
+        return []
+      }
+    }
   },
   methods: {
     openFilters () {
@@ -498,7 +545,7 @@ export default {
    }*/
   // .category_filter_out_pop_box .category_filter_bx_sortby{
   //    display: block;
-  //  }  
+  //  }
 
    .head_category{
      padding-bottom: 0px;
@@ -506,11 +553,20 @@ export default {
 
    .search_out_pop_box .search_bx_sortby{
      display: none;
-   } 
+   }
    .category_filter_bx_sortby .select{
          background-color: #f9f9f9;
-   } 
+   }
+  .sub-cat-box {
+     min-width: 72px;
+    height: 35px;
+    float: left;
+    border: 2px solid #919191;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 6px 0 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+   }
 }
-  
-
 </style>
