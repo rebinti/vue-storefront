@@ -14,6 +14,7 @@ const mutations: MutationTree<BoardsState> = {
     const record = state.items[product.index].items.find(p => p.sku === product.product.sku)
     if (!record) {
       state.items[product.index].items.push(product.product);
+      state.items[product.index].items_count++;
       rootStore.dispatch('notification/spawnNotification', {
         type: 'success',
         message: i18n.t('Product has been added to Board list!', { productName: htmlDecode(product.product.name) }), //{productName}
@@ -31,6 +32,7 @@ const mutations: MutationTree<BoardsState> = {
   [types.BOARDS_DEL_ITEM] (state: any, { product }) {
     console.log('removeItem -- mut ' , state , product)
     state.items[product.index].items = state.items[product.index].items.filter(p => p.sku !== product.product.sku)
+    state.items[product.index].items_count > 0 ?  state.items[product.index].items_count-- : null;
   },
   [types.BOARDS_LOAD_BOARDS] (state, storedItems) {
     console.log('BOARDS_LOAD_BOARDS' , storedItems , storedItems.length)
