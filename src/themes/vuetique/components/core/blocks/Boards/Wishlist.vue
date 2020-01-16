@@ -85,7 +85,7 @@
       <template v-slot:right="{ item, index }">
         <div
           class="swipeout-action red button_bx_link_lrg"
-          @click="removeFromWishlist({product: item , index: selectedBoardItemIndex })"
+          @click="removeFromBoardsProduct({product: item , index: selectedBoardItemIndex })"
         >
           <remove-button class="cl-accent" />
         </div>
@@ -120,12 +120,13 @@ export default {
       default: () => {}
     }
   },
-  data() {
+  data () {
     return {
       isBoardsItemsOpen: false,
       swipedValue: 0,
       selectedBoardItem: {},
-      selectedBoardItemIndex: 0
+      selectedBoardItemIndex: 0,
+      isBoardItemIsLoading: false
     };
   },
   components: {
@@ -134,12 +135,12 @@ export default {
     SwipeList,
     RemoveButton
   },
-  mixins: [Wishlist], //Wishlist
+  mixins: [Wishlist], // Wishlist
   methods: {
-    closeWishlist() {
-      this.$store.dispatch("ui/closeWishlist");
+    closeWishlist () {
+      this.$store.dispatch('ui/closeWishlist');
     },
-    movingHandler() {
+    movingHandler () {
       if (
         !this.swipedLeft &&
         (this.swipedValue > -80 && this.swipedValue <= 0) &&
@@ -148,34 +149,48 @@ export default {
         this.swipedValue = this.swipedValue - 10;
       }
     },
-    swipeLeftHandler() {
+    swipeLeftHandler () {
       if (this.windowWidth <= 760) this.swipedValue = -80;
     },
-    swipeRightHandler() {
+    swipeRightHandler () {
       if (this.windowWidth <= 760) this.swipedValue = 0;
     },
-    changeBoardView() {
+    changeBoardView () {
       this.isBoardsItemsOpen = !this.isBoardsItemsOpen;
     },
-    selectedBoard(item, index) {
+    async selectedBoard (item, index) {
       this.isBoardsItemsOpen = !this.isBoardsItemsOpen;
       this.selectedBoardItem = item;
       this.selectedBoardItemIndex = index;
+      if (item.items_count > 0 && item.items.length === 0) {
+        this.isBoardItemIsLoading = true;
+        try {
+          const res = await this.$store.dispatch('boards/getBoardProducts', { board: item, boardIndex: index })
+          console.log('sucesss data', res)
+          if (res) {
+            console.log('sucesss data', res)
+            this.isBoardItemIsLoading = false;
+          }
+        } catch (err) {
+          console.log('Api error data', err)
+          this.isBoardItemIsLoading = false;
+        } finally {
+          this.isBoardItemIsLoading = false;
+        }
+      }
     },
-    removeFromBoards(product) {
+    removeFromBoards (product) {
       this.$store.state["boards"]
         ? this.$store.dispatch("boards/removeBoard", product)
         : false;
       this.swipedValue = 0;
     },
-    removeFromWishlist(product) {
-      console.log("remove From Boards-->", product);
-      return this.$store.state["boards"]
-        ? this.$store.dispatch("boards/removeItem", product)
-        : false;
+    removeFromBoardsProduct (product) {
+      console.log('remove From Boards-->', product);
+      return this.$store.state['boards'] ? this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem}) : false;
     }
   },
-  mounted() {
+  mounted () {
     this.windowWidth = window.innerWidth;
   }
 };

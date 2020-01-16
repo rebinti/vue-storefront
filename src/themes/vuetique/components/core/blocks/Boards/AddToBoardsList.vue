@@ -101,15 +101,29 @@ export default {
       this.$bus.$emit('modal-hide', 'modal-create-boards');
       this.$store.commit('ui/setSelectedBoardItem', null);
     },
-    openCreateBoard() {
+    openCreateBoard () {
       this.$store.commit('ui/setBoardsElem', 'create-board');
       this.$bus.$emit('modal-show', 'modal-create-boards');
     },
-    addProductToBoard (board , index) {
-      let selectedItem =  Object.assign({} , this.selectedProduct);
-      this.addToWishlist({product: selectedItem , board: board, index: index});
-      this.$bus.$emit('modal-hide', 'modal-create-boards');
-      this.$store.commit('ui/setSelectedBoardItem', null);
+    async addProductToBoard (board, index) {
+      let selectedItem = Object.assign({}, this.selectedProduct);
+      console.log('selectedItem to board', this.selectedProduct);
+      try {
+        const result = await this.addToWishlist({product: selectedItem, board: board, index: index});
+        if (result) {
+          console.log('resultttttt success', result);
+          this.$bus.$emit('modal-hide', 'modal-create-boards');
+          this.$store.commit('ui/setSelectedBoardItem', null);
+        }
+      } catch {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'error',
+          message: this.$t('Please try again!'),
+          action1: { label: this.$t('OK') }
+        })
+      } finally {
+        console.log('finally')
+      }
     }
   }
 }

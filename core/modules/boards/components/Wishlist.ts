@@ -12,7 +12,6 @@ export const Wishlist = {
       return this.$store.state.ui.wishlist
     },
     boardsListItems () {
-      console.log('this.$store.state.boards.items' , this.$store.state);
       return this.$store.state.boards.items
     }
   },

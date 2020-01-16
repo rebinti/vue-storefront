@@ -33,6 +33,7 @@ const mutations: MutationTree<BoardsState> = {
     state.items[product.index].items = state.items[product.index].items.filter(p => p.sku !== product.product.sku)
   },
   [types.BOARDS_LOAD_BOARDS] (state, storedItems) {
+    console.log('BOARDS_LOAD_BOARDS' , storedItems , storedItems.length)
     state.items = storedItems || []
   },
   [types.SET_BOARDSLISTS_LOADED] (state, isLoaded: boolean = true) {
@@ -41,11 +42,11 @@ const mutations: MutationTree<BoardsState> = {
 
   /* New mutation for Boards */
   [types.BOARDS_CREATE_BOARD] (state,  boardData ) {
-    const record = state.items.find(p => p.name === boardData.name)
+    const record = state.items.find(p => p.wboard_id === boardData.wboard_id)
     if (!record) {
       state.items.push({
         ...boardData,
-        qty: 1
+        items_count: boardData.items.length > 0 ? boardData.items.length : 0
       });
       rootStore.commit('ui/setSelectedBoardItem', null);
       let messageData = i18n.t('Board has been created succesfully!', { productName: htmlDecode(boardData.name) });
@@ -67,6 +68,17 @@ const mutations: MutationTree<BoardsState> = {
   [types.BOARDS_DELETE_BOARD] (state,  boardData) {
     state.items = state.items.filter(p => p.name !== boardData.name)
   },
+  [types.BOARDS_BOARD_PRODUCT_LIST] (state,  boardData) {
+    boardData.products.filter(prod => {
+      const record = state.items[boardData.board.boardIndex].items.find(p => p.sku === prod.sku)
+      if (!record) {
+        state.items[boardData.board.boardIndex].items.push(prod)
+        // state.items[boardData.board.boardIndex].items.push(...boardData.products)
+      }
+    });
+   
+  },
+
 }
 
 export default mutations

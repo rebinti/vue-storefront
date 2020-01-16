@@ -91,7 +91,10 @@ const actions: ActionTree<UserState, RootState> = {
         if (resp.code === 200) {
           rootStore.state.userTokenInvalidateLock = 0
           context.commit(types.USER_TOKEN_CHANGED, { newToken: resp.result, meta: resp.meta }) // TODO: handle the "Refresh-token" header
-          context.dispatch('me', { refresh: true, useCache: false }).then(result => { rootStore.dispatch('wishlist/load' , true); })
+          context.dispatch('me', { refresh: true, useCache: false }).then(result => { 
+            rootStore.dispatch('wishlist/load' , true); 
+            rootStore.state["boards"] ? rootStore.dispatch('boards/load' , true) : null; 
+          })
           context.dispatch('getOrdersHistory', { refresh: true, useCache: false }).then(result => {})
         }
         return resp

@@ -70,7 +70,7 @@ export default {
         this.$store.commit('ui/setBoardsElem', 'add-to-board');
       }
     },
-    createNewBoard () {
+    async createNewBoard () {
       if (this.$v.$invalid) {
         this.$v.$touch()
         this.$store.dispatch('notification/spawnNotification', {
@@ -80,14 +80,38 @@ export default {
         })
         return
       }
+      console.log('this.selectedBoardItem', this.selectedBoardItem);
       let Boarddata = { name: this.boardname, items: [] };
       if (this.selectedBoardItem) Boarddata.items.push(this.selectedBoardItem);
-      this.$store.dispatch('boards/createBoard', Boarddata);
-      if (this.selectedBoardItem === null) {
-        this.$bus.$emit('modal-hide', 'modal-create-boards')
-      } else {
-        this.$bus.$emit('modal-hide', 'modal-create-boards')
+      try {
+        const result = await this.$store.dispatch('boards/createBoard', Boarddata)
+        console.log('resultttttt', result)
+        if (result) {
+          console.log('resultttttt success', result);
+          if (this.selectedBoardItem === null) {
+            this.$bus.$emit('modal-hide', 'modal-create-boards')
+          } else {
+            this.$bus.$emit('modal-hide', 'modal-create-boards')
+          }
+        }
+        return
+      } catch (err) {
+        console.log('resultttttt errr', err);
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'error',
+          message: this.$t('Please try again!'),
+          action1: { label: this.$t('OK') }
+        })
+        return
+      } finally {
+        console.log('finally')
       }
+
+      // if (this.selectedBoardItem === null) {
+      //   this.$bus.$emit('modal-hide', 'modal-create-boards')
+      // } else {
+      //   this.$bus.$emit('modal-hide', 'modal-create-boards')
+      // }
       // else {
       //   this.$store.commit('ui/setBoardsElem', 'add-to-board');
       // }

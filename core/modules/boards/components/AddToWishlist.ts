@@ -15,8 +15,8 @@ export const AddToWishlist = {
     BoardsModule.register()
   },
   methods: {
-    addToWishlist (product) {
-      return this.$store.state['boards'] ? this.$store.dispatch('boards/addItem', product) : false
+     async addToWishlist (product) { 
+      return await this.$store.state['boards'] ? this.$store.dispatch('boards/addItem', product) : false
     }
   }
 }

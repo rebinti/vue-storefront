@@ -35,8 +35,10 @@
           </div>
 
           <div class="image-block-more">
-            <h5>{{product.name}}</h5>
-            <span class="sp_txt">{{product.items.length}} Items</span>
+            <h5>{{ product.name }}</h5>
+            <!-- <span class="sp_txt" v-if="product && product.items && product.items.length"> {{ product.items.length }} Items</span> -->
+             <span class="sp_txt" v-if="product && product.items_count"> {{ product.items_count }} Items</span>
+             <span class="sp_txt" v-else>0 Items</span>       
           </div>
         </div>
 
