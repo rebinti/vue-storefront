@@ -15,7 +15,7 @@ export const IsOnWishlist = {
   },
   computed: {
     isOnWishlist (): boolean {
-      return !!this.$store.state.wishlist.items.find(p => p.sku === this.product.sku) || false
+      return !!this.$store.state.wishlist.items.find(p => p.parentSku === this.product.parentSku) || false
     }
   }
 }

@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
-          {{ product.sku }}
+          {{ product.parentSku }}
         </div>
 
         <div class="col-auto font-bold text-right leading-6 price_left_out">
