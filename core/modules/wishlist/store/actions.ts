@@ -52,8 +52,9 @@ const actions: ActionTree<WishlistState, RootState> = {
           const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
           clientCartAddItems.push({...items[0], wishlistItemId: item.wishlistItemId })
           console.log('clientCartAddItems' , clientCartAddItems);
-          commit(types.WISH_LOAD_WISH, items[0])
+          // commit(types.WISH_LOAD_WISH, items[0])
           if(clientCartAddItems.length === data.length) {
+            commit(types.WISH_LOAD_WISH, clientCartAddItems)
             cacheStorage.setItem('current-wishlist', clientCartAddItems).catch((reason) => {
                 Logger.error(reason, 'wishlist') // it doesn't work on SSR
             })
@@ -171,6 +172,7 @@ const actions: ActionTree<WishlistState, RootState> = {
       if (task.resultCode === 200) {
         console.log('api dataaaa Sucesss' , task.result)
         commit(types.WISH_DEL_ITEM, { product })
+        rootStore.dispatch('boards/load' , true);
         rootStore.dispatch('notification/spawnNotification', {
           type: 'success',
           message: i18n.t('Product {productName} has been removed from wishlit!', { productName: htmlDecode(product.name) }),
