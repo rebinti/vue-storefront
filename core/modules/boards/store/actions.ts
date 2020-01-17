@@ -68,7 +68,7 @@ const actions: ActionTree<BoardsState, RootState> = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
-        body: JSON.stringify({"bid":product.board.wboard_id,"witemid":product.product.wishlistId,"tid":"addproduct"}) 
+        body: JSON.stringify({"bid":product.board.wboard_id,"witemid":product.product.wishlistItemId,"tid":"addproduct"}) 
       },
       silent: false
     });
@@ -100,7 +100,7 @@ const actions: ActionTree<BoardsState, RootState> = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
-        body: JSON.stringify({"bid": product.board.wboard_id,"witemid": product.product.wishlistId,"tid":"deleteproduct"}) 
+        body: JSON.stringify({"bid": product.board.wboard_id,"witemid": product.product.wishlistItemId,"tid":"deleteproduct"}) 
       },
       silent: false
     }).then(async task => {
@@ -150,7 +150,7 @@ const actions: ActionTree<BoardsState, RootState> = {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               mode: 'cors',
-              body: JSON.stringify({"bid":task.result,"witemid":  product.items[0].wishlistId,"tid":"addproduct"}) 
+              body: JSON.stringify({"bid":task.result,"witemid":  product.items[0].wishlistItemId,"tid":"addproduct"}) 
             },
             silent: false
           });
