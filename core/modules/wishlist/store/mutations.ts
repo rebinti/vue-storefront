@@ -8,7 +8,7 @@ const mutations: MutationTree<WishlistState> = {
   * @param {Object} product data format for products is described in /doc/ElasticSearch data formats.md
   */
   [types.WISH_ADD_ITEM] (state, { product }) {
-    const record = state.items.find(p => p.sku === product.sku)
+    const record = state.items.find(p => p.parentSku === product.parentSku)
     if (!record) {
       state.items.push({
         ...product,
@@ -17,7 +17,7 @@ const mutations: MutationTree<WishlistState> = {
     }
   },
   [types.WISH_DEL_ITEM] (state, { product }) {
-    state.items = state.items.filter(p => p.sku !== product.sku)
+    state.items = state.items.filter(p => p.parentSku !== product.parentSku)
   },
   [types.WISH_LOAD_WISH] (state, storedItems) {
     state.items = storedItems || []
