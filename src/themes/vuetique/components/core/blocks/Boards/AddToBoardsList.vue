@@ -36,17 +36,29 @@
 
             <div class="image-block-col brd_bx_li">
                   <div class="img_col_2 lg_img_one">
-                      <img src="/assets/wishlist-image3.jpg"/>
-                      <img src="/assets/wishlist-image4.jpg"/>  
+                      <img v-if="board.items.length > 0" v-lazy="thumbnail(board.items[0].image)" alt="" title="">
+                      <img v-else src="/assets/mid_1.png"/>
+
+                      <img v-if="board.items.length > 1" v-lazy="thumbnail(board.items[1].image)" alt="" title="">
+                      <img v-else src="/assets/small_1.png"/>
+                      
+                      <!-- <img src="/assets/wishlist-image3.jpg"/>
+                      <img src="/assets/wishlist-image4.jpg"/>   -->
                   </div>
                   <div class="img_col_2 lg_img_two">
-                    <img src="/assets/wishlist-image5.jpg"/>
-                    <img src="/assets/wishlist-image6.jpg"/>
+                     <img v-if="board.items.length > 2" v-lazy="thumbnail(board.items[2].image)" alt="" title="">
+                     <img v-else src="/assets/small_1.png"/>
+
+                     <img v-if="board.items.length > 3" v-lazy="thumbnail(board.items[3].image)" alt="" title="">
+                     <img v-else src="/assets/mid_1.png"/>
+ 
+                    <!-- <img src="/assets/wishlist-image5.jpg"/>
+                    <img src="/assets/wishlist-image6.jpg"/> -->
                   </div>
               </div>
 
               <div class="ft_text">
-                {{board.name}}
+                {{ board.name }}
               </div>
 
           </div>
@@ -124,6 +136,9 @@ export default {
       } finally {
         console.log('finally')
       }
+    },
+    thumbnail (image) {
+      return this.getThumbnail(image, 150, 150)
     }
   }
 }
