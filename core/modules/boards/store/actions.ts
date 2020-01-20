@@ -18,7 +18,7 @@ const actions: ActionTree<BoardsState, RootState> = {
     context.commit(types.BOARDS_LOAD_BOARDS, [])
     cacheStorage.removeItem('current-boards');
   },
-  async load ({ commit, getters }, force: boolean = false) {
+  async load ({ commit, getters , dispatch }, force: boolean = false) {
     if (!force && getters.isBoardsLoaded) return
     // commit(types.SET_BOARDSLISTS_LOADED)
     // cacheStorage.getItem('current-boards', (err, storedItems) => {
@@ -42,8 +42,33 @@ const actions: ActionTree<BoardsState, RootState> = {
       console.log('api Result Boards' , task);
       commit(types.SET_BOARDSLISTS_LOADED)
       if (task.resultCode === 200) {
-        let storedItems = task.result.filter(val => val.items = []);
-        commit(types.BOARDS_LOAD_BOARDS, storedItems)
+        let copyData = task.result // task.result.filter(val => val.items = []);
+        let storedItems = JSON.parse(JSON.stringify(copyData))
+        copyData = copyData.filter(val => val.items = []);
+        // commit(types.BOARDS_LOAD_BOARDS, copyData)
+        if(storedItems.length > 0) {
+          storedItems.filter(async (board , index) => {
+            console.log('items' ,board.items)
+
+            if(board.items.length > 0) { 
+              console.log('items' ,board.items)
+              let clientBoardItems = [];
+              board.items.filter(async (boardItem , indexItem) => {
+                let query = new SearchQuery()
+                query = query.applyFilter({key: 'sku', value: {'eq': boardItem.sku}})
+                const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
+                // clientBoardItems.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
+                copyData[index].items.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
+                if(copyData[index].items.length === board.items.length) {
+                  console.log('clientBoardItems' , clientBoardItems);
+                  commit(types.BOARDS_BOARD_PRODUCT_LIST , { products: clientBoardItems, board: {...copyData[index], boardIndex: index} })
+                }
+              })
+            } else {
+              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...board, boardIndex: index} })
+            }
+          });
+        }
         cacheStorage.getItem('current-boards', (err, storedItems) => {
           if (err) throw new Error(err)
           Logger.info('current-boards state loaded from browser cache. ', 'cache', storedItems)()

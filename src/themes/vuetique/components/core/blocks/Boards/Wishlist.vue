@@ -162,22 +162,22 @@ export default {
       this.isBoardsItemsOpen = !this.isBoardsItemsOpen;
       this.selectedBoardItem = item;
       this.selectedBoardItemIndex = index;
-      if (item.items_count > 0 && item.items.length === 0) {
-        this.isBoardItemIsLoading = true;
-        try {
-          const res = await this.$store.dispatch('boards/getBoardProducts', { board: item, boardIndex: index })
-          console.log('sucesss data', res)
-          if (res) {
-            console.log('sucesss data', res)
-            this.isBoardItemIsLoading = false;
-          }
-        } catch (err) {
-          console.log('Api error data', err)
-          this.isBoardItemIsLoading = false;
-        } finally {
-          this.isBoardItemIsLoading = false;
-        }
-      }
+      // if (item.items_count > 0 && item.items.length === 0) {
+      //   this.isBoardItemIsLoading = true;
+      //   try {
+      //     const res = await this.$store.dispatch('boards/getBoardProducts', { board: item, boardIndex: index })
+      //     console.log('sucesss data', res)
+      //     if (res) {
+      //       console.log('sucesss data', res)
+      //       this.isBoardItemIsLoading = false;
+      //     }
+      //   } catch (err) {
+      //     console.log('Api error data', err)
+      //     this.isBoardItemIsLoading = false;
+      //   } finally {
+      //     this.isBoardItemIsLoading = false;
+      //   }
+      // }
     },
     removeFromBoards (product) {
       this.$store.state["boards"]

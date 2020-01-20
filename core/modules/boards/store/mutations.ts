@@ -71,14 +71,24 @@ const mutations: MutationTree<BoardsState> = {
     state.items = state.items.filter(p => p.name !== boardData.name)
   },
   [types.BOARDS_BOARD_PRODUCT_LIST] (state,  boardData) {
-    boardData.products.filter(prod => {
-      const record = state.items[boardData.board.boardIndex].items.find(p => p.sku === prod.sku)
-      if (!record) {
-        state.items[boardData.board.boardIndex].items.push(prod)
-        // state.items[boardData.board.boardIndex].items.push(...boardData.products)
-      }
-    });
+    console.log('BOARDS_BOARD_PRODUCT_LIST' , boardData)
+    // state.items[boardData.board.boardIndex].items = boardData.products
+    // boardData.products.filter(prod => {
+    //   const record = state.items[boardData.board.boardIndex].items.find(p => p.sku === prod.sku)
+    //   if (!record) {
+    //     state.items[boardData.board.boardIndex].items.push(prod)
+    //     // state.items[boardData.board.boardIndex].items.push(...boardData.products)
+    //   }
+    // });
    
+   // state.items[boardData.board.boardIndex].items = boardData.board
+
+    const record = state.items.find(p => p.wboard_id === boardData.board.wboard_id)
+    if (!record) {
+      state.items.push( boardData.board)
+
+    }
+
   },
 
 }

@@ -5,7 +5,7 @@
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
   > -->
-  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
+  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
     <!-- <div class="col-12 flex-col justify-start sm:justify-between prdct_cnt">
       <div>
         {{product.name}}
@@ -20,18 +20,52 @@
     <div class="image-block-wrapper-out">
         <div @click="$emit('click')">
           <div class="image-block-wrapper clearfix">
-              <div class="image-block-col"><img src="/assets/wishlist-image1.jpg"/></div>
-              <div class="image-block-col"><img src="/assets/wishlist-image2.jpg"/></div>
-              <div class="image-block-col">
-                  <div class="img_col_2 lg_img_one">
-                      <img src="/assets/wishlist-image3.jpg"/>
-                      <img src="/assets/wishlist-image4.jpg"/>  
-                  </div>
-                  <div class="img_col_2 lg_img_two">
-                    <img src="/assets/wishlist-image5.jpg"/>
-                    <img src="/assets/wishlist-image6.jpg"/>
-                  </div>
+              <!-- <div class="image-block-col" v-for="(prod,index) in product.items.slice(0,6)" :key="prod.id" v-show="product.items.length > 0"> -->
+
+
+                <div class="image-block-col">
+                  <img class="image" v-if="product.items.length > 0" v-lazy="thumbnail(product.items[0].image)" alt="" title="">
+                  <img v-else src="/assets/large_1.png"/>
+                </div>
+
+                <div class="image-block-col">
+                 <img class="image" v-if="product.items.length > 1" v-lazy="thumbnail(product.items[1].image)" alt="" title="">
+                 <img v-else src="/assets/large_1.png"/>
+                </div>
+
+                <div class="image-block-col">
+                 <div class="img_col_2 lg_img_one" >
+                    <img class="image" v-if="product.items.length > 2" v-lazy="thumbnail(product.items[2].image)" alt="" title="">
+                    <img v-else src="/assets/mid_1.png"/>
+
+                    <img class="image" v-if="product.items.length > 3" v-lazy="thumbnail(product.items[3].image)" alt="" title="">
+                    <img v-else src="/assets/small_1.png"/>
+                 </div>
+
+                 <div class="img_col_2 lg_img_two">
+                    <img class="image" v-if="product.items.length > 4" v-lazy="thumbnail(product.items[4].image)" alt="" title="">
+                    <img v-else src="/assets/small_1.png"/>
+
+                    <img class="image" v-if="product.items.length > 5" v-lazy="thumbnail(product.items[5].image)" alt="" title="">
+                    <img v-else src="/assets/mid_1.png"/>
+                 </div>
+                </div>
               </div>
+
+              <!-- <div class="image-block-wrapper clearfix">
+                <div class="image-block-col"><img src="/assets/wishlist-image1.jpg"/></div>
+                <div class="image-block-col"><img src="/assets/wishlist-image2.jpg"/></div>
+                <div class="image-block-col">
+                    <div class="img_col_2 lg_img_one">
+                        <img src="/assets/wishlist-image3.jpg"/>
+                        <img src="/assets/wishlist-image4.jpg"/>  
+                    </div>
+                    <div class="img_col_2 lg_img_two">
+                      <img src="/assets/wishlist-image5.jpg"/>
+                      <img src="/assets/wishlist-image6.jpg"/>
+                    </div>
+                </div>
+            </div> -->
           </div>
 
           <div class="image-block-more">
@@ -48,7 +82,7 @@
           </div>
        </div>
     </div>
- </div>
+ <!-- </div> -->
   <!-- </li> -->
 </template>
 
@@ -56,6 +90,7 @@
 
 import { WishlistProduct } from '@vue-storefront/core/modules/boards/components/Product'
 import RemoveButton from './RemoveButton'
+import wishlistMountedMixin from '@vue-storefront/core/modules/boards/mixins/wishlistMountedMixin'
 
 export default {
   name: 'BoardsItem',
@@ -66,14 +101,29 @@ export default {
       windowWidth: 0
     }
   },
+  props: {
+    product: {
+      type: Object,
+      required: false
+    },
+    indexValue: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
   components: {
     RemoveButton
   },
-  mixins: [ WishlistProduct], 
+  mixins: [ wishlistMountedMixin ],  // WishlistProduct
   mounted() {
      this.windowWidth =  window.innerWidth;
   },
   methods: {
+    thumbnail (image) {
+      console.log('imageee', image)
+      return this.getThumbnail(image, 150, 150)
+    },
     movingHandler() {
         if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0)  && this.windowWidth <= 760 ) {
           this.swipedValue = this.swipedValue - 10 ;
@@ -91,7 +141,6 @@ export default {
     removeFromBoards (product) {
        this.$store.state['boards'] ? this.$store.dispatch('boards/removeBoard', product) : false;
        this.swipedValue = 0;
-
     }
   }
 }

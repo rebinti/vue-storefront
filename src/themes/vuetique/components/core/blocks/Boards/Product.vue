@@ -7,7 +7,7 @@
   > -->
    <!-- v-touch:start="startHandler" 
         v-touch:end="endHandler"  -->
-<div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
+<div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="localizedRoute({
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
-          {{ product.sku }}
+          {{ product.parentSku }}
         </div>
 
         <div class="col-auto font-bold text-right leading-6 price_left_out">
