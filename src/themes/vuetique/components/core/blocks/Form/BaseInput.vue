@@ -252,6 +252,27 @@ export default {
           }
         }
     }
+
+    .modal .login_out_bx .modal-content .tx_bx_out.board_input_box .text-sm {
+        background: #f2f2f2;
+        border: 0px;
+        border-bottom: 0px;
+        height: 40px;
+        color: #000000;
+        margin: 0 3%;
+        border-radius: 4px;
+        width: 94%;
+    }
+
+    .modal .login_out_bx .modal-content.board_input_outer .text-error {
+        padding-left: 13px;
+        position: absolute;
+        width: 100%;
+        bottom: -25px;
+        left: 0px;
+    }
+    .modal .login_out_bx .modal-content.board_input_outer .vt-icon--sm{ right:20px; }
+
 }
 
 </style>
