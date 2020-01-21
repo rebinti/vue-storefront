@@ -311,6 +311,19 @@ img[lazy=loaded] {
   .hooper {
     height: 693px;
   }
+  .details-section{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background: #FFF;
+      /* margin: 64px; */
+      margin-top: 0px;
+      margin-right: 64px;
+      height: 100%;
+  }
+  /*.bg-grey-lightest{
+      position: relative;
+  }  */
 
 }
 @media (max-width: 576px) {
@@ -343,7 +356,6 @@ img[lazy=loaded] {
   .hooper {
     height: 693px;
   }
-
 
 }
 

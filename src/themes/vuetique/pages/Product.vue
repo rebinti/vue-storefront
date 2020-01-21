@@ -638,11 +638,17 @@ export default {
     display: block;
   }
   .details-section{
-    position: absolute;
-    top: 202px;    
-    right: 0px;
-    background: #FFF;
-    margin: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background: #FFF;
+      /* margin: 64px; */
+      margin-top: 0px;
+      margin-right: 64px;
+      height: 100%;
+  }
+  .bg-grey-lightest{
+      position: relative;
   }
 
 }
