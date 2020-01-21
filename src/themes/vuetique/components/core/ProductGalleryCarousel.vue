@@ -1,6 +1,6 @@
 <template>
   <div class="media-gallery-carousel">
-    <hooper :infiniteScroll="true" :itemsToShow="Itemshow" :centerMode="true" pagination="yes">
+    <hooper :infiniteScroll="true" :itemsToShow="Itemshow" :centerMode="true" pagination="yes" :progress="true">
       <slide
         v-for="(images, index) in gallery"
         :key="images.src"
@@ -50,6 +50,8 @@
           />
         </div>
       </slide>
+      <hooper-navigation slot="hooper-addons"></hooper-navigation>
+      <hooper-pagination slot="hooper-addons"></hooper-pagination>
     </hooper>
     <i
       class="zoom-in material-icons p-4 cursor-pointer"
@@ -61,7 +63,9 @@
 <script>
 import store from '@vue-storefront/core/store'
 import { Carousel } from 'vue-carousel'
-import { Hooper,Slide } from 'hooper'
+// import { Hooper,Slide } from 'hooper'
+import { Hooper,Slide,Pagination as HooperPagination} from 'hooper';
+import { Progress as HooperProgress} from 'hooper';
 import ProductVideo from './ProductVideo'
 import { onlineHelper } from '@vue-storefront/core/helpers'
 import 'hooper/dist/hooper.css';
@@ -72,6 +76,8 @@ export default {
     Carousel,
     Hooper,
     Slide,
+    HooperProgress,    
+    HooperPagination,
     ProductVideo
   },
   props: {
