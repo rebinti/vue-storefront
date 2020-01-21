@@ -5,11 +5,21 @@
       :active-route="breadcrumbs.name"
     />
     <section class="bg-grey-lightest">
-      <div class="container">
-        <section class="md:flex">
+          <div class="w-full md:w-12/12">
+            <product-gallery
+              ref="gallery"
+              :gallery="gallery"
+              :offline="offlineImage"
+              :configuration="configuration"
+              :product="product"
+              @page-change="(page) => currentGalleryPage = page"
+            />
+          </div>       
+      <div class="container">            
+        <section class="md:flex">     
           <div class="w-full md:w-3/5">
             <div class="flex">
-              <div v-if="gallery.length > 1" class="product-thumbnails w-1/12 hidden md:block">
+              <!-- <div v-if="gallery.length > 1" class="product-thumbnails w-1/12 hidden md:block">
                 <ul>
                   <li
                     v-for="(images, key) in gallery"
@@ -26,9 +36,9 @@
                     >
                   </li>
                 </ul>
-              </div>
+              </div> -->
 
-              <div class="w-full md:w-11/12">
+              <!-- <div class="w-full md:w-11/12">
                 <product-gallery
                   ref="gallery"
                   :gallery="gallery"
@@ -37,7 +47,7 @@
                   :product="product"
                   @page-change="(page) => currentGalleryPage = page"
                 />
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -175,7 +185,7 @@
 
 
 
-          <div class="w-full md:w-2/5 md:px-10 ds_item">
+          <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
@@ -626,6 +636,13 @@ export default {
   }
   .ds_item{
     display: block;
+  }
+  .details-section{
+    position: absolute;
+    top: 202px;    
+    right: 0px;
+    background: #FFF;
+    margin: 64px;
   }
 
 }

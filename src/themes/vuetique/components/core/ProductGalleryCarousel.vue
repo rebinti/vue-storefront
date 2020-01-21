@@ -1,17 +1,6 @@
 <template>
   <div class="media-gallery-carousel">
-    <carousel
-      :per-page="1"
-      :mouse-drag="false"
-      :navigation-enabled="true"
-      pagination-active-color="#222222"
-      pagination-color="#828282"
-      navigation-next-label="<svg viewBox='0 0 25 25' class='vt-icon cursor-pointer'><use xlink:href='#right'/></svg>"
-      navigation-prev-label="<svg viewBox='0 0 25 25' class='vt-icon cursor-pointer'><use xlink:href='#left'/></svg>"
-      ref="carousel"
-      :speed="carouselTransitionSpeed"
-      @pageChange="pageChange"
-    >
+    <hooper :infiniteScroll="true" :itemsToShow="Itemshow" :centerMode="true" pagination="yes">
       <slide
         v-for="(images, index) in gallery"
         :key="images.src"
@@ -61,7 +50,7 @@
           />
         </div>
       </slide>
-    </carousel>
+    </hooper>
     <i
       class="zoom-in material-icons p-4 cursor-pointer"
       @click="openOverlay"
@@ -71,14 +60,17 @@
 
 <script>
 import store from '@vue-storefront/core/store'
-import { Carousel, Slide } from 'vue-carousel'
+import { Carousel } from 'vue-carousel'
+import { Hooper,Slide } from 'hooper'
 import ProductVideo from './ProductVideo'
 import { onlineHelper } from '@vue-storefront/core/helpers'
+import 'hooper/dist/hooper.css';
 
 export default {
   name: 'ProductGalleryCarousel',
   components: {
     Carousel,
+    Hooper,
     Slide,
     ProductVideo
   },
@@ -100,6 +92,8 @@ export default {
     return {
       carouselTransitionSpeed: 0,
       currentPage: 0,
+      Itemshow: 0,
+      windowWidth: 0,
       hideImageAtIndex: null,
       lowerQualityImagesLoadedMap: {},
       highQualityImagesLoadedMap: {},
@@ -150,6 +144,12 @@ export default {
       }
     }
     this.$emit('loaded')
+    window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth
+        this.checkWindowSize();
+    });
+    this.windowWidth =  window.innerWidth;       
+    this.checkWindowSize();
   },
   beforeDestroy () {
     this.$bus.$off('filter-changed-product', this.selectVariant)
@@ -192,8 +192,24 @@ export default {
     highQualityImageLoaded (index, success = true) {
       this.$set(this.highQualityImagesLoadedMap, index, success)
       this.$set(this.highQualityImagesErrorsMap, index, !success)
+    },
+    checkWindowSize() {
+      console.log('this.windowWidth' , this.windowWidth)
+      if( this.windowWidth <= 768 ) {
+         this.Itemshow = 1
+      }
+      else {
+          this.Itemshow = 4
+      }
     }
-  }
+  },
+  created () {
+    this.windowWidth =  window.innerWidth; 
+    this.checkWindowSize();    
+  },
+  destroyed () {
+    window.removeEventListener('resize');
+  }  
 }
 </script>
 
@@ -291,7 +307,12 @@ img[lazy=loaded] {
   }
 }
 
+@media (min-width: 577px) {
+  .hooper {
+    height: 693px;
+  }
 
+}
 @media (max-width: 576px) {
   .VueCarousel{
       .btn-primary{
@@ -319,6 +340,10 @@ img[lazy=loaded] {
   .zoom-in.material-icons.p-4.cursor-pointer{
     display: none!important;
   }
+  .hooper {
+    height: 693px;
+  }
+
 
 }
 
