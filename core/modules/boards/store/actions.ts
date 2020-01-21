@@ -50,7 +50,7 @@ const actions: ActionTree<BoardsState, RootState> = {
           storedItems.filter(async (board , index) => {
             console.log('items' ,board.items)
 
-            if(board.items.length > 0) { 
+            if(board.items && board.items.length > 0) { 
               console.log('items' ,board.items)
               let clientBoardItems = [];
               board.items.filter(async (boardItem , indexItem) => {
@@ -65,7 +65,7 @@ const actions: ActionTree<BoardsState, RootState> = {
                 }
               })
             } else {
-              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...board, boardIndex: index} })
+              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...copyData[index], boardIndex: index} })
             }
           });
         }

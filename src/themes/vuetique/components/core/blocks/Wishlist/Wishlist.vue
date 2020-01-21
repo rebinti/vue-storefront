@@ -82,8 +82,8 @@
           <i class="fa fa-trash"></i>
         </div>
         </template>-->
-        <template v-slot:right="{ item }">
-          <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item)">
+        <template v-slot:right="{ item , index }">
+          <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item , index )">
             <!-- <i class="fa fa-trash"></i> -->
             <remove-button class="cl-accent" />
           </div>
@@ -165,9 +165,9 @@ export default {
       console.log('Changes in view page Wishlist');
       this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
     },
-    removeFromWishlist (product) {
+    removeFromWishlist (product, index) {
       return this.$store.state['wishlist']
-        ? this.$store.dispatch('wishlist/removeItem', product)
+        ? this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
         : false;
     }
   }
