@@ -50,7 +50,7 @@ const actions: ActionTree<BoardsState, RootState> = {
           storedItems.filter(async (board , index) => {
             console.log('items' ,board.items)
 
-            if(board.items.length > 0) { 
+            if(board.items && board.items.length > 0) { 
               console.log('items' ,board.items)
               let clientBoardItems = [];
               board.items.filter(async (boardItem , indexItem) => {
