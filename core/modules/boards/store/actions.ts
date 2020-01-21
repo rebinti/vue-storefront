@@ -65,7 +65,7 @@ const actions: ActionTree<BoardsState, RootState> = {
                 }
               })
             } else {
-              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...board, boardIndex: index} })
+              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...copyData[index], boardIndex: index} })
             }
           });
         }
