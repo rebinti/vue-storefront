@@ -68,7 +68,8 @@
         <div class="flex flex-wrap -mx-3">
           <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">
             <slot name="placeOrderButton">
-              <!-- <paypal-button  /> -->
+              <!-- <paypal-button />
+              <braintree-dropin v-if="payment.paymentMethod === 'braintree'" /> -->
               <button-full
                 @click.native="placeOrder"
                 data-testid="orderReviewSubmit"
@@ -123,6 +124,8 @@ import { OrderReview } from '@vue-storefront/core/modules/checkout/components/Or
 import ValidationError from 'theme/components/core/ValidationError'
 
 import PaypalButton from 'src/modules/paypal/components/Button'
+import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
+// import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
 
 export default {
   components: {
@@ -131,7 +134,8 @@ export default {
     CartSummary,
     Modal,
     PaypalButton,
-    ValidationError
+    ValidationError,
+    BraintreeDropin
   },
   mixins: [OrderReview, Composite],
   validations: {

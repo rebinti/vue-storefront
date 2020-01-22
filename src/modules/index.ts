@@ -26,7 +26,9 @@ import { InstantCheckout } from './instant-checkout'
 import { OrderHistory } from './order-history'
 
 import { DndPrismicCMS } from './dnd-prismic-cms'
-// import { Braintree } from './payment-braintree';
+import { Braintree } from './payment-braintree';  // M2
+
+// import { PaymentBraintreeModule } from './payment-braintree'
 
 import { Paypal } from './paypal'
 // import { Example } from './module-template'
@@ -82,7 +84,8 @@ export const registerModules: VueStorefrontModule[] = [
   Url,
   OrderHistory,
   DndPrismicCMS,
-  Paypal
-  // Braintree
+  Paypal,
+  // PaymentBraintreeModule
+  Braintree
   // Example
 ]
