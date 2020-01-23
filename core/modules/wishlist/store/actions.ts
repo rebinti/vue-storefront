@@ -186,6 +186,7 @@ const actions: ActionTree<WishlistState, RootState> = {
           action1: { label: i18n.t('OK') }
         })
       }
+      return task
     })
   },
 }

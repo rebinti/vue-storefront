@@ -112,6 +112,7 @@ import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue';
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
 import { SwipeList, SwipeOut } from 'vue-swipe-actions';
 import RemoveButton from './RemoveButton';
+import Vue from 'vue'
 
 export default {
   props: {
@@ -165,10 +166,25 @@ export default {
       console.log('Changes in view page Wishlist');
       this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
     },
-    removeFromWishlist (product, index) {
-      return this.$store.state['wishlist']
-        ? this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
-        : false;
+    async removeFromWishlist (product, index) {
+      try {
+        const result = await this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
+        console.log('result after delete', result)
+        // if (result) {
+        // setTimeout(() => {
+        // Vue.forceUpdate()
+        this.$forceUpdate()
+        // }, 250);
+        // }
+      } catch (err) {
+        console.log('errrorr', err);
+      } finally {
+        console.log('finally');
+      }
+
+      // return this.$store.state['wishlist']
+      //   ? this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
+      //   : false;
     }
   }
 };

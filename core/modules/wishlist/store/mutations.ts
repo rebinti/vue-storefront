@@ -17,7 +17,15 @@ const mutations: MutationTree<WishlistState> = {
     }
   },
   [types.WISH_DEL_ITEM] (state, { product }) {
-    state.items.splice(product.prodIndex,1)
+    // const dupData = Object.assign([],state.items)
+    // dupData.splice(product.prodIndex,1)
+    // console.log('dupData dupData', dupData);
+    // state.items = []
+    // setTimeout(() => {
+    //   state.items = dupData
+    // }, 0);
+    state.items.splice(product.prodIndex,1) 
+
     // state.items = state.items.filter(p => p.parentSku !== product.parentSku)
   },
   [types.WISH_LOAD_WISH] (state, storedItems) {
