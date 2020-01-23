@@ -269,6 +269,12 @@ export default {
     }
   }
 }
+@media (max-width: 1440px) {
+  .item-2-6-grid .product-image img{
+      width: 228px;
+      height: 342px;
+  }  
+}
 @media (max-width: 1024px) {
   .item-2-6-grid .product-image img{
       width: 228px;
