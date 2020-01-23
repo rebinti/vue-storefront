@@ -12,10 +12,14 @@
     <span
       class="minicart-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary"
       v-cloak
-      v-show="productsInWishlist && productsInWishlist.length > 0"
       data-testid="minicartCount"
     >
-      {{ productsInWishlist.length }}
+      <template v-if="productsInWishlist.length > 0">
+        {{ productsInWishlist[0].length }}
+      </template>
+      <template v-else>
+        0
+      </template>
     </span>
   </button>
 </template>

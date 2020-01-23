@@ -72,8 +72,8 @@
           Add now
         </router-link>
       </div>
-
-      <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist" item-key="id">
+      <template v-if="productsInWishlist.length > 0">
+      <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist[0]" item-key="id">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
           <product :product="item" />
         </template>
@@ -89,6 +89,7 @@
           </div>
         </template>
       </swipe-list>
+      </template>
     </div>
 
     <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" />
@@ -126,7 +127,8 @@ export default {
     return {
       valueUp: 106,
       viewType: 'wishlist',
-      hideWishListForBoardFlag: false
+      hideWishListForBoardFlag: false,
+      page: 0
     };
   },
   components: {
@@ -167,13 +169,23 @@ export default {
       this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
     },
     async removeFromWishlist (product, index) {
-      try {
+      // this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));
+      try { 
         const result = await this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
         console.log('result after delete', result)
+        if ((this.productsInWishlist.length > 0) && this.productsInWishlist[this.page].length > 1) {
+          this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));
+        } else {
+          this.$store.dispatch('wishlist/syncWishlist', []);
+          return
+        }
+
+        this.$store.dispatch('wishlist/syncWishlist', this.productsInWishlist);
+
         // if (result) {
         // setTimeout(() => {
         // Vue.forceUpdate()
-        this.$forceUpdate()
+        // this.$forceUpdate()
         // }, 250);
         // }
       } catch (err) {

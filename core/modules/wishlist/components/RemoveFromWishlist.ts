@@ -14,7 +14,7 @@ export const RemoveFromWishlist = {
   methods: {
     removeFromWishlist (product: Product) {
       WishlistModule.register()
-      this.$store.dispatch('wishlist/removeItem', product)
+      this.$store.dispatch('wishlist/removeItem', { ...product, fromListView: true })
     }
   }
 }

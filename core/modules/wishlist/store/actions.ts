@@ -145,7 +145,7 @@ const actions: ActionTree<WishlistState, RootState> = {
     //   message: i18n.t('Product {productName} has been removed from wishlit!', { productName: htmlDecode(product.name) }),
     //   action1: { label: i18n.t('OK') }
     // })
-
+    
       /** To get the add Item to server */
       if(this.state.user && this.state.user.current === null) {
         rootStore.dispatch('notification/spawnNotification', {
@@ -171,7 +171,9 @@ const actions: ActionTree<WishlistState, RootState> = {
       console.log('api Result' , task)
       if (task.resultCode === 200) {
         console.log('api dataaaa Sucesss' , task.result)
-        commit(types.WISH_DEL_ITEM, { product })
+        if (product.fromListView) {
+           commit(types.WISH_DEL_ITEM, { product })
+        }
         rootStore.dispatch('boards/load' , true);
         rootStore.dispatch('notification/spawnNotification', {
           type: 'success',
@@ -188,6 +190,9 @@ const actions: ActionTree<WishlistState, RootState> = {
       }
       return task
     })
+  },
+  syncWishlist ({ commit }, products) {
+      commit(types.WISH_SYNC_ITEMS, products);
   },
 }
 
