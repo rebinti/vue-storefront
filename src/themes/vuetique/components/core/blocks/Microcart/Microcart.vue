@@ -33,7 +33,7 @@
       </router-link>
       {{ $t('to find something beautiful for You!') }}
     </div>
-     <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" ref="list" :items="productsInCart" item-key="sku">
+     <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" ref="list" :items="productsInCart" item-key="sku" :key="componentKey">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
           <product :product="item" />
         </template>
@@ -163,7 +163,8 @@ export default {
       addCouponPressed: false,
       couponCode: '',
       componentLoaded: false,
-      selectedRemoveProduct: null
+      selectedRemoveProduct: null,
+      componentKey: 0
     }
   },
   props: {
@@ -238,8 +239,12 @@ export default {
         this.removeFromCart()
       }
     },
-    removeFromCart (product) {
-      this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
+    async removeFromCart (product) {
+      const res = await this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
+      this.forceRerender()
+    },
+    forceRerender () {
+      this.componentKey += 1
     }
   }
 }

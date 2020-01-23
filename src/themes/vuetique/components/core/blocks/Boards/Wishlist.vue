@@ -38,6 +38,7 @@
       :items="boardsListItems"
       item-key="id"
       v-if="boardsListItems.length > 0 & !isBoardsItemsOpen"
+      :key="componentKeyBoards"
     >
       <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
         <boards-item @click="selectedBoard(item, index);$emit('chagesInView')" :product="item" />
@@ -78,6 +79,7 @@
       :items="selectedBoardItem.items"
       item-key="id"
       v-if="isBoardsItemsOpen"
+      :key="componentKeyProduct"
     >
       <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
         <product :product="item" :index-value="selectedBoardItemIndex" />
@@ -126,7 +128,9 @@ export default {
       swipedValue: 0,
       selectedBoardItem: {},
       selectedBoardItemIndex: 0,
-      isBoardItemIsLoading: false
+      isBoardItemIsLoading: false,
+      componentKeyProduct: 0,
+      componentKeyBoards: 0
     };
   },
   components: {
@@ -179,19 +183,46 @@ export default {
       //   }
       // }
     },
-    removeFromBoards (product) {
-      this.$store.state["boards"]
-        ? this.$store.dispatch("boards/removeBoard", product)
-        : false;
-      this.swipedValue = 0;
+    async removeFromBoards (product) {
+      // this.$store.state["boards"]
+      //   ? this.$store.dispatch("boards/removeBoard", product)
+      //   : false;
+      // this.swipedValue = 0;
+     
+      try {
+        const result = await this.$store.dispatch('boards/removeBoard', product);
+        this.forceRerenderBoards();
+      } catch (err) {
+        console.log('error while deleting', err);
+      } finally {
+        this.swipedValue = 0;
+      }
     },
-    removeFromBoardsProduct (product) {
-      console.log('remove From Boards-->', product);
-      return this.$store.state['boards'] ? this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem}) : false;
+    async removeFromBoardsProduct (product) {
+      // console.log('remove From Boards-->', product);
+      // return this.$store.state['boards'] ? this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem}) : false;
+
+      try {
+        const result = await this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem});
+        this.forceRerenderProduct();
+      } catch (err) {
+        console.log('error while deleting', err);
+      } finally {
+        this.swipedValue = 0;
+      }
+    },
+    forceRerenderProduct () {
+      this.componentKeyProduct += 1
+    },
+    forceRerenderBoards () {
+      this.componentKeyBoards += 1
     }
   },
   mounted () {
     this.windowWidth = window.innerWidth;
+    setTimeout(() => {
+      this.forceRerenderBoards()
+    }, 150);
   }
 };
 </script>
