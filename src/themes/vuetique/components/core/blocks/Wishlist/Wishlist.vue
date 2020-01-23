@@ -73,7 +73,7 @@
         </router-link>
       </div>
       <template v-if="productsInWishlist.length > 0">
-      <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist[0]" item-key="id">
+      <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist[0]" item-key="id" :key="componentKey">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
           <product :product="item" />
         </template>
@@ -128,7 +128,8 @@ export default {
       valueUp: 106,
       viewType: 'wishlist',
       hideWishListForBoardFlag: false,
-      page: 0
+      page: 0,
+      componentKey: 0
     };
   },
   components: {
@@ -181,11 +182,11 @@ export default {
         }
 
         this.$store.dispatch('wishlist/syncWishlist', this.productsInWishlist);
-
+        this.forceRerender()
         // if (result) {
         // setTimeout(() => {
         // Vue.forceUpdate()
-        // this.$forceUpdate()
+        this.$forceUpdate()
         // }, 250);
         // }
       } catch (err) {
@@ -197,6 +198,9 @@ export default {
       // return this.$store.state['wishlist']
       //   ? this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
       //   : false;
+    },
+    forceRerender () {
+      this.componentKey += 1
     }
   }
 };
