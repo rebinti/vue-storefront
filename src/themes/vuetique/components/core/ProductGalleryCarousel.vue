@@ -201,8 +201,12 @@ export default {
     },
     checkWindowSize() {
       console.log('this.windowWidth' , this.windowWidth)
-      if( this.windowWidth <= 768 ) {
+      if( this.windowWidth < 768 ) {
          this.Itemshow = 1
+      }else if(this.windowWidth == 768 ){
+        this.Itemshow = 2
+      }else if(this.windowWidth <= 1024 ){
+        this.Itemshow = 3
       }
       else {
           this.Itemshow = 4
@@ -331,6 +335,51 @@ img[lazy=loaded] {
       position: relative;
   }  */
 
+}
+@media (max-width: 2560px) {
+  .hooper-slide .product-image-container img{
+      width: 640px;
+      height: 960px;
+  }      
+  .hooper {
+    height: 960px;
+  }      
+}
+@media (max-width: 1920px) {
+  .hooper-slide .product-image-container img{
+      width: 461px;
+      height: 691px;
+  }      
+  .hooper {
+    height: 691px;
+  }      
+}
+@media (max-width: 1440px) {
+  .hooper-slide .product-image-container img{
+      width: 360px;
+      height: 540px;
+  }      
+  .hooper {
+    height: 540px;
+  }      
+}
+@media (max-width: 1024px) {
+  .hooper-slide .product-image-container img{
+      width: 341px;
+      height: 511.5px;
+  }      
+  .hooper {
+    height: 511.5px;
+  }      
+}
+@media (max-width: 768px) {
+  .hooper-slide .product-image-container img{
+      width: 384px;
+      height: 576px;
+  }      
+  .hooper {
+    height: 576px;
+  }      
 }
 @media (max-width: 576px) {
   .VueCarousel{
