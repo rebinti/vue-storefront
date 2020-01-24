@@ -229,7 +229,7 @@ export default {
       setTimeout(() => {
         this.forceRerenderBoards()
         this.$emit('chageRenderFlag')
-      }, 250);
+      }, 100);
     }
   },
   watch: {
@@ -239,7 +239,7 @@ export default {
         setTimeout(() => {
           this.forceRerenderBoards()
           this.$emit('chageRenderFlag')
-        }, 250);
+        }, 100);
       }
     }
   }

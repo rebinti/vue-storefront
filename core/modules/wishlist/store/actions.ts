@@ -45,13 +45,13 @@ const actions: ActionTree<WishlistState, RootState> = {
         let data  = [];
         commit(types.SET_WISHLIST_LOADED)
         data.push(...Object.keys(task.result).map(i => { return { ...task.result[i], wishlistItemId: i } }));
-        console.log('data datadata data', data);
+        // console.log('data datadata data', data);
         data.filter(async item => {
           let query = new SearchQuery()
           query = query.applyFilter({key: 'sku', value: {'eq': item.sku}})
           const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
           clientCartAddItems.push({...items[0], wishlistItemId: item.wishlistItemId })
-          console.log('clientCartAddItems' , clientCartAddItems);
+          // console.log('clientCartAddItems' , clientCartAddItems);
           // commit(types.WISH_LOAD_WISH, items[0])
           if(clientCartAddItems.length === data.length) {
             commit(types.WISH_LOAD_WISH, clientCartAddItems)

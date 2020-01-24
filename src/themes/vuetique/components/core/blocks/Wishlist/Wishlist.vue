@@ -172,7 +172,7 @@ export default {
     },
     async removeFromWishlist (product, index) {
       // this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));
-      try { 
+      try {
         const result = await this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
         console.log('result after delete', result)
         if ((this.productsInWishlist.length > 0) && this.productsInWishlist[this.page].length > 1) {
