@@ -6,7 +6,7 @@
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
   > -->
-  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" @click.native="itemClick(item)">
+  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
       <router-link
         class="col-4 bg-grey-lightest"
         :to="localizedRoute({

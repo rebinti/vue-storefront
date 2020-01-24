@@ -239,8 +239,8 @@ export default {
         this.removeFromCart()
       }
     },
-    async removeFromCart (product) {
-      const res = await this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
+    removeFromCart (product) {
+      this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
       this.forceRerender()
     },
     forceRerender () {
