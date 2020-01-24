@@ -628,7 +628,37 @@ export default {
     }
   }
 }
-
+@media (max-width: 2560px) {
+     
+}
+@media (max-width: 1920px) {
+ 
+}
+@media (max-width: 1440px) {
+    
+}
+@media (max-width: 1024px) {
+    
+}
+@media (max-width: 768px) {
+ .details-section  h1 {
+    font-size: 1rem;
+    line-height: 2rem;
+  }   
+  .details-section.md\:px-10{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;    
+  }
+  .details-section.md\:w-2\/5 {
+    width: 42%;
+  }
+  .details-section .text-h1 {
+    font-size: 1rem;
+  }
+  .details-section .pb-5 {
+    padding-bottom: .25rem;
+  }
+}
 @media (min-width: 576px) {
 
   .m_item{
