@@ -33,14 +33,14 @@
         <button
           class="button-type1"
           :class="{'active' : viewType === 'wishlist'}"
-          @click="viewType = 'wishlist'"
+          @click="viewType = 'wishlist';reRendBoards=false"
         >All items</button>
       </span>
       <span class="button-blck">
         <button
           class="button-type1"
           :class="{'active' : viewType === 'boards'}"
-          @click="viewType = 'boards'"
+          @click="viewType = 'boards';reRendBoards=true"
         >Boards</button>
       </span>
     </div>
@@ -92,7 +92,7 @@
       </template>
     </div>
 
-    <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" />
+    <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
     <div
       class="add_more_btn"
       v-show="viewType === 'boards'"
@@ -129,7 +129,8 @@ export default {
       viewType: 'wishlist',
       hideWishListForBoardFlag: false,
       page: 0,
-      componentKey: 0
+      componentKey: 0,
+      reRendBoards: false
     };
   },
   components: {
@@ -201,6 +202,9 @@ export default {
     },
     forceRerender () {
       this.componentKey += 1
+    },
+    chageRenderFlag () {
+      this.reRendBoards = false
     }
   }
 };

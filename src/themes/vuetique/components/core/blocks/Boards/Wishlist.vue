@@ -120,6 +120,11 @@ export default {
       type: Object,
       required: false,
       default: () => {}
+    },
+    rerender: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
@@ -220,9 +225,23 @@ export default {
   },
   mounted () {
     this.windowWidth = window.innerWidth;
-    setTimeout(() => {
-      this.forceRerenderBoards()
-    }, 150);
+    if (this.rerender) {
+      setTimeout(() => {
+        this.forceRerenderBoards()
+        this.$emit('chageRenderFlag')
+      }, 250);
+    }
+  },
+  watch: {
+    rerender () {
+      console.log('The rerender has changed!' , this.rerender);
+      if (this.rerender) {
+        setTimeout(() => {
+          this.forceRerenderBoards()
+          this.$emit('chageRenderFlag')
+        }, 250);
+      }
+    }
   }
 };
 </script>
