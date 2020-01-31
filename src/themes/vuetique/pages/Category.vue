@@ -1,9 +1,9 @@
 <template>
   <div id="category" class="st_brd"> 
     <div class="b_crumb">
-        <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
-    </div>  
-    
+      <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
+    </div>
+
     <header class="pb-16 row bg-grey-lightest mb-6 head_category">
 
       <!-- <div class="search_out_pop_box">
@@ -16,7 +16,7 @@
 
           <div class="search_bx_it">
 
-              <div class="search_bx_filter">                  
+              <div class="search_bx_filter" >                  
                   <button-full class="w-full" @click.native="openFilters">
                     {{ $t('Filters') }}
                   </button-full>
@@ -63,13 +63,15 @@
 
       </div>   
 
-      <div class="category_filter_out_pop_box" v-if="getCurrentSubCategory.length>0">
-        <div v-for="link in getCurrentSubCategory" class="sub-cat-box" :key="link.slug">
-        <router-link class="menu-link"
+      <div class="category_filter_out_pop_box" v-if="firstTimeflag.length>0">
+        <div v-for="link in firstTimeflag" class="sub-cat-box" :key="link.slug"  @click="toggleCategory(link)"
+        :style="colorFrom(link)">
+        <!-- <router-link class="menu-link"
           :to="localizedRoute({ name: 'category', params: { id: link.id, slug: link.slug }})"
         >
         {{ link.name }}
-      </router-link>
+      </router-link> -->
+            {{ link.name }}
         </div>
         <!-- <div class="sub-cat-box">
         test 2
@@ -78,6 +80,10 @@
         test 3
       </div> -->
       </div>   
+<!-- 
+      <div v-if="visibleProducts.length && categories1.length > 1" class="categories mb-4">
+        <category-panel :categories="categories1" v-model="selectedCategoryIds" />
+    </div> -->
 
       <div class="container d_item">
         <div class="row items-center mt-2">
@@ -91,7 +97,15 @@
           <div class="col-2 hidden lg:block">
             <sort-by />
           </div>
+           <!-- <active-filters :filters="filters.available" /> -->
         </div>
+
+        <div class="category_filter_out_pop_box" v-if="firstTimeflag.length>0" style="display:block;margin: 10px 0 0 0;" >
+          <div v-for="link in firstTimeflag" class="sub-cat-box" :key="link.slug"  @click="toggleCategory(link)"
+          :style="colorFrom(link)">
+              {{ link.name }}
+          </div>
+      </div>  
       </div>
       <div class="container lg:hidden d_item">
         <div class="row gutter-md mt-6">
@@ -135,7 +149,7 @@
               {{ $t('Please change Your search criteria and try again. If you still can\'t find what you\'re looking for, try visiting our homepage to check out our bestsellers!') }}
             </p>
           </div>
-          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="products" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="visibleProducts" />
         </div>
       </div>
     </div>
@@ -156,6 +170,11 @@ import { mapGetters } from 'vuex'
 import { mapState } from 'vuex'
 import config from 'config'
 
+// import CategoryPanel from 'theme/components/core/blocks/Category/CategoryPanel'
+
+// import Sidebar from 'src/modules/vsf-layered-navigation/components/Sidebar'
+// import ActiveFilters from 'src/modules/vsf-layered-navigation/components/ActiveFilters'
+
 export default {
   components: {
     ProductListing,
@@ -164,16 +183,27 @@ export default {
     SortBy,
     ButtonFull,
     Columns
+    // CategoryPanel
+    // ActiveFilters
   },
   data () {
     return {
       mobileFilters: false,
       defaultColumn: 3,
-      allCategories: []
+      allCategories: [],
+      selectedCategoryIds: [],
+      firstTimeflag: []
       // defaultColumnMobile: 2,
       // mobileGridData: config.mobileGridData
       // [{value: 2, image: '../assets/grid2.png', index: 0}, {value: 3, image: '../assets/grid3.jpg', index: 1}, {value: 4, image: '../assets/grid4.png', index: 2}],
       // seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0}
+    }
+  },
+
+  props: {
+    value: {
+      type: Array,
+      default: () => []
     }
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
@@ -222,6 +252,18 @@ export default {
       });
     },
 
+    categories1 () {
+      const categoriesMap = {}
+      this.products.forEach(product => {
+        if (product.category) {
+          [...product.category].forEach(category => {
+            categoriesMap[category.category_id] = category
+          })
+        }
+      })
+      return Object.keys(categoriesMap).map(categoryId => categoriesMap[categoryId])
+    },
+
     category () {
       return this.getCurrentCategory
     },
@@ -233,9 +275,34 @@ export default {
       } else {
         return []
       }
+    },
+
+    visibleProducts () {
+      const productList = this.products || []
+      if (this.selectedCategoryIds.length) {
+        return productList.filter(product => product.category_ids.some(categoryId => {
+          const catId = parseInt(categoryId)
+          return this.selectedCategoryIds.includes(catId)
+        }))
+      }
+      return productList
     }
   },
+
+  watch: {
+    '$route': 'validateRouteCategory'
+  },
+
+  mounted () {
+    this.firstTimeflag = Object.assign([], this.categories1);
+  },
   methods: {
+    validateRouteCategory () {
+      this.selectedCategoryIds = [];
+      setTimeout(() => {
+        this.firstTimeflag = Object.assign([], this.categories1);
+      }, 100);
+    },
     openFilters () {
       this.mobileFilters = true;
       const el = document.body; // to fix background scroll issue when the filter opened
@@ -274,6 +341,38 @@ export default {
       }
       // this.defaultColumnMobile = tdata.value;
       this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);
+    },
+    toggleCategory (category) {
+      // console.log('toggleCategory --->  ', category)
+      const isSelected = this.selectedCategoryIds.includes(category.category_id)
+      if (isSelected) {
+        this.selectedCategoryIds = this.selectedCategoryIds.filter(categoryId => categoryId !== category.category_id)
+        this.visibleProductsfilter()
+      } else {
+        this.selectedCategoryIds = []
+        this.selectedCategoryIds.push(category.category_id)
+        this.visibleProductsfilter() // this.$emit('input', [...this.value, category.id])
+      }
+    },
+
+    visibleProductsfilter () {
+      // console.log('selectedCategoryIds', this.selectedCategoryIds)
+      const productList = this.products || []
+      if (this.selectedCategoryIds.length) {
+        productList.filter(product => product.category_ids.some(categoryId => {
+          const catId = parseInt(categoryId)
+          return this.selectedCategoryIds.includes(catId)
+        }))
+      }
+      // console.log('visible prod', this.products)
+      // this.visibleProducts = productList
+    },
+    colorFrom (label) {
+      if (this.selectedCategoryIds.includes(label.category_id)) {
+        return 'background: #d2caca;min-width: 72px;height: 35px;float: left;border: 2px solid #919191;text-align: center;margin: 0 auto;padding: 3px 6px 0 5px;margin-right: 5px;margin-top: 5px;'
+      } else {
+        return 'background: #ffff;display:block;float: left;min-width: 72px;height: 35px;float: left;border: 2px solid #919191;text-align: center;margin: 0 auto;padding: 3px 6px 0 5px;margin-right: 5px;margin-top: 5px;'
+      }
     }
   },
   mixins: [Category]
@@ -308,8 +407,6 @@ export default {
   .category_filter_out_pop_box{    
        display: none; 
    }
- 
-    
 }
 
 
