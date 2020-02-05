@@ -1,5 +1,5 @@
 export function beforeRegistration (Vue, config, store, isServer) {
-  const CURRENT_METHOD_CODE = 'braintree'
+  const CURRENT_METHOD_CODE = 'gene_braintree_creditcard'
 
   store.dispatch('payment/addMethod', {
     'title': 'Braintree',
@@ -13,6 +13,7 @@ export function beforeRegistration (Vue, config, store, isServer) {
   if (!Vue.prototype.$isServer) {
     let isCurrentPaymentMethod = false
     store.watch((state) => state.checkout.paymentDetails, (prevMethodCode, newMethodCode) => {
+      console.log('beforeRegistration payment', newMethodCode, CURRENT_METHOD_CODE);
       isCurrentPaymentMethod = newMethodCode === CURRENT_METHOD_CODE
     })
 
