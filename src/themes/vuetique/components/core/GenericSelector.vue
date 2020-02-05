@@ -27,6 +27,10 @@ export default {
       @apply border-grey-dark text-black;
     }
 
+    &.out-of-stock {
+       background: #c5c5c5;
+    }
+
     &:disabled {
       @apply text-disabled border-disabled cursor-not-allowed;
     }

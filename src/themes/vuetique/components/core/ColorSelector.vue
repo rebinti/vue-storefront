@@ -37,6 +37,10 @@ export default {
     &.active {
       @apply border-black opacity-100;
     }
+
+    &.out-of-stock {
+       background: #c5c5c5;
+    }
   }
 
   .color-inside {

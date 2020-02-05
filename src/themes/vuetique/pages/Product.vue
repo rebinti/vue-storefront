@@ -143,6 +143,7 @@
                             :class="{ active: s.id == configuration[option.attribute_code].id }"
                             v-focus-clean
                           />
+          
                         </div>
                         <div :class="option.attribute_code" v-else>
                           <generic-selector
@@ -272,30 +273,34 @@
                       </router-link>
                       <size-selector
                         v-for="(s, i) in options[option.attribute_code]"
-                        v-if="isOptionAvailable(s)"
+                      
                         :key="i"
                         :id="s.id"
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
-
-                        :class="{ active: s.id == configuration[option.attribute_code].id }"
+                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                       
                         v-focus-clean
                       />
+
+                       <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
                     </div>
                     <div :class="option.attribute_code" v-else>
-                      <generic-selector
+                       <generic-selector
                         v-for="(s, i) in options[option.attribute_code]"
-                        v-if="isOptionAvailable(s)"
+                        
                         :key="i"
                         :id="s.id"
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
 
-                        :class="{ active: s.id == configuration[option.attribute_code].id }"
+                        
+                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         v-focus-clean
                       />
+                      <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
                     </div>
                   </div>
                 </div>
@@ -534,6 +539,30 @@ export default {
       this.$store.dispatch('ui/updateYoptoProduct' , this.product)
       this.$store.dispatch('ui/toggleReviewPanel')
     },
+    checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
+       if (optionIndex > 0) {
+          let data = this.product.configurable_children.find(val => {
+          return (val[loopItem.attribute_code] == loopItem.id) &&
+            (val[fullConfigOption[0].attribute_code] == this.options[fullConfigOption[0].attribute_code].find(val1 => val1.id === this.configuration[fullConfigOption[0].attribute_code].id).id)
+          });
+          if (data) {
+            if (data.stock.is_in_stock === false) {
+              if (activeFlag) {
+               return 'active out-of-stock'
+              } else {
+                return 'out-of-stock'
+              }
+            } else if (activeFlag) {
+              return 'active'
+            }
+            else {
+              return ''
+            }
+          } else {
+            return ''
+          }
+       }
+    }
   }
 }
 </script>
