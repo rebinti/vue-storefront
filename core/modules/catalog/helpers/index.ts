@@ -58,6 +58,8 @@ export function findConfigurableChildAsync ({ product, configuration = null, sel
       return configurableChild.sku === configuration.sku // by sku or first one
     } else {
       return Object.keys(omit(configuration, ['price'])).every((configProperty) => {
+        // console.log('everyyyyy omit',configProperty, configurableChild , configuration[configProperty])
+        // console.log('retnnn', toString(configurableChild[configProperty]) === toString(configuration[configProperty].id))
         if (!configuration[configProperty] || typeof configuration[configProperty].id === 'undefined') return true // skip empty
         return toString(configurableChild[configProperty]) === toString(configuration[configProperty].id)
       })
@@ -68,6 +70,7 @@ export function findConfigurableChildAsync ({ product, configuration = null, sel
 
 export function isOptionAvailableAsync (context, { product, configuration }) {
   const variant = findConfigurableChildAsync({ product: product, configuration: configuration, availabilityCheck: true })
+  // console.log('isOptionAvailableAsync', variant ,  typeof variant !== 'undefined' && variant !== null);
   return typeof variant !== 'undefined' && variant !== null
 }
 

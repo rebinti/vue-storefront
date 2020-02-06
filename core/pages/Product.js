@@ -125,8 +125,10 @@ export default {
       CompareProduct.methods.removeFromCompare.call(this, this.product)
     },
     isOptionAvailable (option) { // check if the option is available
+      // console.log('isOptionAvailable', option);
       let currentConfig = Object.assign({}, this.configuration)
       currentConfig[option.attribute_code] = option
+      // console.log('currentConfig', currentConfig)
       return isOptionAvailableAsync(this.$store, { product: this.product, configuration: currentConfig })
     },
     onAfterCustomOptionsChanged (payload) {
