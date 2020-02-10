@@ -59,6 +59,7 @@ export default {
                     // Submit payload.nonce to your server
                     self.nonce = payload.nonce
                     console.error('success')
+                    self.doPayment()
                     self.$bus.$emit('checkout-do-placeOrder', {
                       payment_method_nonce: self.nonce
                     })
@@ -88,8 +89,8 @@ export default {
       console.log('getNonce --> ', this.nonce, this.grandTotal, this.currency);
       return {nonce: this.nonce, total: this.grandTotal, currency: this.currency}
     },
-    doPayment (data, actions) {
-      console.log('doPayment --> ', data, actions);
+    doPayment () { //  doPayment (data, actions)
+      console.log('doPayment --> ');
       return store.dispatch('braintree/doPayment', this.getNonce())
     },
     onAuthorize (data, actions) {
