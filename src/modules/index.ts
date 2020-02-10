@@ -1,4 +1,4 @@
-// import { extendModule } from '@vue-storefront/core/lib/module'
+import { extendModule } from '@vue-storefront/core/lib/module'
 import { VueStorefrontModule } from '@vue-storefront/core/lib/module'
 import { Catalog } from '@vue-storefront/core/modules/catalog'
 import { Cart } from '@vue-storefront/core/modules/cart'
@@ -31,6 +31,7 @@ import { Braintree } from './payment-braintree';  // M2
 // import { PaymentBraintreeModule } from './payment-braintree'
 
 import { Paypal } from './paypal'
+import { FacebookPixel } from './vsf-facebook-pixel'
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -58,6 +59,11 @@ import { Paypal } from './paypal'
  * In VS 1.8 this modules will be seamlessly lazyLoaded after proper action dispatch
  * - Wishlist
  */
+
+// import { layeredNavigationModule } from './vsf-layered-navigation';
+
+// extendModule(layeredNavigationModule)
+
 export const registerModules: VueStorefrontModule[] = [
   Checkout,
   Catalog,
@@ -86,6 +92,8 @@ export const registerModules: VueStorefrontModule[] = [
   DndPrismicCMS,
   Paypal,
   // PaymentBraintreeModule
-  Braintree
+  Braintree,
+  FacebookPixel
+  // layeredNavigationModule
   // Example
 ]
