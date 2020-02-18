@@ -98,6 +98,14 @@
             exact
           >{{ $t('Magazine') }}</router-link>
         </li>
+         <li>
+          <router-link
+            class="menu-link"
+            :to="localizedRoute('/search-spring')"
+            exact
+          >{{ $t('Search Spring') }}
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>

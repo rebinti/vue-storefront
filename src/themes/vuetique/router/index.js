@@ -48,7 +48,7 @@ let routes = [
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
 
-  { name: 'mobile-splash', path: '/splash', component: SplashScreen },
+  { name: 'mobile-splash', path: '/search-spring', component: SplashScreen },
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin }
 ]
 if (!config.products.useShortCatalogUrls) {
