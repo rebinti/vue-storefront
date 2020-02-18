@@ -1,16 +1,30 @@
 <template>
   <div>
-    Mobile Splash Screeen 
+   Search with Search Spring  
     <input type="text" v-model="search">
     <button @click="getSearchData(search)">Search</button>
+<h1>Filters</h1>
+ <div class="container py-10 leading-loose static-content customm" >
+   <div v-for="filter in searchRes.facets" :key="filter.field"> 
+     <h2><b>{{filter.label}}</b></h2>
+  
+   <div v-for="values in filter.values" :key="values.value">
+      {{values.label}}
+   </div>
+ </div >
 
-    <h1>Results</h1>
-    <div class="container py-10 leading-loose static-content"
+
+  </div> 
+  <h1>Results</h1>
+    <div class="container py-10 leading-loose static-content customm" 
     v-if="searchRes" v-html="searchRes.results" />
   </div>
 </template>
 
 <script>
+import { TaskQueue } from '@vue-storefront/core/lib/sync'
+import fetch from 'isomorphic-fetch'
+
 export default {
   name: "SplashScreen",
   props: {
@@ -37,8 +51,9 @@ export default {
   methods: {
   async getSearchData (data) {
       let searchUrl = 'https://api.searchspring.net/api/search/search?siteId=akjx6f&rq=' + data
+      // let searchUrl = 'https://api.searchspring.net/api/search/search?siteId=akjx6f&rq=jeans&filter.size=6' 
       try {
-        await fetch(searchUrl, {
+        const resss = await fetch(searchUrl, {
           method: 'GET',
           headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -46,14 +61,17 @@ export default {
           }
           // body: JSON.stringify()
         }).then(res => {
-          console.log('ress', res);
-          this.searchRes = res;
-                    console.log('this.searchRes', this.searchRes);
-
+          return res.json()
         });
+        console.log('ress', resss);
+        this.searchRes = resss;
+        console.log('this.searchRes', this.searchRes);
       } catch (e) {
 
       };
+    },
+    filterData (data) {
+
     }
 
   },
@@ -67,7 +85,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style>
+.customm .item{
+    float: left;
+    width: 200px;
+}
 
 </style>
