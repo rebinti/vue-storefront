@@ -42,11 +42,10 @@
             data-testid="productGalleryImage"
             itemprop="image"
           >
-          <product-video
-            v-if="images.video && (index === currentPage)"
-            v-bind="images.video"
+          <product-video-slide
+            v-if="images.video && images.video !== null"
+            :video_id="images.video"
             :index="index"
-            @video-started="onVideoStarted"
           />
         </div>
       </slide>
@@ -70,6 +69,8 @@ import ProductVideo from './ProductVideo'
 import { onlineHelper } from '@vue-storefront/core/helpers'
 import 'hooper/dist/hooper.css';
 
+import ProductVideoSlide from './ProductVideoSlide'
+
 export default {
   name: 'ProductGalleryCarousel',
   components: {
@@ -78,7 +79,8 @@ export default {
     Slide,
     HooperProgress,    
     HooperPagination,
-    ProductVideo
+    ProductVideo,
+    ProductVideoSlide
   },
   props: {
     gallery: {
