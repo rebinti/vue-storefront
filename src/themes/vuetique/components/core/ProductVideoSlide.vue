@@ -16,9 +16,8 @@
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           @load="iframeIsLoaded()"
         /> -->
-         <video class="video-fluid" ref="videoElement" id="videoElement" loop controls style="width:100%;margin-top: -313px;height: auto;}"
-          @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
-           <source :src="video_id" type="video/mp4" />
+        <video class="video-fluid" ref="videoElement" id="videoElement" loop controls height="720" style="width:100%;margin-top: -313px;height: 720px;}" @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
+          <source :src="video_id" type="video/mp4" />
         </video>
       </div>
     </div>

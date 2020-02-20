@@ -550,12 +550,12 @@ export function getMediaGallery (product) {
       }
     }
   }
-  if(product && product.meta_title && product.meta_title != null) {
+  if(product && product.video_link && product.video_link != null) {
     mediaGallery.push({
-      'src': product.meta_title,
-      'loading': product.meta_title,
-      'error': product.meta_title,
-      'video': product.meta_title
+      'src': product.video_thumbnail,
+      'loading': product.video_thumbnail,
+      'error': product.video_thumbnail,
+      'video': product.video_link
     })
   }
   return mediaGallery
