@@ -52,9 +52,9 @@ export default {
           Vue.prototype.$bus.$emit('notification-progress-stop')
           button.addEventListener('click', () => {
             console.log('dropinInstance button click', dropinInstance);
-            Vue.prototype.$bus.$emit('notification-progress-start', 'Processing payment...')
             if (dropinInstance.isPaymentMethodRequestable()) {
-              setTimeout(() => {
+              Vue.prototype.$bus.$emit('notification-progress-start', 'Processing payment...')
+              setTimeout(() => {  
                 dropinInstance.requestPaymentMethod((err, payload) => {
                   if (!err) {
                     console.debug(payload)
@@ -68,6 +68,7 @@ export default {
                     // })
                   } else {
                     console.error('requestPaymentMethod payload succ', err)
+                    Vue.prototype.$bus.$emit('notification-progress-stop')
                   }
                 }).catch((requestPaymentMethodErr) => {
                   // No payment method is available.
@@ -95,11 +96,17 @@ export default {
     doPayment () { //  doPayment (data, actions)
       // Vue.prototype.$bus.$emit('notification-progress-stop')
       store.dispatch('braintree/doPayment', this.getNonce()).then(res => {
-        // console.log('result', res);
-        this.$bus.$emit('checkout-do-placeOrder', {
-          payment_method_nonce: this.nonce,
-          do_payment_status: res.result.result.transaction
-        })
+        console.log('result', res);
+        if (res && res.code && res.code === 200) {
+          this.$bus.$emit('checkout-do-placeOrder', {
+            payment_method_nonce: this.nonce,
+            do_payment_status: res.result.result.transaction
+          })
+        } else {
+          Vue.prototype.$bus.$emit('notification-progress-stop')
+        }  
+      }, err => {
+            Vue.prototype.$bus.$emit('notification-progress-stop')
       })
     },
     onAuthorize (data, actions) {
