@@ -7,6 +7,7 @@
 import store from '@vue-storefront/core/store'
 // import {currentStoreView} from '@vue-storefront/store/lib/multistore'
 import { currentStoreView } from '@vue-storefront/core/store/lib/multistore'
+import Vue from 'vue'
 
 export default {
   name: 'BraintreeDropin',
@@ -22,6 +23,7 @@ export default {
   },
   mounted () {
     this.configureBraintree()
+    Vue.prototype.$bus.$emit('notification-progress-start', 'Please wait for payment....')
   },
   computed: {
     grandTotal () {
@@ -36,7 +38,6 @@ export default {
       store.dispatch('braintree/generateToken').then((resp) => {
         var dropin = require('braintree-web-drop-in')
         console.debug('Code for braintree:' + resp)
-        console.log('Code for braintree:---' + resp)
         var button = document.querySelector('.place-order-btn')
         dropin.create({
           authorization: resp,
@@ -48,6 +49,7 @@ export default {
           }
         }).then((dropinInstance) => {
           console.log('dropinInstance', dropinInstance);
+          Vue.prototype.$bus.$emit('notification-progress-stop')
           button.addEventListener('click', () => {
             console.log('dropinInstance button click', dropinInstance);
             if (dropinInstance.isPaymentMethodRequestable()) {
@@ -60,9 +62,9 @@ export default {
                     self.nonce = payload.nonce
                     console.error('success')
                     self.doPayment()
-                    self.$bus.$emit('checkout-do-placeOrder', {
-                      payment_method_nonce: self.nonce
-                    })
+                    // self.$bus.$emit('checkout-do-placeOrder', {
+                    //   payment_method_nonce: self.nonce
+                    // })
                   } else {
                     console.error('requestPaymentMethod payload succ', err)
                   }
@@ -82,7 +84,7 @@ export default {
       })
     },
     getTransactions () {
-       console.log('getTransactions --> ', this.grandTotal, this.currency);
+      console.log('getTransactions --> ', this.grandTotal, this.currency);
       return {amount: {total: this.grandTotal, currency: this.currency}}
     },
     getNonce () {
@@ -90,8 +92,13 @@ export default {
       return {nonce: this.nonce, total: this.grandTotal, currency: this.currency}
     },
     doPayment () { //  doPayment (data, actions)
-      console.log('doPayment --> ');
-      return store.dispatch('braintree/doPayment', this.getNonce())
+      store.dispatch('braintree/doPayment', this.getNonce()).then(res => {
+        // console.log('result', res);
+        this.$bus.$emit('checkout-do-placeOrder', {
+          payment_method_nonce: this.nonce,
+          do_payment_status: res.result.result.transaction
+        })
+      })
     },
     onAuthorize (data, actions) {
       return true
