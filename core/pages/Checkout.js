@@ -307,8 +307,10 @@ export default {
     placeOrder () {
       this.checkConnection({ online: typeof navigator !== 'undefined' ? navigator.onLine : true })
       if (this.checkStocks()) {
+        Vue.prototype.$bus.$emit('notification-progress-stop')
         this.$store.dispatch('checkout/placeOrder', { order: this.prepareOrder() })
       } else {
+        Vue.prototype.$bus.$emit('notification-progress-stop')
         this.notifyNotAvailable()
       }
     },

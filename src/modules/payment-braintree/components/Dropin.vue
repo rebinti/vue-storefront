@@ -52,6 +52,7 @@ export default {
           Vue.prototype.$bus.$emit('notification-progress-stop')
           button.addEventListener('click', () => {
             console.log('dropinInstance button click', dropinInstance);
+            Vue.prototype.$bus.$emit('notification-progress-start', 'Processing payment...')
             if (dropinInstance.isPaymentMethodRequestable()) {
               setTimeout(() => {
                 dropinInstance.requestPaymentMethod((err, payload) => {
@@ -92,6 +93,7 @@ export default {
       return {nonce: this.nonce, total: this.grandTotal, currency: this.currency}
     },
     doPayment () { //  doPayment (data, actions)
+      // Vue.prototype.$bus.$emit('notification-progress-stop')
       store.dispatch('braintree/doPayment', this.getNonce()).then(res => {
         // console.log('result', res);
         this.$bus.$emit('checkout-do-placeOrder', {
