@@ -22,7 +22,7 @@ import { AmpRenderer } from './amp-renderer';
 import { PaymentBackendMethods } from './payment-backend-methods';
 import { PaymentCashOnDelivery } from './payment-cash-on-delivery';
 import { RawOutputExample } from './raw-output-example'
-import { InstantCheckout } from './instant-checkout'
+// import { InstantCheckout } from './instant-checkout'
 import { OrderHistory } from './order-history'
 
 import { DndPrismicCMS } from './dnd-prismic-cms'
@@ -32,6 +32,9 @@ import { Braintree } from './payment-braintree';  // M2
 
 import { Paypal } from './paypal'
 import { FacebookPixel } from './vsf-facebook-pixel'
+
+import { ExternalCheckout } from './vsf-external-checkout'
+
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -86,14 +89,15 @@ export const registerModules: VueStorefrontModule[] = [
   PaymentCashOnDelivery,
   RawOutputExample,
   AmpRenderer,
-  InstantCheckout,
+  // InstantCheckout,
   Url,
   OrderHistory,
   DndPrismicCMS,
   Paypal,
   // PaymentBraintreeModule
   Braintree,
-  FacebookPixel
+  FacebookPixel,
+  ExternalCheckout
   // layeredNavigationModule
   // Example
 ]
