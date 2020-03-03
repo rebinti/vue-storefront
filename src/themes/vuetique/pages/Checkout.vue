@@ -16,7 +16,7 @@
           <shipping class="line relative" :is-active="activeSection.shipping" />
           <payment class="line relative" :is-active="activeSection.payment" />
           <div class="payment">
-            <braintree-dropin v-if="payment.paymentMethod === 'gene_braintree_creditcard'"/>
+            <braintree-dropin v-if="payment.paymentMethod === 'braintree'"/>
           </div>
           <order-review class="line relative" :is-active="activeSection.orderReview" />
           <div id="custom-steps" />

@@ -1,5 +1,5 @@
 export function beforeRegistration (Vue, config, store, isServer) {
-  const CURRENT_METHOD_CODE = 'gene_braintree_creditcard'
+  const CURRENT_METHOD_CODE = 'braintree'
 
   store.dispatch('payment/addMethod', {
     'title': 'Braintree',
