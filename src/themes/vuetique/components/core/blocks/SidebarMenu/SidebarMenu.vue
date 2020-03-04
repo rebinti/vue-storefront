@@ -45,6 +45,7 @@
           :category-links="category.children_data"
           :id="category.id"
           :parent-slug="category.slug"
+          :parent-path="category.url_path"
         />
       </li>
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">

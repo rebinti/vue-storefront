@@ -11,7 +11,7 @@
       >
         <router-link
           class="category-link"
-          :to="localizedRoute({ name: 'category', params: { id: id, slug: parentSlug }})"
+          :to="categoryLink({ url_path: parentPath, slug: parentSlug })"
           data-testid="categoryLink"
         >
           {{ $t('View all') }}
@@ -31,7 +31,7 @@
           <router-link
             v-else
             class="category-link"
-            :to="localizedRoute({ name: 'category', params: { id: link.id, slug: link.slug }})"
+            :to="categoryLink(link)"
           >
             {{ link.name }}
           </router-link>
@@ -41,6 +41,7 @@
           :id="link.id"
           v-if="link.children_count > 0"
           :parent-slug="link.slug"
+          :parent-path="link.url_path"
         />
       </li>
     </ul>
@@ -88,6 +89,9 @@ import SubBtn from './SubBtn.vue'
 import i18n from '@vue-storefront/i18n'
 import MyProfile from '@vue-storefront/core/compatibility/components/blocks/MyAccount/MyProfile'
 
+import config from 'config'
+import { formatCategoryLink } from '@vue-storefront/core/modules/url/helpers'
+
 export default {
   name: 'SubCategory',
   mixins: [MyProfile],
@@ -105,6 +109,11 @@ export default {
       default: false
     },
     parentSlug: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    parentPath: {
       type: String,
       required: false,
       default: ''
@@ -169,6 +178,9 @@ export default {
           action1: { label: i18n.t('OK') }
         })
       }
+    },
+    categoryLink (category) {
+      return formatCategoryLink(category)
     }
   }
 }
