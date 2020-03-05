@@ -138,7 +138,9 @@
     <div class="container pb-16">
       <div class="row gutter-md">
         <div class="col-3 hidden lg:block">
-          <sidebar :filters="filters.available" />
+          <div :class="{ fixed: fixedOrderPanel }">
+            <sidebar :filters="filters.available" />
+          </div>
         </div>
         <div class="col-12 lg:col-9 pr_list_sec_main">
           <div v-if="isCategoryEmpty" class="hidden-xs">
@@ -192,7 +194,8 @@ export default {
       defaultColumn: 3,
       allCategories: [],
       selectedCategoryIds: [],
-      firstTimeflag: []
+      firstTimeflag: [],
+      fixedOrderPanel: false
       // defaultColumnMobile: 2,
       // mobileGridData: config.mobileGridData
       // [{value: 2, image: '../assets/grid2.png', index: 0}, {value: 3, image: '../assets/grid3.jpg', index: 1}, {value: 4, image: '../assets/grid4.png', index: 2}],
@@ -295,6 +298,7 @@ export default {
 
   mounted () {
     this.firstTimeflag = Object.assign([], this.categories1);
+    document.addEventListener('scroll',  this.handleScroll);
   },
   methods: {
     validateRouteCategory () {
@@ -373,7 +377,30 @@ export default {
       } else {
         return 'background: #ffff;display:block;float: left;min-width: 72px;height: 35px;float: left;border: 2px solid #919191;text-align: center;margin: 0 auto;padding: 3px 6px 0 5px;margin-right: 5px;margin-top: 5px;'
       }
-    }
+    },
+    handleScroll: function(){
+            const checkWindow = window !== undefined && window.scrollY;
+
+            if (checkWindow && window.scrollY > 280) {
+              this.fixedOrderPanel = true
+            } else {
+              this.fixedOrderPanel = false
+          }
+
+        const scrollFix = (scrolled) => {
+            if (scrolled > 280) {
+
+              this.fixedOrderPanel = true
+            } else {
+              this.fixedOrderPanel = false
+            }
+        }
+
+        }
+  },
+  destroyed: function () {
+    document.removeEventListener('scroll', this.handleScroll);
+
   },
   mixins: [Category]
 }
@@ -392,7 +419,11 @@ export default {
     top: 73px;
   }
 }
-
+.fixed{
+  position: fixed;
+  top: 0px;
+  padding: 1%;
+ }
 
 
 </style>
