@@ -9,14 +9,7 @@
   <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
       <router-link
         class="col-4 bg-grey-lightest"
-        :to="localizedRoute({
-          name: product.type_id + '-product',
-          params: {
-            parentSku: product.parentSku ? product.parentSku : product.sku,
-            slug: product.slug,
-            childSku: product.sku
-          }
-        })"
+        :to="productLink"
         data-testid="productLink"
       >
         <img class="image" v-lazy="thumbnail" alt="">
@@ -25,14 +18,7 @@
         <div>
           <router-link
             class="text-black product-title"
-            :to="localizedRoute({
-              name: product.type_id + '-product',
-              params: {
-                parentSku: product.parentSku ? product.parentSku : product.sku,
-                slug: product.slug,
-                childSku: product.sku
-              }
-            })"
+            :to="productLink"
             data-testid="productLink"
           >
             {{ product.name | htmlDecode }}
@@ -129,6 +115,9 @@ import ApplyButton from './ApplyButton'
 
 import QtyInput from 'theme/components/theme/QtyInput'
 
+import { currentStoreView } from '@vue-storefront/core/lib/multistore'
+import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
+
 export default {
   components: {
     EditButton,
@@ -188,6 +177,11 @@ export default {
     },
     swipeRightHandler () {
       if (this.windowWidth <= 760) this.swipedValue = -5;
+    }
+  },
+  computed: {
+    productLink () {
+      return formatProductLink(this.product, currentStoreView().storeCode)
     }
   }
 }
