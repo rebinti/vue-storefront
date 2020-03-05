@@ -8,7 +8,7 @@
     >
       <router-link
         class="menu-link"
-        :to="localizedRoute({ name: 'category', params: { id: id, slug: parentSlug }})"
+        :to="categoryLink({ url_path: parentPath, slug: parentSlug })"
         data-testid="categoryLink"
       >
         {{ $t('View all') }}
@@ -36,7 +36,7 @@
       <router-link
         v-else
         class="menu-link"
-        :to="localizedRoute({ name: 'category', params: { id: link.id, slug: link.slug }})"
+        :to="categoryLink({ url_path: link.url_path, slug: link.slug })"
       >
         {{ link.name }}
       </router-link>
@@ -46,12 +46,15 @@
         :id="link.id"
         v-if="link.children_count > 0"
         :parent-slug="link.slug"
+        :parent-path="link.url_path"
         class="top-0 left-100"
       />
     </li>
   </ul>
 </template>
 <script>
+import { formatCategoryLink } from '@vue-storefront/core/modules/url/helpers'
+
 export default {
   name: 'SubCategory',
   props: {
@@ -68,6 +71,11 @@ export default {
       type: null,
       required: false,
       default: false
+    },
+    parentPath: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
@@ -82,6 +90,11 @@ export default {
       } else {
         return this.$store.state.category.list.filter(c => { return c.parent_id === this.id }) // return my child categories
       }
+    }
+  },
+  methods: {
+    categoryLink (category) {
+      return formatCategoryLink(category)
     }
   }
 }

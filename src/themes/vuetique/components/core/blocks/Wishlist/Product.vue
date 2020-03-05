@@ -8,10 +8,8 @@
   <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" >
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
-        <router-link :to="localizedRoute({
-          name: product.type_id + '-product',
-          params: { parentSku: product.parentSku ? product.parentSku : product.sku, slug: product.slug, childSku: product.sku }
-        })"
+        <router-link :to="productLink"
+                     data-testid="productLink"
         >
           <img class="image" v-lazy="thumbnail">
         </router-link>
@@ -23,10 +21,8 @@
           <div @click="closeWishlist">
             <router-link
               class="text-black product-title"
-              :to="localizedRoute({
-                name: product.type_id + '-product',
-                params: { parentSku: product.parentSku ? product.parentSku : product.sku, slug: product.slug ? product.slug : product.url_key, childSku: product.sku }
-              })"
+              :to="productLink"
+              data-testid="productLink"
             >
               {{ product.name | htmlDecode }}
             </router-link>
@@ -70,6 +66,8 @@
 import Product from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Product'
 import RemoveButton from './RemoveButton'
 import AddToCart from 'theme/components/core/AddToCart.vue'
+import { currentStoreView } from '@vue-storefront/core/lib/multistore'
+import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 
 export default {
   data () {
@@ -84,7 +82,12 @@ export default {
     AddToCart
   },
   mounted () {
-     this.windowWidth =  window.innerWidth;
+    this.windowWidth =  window.innerWidth;
+  },
+  computed: {
+    productLink () {
+      return formatProductLink(this.product, currentStoreView().storeCode)
+    }
   },
   methods: {
     movingHandler () {

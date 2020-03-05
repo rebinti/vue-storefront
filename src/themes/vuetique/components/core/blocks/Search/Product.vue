@@ -6,14 +6,7 @@
     >
       <router-link
         class="row items-center border-t border-grey-lighter relative sm:px-3 py-2 sm:pr-4"
-        :to="localizedRoute({
-          name: product.type_id + '-product',
-          params: {
-            parentSku: product.parentSku ? product.parentSku : product.sku,
-            slug: product.slug,
-            childSku: product.sku
-          }
-        })"
+        :to="productLink"
         data-testid="productLink"
       >
         <div class="col-auto mr-1 sm:mr-4 bg-grey-lightest">

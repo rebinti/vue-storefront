@@ -64,7 +64,6 @@
             :aria-label="$t('Show subcategories')"
             data-testid="categoryButton"
             @click="toggleSubMenu(category.id)"
-
           >{{ category.name }}</button>
           <router-link
             v-else
@@ -77,6 +76,7 @@
             :category-links="category.children_data"
             :id="category.id"
             :parent-slug="category.slug"
+            :parent-path="category.url_path"
             class="left-0"
           />
         </li>
