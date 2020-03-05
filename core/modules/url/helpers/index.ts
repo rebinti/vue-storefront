@@ -60,7 +60,7 @@ export function normalizeUrlPath (url: string): string {
 }
 
 export function formatCategoryLink (category: { url_path: string, slug: string }): string {
-  return config.seo.useUrlDispatcher ? ('/' + category.url_path) : ('/c/' + category.slug)
+  return config.seo.useUrlDispatcher ? ('/' + category.url_path).replace('.html' , '') : ('/c/' + category.slug)
 }
 
 export function formatProductLink (
@@ -76,10 +76,11 @@ export function formatProductLink (
 ): string | LocalizedRoute {
   if (config.seo.useUrlDispatcher && product.url_path) {
     let routeData: LocalizedRoute;
+    product.url_path =  product.url_path.replace('.html' , '');
     if (product.configurable_children && product.configurable_children.length > 0) {
       routeData = {
         path: product.url_path,
-        params: { childSku: product.sku }
+        // params: { childSku: product.sku }
       }
     } else {
       routeData = { path: product.url_path }

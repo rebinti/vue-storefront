@@ -69,9 +69,10 @@ const actions: ActionTree<CategoryState, RootState> = {
     if (skipCache || ((!context.state.list || context.state.list.length === 0) || customizedQuery)) {
       return quickSearchByQuery({ entityType: 'category', query: searchQuery, sort: sort, size: size, start: start, includeFields: includeFields, excludeFields: excludeFields }).then((resp) => {
         for (let category of resp.items) {
+          // console.log('category.url_path && updateState', category.url_path ,  updateState);
           if (category.url_path && updateState) {
             rootStore.dispatch('url/registerMapping', {
-              url: localizedDispatcherRoute(category.url_path, currentStoreView().storeCode),
+              url: localizedDispatcherRoute(category.url_path.replace('.html' , ''), currentStoreView().storeCode),
               routeData: {
                 params: {
                   'slug': category.slug
@@ -204,6 +205,7 @@ const actions: ActionTree<CategoryState, RootState> = {
    * Filter category products
    */
   products (context, { populateAggregations = false, filters = [], searchProductQuery, current = 0, perPage = 50, sort = '', includeFields = null, excludeFields = null, configuration = null, append = false, skipCache = false, cacheOnly = false }) {
+    console.log('fileter valuee' , filters)
     context.dispatch('setSearchOptions', {
       populateAggregations,
       filters,
@@ -238,6 +240,8 @@ const actions: ActionTree<CategoryState, RootState> = {
     let t0 = new Date().getTime()
 
     const precachedQuery = searchProductQuery
+    console.log('searchProductQuery' , searchProductQuery);
+    console.log('includeFields' , includeFields);
     let productPromise = rootStore.dispatch('product/list', {
       query: precachedQuery,
       start: current,
@@ -250,6 +254,7 @@ const actions: ActionTree<CategoryState, RootState> = {
       updateState: !cacheOnly,
       prefetchGroupProducts: prefetchGroupProducts
     }).then((res) => {
+      console.log("result products []=" , res)
       let t1 = new Date().getTime()
       rootStore.state.twoStageCachingDelta1 = t1 - t0
 
@@ -257,7 +262,7 @@ const actions: ActionTree<CategoryState, RootState> = {
       if (!res || (res.noresults)) {
         rootStore.dispatch('notification/spawnNotification', {
           type: 'warning',
-          message: i18n.t('No products synchronized for this category. Please come back while online!'),
+          message: i18n.t('No products synchronized for this category. Please come back while online! ******'),
           action1: { label: i18n.t('OK') }
         })
         if (!append) rootStore.dispatch('product/reset')
@@ -288,6 +293,9 @@ const actions: ActionTree<CategoryState, RootState> = {
           }
         }
         if (populateAggregations === true && res.aggregations) { // populate filter aggregates
+          console.log('fileter valuee 111' , filters)
+          console.log('res.aggregations' , res.aggregations);
+
           for (let attrToFilter of filters) { // fill out the filter options
             let filterOptions = []
 
@@ -330,6 +338,7 @@ const actions: ActionTree<CategoryState, RootState> = {
                 }
               }
             }
+            console.log('filterOptions ,,' , attrToFilter ,filterOptions)
             context.dispatch('addAvailableFilter', {
               key: attrToFilter,
               options: filterOptions
@@ -342,7 +351,7 @@ const actions: ActionTree<CategoryState, RootState> = {
       Logger.error(err)()
       rootStore.dispatch('notification/spawnNotification', {
         type: 'warning',
-        message: i18n.t('No products synchronized for this category. Please come back while online!'),
+        message: i18n.t('No products synchronized for this category. Please come back while online! ******11'),
         action1: { label: i18n.t('OK') }
       })
     })
