@@ -423,6 +423,7 @@ export default {
   position: fixed;
   top: 0px;
   padding: 1%;
+  width: 380px;
  }
 
 
