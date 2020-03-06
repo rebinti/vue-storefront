@@ -28,10 +28,12 @@
           :key="valuesitem.value"
           @click="setFilterData (facetsitem, valuesitem)"
           :class="{ 'active': valuesitem.active }"
-        >{{valuesitem.label}}</div>
+        >
+        {{valuesitem.label}} ({{valuesitem.count}})
+        </div>
       </div>
     </div>
-    <h1>Results</h1>
+    <h2>All Results <sub v-if="searchRes.pagination"> ({{searchRes.pagination.totalResults}} Products) </sub></h2>
     <div class="container py-10 leading-loose static-content customm">
       <product-listing
         :mob-columns="3"
@@ -48,14 +50,14 @@
 </template>
 
 <script>
-import { TaskQueue } from "@vue-storefront/core/lib/sync";
-import fetch from "isomorphic-fetch";
-import omit from "lodash-es/omit";
-import SearchQuery from "@vue-storefront/core/lib/search/searchQuery";
-import ProductListing from "../components/core/ProductListing.vue";
+import { TaskQueue } from '@vue-storefront/core/lib/sync';
+import fetch from 'isomorphic-fetch';
+import omit from 'lodash-es/omit';
+import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
+import ProductListing from '../components/core/ProductListing.vue';
 
 export default {
-  name: "SplashScreen",
+  name: 'SplashScreen',
   components: {
     ProductListing
   },
@@ -70,36 +72,35 @@ export default {
   //     required: true
   //   }
   // },
-  data() {
+  data () {
     return {
       currentPage: 1,
-      squery: "",
-      searchRes: "",
+      squery: '',
+      searchRes: '',
       serachedProd: [],
       filterData: []
     };
   },
   computed: {},
   methods: {
-    async getSearchData() {
+    async getSearchData () {
       let searchUrl =
-        'https://api.searchspring.net/api/search/search?siteId=vdwzmz&resultsFormat="native"&' +
-        this.filterData.join("&");
+        'https://api.searchspring.net/api/search/search?siteId=vdwzmz&resultsFormat="native"&' + this.filterData.join('&');
       // rq=' + data
       // let searchUrl = 'https://api.searchspring.net/api/search/search?siteId=akjx6f&rq=jeans&resultsFormat="native"&bgfilter.category="men>shirts"';
       try {
         this.serachedProd = [];
         const resss = await fetch(searchUrl, {
-          method: "GET",
+          method: 'GET',
           headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
           }
           // body: JSON.stringify()
         }).then(res => {
           return res.json();
         });
-        console.log("ress", resss);
+        console.log('ress', resss);
         if (resss && resss.results.length > 0) {
           // var object = resss.results.reduce(
           //   (obj, item) => Object.assign(obj, item.sku), []);
@@ -107,10 +108,10 @@ export default {
           resss.results.filter(val => {
             late.push(val.sku);
           });
-          console.log("last data", late);
+          console.log('last data', late);
           this.getDataFromED(late);
           resss.facets = resss.facets.filter(
-            val => val.label !== "Price" && val.values.length > 0
+            val => val.label !== 'Price'
           );
           // resss.facets = resss.facets.filter(val => val.values.length > 0);
           this.searchRes = resss;
@@ -121,81 +122,91 @@ export default {
       } catch (e) {}
     },
 
-    async getDataFromED(searchedData) {
+    async getDataFromED (searchedData) {
       let query = new SearchQuery();
-      query = query.applyFilter({ key: "sku", value: { eq: searchedData } });
-      console.log("queryyyyy", query);
+      query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
+      console.log('queryyyyy', query);
       const { items } = await this.$store.dispatch(
-        "product/list",
+        'product/list',
         { query, start: 0, size: searchedData.length, updateState: false },
         { root: true }
       );
-      console.log("resssssssssssssss", items);
+      console.log('resssssssssssssss', items);
       this.serachedProd = items;
     },
-    searchData(squerydata) {
+    searchData (squerydata) {
       this.filterData = [];
       this.serachedProd = [];
-      this.filterData.push("rq=" + squerydata);
+      this.filterData.push('rq=' + squerydata);
       this.getSearchData();
     },
-    setFilterData(facetssection, item) {
-      if (facetssection.field === "category_hierarchy") {
-        if (this.filterData.includes("bgfilter.category=" + item.value)) {
+    setFilterData (facetssection, item) {
+      console.log('setFilterData', facetssection, item); 
+      if (facetssection.field === 'category_hierarchy') {
+        if (this.filterData.findIndex(val => val.includes('filter.category_hierarchy')) >= 0) {
           this.filterData.splice(
-            this.filterData.indexOf("bgfilter.category=" + item.value),
+            this.filterData.findIndex(val => val.includes('filter.category_hierarchy')),
             1
           );
-        } else {
-          this.filterData.push("bgfilter.category=" + item.value);
         }
+        this.filterData.push('filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
+        console.log('setFilterData =>>>', this.filterData)
+        // return;
+        // if (this.filterData.includes("bgfilter.category=" + item.value)) {
+        //   this.filterData.splice(
+        //     this.filterData.indexOf("bgfilter.category=" + item.value),
+        //     1
+        //   );
+        // } else {
+        //   this.filterData.push("bgfilter.category=" + item.value);
+        // }
       } else {
         if (
           this.filterData.includes(
-            "filter." + facetssection.field + "=" + item.value
+            'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
           )
         ) {
           this.filterData.splice(
             this.filterData.indexOf(
-              "filter." + facetssection.field + "=" + item.value
+              'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
             ),
             1
           );
         } else {
           this.filterData.push(
-            "filter." + facetssection.field + "=" + item.value
+            'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
           );
         }
       }
-      console.log(" this.filterData", this.filterData);
+      console.log(' this.filterData', this.filterData);
       this.getSearchData();
     },
-    removeFilterFlag(item) {
-      if (this.filterData.includes("filter." + item.field + "=" + item.value)) {
+    removeFilterFlag (item) {
+      if (this.filterData.includes('filter.' + item.field + '=' + encodeURIComponent(item.value))) {
         if (
-          this.filterData.indexOf("filter." + item.field + "=" + item.value) >=
+          this.filterData.indexOf('filter.' + item.field + '=' + encodeURIComponent(item.value)) >=
           0
         ) {
           this.filterData.splice(
-            this.filterData.indexOf("filter." + item.field + "=" + item.value),
+            this.filterData.indexOf('filter.' + item.field + '=' + encodeURIComponent(item.value)),
             1
           );
         }
       }
-      console.log("this.filterData", this.filterData);
+      console.log('this.filterData', this.filterData);
       // else {
       //   this.filterData.push('filter.' + item.field + '=' + item.value)
       // }
       this.getSearchData();
     },
-    clearAllFilter() {
+    clearAllFilter () {
       this.filterData = [];
-      this.filterData.push("rq=" + this.squery);
+      this.filterData.push('rq=' + this.squery);
       this.getSearchData();
     }
   },
   mounted: {
-    setdata() {
+    setdata () {
       setTimeout(() => {
         this.isLoading = false;
       }, 3000);
