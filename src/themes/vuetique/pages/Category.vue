@@ -138,7 +138,7 @@
     <div class="container pb-16">
       <div class="row gutter-md">
         <div class="col-3 hidden lg:block">
-          <div :class="{ fixed: fixedOrderPanel }">
+          <div :class="{ fixed: fixedOrderPanel }" class="filterdiv">
             <sidebar :filters="filters.available" />
           </div>
         </div>
@@ -378,27 +378,60 @@ export default {
         return 'background: #ffff;display:block;float: left;min-width: 72px;height: 35px;float: left;border: 2px solid #919191;text-align: center;margin: 0 auto;padding: 3px 6px 0 5px;margin-right: 5px;margin-top: 5px;'
       }
     },
-    handleScroll: function(){
+    handleScroll (){
             const checkWindow = window !== undefined && window.scrollY;
-
+            let offsety = window.pageYOffset;
+            console.log("offsety>>>>>>>>>",offsety);
             if (checkWindow && window.scrollY > 280) {
-              this.fixedOrderPanel = true
+              if(offsety > 3000){
+                  this.fixedOrderPanel = false
+              }else{
+                  this.fixedOrderPanel = true
+              }
+              
             } else {
               this.fixedOrderPanel = false
           }
-
-        const scrollFix = (scrolled) => {
-            if (scrolled > 280) {
-
-              this.fixedOrderPanel = true
-            } else {
-              this.fixedOrderPanel = false
+          let viewflag = this.checkfooterreached()
+          console.log("viewflag",viewflag)
+          
+          // const footerheight = this.getdivheight('footer .bg-grey-lighter')
+          // const newsletterheight = this.getdivheight('footer .news-letter')
+          // const paydivheight = this.getdivheight('footer .mx-auto')
+          
+          if(viewflag==true){
+            document.querySelector( '.filterdiv' ).classList.add("footerreached");
+          }else{
+            document.querySelector( '.filterdiv' ).classList.remove("footerreached");
+          }
+          
+    },
+    checkfooterreached () {
+          const el = document.querySelector( '.news-letter' )
+          const scroll = window.scrollY || window.pageYOffset
+          const boundsTop = el.getBoundingClientRect().top + scroll
+          console.log('boundsTop', boundsTop)	
+          const viewport = {
+            top: scroll,
+            bottom: scroll + window.innerHeight,
             }
-        }
+          const bounds = {
+            top: boundsTop,
+            bottom: boundsTop + el.clientHeight,
+            }
+          console.log('bounds', bounds)
+          console.log('viewport', viewport)
+          return ( bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom )
+            || ( bounds.top <= viewport.bottom && bounds.top >= viewport.top );
+    },
+    getdivheight(divclass){
+          const el = document.querySelector(divclass).getBoundingClientRect().height
+          return el;
+    }
 
-        }
   },
-  destroyed: function () {
+
+  destroyed () {
     document.removeEventListener('scroll', this.handleScroll);
 
   },
@@ -407,7 +440,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mobile-filters {
+.mobile-filters { 
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
   
   overscroll-behavior: none none;
@@ -419,18 +452,31 @@ export default {
     top: 73px;
   }
 }
-.fixed{
-  position: fixed;
-  top: 0px;
-  padding: 1%;
-  width: 380px;
- }
-
 
 </style>
 
 <style lang="scss" scoped>
+.filterdiv{
+  // padding: 1%;
+}
+.fixed{
+  position: fixed;
+  top: 0px;  
+  width: 380px;
+}
+.footerreached{
+    position: fixed;
+    bottom: 515px;
+    width: 380px;
+    top: auto;
+}
 
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
+  }
+}
 
 @media (min-width: 576px){
   // .search_out_pop_box{    
