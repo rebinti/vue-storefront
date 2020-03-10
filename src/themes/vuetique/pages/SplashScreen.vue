@@ -71,7 +71,7 @@
               :key="filter.label"
               @click="removeFilterFlag(filter)"
               class="filter-box"
-            >{{ filter.label}} &nbsp; x &nbsp;</span>
+            >{{ filter.label }} <span v-if="filter.field === 'final_price'"> {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;</span>
             <span
               class="filter-box"
               v-if="searchRes.filterSummary && searchRes.filterSummary.length>0"
@@ -110,13 +110,15 @@
         </div>
 
         <price-slider
-        v-if="facetsitem.type === 'slider'"
+        v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
         context="category"
         id="price"
         code="price"
-        :price-range="facetsitem.range"
-        content="Price "
+        :price-range="priceSliderData.range"
+        content="Price"
         label="Price Label"
+        :interval="priceSliderData.step"
+        @sliderChanged="sliderChanged"
       />
       </div>
       
@@ -188,7 +190,8 @@ export default {
       searchRes: '',
       serachedProd: [],
       filterData: [],
-      categoryHierarchy: []
+      categoryHierarchy: [],
+      priceSliderData: {}
     };
   },
   computed: {},
@@ -220,6 +223,11 @@ export default {
           });
           console.log('last data', late);
           this.getDataFromED(late);
+
+          if (this.filterData.length === 1 ) {
+            this.priceSliderData = resss.facets.find(val => val.field === 'final_price');
+            console.log('this.priceSliderData', this.priceSliderData);
+          }
           // resss.facets = resss.facets.filter(
           //   val => val.label !== 'Price'
           // );
@@ -231,6 +239,7 @@ export default {
           this.searchRes = resss;
         } else {
           this.serachedProd = [];
+          this.searchRes = resss;
         }
         // console.log('this.searchRes', this.searchRes);
       } catch (e) { }
@@ -299,7 +308,23 @@ export default {
       this.getSearchData();
     },
     removeFilterFlag (item) {
-      if (this.filterData.includes('filter.' + item.field + '=' + encodeURIComponent(item.value))) {
+      console.log('removeFilterFlag', item);
+      if (item.field === 'final_price') {
+        if (this.filterData.findIndex(val => val.includes('filter.final_price.low')) >= 0) {
+          this.filterData.splice(
+            this.filterData.findIndex(val => val.includes('filter.final_price.low')),
+            1
+          );
+        }
+        if (this.filterData.findIndex(val => val.includes('filter.final_price.high')) >= 0) {
+          this.filterData.splice(
+            this.filterData.findIndex(val => val.includes('filter.final_price.high')),
+            1
+          );
+        }
+        this.$bus.$emit('reset-price-slider');
+        this.getSearchData();
+      } else if (this.filterData.includes('filter.' + item.field + '=' + encodeURIComponent(item.value))) {
         if (
           this.filterData.indexOf('filter.' + item.field + '=' + encodeURIComponent(item.value)) >=
           0
@@ -309,17 +334,41 @@ export default {
             1
           );
         }
+        this.getSearchData();
       }
       console.log('this.filterData', this.filterData);
       // else {
       //   this.filterData.push('filter.' + item.field + '=' + item.value)
       // }
-      this.getSearchData();
     },
     clearAllFilter () {
       this.filterData = [];
       this.filterData.push('rq=' + this.squery);
+      this.$bus.$emit('reset-price-slider');
       this.getSearchData();
+    },
+    sliderChanged (range) {
+      console.log('sliderChanged', range)
+
+      // filter.final_price.low=12.5&filter.final_price.high=47.5
+
+      if (this.filterData.findIndex(val => val.includes('filter.final_price.low')) >= 0) {
+          this.filterData.splice(
+            this.filterData.findIndex(val => val.includes('filter.final_price.low')),
+            1
+          );
+      }
+      if (this.filterData.findIndex(val => val.includes('filter.final_price.high')) >= 0) {
+          this.filterData.splice(
+            this.filterData.findIndex(val => val.includes('filter.final_price.high')),
+            1
+          );
+      }
+      this.filterData.push('filter.final_price.low=' + range.from);
+      this.filterData.push('filter.final_price.high=' + range.to);
+      console.log('this.filterData', this.filterData);
+      this.getSearchData();
+
     }
   }
 };

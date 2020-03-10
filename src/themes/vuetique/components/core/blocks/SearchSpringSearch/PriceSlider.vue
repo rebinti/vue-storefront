@@ -8,6 +8,7 @@
         :clickable="false"
         :min="getMin"
         :max="getMax"
+        :interval="interval"
         :tooltip-formatter="tooltipContent"
         @drag-end="setPrice"
       />
@@ -49,6 +50,11 @@ export default {
     context: {
       type: null,
       default: ''
+    },
+    interval: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   beforeMount () {
@@ -84,18 +90,24 @@ export default {
       return this.priceRange[1]
     }
   },
+  // mounted () {
+  //   console.log('mounteddd----', this.content, this.id, this.code, this.priceRange, this.context)
+  // },
   methods: {
     setPrice: function (e) {
+      console.log('this.priceRange', this.priceRange);
       let val = e.val
       let from = val[0]
       let to = val[1]
       let id = val[1]
       this.remove = isEqual(val, this.priceRange)
-      this.switchFilter(id, from, to)
+      console.log('setPrice', id, from, to , this.remove , val, this.priceRange)
+      // this.switchFilter(id, from, to)
+      this.$emit('sliderChanged', {from: from, to: to})
     },
-    switchFilter (id, from, to) {
-      this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, from: from, to: to, label: this.currencySign + ' ' + from + ' - ' + this.currencySign + ' ' + to, remove: this.remove })
-    },
+    // switchFilter (id, from, to) {
+    //   this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, from: from, to: to, label: this.currencySign + ' ' + from + ' - ' + this.currencySign + ' ' + to, remove: this.remove })
+    // },
     resetPriceSlider () {
       if (this.$refs.priceSlider) {
         this.$refs.priceSlider.setValue(this.priceRange)
