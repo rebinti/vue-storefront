@@ -2,7 +2,9 @@
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-6" style="margin:0 auto">
-        <h4 class="col-6"> Search with Search Spring </h4>
+        <h4 class="col-6">
+          Search with Search Spring
+        </h4>
         <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
           <base-input
             ref="search"
@@ -12,7 +14,7 @@
             :placeholder="$t('Type what you are looking for...')"
             class="w-full"
             v-model="squery"
-            @input="searchData"
+            @input="searchDataInSearchSpring"
             focus
           />
           <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
@@ -134,10 +136,26 @@
         </div>
 
         <div class="col-12 lg:col-9 pr_list_sec_main">
-          <h2 style="width:100%;padding-bottom:25px;">
-            All Results
-            <sub v-if="searchRes.pagination">({{searchRes.pagination.totalResults}} Products)</sub>
-          </h2>
+          <div class="row">
+            <div class="col-9">
+            <h2 style="width:100%;padding-bottom:25px;">
+              All Results
+              <sub v-if="searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
+            </h2>
+            </div>
+            <div class="col-3">
+              <base-select
+                v-if="sortingFilterOptions && sortingFilterOptions.length"
+                class="col-12 md:col-6 mb-6 txt_blk_select"
+                name="sort"
+                v-model="sortingFilterSelcted"
+                :options="sortingFilterOptions"
+                :selected="sortingFilterSelcted"
+                :placeholder="$t('Sorting *')"
+                @input="sortingFilterChange"
+              />
+            </div>
+          </div>
           <product-listing :columns="3" :products="serachedProd" />
           <div v-if="serachedProd.length === 0">
             <h5>NO RESULTS FOUND!.</h5>
@@ -158,10 +176,12 @@ import ProductListing from '../components/core/ProductListing.vue';
 
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput';
 // import ButtonFull from 'theme/components/theme/ButtonFull';
+// import BaseSelect from 'theme/components/core/blocks/Form/BaseSelect'
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
 
 import SearchCheckbox from 'theme/components/core/blocks/SearchSpringSearch/genericSelectFilterItem';
 import PriceSlider from 'theme/components/core/blocks/SearchSpringSearch/PriceSlider';
+import BaseSelect from 'theme/components/core/blocks/SearchSpringSearch/BaseSelect';
 
 export default {
   name: 'SplashScreen',
@@ -169,6 +189,7 @@ export default {
     ProductListing,
     BaseInput,
     // ButtonFull,
+    BaseSelect,
     SearchCheckbox,
     PriceSlider
   },
@@ -191,7 +212,9 @@ export default {
       serachedProd: [],
       filterData: [],
       categoryHierarchy: [],
-      priceSliderData: {}
+      priceSliderData: {},
+      sortingFilterSelcted: '',
+      sortingFilterOptions: []
     };
   },
   computed: {},
@@ -219,17 +242,18 @@ export default {
         if (resss && resss.results.length > 0) {
           // var object = resss.results.reduce(
           //   (obj, item) => Object.assign(obj, item.sku), []);
-          let late = [];
+          let prodSku = [];
           resss.results.filter(val => {
-            late.push(val.sku);
+            prodSku.push(val.sku);
           });
-          console.log('last data', late);
-          await this.getDataFromED(late);
+          console.log('last data', prodSku);
+          await this.getDataFromElastic(prodSku);
 
           if (this.filterData.length === 1) {
             this.priceSliderData = resss.facets.find(
               val => val.field === 'final_price'
             );
+            this.sortingFilterOptions = resss.sorting.options;
             console.log('this.priceSliderData', this.priceSliderData);
           }
           // resss.facets = resss.facets.filter(
@@ -253,20 +277,22 @@ export default {
       } catch (e) { this.$bus.$emit('notification-progress-stop') }
     },
 
-    async getDataFromED (searchedData) {
+    async getDataFromElastic (searchedData) {
       let query = new SearchQuery();
       query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
-      console.log('queryyyyy', query);
       const { items } = await this.$store.dispatch(
         'product/list',
         { query, start: 0, size: searchedData.length, updateState: false },
         { root: true }
       );
-      console.log('resssssssssssssss', items);
-      this.serachedProd = items;
-      return items;
+      console.log('Es results', items);
+      this.serachedProd = items.sort((a, b) =>
+        searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
+      );
+      return this.serachedProd;
     },
-    searchData (squerydata) {
+
+    searchDataInSearchSpring (squerydata) {
       console.log('squerydata', squerydata, squerydata.length);
       if (squerydata.length > 2) {
         this.filterData = [];
@@ -275,6 +301,7 @@ export default {
         this.getSearchData();
       }
     },
+
     setFilterData (facetssection, item) {
       console.log('setFilterData', facetssection, item);
       if (facetssection.field === 'category_hierarchy') {
@@ -334,6 +361,7 @@ export default {
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
+
     removeFilterFlag (item) {
       console.log('removeFilterFlag', item);
       if (item.field === 'final_price') {
@@ -389,6 +417,7 @@ export default {
       //   this.filterData.push('filter.' + item.field + '=' + item.value)
       // }
     },
+
     clearAllFilter () {
       this.filterData = [];
       this.filterData.push('rq=' + this.squery);
@@ -396,6 +425,7 @@ export default {
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
+
     sliderChanged (range) {
       console.log('sliderChanged', range);
 
@@ -428,6 +458,21 @@ export default {
       this.filterData.push('filter.final_price.low=' + range.from);
       this.filterData.push('filter.final_price.high=' + range.to);
       console.log('this.filterData', this.filterData);
+      this.$bus.$emit('notification-progress-start', 'Please wait...');
+      this.getSearchData();
+    },
+
+    sortingFilterChange (value) {
+      if (this.filterData.findIndex(val => val.includes('sort.')) >= 0) {
+        this.filterData.splice(
+          this.filterData.findIndex(val =>
+            val.includes('sort.')
+          ),
+          1
+        );
+      }
+      this.filterData.push('sort.' + value.split('$')[0] + '=' + value.split('$')[1]);
+      console.log('sortingFilterChange', this.filterData)
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     }
