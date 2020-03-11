@@ -1,0 +1,175 @@
+<template>
+  <div class="select-wrapper relative">
+    <select
+      :name="name"
+      :class="{
+        'cl-tertiary' : options.length === 0,
+        'empty': !selected
+      }"
+      :autocomplete="autocomplete"
+      @change="$emit('input', $event.target.value)"
+    >
+      <option v-if="!selected" />
+      <option
+        v-for="(option, key) in options"
+        :key="key"
+        :value="option.field+ '$' + option.direction"
+        v-bind="{selected: option.value === selected}"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <label>{{ placeholder }}</label>
+
+    <template if="validations">
+      <span
+        v-for="(validation, index) in validations"
+        :key="index"
+        v-if="validation.condition"
+        class="block text-error text-sm"
+      >
+        {{ validation.text }}
+      </span>
+    </template>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'BaseSelect',
+  props: {
+    id: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    name: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    options: {
+      type: Array,
+      required: true,
+      default: () => []
+    },
+    selected: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    autocomplete: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    validations: {
+      type: Array,
+      required: false,
+      default: () => []
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  @import '~theme/css/variables/colors';
+  @import '~theme/css/helpers/functions/color';
+  @import '~theme/css/base/text';
+  $color-tertiary: color(tertiary);
+  $color-black: color(black);
+  $color-puerto-rico: color(puerto-rico);
+  $color-hover: color(tertiary, $colors-background);
+
+.select-wrapper {
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 18px;
+    //transform: translateY(-50%);
+    right: 20px;
+    //margin-top: -7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 6px 0 6px;
+    border-color: $color-tertiary transparent transparent transparent;
+    pointer-events: none;
+  }
+
+  select {
+    padding: 10px;
+    border: 1px solid $color-tertiary;
+    width: 100%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      border-color: $color-puerto-rico;
+    }
+
+    &:disabled,
+    &:disabled + label {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+  label {
+    color: #999;
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    left: 22px;
+    top: 9px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  select:focus ~ label, select:not(.empty) ~ label {
+    top: -10px;
+    font-size: 14px;
+    color: $color-puerto-rico;
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+
+      .txt_blk_select{
+            width:100%;
+            float: left;
+            padding-left: 0px!important;
+            padding-right: 0px!important;
+            margin-top: 0px!important;
+            margin-bottom: 0px!important;
+            &:after{
+              top:36px;
+            }
+            select{
+              background:#fafafa;
+              border: 0px;
+              border-bottom: 1px solid #e0e0e0;
+              height: 80px;
+              color:#000000;
+            }
+            label{
+              top:28px;
+              left:15px;
+              color:#8d9baf;
+            }
+          }
+}
+
+</style>
