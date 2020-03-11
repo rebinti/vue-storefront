@@ -1,21 +1,25 @@
 <template>
   <div>
-    Search with Search Spring
-    <div class="flex items-center relative mb-4">
-      <base-input
-        ref="search"
-        name="search"
-        type="text"
-        id="search_panel_input"
-        :placeholder="$t('Type what you are looking for...')"
-        class="w-full"
-        v-model="squery"
-        @input="searchData"
-        focus
-      />
-      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
-        <use xlink:href="#search" />
-      </svg>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-6" style="margin:0 auto">
+        <h4 class="col-6"> Search with Search Spring </h4>
+        <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
+          <base-input
+            ref="search"
+            name="search"
+            type="text"
+            id="search_panel_input"
+            :placeholder="$t('Type what you are looking for...')"
+            class="w-full"
+            v-model="squery"
+            @input="searchData"
+            focus
+          />
+          <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
+            <use xlink:href="#search" />
+          </svg>
+        </div>
+      </div>
     </div>
     <!-- <input type="text" v-model="squery" /> -->
     <!-- <button class="button" @click="searchData(squery)">Search</button>
@@ -50,7 +54,7 @@
         </div>
       </div>
       
-    </div> -->
+    </div>-->
     <!-- <h2>All Results <sub v-if="searchRes.pagination"> ({{searchRes.pagination.totalResults}} Products) </sub></h2>
     <div class="container py-10 leading-loose static-content customm">
       <product-listing
@@ -63,89 +67,85 @@
         <h5>NO RESULTS FOUND!.</h5>
         <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
       </div>
-    </div> -->
-    <div class="container pb-5" >
-       <div class="row gutter-md" v-if="searchRes.filterSummary && searchRes.filterSummary.length>0">
-            <span
-              v-for="filter in searchRes.filterSummary"
-              :key="filter.label"
-              @click="removeFilterFlag(filter)"
-              class="filter-box"
-            >{{ filter.label }} <span v-if="filter.field === 'final_price'"> {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;</span>
-            <span
-              class="filter-box"
-              v-if="searchRes.filterSummary && searchRes.filterSummary.length>0"
-              @click="clearAllFilter()"
-            >Clear All</span>
-       </div>
-    </div>
-        <div class="container pb-16" >
-    <div class="row gutter-md" >
-        <div class="col-3 hidden lg:block" >
-            <div  class="">
-                <div class="sidebar" >
-                            <h1>Filters</h1>
-    <div class="container leading-loose static-content customm">
-
-
-      <div v-for="facetsitem in searchRes.facets" :key="facetsitem.field" class="filterdata">
-        <h2>
-          <b>{{facetsitem.label}}</b>
-        </h2>
-
-        <div
-          v-for="(valuesitem,index) in facetsitem.values"
-          :key="valuesitem.value"
-          :class="{ 'active': valuesitem.active }"
+    </div>-->
+    <div class="container pb-5">
+      <div class="row gutter-md" v-if="searchRes.filterSummary && searchRes.filterSummary.length>0">
+        <span
+          v-for="filter in searchRes.filterSummary"
+          :key="filter.label"
+          @click="removeFilterFlag(filter)"
+          class="filter-box"
         >
-          <search-checkbox
-            class="col-xs-12 mb15"
-            :id="valuesitem.label+index+valuesitem.count"
-            v-model="valuesitem.active"
-            @click="setFilterData (facetsitem, valuesitem)"
-          >
-             {{valuesitem.label}} ({{valuesitem.count}})
-          </search-checkbox>
-        <!-- {{valuesitem.label}} ({{valuesitem.count}}) -->
-        </div>
-
-        <price-slider
-        v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
-        context="category"
-        id="price"
-        code="price"
-        :price-range="priceSliderData.range"
-        content="Price"
-        label="Price Label"
-        :interval="priceSliderData.step"
-        @sliderChanged="sliderChanged"
-      />
+          {{ filter.label }}
+          <span
+            v-if="filter.field === 'final_price'"
+          >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
+        </span>
+        <span
+          class="filter-box"
+          v-if="searchRes.filterSummary && searchRes.filterSummary.length>0"
+          @click="clearAllFilter()"
+        >Clear All</span>
       </div>
-      
     </div>
 
+    <div class="container pb-16">
+      <div class="row gutter-md">
+        <div class="col-3">
+          <div class>
+            <div class="sidebar">
+              <h1>Filters</h1>
+              <div class="container leading-loose static-content customm">
+                <div
+                  v-for="facetsitem in searchRes.facets"
+                  :key="facetsitem.field"
+                  class="filterdata"
+                >
+                  <h2>
+                    <b>{{ facetsitem.label }}</b>
+                  </h2>
+
+                  <div v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value">
+                    <search-checkbox
+                      class="col-xs-12 mb15"
+                      :id="valuesitem.label+index+valuesitem.count"
+                      v-model="valuesitem.active"
+                      @click="setFilterData (facetsitem, valuesitem)"
+                    >
+                      {{ valuesitem.label }} ({{ valuesitem.count }})
+                    </search-checkbox>
+                  </div>
+
+                  <price-slider
+                    v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
+                    context="category"
+                    id="price"
+                    code="price"
+                    :price-range="priceSliderData.range"
+                    content="Price"
+                    label="Price Label"
+                    :interval="priceSliderData.step"
+                    @sliderChanged="sliderChanged"
+                  />
                 </div>
+              </div>
             </div>
+          </div>
         </div>
 
-        <div  class="col-12 lg:col-9 pr_list_sec_main" >
-             <div class="row gutter-md justify-center md:justify-start">
-               <h2 style="width:100%;padding-bottom:25px;">All Results <sub v-if="searchRes.pagination"> ({{searchRes.pagination.totalResults}} Products) </sub></h2>
-                    <product-listing
-                        :mob-columns="3"
-                        :columns="3"
-                        :products="serachedProd"
-                        v-if="serachedProd.length>0"
-                    />
-                  <div v-if="serachedProd.length === 0">
-                    <h5>NO RESULTS FOUND!.</h5>
-                    <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
-                </div>
-             </div>
+        <div class="col-12 lg:col-9 pr_list_sec_main">
+          <h2 style="width:100%;padding-bottom:25px;">
+            All Results
+            <sub v-if="searchRes.pagination">({{searchRes.pagination.totalResults}} Products)</sub>
+          </h2>
+          <product-listing :columns="3" :products="serachedProd" />
+          <div v-if="serachedProd.length === 0">
+            <h5>NO RESULTS FOUND!.</h5>
+            <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-
   </div>
 </template>
 
@@ -156,19 +156,19 @@ import omit from 'lodash-es/omit';
 import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
 import ProductListing from '../components/core/ProductListing.vue';
 
-import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
-import ButtonFull from 'theme/components/theme/ButtonFull'
-import NoScrollBackground from 'theme/mixins/noScrollBackground'
+import BaseInput from 'theme/components/core/blocks/Form/BaseInput';
+// import ButtonFull from 'theme/components/theme/ButtonFull';
+import NoScrollBackground from 'theme/mixins/noScrollBackground';
 
-import SearchCheckbox from 'theme/components/core/blocks/SearchSpringSearch/genericSelectFilterItem'
-import PriceSlider from 'theme/components/core/blocks/SearchSpringSearch/PriceSlider'
+import SearchCheckbox from 'theme/components/core/blocks/SearchSpringSearch/genericSelectFilterItem';
+import PriceSlider from 'theme/components/core/blocks/SearchSpringSearch/PriceSlider';
 
 export default {
   name: 'SplashScreen',
   components: {
     ProductListing,
     BaseInput,
-    ButtonFull,
+    // ButtonFull,
     SearchCheckbox,
     PriceSlider
   },
@@ -197,8 +197,10 @@ export default {
   computed: {},
   methods: {
     async getSearchData () {
+      // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl =
-        'https://api.searchspring.net/api/search/search?siteId=vdwzmz&resultsFormat="native"&' + this.filterData.join('&');
+        'https://api.searchspring.net/api/search/search?siteId=vdwzmz&resultsFormat="native"&' +
+        this.filterData.join('&');
       // rq=' + data
       // let searchUrl = 'https://api.searchspring.net/api/search/search?siteId=akjx6f&rq=jeans&resultsFormat="native"&bgfilter.category="men>shirts"';
       try {
@@ -222,27 +224,33 @@ export default {
             late.push(val.sku);
           });
           console.log('last data', late);
-          this.getDataFromED(late);
+          await this.getDataFromED(late);
 
-          if (this.filterData.length === 1 ) {
-            this.priceSliderData = resss.facets.find(val => val.field === 'final_price');
+          if (this.filterData.length === 1) {
+            this.priceSliderData = resss.facets.find(
+              val => val.field === 'final_price'
+            );
             console.log('this.priceSliderData', this.priceSliderData);
           }
           // resss.facets = resss.facets.filter(
           //   val => val.label !== 'Price'
           // );
           if (resss.facets.some(val => val.field !== 'category_hierarchy')) {
-            this.categoryHierarchy.push(resss.facets.find(val => val.field !== 'category_hierarchy'))
+            this.categoryHierarchy.push(
+              resss.facets.find(val => val.field !== 'category_hierarchy')
+            );
           }
-          console.log('this.categoryHierarchy' , this.categoryHierarchy);
+          console.log('this.categoryHierarchy', this.categoryHierarchy);
           // resss.facets = resss.facets.filter(val => val.values.length > 0);
           this.searchRes = resss;
+          this.$bus.$emit('notification-progress-stop')
         } else {
           this.serachedProd = [];
           this.searchRes = resss;
+          this.$bus.$emit('notification-progress-stop')
         }
         // console.log('this.searchRes', this.searchRes);
-      } catch (e) { }
+      } catch (e) { this.$bus.$emit('notification-progress-stop') }
     },
 
     async getDataFromED (searchedData) {
@@ -256,9 +264,10 @@ export default {
       );
       console.log('resssssssssssssss', items);
       this.serachedProd = items;
+      return items;
     },
     searchData (squerydata) {
-      console.log('squerydata', squerydata , squerydata.length)
+      console.log('squerydata', squerydata, squerydata.length);
       if (squerydata.length > 2) {
         this.filterData = [];
         this.serachedProd = [];
@@ -267,16 +276,24 @@ export default {
       }
     },
     setFilterData (facetssection, item) {
-      console.log('setFilterData', facetssection, item); 
+      console.log('setFilterData', facetssection, item);
       if (facetssection.field === 'category_hierarchy') {
-        if (this.filterData.findIndex(val => val.includes('filter.category_hierarchy')) >= 0) {
+        if (
+          this.filterData.findIndex(val =>
+            val.includes('filter.category_hierarchy')
+          ) >= 0
+        ) {
           this.filterData.splice(
-            this.filterData.findIndex(val => val.includes('filter.category_hierarchy')),
+            this.filterData.findIndex(val =>
+              val.includes('filter.category_hierarchy')
+            ),
             1
           );
         }
-        this.filterData.push('filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
-        console.log('setFilterData =>>>', this.filterData)
+        this.filterData.push(
+          'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+        );
+        console.log('setFilterData =>>>', this.filterData);
         // return;
         // if (this.filterData.includes("bgfilter.category=" + item.value)) {
         //   this.filterData.splice(
@@ -289,51 +306,82 @@ export default {
       } else {
         if (
           this.filterData.includes(
-            'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+            'filter.' +
+              facetssection.field +
+              '=' +
+              encodeURIComponent(item.value)
           )
         ) {
           this.filterData.splice(
             this.filterData.indexOf(
-              'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+              'filter.' +
+                facetssection.field +
+                '=' +
+                encodeURIComponent(item.value)
             ),
             1
           );
         } else {
           this.filterData.push(
-            'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+            'filter.' +
+              facetssection.field +
+              '=' +
+              encodeURIComponent(item.value)
           );
         }
       }
       console.log(' this.filterData', this.filterData);
+      this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
     removeFilterFlag (item) {
       console.log('removeFilterFlag', item);
       if (item.field === 'final_price') {
-        if (this.filterData.findIndex(val => val.includes('filter.final_price.low')) >= 0) {
+        if (
+          this.filterData.findIndex(val =>
+            val.includes('filter.final_price.low')
+          ) >= 0
+        ) {
           this.filterData.splice(
-            this.filterData.findIndex(val => val.includes('filter.final_price.low')),
+            this.filterData.findIndex(val =>
+              val.includes('filter.final_price.low')
+            ),
             1
           );
         }
-        if (this.filterData.findIndex(val => val.includes('filter.final_price.high')) >= 0) {
+        if (
+          this.filterData.findIndex(val =>
+            val.includes('filter.final_price.high')
+          ) >= 0
+        ) {
           this.filterData.splice(
-            this.filterData.findIndex(val => val.includes('filter.final_price.high')),
+            this.filterData.findIndex(val =>
+              val.includes('filter.final_price.high')
+            ),
             1
           );
         }
         this.$bus.$emit('reset-price-slider');
+        this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
-      } else if (this.filterData.includes('filter.' + item.field + '=' + encodeURIComponent(item.value))) {
+      } else if (
+        this.filterData.includes(
+          'filter.' + item.field + '=' + encodeURIComponent(item.value)
+        )
+      ) {
         if (
-          this.filterData.indexOf('filter.' + item.field + '=' + encodeURIComponent(item.value)) >=
-          0
+          this.filterData.indexOf(
+            'filter.' + item.field + '=' + encodeURIComponent(item.value)
+          ) >= 0
         ) {
           this.filterData.splice(
-            this.filterData.indexOf('filter.' + item.field + '=' + encodeURIComponent(item.value)),
+            this.filterData.indexOf(
+              'filter.' + item.field + '=' + encodeURIComponent(item.value)
+            ),
             1
           );
         }
+        this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
       }
       console.log('this.filterData', this.filterData);
@@ -345,36 +393,49 @@ export default {
       this.filterData = [];
       this.filterData.push('rq=' + this.squery);
       this.$bus.$emit('reset-price-slider');
+      this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
     sliderChanged (range) {
-      console.log('sliderChanged', range)
+      console.log('sliderChanged', range);
 
       // filter.final_price.low=12.5&filter.final_price.high=47.5
 
-      if (this.filterData.findIndex(val => val.includes('filter.final_price.low')) >= 0) {
-          this.filterData.splice(
-            this.filterData.findIndex(val => val.includes('filter.final_price.low')),
-            1
-          );
+      if (
+        this.filterData.findIndex(val =>
+          val.includes('filter.final_price.low')
+        ) >= 0
+      ) {
+        this.filterData.splice(
+          this.filterData.findIndex(val =>
+            val.includes('filter.final_price.low')
+          ),
+          1
+        );
       }
-      if (this.filterData.findIndex(val => val.includes('filter.final_price.high')) >= 0) {
-          this.filterData.splice(
-            this.filterData.findIndex(val => val.includes('filter.final_price.high')),
-            1
-          );
+      if (
+        this.filterData.findIndex(val =>
+          val.includes('filter.final_price.high')
+        ) >= 0
+      ) {
+        this.filterData.splice(
+          this.filterData.findIndex(val =>
+            val.includes('filter.final_price.high')
+          ),
+          1
+        );
       }
       this.filterData.push('filter.final_price.low=' + range.from);
       this.filterData.push('filter.final_price.high=' + range.to);
       console.log('this.filterData', this.filterData);
+      this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
-
     }
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .customm .item {
   float: left;
   width: 200px;
