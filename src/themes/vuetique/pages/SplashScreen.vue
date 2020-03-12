@@ -2,7 +2,7 @@
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-6" style="margin:0 auto">
-        <h4 class="col-6">
+        <h4 class="col-6" @click="getSearchData">
           Search with Search Spring
         </h4>
         <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
@@ -23,53 +23,6 @@
         </div>
       </div>
     </div>
-    <!-- <input type="text" v-model="squery" /> -->
-    <!-- <button class="button" @click="searchData(squery)">Search</button>
-    <h1>Filters</h1>
-    <div class="container py-10 leading-loose static-content customm">
-      <div>
-        <span
-          v-for="filter in searchRes.filterSummary"
-          :key="filter.label"
-          @click="removeFilterFlag(filter)"
-          class="filter-box"
-        >{{ filter.label}} &nbsp; x &nbsp;</span>
-        <span
-          class="filter-box"
-          v-if="searchRes.filterSummary && searchRes.filterSummary.length>0"
-          @click="clearAllFilter()"
-        >Clear All</span>
-      </div>
-
-      <div v-for="facetsitem in searchRes.facets" :key="facetsitem.field" class="filterdata">
-        <h2>
-          <b>{{facetsitem.label}}</b>
-        </h2>
-
-        <div
-          v-for="valuesitem in facetsitem.values"
-          :key="valuesitem.value"
-          @click="setFilterData (facetsitem, valuesitem)"
-          :class="{ 'active': valuesitem.active }"
-        >
-        {{valuesitem.label}} ({{valuesitem.count}})
-        </div>
-      </div>
-      
-    </div>-->
-    <!-- <h2>All Results <sub v-if="searchRes.pagination"> ({{searchRes.pagination.totalResults}} Products) </sub></h2>
-    <div class="container py-10 leading-loose static-content customm">
-      <product-listing
-        :mob-columns="3"
-        :columns="6"
-        :products="serachedProd"
-        v-if="serachedProd.length>0"
-      />
-      <div v-if="serachedProd.length === 0">
-        <h5>NO RESULTS FOUND!.</h5>
-        <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
-      </div>
-    </div>-->
     <div class="container pb-5">
       <div class="row gutter-md" v-if="searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
@@ -139,7 +92,7 @@
           <div class="row">
             <div class="col-9">
             <h2 style="width:100%;padding-bottom:25px;">
-              All Results
+              Results
               <sub v-if="searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
             </h2>
             </div>
@@ -157,8 +110,24 @@
             </div>
           </div>
           <product-listing :columns="3" :products="serachedProd" />
+          <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
+          <div class="loader loader--style3" title="2" v-if="paginationLoader">
+            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
+            <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+              <animateTransform attributeType="xml"
+                attributeName="transform"
+                type="rotate"
+                from="0 25 25"
+                to="360 25 25"
+                dur="0.6s"
+                repeatCount="indefinite"/>
+              </path>
+            </svg>
+            <h3 style="text-align: center;"> Please wait for loading more... </h3>
+          </div>
           <div v-if="serachedProd.length === 0">
-            <h5>NO RESULTS FOUND!.</h5>
+            <h5>NO RESULTS FOUND <span v-if="squery">FOR {{ squery }} </span>!.</h5>
             <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
           </div>
         </div>
@@ -182,6 +151,9 @@ import NoScrollBackground from 'theme/mixins/noScrollBackground';
 import SearchCheckbox from 'theme/components/core/blocks/SearchSpringSearch/genericSelectFilterItem';
 import PriceSlider from 'theme/components/core/blocks/SearchSpringSearch/PriceSlider';
 import BaseSelect from 'theme/components/core/blocks/SearchSpringSearch/BaseSelect';
+import config from 'config'
+
+import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 
 export default {
   name: 'SplashScreen',
@@ -193,6 +165,7 @@ export default {
     SearchCheckbox,
     PriceSlider
   },
+  mixins: [onBottomScroll],
   // props: {
   //   perPage: {
   //     type: Number,
@@ -214,70 +187,66 @@ export default {
       categoryHierarchy: [],
       priceSliderData: {},
       sortingFilterSelcted: '',
-      sortingFilterOptions: []
+      sortingFilterOptions: [],
+      paginationLoader: false
     };
   },
   computed: {},
   methods: {
-    async getSearchData () {
+    async getSearchData (onScroll = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
-      let searchUrl =
-        'https://api.searchspring.net/api/search/search?siteId=vdwzmz&resultsFormat="native"&' +
-        this.filterData.join('&');
-      // rq=' + data
-      // let searchUrl = 'https://api.searchspring.net/api/search/search?siteId=akjx6f&rq=jeans&resultsFormat="native"&bgfilter.category="men>shirts"';
+      let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
       try {
-        this.serachedProd = [];
-        const resss = await fetch(searchUrl, {
+        if (!onScroll) { this.serachedProd = []; }
+        const searchResults = await fetch(searchUrl, {
           method: 'GET',
           headers: {
             Accept: 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
           }
-          // body: JSON.stringify()
         }).then(res => {
           return res.json();
         });
-        console.log('ress', resss);
-        if (resss && resss.results.length > 0) {
-          // var object = resss.results.reduce(
+        console.log('Search Spring Results', searchResults);
+        if (searchResults && searchResults.results.length > 0) {
+          // var object = searchResults.results.reduce(
           //   (obj, item) => Object.assign(obj, item.sku), []);
           let prodSku = [];
-          resss.results.filter(val => {
+          searchResults.results.filter(val => {
             prodSku.push(val.sku);
           });
           console.log('last data', prodSku);
-          await this.getDataFromElastic(prodSku);
-
+          await this.getDataFromElastic(prodSku, onScroll);
+          this.paginationLoader = false;
           if (this.filterData.length === 1) {
-            this.priceSliderData = resss.facets.find(
+            this.priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
-            this.sortingFilterOptions = resss.sorting.options;
+            this.sortingFilterOptions = searchResults.sorting.options;
             console.log('this.priceSliderData', this.priceSliderData);
           }
-          // resss.facets = resss.facets.filter(
+          // searchResults.facets = searchResults.facets.filter(
           //   val => val.label !== 'Price'
           // );
-          if (resss.facets.some(val => val.field !== 'category_hierarchy')) {
+          if (searchResults.facets.some(val => val.field !== 'category_hierarchy')) {
             this.categoryHierarchy.push(
-              resss.facets.find(val => val.field !== 'category_hierarchy')
+              searchResults.facets.find(val => val.field !== 'category_hierarchy')
             );
           }
           console.log('this.categoryHierarchy', this.categoryHierarchy);
-          // resss.facets = resss.facets.filter(val => val.values.length > 0);
-          this.searchRes = resss;
+          // searchResults.facets = searchResults.facets.filter(val => val.values.length > 0);
+          this.searchRes = searchResults;
           this.$bus.$emit('notification-progress-stop')
         } else {
           this.serachedProd = [];
-          this.searchRes = resss;
+          this.searchRes = searchResults;
           this.$bus.$emit('notification-progress-stop')
         }
         // console.log('this.searchRes', this.searchRes);
       } catch (e) { this.$bus.$emit('notification-progress-stop') }
     },
 
-    async getDataFromElastic (searchedData) {
+    async getDataFromElastic (searchedData, onScroll = false) {
       let query = new SearchQuery();
       query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
@@ -286,18 +255,23 @@ export default {
         { root: true }
       );
       console.log('Es results', items);
-      this.serachedProd = items.sort((a, b) =>
+      const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
+      if (!onScroll) {
+        this.serachedProd = sortedData
+      } else {
+        this.serachedProd.push(...sortedData);
+      }
       return this.serachedProd;
     },
 
     searchDataInSearchSpring (squerydata) {
-      console.log('squerydata', squerydata, squerydata.length);
-      if (squerydata.length > 2) {
+      console.log('squerydata', this.squery, squerydata, squerydata.length);
+      if (this.squery.length > 2) {
         this.filterData = [];
         this.serachedProd = [];
-        this.filterData.push('rq=' + squerydata);
+        this.filterData.push('rq=' + this.squery);
         this.getSearchData();
       }
     },
@@ -475,6 +449,16 @@ export default {
       console.log('sortingFilterChange', this.filterData)
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
+    },
+    onBottomScroll () {
+      if (this.filterData.findIndex(val => val.includes('page=')) >= 0) {
+        this.filterData.splice(this.filterData.findIndex(val => val.includes('page=')), 1);
+      }
+      if (this.searchRes && this.searchRes.pagination && this.searchRes.pagination.nextPage > 0 && !this.paginationLoader) {
+        this.paginationLoader = true;
+        this.filterData.push('page=' + this.searchRes.pagination.nextPage)
+        this.getSearchData(true);
+      }
     }
   }
 };
