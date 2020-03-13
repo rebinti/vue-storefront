@@ -56,12 +56,26 @@
                   :key="facetsitem.field"
                   class="filterdata"
                 >
-                  <h2>
-                    <b>{{ facetsitem.label }}</b>
-                  </h2>
+                  <h2><b>{{ facetsitem.label }}</b></h2>
 
-                  <div v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value">
+                  <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
+                    <p @click="setCategoryFilterHistory({type: 'view all'})"
+                       v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                    > View all </p>
+                    <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
+                       @click="setCategoryFilterHistory(categ, index)"
+                       :class="{'active': categ.active}">
+                      {{ categ.label }}
+                    </p>
+                    <p v-for="(valuesitem) in facetsitem.values" :key="valuesitem.value"
+                       @click="setCategoryFilterData (facetsitem, valuesitem)">
+                      {{ valuesitem.label }} ({{ valuesitem.count }})
+                    </p>
+                  </div>
+
+                  <div v-else>
                     <search-checkbox
+                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                       class="col-xs-12 mb15"
                       :id="valuesitem.label+index+valuesitem.count"
                       v-model="valuesitem.active"
@@ -69,19 +83,21 @@
                     >
                       {{ valuesitem.label }} ({{ valuesitem.count }})
                     </search-checkbox>
+
+                    <price-slider
+                      v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
+                      context="category"
+                      id="price"
+                      code="price"
+                      :price-range="priceSliderData.range"
+                      content="Price"
+                      label="Price Label"
+                      :interval="priceSliderData.step"
+                      @sliderChanged="sliderChanged"
+                    />
                   </div>
 
-                  <price-slider
-                    v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
-                    context="category"
-                    id="price"
-                    code="price"
-                    :price-range="priceSliderData.range"
-                    content="Price"
-                    label="Price Label"
-                    :interval="priceSliderData.step"
-                    @sliderChanged="sliderChanged"
-                  />
+
                 </div>
               </div>
             </div>
@@ -188,7 +204,8 @@ export default {
       priceSliderData: {},
       sortingFilterSelcted: '',
       sortingFilterOptions: [],
-      paginationLoader: false
+      paginationLoader: false,
+      setTime: Object
     };
   },
   computed: {},
@@ -228,12 +245,17 @@ export default {
           // searchResults.facets = searchResults.facets.filter(
           //   val => val.label !== 'Price'
           // );
-          if (searchResults.facets.some(val => val.field !== 'category_hierarchy')) {
-            this.categoryHierarchy.push(
-              searchResults.facets.find(val => val.field !== 'category_hierarchy')
-            );
-          }
-          console.log('this.categoryHierarchy', this.categoryHierarchy);
+          // if (searchResults.facets.some(val => val.field === 'category_hierarchy')) {  
+          //   const category = searchResults.facets.find(val => val.field === 'category_hierarchy');
+          //   this.categoryHierarchy.push(category);
+
+          //   // if (category.facet_active === 0 && category.values.length === 0) {
+          //   //     this.categoryHierarchy = [];
+          //   // } else {
+          //   //   this.categoryHierarchy.push(category);
+          //   // }
+          // }
+          // console.log('this.categoryHierarchy', this.categoryHierarchy);
           // searchResults.facets = searchResults.facets.filter(val => val.values.length > 0);
           this.searchRes = searchResults;
           this.$bus.$emit('notification-progress-stop')
@@ -272,7 +294,13 @@ export default {
         this.filterData = [];
         this.serachedProd = [];
         this.filterData.push('rq=' + this.squery);
-        this.getSearchData();
+        clearTimeout(this.setTime);
+        this.setTime = setTimeout(() => {
+          this.getSearchData();
+        }, 400);
+      } else {
+        this.filterData = [];
+        this.serachedProd = [];
       }
     },
 
@@ -334,6 +362,67 @@ export default {
       console.log(' this.filterData', this.filterData);
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
+    },
+
+    setCategoryFilterData (facetssection, item) {
+      this.categoryHierarchy.map(val => { if (val.active) val.active = false; })
+      this.categoryHierarchy.push({...item, field: facetssection.field, active: true})
+      if (facetssection.field === 'category_hierarchy') {
+        if (
+          this.filterData.findIndex(val =>
+            val.includes('filter.category_hierarchy')
+          ) >= 0
+        ) {
+          this.filterData.splice(
+            this.filterData.findIndex(val =>
+              val.includes('filter.category_hierarchy')
+            ),
+            1
+          );
+        }
+        this.filterData.push(
+          'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+        );
+        console.log('setFilterData =>>>', this.filterData);
+        this.$bus.$emit('notification-progress-start', 'Please wait...');
+        this.getSearchData();
+      }
+    },
+
+    setCategoryFilterHistory (item, index = 0) {
+      console.log('this.categoryHierarchy', this.categoryHierarchy, index);
+      if (item.active) { return; }
+      if (item && item.type === 'view all') {
+        this.categoryHierarchy = [];
+      } else {
+        this.categoryHierarchy = this.categoryHierarchy.filter((val, i) => i < index);
+        this.categoryHierarchy.map(val => { if (val.active) val.active = false; });
+        this.categoryHierarchy.push({...item, field: item.field, active: true});
+        console.log('this.categoryHierarchy pushed', this.categoryHierarchy);
+      }
+
+      // if (item.field === 'category_hierarchy') {
+      if (
+        this.filterData.findIndex(val =>
+          val.includes('filter.category_hierarchy')
+        ) >= 0
+      ) {
+        this.filterData.splice(
+          this.filterData.findIndex(val =>
+            val.includes('filter.category_hierarchy')
+          ),
+          1
+        );
+      }
+      if (item && item.type !== 'view all') {
+        this.filterData.push(
+          'filter.' + item.field + '=' + encodeURIComponent(item.value)
+        );
+      }
+      console.log('setFilterData =>>>', this.filterData);
+      this.$bus.$emit('notification-progress-start', 'Please wait...');
+      this.getSearchData();
+      // }
     },
 
     removeFilterFlag (item) {
@@ -450,6 +539,7 @@ export default {
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
+
     onBottomScroll () {
       if (this.filterData.findIndex(val => val.includes('page=')) >= 0) {
         this.filterData.splice(this.filterData.findIndex(val => val.includes('page=')), 1);
@@ -495,5 +585,9 @@ input {
   padding: 3px 10px 3px 10px;
   margin: 0 7px 0 0;
   border-radius: 10px;
+}
+
+.active {
+  font-weight: 800;
 }
 </style>
