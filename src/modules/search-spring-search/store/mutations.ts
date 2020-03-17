@@ -24,5 +24,49 @@ export const mutations: MutationTree<any> = {
     console.log('REMOVE_FILTER_DATA', filterData);
     state.filterData.splice(state.filterData.findIndex(val => val.includes(filterData)),1);
   },
+
+  [types.RESET_FILTER_DATA] (state) {
+    state.filterData = [];
+  },
+
+  [types.SET_SEARCH_RESULTS] (state, filterData) {
+    console.log('SET_SEARCH_RESULTS', filterData);
+    state.searchRes = filterData
+  },
+
+  [types.RESET_SEARCH_RESULTS] (state) {
+    state.searchRes = []
+  },
+
+
+  [types.set_categoryHierarchy]  (state, filterData) {
+    console.log('set_categoryHierarchy', filterData);
+    state.categoryHierarchy.map(val => { if (val.active) val.active = false; });
+    state.categoryHierarchy.push(filterData);
+  },
+
+  [types.set_priceSliderData] (state, filterData) {
+    console.log('set_priceSliderData', filterData);
+    state.priceSliderData = filterData.sliderData;
+    state.priceSliderActiveRange = filterData.sliderActiveRange;
+  },
+
+  [types.set_priceSliderActiveRange] (state, filterData) {
+    console.log('set_priceSliderActiveRange', filterData);
+    state.searchRes = filterData
+  },
+
+  [types.set_sortingFilterSelcted] (state, filterData) {
+    console.log('set_sortingFilterSelcted', filterData);
+    state.searchRes = filterData
+  },
+
+  [types.set_sortingFilterOptions] (state, filterData) {
+    console.log('set_sortingFilterOptions', filterData);
+    state.searchRes = filterData
+  },
   
+  [types.RESET_CATEGORY_FILTER] (state) {
+    state.categoryHierarchy = []
+  },
 }

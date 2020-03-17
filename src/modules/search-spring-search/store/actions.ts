@@ -31,4 +31,64 @@ export const actions: ActionTree<SearchSpringState, any> = {
         }
     },
 
+    resetFilterData ({ commit }) {
+        commit(types.RESET_FILTER_DATA)
+    },
+
+    addSearchSpringSearchResult ({ commit }, searchRes) {
+        console.log('add Search Spring Search Result' , searchRes);
+        if (searchRes) {
+            commit(types.SET_SEARCH_RESULTS, searchRes)
+        }
+    },
+
+    resetSearchSpringSearchRes ({ commit }) {
+        console.log('reset Search Spring Search Result');
+        commit(types.RESET_SEARCH_RESULTS)
+    },
+
+
+    set_categoryHierarchy  ({ commit }, searchRes) {
+        console.log('set_categoryHierarchy' , searchRes);
+        if (searchRes) {
+            commit(types.set_categoryHierarchy, searchRes)
+        }
+    },
+
+    set_priceSliderData  ({ commit }, priceData) {
+        console.log('set_priceSliderData' , priceData);
+        if (priceData) {
+            commit(types.set_priceSliderData, priceData)
+        }
+    },
+
+    set_priceSliderActiveRange  ({ commit }, searchRes) {
+        console.log('set_priceSliderActiveRange' , searchRes);
+        if (searchRes) {
+            commit(types.set_priceSliderActiveRange, searchRes)
+        }
+    },
+
+    set_sortingFilterSelcted  ({ commit }, searchRes) {
+        console.log('set_sortingFilterSelcted' , searchRes);
+        if (searchRes) {
+            commit(types.set_sortingFilterSelcted, searchRes)
+        }
+    },
+
+    set_sortingFilterOptions  ({ commit }, searchRes) {
+        console.log('set_sortingFilterOptions' , searchRes);
+        if (searchRes) {
+            commit(types.set_sortingFilterOptions, searchRes)
+        }
+    },
+
+    reset_categoryFilterOption ({ commit }) {
+        console.log('reset_categoryFilterOption');
+        commit(types.RESET_CATEGORY_FILTER)
+    },
+
+    
+    
+
 }

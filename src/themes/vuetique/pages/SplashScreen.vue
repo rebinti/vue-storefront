@@ -44,7 +44,7 @@
     </div>
 
     <div class="container pb-5 md: ml-2">
-      <div class="row gutter-md" v-if="searchRes.filterSummary && searchRes.filterSummary.length>0">
+      <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
           v-for="filter in searchRes.filterSummary"
           :key="filter.label"
@@ -58,7 +58,7 @@
         </span>
         <span
           class="filter-box"
-          v-if="searchRes.filterSummary && searchRes.filterSummary.length>0"
+          v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
           @click="clearAllFilter()"
         >Clear All</span>
       </div>
@@ -79,7 +79,7 @@
         <div class="">
           <div class="sidebar">
             <h1>Filters</h1>
-            <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets.length > 0">
+            <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <div
                 v-for="facetsitem in searchRes.facets"
                 :key="facetsitem.field"
@@ -144,7 +144,7 @@
           <div class="">
             <div class="sidebar">
               <h1>Filters</h1>
-              <div class="container leading-loose static-content customm">
+              <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
                 <div
                   v-for="facetsitem in searchRes.facets"
                   :key="facetsitem.field"
@@ -202,7 +202,7 @@
             <div class="col-9">
               <h2 style="width:100%;padding-bottom:25px;">
                 Results
-                <sub v-if="searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
+                <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
             <div class="col-3">
@@ -278,7 +278,7 @@ export default {
   },
   mixins: [onBottomScroll],
   computed: {
-    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData1'])
+    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange1'])
 
   },
   // props: {
@@ -296,11 +296,11 @@ export default {
     return {
       currentPage: 1,
       squery: '',
-      searchRes: '',
+      // searchRes: '',
       // serachedProd: [],
-      filterData: [],
-      categoryHierarchy: [],
-      priceSliderData: {},
+      // filterData: [],
+      // categoryHierarchy: [],
+      // priceSliderData: {},
       priceSliderActiveRange: [],
       sortingFilterSelcted: '',
       sortingFilterOptions: [],
@@ -311,13 +311,25 @@ export default {
   },
   mounted () {
     console.log('searchSpringSearch storee', this.$store.state.searchSpringSearch)
+    if (this.filterData && this.filterData.length > 0) {
+      // this.getSearchData(false, true);
+      // if (this.searchRes.length === 1) {
+      //   this.priceSliderData = this.searchRes.facets.find(
+      //     val => val.field === 'final_price'
+      //   );
+      //   this.priceSliderActiveRange = this.priceSliderData.range;
+      //   this.$bus.$emit('reset-price-slider');
+      //   this.sortingFilterOptions = searchResults.sorting.options;
+      //   console.log('this.priceSliderData', this.priceSliderData);
+      // }
+    }
   },
   methods: {
-    async getSearchData (onScroll = false) {
+    async getSearchData (onScroll = false, dataFromStateFlag = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
       try {
-        if (!onScroll) {
+        if (!onScroll && !dataFromStateFlag) {
           this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
           // this.serachedProd = [];
         }
@@ -339,14 +351,23 @@ export default {
             prodSku.push(val.sku);
           });
           console.log('last data', prodSku);
-          await this.getDataFromElastic(prodSku, onScroll);
+          if (!dataFromStateFlag) await this.getDataFromElastic(prodSku, onScroll);
           this.paginationLoader = false;
-          if (this.filterData.length === 1) {
-            this.priceSliderData = searchResults.facets.find(
+          if (this.filterData.length === 1 || dataFromStateFlag) {
+
+            const priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
-            this.priceSliderActiveRange = this.priceSliderData.range;
-            this.$bus.$emit('reset-price-slider');
+            this.$store.dispatch('searchSpringSearch/set_priceSliderData', {sliderData: priceSliderData, sliderActiveRange: priceSliderData.range})
+            
+            // this.priceSliderData = searchResults.facets.find(
+            //   val => val.field === 'final_price'
+            // );
+            // this.priceSliderActiveRange = this.priceSliderData.range;
+            setTimeout(() => {
+              this.$bus.$emit('reset-price-slider');
+            }, 100);
+            
             this.sortingFilterOptions = searchResults.sorting.options;
             console.log('this.priceSliderData', this.priceSliderData);
           }
@@ -365,12 +386,14 @@ export default {
           // }
           // console.log('this.categoryHierarchy', this.categoryHierarchy);
           // searchResults.facets = searchResults.facets.filter(val => val.values.length > 0);
-          this.searchRes = searchResults;
+          // this.searchRes = searchResults;
+          this.$store.dispatch('searchSpringSearch/addSearchSpringSearchResult', searchResults)
           this.$bus.$emit('notification-progress-stop')
         } else {
           this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
           // this.serachedProd = [];
-          this.searchRes = searchResults;
+          // this.searchRes = searchResults;
+          this.$store.dispatch('searchSpringSearch/addSearchSpringSearchResult', searchResults)
           this.$bus.$emit('notification-progress-stop')
         }
         // console.log('this.searchRes', this.searchRes);
@@ -401,17 +424,19 @@ export default {
     searchDataInSearchSpring (squerydata) {
       console.log('squerydata', this.squery, squerydata, squerydata.length);
       if (this.squery.length > 2) {
-        this.filterData = [];
+        // this.filterData = [];
+        this.$store.dispatch('searchSpringSearch/resetFilterData')
         // this.serachedProd = [];
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-        this.filterData.push('rq=' + this.squery);
+        // this.filterData.push('rq=' + this.squery);
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
         clearTimeout(this.setTime);
         this.setTime = setTimeout(() => {
           this.getSearchData();
         }, 400);
       } else {
-        this.filterData = [];
+        // this.filterData = [];
+        this.$store.dispatch('searchSpringSearch/resetFilterData')
         // this.serachedProd = [];
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
       }
@@ -425,17 +450,17 @@ export default {
             val.includes('filter.category_hierarchy')
           ) >= 0
         ) {
-          this.filterData.splice(
-            this.filterData.findIndex(val =>
-              val.includes('filter.category_hierarchy')
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.findIndex(val =>
+          //     val.includes('filter.category_hierarchy')
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
         }
-        this.filterData.push(
-          'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
-        );
+        // this.filterData.push(
+        //   'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+        // );
         this.$store.dispatch('searchSpringSearch/addFilterItems','filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
         console.log('setFilterData =>>>', this.filterData);
         // return;
@@ -456,23 +481,23 @@ export default {
               encodeURIComponent(item.value)
           )
         ) {
-          this.filterData.splice(
-            this.filterData.indexOf(
-              'filter.' +
-                facetssection.field +
-                '=' +
-                encodeURIComponent(item.value)
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.indexOf(
+          //     'filter.' +
+          //       facetssection.field +
+          //       '=' +
+          //       encodeURIComponent(item.value)
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
         } else {
-          this.filterData.push(
-            'filter.' +
-              facetssection.field +
-              '=' +
-              encodeURIComponent(item.value)
-          );
+          // this.filterData.push(
+          //   'filter.' +
+          //     facetssection.field +
+          //     '=' +
+          //     encodeURIComponent(item.value)
+          // );
           this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' +
               facetssection.field +
               '=' +
@@ -485,25 +510,26 @@ export default {
     },
 
     setCategoryFilterData (facetssection, item) {
-      this.categoryHierarchy.map(val => { if (val.active) val.active = false; })
-      this.categoryHierarchy.push({...item, field: facetssection.field, active: true})
+      this.$store.dispatch('searchSpringSearch/set_categoryHierarchy', {...item, field: facetssection.field, active: true})
+      // this.categoryHierarchy.map(val => { if (val.active) val.active = false; })
+      // this.categoryHierarchy.push({...item, field: facetssection.field, active: true})
       if (facetssection.field === 'category_hierarchy') {
         if (
           this.filterData.findIndex(val =>
             val.includes('filter.category_hierarchy')
           ) >= 0
         ) {
-          this.filterData.splice(
-            this.filterData.findIndex(val =>
-              val.includes('filter.category_hierarchy')
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.findIndex(val =>
+          //     val.includes('filter.category_hierarchy')
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
         }
-        this.filterData.push(
-          'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
-        );
+        // this.filterData.push(
+        //   'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
+        // );
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
         console.log('setFilterData =>>>', this.filterData);
         this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -515,11 +541,17 @@ export default {
       console.log('this.categoryHierarchy', this.categoryHierarchy, index);
       if (item.active) { return; }
       if (item && item.type === 'view all') {
-        this.categoryHierarchy = [];
+        // this.categoryHierarchy = [];
+        this.$store.dispatch('searchSpringSearch/reset_categoryFilterOption')
       } else {
-        this.categoryHierarchy = this.categoryHierarchy.filter((val, i) => i < index);
-        this.categoryHierarchy.map(val => { if (val.active) val.active = false; });
-        this.categoryHierarchy.push({...item, field: item.field, active: true});
+        // this.categoryHierarchy = this.categoryHierarchy.filter((val, i) => i < index);
+        
+        this.$store.dispatch('searchSpringSearch/reset_categoryFilterOption')
+        this.$store.dispatch('searchSpringSearch/set_categoryHierarchy', this.categoryHierarchy.filter((val, i) => i < index))
+        this.$store.dispatch('searchSpringSearch/set_categoryHierarchy', {...item, field: item.field, active: true})
+
+        // this.categoryHierarchy.map(val => { if (val.active) val.active = false; });
+        // this.categoryHierarchy.push({...item, field: item.field, active: true});
         console.log('this.categoryHierarchy pushed', this.categoryHierarchy);
       }
 
@@ -529,18 +561,18 @@ export default {
           val.includes('filter.category_hierarchy')
         ) >= 0
       ) {
-        this.filterData.splice(
-          this.filterData.findIndex(val =>
-            val.includes('filter.category_hierarchy')
-          ),
-          1
-        );
+        // this.filterData.splice(
+        //   this.filterData.findIndex(val =>
+        //     val.includes('filter.category_hierarchy')
+        //   ),
+        //   1
+        // );
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
       }
       if (item && item.type !== 'view all') {
-        this.filterData.push(
-          'filter.' + item.field + '=' + encodeURIComponent(item.value)
-        );
+        // this.filterData.push(
+        //   'filter.' + item.field + '=' + encodeURIComponent(item.value)
+        // );
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
       }
       console.log('setFilterData =>>>', this.filterData);
@@ -557,12 +589,12 @@ export default {
             val.includes('filter.final_price.low')
           ) >= 0
         ) {
-          this.filterData.splice(
-            this.filterData.findIndex(val =>
-              val.includes('filter.final_price.low')
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.findIndex(val =>
+          //     val.includes('filter.final_price.low')
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.low')
         }
         if (
@@ -570,12 +602,12 @@ export default {
             val.includes('filter.final_price.high')
           ) >= 0
         ) {
-          this.filterData.splice(
-            this.filterData.findIndex(val =>
-              val.includes('filter.final_price.high')
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.findIndex(val =>
+          //     val.includes('filter.final_price.high')
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.high')
         }
         this.$bus.$emit('reset-price-slider');
@@ -591,12 +623,12 @@ export default {
             'filter.' + item.field + '=' + encodeURIComponent(item.value)
           ) >= 0
         ) {
-          this.filterData.splice(
-            this.filterData.indexOf(
-              'filter.' + item.field + '=' + encodeURIComponent(item.value)
-            ),
-            1
-          );
+          // this.filterData.splice(
+          //   this.filterData.indexOf(
+          //     'filter.' + item.field + '=' + encodeURIComponent(item.value)
+          //   ),
+          //   1
+          // );
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
         }
         this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -609,8 +641,9 @@ export default {
     },
 
     clearAllFilter () {
-      this.filterData = [];
-      this.filterData.push('rq=' + this.squery);
+      // this.filterData = [];
+      this.$store.dispatch('searchSpringSearch/resetFilterData');
+      // this.filterData.push('rq=' + this.squery);
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
       this.$bus.$emit('reset-price-slider');
       this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -628,12 +661,12 @@ export default {
           val.includes('filter.final_price.low')
         ) >= 0
       ) {
-        this.filterData.splice(
-          this.filterData.findIndex(val =>
-            val.includes('filter.final_price.low')
-          ),
-          1
-        );
+        // this.filterData.splice(
+        //   this.filterData.findIndex(val =>
+        //     val.includes('filter.final_price.low')
+        //   ),
+        //   1
+        // );
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.low')
       }
       if (
@@ -641,17 +674,17 @@ export default {
           val.includes('filter.final_price.high')
         ) >= 0
       ) {
-        this.filterData.splice(
-          this.filterData.findIndex(val =>
-            val.includes('filter.final_price.high')
-          ),
-          1
-        );
+        // this.filterData.splice(
+        //   this.filterData.findIndex(val =>
+        //     val.includes('filter.final_price.high')
+        //   ),
+        //   1
+        // );
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.high')
       }
-      this.filterData.push('filter.final_price.low=' + range.from);
+      // this.filterData.push('filter.final_price.low=' + range.from);
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.final_price.low=' + range.from)
-      this.filterData.push('filter.final_price.high=' + range.to);
+      // this.filterData.push('filter.final_price.high=' + range.to);
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.final_price.high=' + range.to)
       console.log('this.filterData', this.filterData);
       this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -660,15 +693,15 @@ export default {
 
     sortingFilterChange (value) {
       if (this.filterData.findIndex(val => val.includes('sort.')) >= 0) {
-        this.filterData.splice(
-          this.filterData.findIndex(val =>
-            val.includes('sort.')
-          ),
-          1
-        );
+        // this.filterData.splice(
+        //   this.filterData.findIndex(val =>
+        //     val.includes('sort.')
+        //   ),
+        //   1
+        // );
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'sort.')
       }
-      this.filterData.push('sort.' + value.split('$')[0] + '=' + value.split('$')[1]);
+      // this.filterData.push('sort.' + value.split('$')[0] + '=' + value.split('$')[1]);
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'sort.' + value.split('$')[0] + '=' + value.split('$')[1])
       console.log('sortingFilterChange', this.filterData)
       this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -677,12 +710,12 @@ export default {
 
     onBottomScroll () {
       if (this.filterData.findIndex(val => val.includes('page=')) >= 0) {
-        this.filterData.splice(this.filterData.findIndex(val => val.includes('page=')), 1);
+        // this.filterData.splice(this.filterData.findIndex(val => val.includes('page=')), 1);
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'page=')
       }
       if (this.searchRes && this.searchRes.pagination && this.searchRes.pagination.nextPage > 0 && !this.paginationLoader) {
         this.paginationLoader = true;
-        this.filterData.push('page=' + this.searchRes.pagination.nextPage)
+        // this.filterData.push('page=' + this.searchRes.pagination.nextPage)
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'page=' + this.searchRes.pagination.nextPage)
         this.getSearchData(true);
       }
@@ -690,13 +723,15 @@ export default {
 
     resetAllFilterResult () {
       console.log('resetAllFilterResult')
-      this.filterData = [];
+      // this.filterData = [];
+      this.$store.dispatch('searchSpringSearch/resetFilterData')
       this.squery = '';
-      this.searchRes = '';
+      // this.searchRes = '';
+      this.$store.dispatch('searchSpringSearch/resetSearchSpringSearchRes')
       // this.serachedProd = [];
       this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-      this.filterData = [];
-      this.categoryHierarchy = [];
+      // this.categoryHierarchy = [];
+      this.$store.dispatch('searchSpringSearch/reset_categoryFilterOption')
       this.priceSliderData = {};
       this.sortingFilterSelcted = '';
       this.sortingFilterOptions = [];
