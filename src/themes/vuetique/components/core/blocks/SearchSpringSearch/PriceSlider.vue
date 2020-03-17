@@ -55,23 +55,29 @@ export default {
       type: Number,
       required: false,
       default: 0
+    },
+    activeRange: {
+      type: Array,
+      required: true
     }
   },
   beforeMount () {
     this.$bus.$on('filter-reset', this.resetPriceSlider)
     this.$bus.$on('reset-price-slider', this.resetPriceSlider)
+    this.$bus.$on('reset-active-price-slider', this.changeActiveValueToSlider)
     this.$bus.$on('category-after-load', this.resetPriceSlider)
   },
   beforeDestroy () {
     this.$bus.$off('filter-reset', this.resetPriceSlider)
     this.$bus.$off('reset-price-slider', this.resetPriceSlider)
+    this.$bus.$off('reset-active-price-slider', this.changeActiveValueToSlider)
     this.$bus.$off('category-after-load', this.resetPriceSlider)
   },
   data () {
     return {
       active: false,
       remove: false,
-      value: this.priceRange,
+      value: this.activeRange,
       currencySign: this.$store.state.config.i18n.currencySign,
       priceSliderConfig: this.$store.state.config.layeredNavigation.priceSliderOptions
     }
@@ -111,6 +117,11 @@ export default {
     resetPriceSlider () {
       if (this.$refs.priceSlider) {
         this.$refs.priceSlider.setValue(this.priceRange)
+      }
+    },
+    changeActiveValueToSlider () {
+      if (this.$refs.priceSlider) {
+        this.$refs.priceSlider.setValue(this.activeRange)
       }
     }
   },

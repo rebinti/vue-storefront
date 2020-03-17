@@ -35,6 +35,8 @@ import { FacebookPixel } from './vsf-facebook-pixel'
 
 import { ExternalCheckout } from './vsf-external-checkout'
 
+import { SearchSpringSearch } from './search-spring-search';
+
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -97,7 +99,8 @@ export const registerModules: VueStorefrontModule[] = [
   // PaymentBraintreeModule
   Braintree,
   FacebookPixel,
-  ExternalCheckout
+  ExternalCheckout,
+  SearchSpringSearch
   // layeredNavigationModule
   // Example
 ]

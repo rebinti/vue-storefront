@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row" style="margin-top: 10px;">
-      <div class="col-6" style="margin:0 auto">
+      <div class="col-8 md:col-12 sm:col-12" style="margin:0 auto">
         <h4 class="col-6" @click="getSearchData">
           Search with Search Spring
         </h4>
@@ -21,9 +21,29 @@
             <use xlink:href="#search" />
           </svg>
         </div>
+        <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;"> 
+          <button-full
+            class="mb35"
+            type="button"
+            @click.native="resetAllFilterResult"
+          >
+            Clear All
+          </button-full>
+        </div>
       </div>
     </div>
-    <div class="container pb-5">
+
+    <div class="container lg:hidden d_item" style=" margin-bottom: 20px;">
+      <div class="row gutter-md mt-6">
+        <div class="col-12">
+          <button-full class="w-full" @click.native="openFilters">
+            {{ $t('Filters') }}
+          </button-full>
+        </div>
+      </div>
+    </div>
+
+    <div class="container pb-5 md: ml-2">
       <div class="row gutter-md" v-if="searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
           v-for="filter in searchRes.filterSummary"
@@ -43,11 +63,85 @@
         >Clear All</span>
       </div>
     </div>
+    <!-- Side bar for Mobile -->
+    <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
+      <div class="mobile-filters_new">
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4"
+          @click="closeFilters"
+        >
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
+        <div class="">
+          <div class="sidebar">
+            <h1>Filters</h1>
+            <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets.length > 0">
+              <div
+                v-for="facetsitem in searchRes.facets"
+                :key="facetsitem.field"
+                class="filterdata"
+              >
+                <h2><b>{{ facetsitem.label }}</b></h2>
+
+                <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
+                  <p @click="setCategoryFilterHistory({type: 'view all'})"
+                     v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                  > View all </p>
+                  <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
+                     @click="setCategoryFilterHistory(categ, index)"
+                     :class="{'active': categ.active}">
+                    {{ categ.label }}
+                  </p>
+                  <p v-for="(valuesitem) in facetsitem.values" :key="valuesitem.value"
+                     @click="setCategoryFilterData (facetsitem, valuesitem)">
+                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                  </p>
+                </div>
+
+                <div v-else>
+                  <search-checkbox
+                    v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                    class="col-xs-12 mb15"
+                    :id="valuesitem.label+index+valuesitem.count"
+                    v-model="valuesitem.active"
+                    @click="setFilterData (facetsitem, valuesitem)"
+                  >
+                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                  </search-checkbox>
+
+                  <price-slider
+                    v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
+                    context="categoryMob"
+                    id="priceMob"
+                    code="priceMob"
+                    :price-range="priceSliderData.range"
+                    :active-range="priceSliderActiveRange"
+                    content="PriceMob"
+                    label="Price Label"
+                    :interval="priceSliderData.step"
+                    @sliderChanged="priceSliderChanged"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div v-else>
+              <h5>NO RESULTS FOUND <span v-if="squery">FOR {{ squery }} </span>!.</h5>
+              <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container pb-16">
       <div class="row gutter-md">
-        <div class="col-3">
-          <div class>
+        <div class="col-3 hidden lg:block">
+          <div class="">
             <div class="sidebar">
               <h1>Filters</h1>
               <div class="container leading-loose static-content customm">
@@ -87,17 +181,16 @@
                     <price-slider
                       v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
                       context="category"
-                      id="price"
+                      id="priceWeb"
                       code="price"
                       :price-range="priceSliderData.range"
+                      :active-range="priceSliderActiveRange"
                       content="Price"
                       label="Price Label"
                       :interval="priceSliderData.step"
-                      @sliderChanged="sliderChanged"
+                      @sliderChanged="priceSliderChanged"
                     />
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -107,10 +200,10 @@
         <div class="col-12 lg:col-9 pr_list_sec_main">
           <div class="row">
             <div class="col-9">
-            <h2 style="width:100%;padding-bottom:25px;">
-              Results
-              <sub v-if="searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
-            </h2>
+              <h2 style="width:100%;padding-bottom:25px;">
+                Results
+                <sub v-if="searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
+              </h2>
             </div>
             <div class="col-3">
               <base-select
@@ -129,15 +222,15 @@
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
-            <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-              <animateTransform attributeType="xml"
-                attributeName="transform"
-                type="rotate"
-                from="0 25 25"
-                to="360 25 25"
-                dur="0.6s"
-                repeatCount="indefinite"/>
+                 width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
+              <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                <animateTransform attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"/>
               </path>
             </svg>
             <h3 style="text-align: center;"> Please wait for loading more... </h3>
@@ -153,14 +246,14 @@
 </template>
 
 <script>
-import { TaskQueue } from '@vue-storefront/core/lib/sync';
+// import { TaskQueue } from '@vue-storefront/core/lib/sync';
 import fetch from 'isomorphic-fetch';
-import omit from 'lodash-es/omit';
+// import omit from 'lodash-es/omit';
 import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
 import ProductListing from '../components/core/ProductListing.vue';
 
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput';
-// import ButtonFull from 'theme/components/theme/ButtonFull';
+import ButtonFull from 'theme/components/theme/ButtonFull';
 // import BaseSelect from 'theme/components/core/blocks/Form/BaseSelect'
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
 
@@ -171,17 +264,23 @@ import config from 'config'
 
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'SplashScreen',
   components: {
     ProductListing,
     BaseInput,
-    // ButtonFull,
+    ButtonFull,
     BaseSelect,
     SearchCheckbox,
     PriceSlider
   },
   mixins: [onBottomScroll],
+  computed: {
+    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData1'])
+
+  },
   // props: {
   //   perPage: {
   //     type: Number,
@@ -198,23 +297,30 @@ export default {
       currentPage: 1,
       squery: '',
       searchRes: '',
-      serachedProd: [],
+      // serachedProd: [],
       filterData: [],
       categoryHierarchy: [],
       priceSliderData: {},
+      priceSliderActiveRange: [],
       sortingFilterSelcted: '',
       sortingFilterOptions: [],
       paginationLoader: false,
-      setTime: Object
+      setTime: Object,
+      mobileFilters: false
     };
   },
-  computed: {},
+  mounted () {
+    console.log('searchSpringSearch storee', this.$store.state.searchSpringSearch)
+  },
   methods: {
     async getSearchData (onScroll = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
       try {
-        if (!onScroll) { this.serachedProd = []; }
+        if (!onScroll) {
+          this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+          // this.serachedProd = [];
+        }
         const searchResults = await fetch(searchUrl, {
           method: 'GET',
           headers: {
@@ -239,6 +345,8 @@ export default {
             this.priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
+            this.priceSliderActiveRange = this.priceSliderData.range;
+            this.$bus.$emit('reset-price-slider');
             this.sortingFilterOptions = searchResults.sorting.options;
             console.log('this.priceSliderData', this.priceSliderData);
           }
@@ -260,7 +368,8 @@ export default {
           this.searchRes = searchResults;
           this.$bus.$emit('notification-progress-stop')
         } else {
-          this.serachedProd = [];
+          this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+          // this.serachedProd = [];
           this.searchRes = searchResults;
           this.$bus.$emit('notification-progress-stop')
         }
@@ -273,18 +382,19 @@ export default {
       query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
         'product/list',
-        { query, start: 0, size: searchedData.length, updateState: false },
+        { query, start: 0, size: searchedData.length, updateState: true },
         { root: true }
       );
       console.log('Es results', items);
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
-      if (!onScroll) {
-        this.serachedProd = sortedData
-      } else {
-        this.serachedProd.push(...sortedData);
-      }
+      this.$store.dispatch('searchSpringSearch/addProdcutsItems', {onScroll: onScroll, products: sortedData})
+      // if (!onScroll) {
+      //   this.serachedProd = sortedData
+      // } else {
+      //   this.serachedProd.push(...sortedData);
+      // }
       return this.serachedProd;
     },
 
@@ -292,15 +402,18 @@ export default {
       console.log('squerydata', this.squery, squerydata, squerydata.length);
       if (this.squery.length > 2) {
         this.filterData = [];
-        this.serachedProd = [];
+        // this.serachedProd = [];
+        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
         this.filterData.push('rq=' + this.squery);
+        this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
         clearTimeout(this.setTime);
         this.setTime = setTimeout(() => {
           this.getSearchData();
         }, 400);
       } else {
         this.filterData = [];
-        this.serachedProd = [];
+        // this.serachedProd = [];
+        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
       }
     },
 
@@ -318,10 +431,12 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
         }
         this.filterData.push(
           'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
         );
+        this.$store.dispatch('searchSpringSearch/addFilterItems','filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
         console.log('setFilterData =>>>', this.filterData);
         // return;
         // if (this.filterData.includes("bgfilter.category=" + item.value)) {
@@ -350,6 +465,7 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
         } else {
           this.filterData.push(
             'filter.' +
@@ -357,6 +473,10 @@ export default {
               '=' +
               encodeURIComponent(item.value)
           );
+          this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' +
+              facetssection.field +
+              '=' +
+              encodeURIComponent(item.value))
         }
       }
       console.log(' this.filterData', this.filterData);
@@ -379,10 +499,12 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
         }
         this.filterData.push(
           'filter.' + facetssection.field + '=' + encodeURIComponent(item.value)
         );
+        this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
         console.log('setFilterData =>>>', this.filterData);
         this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
@@ -413,11 +535,13 @@ export default {
           ),
           1
         );
+        this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
       }
       if (item && item.type !== 'view all') {
         this.filterData.push(
           'filter.' + item.field + '=' + encodeURIComponent(item.value)
         );
+        this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
       }
       console.log('setFilterData =>>>', this.filterData);
       this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -439,6 +563,7 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.low')
         }
         if (
           this.filterData.findIndex(val =>
@@ -451,6 +576,7 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.high')
         }
         this.$bus.$emit('reset-price-slider');
         this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -471,6 +597,7 @@ export default {
             ),
             1
           );
+          this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
         }
         this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
@@ -484,16 +611,18 @@ export default {
     clearAllFilter () {
       this.filterData = [];
       this.filterData.push('rq=' + this.squery);
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
       this.$bus.$emit('reset-price-slider');
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
 
-    sliderChanged (range) {
-      console.log('sliderChanged', range);
-
+    priceSliderChanged (range) {
+      console.log('priceSliderChanged', range);
+      this.priceSliderActiveRange[0] = range.from;
+      this.priceSliderActiveRange[1] = range.to;
+      this.$bus.$emit('reset-active-price-slider')
       // filter.final_price.low=12.5&filter.final_price.high=47.5
-
       if (
         this.filterData.findIndex(val =>
           val.includes('filter.final_price.low')
@@ -505,6 +634,7 @@ export default {
           ),
           1
         );
+        this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.low')
       }
       if (
         this.filterData.findIndex(val =>
@@ -517,9 +647,12 @@ export default {
           ),
           1
         );
+        this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.final_price.high')
       }
       this.filterData.push('filter.final_price.low=' + range.from);
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.final_price.low=' + range.from)
       this.filterData.push('filter.final_price.high=' + range.to);
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'filter.final_price.high=' + range.to)
       console.log('this.filterData', this.filterData);
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -533,8 +666,10 @@ export default {
           ),
           1
         );
+        this.$store.dispatch('searchSpringSearch/removeFilterItem', 'sort.')
       }
       this.filterData.push('sort.' + value.split('$')[0] + '=' + value.split('$')[1]);
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'sort.' + value.split('$')[0] + '=' + value.split('$')[1])
       console.log('sortingFilterChange', this.filterData)
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -543,18 +678,63 @@ export default {
     onBottomScroll () {
       if (this.filterData.findIndex(val => val.includes('page=')) >= 0) {
         this.filterData.splice(this.filterData.findIndex(val => val.includes('page=')), 1);
+        this.$store.dispatch('searchSpringSearch/removeFilterItem', 'page=')
       }
       if (this.searchRes && this.searchRes.pagination && this.searchRes.pagination.nextPage > 0 && !this.paginationLoader) {
         this.paginationLoader = true;
         this.filterData.push('page=' + this.searchRes.pagination.nextPage)
+        this.$store.dispatch('searchSpringSearch/addFilterItems', 'page=' + this.searchRes.pagination.nextPage)
         this.getSearchData(true);
       }
-    }
+    },
+
+    resetAllFilterResult () {
+      console.log('resetAllFilterResult')
+      this.filterData = [];
+      this.squery = '';
+      this.searchRes = '';
+      // this.serachedProd = [];
+      this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+      this.filterData = [];
+      this.categoryHierarchy = [];
+      this.priceSliderData = {};
+      this.sortingFilterSelcted = '';
+      this.sortingFilterOptions = [];
+      this.paginationLoader = false;
+    },
+    openFilters () {
+      this.mobileFilters = true;
+      const el = document.body; // to fix background scroll issue when the filter opened
+      el.classList.add('openfilter');
+      el.classList.add('no-scroll');
+      document.documentElement.classList.add('no-scroll');
+    },
+    closeFilters () {
+      this.mobileFilters = false
+      const el = document.body;
+      el.classList.remove('openfilter');
+      el.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.mobile-filters { 
+  @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
+  
+  overscroll-behavior: none none;
+  padding-top: 52px;
+  top: 70px;
+  height: calc(100vh - 70px);
+
+  @screen md {
+    top: 73px;
+  }
+}
+
 .customm .item {
   float: left;
   width: 200px;
@@ -583,7 +763,7 @@ input {
   /* width: 69px; */
   border: 1px solid;
   padding: 3px 10px 3px 10px;
-  margin: 0 7px 0 0;
+  margin: 0px 3px 5px 3px;
   border-radius: 10px;
 }
 
