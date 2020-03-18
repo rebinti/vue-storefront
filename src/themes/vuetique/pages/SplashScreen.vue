@@ -2,7 +2,7 @@
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-8 md:col-12 sm:col-12" style="margin:0 auto">
-        <h4 class="col-6" @click="getSearchData">
+        <h4 class="col-6">
           Search with Search Spring
         </h4>
         <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
@@ -788,6 +788,7 @@ export default {
       this.priceSliderData = {};
       this.sortingFilterSelcted = '';
       this.sortingFilterOptions = [];
+      this.searchedValue = null;
       this.paginationLoader = false;
     },
     openFilters () {
