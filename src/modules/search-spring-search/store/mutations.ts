@@ -49,6 +49,7 @@ export const mutations: MutationTree<any> = {
     console.log('set_priceSliderData', filterData);
     state.priceSliderData = filterData.sliderData;
     state.priceSliderActiveRange = filterData.sliderActiveRange;
+    state.sortingFilterOptions = filterData.sortingFilterOptions;
   },
 
   [types.set_priceSliderActiveRange] (state, activeRange) {
@@ -57,9 +58,9 @@ export const mutations: MutationTree<any> = {
     state.priceSliderActiveRange[1] = activeRange.to;
   },
 
-  [types.set_sortingFilterSelcted] (state, filterData) {
-    console.log('set_sortingFilterSelcted', filterData);
-    state.searchRes = filterData
+  [types.set_sortingFilterSelected] (state, sortFilterItem) {
+    console.log('set_sortingFilterSelcted', sortFilterItem);
+    state.sortingFilterSelected = sortFilterItem
   },
 
   [types.set_sortingFilterOptions] (state, filterData) {
@@ -72,17 +73,13 @@ export const mutations: MutationTree<any> = {
   },
 
   [types.RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT] (state) {
-    state.currentPage = 1
-    state.squery = ''
     state.searchRes = null
     state.serachedProd = []
     state.filterData = []
     state.categoryHierarchy = []
     state.priceSliderData = {}
     state.priceSliderActiveRange = []
-    state.sortingFilterSelcted = ''
+    state.sortingFilterSelected = ''
     state.sortingFilterOptions = []
-    state.paginationLoader = false
-    state.mobileFilters = false
   }
 }

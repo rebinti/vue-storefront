@@ -43,7 +43,7 @@
                   repeatCount="indefinite"/>
               </path>
             </svg>
-             <h3 style="text-align: center;"> Please wait.Finding best results... </h3>
+             <h3 style="text-align: center;"> Please wait.finding best results... </h3>
           </div>
       </div>
     </div>
@@ -225,9 +225,9 @@
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
                 name="sort"
-                v-model="sortingFilterSelcted"
+                v-model="sortingFilterSelectedValue"
                 :options="sortingFilterOptions"
-                :selected="sortingFilterSelcted"
+                :selected="sortingFilterSelectedValue"
                 :placeholder="$t('Sorting *')"
                 @input="sortingFilterChange"
               />
@@ -293,7 +293,7 @@ export default {
   },
   mixins: [onBottomScroll],
   computed: {
-    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange'])
+    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
 
   },
   // props: {
@@ -317,8 +317,8 @@ export default {
       // categoryHierarchy: [],
       // priceSliderData: {},
       // priceSliderActiveRange: [],
-      sortingFilterSelcted: '',
-      sortingFilterOptions: [],
+      sortingFilterSelectedValue: '',
+      // sortingFilterOptions: [],
       paginationLoader: false,
       setTime: Object,
       mobileFilters: false,
@@ -335,6 +335,9 @@ export default {
             this.$bus.$emit('reset-price-slider');
             this.$bus.$emit('reset-active-price-slider');
         }, 50);
+      }
+      if (this.sortingFilterSelected) {
+          this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
       // this.getSearchData(false, true);
       // if (this.searchRes.length === 1) {
@@ -368,8 +371,10 @@ export default {
         });
         console.log('Search Spring Results', searchResults);
         if (this.squery.length < 2) {
-          this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-          return;
+            if (this.searchedValue.length < 2) {
+              this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+              return;
+            }
         }
         if (searchResults && searchResults.results.length > 0) {
           // var object = searchResults.results.reduce(
@@ -387,7 +392,7 @@ export default {
             const priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
-            this.$store.dispatch('searchSpringSearch/set_priceSliderData', {sliderData: priceSliderData, sliderActiveRange: priceSliderData.range})
+            this.$store.dispatch('searchSpringSearch/set_priceSliderData', {sliderData: priceSliderData, sliderActiveRange: priceSliderData.range , sortingFilterOptions: searchResults.sorting.options })
             
             // this.priceSliderData = searchResults.facets.find(
             //   val => val.field === 'final_price'
@@ -397,7 +402,7 @@ export default {
               this.$bus.$emit('reset-price-slider');
             }, 100);
             
-            this.sortingFilterOptions = searchResults.sorting.options;
+            // this.sortingFilterOptions = searchResults.sorting.options;
             console.log('this.priceSliderData', this.priceSliderData);
           }
           // searchResults.facets = searchResults.facets.filter(
@@ -452,9 +457,11 @@ export default {
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
       if (this.squery.length < 2) {
-        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-        return;
-      }
+            if (this.searchedValue.length < 2) {
+              this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+              return;
+            }
+        }
       this.$store.dispatch('searchSpringSearch/addProdcutsItems', {onScroll: onScroll, products: sortedData})
       // if (!onScroll) {
       //   this.serachedProd = sortedData
@@ -753,6 +760,7 @@ export default {
         // );
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'sort.')
       }
+      this.$store.dispatch('searchSpringSearch/set_sortingFilterSelected', value)
       // this.filterData.push('sort.' + value.split('$')[0] + '=' + value.split('$')[1]);
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'sort.' + value.split('$')[0] + '=' + value.split('$')[1])
       console.log('sortingFilterChange', this.filterData)
@@ -786,8 +794,8 @@ export default {
       // this.categoryHierarchy = [];
       this.$store.dispatch('searchSpringSearch/reset_categoryFilterOption')
       this.priceSliderData = {};
-      this.sortingFilterSelcted = '';
-      this.sortingFilterOptions = [];
+      this.sortingFilterSelectedValue = '';
+      // this.sortingFilterOptions = [];
       this.searchedValue = null;
       this.paginationLoader = false;
     },

@@ -14,7 +14,7 @@
         v-for="(option, key) in options"
         :key="key"
         :value="option.field+ '$' + option.direction"
-        v-bind="{selected: option.value === selected}"
+        v-bind="{selected: option.field+ '$' + option.direction === selected}"
       >
         {{ option.label }}
       </option>

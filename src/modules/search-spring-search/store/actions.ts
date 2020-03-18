@@ -69,10 +69,10 @@ export const actions: ActionTree<SearchSpringState, any> = {
         }
     },
 
-    set_sortingFilterSelcted  ({ commit }, searchRes) {
-        console.log('set_sortingFilterSelcted' , searchRes);
-        if (searchRes) {
-            commit(types.set_sortingFilterSelcted, searchRes)
+    set_sortingFilterSelected  ({ commit }, sortFilterItem) {
+        console.log('set_sortingFilterSelcted' , sortFilterItem);
+        if (sortFilterItem) {
+            commit(types.set_sortingFilterSelected, sortFilterItem)
         }
     },
 
