@@ -62,10 +62,10 @@ export const actions: ActionTree<SearchSpringState, any> = {
         }
     },
 
-    set_priceSliderActiveRange  ({ commit }, searchRes) {
-        console.log('set_priceSliderActiveRange' , searchRes);
-        if (searchRes) {
-            commit(types.set_priceSliderActiveRange, searchRes)
+    set_priceSliderActiveRange  ({ commit }, activeRange) {
+        console.log('set_priceSliderActiveRange' , activeRange);
+        if (activeRange) {
+            commit(types.set_priceSliderActiveRange, activeRange)
         }
     },
 
@@ -86,6 +86,11 @@ export const actions: ActionTree<SearchSpringState, any> = {
     reset_categoryFilterOption ({ commit }) {
         console.log('reset_categoryFilterOption');
         commit(types.RESET_CATEGORY_FILTER)
+    },
+
+    resetAllFilterResult ({ commit }) {
+        console.log('resetAllFilterResult actionn');
+        commit(types.RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT)
     },
 
     

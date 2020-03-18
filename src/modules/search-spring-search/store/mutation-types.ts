@@ -14,6 +14,8 @@ const set_sortingFilterOptions = 'set_sortingFilterOptions'
 
 const RESET_CATEGORY_FILTER = 'RESET_CATEGORY_FILTER'
 
+const RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT = 'RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT'
+
 export {
   SET_SERACH_ITEMS,
   CLEAR_SEARCHED_PRODCUTS,
@@ -29,5 +31,7 @@ export {
   set_sortingFilterSelcted,
   set_sortingFilterOptions,
 
-  RESET_CATEGORY_FILTER
+  RESET_CATEGORY_FILTER,
+
+  RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT
 }

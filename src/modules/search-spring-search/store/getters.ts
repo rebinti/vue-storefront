@@ -8,7 +8,7 @@ export const getters: GetterTree<SearchSpringState, RootState> = {
     searchRes: (state) => state.searchRes,
     categoryHierarchy:  (state) => state.categoryHierarchy,
     priceSliderData: (state) => state.priceSliderData,
-    priceSliderActiveRange1: (state) => state.priceSliderActiveRange,
+    priceSliderActiveRange: (state) => state.priceSliderActiveRange,
     sortingFilterSelcted1: (state) => state.sortingFilterSelcted,
     sortingFilterOptions1: (state) => state.sortingFilterOptions
 }

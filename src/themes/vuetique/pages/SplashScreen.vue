@@ -15,12 +15,12 @@
             class="w-full"
             v-model="squery"
             @input="searchDataInSearchSpring"
-            focus
+            
           />
           <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
             <use xlink:href="#search" />
           </svg>
-        </div>
+        </div>    
         <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;"> 
           <button-full
             class="mb35"
@@ -30,6 +30,21 @@
             Clear All
           </button-full>
         </div>
+        <div class="loader loader--style3" title="2" v-if="searcingLoaderFlag">
+            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
+              <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                <animateTransform attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"/>
+              </path>
+            </svg>
+             <h3 style="text-align: center;"> Please wait.Finding best results... </h3>
+          </div>
       </div>
     </div>
 
@@ -138,7 +153,7 @@
       </div>
     </div>
 
-    <div class="container pb-16">
+    <div class="container pb-16" v-if="!searcingLoaderFlag">
       <div class="row gutter-md">
         <div class="col-3 hidden lg:block">
           <div class="">
@@ -201,7 +216,7 @@
           <div class="row">
             <div class="col-9">
               <h2 style="width:100%;padding-bottom:25px;">
-                Results
+               Search results <span v-if="searchedValue">for "{{searchedValue}}" </span>
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
@@ -236,7 +251,7 @@
             <h3 style="text-align: center;"> Please wait for loading more... </h3>
           </div>
           <div v-if="serachedProd.length === 0">
-            <h5>NO RESULTS FOUND <span v-if="squery">FOR {{ squery }} </span>!.</h5>
+            <h5>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h5>
             <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
           </div>
         </div>
@@ -278,7 +293,7 @@ export default {
   },
   mixins: [onBottomScroll],
   computed: {
-    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange1'])
+    ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange'])
 
   },
   // props: {
@@ -301,17 +316,26 @@ export default {
       // filterData: [],
       // categoryHierarchy: [],
       // priceSliderData: {},
-      priceSliderActiveRange: [],
+      // priceSliderActiveRange: [],
       sortingFilterSelcted: '',
       sortingFilterOptions: [],
       paginationLoader: false,
       setTime: Object,
-      mobileFilters: false
+      mobileFilters: false,
+      searchedValue: '',
+      searcingLoaderFlag: false
     };
   },
   mounted () {
     console.log('searchSpringSearch storee', this.$store.state.searchSpringSearch)
     if (this.filterData && this.filterData.length > 0) {
+       this.searchedValue = this.filterData[0].split('=')[1];
+      if(this.priceSliderData) {
+        setTimeout(() => {
+            this.$bus.$emit('reset-price-slider');
+            this.$bus.$emit('reset-active-price-slider');
+        }, 50);
+      }
       // this.getSearchData(false, true);
       // if (this.searchRes.length === 1) {
       //   this.priceSliderData = this.searchRes.facets.find(
@@ -343,6 +367,10 @@ export default {
           return res.json();
         });
         console.log('Search Spring Results', searchResults);
+        if (this.squery.length < 2) {
+          this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+          return;
+        }
         if (searchResults && searchResults.results.length > 0) {
           // var object = searchResults.results.reduce(
           //   (obj, item) => Object.assign(obj, item.sku), []);
@@ -353,6 +381,7 @@ export default {
           console.log('last data', prodSku);
           if (!dataFromStateFlag) await this.getDataFromElastic(prodSku, onScroll);
           this.paginationLoader = false;
+          this.searcingLoaderFlag = false;
           if (this.filterData.length === 1 || dataFromStateFlag) {
 
             const priceSliderData = searchResults.facets.find(
@@ -388,16 +417,26 @@ export default {
           // searchResults.facets = searchResults.facets.filter(val => val.values.length > 0);
           // this.searchRes = searchResults;
           this.$store.dispatch('searchSpringSearch/addSearchSpringSearchResult', searchResults)
+          setTimeout(() => {
+            this.searchedValue = this.filterData[0].split('=')[1];
+          }, 100);
           this.$bus.$emit('notification-progress-stop')
         } else {
           this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
           // this.serachedProd = [];
           // this.searchRes = searchResults;
+          this.searchedValue = null;
+          this.paginationLoader = false;
+          this.searcingLoaderFlag = false;
           this.$store.dispatch('searchSpringSearch/addSearchSpringSearchResult', searchResults)
           this.$bus.$emit('notification-progress-stop')
         }
         // console.log('this.searchRes', this.searchRes);
-      } catch (e) { this.$bus.$emit('notification-progress-stop') }
+      } catch (e) { 
+        this.$bus.$emit('notification-progress-stop') 
+        this.searcingLoaderFlag = false;
+        this.paginationLoader = false;
+        }
     },
 
     async getDataFromElastic (searchedData, onScroll = false) {
@@ -412,6 +451,10 @@ export default {
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
+      if (this.squery.length < 2) {
+        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+        return;
+      }
       this.$store.dispatch('searchSpringSearch/addProdcutsItems', {onScroll: onScroll, products: sortedData})
       // if (!onScroll) {
       //   this.serachedProd = sortedData
@@ -433,11 +476,17 @@ export default {
         clearTimeout(this.setTime);
         this.setTime = setTimeout(() => {
           this.getSearchData();
+          this.searcingLoaderFlag = true;
         }, 400);
       } else {
         // this.filterData = [];
+        if(this.setTime) clearTimeout(this.setTime);
+        console.log('searchDataInSearchSpring else')
+        this.$store.dispatch('searchSpringSearch/resetAllFilterResult');
+        this.searchedValue = null;
         this.$store.dispatch('searchSpringSearch/resetFilterData')
         // this.serachedProd = [];
+        this.searcingLoaderFlag = false;
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
       }
     },
@@ -644,7 +693,7 @@ export default {
       // this.filterData = [];
       this.$store.dispatch('searchSpringSearch/resetFilterData');
       // this.filterData.push('rq=' + this.squery);
-      this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.searchedValue)
       this.$bus.$emit('reset-price-slider');
       this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -652,9 +701,12 @@ export default {
 
     priceSliderChanged (range) {
       console.log('priceSliderChanged', range);
-      this.priceSliderActiveRange[0] = range.from;
-      this.priceSliderActiveRange[1] = range.to;
-      this.$bus.$emit('reset-active-price-slider')
+      // this.priceSliderActiveRange[0] = range.from;
+      // this.priceSliderActiveRange[1] = range.to;
+      this.$store.dispatch('searchSpringSearch/set_priceSliderActiveRange', range)
+      setTimeout(() => {
+          this.$bus.$emit('reset-active-price-slider')
+      }, 50);  
       // filter.final_price.low=12.5&filter.final_price.high=47.5
       if (
         this.filterData.findIndex(val =>
@@ -723,6 +775,7 @@ export default {
 
     resetAllFilterResult () {
       console.log('resetAllFilterResult')
+      this.$store.dispatch('searchSpringSearch/resetAllFilterResult');
       // this.filterData = [];
       this.$store.dispatch('searchSpringSearch/resetFilterData')
       this.squery = '';
