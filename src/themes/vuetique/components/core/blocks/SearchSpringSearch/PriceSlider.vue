@@ -8,6 +8,7 @@
         :clickable="false"
         :min="getMin"
         :max="getMax"
+        :marks="[getMin, getMax]"
         :interval="interval"
         :tooltip-formatter="tooltipContent"
         @drag-end="setPrice"
