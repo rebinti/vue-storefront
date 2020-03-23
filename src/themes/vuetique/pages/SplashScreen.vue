@@ -156,9 +156,9 @@
     <div class="container pb-16" v-if="!searcingLoaderFlag">
         <div class="col-12 lg:col-9 pr_list_sec_main">
           <div class="row">
-            <div class="col-9">
+            <div class="col-9 searchtitle">
               <h2 style="width:100%;padding-bottom:25px;">
-                Search results <span v-if="searchedValue">for "{{searchedValue}}" </span>
+                Search results for<span v-if="searchedValue"> "{{searchedValue}}" </span>
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
@@ -711,9 +711,32 @@ export default {
 .sidebar .filterdata{
   width:350px;
 }
+.sidebar h2{
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 12px;
+}
 .filterdata {
   float: left;
   // width: 200px;
+}
+.searchtitle h2{
+    width: 100%;
+    padding-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: sans-serif;
+    /* font-weight: 600; */
+    margin-left: 15px;
+}
+.searchtitle h2 sub{
+    bottom: 0px;
+    font-size: 14px;
+}
+.searchtitle h2 span{
+  font-weight:600;
 }
 .static-content.customm {
   clear: both;
