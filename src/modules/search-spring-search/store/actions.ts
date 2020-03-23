@@ -55,6 +55,10 @@ export const actions: ActionTree<SearchSpringState, any> = {
         }
     },
 
+    resetCategoryHierarchy ({commit}) {
+        commit(types.RESET_CATEGORY_HIERARCHY);
+    },
+
     set_priceSliderData  ({ commit }, priceData) {
         
         if (priceData) {

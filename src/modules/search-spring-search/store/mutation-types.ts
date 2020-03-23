@@ -7,6 +7,7 @@ const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
 const RESET_SEARCH_RESULTS = 'RESET_SEARCH_RESULTS'
 
 const set_categoryHierarchy = 'set_categoryHierarchy'
+const RESET_CATEGORY_HIERARCHY = 'RESET_CATEGORY_HIERARCHY'
 const set_priceSliderData = 'set_priceSliderData'
 const set_priceSliderActiveRange = 'set_priceSliderActiveRange'
 const set_sortingFilterSelected = 'set_sortingFilterSelcted'
@@ -33,5 +34,6 @@ export {
 
   RESET_CATEGORY_FILTER,
 
-  RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT
+  RESET_ALL_SEARCHED_FILETER_DATA_DEFAULT,
+  RESET_CATEGORY_HIERARCHY
 }

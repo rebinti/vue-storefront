@@ -124,7 +124,7 @@
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
                     v-model="valuesitem.active"
-                    @click="setFilterData (facetsitem, valuesitem)"
+                    @click.native="setFilterData (facetsitem, valuesitem)"
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
                   </search-checkbox>
@@ -559,6 +559,7 @@ export default {
 
     clearAllFilter () {
       this.$store.dispatch('searchSpringSearch/resetFilterData');
+      this.$store.dispatch('searchSpringSearch/resetCategoryHierarchy');
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.searchedValue)
       this.$bus.$emit('reset-price-slider');
       this.showNotificationLoader(true);

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <div class="checkbox-wrap">
       <input
         class="outline-none"
@@ -25,7 +25,16 @@
         {{ validation.text }}
       </span>
     </template>
-  </div>
+  </div> -->
+
+
+    <button
+    :class="{'active': value}"
+     @click="$emit('click')"
+    class="border border-grey-light font-medium text-xs text-grey-dark generic-selector generic-select mr-3 mb-3"
+  >
+      <slot />
+  </button>
 </template>
 
 <script>
@@ -57,6 +66,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .generic-selector {
+    height: 40px;
+    min-width: 40px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    &.active {
+      @apply border-grey-dark text-black;
+    }
+
+    &.out-of-stock {
+       background: #c5c5c5;
+    }
+
+    &:disabled {
+      @apply text-disabled border-disabled cursor-not-allowed;
+    }
+  }
+</style>
+
+<!--
+<style lang="scss" scoped>
 
 @media (max-width: 576px) {
 
@@ -73,4 +104,4 @@ export default {
   } 
   
 }
-</style>
+</style> -->

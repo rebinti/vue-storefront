@@ -73,5 +73,9 @@ export const mutations: MutationTree<any> = {
     state.priceSliderActiveRange = []
     state.sortingFilterSelected = ''
     state.sortingFilterOptions = []
+  },
+
+  [types.RESET_CATEGORY_HIERARCHY] (state) {
+    state.categoryHierarchy = []
   }
 }
