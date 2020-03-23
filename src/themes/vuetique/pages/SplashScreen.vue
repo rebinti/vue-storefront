@@ -274,9 +274,9 @@ import ProductListing from '../components/core/ProductListing.vue';
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput';
 import ButtonFull from 'theme/components/theme/ButtonFull';
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
-import SearchCheckbox from 'theme/components/core/blocks/SearchSpringSearch/genericSelectFilterItem';
-import PriceSlider from 'theme/components/core/blocks/SearchSpringSearch/PriceSlider';
-import BaseSelect from 'theme/components/core/blocks/SearchSpringSearch/BaseSelect';
+import SearchCheckbox from 'src/modules/search-spring-search/components/genericSelectFilterItem';
+import PriceSlider from 'src/modules/search-spring-search/components/PriceSlider';
+import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters, mapActions } from 'vuex'
