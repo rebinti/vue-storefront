@@ -19,14 +19,14 @@ export const Search = {
     }
   },
   mounted () {
-    this.search = localStorage.getItem(`shop/user/searchQuery`) === 'null' ? '' : localStorage.getItem(`shop/user/searchQuery`);
+    // this.search = localStorage.getItem(`shop/user/searchQuery`) === 'null' ? '' : localStorage.getItem(`shop/user/searchQuery`);
 
-    if (this.search) {
-      this.makeSearch();
-    }
+    // if (this.search) {
+    //   this.makeSearch();
+    // }
   },
   beforeDestroy () {
-    localStorage.setItem(`shop/user/searchQuery`, this.search);
+    // localStorage.setItem(`shop/user/searchQuery`, this.search);
   },
   methods: {
     onEscapePress () {

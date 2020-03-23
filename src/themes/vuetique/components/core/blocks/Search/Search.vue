@@ -3,6 +3,11 @@
     class="relative w-full"
     data-testid="search"
   >
+      <router-link
+      class="block no-underline product-link"
+      :to="'/search-spring'"
+      data-testid="productLink"
+    >
     <div class="flex items-center">
       <base-input
         ref="search"
@@ -12,14 +17,15 @@
         :placeholder="$t('Type what you are looking for...')"
         class="w-full"
         v-model="search"
-        @input="makeSearch"
-        @focus="searchFocus = true"
+        @input="searchDataInSearchSpring"
+        @focus="searchFocus = true;"
         @blur="searchFocus = false"
       />
       <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
         <use xlink:href="#search" />
       </svg>
     </div>
+      </router-link>
     <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
       <div v-show="showDrop" class="bg-white border border-grey border-t-0">
         <product :key="product.id" v-for="product in results" :product="product" @click.native="resultsHover = false" />
@@ -43,6 +49,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import SearchPanel from '@vue-storefront/core/compatibility/components/blocks/SearchPanel/SearchPanel'
 import Product from 'theme/components/core/blocks/Search/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
@@ -64,13 +71,20 @@ export default {
   },
   computed: {
     showDrop () {
-      return (this.searchFocus && this.search !== '') || this.resultsHover
+      return false // (this.searchFocus && this.search !== '') || this.resultsHover
     },
     results () {
       return this.products.slice(0, this.showResults)
     },
     moreResults () {
       return this.products.length > this.showResults
+    },
+
+    searchDataInSearchSpring () {
+      console.log('searchDataInSearchSpring', this.search, this.searchFocus);
+      if (this.searchFocus) {
+        Vue.prototype.$bus.$emit('search-in-search-spring', this.search );
+      }
     }
   },
   mounted () {
