@@ -32,7 +32,6 @@
         </div>
       </div>
     </div>
-
      <div class="loader loader--style3" title="2" v-if="searcingLoaderFlag">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
@@ -94,7 +93,7 @@
         </button>
         <div class="">
           <div class="sidebar">
-            <h1>Filters</h1>
+            <!-- <h1>Filters</h1> -->
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <div
                 v-for="facetsitem in searchRes.facets"
@@ -155,7 +154,29 @@
     </div>
 
     <div class="container pb-16" v-if="!searcingLoaderFlag">
-      <div class="row gutter-md">
+        <div class="col-12 lg:col-9 pr_list_sec_main">
+          <div class="row">
+            <div class="col-9">
+              <h2 style="width:100%;padding-bottom:25px;">
+                Search results <span v-if="searchedValue">for "{{searchedValue}}" </span>
+                <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
+              </h2>
+            </div>
+            <div class="col-3">
+              <base-select
+                v-if="sortingFilterOptions && sortingFilterOptions.length"
+                class="col-12 md:col-6 mb-6 txt_blk_select"
+                name="sort"
+                v-model="sortingFilterSelectedValue"
+                :options="sortingFilterOptions"
+                :selected="sortingFilterSelectedValue"
+                :placeholder="$t('Sorting *')"
+                @input="sortingFilterChange"
+              />
+            </div>
+          </div>
+        </div>       
+      <div class="row gutter-md">        
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar">
@@ -216,28 +237,7 @@
             </div>
           </div>
         </div>
-
-        <div class="col-12 lg:col-9 pr_list_sec_main">
-          <div class="row">
-            <div class="col-9">
-              <h2 style="width:100%;padding-bottom:25px;">
-               Search results <span v-if="searchedValue">for "{{searchedValue}}" </span>
-                <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
-              </h2>
-            </div>
-            <div class="col-3">
-              <base-select
-                v-if="sortingFilterOptions && sortingFilterOptions.length"
-                class="col-12 md:col-6 mb-6 txt_blk_select"
-                name="sort"
-                v-model="sortingFilterSelectedValue"
-                :options="sortingFilterOptions"
-                :selected="sortingFilterSelectedValue"
-                :placeholder="$t('Sorting *')"
-                @input="sortingFilterChange"
-              />
-            </div>
-          </div>
+  <div class="col-12 lg:col-9 pr_list_sec_main">
           <product-listing :columns="3" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -681,10 +681,18 @@ export default {
 .active {
   font-weight: 800;
 }
-
+.sidebar .filterdata h2 b{
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+.sidebar .filterdata{
+  width:350px;
+}
 .filterdata {
   float: left;
-  width: 200px;
+  // width: 200px;
 }
 .static-content.customm {
   clear: both;
