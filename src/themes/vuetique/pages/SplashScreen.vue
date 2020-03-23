@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="container pb-5 md: ml-2">
+    <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
           v-for="filter in searchRes.filterSummary"
@@ -181,6 +181,27 @@
           <div class="">
             <div class="sidebar">
               <h1>Filters</h1>
+              
+              <div class="container pb-5 md: ml-2">
+                <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+                  <span
+                    v-for="filter in searchRes.filterSummary"
+                    :key="filter.label"
+                    @click="removeFilterFlag(filter)"
+                    class="filter-box"
+                  >
+                    {{ filter.label }}
+                    <span
+                      v-if="filter.field === 'final_price'"
+                    >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
+                  </span>
+                  <span
+                    class="filter-box"
+                    v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
+                    @click="clearAllFilter()"
+                  >Clear All</span>
+                </div>
+              </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
                 <div
                   v-for="facetsitem in searchRes.facets"
@@ -708,9 +729,10 @@ input {
 .filter-box {
   /* width: 69px; */
   border: 1px solid;
-  padding: 3px 10px 3px 10px;
+  padding: 3px 5px 3px 5px;
   margin: 0px 3px 5px 3px;
   border-radius: 10px;
+  font-size: 13px;
 }
 
 .active {
