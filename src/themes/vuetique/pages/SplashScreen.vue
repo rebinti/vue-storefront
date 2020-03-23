@@ -645,7 +645,7 @@ export default {
       return this.filterData.findIndex(val => val.includes(searchText)) >= 0
     },
     dataFromHeader (event) {
-      console.log('event dataFromHeader', event);
+      // console.log('event dataFromHeader', event);
       if (event && event !== this.searchedValue) {
         this.squery= event;
         this.searchDataInSearchSpring (event)

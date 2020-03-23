@@ -81,7 +81,7 @@ export default {
     },
 
     searchDataInSearchSpring () {
-      console.log('searchDataInSearchSpring', this.search, this.searchFocus);
+      // console.log('searchDataInSearchSpring', this.search, this.searchFocus);
       if (this.searchFocus) {
         Vue.prototype.$bus.$emit('search-in-search-spring', this.search );
       }
