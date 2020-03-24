@@ -180,7 +180,7 @@
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar">
-              <h1>Filters</h1>
+              <h1 class="filterhead">Filters</h1>
               
               <div class="container pb-5 md: ml-2">
                 <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
@@ -702,10 +702,9 @@ export default {
 .active {
   font-weight: 800;
 }
-.sidebar .filterdata h2 b{
-  text-transform: uppercase;
+.sidebar .filterdata h2 b{  
   font-size: 16px;
-  font-family: sans-serif;
+  margin-left: 0px;
   font-weight: 600;
 }
 .sidebar .filterdata{
@@ -716,7 +715,14 @@ export default {
   font-family: sans-serif;
   font-size: 20px;
   font-weight: 600;
-  margin-left: 12px;
+  // margin-left: 12px;
+}
+.sidebar h2.filterhead{
+    margin-left: 8px;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 22px;
 }
 .filterdata {
   float: left;
