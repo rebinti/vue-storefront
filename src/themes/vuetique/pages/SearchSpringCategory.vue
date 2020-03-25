@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- <div class="row" style="margin-top: 10px;">
-      <div class="col-8 md:col-12 sm:col-12 lg:hidden" style="margin:0 auto">
+      <div class="col-12 md:col-12 sm:col-12 lg:hidden devicetitle" style="margin:0 auto">
         <h4 class="col-6">
-          Search with Search Spring
+          Search
         </h4>
         <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
           <base-input
@@ -21,7 +21,7 @@
             <use xlink:href="#search" />
           </svg>
         </div>    
-        <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;"> 
+        <div v-if="searchRes" class="col-6 flex items-center relative mb-4" style="margin-top: 10px;"> 
           <button-full
             class="mb35"
             type="button"
@@ -45,10 +45,10 @@
                   repeatCount="indefinite"/>
               </path>
             </svg>
-             <h3 style="text-align: center;"> Please Wait For Results... </h3>
+             <h3 style="text-align: center;"> Please wait.finding best results... </h3>
           </div>
 
-    <div class="container lg:hidden d_item" style=" margin-bottom: 20px;">
+    <div v-if="searchRes" class="container lg:hidden d_item" style=" margin-bottom: 20px;">
       <div class="row gutter-md mt-6">
         <div class="col-12">
           <button-full class="w-full" @click.native="openFilters">
@@ -156,13 +156,13 @@
     <div class="container pb-16" v-if="!searcingLoaderFlag">
         <div class="col-12 lg:col-9 pr_list_sec_main">
           <div class="row">
-            <div class="col-9">
+            <div class="col-9 xs:col-12 searchtitle" v-if="searchRes">
               <h2 style="width:100%;padding-bottom:25px;">
-                {{searchedValue.replace('/', '>')}}
+                 {{searchedValue.replace('/', '>')}}
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
-            <div class="col-3">
+            <div class="col-3 xs:col-12">
               <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -180,7 +180,7 @@
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar">
-              <h1>Filters</h1>
+              <h1 class="filterhead" v-if="searchRes" >Filters</h1>
               
               <div class="container pb-5 md: ml-2">
                 <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
@@ -258,7 +258,13 @@
             </div>
           </div>
         </div>
-  <div class="col-12 lg:col-9 pr_list_sec_main">
+        <div class="lg:col-6 no-result" v-if="serachedProd.length === 0">
+            <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
+            <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
+        </div>
+        <div class="lg:col-3" v-if="serachedProd.length === 0">
+        </div>  
+      <div class="col-12 lg:col-9 pr_list_sec_main">
           <product-listing :columns="3" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -275,10 +281,6 @@
               </path>
             </svg>
             <h3 style="text-align: center;"> Please wait for loading more... </h3>
-          </div>
-          <div v-if="serachedProd.length === 0">
-            <h5>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h5>
-            <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
           </div>
         </div>
       </div>
@@ -760,18 +762,55 @@ export default {
 .active {
   font-weight: 800;
 }
-.sidebar .filterdata h2 b{
-  text-transform: uppercase;
+.sidebar .filterdata h2 b{  
   font-size: 16px;
-  font-family: sans-serif;
+  margin-left: 0px;
   font-weight: 600;
 }
 .sidebar .filterdata{
   width:350px;
 }
+.sidebar h2{
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  // margin-left: 12px;
+}
+.sidebar .filterhead{
+    margin-left: 8px;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 22px;
+}
 .filterdata {
   float: left;
   // width: 200px;
+}
+.searchtitle h2{
+    width: 100%;
+    padding-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: sans-serif;
+    /* font-weight: 600; */
+    margin-left: 15px;
+}
+.searchtitle h2 sub{
+    bottom: 0px;
+    font-size: 14px;
+}
+.searchtitle h2 span{
+  font-weight:600;
+}
+div.no-result{
+  text-align: center;
+  margin-top: 50px;
+}
+div.devicetitle{
+  margin: 10px;
+  padding: 10px;
 }
 .static-content.customm {
   clear: both;
@@ -795,5 +834,10 @@ input {
 
 .active {
   font-weight: 800;
+}
+@media screen and (min-width: 768px) and (max-width: 1600px)  {
+  .sidebar .filterdata{
+    width:225px;
+  }
 }
 </style>
