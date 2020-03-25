@@ -37,6 +37,9 @@ import { ExternalCheckout } from './vsf-external-checkout'
 
 import { SearchSpringSearch } from './search-spring-search';
 
+import { SearchSpringCategory } from './search-spring-category';
+
+
 // import { Example } from './module-template'
 
 // This is how you can extend any of VS modues
@@ -100,7 +103,8 @@ export const registerModules: VueStorefrontModule[] = [
   Braintree,
   FacebookPixel,
   ExternalCheckout,
-  SearchSpringSearch
+  SearchSpringSearch,
+  SearchSpringCategory
   // layeredNavigationModule
   // Example
 ]
