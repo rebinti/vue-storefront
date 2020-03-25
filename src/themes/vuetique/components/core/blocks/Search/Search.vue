@@ -78,9 +78,10 @@ export default {
     },
     moreResults () {
       return this.products.length > this.showResults
-    },
-
-    searchDataInSearchSpring () {
+    },   
+  },
+  methods: {
+   searchDataInSearchSpring () {
       // console.log('searchDataInSearchSpring', this.search, this.searchFocus);
       if (this.searchFocus) {
         Vue.prototype.$bus.$emit('search-in-search-spring', this.search );
