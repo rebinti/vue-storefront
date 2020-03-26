@@ -1,53 +1,9 @@
 <template>
   <div>
-    <!-- <div class="row" style="margin-top: 10px;">
-      <div class="col-12 md:col-12 sm:col-12 lg:hidden devicetitle" style="margin:0 auto">
-        <h4 class="col-6">
-          Search
-        </h4>
-        <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
-          <base-input
-            ref="search"
-            name="search"
-            type="text"
-            id="search_panel_input"
-            :placeholder="$t('Type what you are looking for...')"
-            class="w-full"
-            v-model="squery"
-            @input="searchDataInSearchSpring"
-            
-          />
-          <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey">
-            <use xlink:href="#search" />
-          </svg>
-        </div>    
-        <div v-if="searchRes" class="col-6 flex items-center relative mb-4" style="margin-top: 10px;"> 
-          <button-full
-            class="mb35"
-            type="button"
-            @click.native="resetAllFilterResult"
-          >
-            Clear All
-          </button-full>
-        </div>
-      </div>
-    </div> -->
      <div class="loader loader--style3" title="2" v-if="searcingLoaderFlag">
-            <!-- <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
-              <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-                <animateTransform attributeType="xml"
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 25 25"
-                  to="360 25 25"
-                  dur="0.6s"
-                  repeatCount="indefinite"/>
-              </path>
-            </svg> -->
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
-          </div>
+      </div>
 
     <div v-if="searchRes" class="container lg:hidden d_item" style=" margin-bottom: 20px;">
       <div class="row gutter-md mt-6">
@@ -96,11 +52,18 @@
           <div class="sidebar">
             <!-- <h1>Filters</h1> -->
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-              <div
+              <!-- <div
                 v-for="facetsitem in searchRes.facets"
                 :key="facetsitem.field"
                 class="filterdata"
-              >
+              > -->
+                <Accordion class="mob_fltr"
+                    v-for="(facetsitem) in searchRes.facets"
+                    :key="facetsitem.field"
+                    :openType= "false"
+                    :title="$t(facetsitem.label)"
+                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                  >
                 <h2><b>{{ facetsitem.label }}</b></h2>
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
@@ -142,7 +105,8 @@
                     @sliderChanged="priceSliderChanged"
                   />
                 </div>
-              </div>
+              <!-- </div> -->
+              </Accordion>
             </div>
 
             <div v-else>
@@ -211,10 +175,11 @@
                   class="filterdata"
                 > -->
                  <Accordion class="mob_fltr"
-                    v-for="(facetsitem, index) in searchRes.facets"
+                    v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
-                    :openType= "index>2 ? false: true"
+                    :openType= "false"
                     :title="$t(facetsitem.label)"
+                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
                   <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
@@ -333,14 +298,7 @@ export default {
     return {
       currentPage: 1,
       squery: '',
-      // searchRes: '',
-      // serachedProd: [],
-      // filterData: [],
-      // categoryHierarchy: [],
-      // priceSliderData: {},
-      // priceSliderActiveRange: [],
       sortingFilterSelectedValue: '',
-      // sortingFilterOptions: [],
       paginationLoader: false,
       setTime: Object,
       mobileFilters: false,
@@ -350,27 +308,10 @@ export default {
       signal: null
     };
   },
-  // async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
-  //   console.log('route.params.slug >>>>>>>>', route, route.params.slug) // path: /men/new-arrivals
 
-  //   return new Promise((resolve, reject) => {
-  //     store.dispatch('category/mergeSearchOptions', { // this is just an example how can you modify the search criteria in child components
-  //       sort: 'updated_at:desc'
-  //       // searchProductQuery: builder().query('range', 'price', { 'gt': 0 }).andFilter('range', 'visibility', { 'gte': 2, 'lte': 4 }) // this is an example on how to modify the ES query, please take a look at the @vue-storefront/core/helpers for refernce on how to build valid query
-  //     })
-  //     resolve()
-  //   })
-  // },
   beforeMount () {
-    // this.$bus.$on('search-in-search-spring', this.dataFromHeader);
      this.searchDataInSearchSpring();
   },
-  // beforeDestroy () {
-  //   this.$bus.$off('search-in-search-spring');
-  // },
-  //  beforeMount () {
-  //   this.updateQuantity = debounce(this.updateQuantity, 5000)
-  // },
   watch: {
     '$route': 'validateRouteCategory'
   },
@@ -393,22 +334,8 @@ export default {
   },
   methods: {
     validateRouteCategory () {
-        // this.resetAllFilterResult ();
-      //   let routeString = this.$route.path.replace('-', ' ');
-      // routeString = routeString.replace('/','').toLowerCase()
-      //                 .split('/')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join('/');
-      // routeString = routeString
-      //                 .split(' ')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join(' ');
-
-      // console.log('routeString', routeString);
-      //   if (routeString !== ) {
         this.searcingLoaderFlag = true;
-          this.searchDataInSearchSpring();
-      //   }
+        this.searchDataInSearchSpring();
     },
     async getSearchData (onScroll = false, abortApiCallFlag = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -501,20 +428,12 @@ export default {
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
-      // if (this.squery.length < 2) {
-      //       if (this.searchedValue.length < 2) {
-      //         this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
-      //         return;
-      //       }
-      //   }
       this.$store.dispatch('searchSpringCategory/addProdcutsItems', {onScroll: onScroll, products: sortedData})
       return this.serachedProd;
     },
 
     searchDataInSearchSpring (squerydata=null) {
       console.log('this.$route.params.slug', this.$route ,this.$route.params.slug);
-      // console.log('squerydata', this.squery, squerydata, squerydata.length);
-      // if (this.squery.length > 2) {
       let routeString = this.$route.path.replace('-', ' ');
       routeString = routeString.replace('/','').toLowerCase()
                       .split('/')
@@ -534,27 +453,7 @@ export default {
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
-      //  'rq=' + this.squery
-      // if(this.setTime) { clearTimeout(this.setTime); }
-      // if ("AbortController" in window) {
-      //   this.getSearchData(false, true);
-      //   this.searcingLoaderFlag = true;
-      // } else {
-        // this.setTime = setTimeout(() => {
-          this.getSearchData(false, true);
-          // this.searcingLoaderFlag = true;
-        // }, 400);
-      // }
-       
-      // } else {
-      //   if(this.setTime) clearTimeout(this.setTime);
-      //   console.log('searchDataInSearchSpring else')
-      //   this.$store.dispatch('searchSpringCategory/resetAllFilterResult');
-      //   this.searchedValue = null;
-      //   this.$store.dispatch('searchSpringCategory/resetFilterData')
-      //   this.searcingLoaderFlag = false;
-      //   this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
-      // }
+      this.getSearchData(false, true);
     },
 
     setFilterData (facetssection, item) {
