@@ -77,5 +77,9 @@ export const mutations: MutationTree<any> = {
 
   [types.RESET_CATEGORY_HIERARCHY] (state) {
     state.categoryHierarchy = []
+  },
+
+  [types.SET_ROUTER_FULL_PATH] (state, fullPath) {
+    state.routerFullPath = fullPath ? fullPath : ''
   }
 }

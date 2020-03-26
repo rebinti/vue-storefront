@@ -112,6 +112,10 @@ export const actions: ActionTree<SearchSpringCategoryState, any> = {
             return err;
         });
         return searchResults
+    },
+
+    setCurrentRouterPath ({ commit }, fullPath) {
+        commit(types.SET_ROUTER_FULL_PATH, fullPath )
     }
     
 

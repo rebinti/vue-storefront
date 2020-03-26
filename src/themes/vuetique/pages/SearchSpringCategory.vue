@@ -292,7 +292,7 @@ export default {
   },
   mixins: [onBottomScroll, Category],
   computed: {
-    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
+    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath'])
   },
   data () {
     return {
@@ -310,7 +310,11 @@ export default {
   },
 
   beforeMount () {
-     this.searchDataInSearchSpring();
+     if(this.getStoredCurrentRouterPath !== this.$route.path ) {
+        this.searchDataInSearchSpring();
+      } else {
+        this.searcingLoaderFlag = false;
+      }
   },
   watch: {
     '$route': 'validateRouteCategory'
@@ -318,7 +322,6 @@ export default {
   mounted () {
     console.log('searchSpringCategory storee', this.$store.state.searchSpringCategory)
     // this.searchDataInSearchSpring();
-    // this.searcingLoaderFlag();
     if (this.filterData && this.filterData.length > 0) {
        // this.searchedValue = this.filterData[0].split('=')[1];
       if(this.priceSliderData) {
@@ -334,6 +337,7 @@ export default {
   },
   methods: {
     validateRouteCategory () {
+        console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;
         this.searchDataInSearchSpring();
     },
@@ -446,10 +450,10 @@ export default {
       routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
       console.log('routeString', routeString);
       this.searchedValue =  routeString
-
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
       }
+      this.$store.dispatch('searchSpringCategory/setCurrentRouterPath' ,  this.$route.path);
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)

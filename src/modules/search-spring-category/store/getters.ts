@@ -10,6 +10,7 @@ export const getters: GetterTree<SearchSpringCategoryState, RootState> = {
     priceSliderData: (state) => state.priceSliderData,
     priceSliderActiveRange: (state) => state.priceSliderActiveRange,
     sortingFilterSelected: (state) => state.sortingFilterSelected,
-    sortingFilterOptions: (state) => state.sortingFilterOptions
+    sortingFilterOptions: (state) => state.sortingFilterOptions,
+    getStoredCurrentRouterPath: (state) => state.routerFullPath
 }
   

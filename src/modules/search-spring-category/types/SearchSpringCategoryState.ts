@@ -6,6 +6,7 @@ export interface SearchSpringCategoryState {
     priceSliderData?: object,
     priceSliderActiveRange: any[],
     sortingFilterSelected: string,
-    sortingFilterOptions: any[]
+    sortingFilterOptions: any[],
+    routerFullPath: string
 }
   

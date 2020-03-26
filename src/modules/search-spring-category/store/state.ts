@@ -8,5 +8,6 @@ export const state: SearchSpringCategoryState = {
   priceSliderData: {},
   priceSliderActiveRange: [],
   sortingFilterSelected: '',
-  sortingFilterOptions: []
+  sortingFilterOptions: [],
+  routerFullPath: ''
 }
