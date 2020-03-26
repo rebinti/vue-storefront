@@ -1,6 +1,6 @@
 <template>
   <div>
-     <div class="loader loader--style3" title="2" v-if="searcingLoaderFlag">
+     <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
