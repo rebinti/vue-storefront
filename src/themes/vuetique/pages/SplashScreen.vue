@@ -95,12 +95,19 @@
           <div class="sidebar">
             <!-- <h1>Filters</h1> -->
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-              <div
+              <!-- <div
                 v-for="facetsitem in searchRes.facets"
                 :key="facetsitem.field"
                 class="filterdata"
-              >
-                <h2 v-if="(facetsitem.values.length > 0)"><b>{{ facetsitem.label }}</b></h2>
+              > -->
+              <Accordion class="mob_fltr"
+                    v-for="(facetsitem) in searchRes.facets"
+                    :key="facetsitem.field"
+                    :openType= "false"
+                    :title="$t(facetsitem.label)"
+                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                  >
+                <!-- <h2 v-if="(facetsitem.values.length > 0)"><b>{{ facetsitem.label }}</b></h2> -->
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
@@ -141,7 +148,8 @@
                     @sliderChanged="priceSliderChanged"
                   />
                 </div>
-              </div>
+              <!-- </div> -->
+            </Accordion>
             </div>
 
             <div v-else>
@@ -176,7 +184,8 @@
             </div>
           </div>
         </div>       
-      <div class="row gutter-md">        
+      <div class="row gutter-md">     
+      <!-- Sidebar For web view   -->   
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar">
@@ -203,27 +212,20 @@
                 </div>
               </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">               
-                <div
+                <!-- <div
                   v-for="facetsitem in searchRes.facets"
                   :key="facetsitem.field"
                   class="filterdata"
-                >
-                  <h2 v-if="facetsitem.values.length > 0" @click.prevent="detailsAccordion != facetsitem.field ? detailsAccordion = facetsitem.field : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">                    
-                    <span>{{ facetsitem.label }}</span>
-                    <svg viewBox="0 0 25 25" class="vt-icon">
-                      <use v-if="detailsAccordion != facetsitem.field" xlink:href="#down" />
-                      <use v-else xlink:href="#up" />
-                    </svg>                    
-                  </h2>
-                  <h2 v-if="facetsitem.field == 'final_price'" @click.prevent="detailsAccordion != facetsitem.field ? detailsAccordion = facetsitem.field : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">                    
-                    <span>{{ facetsitem.label }}</span>
-                    <svg viewBox="0 0 25 25" class="vt-icon">
-                      <use v-if="detailsAccordion != facetsitem.field" xlink:href="#down" />
-                      <use v-else xlink:href="#up" />
-                    </svg>                    
-                  </h2>                  
-                  <transition name="fade">
-                    <section v-show="detailsAccordion == facetsitem.field" class="mt-10">
+                > -->
+                 <Accordion class="mob_fltr"
+                    v-for="(facetsitem) in searchRes.facets"
+                    :key="facetsitem.field"
+                    :openType= "false"
+                    :title="$t(facetsitem.label)"
+                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                  >
+                  <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->            
+
                         <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                           <p @click="setCategoryFilterHistory({type: 'view all'})"
                             v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
@@ -266,10 +268,9 @@
                             :interval="priceSliderData.step"
                             @sliderChanged="priceSliderChanged"
                           />
-                        </div>
-                    </section>
-                  </transition>                        
-                </div>
+                        </div>                     
+                <!-- </div> -->
+                </Accordion>
               </div>
             </div>
           </div>
@@ -319,6 +320,7 @@ import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters, mapActions } from 'vuex'
+import Accordion from 'theme/components/theme/Accordion'
 
 export default {
   name: 'SplashScreen',
@@ -328,7 +330,8 @@ export default {
     ButtonFull,
     BaseSelect,
     SearchFilterData,
-    PriceSlider
+    PriceSlider,
+    Accordion
   },
   mixins: [onBottomScroll],
   computed: {

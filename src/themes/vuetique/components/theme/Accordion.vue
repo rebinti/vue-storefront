@@ -61,7 +61,7 @@ export default {
   }
 
   
-  @media (max-width: 576px) {
+  // @media (max-width: 576px) {
 
     .mob_fltr{
       &.cart_filter_hd{
@@ -86,5 +86,5 @@ export default {
 
 
 
-}
+// }
 </style>

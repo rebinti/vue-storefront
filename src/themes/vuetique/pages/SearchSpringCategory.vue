@@ -64,7 +64,7 @@
                     :title="$t(facetsitem.label)"
                     v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
-                <h2><b>{{ facetsitem.label }}</b></h2>
+                <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
