@@ -100,7 +100,7 @@
                 :key="facetsitem.field"
                 class="filterdata"
               >
-                <h2><b>{{ facetsitem.label }}</b></h2>
+                <h2 v-if="(facetsitem.values.length > 0)"><b>{{ facetsitem.label }}</b></h2>
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
@@ -118,7 +118,7 @@
                 </div>
 
                 <div v-else>
-                  <search-checkbox
+                  <search-filter-data
                     v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
@@ -126,7 +126,7 @@
                     @click.native="setFilterData (facetsitem, valuesitem)"
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
-                  </search-checkbox>
+                  </search-filter-data>
 
                   <price-slider
                     v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -202,57 +202,73 @@
                   >Clear All</span>
                 </div>
               </div>
-              <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
+              <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">               
                 <div
                   v-for="facetsitem in searchRes.facets"
                   :key="facetsitem.field"
                   class="filterdata"
                 >
-                  <h2><b>{{ facetsitem.label }}</b></h2>
+                  <h2 v-if="facetsitem.values.length > 0" @click.prevent="detailsAccordion != facetsitem.field ? detailsAccordion = facetsitem.field : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">                    
+                    <span>{{ facetsitem.label }}</span>
+                    <svg viewBox="0 0 25 25" class="vt-icon">
+                      <use v-if="detailsAccordion != facetsitem.field" xlink:href="#down" />
+                      <use v-else xlink:href="#up" />
+                    </svg>                    
+                  </h2>
+                  <h2 v-if="facetsitem.field == 'final_price'" @click.prevent="detailsAccordion != facetsitem.field ? detailsAccordion = facetsitem.field : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">                    
+                    <span>{{ facetsitem.label }}</span>
+                    <svg viewBox="0 0 25 25" class="vt-icon">
+                      <use v-if="detailsAccordion != facetsitem.field" xlink:href="#down" />
+                      <use v-else xlink:href="#up" />
+                    </svg>                    
+                  </h2>                  
+                  <transition name="fade">
+                    <section v-show="detailsAccordion == facetsitem.field" class="mt-10">
+                        <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
+                          <p @click="setCategoryFilterHistory({type: 'view all'})"
+                            v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                          > View all </p>
+                          <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
+                            @click="setCategoryFilterHistory(categ, index)"
+                            :class="{'active': categ.active}"
+                            :style="'margin-left:' + 5 * (index) + 'px;'"
+                            >
+                            {{ categ.label }}
+                          </p>
+                          <p v-for="(valuesitem) in facetsitem.values" :key="valuesitem.value"
+                            @click="setCategoryFilterData (facetsitem, valuesitem)"
+                            :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : 'margin-left:0px;'"
+                            >
+                            {{ valuesitem.label }} ({{ valuesitem.count }})
+                          </p>
+                        </div>
 
-                  <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
-                    <p @click="setCategoryFilterHistory({type: 'view all'})"
-                       v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
-                    > View all </p>
-                    <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
-                       @click="setCategoryFilterHistory(categ, index)"
-                       :class="{'active': categ.active}"
-                       :style="'margin-left:' + 5 * (index) + 'px;'"
-                       >
-                      {{ categ.label }}
-                    </p>
-                    <p v-for="(valuesitem) in facetsitem.values" :key="valuesitem.value"
-                       @click="setCategoryFilterData (facetsitem, valuesitem)"
-                       :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : 'margin-left:0px;'"
-                       >
-                      {{ valuesitem.label }} ({{ valuesitem.count }})
-                    </p>
-                  </div>
+                        <div v-else>
+                          <search-filter-data
+                            v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                            class="col-xs-12 mb15"
+                            :id="valuesitem.label+index+valuesitem.count"
+                            v-model="valuesitem.active"
+                            @click="setFilterData (facetsitem, valuesitem)"
+                          >
+                            {{ valuesitem.label }} ({{ valuesitem.count }})
+                          </search-filter-data>
 
-                  <div v-else>
-                    <search-checkbox
-                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
-                      class="col-xs-12 mb15"
-                      :id="valuesitem.label+index+valuesitem.count"
-                      v-model="valuesitem.active"
-                      @click="setFilterData (facetsitem, valuesitem)"
-                    >
-                      {{ valuesitem.label }} ({{ valuesitem.count }})
-                    </search-checkbox>
-
-                    <price-slider
-                      v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
-                      context="category"
-                      id="priceWeb"
-                      code="price"
-                      :price-range="priceSliderData.active"
-                      :active-range="priceSliderData.range"
-                      content="Price"
-                      label="Price Label"
-                      :interval="priceSliderData.step"
-                      @sliderChanged="priceSliderChanged"
-                    />
-                  </div>
+                          <price-slider
+                            v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
+                            context="category"
+                            id="priceWeb"
+                            code="price"
+                            :price-range="priceSliderData.active"
+                            :active-range="priceSliderData.range"
+                            content="Price"
+                            label="Price Label"
+                            :interval="priceSliderData.step"
+                            @sliderChanged="priceSliderChanged"
+                          />
+                        </div>
+                    </section>
+                  </transition>                        
                 </div>
               </div>
             </div>
@@ -297,7 +313,7 @@ import ProductListing from '../components/core/ProductListing.vue';
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput';
 import ButtonFull from 'theme/components/theme/ButtonFull';
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
-import SearchCheckbox from 'src/modules/search-spring-search/components/genericSelectFilterItem';
+import SearchFilterData from 'src/modules/search-spring-search/components/genericSelectFilterItem';
 import PriceSlider from 'src/modules/search-spring-search/components/PriceSlider';
 import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
@@ -311,7 +327,7 @@ export default {
     BaseInput,
     ButtonFull,
     BaseSelect,
-    SearchCheckbox,
+    SearchFilterData,
     PriceSlider
   },
   mixins: [onBottomScroll],
@@ -336,7 +352,8 @@ export default {
       searchedValue: '',
       searcingLoaderFlag: false,
       controller: null,
-      signal: null
+      signal: null,
+      detailsAccordion: null
     };
   },
   beforeMount () {
@@ -715,9 +732,12 @@ export default {
 .sidebar h2{
   text-transform: uppercase;
   font-family: sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   // margin-left: 12px;
+}
+.sidebar .filterdata .mt-10{
+  margin-top: .5rem;
 }
 .sidebar .filterhead{
     margin-left: 8px;
