@@ -90,6 +90,7 @@
 import NoSSR from 'vue-no-ssr'
 import rootStore from '@vue-storefront/core/store'
 import { ProductTile } from '@vue-storefront/core/modules/catalog/components/ProductTile.ts'
+import config from 'config'
 
 export default {
   mixins: [ProductTile],
@@ -121,7 +122,7 @@ export default {
               break
             }
           }
-          return this.getThumbnail(thumbnail, 310, 300)
+          return this.getThumbnail(thumbnail, config.products.thumbnails.width, config.products.thumbnails.height)
         }
       }
       return null
