@@ -33,7 +33,7 @@
       </div>
     </div> -->
      <div class="loader loader--style3" title="2" v-if="searcingLoaderFlag">
-            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <!-- <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
               <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                 <animateTransform attributeType="xml"
@@ -44,7 +44,8 @@
                   dur="0.6s"
                   repeatCount="indefinite"/>
               </path>
-            </svg>
+            </svg> -->
+            <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
           </div>
 
@@ -176,7 +177,8 @@
             </div>
           </div>
         </div>       
-      <div class="row gutter-md">        
+      <div class="row gutter-md">      
+        <!-- Sidebar For web view   -->
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar">
@@ -203,12 +205,18 @@
                 </div>
               </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-                <div
+                <!-- <div
                   v-for="facetsitem in searchRes.facets"
                   :key="facetsitem.field"
                   class="filterdata"
-                >
-                  <h2><b>{{ facetsitem.label }}</b></h2>
+                > -->
+                 <Accordion class="mob_fltr"
+                    v-for="(facetsitem, index) in searchRes.facets"
+                    :key="facetsitem.field"
+                    :openType= "index>2 ? false: true"
+                    :title="$t(facetsitem.label)"
+                  >
+                  <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
                   <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                     <p @click="setCategoryFilterHistory({type: 'view all'})"
@@ -253,7 +261,8 @@
                       @sliderChanged="priceSliderChanged"
                     />
                   </div>
-                </div>
+                <!-- </div> -->
+                </Accordion>
               </div>
             </div>
           </div>
@@ -304,6 +313,7 @@ import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters, mapActions } from 'vuex'
+import Accordion from 'theme/components/theme/Accordion'
 
 export default {
   components: {
@@ -312,7 +322,8 @@ export default {
     ButtonFull,
     BaseSelect,
     SearchCheckbox,
-    PriceSlider
+    PriceSlider,
+    Accordion
   },
   mixins: [onBottomScroll, Category],
   computed: {
@@ -334,7 +345,7 @@ export default {
       setTime: Object,
       mobileFilters: false,
       searchedValue: '',
-      searcingLoaderFlag: false,
+      searcingLoaderFlag: true,
       controller: null,
       signal: null
     };
@@ -350,9 +361,10 @@ export default {
   //     resolve()
   //   })
   // },
-  // beforeMount () {
-  //   this.$bus.$on('search-in-search-spring', this.dataFromHeader);
-  // },
+  beforeMount () {
+    // this.$bus.$on('search-in-search-spring', this.dataFromHeader);
+     this.searchDataInSearchSpring();
+  },
   // beforeDestroy () {
   //   this.$bus.$off('search-in-search-spring');
   // },
@@ -364,7 +376,8 @@ export default {
   },
   mounted () {
     console.log('searchSpringCategory storee', this.$store.state.searchSpringCategory)
-    this.searchDataInSearchSpring();
+    // this.searchDataInSearchSpring();
+    // this.searcingLoaderFlag();
     if (this.filterData && this.filterData.length > 0) {
        // this.searchedValue = this.filterData[0].split('=')[1];
       if(this.priceSliderData) {
@@ -393,6 +406,7 @@ export default {
 
       // console.log('routeString', routeString);
       //   if (routeString !== ) {
+        this.searcingLoaderFlag = true;
           this.searchDataInSearchSpring();
       //   }
     },
