@@ -69,17 +69,33 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-
-    <div v-if="searchRes" class="container lg:hidden d_item" style=" margin-bottom: 20px;">
-      <div class="row gutter-md mt-6">
-        <div class="col-12">
-          <button-full class="w-full" @click.native="openFilters">
-            {{ $t('Filters') }}
-          </button-full>
+      <div class="container onlymobile col-12">
+        <div v-if="searchRes" class="lg:hidden d_item col-4" style=" margin-bottom: 20px;">
+          <div class="row gutter-md mt-6">
+            <div class="col-12">
+              <button-full class="w-full" @click.native="openFilters">
+                {{ $t('Filters') }}
+              </button-full>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  lg:hidden">
+              <label class="mr10">{{ $t('Columns') }}:</label>
+              <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+        </div>
+        <div class="col-4  lg:hidden">
+            <base-select
+              v-if="sortingFilterOptions && sortingFilterOptions.length"
+              class="col-12 md:col-6 mb-6 txt_blk_select"
+              name="sort"
+              v-model="sortingFilterSelectedValue"
+              :options="sortingFilterOptions"
+              :selected="sortingFilterSelectedValue"
+              :placeholder="$t('Sorting *')"
+              @input="sortingFilterChange"
+            />
         </div>
       </div>
-    </div>
-
     <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
@@ -928,6 +944,17 @@ input {
 
 .active {
   font-weight: 800;
+}
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
+}
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 62px;
+    z-index: 10;
 }
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
