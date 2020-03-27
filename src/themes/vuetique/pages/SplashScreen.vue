@@ -950,26 +950,16 @@ input {
       float: left;
     width: 33.33%;
 }
-.onlymobile{
-    position: absolute;
-    clear: both;
-    overflow: hidden;
-    height: 62px;
-    z-index: 10;
-}
-.onlymobile{
-    position: absolute;
-    clear: both;
+.onlymobile{        
     overflow: hidden;
     height: 50px;
-    z-index: 10;
-    margin-top: -20px;
+    margin-top: -15px;    
 }
 .onlymobile .col-4{
       float: left;
     width: 33.33%;
 }
-.onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select{
+.onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select select{
       height: 42px;
 }
 .onlymobile .col-4.mgrid{
