@@ -83,9 +83,8 @@
                   @input="sortingFilterChange"
                 />
               </div>
-
         </div>        
-        <div class="col-4  lg:hidden mgrid">
+        <div v-if="searchRes" class="col-4  lg:hidden mgrid">
               <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
                   <span> view</span> 
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
@@ -210,19 +209,21 @@
     </div>
 
     <div class="container pb-16" v-if="!searcingLoaderFlag">
-        <div class="col-12 lg:col-9 pr_list_sec_main">
+        <div class="col-12 lg:col-9 sm:col-12 pr_list_sec_main">
           <div class="row">
-            <div class="col-8 xs:col-12 searchtitle" v-if="searchRes">
+            <div class="col-12 lg:col-8 searchtitle" v-if="searchRes">
               <h2 style="width:100%;padding-bottom:25px;">
                 Search results for<span v-if="searchedValue"> "{{searchedValue}}" </span>
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
              <div class="col-2 hidden lg:block xs:col-6">
+                 <div v-if="searchRes">
                     <label class="mr10">{{ $t('Columns') }}:</label>
                     <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+                 </div>   
               </div>
-            <div class="col-2 xs:col-6 lg:block" >
+            <div class="col-2 hidden xs:col-6 lg:block" >
               <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -942,22 +943,46 @@ input {
   border-radius: 10px;
   font-size: 13px;
 }
-
 .active {
   font-weight: 800;
 }
-@media screen and (min-width: 768px) and (max-width: 1600px)  {
-  .sidebar .filterdata{
-    width:225px;
-  }
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
 }
-@media (max-width: 1440px) {
-  .filterdiv{
-      width: 228px;
-      bottom: 515px;
-  }
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 62px;
+    z-index: 10;
 }
-
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 50px;
+    z-index: 10;
+    margin-top: -20px;
+}
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
+}
+.onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select{
+      height: 42px;
+}
+.onlymobile .col-4.mgrid{
+    line-height: 1;
+    margin-top: 0px;    
+}
+.onlymobile .col-4.mgrid div span{
+  position: absolute;
+  margin-top: 12px;
+}
+.onlymobile .col-4.mfilter .mt-6{    
+    margin-top: 0px;    
+}
 .filter-top .filter_bx.filter_bx_sort{
     width: 20px;
     height:20px;
@@ -980,32 +1005,16 @@ input {
     // background: url("../assets/gridview.jpg") no-repeat;
     margin-top:8px;
   }
+@media screen and (min-width: 768px) and (max-width: 1600px)  {
+  .sidebar .filterdata{
+    width:225px;
+  }
+}
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
+  }
+}
 
-.onlymobile .col-4{
-      float: left;
-    width: 33.33%;
-}
-.onlymobile{
-    position: absolute;
-    clear: both;
-    overflow: hidden;
-    height: 62px;
-    z-index: 10;
-}
-.onlymobile{
-    position: absolute;
-    clear: both;
-    overflow: hidden;
-    height: 62px;
-    z-index: 10;
-    margin-top: -45px;
-}
-.onlymobile .col-4{
-      float: left;
-    width: 33.33%;
-}
-.onlymobile .col-4.mgrid{
-    line-height: 1;
-    margin-top: 28px;    
-}
 </style>
