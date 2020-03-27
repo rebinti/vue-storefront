@@ -209,8 +209,8 @@
       <div class="row gutter-md">      
         <!-- Sidebar For web view   -->
         <div class="col-3 hidden lg:block">
-          <div class="filterdiv">
-            <div class="sidebar">
+          <div class="">
+            <div class="sidebar filterdiv"  :class="{ fixed: fixedOrderPanel }">
               <h1 class="filterhead" v-if="searchRes" >Filters</h1>
               
               <div class="container pb-5 md: ml-2">
@@ -768,7 +768,7 @@ export default {
             let offsety = window.pageYOffset;
             console.log("offsety>>>>>>>>>",offsety);
             if (checkWindow && window.scrollY > 280) {
-              if(offsety > 3000){
+              if(offsety > 10000){
                   this.fixedOrderPanel = false
               }else{
                   this.fixedOrderPanel = true
@@ -823,6 +823,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fixed{
+  position: fixed;
+  top: 0px;  
+  width: 380px;
+}
+.footerreached{
+    position: fixed;
+    bottom: 515px;
+    width: 380px;
+    top: auto;
+}
 
 .mobile-filters { 
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
