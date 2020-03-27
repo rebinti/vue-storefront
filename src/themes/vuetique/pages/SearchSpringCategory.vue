@@ -416,18 +416,19 @@ export default {
   },
 
   beforeMount () {
-    //  if(this.getStoredCurrentRouterPath !== this.$route.path ) {
-    //     this.searchDataInSearchSpring();
-    //   } else {
-    //     this.searcingLoaderFlag = false;
-    //   }
-  },
-  created () {
-      if(this.getStoredCurrentRouterPath !== this.$route.path ) {
+    console.log('beforeMount storee', this.$store.state.searchSpringCategory)
+     if(this.getStoredCurrentRouterPath !== this.$route.path ) {
         this.searchDataInSearchSpring();
       } else {
         this.searcingLoaderFlag = false;
       }
+  },
+  created () {
+      // if(this.getStoredCurrentRouterPath !== this.$route.path ) {
+      //   this.searchDataInSearchSpring();
+      // } else {
+      //   this.searcingLoaderFlag = false;
+      // }
   },
   watch: {
     '$route': 'validateRouteCategory'
