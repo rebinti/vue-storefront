@@ -68,7 +68,7 @@
       </div> -->
     <!-- </div> -->
 
-    <div class="container onlymobile col-12">
+    <div class="container onlymobile col-12" v-if="!searcingLoaderFlag">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top">
