@@ -967,32 +967,38 @@ input {
 .active {
   font-weight: 800;
 }
-.onlymobile .col-4{
-      float: left;
-    width: 33.33%;
-}
-.onlymobile{
-    position: absolute;
-    clear: both;
+.onlymobile{        
     overflow: hidden;
-    height: 62px;
-    z-index: 10;
-}
-.onlymobile{
-    position: absolute;
-    clear: both;
-    overflow: hidden;
-    height: 62px;
-    z-index: 10;
-    margin-top: -45px;
+    height: 50px;
+    margin-top: -15px;    
 }
 .onlymobile .col-4{
-      float: left;
+    float: left;
     width: 33.33%;
+    border: 2px solid #4e4e4e;
+}
+.onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select select{
+      height: 42px;
 }
 .onlymobile .col-4.mgrid{
     line-height: 1;
-    margin-top: 28px;    
+    margin-top: 0px; 
+    height: 49px;   
+}
+.onlymobile .col-4.mgrid div span{
+    position: absolute;
+    margin-top: 16px;
+    margin-left: 11px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+}
+.onlymobile .col-4.mfilter .mt-6{    
+    margin-top: 0px;
+    height: 45px;   
+}
+.onlymobile .col-4.mfilter .mt-6 button{
+      height: 45px;
 }
 .filter-top .filter_bx.filter_bx_sort{
     width: 20px;
