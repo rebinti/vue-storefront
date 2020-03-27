@@ -177,7 +177,7 @@
       <!-- Sidebar For web view   -->   
         <div class="col-3 hidden lg:block">
           <div class="">
-            <div class="sidebar">
+            <div class="sidebar filterdiv"  :class="{ fixed: fixedOrderPanel }">
               <h1 class="filterhead" v-if="searchRes" >Filters</h1>
               
               <div class="container pb-5 md: ml-2">
@@ -345,7 +345,8 @@ export default {
       searcingLoaderFlag: false,
       controller: null,
       signal: null,
-      detailsAccordion: null
+      detailsAccordion: null,
+      fixedOrderPanel: false
     };
   },
   beforeMount () {
@@ -371,6 +372,7 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
+    document.addEventListener('scroll',  this.handleScroll);
   },
   methods: {
     async getSearchData (onScroll = false, abortApiCallFlag = false) {
@@ -683,15 +685,79 @@ export default {
         this.squery= event;
         this.searchDataInSearchSpring (event)
       }
+    },
+        handleScroll (){
+            const checkWindow = window !== undefined && window.scrollY;
+            let offsety = window.pageYOffset;
+            console.log("offsety>>>>>>>>>",offsety);
+            if (checkWindow && window.scrollY > 280) {
+              if(offsety > 3000){
+                  this.fixedOrderPanel = false
+              }else{
+                  this.fixedOrderPanel = true
+              }
+              
+            } else {
+              this.fixedOrderPanel = false
+          }
+          let viewflag = this.checkfooterreached()
+          console.log("viewflag",viewflag)
+          
+          // const footerheight = this.getdivheight('footer .bg-grey-lighter')
+          // const newsletterheight = this.getdivheight('footer .news-letter')
+          // const paydivheight = this.getdivheight('footer .mx-auto')
+          
+          if(viewflag==true){
+            document.querySelector( '.filterdiv' ).classList.add("footerreached");
+          }else{
+            document.querySelector( '.filterdiv' ).classList.remove("footerreached");
+          }
+          
+    },
+    checkfooterreached () {
+          const el = document.querySelector( '.news-letter' )
+          const scroll = window.scrollY || window.pageYOffset
+          const boundsTop = el.getBoundingClientRect().top + scroll
+          console.log('boundsTop', boundsTop)	
+          const viewport = {
+            top: scroll,
+            bottom: scroll + window.innerHeight,
+            }
+          const bounds = {
+            top: boundsTop,
+            bottom: boundsTop + el.clientHeight,
+            }
+          console.log('bounds', bounds)
+          console.log('viewport', viewport)
+          return ( bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom )
+            || ( bounds.top <= viewport.bottom && bounds.top >= viewport.top );
+    },
+    getdivheight(divclass){
+          const el = document.querySelector(divclass).getBoundingClientRect().height
+          return el;
     }
 
+
+  },
+   destroyed () {
+    document.removeEventListener('scroll', this.handleScroll);
 
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
+.fixed{
+  position: fixed;
+  top: 0px;  
+  width: 380px;
+}
+.footerreached{
+    position: fixed;
+    bottom: 515px;
+    width: 380px;
+    top: auto;
+}
 .mobile-filters { 
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
   
