@@ -72,7 +72,7 @@
       <div class="container onlymobile col-12" v-if="!searcingLoaderFlag">
 
         <div class="col-4  lg:hidden msort">
-              <div class="category_filter_bx_sortby filter-top">
+              <div class="category_filter_bx_sortby filter-top search">
                 <base-select
                   v-if="sortingFilterOptions && sortingFilterOptions.length"
                   class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -999,6 +999,9 @@ input {
 }
 .onlymobile .col-4.mfilter .mt-6 button{
       height: 45px;
+}
+.onlymobile .txt_blk_select:after{
+  top:20px;
 }
 .filter-top .filter_bx.filter_bx_sort{
     width: 20px;
