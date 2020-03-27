@@ -1,5 +1,70 @@
 <template>
-  <div>
+  <div class="st_brd">
+     <div class="b_crumb">
+      <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
+    </div>
+    <header class="pb-10 row bg-grey-lightest mb-6 head_category">
+      <div class="container d_item">
+        <div class="row items-center mt-2">
+          <h1 class="col-8">
+            {{ category.name }}
+          </h1>
+           <div class="col-2 hidden lg:block">
+                <label class="mr10">{{ $t('Columns') }}:</label>
+                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+          </div>
+          <div class="col-2 hidden lg:block">
+             <base-select
+                v-if="sortingFilterOptions && sortingFilterOptions.length"
+                class="col-12 md:col-6 mb-6 txt_blk_select"
+                name="sort"
+                v-model="sortingFilterSelectedValue"
+                :options="sortingFilterOptions"
+                :selected="sortingFilterSelectedValue"
+                :placeholder="$t('Sorting *')"
+                @input="sortingFilterChange"
+              />
+          </div>
+           <!-- <active-filters :filters="filters.available" /> -->
+        </div> 
+      </div>
+
+       <!-- <div class="category_filter_out_pop_box">
+
+          <div class="category_filter_bx_it">
+              <div class="category_filter_bx_sortby filter-top">
+                   <base-select
+                      v-if="sortingFilterOptions && sortingFilterOptions.length"
+                      class="col-12 md:col-6 mb-6 txt_blk_select"
+                      name="sort"
+                      v-model="sortingFilterSelectedValue"
+                      :options="sortingFilterOptions"
+                      :selected="sortingFilterSelectedValue"
+                      :placeholder="$t('Sorting *')"
+                      @input="sortingFilterChange"
+                    /> 
+              </div>
+
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+                  <span> view</span> 
+                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
+                  </div>                  
+              </div>              
+              <div class="category_filter_bx_filter filter-top" @click="openFilters"> 
+                 <span>filter</span>
+
+                   <div class="filter_bx">               
+                  <button-full class="w-full" @click.native="openFilters"> 
+                    {{ $t('Filters') }}
+                  </button-full>
+                  </div>   
+
+              </div>
+
+          </div>
+
+      </div>  -->
+    </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
@@ -119,7 +184,7 @@
     </div>
 
     <div class="container pb-16" v-if="!searcingLoaderFlag">
-        <div class="col-12 lg:col-9 pr_list_sec_main">
+        <!-- <div class="col-12 lg:col-9 pr_list_sec_main">
           <div class="row">
             <div class="col-9 xs:col-12 searchtitle" v-if="searchRes">
               <h2 style="width:100%;padding-bottom:25px;">
@@ -140,11 +205,11 @@
               />
             </div>
           </div>
-        </div>       
+        </div>        -->
       <div class="row gutter-md">      
         <!-- Sidebar For web view   -->
         <div class="col-3 hidden lg:block">
-          <div class="">
+          <div class="filterdiv">
             <div class="sidebar">
               <h1 class="filterhead" v-if="searchRes" >Filters</h1>
               
@@ -239,7 +304,7 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
-          <product-listing :columns="3" :products="serachedProd" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -277,8 +342,11 @@ import PriceSlider from 'src/modules/search-spring-search/components/PriceSlider
 import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Accordion from 'theme/components/theme/Accordion'
+import Breadcrumbs from '../components/core/Breadcrumbs.vue'
+// import SortBy from '../components/core/SortBy.vue'
+import Columns from '../components/core/Columns.vue'
 
 export default {
   components: {
@@ -288,10 +356,18 @@ export default {
     BaseSelect,
     SearchCheckbox,
     PriceSlider,
-    Accordion
+    Accordion,
+    Breadcrumbs,
+    // SortBy,
+    Columns
   },
   mixins: [onBottomScroll, Category],
   computed: {
+    ...mapState({
+      seletedMobileGrid: state => state.ui.seletedMobileGrid,
+      defaultColumnMobile: state => state.ui.defaultColumnMobile,
+      mobileGridData: state => state.ui.mobileGridData
+    }),
     ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath'])
   },
   data () {
@@ -305,12 +381,22 @@ export default {
       searchedValue: '',
       searcingLoaderFlag: true,
       controller: null,
-      signal: null
+      signal: null,
+
+      defaultColumn: 3,
+      fixedOrderPanel: false
     };
   },
 
   beforeMount () {
-     if(this.getStoredCurrentRouterPath !== this.$route.path ) {
+    //  if(this.getStoredCurrentRouterPath !== this.$route.path ) {
+    //     this.searchDataInSearchSpring();
+    //   } else {
+    //     this.searcingLoaderFlag = false;
+    //   }
+  },
+  created () {
+      if(this.getStoredCurrentRouterPath !== this.$route.path ) {
         this.searchDataInSearchSpring();
       } else {
         this.searcingLoaderFlag = false;
@@ -334,6 +420,7 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
+    document.addEventListener('scroll',  this.handleScroll);
   },
   methods: {
     validateRouteCategory () {
@@ -649,10 +736,89 @@ export default {
     },
     findIndexInFilterItems (searchText) {
       return this.filterData.findIndex(val => val.includes(searchText)) >= 0
+    },
+
+    notify () {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'error',
+        message: this.$t('Please select the field which You like to sort by'),
+        action1: { label: this.$t('OK') }
+      })
+    },
+    toggleSearchpanel () {
+      this.$store.commit('ui/setSearchpanel', true)
+      this.$bus.$emit('HomefocusSearchInput') 
+    },
+    columnChangeWeb (column) {
+      if (column.type === 'lg') this.defaultColumn = column.selected
+    },
+    columnChangeMobile (gridData) {
+      // console.log('this.mobileGridData', this.mobileGridData)
+      let tdata;
+      if (gridData.index === 2) {
+        tdata = this.mobileGridData[0];
+      } else {
+        tdata = this.mobileGridData[gridData.index + 1];
+      }
+      // this.defaultColumnMobile = tdata.value;
+      this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);
+    },
+     handleScroll (){
+            const checkWindow = window !== undefined && window.scrollY;
+            let offsety = window.pageYOffset;
+            console.log("offsety>>>>>>>>>",offsety);
+            if (checkWindow && window.scrollY > 280) {
+              if(offsety > 3000){
+                  this.fixedOrderPanel = false
+              }else{
+                  this.fixedOrderPanel = true
+              }
+              
+            } else {
+              this.fixedOrderPanel = false
+          }
+          let viewflag = this.checkfooterreached()
+          console.log("viewflag",viewflag)
+          
+          // const footerheight = this.getdivheight('footer .bg-grey-lighter')
+          // const newsletterheight = this.getdivheight('footer .news-letter')
+          // const paydivheight = this.getdivheight('footer .mx-auto')
+          
+          if(viewflag==true){
+            document.querySelector( '.filterdiv' ).classList.add("footerreached");
+          }else{
+            document.querySelector( '.filterdiv' ).classList.remove("footerreached");
+          }
+          
+    },
+    checkfooterreached () {
+          const el = document.querySelector( '.news-letter' )
+          const scroll = window.scrollY || window.pageYOffset
+          const boundsTop = el.getBoundingClientRect().top + scroll
+          console.log('boundsTop', boundsTop)	
+          const viewport = {
+            top: scroll,
+            bottom: scroll + window.innerHeight,
+            }
+          const bounds = {
+            top: boundsTop,
+            bottom: boundsTop + el.clientHeight,
+            }
+          console.log('bounds', bounds)
+          console.log('viewport', viewport)
+          return ( bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom )
+            || ( bounds.top <= viewport.bottom && bounds.top >= viewport.top );
+    },
+    getdivheight(divclass){
+          const el = document.querySelector(divclass).getBoundingClientRect().height
+          return el;
     }
 
 
-  }
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.handleScroll);
+  },
 };
 </script>
 
@@ -755,6 +921,13 @@ input {
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
     width:225px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
   }
 }
 </style>
