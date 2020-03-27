@@ -80,8 +80,13 @@
           </div>
         </div>
         <div class="col-4  lg:hidden">
-              <label class="mr10">{{ $t('Columns') }}:</label>
-              <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+                  <span> view</span> 
+                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
+                  </div>                  
+              </div>   
+              <!-- <label class="mr10">{{ $t('Columns') }}:</label>
+              <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/> -->
         </div>
         <div class="col-4  lg:hidden">
             <base-select
@@ -968,4 +973,27 @@ input {
       bottom: 515px;
   }
 }
+
+.filter-top .filter_bx.filter_bx_sort{
+    width: 20px;
+    height:20px;
+    float: left;
+    background-color:transparent;
+    border:0px;
+    background: url("../assets/sort.png") no-repeat;
+  }
+  .filter-top .sort-by .w-full{
+    height: 43px !important;
+    font-size: 13px !important;
+  }
+  .filter-top .filter_bx_grid{
+    width: 32px;
+    height:32px;
+    float: right;
+    background-color:transparent;
+    background-size: 32px 32px;
+    border:0px;
+    // background: url("../assets/gridview.jpg") no-repeat;
+    margin-top:8px;
+  }
 </style>
