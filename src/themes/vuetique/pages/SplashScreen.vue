@@ -74,7 +74,7 @@
               <div class="category_filter_bx_sortby filter-top">
                 <base-select
                   v-if="sortingFilterOptions && sortingFilterOptions.length"
-                  class="col-12 md:col-6 mb-6 txt_blk_select"
+                  class="col-12 md:col-6 mb-6 txt_blk_select search"
                   name="sort"
                   v-model="sortingFilterSelectedValue"
                   :options="sortingFilterOptions"

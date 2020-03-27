@@ -155,20 +155,32 @@ export default {
             margin-top: 0px!important;
             margin-bottom: 0px!important;
             &:after{
-              top:21px;
+              top:36px;
             }
             select{
               background:#fafafa;
               border: 0px;
               border-bottom: 1px solid #e0e0e0;
-              height: auto;
+              height: 80px;
               color:#000000;
             }
             label{
-              top:10px;
+              top:25px;
               left:15px;
               color:#8d9baf;
             }
+          }
+
+            .search {
+                &:after{
+                  top:21px !important;
+                }
+                select{
+                  height: auto !important;
+                }
+                label{
+                  top:10px !important;
+                }
           }
 }
 
