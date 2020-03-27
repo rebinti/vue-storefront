@@ -70,16 +70,23 @@
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
       <div class="container onlymobile col-12">
-        <div v-if="searchRes" class="lg:hidden d_item col-4" style=" margin-bottom: 20px;">
-          <div class="row gutter-md mt-6">
-            <div class="col-12">
-              <button-full class="w-full" @click.native="openFilters">
-                {{ $t('Filters') }}
-              </button-full>
-            </div>
-          </div>
-        </div>
-        <div class="col-4  lg:hidden">
+
+        <div class="col-4  lg:hidden msort">
+              <div class="category_filter_bx_sortby filter-top">
+                <base-select
+                  v-if="sortingFilterOptions && sortingFilterOptions.length"
+                  class="col-12 md:col-6 mb-6 txt_blk_select"
+                  name="sort"
+                  v-model="sortingFilterSelectedValue"
+                  :options="sortingFilterOptions"
+                  :selected="sortingFilterSelectedValue"
+                  :placeholder="$t('Sorting *')"
+                  @input="sortingFilterChange"
+                />
+              </div>
+
+        </div>        
+        <div class="col-4  lg:hidden mgrid">
               <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
                   <span> view</span> 
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
@@ -88,19 +95,18 @@
               <!-- <label class="mr10">{{ $t('Columns') }}:</label>
               <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/> -->
         </div>
-        <div class="col-4  lg:hidden">
-            <base-select
-              v-if="sortingFilterOptions && sortingFilterOptions.length"
-              class="col-12 md:col-6 mb-6 txt_blk_select"
-              name="sort"
-              v-model="sortingFilterSelectedValue"
-              :options="sortingFilterOptions"
-              :selected="sortingFilterSelectedValue"
-              :placeholder="$t('Sorting *')"
-              @input="sortingFilterChange"
-            />
-        </div>
+        <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
+          <div class="row gutter-md mt-6">
+            <div class="col-12">
+              <button-full class="w-full" @click.native="openFilters">
+                {{ $t('Filters') }}
+              </button-full>
+            </div>
+          </div>
+        </div>        
+
       </div>
+
     <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
@@ -961,19 +967,22 @@ input {
     height: 62px;
     z-index: 10;
 }
-@media screen and (min-width: 768px) and (max-width: 1600px)  {
-  .sidebar .filterdata{
-    width:225px;
-  }
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 62px;
+    z-index: 10;
+    margin-top: -45px;
 }
-
-@media (max-width: 1440px) {
-  .filterdiv{
-      width: 228px;
-      bottom: 515px;
-  }
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
 }
-
+.onlymobile .col-4.mgrid{
+    line-height: 1;
+    margin-top: 28px;    
+}
 .filter-top .filter_bx.filter_bx_sort{
     width: 20px;
     height:20px;
@@ -996,4 +1005,17 @@ input {
     // background: url("../assets/gridview.jpg") no-repeat;
     margin-top:8px;
   }
+@media screen and (min-width: 768px) and (max-width: 1600px)  {
+  .sidebar .filterdata{
+    width:225px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
+  }
+}
+
 </style>
