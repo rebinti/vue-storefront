@@ -758,6 +758,7 @@ export default {
     width: 380px;
     top: auto;
 }
+
 .mobile-filters { 
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
   
@@ -858,6 +859,12 @@ input {
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
     width:225px;
+  }
+}
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
   }
 }
 </style>
