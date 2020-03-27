@@ -205,7 +205,7 @@ const actions: ActionTree<CategoryState, RootState> = {
    * Filter category products
    */
   products (context, { populateAggregations = false, filters = [], searchProductQuery, current = 0, perPage = 50, sort = '', includeFields = null, excludeFields = null, configuration = null, append = false, skipCache = false, cacheOnly = false }) {
-    console.log('fileter valuee' , filters)
+    // console.log('fileter valuee' , filters)
     context.dispatch('setSearchOptions', {
       populateAggregations,
       filters,
@@ -240,8 +240,6 @@ const actions: ActionTree<CategoryState, RootState> = {
     let t0 = new Date().getTime()
 
     const precachedQuery = searchProductQuery
-    console.log('searchProductQuery' , searchProductQuery);
-    console.log('includeFields' , includeFields);
     let productPromise = rootStore.dispatch('product/list', {
       query: precachedQuery,
       start: current,
@@ -254,7 +252,7 @@ const actions: ActionTree<CategoryState, RootState> = {
       updateState: !cacheOnly,
       prefetchGroupProducts: prefetchGroupProducts
     }).then((res) => {
-      console.log("result products []=" , res)
+      // console.log("result products []=" , res)
       let t1 = new Date().getTime()
       rootStore.state.twoStageCachingDelta1 = t1 - t0
 
@@ -293,8 +291,8 @@ const actions: ActionTree<CategoryState, RootState> = {
           }
         }
         if (populateAggregations === true && res.aggregations) { // populate filter aggregates
-          console.log('fileter valuee 111' , filters)
-          console.log('res.aggregations' , res.aggregations);
+          // console.log('fileter valuee 111' , filters)
+          // console.log('res.aggregations' , res.aggregations);
 
           for (let attrToFilter of filters) { // fill out the filter options
             let filterOptions = []
@@ -338,7 +336,7 @@ const actions: ActionTree<CategoryState, RootState> = {
                 }
               }
             }
-            console.log('filterOptions ,,' , attrToFilter ,filterOptions)
+            // console.log('filterOptions ,,' , attrToFilter ,filterOptions)
             context.dispatch('addAvailableFilter', {
               key: attrToFilter,
               options: filterOptions

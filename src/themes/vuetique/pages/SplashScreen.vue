@@ -35,17 +35,76 @@
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
+     </div>
+
+    <!-- <div v-if="searchRes" class="container lg:hidden d_item" style=" margin-bottom: 20px;">
+       <div class="category_filter_out_pop_box">
+
+          <div class="category_filter_bx_it">
+              <div class="category_filter_bx_sortby filter-top">
+                  <sort-by />  
+              </div>
+
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+                  <span> view</span> 
+                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
+                  </div>                  
+              </div>              
+              <div class="category_filter_bx_filter filter-top" @click="openFilters"> 
+                  <button-full class="w-full" @click.native="openFilters">
+                    {{ $t('Filters') }}
+                  </button-full> 
+              </div>
+
           </div>
 
-    <div v-if="searchRes" class="container lg:hidden d_item" style=" margin-bottom: 20px;">
-      <div class="row gutter-md mt-6">
+      </div>    -->
+      <!-- <div class="row gutter-md mt-6">
         <div class="col-12">
           <button-full class="w-full" @click.native="openFilters">
             {{ $t('Filters') }}
           </button-full>
         </div>
+      </div> -->
+    <!-- </div> -->
+
+    <div class="container onlymobile col-12">
+
+        <div class="col-4  lg:hidden msort">
+              <div class="category_filter_bx_sortby filter-top">
+                <base-select
+                  v-if="sortingFilterOptions && sortingFilterOptions.length"
+                  class="col-12 md:col-6 mb-6 txt_blk_select"
+                  name="sort"
+                  v-model="sortingFilterSelectedValue"
+                  :options="sortingFilterOptions"
+                  :selected="sortingFilterSelectedValue"
+                  :placeholder="$t('Sorting *')"
+                  @input="sortingFilterChange"
+                />
+              </div>
+
+        </div>        
+        <div class="col-4  lg:hidden mgrid">
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+                  <span> view</span> 
+                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
+                  </div>                  
+              </div>   
+              <!-- <label class="mr10">{{ $t('Columns') }}:</label>
+              <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/> -->
+        </div>
+        <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
+          <div class="row gutter-md mt-6">
+            <div class="col-12">
+              <button-full class="w-full" @click.native="openFilters">
+                {{ $t('Filters') }}
+              </button-full>
+            </div>
+          </div>
+        </div>        
+
       </div>
-    </div>
 
     <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
@@ -153,13 +212,17 @@
     <div class="container pb-16" v-if="!searcingLoaderFlag">
         <div class="col-12 lg:col-9 pr_list_sec_main">
           <div class="row">
-            <div class="col-9 xs:col-12 searchtitle" v-if="searchRes">
+            <div class="col-8 xs:col-12 searchtitle" v-if="searchRes">
               <h2 style="width:100%;padding-bottom:25px;">
                 Search results for<span v-if="searchedValue"> "{{searchedValue}}" </span>
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
-            <div class="col-3 xs:col-12">
+             <div class="col-2 hidden lg:block xs:col-6">
+                    <label class="mr10">{{ $t('Columns') }}:</label>
+                    <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+              </div>
+            <div class="col-2 xs:col-6 lg:block" >
               <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -271,7 +334,7 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
-          <product-listing :columns="3" :products="serachedProd" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -308,8 +371,9 @@ import PriceSlider from 'src/modules/search-spring-search/components/PriceSlider
 import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Accordion from 'theme/components/theme/Accordion'
+import Columns from '../components/core/Columns.vue'
 
 export default {
   name: 'SplashScreen',
@@ -320,10 +384,16 @@ export default {
     BaseSelect,
     SearchFilterData,
     PriceSlider,
-    Accordion
+    Accordion,
+    Columns
   },
   mixins: [onBottomScroll],
   computed: {
+     ...mapState({
+      seletedMobileGrid: state => state.ui.seletedMobileGrid,
+      defaultColumnMobile: state => state.ui.defaultColumnMobile,
+      mobileGridData: state => state.ui.mobileGridData
+    }),
     ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
   },
   data () {
@@ -346,7 +416,8 @@ export default {
       controller: null,
       signal: null,
       detailsAccordion: null,
-      fixedOrderPanel: false
+      fixedOrderPanel: false,
+      defaultColumn: 3
     };
   },
   beforeMount () {
@@ -691,7 +762,7 @@ export default {
             let offsety = window.pageYOffset;
             console.log("offsety>>>>>>>>>",offsety);
             if (checkWindow && window.scrollY > 280) {
-              if(offsety > 3000){
+              if(offsety > 10000){
                   this.fixedOrderPanel = false
               }else{
                   this.fixedOrderPanel = true
@@ -735,7 +806,26 @@ export default {
     getdivheight(divclass){
           const el = document.querySelector(divclass).getBoundingClientRect().height
           return el;
-    }
+    },
+    toggleSearchpanel () {
+      this.$store.commit('ui/setSearchpanel', true)
+      this.$bus.$emit('HomefocusSearchInput') 
+    },
+    columnChangeWeb (column) {
+      console.log('columnChangeWeb', column)
+      if (column.type === 'lg') this.defaultColumn = column.selected
+    },
+    columnChangeMobile (gridData) {
+      // console.log('this.mobileGridData', this.mobileGridData)
+      let tdata;
+      if (gridData.index === 2) {
+        tdata = this.mobileGridData[0];
+      } else {
+        tdata = this.mobileGridData[gridData.index + 1];
+      }
+      // this.defaultColumnMobile = tdata.value;
+      this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);
+    },
 
 
   },
@@ -866,5 +956,56 @@ input {
       width: 228px;
       bottom: 515px;
   }
+}
+
+.filter-top .filter_bx.filter_bx_sort{
+    width: 20px;
+    height:20px;
+    float: left;
+    background-color:transparent;
+    border:0px;
+    background: url("../assets/sort.png") no-repeat;
+  }
+  .filter-top .sort-by .w-full{
+    height: 43px !important;
+    font-size: 13px !important;
+  }
+  .filter-top .filter_bx_grid{
+    width: 32px;
+    height:32px;
+    float: right;
+    background-color:transparent;
+    background-size: 32px 32px;
+    border:0px;
+    // background: url("../assets/gridview.jpg") no-repeat;
+    margin-top:8px;
+  }
+
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
+}
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 62px;
+    z-index: 10;
+}
+.onlymobile{
+    position: absolute;
+    clear: both;
+    overflow: hidden;
+    height: 62px;
+    z-index: 10;
+    margin-top: -45px;
+}
+.onlymobile .col-4{
+      float: left;
+    width: 33.33%;
+}
+.onlymobile .col-4.mgrid{
+    line-height: 1;
+    margin-top: 28px;    
 }
 </style>
