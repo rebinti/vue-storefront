@@ -147,7 +147,7 @@ export default {
 
 @media (max-width: 576px) {
 
-      .txt_blk_select{
+    .txt_blk_select{
             width:100%;
             float: left;
             padding-left: 0px!important;
@@ -155,17 +155,17 @@ export default {
             margin-top: 0px!important;
             margin-bottom: 0px!important;
             &:after{
-              top:36px;
+              top:21px;
             }
             select{
               background:#fafafa;
               border: 0px;
               border-bottom: 1px solid #e0e0e0;
-              height: 80px;
+              height: auto;
               color:#000000;
             }
             label{
-              top:28px;
+              top:10px;
               left:15px;
               color:#8d9baf;
             }
