@@ -12,6 +12,10 @@ export default {
   name: 'brands',
   components: {
 
+
+
+    
+
   },
   mixins: [],
   computed: {
