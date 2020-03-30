@@ -98,14 +98,25 @@
             exact
           >{{ $t('Magazine') }}</router-link>
         </li>
-         <!-- <li>
+
+         <li>
           <router-link
             class="menu-link"
-            :to="localizedRoute('/search-spring')"
+            :to="localizedRoute('/brands')"
             exact
-          >{{ $t('Search Spring') }}
+          >{{ $t('Brands') }}
           </router-link>
-        </li> -->
+        </li>
+        
+        <li>
+          <router-link
+            class="menu-link"
+             :to="localizedRoute('/brands/nike')"
+            exact
+          >{{ $t('Brands Category') }}
+          </router-link>
+        </li>
+        
       </ul>
     </div>
   </div>
@@ -117,6 +128,7 @@ import onEscapePress from "@vue-storefront/core/mixins/onEscapePress";
 import SubCategory from "theme/components/core/blocks/HeaderMenu/SubCategory";
 import CurrentPage from "theme/mixins/currentPage";
 import CmsBlock from '../Cms/Block'
+import { formatCategoryLink } from '@vue-storefront/core/modules/url/helpers'
 
 export default {
   name: "HeaderMenu",
@@ -186,6 +198,9 @@ export default {
       } else {
         this.openMenu(id);
       }
+    },
+    categoryLink (category) {
+      return formatCategoryLink(category)
     }
   }
 };

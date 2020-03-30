@@ -1,6 +1,8 @@
 import config from 'config'
 // import SocialLogin from 'theme/pages/SocialLogin'
-// import SplashScreen from 'ttheme/pages/SplashScreen'
+// import SplashScreen from 'theme/pages/SplashScreen'
+import Brands from 'theme/pages/brands'
+import BrandsCategory from 'theme/pages/brandsCategory'
 
 const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
@@ -18,6 +20,9 @@ const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/Cms
 
 const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin')
 const SplashScreen = () => import(/* webpackChunkName: "vsf-splash" */ 'theme/pages/SplashScreen')
+
+// const Brands = () => import(/* webpackChunkName: "vsf-brands" */ 'theme/pages/brands')
+// const BrandsCategory = () => import(/* webpackChunkName: "vsf-brand-category" */ 'theme/pages/brandsCategory')
 
 let routes = [
   { name: 'home', path: '/', component: Home, alias: '/pwa.html' },
@@ -49,7 +54,9 @@ let routes = [
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
 
   { name: 'mobile-splash', path: '/search-spring', component: SplashScreen },
-  { name: 'mobile-social-login', path: '/social-login', component: SocialLogin }
+  { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
+  { name: 'brands', path: '/brands', component: Brands },
+  { name: 'brands-category', path: '/brands/:brandName', component: BrandsCategory }
 ]
 if (!config.products.useShortCatalogUrls) {
   routes = routes.concat([{ name: 'virtual-product', path: '/p/:parentSku/:slug', component: Product }, // :sku param can be marked as optional with ":sku?" (https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js#L16), but it requires a lot of work to adjust the rest of the site
