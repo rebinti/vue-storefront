@@ -27,14 +27,14 @@
     </template>
   </div> -->
 
-
-    <button
+  
+  <button
     :class="{'active': value}"
      @click="$emit('click')"
     class="border border-grey-light font-medium text-xs text-grey-dark generic-selector generic-select mr-3 mb-3"
   >
       <slot />
-  </button>
+  </button>  
 </template>
 
 <script>
@@ -58,7 +58,12 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    }
+    },
+    fieldType: {
+      type: String,
+      required: false,
+      default: ''
+    },
   }
 }
 

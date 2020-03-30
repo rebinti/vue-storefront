@@ -179,6 +179,7 @@
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
                     v-model="valuesitem.active"
+                    :field-type="valuesitem.field"
                     @click.native="setFilterData (facetsitem, valuesitem)"
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
@@ -299,10 +300,16 @@
                       v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                       class="col-xs-12 mb15"
                       :id="valuesitem.label+index+valuesitem.count"
+                      :field-type="facetsitem.field"
                       v-model="valuesitem.active"
                       @click="setFilterData (facetsitem, valuesitem)"
                     >
-                      {{ valuesitem.label }} ({{ valuesitem.count }})
+                      <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + valuesitem.label.toLowerCase() +'.png'" 
+                      @error="imgUrlAlt" alt="" v-if="facetsitem.field === 'color'" >
+                      <span v-else>
+                        {{ valuesitem.label }} ({{ valuesitem.count }})
+                      </span>
+                      
                     </search-checkbox>
 
                     <price-slider
@@ -461,6 +468,9 @@ export default {
     document.addEventListener('scroll',  this.handleScroll);
   },
   methods: {
+    imgUrlAlt(event) {
+       event.target.src = "/assets/colour/multi.png"
+    }, 
     validateRouteCategory () {
         console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;

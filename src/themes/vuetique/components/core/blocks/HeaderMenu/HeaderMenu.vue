@@ -107,15 +107,7 @@
           >{{ $t('Brands') }}
           </router-link>
         </li>
-        
-        <li>
-          <router-link
-            class="menu-link"
-             :to="localizedRoute('/brands/nike')"
-            exact
-          >{{ $t('Brands Category') }}
-          </router-link>
-        </li>
+      
         
       </ul>
     </div>
