@@ -8,7 +8,7 @@
         <div class="row items-center mt-2">
           <h1 class="col-8">
             <!-- {{ category.name }} -->
-             {{$route.params.brandName}}
+             {{searchedValue}}
           </h1>
            <div class="col-2 hidden lg:block">
                 <label class="mr10">{{ $t('Columns') }}:</label>
@@ -563,15 +563,10 @@ export default {
     searchDataInSearchSpring (squerydata=null) { // this.$route.params.brandName
       console.log('this.$route.params.slug', this.$route ,this.$route.params.brandName);
       let routeString = this.$route.params.brandName; // this.$route.path.replace('-', ' ');
-      // routeString = routeString.replace('/','').toLowerCase()
-      //                 .split('/')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join('/');
-      // routeString = routeString
-      //                 .split(' ')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join(' ');
-      // routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
+
+      routeString = routeString.split('-')
+                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                      .join(' ');
       console.log('routeString', routeString);
       this.searchedValue =  routeString
       if(routeString.includes('&')) {
@@ -675,15 +670,9 @@ export default {
       this.$store.dispatch('searchSpringCategory/resetFilterData');
       this.$store.dispatch('searchSpringCategory/resetCategoryHierarchy');
       let routeString = this.$route.params.brandName; // this.$route.path.replace('-', ' ');
-      // routeString = routeString.replace('/','').toLowerCase()
-      //                 .split('/')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join('/');
-      // routeString = routeString
-      //                 .split(' ')
-      //                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      //                 .join(' ');
-      // routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
+      routeString = routeString.split('-')
+                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                      .join(' ');
       console.log('routeString', routeString);
       this.searchedValue =  routeString
       if(routeString.includes('&')) {
