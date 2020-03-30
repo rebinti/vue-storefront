@@ -56,7 +56,14 @@
 
               <div class="mob_headline_out">
                   <div class="mob_headline">
-
+                    <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;">   
+                      <router-link
+                          class="menu-link"
+                          :to="localizedRoute('/brands/' + getBrandLabelDetails.label)"
+                          exact
+                        >{{ getBrandLabelDetails.label }}
+                        </router-link>
+                   </p>
                     <h1 data-testid="productName" itemprop="name">
                       {{ product.name | htmlDecode }}
                     </h1>
@@ -187,6 +194,14 @@
 
 
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
+          <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;">   
+            <router-link
+                class="menu-link"
+                :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
+                exact
+              >{{ getBrandLabelDetails.label }}
+              </router-link>
+            </p>
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
@@ -516,7 +531,15 @@ export default {
     }
   },
   directives: { focusClean },
+  computed: {
+    getBrandLabelDetails () {
+       return this.attributesByCode.label.options.find(val => val.value == this.product.label)
+    }
+  },
   methods: {
+    getBrandUrlPath (brandName) {
+      return brandName.toLowerCase().split(' ').join('-');
+    },
     showDetails (event) {
       this.detailsOpen = true
       event.target.classList.add('hidden')
