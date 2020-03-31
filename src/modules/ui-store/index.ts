@@ -1,5 +1,9 @@
 import { createModule } from '@vue-storefront/core/lib/module'
 // TODO: Move the logic to appropriate modules and deprecate this one
+import { quickSearchByQuery } from '@vue-storefront/core/lib/search'
+import SearchQuery from '@vue-storefront/core/lib/search/searchQuery'
+import { Logger } from '@vue-storefront/core/lib/logger'
+import config from 'config'
 
 const KEY = 'ui'
 const store = {
@@ -27,11 +31,13 @@ const store = {
                     {'value': 4, 'image': '../assets/grid4.png', 'index': 2}],
     seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0},
     defaultColumnMobile: 2,
-    yoptoProduct: null
+    yoptoProduct: null,
+    brandsList: []
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
-    getDefaultColumnMobile: state => state.defaultColumnMobile
+    getDefaultColumnMobile: state => state.defaultColumnMobile,
+    getBrandsList: state => state.brandsList
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -88,6 +94,9 @@ const store = {
     setSeletedMobileGrid (state, data) {
       state.seletedMobileGrid = data
       state.defaultColumnMobile = data.value
+    },
+    setBrandList (state, data) {
+      state.brandsList = data;
     }
   },
   actions: {
@@ -105,7 +114,24 @@ const store = {
     },
     UpdateSeletedMobileGrid ({commit}, state) {
       commit('setSeletedMobileGrid', state)
-    }
+    },
+    getBrandList ({commit}, { key = 'type', value, excludeFields = null, includeFields = null, skipCache = false }) {
+        let query = new SearchQuery()
+        if (value) {
+          query = query.applyFilter({key: key, value: {'eq': value}})
+        }
+        if (includeFields === null) {
+          includeFields = config.brand.includeFields;
+        }
+        return quickSearchByQuery({ query, entityType: 'brand', excludeFields, includeFields })
+          .then((resp) => {
+            commit('setBrandList', resp.items);
+            return resp.items
+          })
+          .catch(err => {
+            Logger.error(err, 'ui/brands')()
+          })
+    },
   }
 }
 
