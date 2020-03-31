@@ -173,6 +173,7 @@
 
                 <div v-else>
                   <search-filter-data
+                    v-if="facetsitem.field !== 'color'"
                     v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
@@ -181,6 +182,17 @@
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
                   </search-filter-data>
+
+                  <filter-color-selector
+                    v-if="facetsitem.field === 'color'"
+                    v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                    :id="valuesitem.label+index+valuesitem.count"
+                    :field-type="facetsitem.field"
+                    v-model="valuesitem.active"
+                    :label="valuesitem.label"
+                    @click="setFilterData (facetsitem, valuesitem)"
+                  >
+                  </filter-color-selector>
 
                   <price-slider
                     v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -300,6 +312,7 @@
 
                         <div v-else>
                           <search-filter-data
+                            v-if="facetsitem.field !== 'color'"
                             v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                             class="col-xs-12 mb15"
                             :id="valuesitem.label+index+valuesitem.count"
@@ -308,6 +321,17 @@
                           >
                             {{ valuesitem.label }} ({{ valuesitem.count }})
                           </search-filter-data>
+
+                           <filter-color-selector
+                            v-if="facetsitem.field === 'color'"
+                            v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                            :id="valuesitem.label+index+valuesitem.count"
+                            :field-type="facetsitem.field"
+                            v-model="valuesitem.active"
+                            :label="valuesitem.label"
+                            @click="setFilterData (facetsitem, valuesitem)"
+                          >
+                           </filter-color-selector>
 
                           <price-slider
                             v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -375,6 +399,7 @@ import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Accordion from 'theme/components/theme/Accordion'
 import Columns from '../components/core/Columns.vue'
+import filterColorSelector from 'src/modules/search-spring-search/components/ColorSelector';
 
 export default {
   name: 'SplashScreen',
@@ -386,7 +411,8 @@ export default {
     SearchFilterData,
     PriceSlider,
     Accordion,
-    Columns
+    Columns,
+    filterColorSelector
   },
   mixins: [onBottomScroll],
   computed: {

@@ -175,6 +175,7 @@
 
                 <div v-else>
                   <search-checkbox
+                   v-if="facetsitem.field !== 'color'"
                     v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
@@ -184,6 +185,17 @@
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
                   </search-checkbox>
+
+                  <filter-color-selector
+                      v-if="facetsitem.field === 'color'"
+                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                      :id="valuesitem.label+index+valuesitem.count"
+                      :field-type="facetsitem.field"
+                      v-model="valuesitem.active"
+                      :label="valuesitem.label"
+                      @click="setFilterData (facetsitem, valuesitem)"
+                    >
+                    </filter-color-selector>
 
                   <price-slider
                     v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -298,19 +310,30 @@
                   <div v-else>
                     <search-checkbox
                       v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                      v-if="facetsitem.field !== 'color'"
                       class="col-xs-12 mb15"
                       :id="valuesitem.label+index+valuesitem.count"
                       :field-type="facetsitem.field"
                       v-model="valuesitem.active"
                       @click="setFilterData (facetsitem, valuesitem)"
                     >
-                      <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + valuesitem.label.toLowerCase() +'.png'" 
-                      @error="imgUrlAlt" alt="" v-if="facetsitem.field === 'color'" >
-                      <span v-else>
+                      <!-- <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + valuesitem.label.toLowerCase() +'.png'" 
+                      @error="imgUrlAlt" alt="" v-if="facetsitem.field === 'color'" > -->
+                      <span>
                         {{ valuesitem.label }} ({{ valuesitem.count }})
                       </span>
-                      
                     </search-checkbox>
+
+                    <filter-color-selector
+                      v-if="facetsitem.field === 'color'"
+                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                      :id="valuesitem.label+index+valuesitem.count"
+                      :field-type="facetsitem.field"
+                      v-model="valuesitem.active"
+                      :label="valuesitem.label"
+                      @click="setFilterData (facetsitem, valuesitem)"
+                    >
+                    </filter-color-selector>
 
                     <price-slider
                       v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -374,6 +397,7 @@ import NoScrollBackground from 'theme/mixins/noScrollBackground';
 import SearchCheckbox from 'src/modules/search-spring-search/components/genericSelectFilterItem';
 import PriceSlider from 'src/modules/search-spring-search/components/PriceSlider';
 import BaseSelect from 'src/modules/search-spring-search/components/BaseSelect';
+import filterColorSelector from 'src/modules/search-spring-search/components/ColorSelector';
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapState, mapGetters, mapActions } from 'vuex'
@@ -389,6 +413,7 @@ export default {
     ButtonFull,
     BaseSelect,
     SearchCheckbox,
+    filterColorSelector,
     PriceSlider,
     Accordion,
     Breadcrumbs,

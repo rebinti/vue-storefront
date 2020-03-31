@@ -176,6 +176,7 @@
 
                 <div v-else>
                   <search-checkbox
+                   v-if="facetsitem.field !== 'color'"
                     v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
@@ -184,6 +185,17 @@
                   >
                     {{ valuesitem.label }} ({{ valuesitem.count }})
                   </search-checkbox>
+
+                   <filter-color-selector
+                      v-if="facetsitem.field === 'color'"
+                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                      :id="valuesitem.label+index+valuesitem.count"
+                      :field-type="facetsitem.field"
+                      v-model="valuesitem.active"
+                      :label="valuesitem.label"
+                      @click="setFilterData (facetsitem, valuesitem)"
+                    >
+                    </filter-color-selector>
 
                   <price-slider
                     v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -297,6 +309,7 @@
 
                   <div v-else>
                     <search-checkbox
+                     v-if="facetsitem.field !== 'color'"
                       v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                       class="col-xs-12 mb15"
                       :id="valuesitem.label+index+valuesitem.count"
@@ -305,6 +318,17 @@
                     >
                       {{ valuesitem.label }} ({{ valuesitem.count }})
                     </search-checkbox>
+
+                     <filter-color-selector
+                      v-if="facetsitem.field === 'color'"
+                      v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
+                      :id="valuesitem.label+index+valuesitem.count"
+                      :field-type="facetsitem.field"
+                      v-model="valuesitem.active"
+                      :label="valuesitem.label"
+                      @click="setFilterData (facetsitem, valuesitem)"
+                    >
+                    </filter-color-selector>
 
                     <price-slider
                       v-if="priceSliderData && priceSliderData.type && priceSliderData.type === 'slider' && facetsitem.type === 'slider'"
@@ -371,6 +395,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import Accordion from 'theme/components/theme/Accordion'
 import Breadcrumbs from '../components/core/Breadcrumbs.vue'
 import Columns from '../components/core/Columns.vue'
+import filterColorSelector from 'src/modules/search-spring-search/components/ColorSelector';
 
 // import searchSpringCategory from 'src/modules/search-spring-category/mixins/searchSpringCategory';
 
@@ -392,7 +417,8 @@ export default {
     PriceSlider,
     Accordion,
     Breadcrumbs,
-    Columns
+    Columns,
+    filterColorSelector
   },
   mixins: [onBottomScroll],
 
@@ -678,7 +704,7 @@ export default {
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
       }
-      this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
+      this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.label=' + routeString)
       this.$bus.$emit('reset-price-slider');
       this.showNotificationLoader(true);
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
