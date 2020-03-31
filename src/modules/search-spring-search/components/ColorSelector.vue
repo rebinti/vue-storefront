@@ -59,6 +59,7 @@ export default {
 
     &.active {
       @apply border-black opacity-100;
+      border: 2px solid #222;
     }
 
     &.out-of-stock {
@@ -72,6 +73,9 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%)
+  }
+  div.clr_img_inner img{
+    border-radius: 20px;
   }
 
 
