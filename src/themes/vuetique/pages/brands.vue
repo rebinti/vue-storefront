@@ -152,6 +152,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .brand-box{
+    height:auto;
+    min-height: 125px;
+  }
   .brand-box div{
     min-height: 118px;
     border: 1px solid #CCC;
@@ -214,7 +218,7 @@ export default {
 
   .brand-image {
     margin: 0 auto;
-    border-radius: 50%;
+    // border-radius: 50%;
     margin-bottom: 12px;
   }
 
