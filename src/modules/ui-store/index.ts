@@ -32,7 +32,9 @@ const store = {
     seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0},
     defaultColumnMobile: 2,
     yoptoProduct: null,
-    brandsList: []
+    brandsList: [],
+    brandSearchText: '',
+    brandSelectedChar: ''
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -97,6 +99,10 @@ const store = {
     },
     setBrandList (state, data) {
       state.brandsList = data;
+    },
+    setBrandsFilters (state, data) {
+      state.brandSearchText = data.selText;
+      state.brandSelectedChar = data.selChar;
     }
   },
   actions: {
@@ -121,7 +127,7 @@ const store = {
           query = query.applyFilter({key: key, value: {'eq': value}})
         }
         if (includeFields === null) {
-          includeFields = config.brand.includeFields;
+          // includeFields = config.brand.includeFields;
         }
         return quickSearchByQuery({ query, entityType: 'brand', excludeFields, includeFields })
           .then((resp) => {
@@ -131,6 +137,9 @@ const store = {
           .catch(err => {
             Logger.error(err, 'ui/brands')()
           })
+    },
+    setBrandsFiltersAction({commit}, state) {
+      commit('setBrandsFilters', state)
     },
   }
 }

@@ -7,11 +7,11 @@
              <div class="row">
                 <div class="col-12" style="margin-top: 30px;">
                   <button type="button" class="all-brand-button" @click="clearSort" >All Brands</button>
-                  <input type="text" class="search-text" v-model="search" placeholder="Search" />
+                  <input type="text" @input="inputEvent" class="search-text" v-model="search" placeholder="Search" />
                 </div>
               </div>
             <div class="row" style="margin-top: 30px;">          
-                  <div :class="['char-box', disableBrandsChar(char) ? 'disable-char-box' : '']" v-for="(char,index) in charList" :key="index"
+                  <div :class="['char-box', disableBrandsChar(char) ? 'disable-char-box' : char === selectedBrandChar ? 'active-char' : '']" v-for="(char,index) in charList" :key="index"
                   @click="sortbrands(char)">
                       <p> 
                           {{char}}
@@ -22,16 +22,19 @@
 
           <div class="container col-12" style="margin-top: 30px;margin-bottom: 50px;">
            <div class="row" v-if="visibleProducts.length > 0" > 
-                <div class="col-2 brand-box" v-for="brand in visibleProducts" :key="brand.id">
-                    <p> 
-                      <router-link
-                        class="menu-link"
-                        :to="localizedRoute('/brands/' + brand.slug)"
-                        exact>
-                        {{ brand.slug }}
-                      </router-link>
+             <router-link
+                class="col-2 brand-box"
+                v-for="brand in visibleProducts" :key="brand.id"
+                :to="localizedRoute('/brands/' + brand.slug)"
+                exact>
+                <div>
+                  <img v-if="brand.image" :src="imagesPath + brand.image" alt="" 
+                      width="50px" height="50px" class="brand-image" />
+                  <p class="brand-name" :class="[!brand.image ? 'no-image' : '']">
+                    {{ brand.slug }}
                     </p>
                 </div>
+              </router-link>
            </div>
 
           <div class="row" v-if="visibleProducts.length ===0 && brandsLoadedFlag" > 
@@ -55,6 +58,7 @@ export default {
   data () {
     return {
       search: '',
+      imagesPath: config.brand.imageUrl,
       alphabetsList : [],
       brandsLoadedFlag: false,
       selectedBrandChar: '',
@@ -80,6 +84,8 @@ export default {
   computed: {
      ...mapState({
       brandsList: state => state.ui.brandsList,
+      brandSearchText:  state => state.ui.brandSearchText,
+      brandSelectedChar:  state => state.ui.brandSelectedChar
     }),
     // ...mapGetters('ui', ['getBrandsList']),
     alphabetList() {
@@ -105,12 +111,14 @@ export default {
     },
   },
   mounted () {
-      console.log('char', Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)))
+      // console.log('char', Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)))
   },
   methods: {
     async getBrandsData() {
-      if(this.brandsList.length > 0) { 
+      if (this.brandsList.length > 0) { 
         this.brandsLoadedFlag = true;
+         this.search =  this.brandSearchText;
+         this.selectedBrandChar =  this.brandSelectedChar;
         return; 
       }
       this.$store.dispatch('ui/getBrandList', {
@@ -123,14 +131,19 @@ export default {
    sortbrands (brandChar) {
      if (this.disableBrandsChar(brandChar)) return;
      this.selectedBrandChar = brandChar;
+     this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: this.search, selChar: brandChar });
    },
    clearSort () {
       this.selectedBrandChar = '';
       this.search = '';
+      this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: '', selChar: '' });
    },
    disableBrandsChar (brandChar) {
      return !this.brandsList.some(val => val.slug.charAt(0).toUpperCase() === brandChar);
-   }
+   },
+   inputEvent ($event) {
+      this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: $event.target.value, selChar: this.selectedBrandChar });
+    }
   },
   destroyed () {
    
@@ -140,8 +153,8 @@ export default {
 
 <style lang="scss" scoped>
   .brand-box {
-    min-height: 70px;
-    border: 1px solid;
+    min-height: 118px;
+    border: 1px solid #CCC;
     margin-right: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -193,6 +206,24 @@ export default {
     font-size: 16px;
     font-weight: 500;
     margin-top: 15px;
+  }
+  .active-char {
+    border: 1px solid black;
+    padding-top: 1px;
+  }
+
+  .brand-image {
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-bottom: 12px;
+  }
+
+  .brand-name {
+    margin-bottom: 10px;
+  }
+
+  .no-image {
+    margin-top: 20px;
   }
 
 </style>
