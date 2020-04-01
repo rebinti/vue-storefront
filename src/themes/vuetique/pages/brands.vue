@@ -152,7 +152,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .brand-box {
+  .brand-box div{
     min-height: 118px;
     border: 1px solid #CCC;
     margin-right: 10px;
