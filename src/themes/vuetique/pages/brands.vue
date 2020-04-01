@@ -29,7 +29,7 @@
                 exact>
                 <div>
                   <img v-if="brand.image" :src="imagesPath + brand.image" alt="" 
-                      width="50px" height="50px" class="brand-image" />
+                      width="150px" height="150px" class="brand-image" />
                   <p class="brand-name" :class="[!brand.image ? 'no-image' : '']">
                     {{ brand.slug }}
                     </p>
