@@ -56,7 +56,7 @@
 
               <div class="mob_headline_out">
                   <div class="mob_headline">
-                    <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;">   
+                    <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
                       <router-link
                           class="menu-link"
                           :to="localizedRoute('/brands/' + getBrandLabelDetails.label)"
@@ -194,7 +194,7 @@
 
 
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
-          <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;">   
+          <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
             <router-link
                 class="menu-link"
                 :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
@@ -533,7 +533,11 @@ export default {
   directives: { focusClean },
   computed: {
     getBrandLabelDetails () {
-       return this.attributesByCode.label.options.find(val => val.value == this.product.label)
+      if (this.attributesByCode && this.attributesByCode.label) {
+         return this.attributesByCode.label.options.find(val => val.value == this.product.label)
+      } else {
+         return null
+      }
     }
   },
   methods: {
