@@ -130,12 +130,6 @@ export default {
    },
    disableBrandsChar (brandChar) {
      return !this.brandsList.some(val => val.slug.charAt(0).toUpperCase() === brandChar);
-     
-    //  {
-    //       if (!this.alphabetsList.includes(val.slug.charAt(0).toUpperCase())) {
-    //         this.alphabetsList.push(val.slug.charAt(0).toUpperCase())
-    //       }
-    //   })
    }
   },
   destroyed () {
