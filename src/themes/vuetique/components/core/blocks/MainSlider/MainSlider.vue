@@ -75,7 +75,7 @@ export default {
     //this.updateSliderData(sliderData.web)
   },
   destroyed () {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize' , null);
   }
 }
 </script>

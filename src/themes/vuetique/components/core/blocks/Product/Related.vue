@@ -11,7 +11,7 @@
       </header>
     </div>
     <div class="text-center">
-      <product-listing columns="4" :products="product.related[type]" />
+      <product-listing columns="4" :products="product.related[type].slice(0,8)" />
     </div>
   </section>
 </template>
@@ -73,7 +73,7 @@ export default {
 
       this.$store.dispatch('product/list', {
         query: relatedProductsQuery,
-        size: 8,
+        size: 20,
         prefetchGroupProducts: false,
         updateState: false
       }).then((response) => {

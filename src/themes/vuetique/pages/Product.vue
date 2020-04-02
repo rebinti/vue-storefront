@@ -252,6 +252,28 @@
                 <div class="error" v-if="product.errors && Object.keys(product.errors).length > 0">
                   {{ product.errors | formatProductMessages }}
                 </div>
+                <!-- Color swatch products Links -->
+                <div v-if="colorSwatchRelateProduct.length > 0">
+                  <p class="font-bold mb-4">Color: </p>
+                    <router-link
+                        class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
+                        :to="productLink(prod)"
+                        data-testid="productLink"
+                        v-for="prod in colorSwatchRelateProduct" :key="prod.id"
+                        v-if=" prod.colorSwatch"
+                      >
+                        <button 
+                            :aria-label="$t('Select color ') + prod.colorSwatch.label"
+                          >
+                          <div class="clr_img_out">
+                            <div class="clr_img_inner">
+                            <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                                              @error="imgUrlAlt" alt="" >
+                            </div>
+                          </div>
+                        </button>
+                      </router-link>
+                  </div>
                 <div
                   class="relative"
                   v-for="(option, index) in product.configurable_options"
@@ -500,6 +522,8 @@ import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewe
 import focusClean from 'theme/components/theme/directives/focusClean'
 import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
 import QtyInput from 'theme/components/theme/QtyInput'
+import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
+import { currentStoreView } from '@vue-storefront/core/lib/multistore'
 
 export default {
   components: {
@@ -527,7 +551,8 @@ export default {
     return {
       detailsOpen: false,
       detailsAccordion: null,
-      currentGalleryPage: 0
+      currentGalleryPage: 0,
+      colorSwatchRelateProduct: []
     }
   },
   directives: { focusClean },
@@ -589,7 +614,38 @@ export default {
             return ''
           }
        }
-    }
+    },
+    imgUrlAlt(event) {
+       event.target.src = "/assets/colour/multi.png"
+    },
+    getRelatedProduct (relatedData) { 
+    // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
+    if (relatedData && relatedData.key !== 'related') return
+     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
+      if (relatedProd.length > 0 && this.attributesByCode.color) {
+          relatedProd.map(val =>  {
+            if(val.color && this.attributesByCode.color.options.some(code =>  parseInt(code.value) === val.color)) {
+              val.colorSwatch = this.attributesByCode.color.options.find(code =>  parseInt(code.value) === val.color)
+              return val
+            } else {
+              return val
+            }
+          })
+          this.colorSwatchRelateProduct = relatedProd;
+      } else {
+         this.colorSwatchRelateProduct = [];
+      }
+    },
+    productLink (product) {
+      return formatProductLink(product, currentStoreView().storeCode)
+    },
+
+  },
+  beforeMount () {
+    this.$bus.$on('product-after-related', this.getRelatedProduct)
+   },
+  destroyed () {
+    this.$bus.$off('product-after-related')
   }
 }
 </script>
@@ -889,6 +945,45 @@ export default {
   .mob_p_cart_list{
     padding-top: 20px;
   }
+
+
+/* Colour swatch css */
+  .color {
+    width: 40px;
+    height: 40px;
+
+    &.active {
+      @apply border-black opacity-100;
+      border: 2px solid #222;
+    }
+
+    &.out-of-stock {
+       background: #c5c5c5;
+    }
+  }
+
+  .color-inside {
+    width: 30px;
+    height: 30px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%)
+  }
+  div.clr_img_inner img{
+    border-radius: 20px;
+  }
+
+
+@media (max-width: 576px) {
+
+  .mobile_filter h5.Accordion__trigger{
+    color:#000;
+    font-size:18px;
+    font-weight: 600;
+  }
+
+
+}
 
 }
 
