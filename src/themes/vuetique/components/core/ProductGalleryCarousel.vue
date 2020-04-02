@@ -338,6 +338,15 @@ img[lazy=loaded] {
   }  */
 
 }
+@media (max-width: 3000px) {
+  .hooper-slide .product-image-container img{
+      width: 640px;
+      height: 960px;
+  }      
+  .hooper {
+    height: 960px;
+  }      
+}
 @media (max-width: 2560px) {
   .hooper-slide .product-image-container img{
       width: 640px;

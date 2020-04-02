@@ -23,7 +23,7 @@
           <div class="container col-12" style="margin-top: 30px;margin-bottom: 50px;">
            <div class="row" v-if="visibleProducts.length > 0" > 
              <router-link
-                class="col-2 brand-box"
+                class="lg:col-2 md:col-3 col-4 brand-box"
                 v-for="brand in visibleProducts" :key="brand.id"
                 :to="localizedRoute('/brands/' + brand.slug)"
                 exact>
