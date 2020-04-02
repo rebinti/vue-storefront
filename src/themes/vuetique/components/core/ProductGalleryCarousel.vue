@@ -339,6 +339,10 @@ img[lazy=loaded] {
 
 }
 @media (max-width: 2560px) {
+  .hooper-slide{
+      width: 607px;
+      height: 910.5px;
+  }   
   .hooper-slide .product-image-container img{
       width: 607px;
       height: 910.5px;
