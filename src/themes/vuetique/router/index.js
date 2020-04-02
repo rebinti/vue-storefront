@@ -3,6 +3,7 @@ import config from 'config'
 // import SplashScreen from 'theme/pages/SplashScreen'
 import Brands from 'theme/pages/brands'
 import BrandsCategory from 'theme/pages/brandsCategory'
+import SearchSpringSearch from 'theme/pages/SearchSpringSearch'
 
 const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
@@ -19,7 +20,7 @@ const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'the
 const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData')
 
 const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin')
-const SplashScreen = () => import(/* webpackChunkName: "vsf-splash" */ 'theme/pages/SplashScreen')
+// const SearchSpringSearch = () => import(/* webpackChunkName: "vsf-splash" */ 'theme/pages/SearchSpringSearch')
 
 // const Brands = () => import(/* webpackChunkName: "vsf-brands" */ 'theme/pages/brands')
 // const BrandsCategory = () => import(/* webpackChunkName: "vsf-brand-category" */ 'theme/pages/brandsCategory')
@@ -53,7 +54,7 @@ let routes = [
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
 
-  { name: 'mobile-splash', path: '/search-spring', component: SplashScreen },
+  { name: 'search-spring', path: '/search', component: SearchSpringSearch },
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
   { name: 'brands', path: '/brands', component: Brands },
   { name: 'brands-category', path: '/brands/:brandName', component: BrandsCategory }

@@ -5,8 +5,8 @@
   >
       <router-link
       class="block no-underline product-link"
-      :to="'/search-spring'"
-      data-testid="productLink"
+      :to="'/search'"
+      data-testid="search"
     >
     <div class="flex items-center">
       <base-input

@@ -623,15 +623,11 @@ export default {
     if (relatedData && relatedData.key !== 'related') return
      let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
-          relatedProd.map(val =>  {
-            if(val.color && this.attributesByCode.color.options.some(code =>  parseInt(code.value) === val.color)) {
-              val.colorSwatch = this.attributesByCode.color.options.find(code =>  parseInt(code.value) === val.color)
+          this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
+          .map(val => { 
+              val.colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === val.color)
               return val
-            } else {
-              return val
-            }
-          })
-          this.colorSwatchRelateProduct = relatedProd;
+            });
       } else {
          this.colorSwatchRelateProduct = [];
       }

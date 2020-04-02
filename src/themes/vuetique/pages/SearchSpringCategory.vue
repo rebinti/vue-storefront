@@ -458,7 +458,7 @@ export default {
   },
 
   beforeMount () {
-    console.log('beforeMount storee', this.$store.state.searchSpringCategory)
+    // console.log('beforeMount storee', this.$store.state.searchSpringCategory)
      if(this.getStoredCurrentRouterPath !== this.$route.path ) {
         this.searchDataInSearchSpring();
       } else {
@@ -476,7 +476,7 @@ export default {
     '$route': 'validateRouteCategory'
   },
   mounted () {
-    console.log('searchSpringCategory storee', this.$store.state.searchSpringCategory)
+    // console.log('searchSpringCategory storee', this.$store.state.searchSpringCategory)
     // this.searchDataInSearchSpring();
     if (this.filterData && this.filterData.length > 0) {
        // this.searchedValue = this.filterData[0].split('=')[1];
@@ -497,7 +497,7 @@ export default {
        event.target.src = "/assets/colour/multi.png"
     }, 
     validateRouteCategory () {
-        console.log('validateRouteCategory',this.$route.path)
+        // console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;
         this.searchDataInSearchSpring();
     },
@@ -519,7 +519,7 @@ export default {
           this.signal = this.controller.signal; 
         }
         const searchResults = await this.$store.dispatch('searchSpringCategory/searchInSearchSpringPlatform', {filterData: this.filterData, signal: this.signal })
-        console.log('Search Spring Results', searchResults);
+        // console.log('Search Spring Results', searchResults);
         // if (this.squery.length < 2) {
         //     if (this.searchedValue.length < 2) {
         //       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
@@ -531,7 +531,7 @@ export default {
           searchResults.results.filter(val => {
             prodSku.push(val.sku);
           });
-          console.log('last data', prodSku);
+          // console.log('last data', prodSku);
           await this.getDataFromElastic(prodSku, onScroll);
           this.paginationLoader = false;
           this.searcingLoaderFlag = false;
@@ -546,7 +546,7 @@ export default {
             }, 100);
             
             // this.sortingFilterOptions = searchResults.sorting.options;
-            console.log('this.priceSliderData', this.priceSliderData);
+            // console.log('this.priceSliderData', this.priceSliderData);
           }
           this.$store.dispatch('searchSpringCategory/addSearchSpringSearchResult', searchResults).then(res => {
               // this.searchedValue = this.filterData[0].split('=')[1];
@@ -564,7 +564,7 @@ export default {
           });
           this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
           this.paginationLoader = false;
-          console.log('else  erorrrrrr')
+          // console.log('else  erorrrrrr')
 
           if (!abortApiCallFlag || searchResults.includes('Failed to fetch')) {
             this.searcingLoaderFlag = false;
@@ -574,7 +574,7 @@ export default {
         // console.log('this.searchRes', this.searchRes);
       } catch (e) { 
         this.$bus.$emit('notification-progress-stop') 
-        console.log('sec erorrrrrr', e)
+        // console.log('sec erorrrrrr', e)
         // this.searcingLoaderFlag = false;
         this.paginationLoader = false;
         }
@@ -585,10 +585,10 @@ export default {
       query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
         'product/list',
-        { query, start: 0, size: searchedData.length, updateState: true },
+        { query, start: 0, size: searchedData.length, updateState: false },
         { root: true }
       );
-      console.log('Es results', items);
+      // console.log('Es results', items);
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
       );
@@ -597,7 +597,7 @@ export default {
     },
 
     searchDataInSearchSpring (squerydata=null) {
-      console.log('this.$route.params.slug', this.$route ,this.$route.params.slug);
+      // console.log('this.$route.params.slug', this.$route ,this.$route.params.slug);
       let routeString = this.$route.path.replace('-', ' ');
       routeString = routeString.replace('/','').toLowerCase()
                       .split('/')
@@ -608,7 +608,7 @@ export default {
                       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                       .join(' ');
       routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
-      console.log('routeString', routeString);
+      // console.log('routeString', routeString);
       this.searchedValue =  routeString
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
@@ -621,13 +621,13 @@ export default {
     },
 
     setFilterData (facetssection, item) {
-      console.log('setFilterData', facetssection, item);
+      // console.log('setFilterData', facetssection, item);
       if (facetssection.field === 'category_hierarchy') {
         if ( this.findIndexInFilterItems ('filter.category_hierarchy') ) {
           this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy')
         }
         this.$store.dispatch('searchSpringCategory/addFilterItems','filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
-        console.log('setFilterData =>>>', this.filterData);
+        // console.log('setFilterData =>>>', this.filterData);
       } else {
         if ( this.filterData.includes('filter.' + facetssection.field + '=' + encodeURIComponent(item.value))) {
           this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
@@ -638,7 +638,7 @@ export default {
               encodeURIComponent(item.value))
         }
       }
-      console.log(' this.filterData', this.filterData);
+      // console.log(' this.filterData', this.filterData);
       this.showNotificationLoader();
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -651,7 +651,7 @@ export default {
           this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy')
         }
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value))
-        console.log('setFilterData =>>>', this.filterData);
+        // console.log('setFilterData =>>>', this.filterData);
         this.showNotificationLoader();
         // this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
@@ -659,7 +659,7 @@ export default {
     },
 
     setCategoryFilterHistory (item, index = 0) {
-      console.log('this.categoryHierarchy', this.categoryHierarchy, index);
+      // console.log('this.categoryHierarchy', this.categoryHierarchy, index);
       if (item.active) { return; }
       if (item && item.type === 'view all') {
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
@@ -667,7 +667,7 @@ export default {
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
         this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', this.categoryHierarchy.filter((val, i) => i < index))
         this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', {...item, field: item.field, active: true})
-        console.log('this.categoryHierarchy pushed', this.categoryHierarchy);
+        // console.log('this.categoryHierarchy pushed', this.categoryHierarchy);
       }
 
       if ( this.findIndexInFilterItems ('filter.category_hierarchy')) {
@@ -676,7 +676,7 @@ export default {
       if (item && item.type !== 'view all') {
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
       }
-      console.log('setFilterData =>>>', this.filterData);
+      // console.log('setFilterData =>>>', this.filterData);
       this.showNotificationLoader();
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -684,7 +684,7 @@ export default {
     },
 
     removeFilterFlag (item) {
-      console.log('removeFilterFlag', item);
+      // console.log('removeFilterFlag', item);
       if (item.field === 'final_price') {
         if ( this.findIndexInFilterItems ('filter.final_price.low')) {
           this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.final_price.low')
@@ -704,7 +704,7 @@ export default {
         // this.$bus.$emit('notification-progress-start', 'Please wait...');
         this.getSearchData();
       }
-      console.log('this.filterData', this.filterData);
+      // console.log('this.filterData', this.filterData);
     },
 
     clearAllFilter () {
@@ -720,7 +720,7 @@ export default {
                       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                       .join(' ');
       routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
-      console.log('routeString', routeString);
+      // console.log('routeString', routeString);
       this.searchedValue =  routeString
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
@@ -733,7 +733,7 @@ export default {
     },
 
     priceSliderChanged (range) {
-      console.log('priceSliderChanged', range);
+      // console.log('priceSliderChanged', range);
       this.$store.dispatch('searchSpringCategory/set_priceSliderActiveRange', range)
       setTimeout(() => {
           this.$bus.$emit('reset-active-price-slider')
@@ -746,7 +746,7 @@ export default {
       }
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.final_price.low=' + range.from)
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.final_price.high=' + range.to)
-      console.log('this.filterData', this.filterData);
+      // console.log('this.filterData', this.filterData);
       this.showNotificationLoader();
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -758,7 +758,7 @@ export default {
       }
       this.$store.dispatch('searchSpringCategory/set_sortingFilterSelected', value)
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'sort.' + value.split('$')[0] + '=' + value.split('$')[1])
-      console.log('sortingFilterChange', this.filterData)
+      // console.log('sortingFilterChange', this.filterData)
       this.showNotificationLoader();
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
@@ -776,7 +776,7 @@ export default {
     },
 
     resetAllFilterResult () {
-      console.log('resetAllFilterResult')
+      // console.log('resetAllFilterResult')
       this.$store.dispatch('searchSpringCategory/resetAllFilterResult');
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.squery = '';
@@ -839,27 +839,22 @@ export default {
      handleScroll (){
             const checkWindow = window !== undefined && window.scrollY;
             let offsety = window.pageYOffset;
-            console.log("offsety>>>>>>>>>",offsety);
             if (checkWindow && window.scrollY > 280) {
-              if(offsety > 10000){
+              if (offsety > 10000) {
                   this.fixedOrderPanel = false
-              }else{
+              } else {
                   this.fixedOrderPanel = true
               }
-              
             } else {
               this.fixedOrderPanel = false
           }
           let viewflag = this.checkfooterreached()
-          console.log("viewflag",viewflag)
-          
           // const footerheight = this.getdivheight('footer .bg-grey-lighter')
           // const newsletterheight = this.getdivheight('footer .news-letter')
           // const paydivheight = this.getdivheight('footer .mx-auto')
-          
-          if(viewflag==true){
+          if (viewflag==true) {
             document.querySelector( '.filterdiv' ).classList.add("footerreached");
-          }else{
+          } else {
             document.querySelector( '.filterdiv' ).classList.remove("footerreached");
           }
           
@@ -868,7 +863,7 @@ export default {
           const el = document.querySelector( '.news-letter' )
           const scroll = window.scrollY || window.pageYOffset
           const boundsTop = el.getBoundingClientRect().top + scroll
-          console.log('boundsTop', boundsTop)	
+          // console.log('boundsTop', boundsTop)	
           const viewport = {
             top: scroll,
             bottom: scroll + window.innerHeight,
@@ -877,8 +872,8 @@ export default {
             top: boundsTop,
             bottom: boundsTop + el.clientHeight,
             }
-          console.log('bounds', bounds)
-          console.log('viewport', viewport)
+          // console.log('bounds', bounds)
+          // console.log('viewport', viewport)
           return ( bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom )
             || ( bounds.top <= viewport.bottom && bounds.top >= viewport.top );
     },
