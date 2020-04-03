@@ -588,7 +588,7 @@ export default {
       detailsAccordion: null,
       currentGalleryPage: 0,
       colorSwatchRelateProduct: [],
-      getProductId: '145954'
+      getProductId: 'null'
     }
   },
   directives: { focusClean },
@@ -600,6 +600,15 @@ export default {
          return null
       }
     }
+  },
+  mounted () {
+    console.log('window.StampedFn', window.StampedFn)
+      // setTimeout(() => {
+      //   window.StampedFn.reloadUGC()
+      //   window.StampedFn.loadWidget()
+      //   window.StampedFn.loadBadges()
+      //   window.StampedFn.loadDisplayWidgets()
+      // }, 100);
   },
   methods: {
     getBrandUrlPath (brandName) {
@@ -657,6 +666,20 @@ export default {
     getRelatedProduct (relatedData) { 
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return
+
+     var aaaa = ['145954' , '145961' ,'161420', '161445', '161524', '145965'] 
+     this.getProductId = aaaa[Math.floor((Math.random() * 5))];
+      console.log('valueeeeeeeee', this.getProductId)
+      // window.StampedFn.reloadUGC()
+      // this.$forceUpdate();
+     setTimeout(() => {
+          window.StampedFn.loadWidget()
+          window.StampedFn.loadBadges()
+          window.StampedFn.loadDisplayWidgets()
+          this.$forceUpdate();
+     }, 300);
+
+
      let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
