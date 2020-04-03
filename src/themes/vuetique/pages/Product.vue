@@ -70,7 +70,7 @@
                     <div class="text-grey text-sm sku_txt">
                       sku: {{ product.sku }}
                     </div>
-
+                    <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId"></span>
                   </div>
 
                   <div class="mob_price">
@@ -104,6 +104,30 @@
                     <div class="error" v-if="product.errors && Object.keys(product.errors).length > 0">
                       {{ product.errors | formatProductMessages }}
                     </div>
+
+                  <!--Mobile View Color swatch products Links -->
+                  <div v-if="colorSwatchRelateProduct.length > 0">
+                    <p class="font-bold mb-4">Color: </p>
+                      <router-link
+                          class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
+                          :to="productLink(prod)"
+                          data-testid="productLink"
+                          v-for="prod in colorSwatchRelateProduct" :key="prod.id"
+                          v-if=" prod.colorSwatch"
+                        >
+                          <button 
+                              :aria-label="$t('Select color ') + prod.colorSwatch.label"
+                            >
+                            <div class="clr_img_out">
+                              <div class="clr_img_inner">
+                              <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                                                @error="imgUrlAlt" alt="" >
+                              </div>
+                            </div>
+                          </button>
+                        </router-link>
+                    </div>
+
                     <div
                       class="relative mob_size_box" :class="{'only-single-item':product.configurable_options.length==1}"
                       v-for="(option, index) in product.configurable_options"
@@ -208,6 +232,7 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
+            <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId"></span>
 	<!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
@@ -217,9 +242,6 @@
          data-url="product.url_path"
          data-image-url="product.image">
 </div> -->
-
-
-
 
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
@@ -416,6 +438,19 @@
       </div>
     </section>
 
+    <section>
+       <div class="container my-4" style="margin-top:50px;margin-bottom:50px">
+                <div id="stamped-main-widget" 
+                  :data-product-id="getProductId" 
+                  :data-name="product.name" 
+                  :data-url="product.url_path" 
+                  :data-image-url="product.image" 
+                  :data-description="'Testing prduct'" 
+                  :data-product-sku="product.sku"> 
+                </div>
+      </div>
+    </section>
+
     <div class="container my-4">
       <div class="border-b border-grey-light mt-5 pb-5" />
 
@@ -552,7 +587,8 @@ export default {
       detailsOpen: false,
       detailsAccordion: null,
       currentGalleryPage: 0,
-      colorSwatchRelateProduct: []
+      colorSwatchRelateProduct: [],
+      getProductId: '145954'
     }
   },
   directives: { focusClean },
