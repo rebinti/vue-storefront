@@ -70,7 +70,7 @@
                     <div class="text-grey text-sm sku_txt">
                       sku: {{ product.sku }}
                     </div>
-                    <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId"></span>
+                    <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
                   </div>
 
                   <div class="mob_price">
@@ -232,7 +232,7 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
-            <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId"></span>
+            <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
 	<!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
@@ -439,7 +439,7 @@
     </section>
 
     <section>
-       <div class="container my-4" style="margin-top:50px;margin-bottom:50px">
+       <div class="container my-4" style="margin-top:50px;margin-bottom:50px" v-if="getProductId">
                 <div id="stamped-main-widget" 
                   :data-product-id="getProductId" 
                   :data-name="product.name" 
@@ -588,7 +588,7 @@ export default {
       detailsAccordion: null,
       currentGalleryPage: 0,
       colorSwatchRelateProduct: [],
-      getProductId: 'null'
+      getProductId: null
     }
   },
   directives: { focusClean },
@@ -677,7 +677,7 @@ export default {
           window.StampedFn.loadBadges()
           window.StampedFn.loadDisplayWidgets()
           this.$forceUpdate();
-     }, 300);
+     }, 400);
 
 
      let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
