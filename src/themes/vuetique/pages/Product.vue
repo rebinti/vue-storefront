@@ -609,6 +609,11 @@ export default {
       //   window.StampedFn.loadBadges()
       //   window.StampedFn.loadDisplayWidgets()
       // }, 100);
+
+    // addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
+    //       console.log('stamped:reviews:loaded', e);
+    //   });
+      
   },
   methods: {
     getBrandUrlPath (brandName) {
@@ -669,15 +674,17 @@ export default {
 
      var aaaa = ['145954' , '145961' ,'161420', '161445', '161524', '145965'] 
      this.getProductId = aaaa[Math.floor((Math.random() * 5))];
-      console.log('valueeeeeeeee', this.getProductId)
-      // window.StampedFn.reloadUGC()
-      // this.$forceUpdate();
+     console.log('getProductId value', this.getProductId)
+
+      window.StampedFn.reloadUGC()
+      this.$forceUpdate();
+
      setTimeout(() => {
           window.StampedFn.loadWidget()
           window.StampedFn.loadBadges()
           window.StampedFn.loadDisplayWidgets()
           this.$forceUpdate();
-     }, 400);
+     }, 1500);
 
 
      let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
