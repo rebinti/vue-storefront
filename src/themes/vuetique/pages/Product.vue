@@ -601,6 +601,9 @@ export default {
       }
     }
   },
+  beforeMount () {
+    this.$bus.$on('product-after-related', this.getRelatedProduct)
+   },  
   mounted () {
     console.log('window.StampedFn', window.StampedFn)
       // setTimeout(() => {
@@ -703,9 +706,6 @@ export default {
     },
 
   },
-  beforeMount () {
-    this.$bus.$on('product-after-related', this.getRelatedProduct)
-   },
   destroyed () {
     this.$bus.$off('product-after-related')
   }
@@ -806,10 +806,41 @@ export default {
      
 }
 @media (max-width: 1920px) {
- 
+  .details-section{
+    width: 461px;
+    height: 691px;
+    margin-right: 231px;
+  }  
+  .details-section h1{
+    font-size: 1.2rem;    
+    text-transform: uppercase;
+  }
+  div.price div span{
+    font-size: 18px;
+  } 
+  #product div.container .details-section{
+    margin-right: 233px;
+  } 
 }
 @media (max-width: 1440px) {
-    
+  .details-section{
+    width: 360px;
+    height: 540px;
+    margin-right: 231px;
+  }  
+  .details-section h1{
+    font-size: 1.2rem;    
+    text-transform: uppercase;
+  }
+  div.price div span{
+    font-size: 12x;
+  } 
+  #product div.container .details-section{
+    margin-right: 180px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    line-height: 1.5rem;    
+  }    
 }
 @media (max-width: 1024px) {
     
