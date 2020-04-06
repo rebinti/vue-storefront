@@ -603,6 +603,7 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('product-after-related', this.getRelatedProduct)
+    //  this.$bus.$on('product-after-load', this.refreshStampedReview)
    },  
   mounted () {
     console.log('window.StampedFn', window.StampedFn)
@@ -616,7 +617,7 @@ export default {
     // addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
     //       console.log('stamped:reviews:loaded', e);
     //   });
-      
+    // this.refreshStampedReview();
   },
   methods: {
     getBrandUrlPath (brandName) {
@@ -674,23 +675,8 @@ export default {
     getRelatedProduct (relatedData) { 
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return
-
-     var aaaa = ['145954' , '145961' ,'161420', '161445', '161524', '145965'] 
-     this.getProductId = aaaa[Math.floor((Math.random() * 5))];
-     console.log('getProductId value', this.getProductId)
-
-      window.StampedFn.reloadUGC()
-      this.$forceUpdate();
-
-     setTimeout(() => {
-          window.StampedFn.loadWidget()
-          window.StampedFn.loadBadges()
-          window.StampedFn.loadDisplayWidgets()
-          this.$forceUpdate();
-     }, 1500);
-
-
-     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
+    this.refreshStampedReview(); 
+    let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
           .map(val => { 
@@ -705,9 +691,50 @@ export default {
       return formatProductLink(product, currentStoreView().storeCode)
     },
 
+    refreshStampedReview () {
+     const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
+     this.getProductId = prod_ids[Math.floor((Math.random() * 5))];
+     console.log('Stamped getProductId value', this.getProductId)
+
+    let stampedContainer = document.querySelectorAll(".stamped-container");
+    if (stampedContainer.length > 0) {
+      stampedContainer.forEach(el => el.remove())
+    }
+
+    let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
+    if (stampedBadge.length > 0) {
+      stampedBadge.forEach(el => el.remove())
+    }
+
+    window.StampedFn.reloadUGC()
+    // this.$forceUpdate();
+
+     setTimeout(() => {
+           let stampedBadge = document.querySelectorAll(".stamped-badge");
+          if (stampedBadge.length > 0) {
+            stampedBadge.forEach(el => el.remove())
+          }
+
+          let elements = document.querySelectorAll(".stamped-container");
+          if (elements.length > 0) {
+            elements.forEach(el => el.remove())
+          }
+
+          window.StampedFn.reloadUGC()
+          
+          window.StampedFn.loadWidget()
+          window.StampedFn.loadBadges()
+          window.StampedFn.loadDisplayWidgets()
+          this.$forceUpdate();
+
+     }, 1500);
+
+    }
+
   },
   destroyed () {
     this.$bus.$off('product-after-related')
+    // this.$bus.$off('product-after-load')
   }
 }
 </script>
