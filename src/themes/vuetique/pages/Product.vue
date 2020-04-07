@@ -911,7 +911,7 @@ export default {
         padding-right: 1.5rem;        
         h1{
           font-size: 1.85rem;
-          line-height: 2rem;
+          line-height: 2.5rem;
           text-transform: uppercase;
         }
         div.price{
@@ -972,52 +972,48 @@ export default {
           line-height: 1.5rem;
           text-transform: uppercase;
         }
-        div{
+        div.price{
           .text-h1{
             font-size: 12px; 
-          }
-          .price{
-            font-size: 12px;
-            div{
-              span{
-                font-size: 12px;
-              }
-            }  
-          }
-        }            
+          }          
+          font-size: 12px;
+          div{
+            span{
+              font-size: 12px;
+            }
+          }            
+        }           
       }
     }
   }  
 }
 @media (max-width: 1024px) {
   #product{
-      .container{
-        .details-section{
-          width: 341px;
-          height: 511.5px;
-          margin-right: 40px!important;
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;        
-          h1{
-            font-size: 1rem;
-            line-height: 1.5rem;
-            text-transform: uppercase;
-          }
+    .container{
+      .details-section{
+        width: 341px;
+        height: 511.5px;
+        margin-right: 40px!important;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;        
+        h1{
+          font-size: 1rem;
+          line-height: 1.5rem;
+          text-transform: uppercase;
+        }
+        div.price{
+          .text-h1{
+            font-size: 12px; 
+          }          
+          font-size: 12px;
           div{
-            .text-h1{
-              font-size: 12px; 
-            }
-            .price{
+            span{
               font-size: 12px;
-              div{
-                span{
-                  font-size: 12px;
-                }
-              }  
             }
           }            
-        }
+        }           
       }
+    }
   }      
 }
 @media (max-width: 768px) {
