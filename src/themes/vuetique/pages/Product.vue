@@ -70,7 +70,7 @@
                     <div class="text-grey text-sm sku_txt">
                       sku: {{ product.sku }}
                     </div>
-                    <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+                    <span id="stamped-badge-mobile" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
                   </div>
 
                   <div class="mob_price">
@@ -232,7 +232,7 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
-            <span class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+            <span id="stamped-badge-web" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
 	<!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
@@ -603,10 +603,35 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('product-after-related', this.getRelatedProduct)
+
+    this.$bus.$on('product-before-load', this.changeProd)
+
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
+    document.addEventListener( 'stamped:reviews:loaded', function(e) {
+      console.log('Stampled addEventListener', e);
+
+      // document.getElementById("stamped-main-widget").contentWindow.location.reload(true);
+// id="stamped-badge-mobile"  stamped-main-widget
+      // document.getElementById("stamped-badge-mobile").contentWindow.location.reload(true);
+      // document.getElementById("stamped-badge-web").contentWindow.location.reload(true);
+
+      //  let stampedBadge = document.querySelectorAll(".stamped-badge");
+      //     if (stampedBadge.length > 0) {
+      //       stampedBadge.forEach(el => el.remove())
+      //     }
+
+      //     let elements = document.querySelectorAll(".stamped-container");
+      //     if (elements.length > 0) {
+      //       elements.forEach(el => el.remove())
+      //     }
+
+          // window.StampedFn.loadWidget()
+          // window.StampedFn.loadBadges()
+          // window.StampedFn.loadDisplayWidgets()
+    })
    },  
   mounted () {
-    console.log('window.StampedFn', window.StampedFn)
+    // console.log('window.StampedFn', window.StampedFn)
       // setTimeout(() => {
       //   window.StampedFn.reloadUGC()
       //   window.StampedFn.loadWidget()
@@ -675,11 +700,11 @@ export default {
     getRelatedProduct (relatedData) { 
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return;
-
+    // this.getProductId =  null
     const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-     this.getProductId = prod_ids[Math.floor((Math.random() * 5))];
-     console.log('Stamped getProductId value', this.getProductId)
-
+    this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
+    console.log('Stamped getProductId value', this.getProductId)
+    // this.$forceUpdate();
     let stampedContainer = document.querySelectorAll(".stamped-container");
     if (stampedContainer.length > 0) {
       stampedContainer.forEach(el => el.remove())
@@ -694,25 +719,27 @@ export default {
     // this.$forceUpdate();
 
      setTimeout(() => {
-           let stampedBadge = document.querySelectorAll(".stamped-badge");
-          if (stampedBadge.length > 0) {
-            stampedBadge.forEach(el => el.remove())
-          }
+          //  let stampedBadge = document.querySelectorAll(".stamped-badge");
+          // if (stampedBadge.length > 0) {
+          //   stampedBadge.forEach(el => el.remove())
+          // }
 
-          let elements = document.querySelectorAll(".stamped-container");
-          if (elements.length > 0) {
-            elements.forEach(el => el.remove())
-          }
+          // let elements = document.querySelectorAll(".stamped-container");
+          // if (elements.length > 0) {
+          //   elements.forEach(el => el.remove())
+          // }
 
-          window.StampedFn.reloadUGC()
+          // window.StampedFn.reloadUGC()
+
+          // window.StampedFn.reloadUGC()
           
           window.StampedFn.loadWidget()
           window.StampedFn.loadBadges()
           window.StampedFn.loadDisplayWidgets()
           this.$forceUpdate();
 
-     }, 1500);
-     
+     }, 800);
+
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
@@ -766,11 +793,18 @@ export default {
 
      }, 1500);
 
-    }
+    },
+    changeProd (val) {
+      console.log('changeProd changeProd changeProd', val)
+      if (val.route !== null) {
+        this.getProductId = null;
+      }
+    },
 
   },
   destroyed () {
     this.$bus.$off('product-after-related')
+    this.$bus.$off('product-before-load')
     // this.$bus.$off('product-after-load')
   }
 }
