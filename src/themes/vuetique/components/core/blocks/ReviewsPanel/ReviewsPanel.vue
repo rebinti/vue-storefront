@@ -11,7 +11,7 @@
         <use xlink:href="#close" />
       </svg>
     </button>
-       <h3>Product Review</h3>
+       <h3>Product Reviews</h3>
         <!-- <div v-if="yoptoProduct !== null"
           class="yotpo yotpo-main-widget"
           data-product-id="yoptoProduct.id"

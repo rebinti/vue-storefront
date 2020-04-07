@@ -49,7 +49,7 @@
           />
         </div>
       </slide>
-      <hooper-navigation slot="hooper-addons"></hooper-navigation>
+      <!-- <hooper-navigation slot="hooper-addons"></hooper-navigation> -->
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
     </hooper>
     <i
@@ -220,7 +220,7 @@ export default {
     this.checkWindowSize();    
   },
   destroyed () {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', null);
   }  
 }
 </script>
