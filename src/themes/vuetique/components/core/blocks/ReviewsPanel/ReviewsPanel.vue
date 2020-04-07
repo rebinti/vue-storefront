@@ -11,8 +11,8 @@
         <use xlink:href="#close" />
       </svg>
     </button>
-        Review yotpo panel Demo
-        <div v-if="yoptoProduct !== null"
+       <h3>Product Review</h3>
+        <!-- <div v-if="yoptoProduct !== null"
           class="yotpo yotpo-main-widget"
           data-product-id="yoptoProduct.id"
           data-price="yoptoProduct.price"
@@ -20,7 +20,16 @@
           data-name="yoptoProduct.name"
           data-url="yoptoProduct.url_path"
           data-image-url="yoptoProduct.image">
-        </div> 
+        </div>  -->
+
+         <div id="stamped-main-widget" 
+                  :data-product-id="yoptoProduct" 
+                  :data-name="'test'" 
+                  :data-url="'test'" 
+                  :data-image-url="'test'" 
+                  :data-description="'Testing prduct'" 
+                  :data-product-sku="'test'"> 
+          </div>
   </div>
 </template>
 
@@ -43,9 +52,43 @@ export default {
     }),
     isReviewPanelOpen () {
       console.log('state all data' , this.$store.state);
+          // let elements = document.querySelectorAll(".stamped-container");
+          // if (elements.length > 0) {
+          //   elements.forEach(el => el.remove())
+          // }
+          // window.StampedFn.reloadUGC()
+          // window.StampedFn.loadWidget()
+          // window.StampedFn.loadBadges()
+          // window.StampedFn.loadDisplayWidgets()
       return this.$store.state.ui.reviewPanel
     }
   },
+   mounted () {
+     console.log('yoptoProduct' , this.yoptoProduct);
+         let elements = document.querySelectorAll(".stamped-container");
+          if (elements.length > 0) {
+            elements.forEach(el => el.remove())
+          }
+          window.StampedFn.reloadUGC()
+          window.StampedFn.loadWidget()
+          window.StampedFn.loadDisplayWidgets()
+  },
+  //  watch: {
+  //   isReviewPanelOpen: {
+  //     handler () {
+  //      console.log('state all data--' , this.$store.state)
+  //      let elements = document.querySelectorAll(".stamped-container");
+  //         if (elements.length > 0) {
+  //           elements.forEach(el => el.remove())
+  //         }
+  //         window.StampedFn.reloadUGC()
+  //         window.StampedFn.loadWidget()
+  //         window.StampedFn.loadBadges()
+  //         window.StampedFn.loadDisplayWidgets()
+  //         this.$forceUpdate();
+  //     }
+  //   }
+  // },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
     closeReviewPanel () {

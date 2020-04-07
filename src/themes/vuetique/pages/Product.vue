@@ -70,7 +70,7 @@
                     <div class="text-grey text-sm sku_txt">
                       sku: {{ product.sku }}
                     </div>
-                    <span id="stamped-badge-mobile" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+                    <span id="stamped-badge-mobile"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
                   </div>
 
                   <div class="mob_price">
@@ -232,7 +232,7 @@
             <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
             </div>
-            <span id="stamped-badge-web" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+            <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
 	<!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
@@ -439,7 +439,7 @@
     </section>
 
     <section>
-       <div class="container my-4" style="margin-top:50px;margin-bottom:50px" v-if="getProductId">
+       <div class="container my-4" style="margin-top:50px;margin-bottom:50px;display:none;" v-if="getProductId">
                 <div id="stamped-main-widget" 
                   :data-product-id="getProductId" 
                   :data-name="product.name" 
@@ -667,7 +667,7 @@ export default {
       })
     },
     toggleReviewPanel () {
-      this.$store.dispatch('ui/updateYoptoProduct' , this.product)
+      // this.$store.dispatch('ui/updateYoptoProduct' , this.product)
       this.$store.dispatch('ui/toggleReviewPanel')
     },
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
@@ -704,6 +704,8 @@ export default {
     const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
     this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
     console.log('Stamped getProductId value', this.getProductId)
+    this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
+
     // this.$forceUpdate();
     let stampedContainer = document.querySelectorAll(".stamped-container");
     if (stampedContainer.length > 0) {
