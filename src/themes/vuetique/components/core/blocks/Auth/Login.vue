@@ -83,6 +83,10 @@
           {{ $t('Log in to your account') }}
         </button-full>
 
+         <!-- <div class="login_bx">
+             <span @click="logInWithFacebook"><img src="/assets/fcbk_login.png" alt=""></span>
+          </div> -->
+        
         <div class="text-center">
           {{ $t('or') }}
           <a href="#" @click.prevent="switchElem" data-testid="registerLink">
@@ -94,6 +98,9 @@
 
         </div>
       </form>
+
+      <facebook-sign-in></facebook-sign-in>
+      <google-sign-in></google-sign-in>
     </div>
   </div>
 </template>
@@ -104,6 +111,10 @@ import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import BaseCheckbox from '../Form/BaseCheckbox.vue'
 import BaseInput from '../Form/BaseInput.vue'
 import { required, email } from 'vuelidate/lib/validators'
+
+import  GoogleSignIn from "theme/components/core/blocks/Auth/GoogleLogin"
+import  FacebookSignIn from "theme/components/core/blocks/Auth/FacebookLogin"
+
 export default {
   mixins: [Login],
   validations: {
@@ -166,7 +177,9 @@ export default {
   components: {
     ButtonFull,
     BaseCheckbox,
-    BaseInput
+    BaseInput,
+    GoogleSignIn,
+    FacebookSignIn
   }
 }
 </script>

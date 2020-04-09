@@ -21,7 +21,9 @@
     "vue-swipe-actions": "^2.0.0-beta.19",
     "vuelidate": "^0.6.2",
     "vuex": "^3.0.1",
-    "vue-slider-component": "^2.8.10"
+    "vue-slider-component": "^2.8.10",
+    "facebook-login-vuejs": "^2.1.3",
+    "vue-google-login": "^2.0.3"
   },
   "publishConfig": {
     "access": "public"
