@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 45%;float: left;margin: 6px 25px 0 10px;">
+  <div class="fb-view">
       <!-- <facebook-login
             :appId="FBappId"
             @login="onLogin"
@@ -43,9 +43,7 @@ export default {
     getUserData() {
       this.FB.api('/me', 'GET', { fields: 'id,name,email,picture' },
         user => {
-
           console.log('User details from FB', user)
-
           this.$store.commit('ui/setAuthElem', 'set-social-login-password')
           // this.personalID = user.id;
           // this.email = user.email;
@@ -80,8 +78,7 @@ export default {
             setTimeout(() => {
               window.FB.api('/me' , 'GET', { fields: 'id,name,email,picture,gender' }, function(response) {
                 console.log('Good to see you, ***', response);
-                // This.$store.commit('ui/setAuthElem', 'set-social-login-password')
-                This.callCheckSocialLoginUser( response.email)
+                This.callCheckSocialLoginUser(response)
               });
             }, 100);
             // Now you can redirect the user or do an AJAX request to
@@ -100,12 +97,8 @@ export default {
               setTimeout(() => {
                 window.FB.api('/me' , 'GET', { fields: 'id,name,email,picture,gender' }, function(response) {
                   console.log('Good to see you, ', response);
-
-                //This.$store.commit('ui/setAuthElem', 'set-social-login-password')
                   This.callCheckSocialLoginUser(response)
                 });
-
-
               }, 100);
               // Now you can redirect the user or do an AJAX request to
               // a PHP script that grabs the signed request from the cookie.
@@ -151,17 +144,15 @@ export default {
           if (result.result === 'Email Not exist') {
               this.$store.commit('ui/setSocialLoginInfo', { type: 'facebook', social_data: fbData})
               this.$store.commit('ui/setAuthElem', 'set-social-login-password');
-
-
-
-
-
           } else if (result.result === 'Email exist') {
-
+              this.callSocialLogin(fbData);
           }
-
-
         }
+      }).catch(err => {
+        Logger.error(err, 'user')()
+        this.onFailure({ result: 'Unexpected authorization error. Check your Network conection.' })
+        // TODO Move to theme
+        this.$bus.$emit('notification-progress-stop')
       });
     },
 
@@ -178,8 +169,44 @@ export default {
         message: this.$t(result.result),
         action1: { label: this.$t('OK') }
       })
+    },
+
+    callSocialLogin (social_data) {
+      const socialData = { useremail: social_data.email,
+                           username: social_data.name,
+                           social_type : 'facebook' , 
+                           social_id: social_data.id 
+                           }
+      console.log('socialData Api', socialData);
+      this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'));
+      this.$store.dispatch('user/socialUserlogin', socialData).then((result) => {
+        this.$bus.$emit('notification-progress-stop', {})
+
+        if (result.code !== 200) {
+          this.onFailure(result)
+        } else {
+          this.onSuccess()
+          this.close()
+        }
+      }).catch(err => {
+        Logger.error(err, 'user')()
+        this.onFailure({ result: 'Unexpected authorization error. Check your Network conection.' })
+        // TODO Move to theme
+        this.$bus.$emit('notification-progress-stop')
+      })
+    },
+
+    close (e) {
+      if (e) localStorage.removeItem('redirect')
+      this.$bus.$emit('modal-hide', 'modal-signup')
     }
 
   }
 }
 </script>
+
+<style scoped>
+.login_box_out_web .fb-view {
+  width: 45%;float: left;margin: 6px 25px 0 10px;
+}
+</style>

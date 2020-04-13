@@ -7,8 +7,8 @@
       <h2 class="to-uppercase-text">{{ $t('Register') }}</h2>
     </header>
 
-    <div class="modal-content pt30 pb60 px65 cl-secondary">
-      <form @submit.prevent="register" novalidate>
+    <div class="modal-content pt30 pb60 px65 cl-secondary" style="padding-bottom: 80px;">
+      <form @submit.prevent="register" novalidate style="padding-bottom: 15px;">
         <base-input
           class="mb-5 tx_bx_out"
           type="email"
@@ -16,7 +16,6 @@
           autocomplete="email"
           v-model="email"
           @blur="$v.email.$touch()"
-          focus
           :placeholder="$t('E-mail address *')"
           :validations="[
             {
@@ -167,9 +166,15 @@
         </div>
       </form>
 
-      
-      <facebook-sign-in></facebook-sign-in>
-      <google-sign-in></google-sign-in>
+
+       <div class="login_box_out">
+           <facebook-sign-in></facebook-sign-in>
+            <google-sign-in></google-sign-in>
+        </div>
+        <div class="login_box_out_web">
+          <facebook-sign-in></facebook-sign-in>
+          <google-sign-in></google-sign-in>
+        </div>
 
     </div>
   </div>

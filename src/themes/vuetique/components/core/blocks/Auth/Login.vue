@@ -6,7 +6,7 @@
       </svg>
       <h2 class="to-uppercase-text">{{ $t('Login') }}</h2>
     </header>
-    <div class="modal-content">
+    <div class="modal-content" style="padding-bottom: 65px;">
       <div class="mobile-signup">
         <p>Dont have an account? 
           <b>  
@@ -16,12 +16,11 @@
             </p>
       </div>
 
-      <form @submit.prevent="login" novalidate>
+      <form @submit.prevent="login" novalidate style="padding-bottom: 15px;">
         <base-input
           class="mb-5 tx_bx_out"
           type="email"
           name="email"
-          focus
           v-model="email"
           @blur="$v.email.$touch()"
           :placeholder="$t('E-mail address *')"
@@ -67,17 +66,6 @@
           </div>
         </div>
 
-        <div class="login_box_out">
-
-          <div class="login_bx">
-             <a href="#"><img src="/assets/fcbk_login.png" alt=""/></a>
-          </div>
-           <div class="login_bx">
-             <a href="#"><img src="/assets/gle_login.png" alt=""/></a>
-          </div>
-
-        </div>
-
         <div class="l_g_rm">
         <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit">
           {{ $t('Log in to your account') }}
@@ -99,8 +87,22 @@
         </div>
       </form>
 
-      <facebook-sign-in></facebook-sign-in>
-      <google-sign-in></google-sign-in>
+
+        <div class="login_box_out">
+           <facebook-sign-in></facebook-sign-in>
+            <google-sign-in></google-sign-in>
+          <!-- <div class="login_bx">
+             <a href="#"><img src="/assets/fcbk_login.png" alt=""/></a>
+          </div>
+           <div class="login_bx">
+             <a href="#"><img src="/assets/gle_login.png" alt=""/></a>
+          </div> -->
+        </div>
+        <div class="login_box_out_web">
+          <facebook-sign-in></facebook-sign-in>
+          <google-sign-in></google-sign-in>
+        </div>
+      
     </div>
   </div>
 </template>

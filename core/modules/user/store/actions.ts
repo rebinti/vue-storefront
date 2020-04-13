@@ -119,10 +119,10 @@ const actions: ActionTree<UserState, RootState> = {
   },
 
   /**
-   * Social Login ---- user and return user profile and current token
+   * Social Login ---- check the user email exist in Magetho DB
    */
   async checkSocialLoginUser (context, { email }) {
-    let url =  "/api/user/socialemailexist";
+    let url = config.users.social_email_exist_endpoint // "/api/user/socialemailexist";
     if (config.storeViews.multistore) {
       url = adjustMultistoreApiUrl(url)
     }
@@ -134,6 +134,36 @@ const actions: ActionTree<UserState, RootState> = {
       },
       body: JSON.stringify( { socialemail: email } )
     }).then(resp => { return resp.json() })
+  },
+
+   /**
+   * Social Login ---- Passing user email and return user profile and current token
+   */
+  socialUserlogin (context, { useremail , username, social_type , social_id }) {
+    let url = config.users.social_email_login_endpoint // "/api/user/socialemaillogin";
+    if (config.storeViews.multistore) {
+      url = adjustMultistoreApiUrl(url)
+    }
+    return fetch(processURLAddress(url), { method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: useremail })
+    }).then(resp => { return resp.json() })
+      .then((resp) => {
+        if (resp.code === 200) {
+          rootStore.state.userTokenInvalidateLock = 0
+          context.commit(types.USER_TOKEN_CHANGED, { newToken: resp.result, meta: resp.meta }) // TODO: handle the "Refresh-token" header
+          context.dispatch('me', { refresh: true, useCache: false }).then(result => { 
+            rootStore.dispatch('wishlist/load' , true); 
+            rootStore.state["boards"] ? rootStore.dispatch('boards/load' , true) : null; 
+          })
+          context.dispatch('getOrdersHistory', { refresh: true, useCache: false }).then(result => {})
+        }
+        return resp
+      })
   },
 
   /**

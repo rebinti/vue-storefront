@@ -10,12 +10,10 @@
     </header>
 
     <div class="modal-content pt30 pb60 px65 cl-secondary">
-      <p>
-        Set a password for your created accout 
+      <p style="padding-bottom: 3px;">
+        Please set a new password for your Accout.
       </p>
       <form @submit.prevent="register" novalidate>
-
-    
         <base-input
           class="mb-5 tx_bx_out"
           type="password"
@@ -55,8 +53,8 @@
             }
           ]"
         />
-    
-        <button-full class="mb-2 w-full d_lgn" type="submit">
+        
+        <button-full class="mb-2 w-full" type="submit">
           Set Password
         </button-full>
         
@@ -79,6 +77,7 @@ import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox.vue'
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import i18n from '@vue-storefront/i18n'
+import { Logger } from '@vue-storefront/core/lib/logger'
 
 export default {
   name: 'SetSocialLoginPassword',
@@ -128,8 +127,11 @@ export default {
             socialData.firstname = fbData.name.split(' ')[0];
             socialData.lastname = fbData.name.split(' ')[1];
       } else if ( this.$store.state.ui.selectedSocialLoginType === 'google') {
-          // this.callRegister(this.$store.state.ui.googleLoggedInfo)
-          console.log('Google Logged Info', this.$store.state.ui.googleLoggedInfo)
+           console.log('Google Logged Info', this.$store.state.ui.googleLoggedInfo)
+           const googleData =  this.$store.state.ui.googleLoggedInfo;
+            socialData.email = googleData.email;
+            socialData.firstname = googleData.firstname;
+            socialData.lastname = googleData.lastname;
       }
       console.log('socialData For Register', socialData);
       if ( socialData.email !== '') {
@@ -160,10 +162,10 @@ export default {
       // { email: fb_data.email, password: this.password,
       //   firstname: fb_data.firstName, lastname: fb_data.lastName }
       console.log('callRegister' , social_data);
-      return;
       this.$bus.$emit('notification-progress-start', i18n.t('Registering the account ...'))
       this.$store.dispatch('user/register', social_data ).then((result) => {
         Logger.debug(result, 'user')()
+        console.log('resgister User', result)
         // TODO Move to theme
         this.$bus.$emit('notification-progress-stop')
         if (result.code !== 200) {

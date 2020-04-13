@@ -1,10 +1,10 @@
 <template>
-  <div style="width: 45%; float: left; margin: 6px 0 0 0;">
+  <div class="google-view" >
         <GoogleLogin :params="params"
         :onSuccess="onSuccessGoogle" 
         :onFailure="onFailureGoogle">
            <div class="login_bx">
-             <a href="#"><img src="/assets/gle_login.png" alt=""/></a>
+             <a href="javascript:void(0);"><img src="/assets/gle_login.png" alt=""/></a>
           </div>
         </GoogleLogin>
 </div>
@@ -38,26 +38,27 @@ export default {
         https://www.npmjs.com/package/vue-google-login
     */
     onSuccessGoogle (googleUser) {
-            console.log(googleUser);
-            // This only gets the user information: id, name, imageUrl and email
-            console.log(googleUser.getBasicProfile());
-            console.log('/**** Personale Info ****/')
-            console.log('*getId*', googleUser.getId());
-            console.log('/*getName/*', googleUser.getName());
-            console.log('/*getGivenName/*', googleUser.getGivenName());
-            console.log('/*getFamilyName/*', googleUser.getFamilyName());
-            console.log('/*getImageUrl/*', googleUser.getImageUrl());
-            console.log('/*getEmail/*', googleUser.getEmail());
-
-            // console.log('/*/*', googleUser.getId());
-            // console.log('/*/*', googleUser.getId());
-
-            // BasicProfile.getId()
-            // BasicProfile.getName()
-            // BasicProfile.getGivenName()
-            // BasicProfile.getFamilyName()
-            // BasicProfile.getImageUrl()
-            // BasicProfile.getEmail()
+          console.log(googleUser);
+          // This only gets the user information: id, name, imageUrl and email
+          console.log(googleUser.getBasicProfile());
+          // console.log('/**** Personale Info ****/')
+          // console.log('*getId*', googleUser.getBasicProfile().getId());
+          // console.log('/*getName/*', googleUser.getBasicProfile().getName());
+          // console.log('/*getGivenName/*', googleUser.getBasicProfile().getGivenName());
+          // console.log('/*getFamilyName/*', googleUser.getBasicProfile().getFamilyName());
+          // console.log('/*getImageUrl/*', googleUser.getBasicProfile().getImageUrl());
+          // console.log('/*getEmail/*', googleUser.getBasicProfile().getEmail());
+          const googleUserInfo = {  
+              email: googleUser.getBasicProfile().getEmail(),
+              name: googleUser.getBasicProfile().getName(),
+              firstname: googleUser.getBasicProfile().getGivenName(), 
+              lastname: googleUser.getBasicProfile().getFamilyName() ,
+              id: googleUser.getBasicProfile().getId(),
+              imageUrl: googleUser.getBasicProfile().getImageUrl()
+          }
+          if (googleUserInfo.email) {
+            this.callCheckSocialLoginUser(googleUserInfo);
+            }
     },
 
     onFailureGoogle (errorMsg) {
@@ -65,19 +66,28 @@ export default {
     },
 
     // Google Login End here
-    callCheckSocialLoginUser () {
+    callCheckSocialLoginUser (googleData) {
+      console.log('callCheckSocialLoginUser', googleData);
       this.$bus.$emit('notification-progress-start', i18n.t('Please wait...'))
-      this.$store.dispatch('user/checkSocialLoginUser', { email: this.email }).then((result) => {
+      this.$store.dispatch('user/checkSocialLoginUser', { email: googleData.email }).then((result) => {
         console.log('Resultt--->>>', result)  
         this.$bus.$emit('notification-progress-stop')
         if (result.code !== 200) {
           console.log('errrorrrr', result)  
-          //this.onFailure(result)
+          this.onFailure(result)
         } else {
-
-
-
+          if (result.result === 'Email Not exist') {
+              this.$store.commit('ui/setSocialLoginInfo', { type: 'google', social_data: googleData})
+              this.$store.commit('ui/setAuthElem', 'set-social-login-password');
+          } else if (result.result === 'Email exist') {
+              this.callSocialLogin(googleData);
+          }
         }
+      }).catch(err => {
+        Logger.error(err, 'user')()
+        this.onFailure({ result: 'Unexpected authorization error. Check your Network conection.' })
+        // TODO Move to theme
+        this.$bus.$emit('notification-progress-stop')
       });
     },
 
@@ -95,8 +105,44 @@ export default {
         message: this.$t(result.result),
         action1: { label: this.$t('OK') }
       })
+    },
+
+    callSocialLogin (social_data) {
+      const socialData = { useremail: social_data.email,
+                           username: social_data.name,
+                           social_type : 'google' , 
+                           social_id: social_data.id 
+                           }
+      console.log('socialData Api', socialData);
+      this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'));
+      this.$store.dispatch('user/socialUserlogin', socialData).then((result) => {
+        this.$bus.$emit('notification-progress-stop', {})
+
+        if (result.code !== 200) {
+          this.onFailure(result)
+        } else {
+          this.onSuccess()
+          this.close()
+        }
+      }).catch(err => {
+        Logger.error(err, 'user')()
+        this.onFailure({ result: 'Unexpected authorization error. Check your Network conection.' })
+        // TODO Move to theme
+        this.$bus.$emit('notification-progress-stop')
+      })
+    },
+
+    close (e) {
+      if (e) localStorage.removeItem('redirect')
+      this.$bus.$emit('modal-hide', 'modal-signup')
     }
 
   }
 }
 </script>
+
+<style scoped>
+.login_box_out_web .google-view {
+  width: 45%; float: left; margin: 6px 0 0 0;
+}
+</style>
