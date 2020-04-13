@@ -3,6 +3,8 @@
     <login v-if="activeElem === 'login'" />
     <register v-if="activeElem === 'register'" />
     <forgot-pass v-if="activeElem === 'forgot-pass'" />
+    <set-social-login-password  v-if="activeElem === 'set-social-login-password'">
+    </set-social-login-password>
   </modal>
 </template>
 
@@ -12,6 +14,7 @@ import Modal from 'theme/components/core/Modal'
 import Login from 'theme/components/core/blocks/Auth/Login'
 import Register from 'theme/components/core/blocks/Auth/Register'
 import ForgotPass from 'theme/components/core/blocks/Auth/ForgotPass'
+import SetSocialLoginPassword from 'theme/components/core/blocks/Auth/SetSocialLoginPassword'
 
 export default {
   name: 'SignUp',
@@ -24,7 +27,8 @@ export default {
     Modal,
     Login,
     Register,
-    ForgotPass
+    ForgotPass,
+    SetSocialLoginPassword
   }
 }
 </script>

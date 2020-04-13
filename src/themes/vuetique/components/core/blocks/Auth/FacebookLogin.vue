@@ -1,14 +1,22 @@
 <template>
-  <div>
-      <facebook-login
+  <div style="width: 45%;float: left;margin: 6px 25px 0 10px;">
+      <!-- <facebook-login
             :appId="FBappId"
             @login="onLogin"
             @get-initial-status="getUserData"
             @sdk-loaded="sdkLoaded">
-      </facebook-login>
+      </facebook-login> -->
+
+      <div class="login_bx" >
+          <span @click="logInWithFacebook" >
+            <img style="cursor: pointer;" src="/assets/fcbk_login.png" alt="">
+            </span>
+      </div>
 </div>
 </template>
 <script>
+import i18n from '@vue-storefront/i18n'
+import config from 'config'
 import facebookLogin from 'facebook-login-vuejs'
 
 export default {
@@ -19,7 +27,7 @@ export default {
   },
    data () {
     return {
-      FBappId : '249780349535973',
+      FBappId : config.socialLogin.facebook.appID,
       FB: undefined,
       isConnected: false,
       name: '',
@@ -37,6 +45,8 @@ export default {
         user => {
 
           console.log('User details from FB', user)
+
+          this.$store.commit('ui/setAuthElem', 'set-social-login-password')
           // this.personalID = user.id;
           // this.email = user.email;
           // this.name = user.name;
@@ -62,36 +72,60 @@ export default {
        https://medium.com/@mrjohnkilonzi/a-simple-facebook-login-component-in-vue-js-5ee71997bb97
     */
     async logInWithFacebook () {
-      await this.loadFacebookSDK(document, "script", "facebook-jssdk");
-      await this.initFacebook();
-      setTimeout(() => {
-        window.FB.login(function(response) {
+      const This = this;
+      if (window.FB) {
+         window.FB.login(function(response) {
           if (response.authResponse) {
             console.log("You are logged in &amp; cookie set!", response);
             setTimeout(() => {
-              window.FB.api('/me' , 'GET', { fields: 'id,name,email,picture, profile_pic,gender' }, function(response) {
-                console.log('Good to see you, ', response);
+              window.FB.api('/me' , 'GET', { fields: 'id,name,email,picture,gender' }, function(response) {
+                console.log('Good to see you, ***', response);
+                // This.$store.commit('ui/setAuthElem', 'set-social-login-password')
+                This.callCheckSocialLoginUser( response.email)
               });
             }, 100);
             // Now you can redirect the user or do an AJAX request to
             // a PHP script that grabs the signed request from the cookie.
           } else {
-            alert("User cancelled login or did not fully authorize.");
+            console.log("User cancelled login or did not fully authorize.");
           }
-        });
-      }, 500);
-      return false;
+        },  { scope: 'email' });
+      } else {
+        await this.loadFacebookSDK(document, "script", "facebook-jssdk" , this.initFacebook());
+        // await this.initFacebook();
+        setTimeout(() => {
+          window.FB.login(function(response) {
+            if (response.authResponse) {
+              console.log("You are logged in &amp; cookie set!", response);
+              setTimeout(() => {
+                window.FB.api('/me' , 'GET', { fields: 'id,name,email,picture,gender' }, function(response) {
+                  console.log('Good to see you, ', response);
+
+                //This.$store.commit('ui/setAuthElem', 'set-social-login-password')
+                  This.callCheckSocialLoginUser(response)
+                });
+
+
+              }, 100);
+              // Now you can redirect the user or do an AJAX request to
+              // a PHP script that grabs the signed request from the cookie.
+            } else {
+              console.log("User cancelled login or did not fully authorize.");
+            }
+          }, { scope: 'email' });
+        }, 500);
+      }
     },
     async initFacebook () {
       window.fbAsyncInit = function() {
         window.FB.init({
-          appId: "249780349535973", //You will need to change this
+          appId: config.socialLogin.facebook.appID, // You will need to change this
           cookie: true, // This is important, it's not enabled by default
           version: "v6.0"
         });
       };
     },
-    async loadFacebookSDK (d, s, id) {
+    async loadFacebookSDK (d, s, id, callback) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
         return;
@@ -100,10 +134,51 @@ export default {
       js.id = id;
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
+      js.onload = callback;
     },
 
-    //  Facebook Login End here
+    // Facebook Login End here
+    callCheckSocialLoginUser (fbData) {
+      console.log('callCheckSocialLoginUser', fbData);
+      this.$bus.$emit('notification-progress-start', i18n.t('Please wait...'))
+      this.$store.dispatch('user/checkSocialLoginUser', { email: fbData.email }).then((result) => {
+        console.log('Resultt--->>>', result)  
+        this.$bus.$emit('notification-progress-stop')
+        if (result.code !== 200) {
+          console.log('errrorrrr', result)  
+          this.onFailure(result)
+        } else {
+          if (result.result === 'Email Not exist') {
+              this.$store.commit('ui/setSocialLoginInfo', { type: 'facebook', social_data: fbData})
+              this.$store.commit('ui/setAuthElem', 'set-social-login-password');
 
+
+
+
+
+          } else if (result.result === 'Email exist') {
+
+          }
+
+
+        }
+      });
+    },
+
+    onSuccess () {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'success',
+        message: this.$t('You are logged in!'),
+        action1: { label: this.$t('OK') }
+      })
+    },
+    onFailure (result) {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'error',
+        message: this.$t(result.result),
+        action1: { label: this.$t('OK') }
+      })
+    }
 
   }
 }

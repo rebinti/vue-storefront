@@ -119,6 +119,24 @@ const actions: ActionTree<UserState, RootState> = {
   },
 
   /**
+   * Social Login ---- user and return user profile and current token
+   */
+  async checkSocialLoginUser (context, { email }) {
+    let url =  "/api/user/socialemailexist";
+    if (config.storeViews.multistore) {
+      url = adjustMultistoreApiUrl(url)
+    }
+    return fetch(processURLAddress(url), { method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( { socialemail: email } )
+    }).then(resp => { return resp.json() })
+  },
+
+  /**
   * Invalidate user token
   */
   refresh (context) {

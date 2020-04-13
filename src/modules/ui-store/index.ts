@@ -34,7 +34,10 @@ const store = {
     yoptoProduct: null,
     brandsList: [],
     brandSearchText: '',
-    brandSelectedChar: ''
+    brandSelectedChar: '',
+    fbLoggedInfo: null,
+    googleLoggedInfo: null,
+    selectedSocialLoginType: null
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -103,7 +106,22 @@ const store = {
     setBrandsFilters (state, data) {
       state.brandSearchText = data.selText;
       state.brandSelectedChar = data.selChar;
-    }
+    },
+    setSocialLoginInfo (state, data) {
+       state.selectedSocialLoginType = data.type;
+       if ( data.type === 'facebook') {
+          state.fbLoggedInfo = data.social_data;
+       } else if ( data.type === 'google') {
+          state.googleLoggedInfo = data.social_data;
+       }
+    },
+    clearSocialLoginInfo (state, data) {
+      if ( data.type === 'facebook') {
+         state.fbLoggedInfo = null;
+      } else if ( data.type === 'google') {
+         state.googleLoggedInfo = null;
+      }
+   }
   },
   actions: {
     toggleMicrocart ({ commit, state }) {

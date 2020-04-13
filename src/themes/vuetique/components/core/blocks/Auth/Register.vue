@@ -166,6 +166,11 @@
           </span>
         </div>
       </form>
+
+      
+      <facebook-sign-in></facebook-sign-in>
+      <google-sign-in></google-sign-in>
+
     </div>
   </div>
 </template>
@@ -175,6 +180,9 @@ import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox.vue'
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
+
+import  GoogleSignIn from "theme/components/core/blocks/Auth/GoogleLogin"
+import  FacebookSignIn from "theme/components/core/blocks/Auth/FacebookLogin"
 
 export default {
   validations: {
@@ -210,7 +218,9 @@ export default {
   components: {
     ButtonFull,
     BaseCheckbox,
-    BaseInput
+    BaseInput,
+    GoogleSignIn,
+    FacebookSignIn
   },
   methods: {
     register () {
