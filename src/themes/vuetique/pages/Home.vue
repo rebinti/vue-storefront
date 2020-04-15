@@ -121,8 +121,9 @@ export default {
   },
   methods: {
     toggleSearchpanel () {
-      this.$store.commit('ui/setSearchpanel', true)
-      this.$bus.$emit('HomefocusSearchInput') 
+      // this.$store.commit('ui/setSearchpanel', true)
+       this.$router.push(this.localizedRoute('/search'))
+      // this.$bus.$emit('HomefocusSearchInput') 
     }
   },
   computed: {

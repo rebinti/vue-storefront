@@ -1,7 +1,7 @@
 <template>
  <router-link
       class="block no-underline product-link"
-      :to="'/search-spring'"
+      :to="'/search'"
       data-testid="productLink"
     >
   <button
