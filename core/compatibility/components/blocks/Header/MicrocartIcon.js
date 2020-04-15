@@ -4,7 +4,8 @@ export default {
   methods: {
     openMicrocart () {
       // Method renamed to 'toggleMicrocart' and is using cart store now
-      this.$store.dispatch('ui/toggleMicrocart')
+      this.$store.commit('ui/setRightSidebarToAll', {active: true, activeTab: 'cart'})
+      // this.$store.dispatch('ui/toggleMicrocart')
     }
   },
   computed: {

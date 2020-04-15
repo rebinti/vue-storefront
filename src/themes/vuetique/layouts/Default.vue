@@ -11,10 +11,12 @@
         <sidebar-menu v-if="isSidebarOpen" />
       </transition>
       <transition name="slide-left">
-        <microcart v-if="isMicrocartOpen" />
+        <!-- <microcart v-if="isMicrocartOpen" /> -->
         <search-panel v-if="isSearchPanelOpen" />
-        <wishlist v-if="isWishlistOpen" />
+        <!-- <wishlist v-if="isWishlistOpen" /> -->
         <review-panel v-if="isReviewPanelOpen" />
+
+        <right-sidebar-all v-if="isAllitemsRightPanelOpen"></right-sidebar-all>
       </transition>
       <slot />
       <main-footer />
@@ -56,11 +58,12 @@ import Icons from 'theme/components/theme/Icons.vue'
 import Head from 'theme/head'
 import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
 import PopupBoards  from 'theme/components/core/blocks/Boards/PopupBoards.vue'
+import rightSidebarAll  from 'theme/components/core/blocks/rightSidebar/RightSidebarAll.vue'
 
 const SearchPanel = () => import(/* webpackChunkName: "vsf-search-panel" */ 'theme/components/core/blocks/SearchPanel/SearchPanel.vue')
 const SidebarMenu = () => import(/* webpackChunkName: "vsf-sidebar-menu" */ 'theme/components/core/blocks/SidebarMenu/SidebarMenu.vue')
-const Microcart = () => import(/* webpackChunkName: "vsf-microcart" */ 'theme/components/core/blocks/Microcart/Microcart.vue')
-const Wishlist = () => import(/* webpackChunkName: "vsf-wishlist" */ 'theme/components/core/blocks/Wishlist/Wishlist.vue')
+// const Microcart = () => import(/* webpackChunkName: "vsf-microcart" */ 'theme/components/core/blocks/Microcart/Microcart.vue')
+// const Wishlist = () => import(/* webpackChunkName: "vsf-wishlist" */ 'theme/components/core/blocks/Wishlist/Wishlist.vue')
 // const ReviewPanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue')
 
 const OrderConfirmation = () => import(/* webpackChunkName: "vsf-order-confirmation" */ 'theme/components/core/blocks/Checkout/OrderConfirmation.vue')
@@ -87,7 +90,8 @@ export default {
       isSidebarOpen: state => state.ui.sidebar,
       isMicrocartOpen: state => state.ui.microcart,
       isWishlistOpen: state => state.ui.wishlist,
-      isReviewPanelOpen: state => state.ui.reviewPanel
+      isReviewPanelOpen: state => state.ui.reviewPanel,
+      isAllitemsRightPanelOpen: state => state.ui.allItemsRightSidebar
     })
   },
   methods: {
@@ -143,8 +147,8 @@ export default {
     MainHeader,
     MainFooter,
     HeaderMenu,
-    Microcart,
-    Wishlist,
+    // Microcart,
+    // Wishlist,
     // Boards,
     SearchPanel,
     SidebarMenu,
@@ -161,7 +165,8 @@ export default {
     OrderConfirmation,
     Announcement,
     Icons,
-    ReviewPanel
+    ReviewPanel,
+    rightSidebarAll
   }
 }
 </script>

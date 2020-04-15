@@ -4,7 +4,7 @@
     :class="{ active: isWishlistOpen }"
     style="text-align: center;"
   >
-    <button
+    <!-- <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
@@ -14,20 +14,20 @@
       <svg viewBox="0 0 25 25" class="vt-icon--sm">
         <use xlink:href="#close" />
       </svg>
-    </button>
+    </button> -->
 
-    <h2
+    <!-- <h2
       v-if="productsInWishlist.length && !hideWishListForBoardFlag"
       class="mb-8 upper-letter"
       style="margin-bottom: 1rem !important;"
     >
       {{ $t('Wishlist') }}
-    </h2>
+    </h2> -->
 
-    <h2 v-else class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
+    <!-- <h2 v-else class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
       {{ $t('Boards') }}
-    </h2>
-
+    </h2> -->
+<!-- 
     <div class="wishlist-top-button-row clearfix" v-show="!hideWishListForBoardFlag">
       <span class="button-blck">
         <button
@@ -43,7 +43,7 @@
           @click="viewType = 'boards';reRendBoards=true"
         >Boards</button>
       </span>
-    </div>
+    </div> -->
 
     <!--  Wish list lsiting -->
     <div
@@ -92,7 +92,7 @@
       </template>
     </div>
 
-    <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
+    <!-- <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" /> -->
     <div
       class="add_more_btn"
       v-show="viewType === 'boards'"

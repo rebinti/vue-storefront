@@ -26,7 +26,8 @@ export default {
     },
     // method renamed to toggleWishlist
     toggleWishlistPanel () {
-      this.toggleWishlist()
+      this.$store.commit('ui/setRightSidebarToAll', {active: true, activeTab: 'wishlist'})
+      // this.toggleWishlist()
     }
   }
 }
