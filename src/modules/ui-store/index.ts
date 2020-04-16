@@ -37,12 +37,7 @@ const store = {
     brandSelectedChar: '',
     fbLoggedInfo: null,
     googleLoggedInfo: null,
-    selectedSocialLoginType: null,
-
-
-    allItemsRightSidebar: false,
-    allItemsRightSidebarActiveTab: ''
-
+    selectedSocialLoginType: null
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -126,14 +121,7 @@ const store = {
       } else if ( data.type === 'google') {
          state.googleLoggedInfo = null;
       }
-   },
-
-   setRightSidebarToAll  (state, data) {
-    state.allItemsRightSidebar = data.active;
-    state.allItemsRightSidebarActiveTab = data.activeTab
    }
-
-
   },
   actions: {
     toggleMicrocart ({ commit, state }) {
