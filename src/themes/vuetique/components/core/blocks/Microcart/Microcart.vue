@@ -5,7 +5,7 @@
     data-testid="microcart"
   >
 
-  <div class="hd_fix">
+  <!-- <div class="hd_fix">
     <button
       type="button"
       :aria-label="$t('Close')"
@@ -21,7 +21,7 @@
     <h2 v-if="productsInCart.length" class="mb-8 h_title">
      <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
     </h2>
-  </div>
+  </div> -->
 
     <h4 v-if="!productsInCart.length" class="mb-2">
       {{ $t('Your shopping cart is empty.') }}
