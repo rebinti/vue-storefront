@@ -201,9 +201,9 @@ export const isBottomVisible = () => {
   }
   const scrollY = window.scrollY
   const visible = window.innerHeight
-  const pageHeight = document.documentElement.scrollHeight
+  const pageHeight = document.documentElement.scrollHeight - 400
   const bottomOfPage = visible + scrollY >= pageHeight
-
+  console.log('bottom Of Page visible', bottomOfPage || pageHeight < visible)
   return bottomOfPage || pageHeight < visible
 }
 

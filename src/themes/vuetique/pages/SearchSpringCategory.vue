@@ -852,10 +852,17 @@ export default {
           // const footerheight = this.getdivheight('footer .bg-grey-lighter')
           // const newsletterheight = this.getdivheight('footer .news-letter')
           // const paydivheight = this.getdivheight('footer .mx-auto')
+          let filterdiv = null;
           if (viewflag==true) {
-            document.querySelector( '.filterdiv' ).classList.add("footerreached");
+            filterdiv = document.querySelector( '.filterdiv' ) // .classList.add("footerreached");
+            if (filterdiv) {
+              filterdiv.classList.add("footerreached");
+            }
           } else {
-            document.querySelector( '.filterdiv' ).classList.remove("footerreached");
+            filterdiv = document.querySelector( '.filterdiv' ) // .classList.remove("footerreached");
+             if (filterdiv) {
+              filterdiv.classList.remove("footerreached");
+            }
           }
           
     },

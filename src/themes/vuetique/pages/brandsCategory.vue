@@ -836,10 +836,17 @@ export default {
           // const newsletterheight = this.getdivheight('footer .news-letter')
           // const paydivheight = this.getdivheight('footer .mx-auto')
           
-          if(viewflag==true){
-            document.querySelector( '.filterdiv' ).classList.add("footerreached");
-          }else{
-            document.querySelector( '.filterdiv' ).classList.remove("footerreached");
+          let filterdiv = null;
+          if (viewflag==true) {
+            filterdiv = document.querySelector( '.filterdiv' ) // .classList.add("footerreached");
+            if (filterdiv) {
+              filterdiv.classList.add("footerreached");
+            }
+          } else {
+            filterdiv = document.querySelector( '.filterdiv' ) // .classList.remove("footerreached");
+             if (filterdiv) {
+              filterdiv.classList.remove("footerreached");
+            }
           }
           
     },

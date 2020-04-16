@@ -11,11 +11,11 @@ import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multi
 import Composite from '@vue-storefront/core/mixins/composite'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import { mapGetters, mapActions } from 'vuex'
-import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
+// import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 
 export default {
   name: 'Category',
-  mixins: [Composite, onBottomScroll],
+  mixins: [Composite ], // onBottomScroll
   data () {
     return {
       pagination: {
