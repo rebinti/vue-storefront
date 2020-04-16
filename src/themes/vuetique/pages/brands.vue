@@ -67,6 +67,8 @@ export default {
   },
   components: {
 
+    
+
   },
   // asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
   //   return new Promise((resolve, reject) => {
