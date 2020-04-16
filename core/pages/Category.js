@@ -15,7 +15,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Category',
-  mixins: [Composite ], // onBottomScroll
+  mixins: [Composite], // onBottomScroll
   data () {
     return {
       pagination: {
