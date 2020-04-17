@@ -750,6 +750,7 @@ export default {
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
       this.$bus.$emit('reset-price-slider');
       this.showNotificationLoader(true);
+      this.initialSearchFlag = true;
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       this.getSearchData();
     },
