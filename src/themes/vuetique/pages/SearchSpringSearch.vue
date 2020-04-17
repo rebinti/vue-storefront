@@ -158,7 +158,7 @@
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
-                     v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                     v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                   > View all </p>
                   <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
                      @click="setCategoryFilterHistory(categ, index)"
@@ -293,7 +293,7 @@
 
                         <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                           <p @click="setCategoryFilterHistory({type: 'view all'})"
-                            v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                            v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                           > View all </p>
                           <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
                             @click="setCategoryFilterHistory(categ, index)"
