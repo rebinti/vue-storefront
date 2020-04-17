@@ -160,7 +160,7 @@
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
-                     v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                     v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                   > View all </p>
                   <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
                      @click="setCategoryFilterHistory(categ, index)"
@@ -290,7 +290,7 @@
 
                   <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                     <p @click="setCategoryFilterHistory({type: 'view all'})"
-                       v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length >= 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
+                       v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                     > View all </p>
                     <p v-for="(categ, index) in categoryHierarchy" :key="categ.value + index"
                        @click="setCategoryFilterHistory(categ, index)"
@@ -461,6 +461,7 @@ export default {
     // console.log('beforeMount storee', this.$store.state.searchSpringCategory)
      if(this.getStoredCurrentRouterPath !== this.$route.path ) {
         this.searchDataInSearchSpring();
+        this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
       } else {
         this.searcingLoaderFlag = false;
       }
@@ -500,6 +501,7 @@ export default {
         // console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;
         this.searchDataInSearchSpring();
+        this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
     },
     async getSearchData (onScroll = false, abortApiCallFlag = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
@@ -672,6 +674,23 @@ export default {
 
       if ( this.findIndexInFilterItems ('filter.category_hierarchy')) {
         this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy')
+
+        let routeString = this.$route.path.replace('-', ' ');
+        routeString = routeString.replace('/','').toLowerCase()
+                        .split('/')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join('/');
+        routeString = routeString
+                        .split(' ')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+        routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
+        // console.log('routeString', routeString);
+        // this.searchedValue =  routeString
+        if(routeString.includes('&')) {
+          routeString = encodeURIComponent(routeString)
+        }
+        this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
       }
       if (item && item.type !== 'view all') {
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + item.field + '=' + encodeURIComponent(item.value))
