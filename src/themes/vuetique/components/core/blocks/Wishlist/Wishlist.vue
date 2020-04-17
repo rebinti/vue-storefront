@@ -422,4 +422,7 @@ i {
 .swipeout-right {
   padding-left: 15px;
 }
+.wishlist.wishlist_out.pt-10 {
+        padding-top: 0.50rem;
+}
 </style>
