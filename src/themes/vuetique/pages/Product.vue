@@ -233,7 +233,10 @@
               sku: {{ product.sku }}
             </div>
             <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
-	<!-- <div
+	
+            <div class="tfc-fitrec-product" id="DS20" data-userid=""
+             data-colorid="navy" data-locale="en_GB"></div>
+  <!-- <div
          class="yotpo yotpo-main-widget"
          data-product-id="product.id"
          data-price="product.price"

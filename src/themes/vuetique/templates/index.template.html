@@ -42,7 +42,34 @@
 	<script async onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn-stamped-io.azureedge.net/files/widget.min.css">
 	
-	    
+	<!-- True Fit Script -->
+
+	<script type="text/JavaScript">
+		(function(){
+			var a={};
+			function g(l){
+			a[l]=function(r,e,o){
+			var w=window,d=document,p=[],t,s,x;
+			w.tfcapi=t=w.tfcapi||function(){
+			t.q=t.q||[];
+			t.q.push(arguments);};
+			o&&o.forceMobile===true&&p.push('deviceType=mobile');
+			o&&o.autoCalculate===false&&p.push('autoCalculate=false');
+			x=d.getElementsByTagName('script')[0];
+			s=d.createElement('script');
+			s.type='text/javascript';s.async=true;
+			s.src='https://'+r+'-cdn'+(e==='dev'||e==='staging'?'.'+e:'')+
+			'.truefitcorp.com/fitrec/'+r+'/js/'+l+'.js?'+p.join('&');
+			x.parentNode.insertBefore(s,x);}}
+			g('fitrec');
+			g('tracker');
+			return a;
+			// Don't change anything above this line
+	 })().fitrec('icl','prod'); 
+	// .fitrec('icl','staging',{autoCalculate:false});
+	</script>
+		
+		
 		{{{ renderResourceHints() }}}
 		{{{ renderStyles() }}}
 		{{{ output.appendHead() }}}
