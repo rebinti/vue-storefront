@@ -359,7 +359,9 @@ export default {
         z-index: 8;
         max-height: calc(100vh - 0px);
     }
-
+    .pt-10.mob_microcart {
+        padding-top: 0.50rem;
+    }
  @media (max-width: 576px) {
     .hd_fix{
       position: fixed;
