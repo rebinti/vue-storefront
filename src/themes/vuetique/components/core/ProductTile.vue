@@ -48,14 +48,18 @@
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>                  
-        </div>  
-        <wishlist-button :product="product" />
+        </div>          
       </div>
-
-      <p class="product-name mb-0 font-medium text-grey-dark mt-3" v-if="!onlyImage">
-        {{ product.name | htmlDecode }}
-      </p>
-
+      <div class="w-full title-and-wish">
+        <div class="lg:col-9 ptitle">  
+          <p class="product-name mb-0 font-medium text-grey-dark mt-3" v-if="!onlyImage">
+            {{ product.name | htmlDecode }}
+          </p>
+        </div>
+        <div class="lg:col-3 pwishlist">
+          <wishlist-button :product="product" />
+        </div>  
+      </div>    
        <p class="product-category prd_cat" v-if="!onlyImage">
           Coats & Jackets
       </p>
@@ -261,6 +265,21 @@ export default {
     .product-name {
       // @apply text-primary;
     }
+  }
+}
+.product{
+  .title-and-wish{
+    .ptitle{
+      width: 90%;
+      float: left;
+    }
+    .pwishlist{
+      width: 10%;
+      float: left;
+    }
+  }
+  .price_bx_it{
+    clear: both;
   }
 }
 @media (max-width: 1440px) {
