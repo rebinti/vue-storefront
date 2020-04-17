@@ -37,8 +37,17 @@ export const mutations: MutationTree<any> = {
 
 
   [types.set_categoryHierarchy]  (state, filterData) {
-    state.categoryHierarchy.map(val => { if (val.active) val.active = false; });
-    state.categoryHierarchy.push(filterData);
+    // state.categoryHierarchy.map(val => { if (val.active) val.active = false; });
+    // state.categoryHierarchy.push(filterData);
+    if (filterData && filterData.values) {
+      state.categoryHierarchy = filterData
+    } else {
+      state.categoryHierarchy.values.map(val => { if (val.active) val.active = false; });
+      const index = state.categoryHierarchy.values.findIndex(val => val.value === filterData.value)
+      if (index >= 0) {
+        state.categoryHierarchy.values[index].active = true;
+      }
+    }
   },
 
   [types.set_priceSliderData] (state, filterData) {

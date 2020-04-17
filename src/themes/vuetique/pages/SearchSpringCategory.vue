@@ -3,7 +3,7 @@
      <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div>
-    <header class="pb-10 row bg-grey-lightest mb-6 head_category">
+    <header class="pb-5 row bg-grey-lightest mb-6 head_category">
       <div class="container d_item">
         <div class="row items-center mt-2">
           <h1 class="col-8">
@@ -29,47 +29,28 @@
         </div> 
       </div>
 
-       <!-- <div class="category_filter_out_pop_box">
-
-          <div class="category_filter_bx_it">
-              <div class="category_filter_bx_sortby filter-top">
-                   <base-select
-                      v-if="sortingFilterOptions && sortingFilterOptions.length"
-                      class="col-12 md:col-6 mb-6 txt_blk_select"
-                      name="sort"
-                      v-model="sortingFilterSelectedValue"
-                      :options="sortingFilterOptions"
-                      :selected="sortingFilterSelectedValue"
-                      :placeholder="$t('Sorting *')"
-                      @input="sortingFilterChange"
-                    /> 
+      <!-- New Category filter box section Web view -->
+      <div class="container d_item hidden lg:block" v-if="!searcingLoaderFlag">
+        <div class="row items-center mt-2">
+          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
+            
+              <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
+              :class="{'category-active' : valuesitem.active}"
+              >
+                    {{ valuesitem.label }} ({{ valuesitem.count }})
               </div>
+            </div>
+              
+        </div>
+      </div>  
 
-              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
-                  <span> view</span> 
-                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
-                  </div>                  
-              </div>              
-              <div class="category_filter_bx_filter filter-top" @click="openFilters"> 
-                 <span>filter</span>
-
-                   <div class="filter_bx">               
-                  <button-full class="w-full" @click.native="openFilters"> 
-                    {{ $t('Filters') }}
-                  </button-full>
-                  </div>   
-
-              </div>
-
-          </div>
-
-      </div>  -->
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-      <div class="container onlymobile col-12" v-if="!searcingLoaderFlag">
+      <div class="container lg:hidden onlymobile col-12" v-if="!searcingLoaderFlag">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top search">
@@ -106,6 +87,22 @@
         </div>        
 
       </div>
+
+    <!-- New Category filter box section Mobile view -->
+      <div class="container d_item lg:hidden onlymobile" v-if="!searcingLoaderFlag">
+        <div class="row items-center mt-2">
+          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
+            
+              <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
+              :class="{'category-active' : valuesitem.active}"
+              >
+                    {{ valuesitem.label }} ({{ valuesitem.count }})
+              </div>
+            </div>
+              
+        </div>
+      </div>  
 
     <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
@@ -154,11 +151,9 @@
                     :key="facetsitem.field"
                     :openType= "false"
                     :title="$t(facetsitem.label)"
-                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                    v-if="facetsitem.type !== 'hierarchy' && (facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
-                <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
-
-                <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
+                <!-- <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
                      v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                   > View all </p>
@@ -171,11 +166,11 @@
                      @click="setCategoryFilterData (facetsitem, valuesitem)">
                     {{ valuesitem.label }} ({{ valuesitem.count }})
                   </p>
-                </div>
+                </div> -->
 
-                <div v-else>
+                <div >
                   <search-checkbox
-                   v-if="facetsitem.field !== 'color'"
+                   v-if="facetsitem.field !== 'color' && facetsitem.type !== 'hierarchy'"
                     v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
                     class="col-xs-12 mb15"
                     :id="valuesitem.label+index+valuesitem.count"
@@ -284,11 +279,11 @@
                     :key="facetsitem.field"
                     :openType= "false"
                     :title="$t(facetsitem.label)"
-                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                    v-if="facetsitem.type !== 'hierarchy' && (facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
                   <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
-                  <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
+                  <!-- <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                     <p @click="setCategoryFilterHistory({type: 'view all'})"
                        v-if="(facetsitem.facet_active > 0 && categoryHierarchy.length > 0 && facetsitem.values.length > 0) || categoryHierarchy.length > 0"
                     > View all </p>
@@ -305,12 +300,12 @@
                        >
                       {{ valuesitem.label }} ({{ valuesitem.count }})
                     </p>
-                  </div>
+                  </div> -->
 
-                  <div v-else>
+                  <div>
                     <search-checkbox
                       v-for="(valuesitem,index) in facetsitem.values" :key="valuesitem.value"
-                      v-if="facetsitem.field !== 'color'"
+                      v-if="facetsitem.field !== 'color' && facetsitem.type !== 'hierarchy'"
                       class="col-xs-12 mb15"
                       :id="valuesitem.label+index+valuesitem.count"
                       :field-type="facetsitem.field"
@@ -443,7 +438,8 @@ export default {
       signal: null,
 
       defaultColumn: 3,
-      fixedOrderPanel: false
+      fixedOrderPanel: false,
+      initialSearchFlag: true
     };
   },
 
@@ -464,6 +460,7 @@ export default {
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
       } else {
         this.searcingLoaderFlag = false;
+        this.initialSearchFlag = false;
       }
   },
   created () {
@@ -500,6 +497,7 @@ export default {
     validateRouteCategory () {
         // console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;
+        this.initialSearchFlag = true;
         this.searchDataInSearchSpring();
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
     },
@@ -549,6 +547,11 @@ export default {
             
             // this.sortingFilterOptions = searchResults.sorting.options;
             // console.log('this.priceSliderData', this.priceSliderData);
+          }
+          if (this.getStoredCurrentRouterPath !== this.$route.path || this.initialSearchFlag) { 
+              this.initialSearchFlag = false;
+              this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', searchResults.facets.find(
+                val => val.field === 'category_hierarchy'));
           }
           this.$store.dispatch('searchSpringCategory/addSearchSpringSearchResult', searchResults).then(res => {
               // this.searchedValue = this.filterData[0].split('=')[1];
@@ -906,6 +909,38 @@ export default {
     getdivheight(divclass){
           const el = document.querySelector(divclass).getBoundingClientRect().height
           return el;
+    },
+
+    categoryFilterChange(category, valuesitem) {
+      if (this.findIndexInFilterItems ('filter.category_hierarchy')) {
+         this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy')
+      }
+      if ( valuesitem.active) {
+        category.values = category.values.map(val => { val.active = false;
+        return val
+        })
+        this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', category);
+        let routeString = this.$route.path.replace('-', ' ');
+        routeString = routeString.replace('/','').toLowerCase()
+                        .split('/')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join('/');
+        routeString = routeString
+                        .split(' ')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+        routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
+        if(routeString.includes('&')) {
+          routeString = encodeURIComponent(routeString)
+        }
+        this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
+
+      } else {
+        this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', valuesitem);
+        this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + category.field + '=' + encodeURIComponent(valuesitem.value))
+      }
+      this.showNotificationLoader();
+      this.getSearchData();
     }
 
 
@@ -1094,4 +1129,29 @@ input {
   }
 }
 
+
+  .category_filter_out_pop_box{
+    width:100%;
+    float: left;
+    padding: 10px 10px;
+    background: #fafafa;
+  }
+
+  .sub-cat-box {
+     min-width: 72px;
+    height: 35px;
+    float: left;
+    border: 2px solid #919191;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 6px 0 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+   }
+
+  .category-active {
+     background-color: #a5a9a973;
+    font-weight: 600;
+   }
 </style>
