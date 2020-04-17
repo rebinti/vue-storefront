@@ -254,7 +254,7 @@ img {
   mix-blend-mode: multiply;
   vertical-align: top;
   &:hover {
-    opacity: 0.9;
+    opacity: 1;
   }
 }
 img[lazy=error] {
