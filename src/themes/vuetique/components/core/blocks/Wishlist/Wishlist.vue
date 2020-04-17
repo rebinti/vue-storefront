@@ -16,15 +16,14 @@
       </svg>
     </button>
 
-    <h2
-      v-if="productsInWishlist.length && !hideWishListForBoardFlag"
+    <h2 v-show="viewType === 'wishlist'"      
       class="mb-8 upper-letter"
       style="margin-bottom: 1rem !important;"
     >
       {{ $t('Wishlist') }}
     </h2>
 
-    <h2 v-else class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
+    <h2 v-show="viewType === 'boards'" class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
       {{ $t('Boards') }}
     </h2>
 
