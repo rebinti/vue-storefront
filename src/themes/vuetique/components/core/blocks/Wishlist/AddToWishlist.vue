@@ -45,7 +45,9 @@ export default {
 </script>
 
 <style scoped>
-
+button.wishlist-bx{
+        margin: 5px;
+}
 @media (min-width: 576px) {
   /* .wishlist-bx{ display: inline-block; }
   .wishlist-bx span{ display: inline-block;}
