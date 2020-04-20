@@ -93,7 +93,7 @@
       </div>
 
       <div class="absolute top-0 right-0 mb-3 cl-accent button_bx_link_lrg" >
-        <div @click="removeItem" class="ic_dlt_bx">
+        <div @click="$emit('click', product)" class="ic_dlt_bx">
           <remove-button />
         </div>
       </div>

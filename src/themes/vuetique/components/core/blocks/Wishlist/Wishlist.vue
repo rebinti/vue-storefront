@@ -74,15 +74,15 @@
       <template v-if="productsInWishlist.length > 0">
       <swipe-list class="products p-0 m-0" ref="list" :items="productsInWishlist[0]" item-key="id" :key="componentKey">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
-          <product :product="item" />
+          <product :product="item" @click="removeFromWishlist"/>
         </template>
         <!-- <template v-slot:left="{ item, close, index }">
         <div class="swipeout-action red" title="remove" @click="remove(item)">
           <i class="fa fa-trash"></i>
         </div>
         </template>-->
-        <template v-slot:right="{ item , index }">
-          <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item , index )">
+        <template v-slot:right="{ item }">
+          <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item)">
             <!-- <i class="fa fa-trash"></i> -->
             <remove-button class="cl-accent" />
           </div>
@@ -169,10 +169,10 @@ export default {
       console.log('Changes in view page Wishlist');
       this.hideWishListForBoardFlag = !this.hideWishListForBoardFlag;
     },
-    async removeFromWishlist (product, index) {
+    async removeFromWishlist (product) {
       // this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));
       try {
-        const result = await this.$store.dispatch('wishlist/removeItem', {...product, prodIndex: index})
+        const result = await this.$store.dispatch('wishlist/removeItem', {...product })
         console.log('result after delete', result)
         if ((this.productsInWishlist.length > 0) && this.productsInWishlist[this.page].length > 1) {
           this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));

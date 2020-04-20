@@ -78,7 +78,7 @@
 
         <div class="absolute top-0 right-0 mb-3 button_bx_link_lrg">
           <div class="ic_dlt_bx">
-              <span @click.prevent="removeFromBoards(product)"><remove-button class="cl-accent" /></span>
+              <span @click.prevent="$emit('removeclick', product)"><remove-button class="cl-accent" /></span>
           </div>
        </div>
     </div>

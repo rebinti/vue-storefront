@@ -35,7 +35,7 @@
     </div>
      <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" ref="list" :items="productsInCart" item-key="sku" :key="componentKey">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
-          <product :product="item" />
+          <product :product="item" @click="removeItem"/>
         </template>
         <template v-slot:right="{ item }">
           <div class="swipeout-action red button_bx_link_lrg" @click="removeItem(item)">

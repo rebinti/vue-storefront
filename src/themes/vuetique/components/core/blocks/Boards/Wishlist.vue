@@ -41,7 +41,9 @@
       :key="componentKeyBoards"
     >
       <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
-        <boards-item @click="selectedBoard(item, index);$emit('chagesInView')" :product="item" />
+        <boards-item @click="selectedBoard(item, index);$emit('chagesInView')" :product="item" 
+        @removeclick="removeFromBoards"
+         />
       </template>
       <template v-slot:right="{ item }">
         <div class="swipeout-action red button_bx_link_lrg" @click="removeFromBoards(item)">
@@ -82,7 +84,7 @@
       :key="componentKeyProduct"
     >
       <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
-        <product :product="item" :index-value="selectedBoardItemIndex" />
+        <product :product="item" :index-value="selectedBoardItemIndex" @click="removeFromBoardsProduct" />
       </template>
       <template v-slot:right="{ item, index }">
         <div

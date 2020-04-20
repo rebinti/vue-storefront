@@ -47,7 +47,9 @@
         </div>
         <div class="absolute top-0 right-0 mb-3 button_bx_link_lrg">
           <div class="ic_dlt_bx">
-              <span @click="removeFromWishlist({product: product , index: indexValue })"><remove-button class="cl-accent" /></span>
+              <span @click="$emit('click', { product: product , index: indexValue })">
+                <remove-button class="cl-accent" />
+              </span>
            </div>
         </div>
         <div class="absolute bottom-0 right-0 mb-3 button_bx_link">
