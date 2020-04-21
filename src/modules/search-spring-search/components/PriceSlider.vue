@@ -1,4 +1,5 @@
 <template>
+  <div style=" padding: 0px 15px;">
   <div class="price-slider-container">
     <no-ssr placeholder="loading..." placeholader-tag="span">
       <vue-slider
@@ -14,6 +15,7 @@
         @drag-end="setPrice"
       />
     </no-ssr>
+  </div>
   </div>
 </template>
 
