@@ -1167,25 +1167,26 @@ input {
     cursor: pointer;
     color: #666666;
    }
-  .option-selected-box {
-     min-width: 72px;
-    height: 35px;
-    float: left;
-    border: 1px solid #ededed;
-    text-align: center;    
-    padding: 3px 6px 0 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    cursor: pointer;
-    color: #666666;
-    border-radius: 0px;
-   }   
+  // .option-selected-box {
+  //    min-width: 72px;
+  //   height: 35px;
+  //   float: left;
+  //   border: 1px solid #ededed;
+  //   text-align: center;    
+  //   padding: 3px 6px 0 5px;
+  //   margin-right: 5px;
+  //   margin-top: 5px;
+  //   cursor: pointer;
+  //   color: #666666;
+  //   border-radius: 0px;
+  //  }   
 
   .category-active,.selectone-active {     
     font-weight: 400;
     border-color: #666666;
     color: #222222; 
-    position: relative;   
+    position: relative;  
+    border-radius: 0px; 
     .topright {
         position: absolute;
         top: 0px;
