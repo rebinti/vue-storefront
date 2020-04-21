@@ -46,9 +46,8 @@
               
         </div>
       </div>   -->
-
       <!-- New Category filter box section Web view -->
-      <div class="container lg-sub-cat d_item " v-if="!searcingLoaderFlag">   <!-- hidden lg:block -->
+      <div class="container lg-sub-cat sub-category d_item " v-if="!searcingLoaderFlag">   <!-- hidden lg:block -->
         <div class="row items-center mt-2">
           <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
             
@@ -1134,31 +1133,19 @@ input {
   }
 .lg-sub-cat{
     margin-bottom: 10px;
-}  
-@media screen and (min-width: 768px) and (max-width: 1600px)  {
-  .sidebar .filterdata{
-    width:225px;
-  }
 }
-
-@media (max-width: 1440px) {
-  .filterdiv{
-      width: 228px;
-      bottom: 515px;
-  }
-}
-  .category_filter_out_pop_box{
+ .category_filter_out_pop_box{
     width:100%;
     float: left;
     padding: 10px 10px;
-    background: #fafafa;
+    background: none;
   }
 
   .sub-cat-box {
      min-width: 72px;
     height: 35px;
     float: left;
-    border: 1px solid #ededed;
+    border: 1px solid #000000;
     text-align: center;
     margin: 0 auto;
     padding: 3px 6px 0 5px;
@@ -1166,6 +1153,7 @@ input {
     margin-top: 5px;
     cursor: pointer;
     color: #666666;
+    background: #FFFFFF;
    }
   // .option-selected-box {
   //    min-width: 72px;
@@ -1268,6 +1256,28 @@ input {
 
    .sub-cat-box-width {
      min-width: 115px !important;
+   }  
+@media screen and (min-width: 768px) and (max-width: 1600px)  {
+  .sidebar .filterdata{
+    width:225px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .filterdiv{
+      width: 228px;
+      bottom: 515px;
+  }
+}
+@media (max-width: 520px) {
+   .sub-category {
+    height: 75px !important;
+    overflow-x: scroll !important;
+    scroll-behavior: smooth !important;
    }
-  
+
+   .sub-cat-box {
+     min-width: 115px !important;
+   }
+} 
 </style>
