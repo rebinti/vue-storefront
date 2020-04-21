@@ -1203,7 +1203,7 @@ input {
         /* position: fixed; */
         /* top: 0; */
         /* right: 0; */
-        z-index: 99999;
+        z-index: 9;
         color: white;
         text-shadow: 0 0 25px 9px #fff;
         // -webkit-filter: drop-shadow(0 1px 9px #000000);
