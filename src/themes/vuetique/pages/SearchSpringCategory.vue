@@ -234,10 +234,14 @@
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar filterdiv"  :class="{ fixed: fixedOrderPanel }">
-              <h1 class="filterhead" v-if="searchRes" >Filters</h1>
-              
-              <div class="container pb-5 md: ml-2">
-                <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+              <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
+              <span
+                class="filter-box clearall-filter"
+                v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
+                @click="clearAllFilter()"
+              >Clear All</span>              
+              <div class="container pb-5 md: ml-2 selectedone">
+                <div class="row  gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
                   <span
                     v-for="filter in searchRes.filterSummary"
                     :key="filter.label"
@@ -249,11 +253,6 @@
                       v-if="filter.field === 'final_price'"
                     >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
                   </span>
-                  <span
-                    class="filter-box"
-                    v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
-                    @click="clearAllFilter()"
-                  >Clear All</span>
                 </div>
               </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
@@ -303,7 +302,8 @@
                       <!-- <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + valuesitem.label.toLowerCase() +'.png'" 
                       @error="imgUrlAlt" alt="" v-if="facetsitem.field === 'color'" > -->
                       <span>
-                        {{ valuesitem.label }} ({{ valuesitem.count }})
+                        {{ valuesitem.label }} 
+                        <!-- ({{ valuesitem.count }}) -->
                       </span>
                     </search-checkbox>
 
@@ -1226,7 +1226,22 @@ input {
       text-decoration: none;
     }
    }
-
+   .clearall-filter{
+     float:right;
+     border-radius:0px;
+    border-radius: 0px;
+    margin-bottom: 15px;
+    width: 100px;
+    text-align: center;     
+   } 
+   .clearall-filter:hover{
+    background: #000000;
+    color: #FFFFFF;
+   }
+   .selectedone{
+     clear: both;
+     overflow: hidden;
+   }
    .mob-category {
     height: 75px !important;
     overflow-x: scroll !important;
