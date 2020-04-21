@@ -109,24 +109,31 @@
       </div>
 
     <div class="container pb-5 md: ml-2 lg:hidden">
-      <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
-          v-for="filter in searchRes.filterSummary"
-          :key="filter.label"
-          @click="removeFilterFlag(filter)"
-          class="filter-box"
-        >
-          {{ filter.label }}
-          <span
-            v-if="filter.field === 'final_price'"
-          >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
-        </span>
-        <span
-          class="filter-box"
+          class="filter-box clearall-filter"
           v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
           @click="clearAllFilter()"
-        >Clear All</span>
-      </div>
+        >Clear All</span>              
+        <div class="container pb-5 md: ml-2 selectedone">
+          <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+            <span
+              v-for="filter in searchRes.filterSummary"
+              :key="filter.label"
+              @click="removeFilterFlag(filter)"
+              class="filter-box option-selected-box selectone-active"
+            >
+              {{ filter.label }}
+              <div class="topright select-active" id="corner-triangle">
+                <div class="corner-triangle-text text-capitalize">
+                    <span>x</span> 
+                </div>
+              </div>                       
+              <span
+                v-if="filter.field === 'final_price'"
+              >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
+            </span>
+          </div>
+        </div>         
     </div>
     <!-- Side bar for Mobile -->
     <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
@@ -251,26 +258,30 @@
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar filterdiv"  :class="{ fixed: fixedOrderPanel }">
-              <h1 class="filterhead" v-if="searchRes" >Filters</h1>
-              
-              <div class="container pb-5 md: ml-2">
+              <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
+              <span
+                class="filter-box clearall-filter"
+                v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
+                @click="clearAllFilter()"
+              >Clear All</span>              
+              <div class="container pb-5 md: ml-2 selectedone">
                 <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
                   <span
                     v-for="filter in searchRes.filterSummary"
                     :key="filter.label"
                     @click="removeFilterFlag(filter)"
-                    class="filter-box"
+                    class="filter-box option-selected-box selectone-active"
                   >
                     {{ filter.label }}
+                    <div class="topright select-active" id="corner-triangle">
+                      <div class="corner-triangle-text text-capitalize">
+                          <span>x</span> 
+                      </div>
+                    </div>                       
                     <span
                       v-if="filter.field === 'final_price'"
-                    >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
+                    >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
                   </span>
-                  <span
-                    class="filter-box"
-                    v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
-                    @click="clearAllFilter()"
-                  >Clear All</span>
                 </div>
               </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
@@ -1047,6 +1058,88 @@ input {
     // background: url("../assets/gridview.jpg") no-repeat;
     margin-top:8px;
   }
+  // Filter style updates - 21-04-2020
+  .selectone-active {     
+    font-weight: 400;
+    border-color: #666666;
+    color: #222222; 
+    position: relative;  
+    border-radius: 0px; 
+    .topright {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 18px;
+    } 
+    div#corner-triangle {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-style: solid;
+        border-width: 0 15px 15px 0;
+        border-color: transparent #000000 transparent transparent;
+        /* position: fixed; */
+        /* top: 0; */
+        /* right: 0; */
+        z-index: 9;
+        color: white;
+        text-shadow: 0 0 25px 9px #fff;
+        // -webkit-filter: drop-shadow(0 1px 9px #000000);
+        // filter: drop-shadow(0 1px 9px #000000);
+    }
+    div#corner-triangle .corner-triangle-text {
+      position: relative;
+      font-size: 8px;
+      top: -9px;
+      right: -9px;
+      font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
+      font-weight: 200;
+      color: #FFFFFF;
+      // line-height: 1.1;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);      
+    }
+    div#corner-triangle{
+      display: none;
+    }
+    div#corner-triangle.select-active{
+      display: block;
+    }
+    div#corner-triangle .corner-triangle-text span.corner-triangle-firstline {
+      margin-left: 29px;
+    }
+    div#corner-triangle .corner-triangle-text a {
+      color: white;
+    }
+    div#corner-triangle .corner-triangle-text a:hover,
+    div#corner-triangle .corner-triangle-text a:link,
+    div#corner-triangle .corner-triangle-text a:visited,
+    div#corner-triangle .corner-triangle-text a:active,
+    div#corner-triangle .corner-triangle-text a:focus {
+      text-decoration: none;
+    }
+   }
+   .clearall-filter{
+     float:right;
+     border-radius:0px;
+    border-radius: 0px;
+    margin-bottom: 15px;
+    width: 100px;
+    text-align: center;  
+    margin-right: 8px;
+    margin-top: 5px;       
+   } 
+   .clearall-filter:hover{
+    background: #000000;
+    color: #FFFFFF;
+   }
+   .selectedone{
+     clear: both;
+     overflow: hidden;
+   }   
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
     width:225px;
