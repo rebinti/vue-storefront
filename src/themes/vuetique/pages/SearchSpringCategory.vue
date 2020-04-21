@@ -29,25 +29,35 @@
         </div> 
       </div>
 
-      <!-- New Category filter box section Mobile view -->
-      <!-- <div class="container d_item lg:hidden onlymobile mob-category" v-if="!searcingLoaderFlag">
+       <!-- New Category filter box section Mobile view -->
+      <div class="container d_item lg:hidden onlymobile mob-category " v-if="!searcingLoaderFlag">
         <div class="row items-center mt-2">
-          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0"
-            style="display: inline-flex;"
+          <div class="category_filter_out_pop_box_mob" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0"
             >
-            
-              <div class="sub-cat-box sub-cat-box-width" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+             <carousel v-bind="sliderConfig" >
+                <slide
+                v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value"
+                >
+              <div class="sub-cat-box-mob" 
               @click="categoryFilterChange(categoryHierarchy, valuesitem)"
               :class="{'category-active' : valuesitem.active}"
               >
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                    {{ valuesitem.label }} 
+                      <div class="topright" id="corner-triangle" :class="{'select-active' : valuesitem.active}">
+                      <div class="corner-triangle-text text-capitalize">
+                          <span v-if="valuesitem.active">x</span> 
+                      </div>
+                    </div>  
               </div>
-            </div>
-              
+               </slide>
+              </carousel>
+            </div>  
         </div>
-      </div>   -->
+      </div>  
+
+
       <!-- New Category filter box section Web view -->
-      <div class="container lg-sub-cat sub-category d_item " v-if="!searcingLoaderFlag">   <!-- hidden lg:block -->
+      <div class="container lg-sub-cat sub-category d_item hidden lg:block" v-if="!searcingLoaderFlag">   <!-- hidden lg:block -->
         <div class="row items-center mt-2">
           <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
             
@@ -113,7 +123,7 @@
       </div>
 
 
-    <div class="container pb-5 md: ml-2 lg:hidden">
+    <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: 10px;">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
         <span
           v-for="filter in searchRes.filterSummary"
@@ -415,6 +425,9 @@ import Breadcrumbs from '../components/core/Breadcrumbs.vue'
 // import SortBy from '../components/core/SortBy.vue'
 import Columns from '../components/core/Columns.vue'
 
+import NoSSR from 'vue-no-ssr'
+import { Carousel, Slide } from 'vue-carousel'
+
 export default {
   components: {
     ProductListing,
@@ -427,7 +440,10 @@ export default {
     Accordion,
     Breadcrumbs,
     // SortBy,
-    Columns
+    Columns,
+    Slide,
+    Carousel,
+    'no-ssr': NoSSR
   },
   mixins: [onBottomScroll, Category],
   computed: {
@@ -453,7 +469,13 @@ export default {
 
       defaultColumn: 3,
       fixedOrderPanel: false,
-      initialSearchFlag: true
+      initialSearchFlag: true,
+      sliderConfig: {
+            perPage: 3,
+            paginationEnabled: false,
+            // loop: true,
+            // paginationSize: 6
+      }
     };
   },
 
@@ -1249,9 +1271,10 @@ input {
      overflow: hidden;
    }
    .mob-category {
-    height: 75px !important;
-    overflow-x: scroll !important;
-    scroll-behavior: smooth !important;
+    height: 62px !important;
+    margin-top: 0 !important;
+    // overflow-x: scroll !important;
+    // scroll-behavior: smooth !important;
    }
 
    .sub-cat-box-width {
@@ -1280,4 +1303,30 @@ input {
      min-width: 115px !important;
    }
 } 
+
+
+
+   .sub-cat-box-mob {
+    min-width: 130px;
+    height: 35px;
+    float: left;
+    border: 1px solid #000000;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 6px 0 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    color: #666666;
+    background: #FFFFFF;
+   }
+
+  .category_filter_out_pop_box_mob{
+    width:100%;
+    float: left;
+    padding: 10px 10px;
+    background: none;
+  }
+
+
 </style>
