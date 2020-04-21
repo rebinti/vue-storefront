@@ -29,6 +29,24 @@
         </div> 
       </div>
 
+      <!-- New Category filter box section Mobile view -->
+      <div class="container d_item lg:hidden onlymobile mob-category" v-if="!searcingLoaderFlag">
+        <div class="row items-center mt-2">
+          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0"
+            style="display: inline-flex;"
+            >
+            
+              <div class="sub-cat-box sub-cat-box-width" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
+              :class="{'category-active' : valuesitem.active}"
+              >
+                    {{ valuesitem.label }} ({{ valuesitem.count }})
+              </div>
+            </div>
+              
+        </div>
+      </div>  
+
 
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
@@ -73,21 +91,6 @@
 
       </div>
 
-    <!-- New Category filter box section Mobile view -->
-      <div class="container d_item lg:hidden onlymobile" v-if="!searcingLoaderFlag">
-        <div class="row items-center mt-2">
-          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
-            
-              <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
-              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
-              :class="{'category-active' : valuesitem.active}"
-              >
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
-              </div>
-            </div>
-              
-        </div>
-      </div>  
 
     <div class="container pb-5 md: ml-2 lg:hidden">
       <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
@@ -1217,6 +1220,16 @@ input {
     div#corner-triangle .corner-triangle-text a:focus {
       text-decoration: none;
     }
+   }
+
+   .mob-category {
+    height: 75px !important;
+    overflow-x: scroll !important;
+    scroll-behavior: smooth !important;
+   }
+
+   .sub-cat-box-width {
+     min-width: 115px !important;
    }
   
 </style>
