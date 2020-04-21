@@ -354,13 +354,13 @@
                   @click="categoryFilterChange(categoryHierarchy, valuesitem)"
                   :class="{'category-active' : valuesitem.active}"
                   >
-                        {{ valuesitem.label }} 
+                            {{ valuesitem.label }} 
                         <!-- ({{ valuesitem.count }}) -->                         
-                        <div class="topright" id="corner-triangle">
+                        <div class="topright" id="corner-triangle" :class="{'select-active' : valuesitem.active}">
                           <div class="corner-triangle-text text-capitalize">
-                            <!-- <span>x</span> -->
+                             <span v-if="valuesitem.active">x</span> 
                           </div>
-                        </div>                                              
+                        </div>                                               
                   </div>
 
                 </div>
@@ -1143,8 +1143,6 @@ input {
       bottom: 515px;
   }
 }
-
-
   .category_filter_out_pop_box{
     width:100%;
     float: left;
@@ -1190,22 +1188,29 @@ input {
         z-index: 99999;
         color: white;
         text-shadow: 0 0 25px 9px #fff;
-        -webkit-filter: drop-shadow(0 1px 9px #000000);
-        filter: drop-shadow(0 1px 9px #000000);
+        // -webkit-filter: drop-shadow(0 1px 9px #000000);
+        // filter: drop-shadow(0 1px 9px #000000);
     }
     div#corner-triangle .corner-triangle-text {
       position: relative;
-      font-size: 2.1em;
-      top: 0;
-      right: -90px;
+      font-size: 8px;
+      top: -9px;
+      right: -9px;
       font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
       font-weight: 200;
-      line-height: 1.1;
+      color: #FFFFFF;
+      // line-height: 1.1;
       -webkit-transform: rotate(45deg);
       -moz-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
       -o-transform: rotate(45deg);
-      transform: rotate(45deg);
+      transform: rotate(45deg);      
+    }
+    div#corner-triangle{
+      display: none;
+    }
+    div#corner-triangle.select-active{
+      display: block;
     }
     div#corner-triangle .corner-triangle-text span.corner-triangle-firstline {
       margin-left: 29px;
