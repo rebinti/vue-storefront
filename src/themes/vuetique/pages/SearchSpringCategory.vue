@@ -29,21 +29,6 @@
         </div> 
       </div>
 
-      <!-- New Category filter box section Web view -->
-      <div class="container d_item hidden lg:block" v-if="!searcingLoaderFlag">
-        <div class="row items-center mt-2">
-          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
-            
-              <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
-              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
-              :class="{'category-active' : valuesitem.active}"
-              >
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
-              </div>
-            </div>
-              
-        </div>
-      </div>  
 
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
@@ -356,6 +341,29 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
+
+          <!-- New Category filter box section Web view -->
+          <div class="lg-sub-cat d_item hidden lg:block" v-if="!searcingLoaderFlag">
+            <div class="row items-center mt-2">
+              <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
+                
+                  <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+                  @click="categoryFilterChange(categoryHierarchy, valuesitem)"
+                  :class="{'category-active' : valuesitem.active}"
+                  >
+                        {{ valuesitem.label }} 
+                        <!-- ({{ valuesitem.count }}) -->                         
+                        <div class="topright" id="corner-triangle">
+                          <div class="corner-triangle-text text-capitalize">
+                            <!-- <span>x</span> -->
+                          </div>
+                        </div>                                              
+                  </div>
+
+                </div>
+                  
+            </div>
+          </div>          
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -1117,6 +1125,9 @@ input {
     // background: url("../assets/gridview.jpg") no-repeat;
     margin-top:8px;
   }
+.lg-sub-cat{
+    margin-bottom: 10px;
+}  
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
     width:225px;
@@ -1142,17 +1153,70 @@ input {
      min-width: 72px;
     height: 35px;
     float: left;
-    border: 2px solid #919191;
+    border: 1px solid #ededed;
     text-align: center;
     margin: 0 auto;
     padding: 3px 6px 0 5px;
     margin-right: 5px;
     margin-top: 5px;
     cursor: pointer;
+    color: #666666;
    }
 
-  .category-active {
-     background-color: #a5a9a973;
-    font-weight: 600;
+  .category-active {     
+    font-weight: 400;
+    border-color: #666666;
+    color: #222222; 
+    position: relative;   
+    .topright {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 18px;
+    } 
+    div#corner-triangle {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-style: solid;
+        border-width: 0 15px 15px 0;
+        border-color: transparent #000000 transparent transparent;
+        /* position: fixed; */
+        /* top: 0; */
+        /* right: 0; */
+        z-index: 99999;
+        color: white;
+        text-shadow: 0 0 25px 9px #fff;
+        -webkit-filter: drop-shadow(0 1px 9px #000000);
+        filter: drop-shadow(0 1px 9px #000000);
+    }
+    div#corner-triangle .corner-triangle-text {
+      position: relative;
+      font-size: 2.1em;
+      top: 0;
+      right: -90px;
+      font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
+      font-weight: 200;
+      line-height: 1.1;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    div#corner-triangle .corner-triangle-text span.corner-triangle-firstline {
+      margin-left: 29px;
+    }
+    div#corner-triangle .corner-triangle-text a {
+      color: white;
+    }
+    div#corner-triangle .corner-triangle-text a:hover,
+    div#corner-triangle .corner-triangle-text a:link,
+    div#corner-triangle .corner-triangle-text a:visited,
+    div#corner-triangle .corner-triangle-text a:active,
+    div#corner-triangle .corner-triangle-text a:focus {
+      text-decoration: none;
+    }
    }
+  
 </style>
