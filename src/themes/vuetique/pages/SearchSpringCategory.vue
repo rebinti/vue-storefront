@@ -30,7 +30,7 @@
       </div>
 
       <!-- New Category filter box section Mobile view -->
-      <div class="container d_item lg:hidden onlymobile mob-category" v-if="!searcingLoaderFlag">
+      <!-- <div class="container d_item lg:hidden onlymobile mob-category" v-if="!searcingLoaderFlag">
         <div class="row items-center mt-2">
           <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0"
             style="display: inline-flex;"
@@ -45,8 +45,30 @@
             </div>
               
         </div>
-      </div>  
+      </div>   -->
 
+      <!-- New Category filter box section Web view -->
+      <div class="container lg-sub-cat d_item " v-if="!searcingLoaderFlag">   <!-- hidden lg:block -->
+        <div class="row items-center mt-2">
+          <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
+            
+              <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
+              @click="categoryFilterChange(categoryHierarchy, valuesitem)"
+              :class="{'category-active' : valuesitem.active}"
+              >
+                        {{ valuesitem.label }} 
+                    <!-- ({{ valuesitem.count }}) -->                         
+                    <div class="topright" id="corner-triangle" :class="{'select-active' : valuesitem.active}">
+                      <div class="corner-triangle-text text-capitalize">
+                          <span v-if="valuesitem.active">x</span> 
+                      </div>
+                    </div>                                               
+              </div>
+
+            </div>
+              
+        </div>
+      </div> 
 
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
@@ -241,17 +263,22 @@
                 @click="clearAllFilter()"
               >Clear All</span>              
               <div class="container pb-5 md: ml-2 selectedone">
-                <div class="row  gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+                <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
                   <span
                     v-for="filter in searchRes.filterSummary"
                     :key="filter.label"
                     @click="removeFilterFlag(filter)"
-                    class="filter-box"
+                    class="filter-box option-selected-box selectone-active"
                   >
                     {{ filter.label }}
+                    <div class="topright select-active" id="corner-triangle">
+                      <div class="corner-triangle-text text-capitalize">
+                          <span>x</span> 
+                      </div>
+                    </div>                       
                     <span
                       v-if="filter.field === 'final_price'"
-                    >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
+                    >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
                   </span>
                 </div>
               </div>
@@ -343,30 +370,7 @@
         </div>
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
-      <div class="col-12 lg:col-9 pr_list_sec_main">
-
-          <!-- New Category filter box section Web view -->
-          <div class="lg-sub-cat d_item hidden lg:block" v-if="!searcingLoaderFlag">
-            <div class="row items-center mt-2">
-              <div class="category_filter_out_pop_box" v-if="categoryHierarchy && categoryHierarchy.values && categoryHierarchy.values.length > 0">
-                
-                  <div class="sub-cat-box" v-for="(valuesitem) in categoryHierarchy.values" :key="valuesitem.value" 
-                  @click="categoryFilterChange(categoryHierarchy, valuesitem)"
-                  :class="{'category-active' : valuesitem.active}"
-                  >
-                            {{ valuesitem.label }} 
-                        <!-- ({{ valuesitem.count }}) -->                         
-                        <div class="topright" id="corner-triangle" :class="{'select-active' : valuesitem.active}">
-                          <div class="corner-triangle-text text-capitalize">
-                             <span v-if="valuesitem.active">x</span> 
-                          </div>
-                        </div>                                               
-                  </div>
-
-                </div>
-                  
-            </div>
-          </div>          
+      <div class="col-12 lg:col-9 pr_list_sec_main">         
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -1163,8 +1167,21 @@ input {
     cursor: pointer;
     color: #666666;
    }
+  .option-selected-box {
+     min-width: 72px;
+    height: 35px;
+    float: left;
+    border: 1px solid #ededed;
+    text-align: center;    
+    padding: 3px 6px 0 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    color: #666666;
+    border-radius: 0px;
+   }   
 
-  .category-active {     
+  .category-active,.selectone-active {     
     font-weight: 400;
     border-color: #666666;
     color: #222222; 
