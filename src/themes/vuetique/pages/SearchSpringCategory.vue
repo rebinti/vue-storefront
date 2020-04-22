@@ -1360,7 +1360,7 @@ input {
      right: 65px;
    }
    .mob-siderbar-footer .reset-button{     
-     right: 45px;
+      left: 45px;
    }   
 } 
 
