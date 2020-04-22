@@ -124,24 +124,32 @@
 
 
     <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: 10px;">
-      <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+        <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
         <span
-          v-for="filter in searchRes.filterSummary"
-          :key="filter.label"
-          @click="removeFilterFlag(filter)"
-          class="filter-box"
-        >
-          {{ filter.label }}
-          <span
-            v-if="filter.field === 'final_price'"
-          >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>&nbsp; x &nbsp;
-        </span>
-        <span
-          class="filter-box"
+          class="filter-box clearall-filter"
           v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
           @click="clearAllFilter()"
-        >Clear All</span>
-      </div>
+        >Clear All</span>              
+        <div class="container pb-5 md: ml-2 selectedone">
+          <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+            <span
+              v-for="filter in searchRes.filterSummary"
+              :key="filter.label"
+              @click="removeFilterFlag(filter)"
+              class="filter-box option-selected-box selectone-active"
+            >
+              {{ filter.label }}
+              <div class="topright select-active" id="corner-triangle">
+                <div class="corner-triangle-text text-capitalize">
+                    <span>x</span> 
+                </div>
+              </div>                       
+              <span
+                v-if="filter.field === 'final_price'"
+              >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
+            </span>
+          </div>
+        </div>       
     </div>
     <!-- Side bar for Mobile -->
     <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
@@ -1260,7 +1268,8 @@ input {
     border-radius: 0px;
     margin-bottom: 15px;
     width: 100px;
-    text-align: center;     
+    text-align: center;   
+    margin-right: 8px;  
    } 
    .clearall-filter:hover{
     background: #000000;
