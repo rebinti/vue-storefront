@@ -1339,6 +1339,23 @@ input {
    .sub-cat-box {
      min-width: 115px !important;
    }
+   .sidebar{
+      position: relative;
+   }
+   .mobile-filters{
+     padding-bottom: 70px;
+   }
+   .mob-siderbar-footer{
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      height: 75px;
+      background: #FFFFFF;
+
+   }
+   .mob-siderbar-footer button{
+     margin-right: 30px;
+   }
 } 
 
 
