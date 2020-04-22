@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Overlay from '@vue-storefront/core/compatibility/components/Overlay'
 
 export default {
@@ -15,6 +16,7 @@ export default {
   },
   methods: {
     close () {
+      Vue.prototype.$bus.$emit('close-sidebar-panel', true);
       this.$store.commit('ui/setOverlay', false)
       this.$store.commit('ui/setMicrocart', false)
       this.$store.commit('ui/setWishlist', false)

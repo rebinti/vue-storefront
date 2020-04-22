@@ -229,7 +229,7 @@
             <div class="mob-siderbar-footer">
                <button
                 type="button"
-                class="absolute bottom-0 right-0 m-4 h-4"
+                class="absolute bottom-0 right-0 m-4 h-4 done-button"
                 style="border: 1px solid;
                         width: 105px;
                         height: 44px;
@@ -241,7 +241,7 @@
                 <button
                 type="button"
                 :disabled="!(searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0)"
-                 class="absolute bottom-0 m-4 h-4"
+                 class="absolute bottom-0 m-4 h-4 reset-button"
                   style="border: 1px solid;
                         width: 105px;
                         height: 44px;
@@ -491,6 +491,7 @@ export default {
       } else {
         this.searcingLoaderFlag = false;
       }
+    this.$bus.$on('close-sidebar-panel', this.closeFilters);
   },
   created () {
       // if(this.getStoredCurrentRouterPath !== this.$route.path ) {
@@ -806,6 +807,7 @@ export default {
     },
     openFilters () {
       this.mobileFilters = true;
+      this.$store.commit('ui/setOverlay', true);
       const el = document.body; // to fix background scroll issue when the filter opened
       el.classList.add('openfilter');
       el.classList.add('no-scroll');
@@ -813,6 +815,7 @@ export default {
     },
     closeFilters () {
       this.mobileFilters = false
+      this.$store.commit('ui/setOverlay', false);
       const el = document.body;
       el.classList.remove('openfilter');
       el.classList.remove('no-scroll');
@@ -911,6 +914,9 @@ export default {
     }
 
 
+  },
+  beforeDestroy () {
+    this.$bus.$off('close-sidebar-panel');
   },
   destroyed () {
     document.removeEventListener('scroll', this.handleScroll);
@@ -1190,5 +1196,31 @@ input {
    .mob-siderbar-footer button{
      margin-right: 30px;
    }
+
+   @media (max-width: 520px) {
+   .sidebar{
+      position: relative;
+   }
+   .mobile-filters{
+     padding-bottom: 70px;
+     width: 85%;
+     right:0;
+     left: inherit;
+   }
+   .mob-siderbar-footer{
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      height: 75px;
+      background: #FFFFFF;
+      z-index:10;
+   }
+   .mob-siderbar-footer .done-button{     
+     right: 65px;
+   }
+   .mob-siderbar-footer .reset-button{     
+      left: 45px;
+   }   
+} 
 
 </style>

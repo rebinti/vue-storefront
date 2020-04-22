@@ -533,6 +533,7 @@ export default {
         this.searcingLoaderFlag = false;
         this.initialSearchFlag = false;
       }
+    this.$bus.$on('close-sidebar-panel', this.closeFilters);
   },
   created () {
       // if(this.getStoredCurrentRouterPath !== this.$route.path ) {
@@ -885,13 +886,15 @@ export default {
     },
     openFilters () {
       this.mobileFilters = true;
+      this.$store.commit('ui/setOverlay', true);
       const el = document.body; // to fix background scroll issue when the filter opened
       el.classList.add('openfilter');
       el.classList.add('no-scroll');
       document.documentElement.classList.add('no-scroll');
     },
-    closeFilters () {
+    closeFilters (closeFlag) {
       this.mobileFilters = false
+      this.$store.commit('ui/setOverlay', false);
       const el = document.body;
       el.classList.remove('openfilter');
       el.classList.remove('no-scroll');
@@ -1017,6 +1020,9 @@ export default {
     }
 
 
+  },
+  beforeDestroy () {
+    this.$bus.$off('close-sidebar-panel');
   },
   destroyed () {
     document.removeEventListener('scroll', this.handleScroll);
@@ -1354,7 +1360,7 @@ input {
       width: 100%;
       height: 75px;
       background: #FFFFFF;
-      z-index:1;
+      z-index:10;
    }
    .mob-siderbar-footer .done-button{     
      right: 65px;
