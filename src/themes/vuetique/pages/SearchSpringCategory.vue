@@ -179,7 +179,7 @@
                 <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
-                    :openType= "facetsitem.facet_active"
+                    :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
                     v-if="facetsitem.type !== 'hierarchy' && (facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
@@ -335,7 +335,7 @@
                  <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
-                    :openType= "facetsitem.facet_active"
+                    :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
                     v-if="facetsitem.type !== 'hierarchy' && (facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
