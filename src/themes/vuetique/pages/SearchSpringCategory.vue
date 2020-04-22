@@ -3,12 +3,15 @@
      <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div>
-    <header class="pb-5 row bg-grey-lightest mb-6 head_category">
+    <header class="row bg-grey-lightest mb-6 head_category"> <!-- pb-5 -->
       <div class="container d_item">
         <div class="row items-center mt-2">
-          <h1 class="col-8">
+          <h1 class="col-8 hidden lg:block">
             {{ category.name }}
           </h1>
+          <h4 class="col-8 lg:hidden">
+            {{ category.name }}
+          </h4>          
            <div class="col-2 hidden lg:block">
                 <label class="mr10">{{ $t('Columns') }}:</label>
                 <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
@@ -1333,7 +1336,7 @@ input {
   .category_filter_out_pop_box_mob{
     width:100%;
     float: left;
-    padding: 10px 10px;
+    // padding: 10px 10px;
     background: none;
   }
 
