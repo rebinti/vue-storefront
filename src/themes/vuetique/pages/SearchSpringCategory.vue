@@ -1354,7 +1354,7 @@ input {
       width: 100%;
       height: 75px;
       background: #FFFFFF;
-      z-index
+      z-index:1;
    }
    .mob-siderbar-footer .done-button{     
      right: 65px;
