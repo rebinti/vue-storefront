@@ -143,8 +143,13 @@
                 {{ $t('About us') }}
               </h3>
               <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/i/about-us')" exact>
+                <router-link class="menu-link" :to="localizedRoute('/i/about-magento-demo-store')" exact>
                   {{ $t('About us (Magento CMS)') }}
+                </router-link>
+              </div>     
+               <div class="my-3">
+                <router-link class="menu-link" :to="localizedRoute('/i/customer-service')" exact>
+                  {{ $t('Customer service (Magento CMS)') }}
                 </router-link>
               </div>             
               <div class="my-3">
