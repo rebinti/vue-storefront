@@ -13,9 +13,8 @@
     <span
       class="minicart-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary"
       v-cloak
-      v-show="totalQuantity"
       data-testid="minicartCount"
-    >
+    >  <!-- v-show="totalQuantity" -->
       {{ totalQuantity }}
     </span>
   </button>

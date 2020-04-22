@@ -158,7 +158,7 @@
               <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
-                    :openType= "false"
+                    :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
                     v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
@@ -224,6 +224,31 @@
               <h5>NO RESULTS FOUND <span v-if="squery">FOR {{ squery }} </span>!.</h5>
               <h6>If you are not seeing any results, try removing some of your selected filters above.</h6>
             </div>
+
+            <div class="mob-siderbar-footer">
+               <button
+                type="button"
+                class="absolute bottom-0 right-0 m-4 h-4"
+                style="border: 1px solid;
+                        width: 105px;
+                        height: 44px;
+                        background: black;
+                        color: white;
+                        font-size: 18px;"
+                @click="closeFilters"
+              > Done </button>
+                <button
+                type="button"
+                :disabled="!(searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0)"
+                 class="absolute bottom-0 m-4 h-4"
+                  style="border: 1px solid;
+                        width: 105px;
+                        height: 44px;
+                        right: 112px;
+                        font-size: 16px;"
+                 @click="clearAllFilter()" > Reset </button>
+            </div>
+
           </div>
         </div>
       </div>
@@ -298,7 +323,7 @@
                  <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
-                    :openType= "false"
+                    :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
                     v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
                   >
@@ -617,6 +642,7 @@ export default {
 
     setFilterData (facetssection, item) {
       // console.log('setFilterData', facetssection, item);
+       item.active = true;
       if (facetssection.field === 'category_hierarchy') {
         if ( this.findIndexInFilterItems ('filter.category_hierarchy') ) {
           this.$store.dispatch('searchSpringSearch/removeFilterItem', 'filter.category_hierarchy')
@@ -1139,5 +1165,17 @@ input {
       bottom: 515px;
   }
 }
+
+   .mob-siderbar-footer{
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      height: 75px;
+      background: #FFFFFF;
+
+   }
+   .mob-siderbar-footer button{
+     margin-right: 30px;
+   }
 
 </style>
