@@ -247,7 +247,7 @@
             <div class="mob-siderbar-footer">
                <button
                 type="button"
-                class="absolute bottom-0 right-0 m-4 h-4"
+                class="absolute bottom-0 right-0 m-4 h-4 done-button"
                 style="border: 1px solid;
                         width: 105px;
                         height: 44px;
@@ -259,7 +259,7 @@
                 <button
                 type="button"
                 :disabled="!(searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0)"
-                 class="absolute bottom-0 m-4 h-4"
+                 class="absolute bottom-0 m-4 h-4 reset-button"
                   style="border: 1px solid;
                         width: 105px;
                         height: 44px;
@@ -1344,6 +1344,9 @@ input {
    }
    .mobile-filters{
      padding-bottom: 70px;
+     width: 85%;
+     right:0;
+     left: inherit;
    }
    .mob-siderbar-footer{
       position: fixed;
@@ -1351,11 +1354,14 @@ input {
       width: 100%;
       height: 75px;
       background: #FFFFFF;
-
+      z-index
    }
-   .mob-siderbar-footer button{
-     margin-right: 30px;
+   .mob-siderbar-footer .done-button{     
+     right: 65px;
    }
+   .mob-siderbar-footer .reset-button{     
+     right: 45px;
+   }   
 } 
 
 
