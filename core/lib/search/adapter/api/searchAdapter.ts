@@ -198,6 +198,15 @@ export class SearchAdapter {
         return this.handleResult(resp, 'brand', start, size)
       }
     })
+    this.registerEntityType('banner', {
+      queryProcessor: (query) => {
+        // function that can modify the query each time before it's being executed
+        return query
+      },
+      resultPorcessor: (resp, start, size) => {
+        return this.handleResult(resp, 'banner', start, size)
+      }
+    })
     this.registerEntityType('cms_hierarchy', {
       queryProcessor: (query) => {
         // function that can modify the query each time before it's being executed

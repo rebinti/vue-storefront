@@ -37,12 +37,14 @@ const store = {
     brandSelectedChar: '',
     fbLoggedInfo: null,
     googleLoggedInfo: null,
-    selectedSocialLoginType: null
+    selectedSocialLoginType: null,
+    mainSliderData: []
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
     getDefaultColumnMobile: state => state.defaultColumnMobile,
-    getBrandsList: state => state.brandsList
+    getBrandsList: state => state.brandsList,
+    getMainSliderData: state => state.mainSliderData
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -121,6 +123,9 @@ const store = {
       } else if ( data.type === 'google') {
          state.googleLoggedInfo = null;
       }
+   },
+   setHomePageMainSliderData (state, data) {
+      state.mainSliderData = data;
    }
   },
   actions: {
@@ -154,6 +159,20 @@ const store = {
           })
           .catch(err => {
             Logger.error(err, 'ui/brands')()
+          })
+    },
+    getSliderData ({commit}, { key = '_type', value, excludeFields = null, includeFields = null, skipCache = false }) {
+      let query = new SearchQuery()
+      if (value) {
+        query = query.applyFilter({key: key, value: {'eq': value}})
+      }
+      return quickSearchByQuery({ query, entityType: 'banner', excludeFields, includeFields })
+        .then((resp) => {
+          commit('setHomePageMainSliderData', resp.items);
+          return resp.items
+        })
+        .catch(err => {
+          Logger.error(err, 'ui/brands')()
           })
     },
     setBrandsFiltersAction({commit}, state) {

@@ -2,15 +2,15 @@
   <section class="main-slider w-full text-white">
     <no-ssr>
       <carousel :per-page="1" pagination-active-color="#ffffff" pagination-color="#e0e0e0">
-        <slide v-for="(slide, index) in slides" :key="index">
-          <div class="slide w-full" v-lazy:background-image="slide.image">
+        <slide v-for="(slide, index) in mainSliderData" :key="index">
+          <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
               <div class="w-full px-10p">
                 <h1 class="text-hero mt-0 mb-8 text-center" data-testid="mainSliderTitle">
-                  {{ slide.title }}
+                  {{ slide.name }}
                 </h1>
                 <div class="mx-auto w-48">
-                  <button-full :link="{path: slide.link}" class="btn-primary">
+                  <button-full :link="{path: slide.click_url}" class="btn-primary">
                     {{ slide.button_text }}
                   </button-full>
                 </div>
@@ -24,11 +24,14 @@
 </template>
 
 <script>
+import config from 'config'
 import NoSSR from 'vue-no-ssr'
 import { Carousel, Slide } from 'vue-carousel'
 import sliderData from 'theme/resource/slider.json'
 
 import ButtonFull from 'theme/components/theme/ButtonFull'
+
+import { mapState } from 'vuex'
 
 export default {
   data () {
@@ -36,7 +39,8 @@ export default {
       currentSlide: 1,
       slides: [],
       totalSlides: 1,
-      windowWidth: 0
+      windowWidth: 0,
+      imageBaseUrl: config.homePageMainSliderConfig.imageBaseUrl
     }
   },
   components: {
@@ -44,6 +48,14 @@ export default {
     Carousel,
     Slide,
     'no-ssr': NoSSR
+  },
+  computed: {
+     ...mapState({
+      mainSliderData: state => state.ui.mainSliderData.filter(val=> val.image !== null).map(slide => {
+        slide.button_text= 'Find your purpose'
+        return slide
+      })
+    }),
   },
   methods: {
     updateSliderData (data) {
@@ -57,7 +69,18 @@ export default {
       else {
           this.updateSliderData(sliderData.web)
       }
-    }
+    },
+    async getSliderData() {
+      if (this.mainSliderData.length > 0) { 
+        return; 
+      }
+      this.$store.dispatch('ui/getSliderData', {
+          key: '_type',
+          value: "banner"
+      }).then(res => {
+        //  console.log('getSliderData', res );
+      });
+   },
   },
   mounted () {
     window.addEventListener('resize', () => {
@@ -72,6 +95,7 @@ export default {
   },
   created () {
     this.checkSliderData();
+    this.getSliderData();
     //this.updateSliderData(sliderData.web)
   },
   destroyed () {

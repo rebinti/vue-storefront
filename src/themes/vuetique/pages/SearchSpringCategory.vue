@@ -1443,12 +1443,13 @@ input {
      left: inherit;
    }
    .mob-siderbar-footer{
-      position: fixed;
+      // position: fixed;
       bottom: 0px;
       width: 100%;
-      height: 75px;
+      // height: 75px;
       background: #FFFFFF;
       z-index:10;
+      text-align: right;
    }
    .mob-siderbar-footer .done-button{     
       right: 65px;
@@ -1469,6 +1470,11 @@ input {
       height: 44px;
       font-size: 16px;
    }   
+   .mob-siderbar-footer-inner {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
 } 
 
   
