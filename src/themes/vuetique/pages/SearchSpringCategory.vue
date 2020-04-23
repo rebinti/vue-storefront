@@ -245,27 +245,18 @@
             </div>
 
             <div class="mob-siderbar-footer">
-               <button
-                type="button"
-                class="absolute bottom-0 right-0 m-4 h-4 done-button"
-                style="border: 1px solid;
-                        width: 105px;
-                        height: 44px;
-                        background: black;
-                        color: white;
-                        font-size: 18px;"
-                @click="closeFilters"
-              > Done </button>
-                <button
-                type="button"
-                :disabled="!(searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0)"
-                 class="absolute bottom-0 m-4 h-4 reset-button"
-                  style="border: 1px solid;
-                        width: 105px;
-                        height: 44px;
-                        right: 112px;
-                        font-size: 16px;"
-                 @click="clearAllFilter()" > Reset </button>
+              <div class="mob-siderbar-footer-inner">
+                    <button
+                      type="button"
+                      class=" m-4 h-4 done-button"
+                      @click="closeFilters"
+                    > Done </button>
+                      <button
+                      type="button"
+                      :disabled="!(searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0)"
+                      class=" m-4 h-4 reset-button"
+                      @click="clearAllFilter()" > Reset </button>
+                </div>
             </div>
           </div>
         </div>
@@ -1347,6 +1338,7 @@ input {
    }
    .sidebar{
       position: relative;
+      padding-bottom: 90px;
    }
    .mobile-filters{
      padding-bottom: 70px;
@@ -1363,10 +1355,23 @@ input {
       z-index:10;
    }
    .mob-siderbar-footer .done-button{     
-     right: 65px;
+     right: 73px;
+     
+     border: 1px solid;
+     width: 105px;
+     height: 44px;
+     background: black;
+     color: white;
+     font-size: 18px;
    }
    .mob-siderbar-footer .reset-button{     
-      left: 45px;
+      left: auto;
+      right: auto;
+
+      border: 1px solid;
+      width: 105px;
+      height: 44px;
+      font-size: 16px;
    }   
 } 
 
@@ -1393,6 +1398,80 @@ input {
     // padding: 10px 10px;
     background: none;
   }
+
+
+  @media (max-width: 320px) { 
+
+    .sidebar{
+      position: relative;
+        padding-bottom: 90px;
+    }
+
+   .mob-siderbar-footer .done-button{     
+     right: 65px;
+
+    border: 1px solid;
+    width: 100px;
+    height: 31px;
+    background: black;
+    color: white;
+    font-size: 16px;
+   }
+
+   .mob-siderbar-footer .reset-button{     
+      left: auto;
+      right: auto;
+
+      border: 1px solid;
+      width: 100px;
+      height: 31px;
+      font-size: 13px;
+   }   
+
+  }
+
+@media screen and (min-width: 520px) and (max-width: 992px)  {
+  // @media (max-width: 768px) { 
+   .sidebar{
+      position: relative;
+      padding-bottom: 90px;
+   }
+   .mobile-filters{
+     padding-bottom: 70px;
+     width: 85%;
+     right:0;
+     left: inherit;
+   }
+   .mob-siderbar-footer{
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      height: 75px;
+      background: #FFFFFF;
+      z-index:10;
+   }
+   .mob-siderbar-footer .done-button{     
+      right: 65px;
+
+      border: 1px solid;
+      width: 105px;
+      height: 44px;
+      background: black;
+      color: white;
+      font-size: 18px;
+   }
+   .mob-siderbar-footer .reset-button{     
+      left: auto;
+      right: auto;
+
+      border: 1px solid;
+      width: 105px;
+      height: 44px;
+      font-size: 16px;
+   }   
+} 
+
+  
 
 
 </style>
