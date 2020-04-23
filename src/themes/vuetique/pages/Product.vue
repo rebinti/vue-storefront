@@ -584,11 +584,11 @@
 
     <related-products
       type="upsell"
+      typeofview="carousel"
       :heading="$t('We found other products you might like')"
     />
     <promoted-offers collection="productBanners" class="my-8 px-6" />
-    <related-products type="related" />
-
+    <related-products type="related"  typeofview="carousel" />
     <div class="container my-4">
       <no-ssr>
         <recently-viewed />

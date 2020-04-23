@@ -152,6 +152,7 @@ export default {
     .vt-icon {
       width: 8px;
       height: 8px;
+      margin: 0 auto;
     }
   }
 }
