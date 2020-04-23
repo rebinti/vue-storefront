@@ -394,9 +394,13 @@
                   class="py-3 text-sm"
                 />
               </div>
+
+               <div class="col-6">
+                <wishlist-button :product="product" />
+              </div>
             </div>
 
-            <div class="row text-sm md:py-5 text-center add-to-buttons">
+            <!-- <div class="row text-sm md:py-5 text-center add-to-buttons">
               <div class="col-6">
                 <wishlist-button :product="product" />
               </div>
@@ -419,9 +423,9 @@
                   </template>
                 </button>
               </div>
-            </div>
+            </div> -->
 
-            <div class="row text-sm md:py-5 text-center add-to-buttons">
+            <!-- <div class="row text-sm md:py-5 text-center add-to-buttons">
                <div class="col-6">
                 <button
                   @click="toggleReviewPanel"
@@ -435,13 +439,68 @@
                     {{ $t('Show Reviews') }}
                 </button>
               </div>
-            </div>
+            </div> -->
+
+            <div class="container my-4">
+                <div class="border-b border-grey-light mt-5 pb-5" />
+
+                <div class="border-b border-grey-light mt-5 pb-5">
+                  <h3 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
+                    <span>{{ $t('Product details') }}</span>
+                    <svg viewBox="0 0 25 25" class="vt-icon">
+                      <use v-if="detailsAccordion != 'details'" xlink:href="#down" />
+                      <use v-else xlink:href="#up" />
+                    </svg>
+                  </h3>
+                  <transition name="fade">
+                    <section v-show="detailsAccordion == 'details'" class="details mt-10">
+                      <div
+                        class="details-wrapper"
+                        :class="{'details-wrapper--open': detailsOpen}"
+                      >
+                        <div
+                          class="text-h5 leading-loose"
+                          itemprop="description"
+                          v-html="product.description"
+                        />
+                        <div
+                          class="details-overlay"
+                          @click="showDetails"
+                        />
+                      </div>
+                    </section>
+                  </transition>
+                </div>
+                <div class="border-b border-grey-light mt-5 pb-5">
+                  <h3 @click.prevent="detailsAccordion != 'specs' ? detailsAccordion = 'specs' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
+                    <span>{{ $t('Specifications') }}</span>
+                    <svg viewBox="0 0 25 25" class="vt-icon">
+                      <use v-if="detailsAccordion != 'specs'" xlink:href="#down" />
+                      <use v-else xlink:href="#up" />
+                    </svg>
+                  </h3>
+                  <transition name="fade">
+                    <section v-show="detailsAccordion == 'specs'" class="specs mt-10">
+                      <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
+                        <product-attribute
+                          :key="attr.attribute_code"
+                          v-for="attr in customAttributes"
+                          :product="product"
+                          :attribute="attr"
+                          empty-placeholder="N/A"
+                        />
+                      </ul>
+                    </section>
+                  </transition>
+                </div>
+              </div>
+
           </div>
         </section>
       </div>
     </section>
 
-    <section>
+    <!-- <section>
        <div class="container my-4" style="margin-top:50px;margin-bottom:50px;display:none;" v-if="getProductId">
                 <div id="stamped-main-widget" 
                   :data-product-id="getProductId" 
@@ -452,9 +511,9 @@
                   :data-product-sku="product.sku"> 
                 </div>
       </div>
-    </section>
+    </section> -->
 
-    <div class="container my-4">
+    <!-- <div class="container my-4">
       <div class="border-b border-grey-light mt-5 pb-5" />
 
       <div class="border-b border-grey-light mt-5 pb-5">
@@ -521,7 +580,7 @@
           </section>
         </transition>
       </div>
-    </div>
+    </div> -->
 
     <related-products
       type="upsell"
