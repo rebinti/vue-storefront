@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{'active': active}"
-    class="border border-grey-light font-medium text-xs text-grey-dark generic-selector"
+    class="mr-3 border border-grey-light font-medium text-xs text-grey-dark generic-selector"
     @click="switchFilter(id, label)"
     :aria-label="$t('Select ' + label)"
   >
@@ -18,8 +18,8 @@ export default {
 
 <style lang="scss" scoped>
   .generic-selector {
-    height: 40px;
-    min-width: 40px;
+    height: 32px;
+    min-width: 32px;
     padding-left: 8px;
     padding-right: 8px;
 

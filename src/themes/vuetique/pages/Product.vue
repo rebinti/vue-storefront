@@ -64,7 +64,7 @@
                         >{{ getBrandLabelDetails.label }}
                         </router-link>
                    </p>
-                    <h1 data-testid="productName" itemprop="name">
+                    <h1 data-testid="productName" itemprop="name" class="product-title-d">
                       {{ product.name | htmlDecode }}
                     </h1>
                     <div class="text-grey text-sm sku_txt">
@@ -120,7 +120,7 @@
                             >
                             <div class="clr_img_out">
                               <div class="clr_img_inner">
-                              <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                              <img :width="'32px'" :height="'32px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
                                                 @error="imgUrlAlt" alt="" >
                               </div>
                             </div>
@@ -229,9 +229,9 @@
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
-            <div class="text-grey text-sm mb-3 uppercase">
+            <!-- <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
-            </div>
+            </div> -->
             <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
 	
             <div class="tfc-fitrec-product" id="DS20" data-userid=""
@@ -279,7 +279,7 @@
                 </div>
                 <!-- Color swatch products Links -->
                 <div v-if="colorSwatchRelateProduct.length > 0">
-                  <p class="font-bold mb-4">Color: </p>
+                  <p class="font-bold">Color: </p> <!-- mb-4 -->
                     <router-link
                         class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
                         :to="productLink(prod)"
@@ -292,7 +292,7 @@
                           >
                           <div class="clr_img_out">
                             <div class="clr_img_inner">
-                            <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                            <img :width="'32px'" :height="'32px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
                                               @error="imgUrlAlt" alt="" >
                             </div>
                           </div>
@@ -305,7 +305,7 @@
                   v-if="(!product.errors || Object.keys(product.errors).length === 0) && Object.keys(configuration).length > 0"
                   :key="index"
                 >
-                  <div class="pt-4 pb-2" data-testid="variantsLabel">
+                  <div class=" pb-2" data-testid="variantsLabel">
                     <span class="font-bold">{{ option.label }}</span>:
                     <span>
                       {{ configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()] ? configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()].label : null }}
@@ -395,7 +395,7 @@
                 />
               </div>
 
-               <div class="col-6">
+               <div class="col-6 wishlist-button">
                 <wishlist-button :product="product" />
               </div>
             </div>
@@ -441,21 +441,21 @@
               </div>
             </div> -->
 
-            <div class="container my-4">
-                <div class="border-b border-grey-light mt-5 pb-5" />
+            <div class="container">  <!-- my-4 -->
+                 <div class="border-b border-grey-light mt-5" /> <!-- pb-5 -->
 
                 <div class="border-b border-grey-light mt-5 pb-5">
-                  <h3 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
+                  <h5 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
                     <span>{{ $t('Product details') }}</span>
                     <svg viewBox="0 0 25 25" class="vt-icon">
                       <use v-if="detailsAccordion != 'details'" xlink:href="#down" />
                       <use v-else xlink:href="#up" />
                     </svg>
-                  </h3>
+                  </h5>
                   <transition name="fade">
-                    <section v-show="detailsAccordion == 'details'" class="details mt-10">
+                    <section v-show="detailsAccordion == 'details'" class="details mt-4">
                       <div
-                        class="details-wrapper"
+                        class="details-wrapper details-accor"
                         :class="{'details-wrapper--open': detailsOpen}"
                       >
                         <div
@@ -472,16 +472,16 @@
                   </transition>
                 </div>
                 <div class="border-b border-grey-light mt-5 pb-5">
-                  <h3 @click.prevent="detailsAccordion != 'specs' ? detailsAccordion = 'specs' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
+                  <h5 @click.prevent="detailsAccordion != 'specs' ? detailsAccordion = 'specs' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
                     <span>{{ $t('Specifications') }}</span>
                     <svg viewBox="0 0 25 25" class="vt-icon">
                       <use v-if="detailsAccordion != 'specs'" xlink:href="#down" />
                       <use v-else xlink:href="#up" />
                     </svg>
-                  </h3>
+                  </h5>
                   <transition name="fade">
-                    <section v-show="detailsAccordion == 'specs'" class="specs mt-10">
-                      <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
+                    <section v-show="detailsAccordion == 'specs'" class="specs mt-4">
+                      <!-- <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
                         <product-attribute
                           :key="attr.attribute_code"
                           v-for="attr in customAttributes"
@@ -489,7 +489,21 @@
                           :attribute="attr"
                           empty-placeholder="N/A"
                         />
-                      </ul>
+                      </ul> -->
+                      <div
+                        class="details-wrapper details-accor"
+                        :class="{'details-wrapper--open': detailsOpen}"
+                      >
+                        <div
+                          class="text-h5 leading-loose"
+                          itemprop="description"
+                          v-html="product.short_description"
+                        />
+                        <div
+                          class="details-overlay"
+                          @click="showDetails"
+                        />
+                      </div>                      
                     </section>
                   </transition>
                 </div>
@@ -923,7 +937,16 @@ export default {
     max-height: none;
   }
 }
-
+.wishlist-button div{
+      margin: 7px;
+}
+.details-accor{
+    height: 80px;
+    overflow: auto;
+}
+.product-title-d{
+  margin-bottom: 10px;
+}
 .details-overlay {
   @media (max-width: 767px) {
     position: absolute;
