@@ -923,7 +923,7 @@ export default {
   }
   .review-div{
     width: 50%;
-    float: left;
+    float: right;
     margin-top: 8px;
     .stamped-main-badge{
         float: right;
@@ -1052,7 +1052,10 @@ export default {
               font-size: 24px;
             }
           }            
-        }            
+        }
+        .border-b {
+           border-bottom-width: 0px;
+        }                   
       }
     }
   }      
@@ -1067,11 +1070,12 @@ export default {
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 1.2rem;
-          line-height: 1.5rem;
+          font-size: 1rem;
+          line-height: 2rem;
           text-transform: uppercase;
         }
         div.price{
+          margin-top: 5px;
           .text-h1{
             font-size: 18px; 
           }          
@@ -1081,7 +1085,28 @@ export default {
               font-size: 18px;
             }
           }            
-        }            
+        }
+        .brand-review-div{
+          .brand-div{
+            p{
+              margin-top: 8px;
+              a{                
+                font-size: 14px;
+              }
+            }
+          }
+        }
+        .color{
+          .clr_img_inner{
+            img{
+              width: 38px;
+              height: 38px;
+            }
+          }
+        }
+        .border-b {
+           border-bottom-width: 0px;
+        }                      
       }
     }
   }    
@@ -1100,17 +1125,36 @@ export default {
           line-height: 1.5rem;
           text-transform: uppercase;
         }
+        h5 {
+          font-size: 0.675rem;
+        }
         div.price{
           .text-h1{
-            font-size: 12px; 
+            font-size: 14px; 
           }          
-          font-size: 12px;
+          font-size: 14px;
           div{
             span{
-              font-size: 12px;
+              font-size: 14px;
             }
           }            
-        }           
+        }
+        .sizes{
+          .pt-4{
+            padding-top: 0rem;
+          }
+        }
+        .color{
+          .clr_img_inner{
+            img{
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+        .border-b {
+           border-bottom-width: 0px;
+        }                  
       }
     }
   }  

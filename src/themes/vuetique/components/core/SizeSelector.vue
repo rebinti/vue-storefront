@@ -44,8 +44,14 @@ export default {
   }
   @media (max-width: 1920px) {
     .size-selector {
-      height: 50px;
-      min-width: 50px;
+      height: 38px;
+      min-width: 38px;
     }    
-  }  
+  } 
+  @media (max-width: 1440px) {
+    .size-selector {
+      height: 32px;
+      min-width: 32px;
+    }      
+  }   
 </style>
