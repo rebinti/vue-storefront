@@ -52,7 +52,8 @@ export default {
     if (queryKey && queryValue) {
       this.$store.dispatch('cmsBlock/single', {
         key: queryKey,
-        value: queryValue
+        value: queryValue,
+        skipCache: this.sync
       })
     }
   },

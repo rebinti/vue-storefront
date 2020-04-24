@@ -14,21 +14,21 @@
       v-cloak
       data-testid="minicartCount"
     >
-      <template v-if="productsInWishlist.length > 0">
-        {{ productsInWishlist[0].length }}
-      </template>
-      <template v-else>
-        0
-      </template>
+        {{ getWishlistProducts.length }}
     </span>
   </button>
 </template>
 
 <script>
 import WishlistIcon from '@vue-storefront/core/compatibility/components/blocks/Header/WishlistIcon'
-import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist'
+// import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist'
 
 export default {
-  mixins: [WishlistIcon, Wishlist]
+  mixins: [WishlistIcon],
+  computed: {
+      getWishlistProducts () {
+          return this.$store.state.wishlist.items.length > 0 ? this.$store.state.wishlist.items[0] : []
+      }
+  }
 }
 </script>

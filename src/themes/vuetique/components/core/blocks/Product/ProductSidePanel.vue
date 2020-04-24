@@ -14,7 +14,7 @@
     
     <h3>Size Guide</h3>
 
-    <cms-block :identifier="'product-size-guide'" />
+    <cms-block :identifier="'product-size-guide'" :sync="true"/>
 
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted () {
-     console.log('yoptoProduct' , this.yoptoProduct);
+    //  console.log('yoptoProduct' , this.yoptoProduct);
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
