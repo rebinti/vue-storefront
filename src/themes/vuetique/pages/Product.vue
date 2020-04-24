@@ -1058,7 +1058,8 @@ export default {
         height: 960px;
         margin-right: 271px!important;
         padding-left: 1.5rem;
-        padding-right: 1.5rem;        
+	      padding-right: 1.5rem; 	
+        box-shadow: 0 7px 20px rgba(0, 0, 0, 0.6);         
         h1{
           font-size: 1.4rem;
           line-height: 3.8rem;
@@ -1111,7 +1112,7 @@ export default {
         .brand-review-div{
           .brand-div{
             p{
-              margin-top: 8px;
+              margin-top: 8px !important;
               a{                
                 font-size: 14px;
               }
@@ -1211,25 +1212,25 @@ export default {
   }      
 }
 @media (max-width: 768px) {
- .details-section  h1 {
-    font-size: 1rem;
-    line-height: 2rem;
-  }   
-  .details-section.md\:px-10{
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;    
-  }
-  .details-section.md\:w-2\/5 {
-    width: 42%;
-  }
-  .details-section .text-h1 {
-    font-size: 1rem;
-  }
-  .details-section .pb-5 {
-    padding-bottom: .25rem;
-  }
+//  .details-section  h1 {
+//     font-size: 1rem;
+//     line-height: 2rem;
+//   }   
+//   .details-section.md\:px-10{
+//     padding-left: 1.5rem;
+//     padding-right: 1.5rem;    
+//   }
+//   .details-section.md\:w-2\/5 {
+//     width: 42%;
+//   }
+//   .details-section .text-h1 {
+//     font-size: 1rem;
+//   }
+//   .details-section .pb-5 {
+//     padding-bottom: .25rem;
+//   }
 }
-@media (min-width: 576px) {
+@media (min-width: 768px) {
 
   .m_item{
     display: none;
@@ -1253,8 +1254,10 @@ export default {
 
 }
 
-@media (max-width: 576px) {
-  
+@media (max-width: 768px) {	
+  .m_item{	
+    display: block;	
+  }
   .ds_item{
     display: none;
   }
