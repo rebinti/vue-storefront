@@ -298,7 +298,7 @@
                           >
                           <div class="clr_img_out">
                             <div class="clr_img_inner">
-                            <img :width="'32px'" :height="'32px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                            <img :width="'50px'" :height="'50px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
                                               @error="imgUrlAlt" alt="" >
                             </div>
                           </div>

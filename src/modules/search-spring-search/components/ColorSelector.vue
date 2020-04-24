@@ -7,7 +7,7 @@
 
   <div class="clr_img_out">
 		<div class="clr_img_inner">
-		 <img :width="'40px'" :height="'40px'" :src="'/assets/colour/' + label.toLowerCase() +'.png'" 
+		 <img :width="'50px'" :height="'50px'" :src="'/assets/colour/' + label.toLowerCase() +'.png'" 
                       @error="imgUrlAlt" alt="" >
 		</div>
 	</div>
