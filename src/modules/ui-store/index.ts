@@ -38,7 +38,8 @@ const store = {
     fbLoggedInfo: null,
     googleLoggedInfo: null,
     selectedSocialLoginType: null,
-    mainSliderData: []
+    mainSliderData: [],
+    productSidePanelFlag: false
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -126,7 +127,11 @@ const store = {
    },
    setHomePageMainSliderData (state, data) {
       state.mainSliderData = data;
-   }
+   },
+   setProductSidePanelFlag (state, action) {
+    state.productSidePanelFlag = action === true
+    state.overlay = action === true
+  },
   },
   actions: {
     toggleMicrocart ({ commit, state }) {
@@ -137,6 +142,9 @@ const store = {
     },
     toggleReviewPanel ({ commit, state }) {
       commit('setReviewPanel', !state.reviewPanel)
+    },
+    toggleProductSidePanel ({ commit, state }) {
+      commit('setProductSidePanelFlag', !state.productSidePanelFlag)
     },
     updateYoptoProduct ({commit}, state) {
       commit('setYoptoProduct', state)

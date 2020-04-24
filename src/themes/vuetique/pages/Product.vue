@@ -154,14 +154,25 @@
                           />
                         </div>
                         <div class="sizes" v-else-if="option.label == 'Size'">
-                          <router-link
+                          <!-- <router-link
                             to="/size-guide"
                             target="_blank"
                             v-if="option.label == 'Size'"
                             class="text-sm font-medium text-black pt-4 absolute top-0 right-0 size_link"
                           >
                             {{ $t('Size guide') }}
-                          </router-link>
+                          </router-link> -->
+                        <a href="javascript:void(0);"  
+                          style="position: absolute;
+                              right: 0;
+                              top: 0;
+                              color: #000;
+                              border-bottom: 1px solid #b3b3b3;
+                              font-weight: 400;"
+                       @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                        data-testid="sizeGuide">
+                          Size Guide
+                      </a>
                           <size-selector
                             v-for="(s, i) in options[option.attribute_code]"
                             v-if="isOptionAvailable(s)"
@@ -331,14 +342,25 @@
                       />
                     </div>
                     <div class="sizes" v-else-if="option.label == 'Size'">
-                      <router-link
+                      <!-- <router-link
                         to="/size-guide"
                         target="_blank"
                         v-if="option.label == 'Size'"
                         class="text-sm font-medium text-black pt-4 absolute top-0 right-0"
                       >
                         {{ $t('Size guide') }}
-                      </router-link>
+                      </router-link> -->
+                      <a href="javascript:void(0);"  
+                          style="position: absolute;
+                              right: 0;
+                              top: 0;
+                              color: #000;
+                              border-bottom: 1px solid #b3b3b3;
+                              font-weight: 400;"
+                       @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                        data-testid="sizeGuide">
+                          Size Guide
+                      </a>
                       <size-selector
                         v-for="(s, i) in options[option.attribute_code]"
                       

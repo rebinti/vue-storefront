@@ -15,6 +15,7 @@
         <search-panel v-if="isSearchPanelOpen" />
         <wishlist v-if="isWishlistOpen" />
         <review-panel v-if="isReviewPanelOpen" />
+        <productSidePanel v-if="isProductSidePanelOpen" />
       </transition>
       <slot />
       <main-footer />
@@ -66,6 +67,8 @@ const Wishlist = () => import(/* webpackChunkName: "vsf-wishlist" */ 'theme/comp
 const OrderConfirmation = () => import(/* webpackChunkName: "vsf-order-confirmation" */ 'theme/components/core/blocks/Checkout/OrderConfirmation.vue')
 //  const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
 
+const ProductSidePanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/Product/ProductSidePanel.vue')
+
 export default {
   data () {
     return {
@@ -87,7 +90,8 @@ export default {
       isSidebarOpen: state => state.ui.sidebar,
       isMicrocartOpen: state => state.ui.microcart,
       isWishlistOpen: state => state.ui.wishlist,
-      isReviewPanelOpen: state => state.ui.reviewPanel
+      isReviewPanelOpen: state => state.ui.reviewPanel,
+      isProductSidePanelOpen: state => state.ui.productSidePanelFlag
     })
   },
   methods: {
@@ -161,7 +165,8 @@ export default {
     OrderConfirmation,
     Announcement,
     Icons,
-    ReviewPanel
+    ReviewPanel,
+    ProductSidePanel
   }
 }
 </script>
