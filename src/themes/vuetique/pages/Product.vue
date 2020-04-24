@@ -925,6 +925,9 @@ export default {
     width: 50%;
     float: left;
     margin-top: 8px;
+    .stamped-main-badge{
+        float: right;
+    }
   }
 }
 .flex-grow {
