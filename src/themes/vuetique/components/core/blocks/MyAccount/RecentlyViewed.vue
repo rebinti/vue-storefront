@@ -119,11 +119,13 @@ export default {
 
   .carousel-nav-next {
     position: absolute;
-    left: -42px;
+    left: -75px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #dad5d5;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
   }
   .carousel-nav-next svg {
     margin: 0 auto;
@@ -133,11 +135,13 @@ export default {
   }
   .carousel-nav-prev {
     position: absolute;
-    right: -42px;
+    right: -75px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #dad5d5;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
   }
 }
 </style>
