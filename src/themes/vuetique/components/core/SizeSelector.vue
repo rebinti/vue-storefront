@@ -1,6 +1,6 @@
 <template>
   <button
-    class="mr-3 mb-3 size-selector"
+    class="mr-3 size-selector"
     :class="{ active: active }"
     @click="switchFilter(id, label)"
     :aria-label="$t('Select size ') + label"
@@ -20,11 +20,12 @@ export default {
 <style lang="scss" scoped>
   .size-selector {
     @apply bg-white border border-grey-light font-medium text-xs text-grey-dark;
-    height: 32px;
-    min-width: 32px;
+    height: 40px;
+    min-width: 40px;
 
     &.active {
-      @apply border-grey-dark text-black;
+      @apply border-black text-white;
+      background: #000000;
     }
     
     &.out-of-stock {
@@ -35,4 +36,16 @@ export default {
       @apply text-disabled border-disabled cursor-not-allowed;
     }
   }
+  @media (max-width: 2560px) {
+    .size-selector {
+      height: 50px;
+      min-width: 50px;
+    }
+  }
+  @media (max-width: 1920px) {
+    .size-selector {
+      height: 50px;
+      min-width: 50px;
+    }    
+  }  
 </style>

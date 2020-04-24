@@ -18,8 +18,8 @@ export default {
 
 <style lang="scss" scoped>
   .generic-selector {
-    height: 32px;
-    min-width: 32px;
+    height: 40px;
+    min-width: 40px;
     padding-left: 8px;
     padding-right: 8px;
 
@@ -35,4 +35,16 @@ export default {
       @apply text-disabled border-disabled cursor-not-allowed;
     }
   }
+  @media (max-width: 2560px) {
+    .generic-selector {
+      height: 50px;
+      min-width: 50px;
+    }
+  }
+  @media (max-width: 1920px) {
+    .generic-selector {
+      height: 50px;
+      min-width: 50px;
+    }    
+  }    
 </style>

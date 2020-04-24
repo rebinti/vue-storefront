@@ -1,5 +1,5 @@
 <template>
-  <div :class="'qty-input__' + size">
+  <div :class="'qty-input__' + size" style="display:none;">
     <label class="pb-2 hidden" for="quantity">{{ $t('Quantity') }}</label>
     <div class="flex h-full">
       <input

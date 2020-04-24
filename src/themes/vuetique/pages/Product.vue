@@ -218,21 +218,27 @@
 
 
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
-          <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
-            <router-link
-                class="menu-link"
-                :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
-                exact
-              >{{ getBrandLabelDetails.label }}
-              </router-link>
-            </p>
+            <div class="brand-review-div">
+              <div class="brand-div">
+                <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
+                  <router-link
+                    class="menu-link"
+                    :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
+                    exact
+                    >{{ getBrandLabelDetails.label }}
+                  </router-link>
+                </p>
+              </div>
+              <div class="review-div">
+                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+              </div>
+            </div>
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
             <!-- <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
-            </div> -->
-            <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+            </div> -->           
 	
             <div class="tfc-fitrec-product" id="DS20" data-userid=""
              data-colorid="navy" data-locale="en_GB"></div>
@@ -446,7 +452,7 @@
 
                 <div class="border-b border-grey-light mt-5 pb-5">
                   <h5 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
-                    <span>{{ $t('Product details') }}</span>
+                    <span>{{ $t('DETAILS') }}</span>
                     <svg viewBox="0 0 25 25" class="vt-icon">
                       <use v-if="detailsAccordion != 'details'" xlink:href="#down" />
                       <use v-else xlink:href="#up" />
@@ -473,7 +479,7 @@
                 </div>
                 <div class="border-b border-grey-light mt-5 pb-5">
                   <h5 @click.prevent="detailsAccordion != 'specs' ? detailsAccordion = 'specs' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
-                    <span>{{ $t('Specifications') }}</span>
+                    <span>{{ $t('ABOUT') }}</span>
                     <svg viewBox="0 0 25 25" class="vt-icon">
                       <use v-if="detailsAccordion != 'specs'" xlink:href="#down" />
                       <use v-else xlink:href="#up" />
@@ -603,7 +609,7 @@
       />
     </no-ssr>
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
-    <!-- <related-products type="related"  typeofview="carousel" /> -->
+    <related-products type="related" style="display: none;" />
     <div class="container my-4">
       <no-ssr>
         <recently-viewed  typeofview="carousel" />
@@ -899,6 +905,37 @@ export default {
   -webkit-font-smoothing: antialiased;
 }
 
+.brand-review-div{
+  position: relative;
+  width: 100%;
+  height: 38px;
+  overflow: hidden;
+  .brand-div{
+    width: 50%;
+    float: left;
+    p{
+      margin-top: 10px;
+      a{
+        text-transform: uppercase;
+        font-size: 18px;
+      }
+    }
+  }
+  .review-div{
+    width: 50%;
+    float: left;
+    margin-top: 8px;
+  }
+}
+.flex-grow {
+  .bg-grey-dark{
+    background-color: #4fce76;
+  }
+}
+.wishlist-button{
+    border: 1px solid #000000;
+    margin-left: 5px;
+}
 .variants-wrapper {
  .sizes {
     @media (max-width: 767px) {
@@ -998,8 +1035,8 @@ export default {
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 1.85rem;
-          line-height: 2.5rem;
+          font-size: 1.4rem;
+          line-height: 3.8rem;
           text-transform: uppercase;
         }
         div.price{
@@ -1324,19 +1361,11 @@ export default {
   div.clr_img_inner img{
     border-radius: 20px;
   }
-
-
-@media (max-width: 576px) {
-
   .mobile_filter h5.Accordion__trigger{
     color:#000;
     font-size:18px;
     font-weight: 600;
   }
-
-
-}
-
 }
 
 </style>
