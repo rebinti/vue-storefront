@@ -187,11 +187,13 @@ export default {
 
   .carousel-nav-nxt { 
     position: absolute;
-    left: -31px;
+    left: -75px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #dad5d5;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
   }
   .carousel-nav-nxt svg {
     margin: 0 auto;
@@ -201,11 +203,13 @@ export default {
   }
   .carousel-nav-pre {
     position: absolute;
-    right: -31px;
+    right: -75px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #dad5d5;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
   }
 }
 </style>
