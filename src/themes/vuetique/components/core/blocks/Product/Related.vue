@@ -10,9 +10,9 @@
       </header>
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel'">
-        <no-ssr>
-          <carousel v-bind="sliderConfig" @pageChange="setMuted">
+      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul">
+        <!-- <no-ssr> -->
+          <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
               v-for="product in product.related[type].slice(0,8)"
               :key="product.id"
@@ -24,7 +24,7 @@
               />
             </slide>
           </carousel>
-       </no-ssr>
+        <!-- </no-ssr> -->
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,8)" />
     </div>
@@ -44,15 +44,19 @@ export default {
   name: 'Related',
   data () {
     return {
-       currentPage: 0,
+      currentPage: 0,
       sliderConfig: {
-        perPage: 1,
-        perPageCustom: [[0, 2], [1024, 4]],
-        paginationEnabled: true,
+        // perPage: 1,
+        perPageCustom: [[0, 2], [768, 3], [1024, 4]],
+        paginationEnabled: false,
         loop: false,
-        paginationSize: 6,
-        navigationEnabled: true
-      }
+        paginationSize: 5,
+        navigationEnabled: true,
+        navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
+        navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
+      },
+      loadingNewProdFlag: true,
+      refresh: 0
     }
   },
   props: {
@@ -95,6 +99,7 @@ export default {
   },
   methods: {
     refreshList () {
+      this.loadingNewProdFlag = true;
       let sku = this.productLinks ? this.productLinks
         .filter(pl => pl.link_type === this.type)
         .map(pl => pl.linked_product_sku) : null
@@ -117,8 +122,12 @@ export default {
             key: this.type,
             items: response.items
           })
+          this.loadingNewProdFlag = false;
           this.$forceUpdate()
+          this.refresh++;
         }
+      }, err => {
+          this.loadingNewProdFlag = false;
       })
     },
     setMuted (currentPage) {
@@ -169,6 +178,34 @@ export default {
     &:focus {
       outline: none;
     }
+  }
+
+  .VueCarousel-navigation--disabled {
+    display: none;
+  }
+
+
+  .carousel-nav-nxt { 
+    position: absolute;
+    left: -31px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #dad5d5;
+  }
+  .carousel-nav-nxt svg {
+    margin: 0 auto;
+  }
+  .carousel-nav-pre svg {
+    margin: 0 auto;
+  }
+  .carousel-nav-pre {
+    position: absolute;
+    right: -31px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #dad5d5;
   }
 }
 </style>

@@ -595,17 +595,18 @@
         </transition>
       </div>
     </div> -->
-
-    <related-products
-      type="upsell"
-      typeofview="carousel"
-      :heading="$t('We found other products you might like')"
-    />
-    <promoted-offers collection="productBanners" class="my-8 px-6" />
-    <related-products type="related"  typeofview="carousel" />
+    <no-ssr>
+      <related-products
+        type="upsell"
+        typeofview="carousel"
+        :heading="$t('We found other products you might like')"
+      />
+    </no-ssr>
+    <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
+    <!-- <related-products type="related"  typeofview="carousel" /> -->
     <div class="container my-4">
       <no-ssr>
-        <recently-viewed />
+        <recently-viewed  typeofview="carousel" />
       </no-ssr>
     </div>
   </div>
