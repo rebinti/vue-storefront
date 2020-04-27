@@ -249,19 +249,24 @@
             </h1>
             <!-- <div class="text-grey text-sm mb-3 uppercase">
               sku: {{ product.sku }}
-            </div> -->           
-	
-            <div class="tfc-fitrec-product" id="DS20" data-userid=""
-             data-colorid="navy" data-locale="en_GB"></div>
-  <!-- <div
-         class="yotpo yotpo-main-widget"
-         data-product-id="product.id"
-         data-price="product.price"
-         data-currency="product.currency"
-         data-name="product.name"
-         data-url="product.url_path"
-         data-image-url="product.image">
-</div> -->
+            </div> -->   
+
+	        <!-- For TrueFit Review button -->
+            <div class="tfc-fitrec-product" 
+             v-if="getTruefitProd !== null"
+             :id="getTruefitProd.id" data-userid=""
+             :data-colorid="getTruefitProd.color" data-locale="en_GB">
+             </div>
+
+              <!-- <div
+                    class="yotpo yotpo-main-widget"
+                    data-product-id="product.id"
+                    data-price="product.price"
+                    data-currency="product.currency"
+                    data-name="product.name"
+                    data-url="product.url_path"
+                    data-image-url="product.image">
+            </div> -->
 
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
@@ -693,7 +698,8 @@ export default {
       detailsAccordion: null,
       currentGalleryPage: 0,
       colorSwatchRelateProduct: [],
-      getProductId: null
+      getProductId: null,
+      getTruefitProd: null
     }
   },
   directives: { focusClean },
@@ -811,18 +817,33 @@ export default {
     console.log('Stamped getProductId value', this.getProductId)
     this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
 
+    /* 
+      For TrueFit Integration
+    */
+    let trufitIds = [{ id: 'DS20', color: 'navy'},
+                    { id: 'MA810108-P3022', color: 'green'},
+                    { id: 'KP0336', color: 'blue'  },
+                    { id: 'PD51162', color: 'orange'  },
+                    { id: 'MA810236', color: 'navy' },
+                    { id: '10222417', color: 'mustard'},
+                    { id: 'PD810608', color: 'navy' }];
+    this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
+    console.log('TrueFit Integration value', this.getTruefitProd)
+
     // this.$forceUpdate();
     let stampedContainer = document.querySelectorAll(".stamped-container");
     if (stampedContainer.length > 0) {
       stampedContainer.forEach(el => el.remove())
     }
-
     let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
     if (stampedBadge.length > 0) {
       stampedBadge.forEach(el => el.remove())
     }
-
     window.StampedFn.reloadUGC()
+
+    /* For reload the TrueFit part */ 
+    window.tfcapi('calculate');
+
     // this.$forceUpdate();
 
      setTimeout(() => {
