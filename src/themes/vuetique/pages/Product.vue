@@ -254,7 +254,7 @@
 	        <!-- For TrueFit Review button -->
             <div class="tfc-fitrec-product" 
              v-if="getTruefitProd !== null"
-             :id="getTruefitProd.id" data-userid=""
+             :id="getTruefitProd.id" :data-userid="getCurrentUserId"
              :data-colorid="getTruefitProd.color" data-locale="en_GB">
              </div>
 
@@ -710,6 +710,13 @@ export default {
       } else {
          return null
       }
+    },
+    getCurrentUserId () {
+      if (this.$store.state.user.current !== null) {
+          return this.$store.state.user.current.id
+      } else {
+        return ''
+      }
     }
   },
   beforeMount () {
@@ -826,7 +833,9 @@ export default {
                     { id: 'PD51162', color: 'orange'  },
                     { id: 'MA810236', color: 'navy' },
                     { id: '10222417', color: 'mustard'},
-                    { id: 'PD810608', color: 'navy' }];
+                    { id: 'PD810608', color: 'navy' },
+                    {id: 'D146985', color: 'navy' }
+                    ];
     this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
     console.log('TrueFit Integration value', this.getTruefitProd)
 
