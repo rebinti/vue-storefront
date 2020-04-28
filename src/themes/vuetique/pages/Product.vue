@@ -251,13 +251,6 @@
               sku: {{ product.sku }}
             </div> -->   
 
-	        <!-- For TrueFit Review button -->
-            <div class="tfc-fitrec-product" 
-             v-if="getTruefitProd !== null"
-             :id="getTruefitProd.id" :data-userid="getCurrentUserId"
-             :data-colorid="getTruefitProd.color" data-locale="en_GB">
-             </div>
-
               <!-- <div
                     class="yotpo yotpo-main-widget"
                     data-product-id="product.id"
@@ -355,17 +348,6 @@
                       >
                         {{ $t('Size guide') }}
                       </router-link> -->
-                      <a href="javascript:void(0);"  
-                          style="position: absolute;
-                              right: 0;
-                              top: 0;
-                              color: #000;
-                              border-bottom: 1px solid #b3b3b3;
-                              font-weight: 400;"
-                       @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
-                        data-testid="sizeGuide">
-                          Size Guide
-                      </a>
                       <size-selector
                         v-for="(s, i) in options[option.attribute_code]"
                       
@@ -413,6 +395,28 @@
               v-else-if="product.custom_options && product.custom_options.length > 0 && !loading"
               :product="product"
             />
+            <div class="size-fit-part">
+              <!-- For TrueFit Review button -->
+              <div class="fit-label">FIND YOUR SIZE</div>
+              <div class="truefit-button tfc-fitrec-product" 
+                v-if="getTruefitProd !== null"
+                :id="getTruefitProd.id" :data-userid="getCurrentUserId"
+                :data-colorid="getTruefitProd.color" data-locale="en_GB">
+              </div>
+              <div class="size-guide-b">
+                <a href="javascript:void(0);"  
+                    style="position: absolute;
+                        right: 0;
+                        top: 0;
+                        color: #000;
+                        border-bottom: 1px solid #b3b3b3;
+                        font-weight: 400;"
+                  @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                  data-testid="sizeGuide">
+                    Size Guide
+                </a> 
+              </div>             
+            </div>
             <div class="flex mt-6 pb-5 border-b">
               <qty-input
                 v-if="product.type_id !== 'grouped' && product.type_id !== 'bundle'"
@@ -474,7 +478,7 @@
               </div>
             </div> -->
 
-            <div class="container">  <!-- my-4 -->
+            <div class="container accor">  <!-- my-4 -->
                  <div class="border-b border-grey-light mt-5" /> <!-- pb-5 -->
 
                 <div class="border-b border-grey-light mt-5 pb-5">
@@ -1033,10 +1037,10 @@ export default {
 .wishlist-button div{
       margin: 7px;
 }
-.details-accor{
-    height: 80px;
-    overflow: auto;
-}
+// .details-accor{
+//     height: 80px;
+//     overflow: auto;
+// }
 .product-title-d{
   margin-bottom: 10px;
 }
@@ -1096,6 +1100,7 @@ export default {
           text-transform: uppercase;
         }
         div.price{
+          padding-bottom: 20px;
           .text-h1{
             font-size: 24px; 
           }          
@@ -1108,7 +1113,34 @@ export default {
         }
         .border-b {
            border-bottom-width: 0px;
-        }                   
+        }
+        .size-fit-part{
+            overflow: hidden;
+            margin-top: 15px;
+          .fit-label{
+            font-size: 12px;
+            width: 25%;
+            float: left;
+            margin-top: 10px;
+          }
+          .truefit-button{
+            float: left;
+            width: 45%;
+          }
+          .size-guide-b{
+              float: right;
+              width: 25%;
+              position: relative;
+              margin-top: 5px;
+          } 
+        }
+        .accor{
+          height: 400px;
+          overflow: auto;
+          .pb-5{
+              padding-bottom: 0rem;
+          }
+        }                           
       }
     }
   }      
@@ -1129,6 +1161,7 @@ export default {
         }
         div.price{
           margin-top: 5px;
+          padding-bottom: 10px !important;
           .text-h1{
             font-size: 18px; 
           }          
@@ -1152,14 +1185,44 @@ export default {
         .color{
           .clr_img_inner{
             img{
-              width: 38px;
-              height: 38px;
+              width: 36px;
+              height: 36px;
             }
           }
         }
+        .flex.mt-6.pb-5.border-b{
+          padding-bottom: .50rem;
+        }
         .border-b {
            border-bottom-width: 0px;
-        }                      
+        }
+        .size-fit-part{
+            overflow: hidden;
+            margin-top: 15px;
+          .fit-label{
+            font-size: 12px;
+            width: 25%;
+            float: left;
+            margin-top: 10px;
+          }
+          .truefit-button{
+            float: left;
+            width: 45%;
+          }
+          .size-guide-b{
+              float: right;
+              width: 25%;
+              position: relative;
+              margin-top: 5px;
+          } 
+        }
+        .accor{
+          height: 225px;
+          overflow: auto;
+          .pb-5{
+              padding-bottom: 0rem;
+          }
+        }                     
       }
     }
   }    
@@ -1174,8 +1237,8 @@ export default {
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 1rem;
-          line-height: 1.5rem;
+          font-size: 0.85rem;
+          line-height: 1.25rem;
           text-transform: uppercase;
         }
         h5 {
@@ -1200,14 +1263,42 @@ export default {
         .color{
           .clr_img_inner{
             img{
-              width: 32px;
-              height: 32px;
+              width: 28px;
+              height: 28px;
             }
           }
         }
         .border-b {
            border-bottom-width: 0px;
-        }                  
+        }
+        .size-fit-part{
+            overflow: hidden;
+            margin-top: 15px;
+          .fit-label{
+            font-size: 9px;
+            width: 26%;
+            float: left;
+            margin-top: 10px;
+          }
+          .truefit-button{
+            float: left;
+            width: 55%;
+          }
+          .size-guide-b{
+              float: right;
+              width: 18%;
+              position: relative;
+              margin-top: 5px;
+              font-size: 12px;
+          } 
+        }
+        .accor{
+          height: 101px;
+          overflow: auto;
+          .pb-5{
+              padding-bottom: 0rem;
+          }
+        }                         
       }
     }
   }  
