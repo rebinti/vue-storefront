@@ -1268,6 +1268,16 @@ export default {
             }
           }
         }
+        .brand-review-div{
+          .brand-div{
+            p{
+              margin-top: 8px !important;
+              a{                
+                font-size: 12px;
+              }
+            }
+          }
+        }        
         .border-b {
            border-bottom-width: 0px;
         }
@@ -1313,8 +1323,8 @@ export default {
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 1rem;
-          line-height: 1.5rem;
+          font-size: 0.80rem;
+          line-height: 1.15rem;
           text-transform: uppercase;
         }
         div.price{
@@ -1327,7 +1337,41 @@ export default {
               font-size: 12px;
             }
           }            
-        }           
+        }
+        .brand-review-div{
+          .brand-div{
+            p{
+              margin-top: 8px !important;
+              a{                
+                font-size: 10px;
+              }
+            }
+          }
+        }
+        .size-fit-part{
+            overflow: hidden;
+            margin-top: 15px;
+          .fit-label{
+            font-size: 9px;
+            width: 26%;
+            float: left;
+            margin-top: 10px;
+          }
+          .truefit-button{
+            float: left;
+            width: 47%;
+          }
+          .size-guide-b{
+              float: right;
+              width: 25%;
+              position: relative;
+              margin-top: 5px;
+              font-size: 12px;
+          } 
+        }        
+        .tfc-cfg-widget.tfc-fitrec-result .tfc-cfg-basic-button.tfc-svg-layout .tfc-valign{
+          font-size: 12px;
+        }
       }
     }
   }      
