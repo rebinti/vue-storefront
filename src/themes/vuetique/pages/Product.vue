@@ -53,24 +53,38 @@
 
           <!-- mobile product details sec -->
           <div class="w-full m_item p_detail_box">
-
+            <div class="brand-review-div">
+              <div class="brand-div">
+                <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
+                  <router-link
+                    class="menu-link"
+                    :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
+                    exact
+                    >{{ getBrandLabelDetails.label }}
+                  </router-link>
+                </p>
+              </div>
+              <div class="review-div">
+                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+              </div>
+            </div>
               <div class="mob_headline_out">
                   <div class="mob_headline">
-                    <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
+                    <!-- <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
                       <router-link
                           class="menu-link"
                           :to="localizedRoute('/brands/' + getBrandLabelDetails.label)"
                           exact
                         >{{ getBrandLabelDetails.label }}
                         </router-link>
-                   </p>
+                   </p> -->
                     <h1 data-testid="productName" itemprop="name" class="product-title-d">
                       {{ product.name | htmlDecode }}
                     </h1>
                     <div class="text-grey text-sm sku_txt">
                       sku: {{ product.sku }}
                     </div>
-                    <span id="stamped-badge-mobile"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+                    <!-- <span id="stamped-badge-mobile"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span> -->
                   </div>
 
                   <div class="mob_price">
@@ -96,8 +110,30 @@
                           </div>
                         </div>
                   </div>      
-              </div>    
-
+              </div>  
+              <!-- size fit part in device -->     
+              <div class="size-fit-part-mob">
+                <!-- For TrueFit Review button -->
+                <div class="fit-label">FIND YOUR SIZE</div>
+                <div class="truefit-button tfc-fitrec-product" 
+                  v-if="getTruefitProd !== null"
+                  :id="getTruefitProd.id" :data-userid="getCurrentUserId"
+                  :data-colorid="getTruefitProd.color" data-locale="en_GB">
+                </div>
+                <div class="size-guide-b">
+                  <a href="javascript:void(0);"  
+                      style="position: absolute;
+                          right: 0;
+                          top: 0;
+                          color: #000;
+                          border-bottom: 1px solid #b3b3b3;
+                          font-weight: 400;"
+                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                    data-testid="sizeGuide">
+                      Size Guide
+                  </a> 
+                </div>             
+              </div>
               <div class="mob_pro_varients">
 
                     <div class="variants" v-if="product.type_id =='configurable' && !loading">
@@ -107,7 +143,7 @@
 
                   <!--Mobile View Color swatch products Links -->
                   <div v-if="colorSwatchRelateProduct.length > 0">
-                    <p class="font-bold mb-4">Color: </p>
+                    <p class="related-color-label">Color: </p>
                       <router-link
                           class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
                           :to="productLink(prod)"
@@ -154,25 +190,6 @@
                           />
                         </div>
                         <div class="sizes" v-else-if="option.label == 'Size'">
-                          <!-- <router-link
-                            to="/size-guide"
-                            target="_blank"
-                            v-if="option.label == 'Size'"
-                            class="text-sm font-medium text-black pt-4 absolute top-0 right-0 size_link"
-                          >
-                            {{ $t('Size guide') }}
-                          </router-link> -->
-                        <a href="javascript:void(0);"  
-                          style="position: absolute;
-                              right: 0;
-                              top: 0;
-                              color: #000;
-                              border-bottom: 1px solid #b3b3b3;
-                              font-weight: 400;"
-                       @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
-                        data-testid="sizeGuide">
-                          Size Guide
-                      </a>
                           <size-selector
                             v-for="(s, i) in options[option.attribute_code]"
                             v-if="isOptionAvailable(s)"
@@ -1385,7 +1402,10 @@ export default {
     }
   }      
 }
-@media (max-width: 768px) {
+@media (min-width: 425px) and (max-width: 768px) {
+  .md\:w-3\/5{
+    width:0% !important;
+  }
 //  .details-section  h1 {
 //     font-size: 1rem;
 //     line-height: 2rem;
@@ -1612,6 +1632,175 @@ export default {
     font-size:18px;
     font-weight: 600;
   }
-}
+  .size-fit-part-mob{
+      overflow: hidden;
+      margin-top: 5px;
+    .fit-label{
+      font-size: 12px;
+      width: 15%;
+      float: left;
+      margin-top: 10px;
+    }
+    .truefit-button{
+      float: left;
+      width: 55%;
+    }
+    .size-guide-b{
+        float: right;
+        width: 25%;
+        position: relative;
+        margin-top: 5px;
+        a{
+          font-size: 12px;
+        }        
+    } 
+  } 
+  .brand-review-div{
+    .brand-div{
+        p{
+          margin-top: 8px;
+          a {
+            font-size: 12px;
+          }
+        }  
+    }
+  } 
+  .mob_headline{
+    padding-top: 8px;
+    h1{
+      padding-bottom: 0px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
 
+  } 
+  .mob_price{
+        padding-top: 8px;
+  } 
+  .related-color-label{
+    font-weight: 300;
+    font-size: 12px;
+    margin-bottom: 0px;
+  }       
+}
+@media (max-width: 425px) {	
+  .container{
+    .m_item{
+      .size-selector{
+        margin-top: 5px;
+      }
+      .size-fit-part-mob{
+          overflow: hidden;
+          margin-top: 2px;
+        .fit-label{
+          font-size: 9px;
+          width: 20%;
+          float: left;
+          margin-top: 10px;
+        }
+        .truefit-button{
+          float: left;
+          width: 52%;
+        }
+        .size-guide-b{
+            float: right;
+            width: 25%;
+            position: relative;
+            margin-top: 5px;
+            font-size: 12px;
+            a{
+              font-size: 12px;
+            }
+        } 
+      }
+      .related-color-label{
+        font-weight: 300;
+        font-size: 12px;
+        margin-bottom: 0px;
+      }
+      .brand-review-div{
+        .brand-div{
+            p{
+              margin-top: 8px;
+              a {
+                font-size: 10px;
+              }
+            }  
+        }
+      } 
+      .mob_headline{
+        padding-top: 8px;
+        h1{
+          padding-bottom: 0px;
+          text-transform: uppercase;
+          margin-bottom: 2px;
+        }
+
+      } 
+      .mob_price{
+            padding-top: 8px;
+      }     
+    }
+  }  
+}
+@media (max-width: 375px) {	
+  .container{
+    .m_item{
+      .size-selector{
+        margin-top: 5px;
+      }
+      .size-fit-part-mob{
+          overflow: hidden;
+          margin-top: 15px;
+        .fit-label{
+          font-size: 9px;
+          width: 26%;
+          float: left;
+          margin-top: 10px;
+        }
+        .truefit-button{
+          float: left;
+          width: 47%;
+        }
+        .size-guide-b{
+            float: right;
+            width: 25%;
+            position: relative;
+            margin-top: 5px;
+            font-size: 12px;
+            a{
+              font-size: 12px;
+            }            
+        } 
+      }
+      .related-color-label{
+        font-weight: 300;
+        font-size: 12px;
+        margin-bottom: 0px;
+      }
+      .brand-review-div{
+        .brand-div{
+            p{
+              margin-top: 8px;
+              a {
+                font-size: 10px;
+              }
+            }  
+        }
+      } 
+      .mob_headline{
+        padding-top: 8px;
+        h1{
+          padding-bottom: 0px;
+          text-transform: uppercase;
+          margin-bottom: 2px;
+        }
+
+      } 
+      .mob_price{
+            padding-top: 8px;
+      }     
+    }
+  }
+}
 </style>
