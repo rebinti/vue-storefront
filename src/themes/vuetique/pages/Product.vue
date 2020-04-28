@@ -1357,58 +1357,77 @@ export default {
   #product{
     .container{
       .details-section{
-        width: 341px;
-        height: 511.5px;
-        margin-right: 40px!important;
+       width: 360px;
+        height: 540px;
+        margin-right: 180px!important;
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 0.80rem;
-          line-height: 1.15rem;
+          font-size: 0.85rem;
+          line-height: 1.25rem;
           text-transform: uppercase;
+        }
+        h5 {
+          font-size: 0.675rem;
         }
         div.price{
           .text-h1{
-            font-size: 12px; 
+            font-size: 14px; 
           }          
-          font-size: 12px;
+          font-size: 14px;
           div{
             span{
-              font-size: 12px;
+              font-size: 14px;
             }
           }            
+        }
+        .sizes{
+          .pt-4{
+            padding-top: 0rem;
+          }
+        }
+        .color{
+          .clr_img_inner{
+            img{
+              width: 28px;
+              height: 28px;
+            }
+          }
         }
         .brand-review-div{
           .brand-div{
             p{
               margin-top: 8px !important;
               a{                
-                font-size: 10px;
+                font-size: 12px;
               }
             }
           }
+        }        
+        .border-b {
+           border-bottom-width: 0px;
         }
         .size-fit-part{
             overflow: hidden;
             margin-top: 15px;
           .fit-label{
             font-size: 9px;
-            width: 26%;
+            width: 24%;
             float: left;
             margin-top: 10px;
           }
           .truefit-button{
             float: left;
-            width: 47%;
+            width: 54%;
           }
           .size-guide-b{
               float: right;
-              width: 25%;
+              width: 21%;
               position: relative;
               margin-top: 5px;
               font-size: 12px;
           } 
-        }        
+        } 
         .tfc-cfg-widget.tfc-fitrec-result .tfc-cfg-basic-button.tfc-svg-layout .tfc-valign{
           font-size: 12px;
         }
