@@ -1325,17 +1325,17 @@ export default {
             margin-top: 15px;
           .fit-label{
             font-size: 9px;
-            width: 26%;
+            width: 24%;
             float: left;
             margin-top: 10px;
           }
           .truefit-button{
             float: left;
-            width: 55%;
+            width: 54%;
           }
           .size-guide-b{
               float: right;
-              width: 18%;
+              width: 21%;
               position: relative;
               margin-top: 5px;
               font-size: 12px;
