@@ -1359,9 +1359,14 @@ export default {
       .details-section{
        width: 360px;
         height: 540px;
-        margin-right: 180px!important;
+        margin-right: 55px!important;
         padding-left: 1.5rem;
-        padding-right: 1.5rem;        
+        padding-right: 1.5rem; 
+        // width: 341px;
+        // height: 511.5px;
+        // margin-right: 40px!important;
+        // padding-left: 1.5rem;
+        // padding-right: 1.5rem;                
         h1{
           font-size: 0.85rem;
           line-height: 1.25rem;
