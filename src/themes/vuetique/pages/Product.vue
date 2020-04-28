@@ -1136,13 +1136,13 @@ export default {
             margin-top: 15px;
           .fit-label{
             font-size: 12px;
-            width: 25%;
+            width: 20%;
             float: left;
             margin-top: 10px;
           }
           .truefit-button{
             float: left;
-            width: 45%;
+            width: 50%;
           }
           .size-guide-b{
               float: right;
@@ -1157,7 +1157,18 @@ export default {
           .pb-5{
               padding-bottom: 0rem;
           }
-        }                           
+        }
+        .variants{
+          .relative{
+            margin-bottom: 10px;
+            .font-bold{
+              font-weight: 500;
+            }
+          }
+          .font-bold{
+            font-weight: 500;
+          }          
+        }                                   
       }
     }
   }      
@@ -1239,7 +1250,18 @@ export default {
           .pb-5{
               padding-bottom: 0rem;
           }
-        }                     
+        }
+        .variants{
+          .relative{
+            margin-bottom: 10px;
+            .font-bold{
+              font-weight: 500;
+            }
+          }
+          .font-bold{
+            font-weight: 500;
+          }             
+        }
       }
     }
   }    
