@@ -1307,6 +1307,7 @@ export default {
           overflow: auto;
           .pb-5{
               padding-bottom: 0rem;
+              margin-top: .75rem;
           }
         }                         
       }
@@ -1372,6 +1373,14 @@ export default {
         .tfc-cfg-widget.tfc-fitrec-result .tfc-cfg-basic-button.tfc-svg-layout .tfc-valign{
           font-size: 12px;
         }
+        .accor{
+          height: 101px;
+          overflow: auto;
+          .pb-5{
+              padding-bottom: 0rem;
+              margin-top: .75rem;
+          }
+        }         
       }
     }
   }      
