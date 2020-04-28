@@ -286,7 +286,7 @@
               <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
               <span
                 class="filter-box clearall-filter"
-                v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
+                v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>1"
                 @click="clearAllFilter()"
               >Clear All</span>              
               <div class="container pb-5 md: ml-2 selectedone">
@@ -296,6 +296,7 @@
                     :key="filter.label"
                     @click="removeFilterFlag(filter)"
                     class="filter-box option-selected-box selectone-active"
+                    v-if="filter.filterLabel !== 'Brand'"
                   >
                     {{ filter.label }}
                     <div class="topright select-active" id="corner-triangle">
@@ -320,7 +321,7 @@
                     :key="facetsitem.field"
                     :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
-                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                    v-if="(facetsitem.label !== 'Brand') && ((facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0))"
                   >
                   <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
