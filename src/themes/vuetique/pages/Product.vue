@@ -914,7 +914,7 @@ export default {
 
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
-        relatedProd.push({...this.product, activeProd: true});
+        relatedProd.unshift({...this.product, activeProd: true});
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
           .map(val => { 
               val.colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === val.color)
@@ -1135,6 +1135,29 @@ export default {
       position: relative;
       top: -3px;
      }     
+    }
+  }
+  a.color{
+    margin-right: 0rem;
+  }
+  .clr_img_inner{
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    width: 38px;
+    height: 38px;    
+    img{
+      margin-top: 4px;
+      margin-left: 4px;
+    }    
+  }
+  .color-swatch-active {
+    border: 1px solid #000000;
+    border-radius: 50px;
+    width: 38px;
+    height: 38px;
+    img{
+      margin-top: 4px;
+      margin-left: 4px;
     }
   }
 
@@ -1886,10 +1909,5 @@ export default {
       }     
     }
   }
-}
-
-.color-swatch-active {
-  border-bottom: 2px solid;
-  padding-bottom: 5px;
 }
 </style>
