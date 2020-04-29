@@ -1120,17 +1120,17 @@ export default {
       }
       span.font-bold{
         color: #BA0C2F !important;;
-      }      
-    }
-    .promotions__stamp-label{
+      } 
+      span.promotions__stamp-label{
       border: 1px dashed #BA0C2F;
       color: #BA0C2F;
-      font-size: 12px;
+      font-size: 12px !important;
       line-height: 15px;
       margin-top: 0 !important;
       padding: 0px 6px;
       position: relative;
       top: -3px;
+     }     
     }
   }
 
