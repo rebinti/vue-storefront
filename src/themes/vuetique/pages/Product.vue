@@ -155,7 +155,7 @@
                               :aria-label="$t('Select color ') + prod.colorSwatch.label"
                             >
                             <div class="clr_img_out">
-                              <div class="clr_img_inner">
+                              <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                               <img 
                               style="border-radius: 50px;width: 28px;height: 28px;" 
                               :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
@@ -328,8 +328,7 @@
                             :aria-label="$t('Select color ') + prod.colorSwatch.label"
                           >
                           <div class="clr_img_out">
-                            <div class="clr_img_inner" 
-                            style="padding-bottom: 5px;">
+                             <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                             <img style="border-radius: 50px;width: 28px;height: 28px;" 
                             :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
                               @error="imgUrlAlt" alt="" >
@@ -915,6 +914,7 @@ export default {
 
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
+        relatedProd.push({...this.product, activeProd: true});
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
           .map(val => { 
               val.colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === val.color)
@@ -1890,5 +1890,6 @@ export default {
 
 .color-swatch-active {
   border-bottom: 2px solid;
+  padding-bottom: 5px;
 }
 </style>
