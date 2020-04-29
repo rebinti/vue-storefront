@@ -289,12 +289,15 @@
                   class="text-h1 gg"
                   v-if="product.special_price && product.priceInclTax && product.originalPriceInclTax"
                 >
-                  <span class="font-bold">
-                    {{ product.priceInclTax * product.qty | price }}
-                  </span>&nbsp;
                   <span class="text-h2 text-grey line-through">
                     {{ product.originalPriceInclTax * product.qty | price }}
-                  </span>
+                  </span>&nbsp;                
+                  <span class="font-bold">
+                    {{ product.priceInclTax * product.qty | price }}
+                  </span>&nbsp; 
+                  <span class="promotions__stamp-label" style="">
+                    {{getSpecialPercent}}
+                  </span> 
                 </div>
                 <div
                   v-if="!product.special_price && product.priceInclTax"
@@ -738,7 +741,15 @@ export default {
       } else {
         return ''
       }
-    }
+    },
+    getSpecialPercent () {
+      if(this.product.originalPriceInclTax){
+      let percent = 100- ((this.product.priceInclTax*100)/this.product.originalPriceInclTax);        
+         return percent;
+      } else {
+        return null
+      }
+    }      
   },
   beforeMount () {
     this.$bus.$on('product-after-related', this.getRelatedProduct)
@@ -1100,6 +1111,29 @@ export default {
       }
     }
   }
+}
+.details-section{
+  .price{
+    div{
+      span.line-through{
+        color: #000000 !important;;
+      }
+      span.font-bold{
+        color: #BA0C2F !important;;
+      }      
+    }
+    .promotions__stamp-label{
+      border: 1px dashed #BA0C2F;
+      color: #BA0C2F;
+      font-size: 12px;
+      line-height: 15px;
+      margin-top: 0 !important;
+      padding: 0px 6px;
+      position: relative;
+      top: -3px;
+    }
+  }
+
 }
 @media (max-width: 2560px) {
   #product{
