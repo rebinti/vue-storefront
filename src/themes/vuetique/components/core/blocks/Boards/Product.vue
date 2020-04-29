@@ -12,6 +12,7 @@
       <div @click="closeWishlist">
         <router-link :to="productLink"
                      data-testid="productLink"
+                     class="imglink"
         >
           <img class="image" v-lazy="thumbnail">
         </router-link>
@@ -30,9 +31,9 @@
             </router-link>
           </div>
         </div>
-        <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
+        <!-- <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
           {{ product.parentSku }}
-        </div>
+        </div> -->
 
         <div class="col-auto font-bold text-right leading-6 price_left_out">
           <div class="text-error" v-if="product.special_price">
@@ -192,7 +193,11 @@ input {
 }
 
 .right-sidebar .p_list_block .image{
-  width:100%;
+  /* width:100%; */
+  width: 100px;
+}
+.right-sidebar .p_list_block a.imglink{
+  max-width: 23.333333%;
 }
 
 .p_list_block{

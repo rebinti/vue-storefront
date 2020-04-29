@@ -64,7 +64,7 @@
         </div>
       </div>
       
-      <Accordion class="mob_fltr cart_filter_hd" v-if="OnlineOnly"
+      <!-- <Accordion class="mob_fltr cart_filter_hd" v-if="OnlineOnly"
               :title="$t('Use Promotional code')"
               :openType=false
             >
@@ -80,7 +80,7 @@
                 </div>
               </div>
           </template>
-      </Accordion>
+      </Accordion> -->
 
       <!-- <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
         <div class="mr-3 flex-grow">
@@ -463,5 +463,8 @@ export default {
 
 .swipeout-right {
   padding-left: 15px;
+}
+.microcart .btn-primary{
+  background: #4fce76 !important;
 }
 </style>

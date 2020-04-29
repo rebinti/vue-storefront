@@ -8,7 +8,7 @@
   > -->
   <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
       <router-link
-        class="col-4 bg-grey-lightest"
+        class="col-4 bg-grey-lightest imglink"
         :to="productLink"
         data-testid="productLink"
       >
@@ -23,9 +23,9 @@
           >
             {{ product.name | htmlDecode }}
           </router-link>
-          <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
+          <!-- <div class="text-sm text-grey leading-normal mb-2" data-testid="productSku">
             {{ product.sku }}
-          </div>
+          </div> -->
           <div class="text-sm leading-normal" v-if="product.totals && product.totals.options">
             <div v-for="opt in product.totals.options" :key="opt.label">
               <span class="text-grey">{{ opt.label }}: </span>
@@ -238,8 +238,12 @@ export default {
   }
 
   .right-sidebar .p_list_block .image{
-    width:100%;
+    /* width:100%; */
+    width: 100px;
   }
+  .right-sidebar .p_list_block a.imglink{
+    max-width: 23.333333%;
+  }  
   .mob_p_cart_list{
     float: left;
     width: 100%;
