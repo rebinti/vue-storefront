@@ -745,7 +745,7 @@ export default {
     getSpecialPercent () {
       if(this.product.originalPriceInclTax){
       let percent = 100- ((this.product.priceInclTax*100)/this.product.originalPriceInclTax);        
-         return percent;
+         return Math.round(percent)+"%";
       } else {
         return null
       }
