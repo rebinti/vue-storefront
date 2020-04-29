@@ -68,7 +68,8 @@
       </div> -->
     <!-- </div> -->
 
-    <div class="container onlymobile col-12" v-if="!searcingLoaderFlag">
+
+    <div class="container onlymobile col-12" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top">
@@ -257,19 +258,19 @@
     <div class="container pb-16" v-if="!searcingLoaderFlag">
         <div class="col-12 lg:col-9 sm:col-12 pr_list_sec_main">
           <div class="row">
-            <div class="col-12 lg:col-8 searchtitle" v-if="searchRes">
+            <div class="col-12 lg:col-8 searchtitle" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <h2 style="width:100%;padding-bottom:25px;">
                 Search results for<span v-if="searchedValue"> "{{searchedValue}}" </span>
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
              <div class="col-2 hidden lg:block xs:col-6">
-                 <div v-if="searchRes">
+                 <div v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
                     <label class="mr10">{{ $t('Columns') }}:</label>
                     <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
                  </div>   
               </div>
-            <div class="col-2 hidden xs:col-6 lg:block" >
+            <div class="col-2 hidden xs:col-6 lg:block" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -1207,5 +1208,11 @@ input {
       left: 45px;
    }   
 } 
+
+  @media (max-width: 380px) {
+    .mob-siderbar-footer .reset-button{
+        left: -7px;
+    }
+  }
 
 </style>

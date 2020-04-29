@@ -438,7 +438,7 @@
               <qty-input
                 v-if="product.type_id !== 'grouped' && product.type_id !== 'bundle'"
                 v-model.number="product.qty"
-                class="mr-5"
+                class="mr-5 hide-qty"
                 size="lg"
               />
 

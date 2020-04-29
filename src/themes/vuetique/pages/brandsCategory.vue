@@ -70,7 +70,7 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-      <div class="container onlymobile col-12" v-if="!searcingLoaderFlag">
+      <div class="container onlymobile col-12" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top search">
@@ -111,7 +111,7 @@
     <div class="container pb-5 md: ml-2 lg:hidden">
         <span
           class="filter-box clearall-filter"
-          v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0"
+          v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>1"
           @click="clearAllFilter()"
         >Clear All</span>              
         <div class="container pb-5 md: ml-2 selectedone">
@@ -121,6 +121,7 @@
               :key="filter.label"
               @click="removeFilterFlag(filter)"
               class="filter-box option-selected-box selectone-active"
+               v-if="filter.filterLabel !== 'Brand'"
             >
               {{ filter.label }}
               <div class="topright select-active" id="corner-triangle">
@@ -162,7 +163,7 @@
                     :key="facetsitem.field"
                     :openType= "facetsitem.facet_active === 0 ? false : true"
                     :title="$t(facetsitem.label)"
-                    v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+                    v-if="(facetsitem.label !== 'Brand') && ((facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0))"
                   >
                 <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
 
@@ -1223,5 +1224,12 @@ input {
       left: 45px;
    }   
 } 
+
+
+  @media (max-width: 380px) {
+    .mob-siderbar-footer .reset-button{
+        left: -7px;
+    }
+  }
 
 </style>

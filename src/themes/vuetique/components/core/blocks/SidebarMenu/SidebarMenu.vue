@@ -58,6 +58,17 @@
           {{ $t('Sale') }}
         </router-link>
       </li>
+
+      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
+        <router-link
+          class="menu-link"
+          :to="localizedRoute('/brands')"
+          exact
+        >
+          {{ $t('Brands') }}
+        </router-link>
+      </li>
+
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
@@ -69,13 +80,20 @@
         </router-link>
       </li>
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b md:hidden">
-        <button
+        <!-- <button
           class="menu-link text-left"
           type="button"
           @click="toggleSearchpanel"
         >
           {{ $t('Search') }}
-        </button>
+        </button> -->
+         <router-link
+          class="menu-link"
+          :to="localizedRoute('/search')"
+          exact
+        >
+          {{ $t('Search') }}
+        </router-link>
       </li>
       <li @click="closeMenu" v-if="compareIsActive && isCurrentMenuShowed" class="border-b">
         <router-link
