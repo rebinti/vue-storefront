@@ -145,7 +145,7 @@
                   <div v-if="colorSwatchRelateProduct.length > 0">
                     <p class="related-color-label">Color: </p>
                       <router-link
-                          class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
+                          class="border border-transparent hover:opacity-100 rounded-full relative pointer color mr-3 mb-3"
                           :to="productLink(prod)"
                           data-testid="productLink"
                           v-for="prod in colorSwatchRelateProduct" :key="prod.id"
@@ -156,8 +156,10 @@
                             >
                             <div class="clr_img_out">
                               <div class="clr_img_inner">
-                              <img :width="'32px'" :height="'32px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
-                                                @error="imgUrlAlt" alt="" >
+                              <img 
+                              style="border-radius: 50px;width: 28px;height: 28px;" 
+                              :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                                 @error="imgUrlAlt" alt="" >
                               </div>
                             </div>
                           </button>
@@ -316,7 +318,7 @@
                 <div v-if="colorSwatchRelateProduct.length > 0">
                   <p class="font-bold">Color: </p> <!-- mb-4 -->
                     <router-link
-                        class="border border-transparent hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3"
+                        class="border border-transparent hover:opacity-100 rounded-full relative  pointer color mr-3 mb-3"
                         :to="productLink(prod)"
                         data-testid="productLink"
                         v-for="prod in colorSwatchRelateProduct" :key="prod.id"
@@ -326,9 +328,11 @@
                             :aria-label="$t('Select color ') + prod.colorSwatch.label"
                           >
                           <div class="clr_img_out">
-                            <div class="clr_img_inner">
-                            <img :width="'50px'" :height="'50px'" :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
-                                              @error="imgUrlAlt" alt="" >
+                            <div class="clr_img_inner" 
+                            style="padding-bottom: 5px;">
+                            <img style="border-radius: 50px;width: 28px;height: 28px;" 
+                            :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                              @error="imgUrlAlt" alt="" >
                             </div>
                           </div>
                         </button>
@@ -1882,5 +1886,9 @@ export default {
       }     
     }
   }
+}
+
+.color-swatch-active {
+  border-bottom: 2px solid;
 }
 </style>
