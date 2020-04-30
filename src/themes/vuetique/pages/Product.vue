@@ -5,7 +5,7 @@
       :active-route="breadcrumbs.name"
     />
     <section class="bg-grey-lightest">
-          <div class="w-full md:w-12/12">
+          <div class="w-full md:w-12/12 top-main">
             <product-gallery
               ref="gallery"
               :gallery="gallery"
@@ -1232,6 +1232,9 @@ export default {
         }                                   
       }
     }
+    .top-main{
+      height: 908px;
+    }    
   }      
 }
 @media (max-width: 1920px) {
@@ -1325,6 +1328,9 @@ export default {
         }
       }
     }
+    .top-main{
+      height: 691px;
+    }
   }    
 }
 @media (max-width: 1440px) {
@@ -1412,6 +1418,9 @@ export default {
         }                         
       }
     }
+    .top-main{
+      height: 540px;
+    }    
   }  
 }
 @media (max-width: 1024px) {
@@ -1507,6 +1516,9 @@ export default {
         }         
       }
     }
+    .top-main{
+      height: 512px;
+    }    
   }      
 }
 @media (min-width: 425px) and (max-width: 768px) {
@@ -1556,6 +1568,11 @@ export default {
 }
 
 @media (max-width: 768px) {	
+  #product{
+    .top-main{
+      height: unset;
+    } 
+  }  
   .m_item{	
     display: block;	
   }
