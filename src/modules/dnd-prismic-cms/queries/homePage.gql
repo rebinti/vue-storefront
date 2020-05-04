@@ -1,0 +1,10 @@
+query listHomePages {
+  prismicHomePages {
+    id
+    identifier
+    content
+    lang
+    creation_time
+    update_time
+  }
+}

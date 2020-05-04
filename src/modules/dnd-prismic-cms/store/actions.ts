@@ -8,6 +8,7 @@ import SearchQuery from '@vue-storefront/core/lib/search/searchQuery'
 
 const CMS_BLOCK_ENTITY_TYPE = 'prismicCmsBlocks'
 const CMS_PAGES_ENTITY_TYPE = 'prismicCmsPages'
+const HOME_PAGE_ENTITY_TYPE = 'prismicHomePages'
 // const GRAPHQL_URL = config.server.protocol + '://' + config.graphql.host + ':' + config.graphql.port + '/graphql'
 const GRAPHQL_URL = 'https://vue.iclothing.com/graphql'
 
@@ -36,6 +37,29 @@ searchAdapter.registerEntityTypeByQuery(CMS_BLOCK_ENTITY_TYPE, {
     }
   }
 })
+
+searchAdapter.registerEntityTypeByQuery(HOME_PAGE_ENTITY_TYPE, {
+  url: GRAPHQL_URL,
+  query: require('../queries/homePage.gql'),
+  queryProcessor: (query) => {
+    return query
+  },
+  resultPorcessor: (resp, start, size) => {
+    if (resp === null) {
+      throw new Error('Invalid graphQl result - null not expected for entity type \'prismicHomePages\'')
+    }
+    if (resp.hasOwnProperty('data')) {
+      return resp.data.prismicHomePages
+    } else {
+      if (resp.error) {
+        throw new Error(JSON.stringify(resp.error))
+      } else {
+        throw new Error('Unknown error with graphQl result in resultPorcessor for entity type \'prismicHomePages\'')
+      }
+    }
+  }
+})
+
 searchAdapter.registerEntityTypeByQuery(CMS_PAGES_ENTITY_TYPE, {
   url: GRAPHQL_URL,
   query: require('../queries/cmsPages.gql'),
@@ -72,6 +96,27 @@ export const actions: ActionTree<DndPrismicCmsState, any> = {
       }
       searchAdapter.search(Request).then((resp) => {
         let cmsBlocksData = searchAdapter.entities[Request.type].resultPorcessor(resp, 0, 200)
+        context.commit(types.SET_PRISMIC_CMS_BLOCKS, cmsBlocksData)
+
+        resolve(cmsBlocksData)
+      }).catch(() => reject())
+    })
+  },
+
+  
+  refreshHomePageCollection (context) {
+    console.log('refreshHomePageCollection')
+    return new Promise ((resolve, reject) => {
+      // prepare a Request object
+      const Request = {
+        store: storeView.storeCode,
+        type: HOME_PAGE_ENTITY_TYPE,
+        searchQuery: searchQuery,
+        sort: ''
+      }
+      searchAdapter.search(Request).then((resp) => {
+        let cmsBlocksData = searchAdapter.entities[Request.type].resultPorcessor(resp, 0, 200)
+        console.log('refreshHomePageCollection', cmsBlocksData);
         context.commit(types.SET_PRISMIC_CMS_BLOCKS, cmsBlocksData)
 
         resolve(cmsBlocksData)
