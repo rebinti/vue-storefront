@@ -22,7 +22,7 @@
     </div> 
     <div class="container">
           <div class="menu-list col-6">
-                 <prismic-cms-block :identifier="'banner'"  /> 
+                 <!-- <prismic-cms-block :identifier="'banner'"  />  -->
                  <!-- <prismic-cms-page :slug="'123456'"  />  -->
           </div>
     </div> 
@@ -62,7 +62,8 @@
         </header>
       </div>
       <!-- <tile-links /> -->
-      <cms-block :identifier="'vue-home-6banner'" />
+      <!-- <cms-block :identifier="'vue-home-6banner'" /> -->
+        <prismic-cms-block :identifier="'vue-home-6banner'"/>
     </section>
     <Onboard />
     <div class="container mr_kst">
