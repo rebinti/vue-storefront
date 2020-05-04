@@ -22,8 +22,8 @@
     </div> 
     <div class="container">
           <div class="menu-list col-6">
-                <!-- <prismic-cms-block :identifier="'homepagecmsheading'"  /> -->
-                <!-- <prismic-cms-page :identifier="'homepagecmsheading'"  /> -->
+                 <prismic-cms-block :identifier="'banner'"  /> 
+                 <!-- <prismic-cms-page :slug="'123456'"  />  -->
           </div>
     </div> 
 
@@ -91,8 +91,8 @@ import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/Promote
 import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import CmsBlock from '../components/core/blocks/Cms/Block'
-// import PrismicCmsBlock from '../../../modules/dnd-prismic-cms/components/CmsBlock/View.vue'
-// import PrismicCmsPage from '../../../modules/dnd-prismic-cms/components/CmsPage/View.vue'
+import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
+import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
 
 
 export default {
@@ -105,8 +105,8 @@ export default {
     PromotedOffers,
     TileLinks,
     CmsBlock,
-    // PrismicCmsBlock,
-    // PrismicCmsPage
+    PrismicCmsBlock,
+    PrismicCmsPage
   },
   data () {
     return {
