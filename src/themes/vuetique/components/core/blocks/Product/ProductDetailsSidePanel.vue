@@ -13,14 +13,18 @@
     </button>
     
     <h3>Product Details</h3>
-    <br>
-    <p style="margin-left: 10px;">
-        {{product.short_description}}
-    </p>    
-    <br>
-    <p style="margin-left: 10px;">
-        {{product.description}}
-    </p>
+    <br>          
+        <div
+            v-html="product.short_description"
+            style="margin-left: 10px;"
+        />
+                                      
+    <br>    
+        <div 
+            v-html="product.description" 
+            style="margin-left: 10px;"
+        />
+                                 
     
 
             <!-- <div class="container accor">  
