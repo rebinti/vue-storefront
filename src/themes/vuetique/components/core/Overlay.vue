@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-overlay w-full h-screen top-0 left-0 bg-black opacity-75" @click="close" v-if="isVisible" />
+  <div class="fixed z-overlay w-full h-screen top-0 left-0 bg-black opacity-75 overlay-fix" @click="close" v-if="isVisible" />
 </template>
 
 <script>
@@ -28,3 +28,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.overlay-fix {
+  z-index: 5;
+}
+</style>
