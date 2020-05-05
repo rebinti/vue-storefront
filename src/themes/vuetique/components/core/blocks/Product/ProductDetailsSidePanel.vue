@@ -100,7 +100,7 @@ export default {
   data () {
     return {      
         detailsOpen: false,        
-        detailsAccordion: null
+        detailsAccordion: 'details'
     }
   },  
   components: {
