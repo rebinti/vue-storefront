@@ -39,7 +39,8 @@ const store = {
     googleLoggedInfo: null,
     selectedSocialLoginType: null,
     mainSliderData: [],
-    productSidePanelFlag: false
+    productSidePanelFlag: false,
+    productDetailsSidePanelFlag: false
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -132,6 +133,10 @@ const store = {
     state.productSidePanelFlag = action === true
     state.overlay = action === true
   },
+  setProductDetailsSidePanelFlag (state, action) {
+    state.productDetailsSidePanelFlag = action === true
+    state.overlay = action === true
+  }  
   },
   actions: {
     toggleMicrocart ({ commit, state }) {
@@ -146,6 +151,9 @@ const store = {
     toggleProductSidePanel ({ commit, state }) {
       commit('setProductSidePanelFlag', !state.productSidePanelFlag)
     },
+    toggleProductDetailsSidePanel ({ commit, state }) {
+      commit('setProductDetailsSidePanelFlag', !state.productDetailsSidePanelFlag)
+    },    
     updateYoptoProduct ({commit}, state) {
       commit('setYoptoProduct', state)
     },
