@@ -13,9 +13,18 @@
     </button>
     
     <h3>Product Details</h3>
+    <br>
+    <p style="margin-left: 10px;">
+        {{product.short_description}}
+    </p>    
+    <br>
+    <p style="margin-left: 10px;">
+        {{product.description}}
+    </p>
+    
 
-            <div class="container accor">  <!-- my-4 -->
-                 <div class="border-b border-grey-light mt-5" /> <!-- pb-5 -->
+            <!-- <div class="container accor">  
+                 <div class="border-b border-grey-light mt-5" /> 
 
                 <div class="border-b border-grey-light mt-5 pb-5">
                   <h5 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
@@ -54,15 +63,6 @@
                   </h5>
                   <transition name="fade">
                     <section v-show="detailsAccordion == 'specs'" class="specs mt-4">
-                      <!-- <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
-                        <product-attribute
-                          :key="attr.attribute_code"
-                          v-for="attr in customAttributes"
-                          :product="product"
-                          :attribute="attr"
-                          empty-placeholder="N/A"
-                        />
-                      </ul> -->
                       <div
                         class="details-wrapper details-accor"
                         :class="{'details-wrapper--open': detailsOpen}"
@@ -80,7 +80,7 @@
                     </section>
                   </transition>
                 </div>
-              </div>
+              </div> -->
 
   </div>
 </template>
