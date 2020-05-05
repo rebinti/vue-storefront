@@ -24,6 +24,7 @@ export default {
       this.$store.commit('ui/setSidebar', false)
       this.$store.commit('ui/setReviewPanel', false)
       this.$store.commit('ui/setProductSidePanelFlag', false)
+      this.$store.commit('ui/setProductDetailsSidePanelFlag', false)
     }
   }
 }
