@@ -69,7 +69,7 @@
     <!-- </div> -->
 
 
-    <div class="container onlymobile col-12" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
+    <div class="container onlymobile col-12" style="margin-bottom: 5px;" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top">
@@ -106,7 +106,25 @@
 
       </div>
 
-    <div class="container pb-5 md: ml-2 lg:hidden">
+    <!-- Side bar for Mobile -->
+    <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
+      <div class="mobile-filters_new">
+        <h2 class="absolute top-0 left-0 m-4 h-4" > Filters </h2>
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4"
+          @click="closeFilters"
+        >
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
+        <div class="">
+          <div class="sidebar">
+            <!-- <h1>Filters</h1> -->
+
+            <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: 10px;">
               <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
               <span
                 class="filter-box clearall-filter"
@@ -132,24 +150,9 @@
                     >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
                   </span>
                 </div>
-              </div>      
-    </div>
-    <!-- Side bar for Mobile -->
-    <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
-      <div class="mobile-filters_new">
-        <button
-          type="button"
-          :aria-label="$t('Close')"
-          class="absolute top-0 right-0 m-4 h-4"
-          @click="closeFilters"
-        >
-          <svg viewBox="0 0 25 25" class="vt-icon--sm">
-            <use xlink:href="#close" />
-          </svg>
-        </button>
-        <div class="">
-          <div class="sidebar">
-            <!-- <h1>Filters</h1> -->
+                      </div>      
+            </div>
+
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <!-- <div
                 v-for="facetsitem in searchRes.facets"
@@ -932,11 +935,11 @@ export default {
   
   overscroll-behavior: none none;
   padding-top: 52px;
-  top: 70px;
-  height: calc(100vh - 70px);
+  // top: 70px;
+  height: 100vh;
 
   @screen md {
-    top: 73px;
+    // top: 73px;
   }
 }
 

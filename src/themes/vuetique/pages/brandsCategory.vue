@@ -70,7 +70,7 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-      <div class="container onlymobile col-12" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
+      <div class="container onlymobile col-12" style="margin-bottom: 5px;" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top search">
@@ -108,37 +108,11 @@
 
       </div>
 
-    <div class="container pb-5 md: ml-2 lg:hidden">
-        <span
-          class="filter-box clearall-filter"
-          v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>1"
-          @click="clearAllFilter()"
-        >Clear All</span>              
-        <div class="container pb-5 md: ml-2 selectedone">
-          <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
-            <span
-              v-for="filter in searchRes.filterSummary"
-              :key="filter.label"
-              @click="removeFilterFlag(filter)"
-              class="filter-box option-selected-box selectone-active"
-               v-if="filter.filterLabel !== 'Brand'"
-            >
-              {{ filter.label }}
-              <div class="topright select-active" id="corner-triangle">
-                <div class="corner-triangle-text text-capitalize">
-                    <span>x</span> 
-                </div>
-              </div>                       
-              <span
-                v-if="filter.field === 'final_price'"
-              >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
-            </span>
-          </div>
-        </div>         
-    </div>
+   
     <!-- Side bar for Mobile -->
     <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
       <div class="mobile-filters_new">
+        <h2 class="absolute top-0 left-0 m-4 h-4" > Filters </h2>
         <button
           type="button"
           :aria-label="$t('Close')"
@@ -152,6 +126,35 @@
         <div class="">
           <div class="sidebar">
             <!-- <h1>Filters</h1> -->
+             <div class="container pb-5 md: ml-2 lg:hidden">
+                <span
+                  class="filter-box clearall-filter"
+                  v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>1"
+                  @click="clearAllFilter()"
+                >Clear All</span>              
+                <div class="container pb-5 md: ml-2 selectedone">
+                  <div class="row gutter-md" v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>0">
+                    <span
+                      v-for="filter in searchRes.filterSummary"
+                      :key="filter.label"
+                      @click="removeFilterFlag(filter)"
+                      class="filter-box option-selected-box selectone-active"
+                      v-if="filter.filterLabel !== 'Brand'"
+                    >
+                      {{ filter.label }}
+                      <div class="topright select-active" id="corner-triangle">
+                        <div class="corner-triangle-text text-capitalize">
+                            <span>x</span> 
+                        </div>
+                      </div>                       
+                      <span
+                        v-if="filter.field === 'final_price'"
+                      >{{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeLow }}- {{ $store.state.config.i18n.currencySign }} {{ filter.value.rangeHigh }}</span>
+                    </span>
+                  </div>
+                </div>         
+            </div>
+
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <!-- <div
                 v-for="facetsitem in searchRes.facets"
@@ -945,11 +948,11 @@ export default {
   
   overscroll-behavior: none none;
   padding-top: 52px;
-  top: 70px;
-  height: calc(100vh - 70px);
+  // top: 70px;
+  height: 100vh;
 
   @screen md {
-    top: 73px;
+    // top: 73px;
   }
 }
 
