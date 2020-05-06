@@ -603,8 +603,7 @@ export default {
         // }
         console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising);
           if ( searchResults.merchandising && searchResults.merchandising.content) {
-              if(searchResults.merchandising.content.header[0]){
-                
+              if(searchResults.merchandising.content.header[0]){                
                   this.headerbanner = searchResults.merchandising.content.header[0];
               }
               if(searchResults.merchandising.content.banner[0]){
