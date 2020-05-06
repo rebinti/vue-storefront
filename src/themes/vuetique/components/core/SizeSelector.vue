@@ -50,8 +50,14 @@ export default {
   } 
   @media (max-width: 1440px) {
     .size-selector {
-      height: 28px;
-      min-width: 28px;
+      height: 33px;
+      min-width: 33px;
+    }      
+  }   
+  @media (max-width: 768px) {
+    .size-selector {
+      height: 33px;
+      min-width: 33px;
     }      
   }   
 </style>

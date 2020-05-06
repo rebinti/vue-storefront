@@ -46,7 +46,15 @@ export default {
 
 <style scoped>
 button.wishlist-bx{
-        margin: 5px;
+        margin: 6px;
+}
+@media (max-width: 768px){
+  button.wishlist-bx{        
+        border: 1px solid #000000;
+        height: 46px;
+        width: 46px;
+        margin: 0px;        
+  }  
 }
 @media (min-width: 576px) {
   /* .wishlist-bx{ display: inline-block; }
