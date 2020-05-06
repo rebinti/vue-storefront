@@ -11,6 +11,8 @@
         :max="getMax"
         :marks="[getMin, getMax]"
         :interval="interval"
+        :tooltip="'always'" 
+        :tooltip-placement="'top'"
         :tooltip-formatter="tooltipContent"
         @drag-end="setPrice"
       />
@@ -112,7 +114,7 @@ export default {
       this.remove = isEqual(val, this.priceRange)
       console.log('setPrice', id, from, to , this.remove , val, this.priceRange)
       // this.switchFilter(id, from, to)
-      this.$emit('sliderChanged', {from: from, to: to})
+      // this.$emit('sliderChanged', {from: from, to: to})
     },
     // switchFilter (id, from, to) {
     //   this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, from: from, to: to, label: this.currencySign + ' ' + from + ' - ' + this.currencySign + ' ' + to, remove: this.remove })
@@ -137,6 +139,14 @@ export default {
   @import '~theme/css/helpers/functions/color';
   $color-event: color(tertiary);
   $color-active: color(accent);
+
+.vue-slider-process {
+      background-color: rgb(17, 19, 18) !important;
+    font-weight: 700;
+    transition-duration: 0s;
+    width: 151.2px;
+    left: 10.8px;
+}
 
   .price-slider-container {
     padding-bottom: 50px;
@@ -168,4 +178,44 @@ export default {
 .vue-slider-component .vue-slider-dot {
   box-shadow: none;
 }
+
+.vue-slider-component .vue-slider-process {
+      background-color: rgb(17, 19, 18) !important;
+    font-weight: 700;
+    transition-duration: 0s;
+    width: 151.2px;
+    left: 10.8px;
+}
+
+
+ .vue-slider-component .vue-slider-process {
+    background-color: rgb(14, 14, 14)!important;;
+  }
+
+ .vue-slider-component .vue-slider-process {
+    background-color: rgb(14, 14, 14)!important;;
+  }
+.vue-slider-component .vue-slider-dot .vue-slider-dot-handle{
+    background-color: #080808!important;;
+}
+
+.vue-slider-component .vue-slider-tooltip {
+    background-color: #fff0 !important;
+    color: rgb(12, 0, 0)!important;
+    border-color: rgba(236, 239, 237, 0)!important;
+    /* padding: 7px 10px; */
+    font-weight: 900;
+}
+
+.vue-slider-component .vue-slider {
+  height: 1px!important;
+  top:45px!important;
+  background-color: rgb(14, 14, 14)!important;
+}
+
+.vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-bottom {
+    bottom: 53px!important;
+    left: 42%!important;
+}
+
 </style>

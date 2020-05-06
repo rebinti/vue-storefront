@@ -256,7 +256,7 @@ export default {
   left: 0;
   overflow: hidden;
   overflow-y: auto;
-  z-index: 3;
+  z-index: 6;
   max-height: calc(100vh - 0px);
 
   @screen md {
