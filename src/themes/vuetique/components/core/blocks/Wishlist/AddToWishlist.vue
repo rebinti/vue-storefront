@@ -49,7 +49,7 @@ button.wishlist-bx{
         margin: 6px;
 }
 @media (max-width: 768px){
-  button.wishlist-bx{        
+  .p_detail_box button.wishlist-bx{        
         border: 1px solid #000000;
         height: 46px;
         width: 46px;
