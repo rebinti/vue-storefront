@@ -1797,7 +1797,7 @@ export default {
       }
       .size-fit-part-mob{
           overflow: hidden;
-          margin-top: 2px;
+          margin-top: 15px;
         .fit-label{
           font-size: 9px;
           width: 20%;
