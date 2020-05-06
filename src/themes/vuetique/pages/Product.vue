@@ -1667,8 +1667,8 @@ export default {
     color: #FFFFFF;
   }
   .mob_pro_varients .mob_size_box .leg_length .generic-selector{
-    height: 20px;
-    min-width: 40px;
+    height: 33px;
+    min-width: 33px;
     line-height: 20px;
     float: left;
     border: 1px solid #909090;
