@@ -114,7 +114,7 @@ export default {
       this.remove = isEqual(val, this.priceRange)
       console.log('setPrice', id, from, to , this.remove , val, this.priceRange)
       // this.switchFilter(id, from, to)
-      // this.$emit('sliderChanged', {from: from, to: to})
+      this.$emit('sliderChanged', {from: from, to: to})
     },
     // switchFilter (id, from, to) {
     //   this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, from: from, to: to, label: this.currencySign + ' ' + from + ' - ' + this.currencySign + ' ' + to, remove: this.remove })
