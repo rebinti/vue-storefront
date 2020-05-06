@@ -601,21 +601,22 @@ export default {
         //       return;
         //     }
         // }
-         
-         if(searchResults.merchandising.content.header[0]){
-           console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising.content.header[0]);
-            this.headerbanner = searchResults.merchandising.content.header[0];
-         }
-         if(searchResults.merchandising.content.banner[0]){
-            this.bannerbanner = searchResults.merchandising.content.banner[0];
-         }
-         if(searchResults.merchandising.content.left[0]){
-            this.leftbanner = searchResults.merchandising.content.left[0];
-         }
-         if(searchResults.merchandising.content.footer[0]){
-            this.footerbanner = searchResults.merchandising.content.footer[0];
-         }
-
+        console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising);
+          if ( searchResults.merchandising && searchResults.merchandising.content) {
+              if(searchResults.merchandising.content.header[0]){
+                
+                  this.headerbanner = searchResults.merchandising.content.header[0];
+              }
+              if(searchResults.merchandising.content.banner[0]){
+                  this.bannerbanner = searchResults.merchandising.content.banner[0];
+              }
+              if(searchResults.merchandising.content.left[0]){
+                  this.leftbanner = searchResults.merchandising.content.left[0];
+              }
+              if(searchResults.merchandising.content.footer[0]){
+                  this.footerbanner = searchResults.merchandising.content.footer[0];
+              }
+          }
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
           searchResults.results.filter(val => {
