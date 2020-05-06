@@ -181,7 +181,7 @@
                   </p>
                   <p v-for="(valuesitem) in facetsitem.values" :key="valuesitem.value"
                      @click="setCategoryFilterData (facetsitem, valuesitem)">
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                    {{ valuesitem.label }} 
                   </p>
                 </div>
 
@@ -194,7 +194,7 @@
                     v-model="valuesitem.active"
                     @click.native="setFilterData (facetsitem, valuesitem)"
                   >
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                    {{ valuesitem.label }}
                   </search-checkbox>
 
                    <filter-color-selector
@@ -344,7 +344,7 @@
                        @click="setCategoryFilterData (facetsitem, valuesitem)"
                        :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : 'margin-left:0px;'"
                        >
-                      {{ valuesitem.label }} ({{ valuesitem.count }})
+                      {{ valuesitem.label }}
                     </p>
                   </div>
 
@@ -357,7 +357,7 @@
                       v-model="valuesitem.active"
                       @click="setFilterData (facetsitem, valuesitem)"
                     >
-                      {{ valuesitem.label }} ({{ valuesitem.count }})
+                      {{ valuesitem.label }}
                     </search-checkbox>
 
                      <filter-color-selector
@@ -1234,5 +1234,9 @@ input {
         left: -7px;
     }
   }
+
+  .mobile-filters_new h2{
+      line-height: 1.5rem;
+}
 
 </style>

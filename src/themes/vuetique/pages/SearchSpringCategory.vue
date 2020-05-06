@@ -213,7 +213,7 @@
                     :field-type="valuesitem.field"
                     @click.native="setFilterData (facetsitem, valuesitem)"
                   >
-                    {{ valuesitem.label }} ({{ valuesitem.count }})
+                    {{ valuesitem.label }}
                   </search-checkbox>
 
                   <filter-color-selector
@@ -1483,6 +1483,8 @@ input {
 } 
 
   
-
+.mobile-filters_new h2{
+      line-height: 1.5rem;
+}
 
 </style>
