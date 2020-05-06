@@ -28,7 +28,7 @@
                 @input="sortingFilterChange"
               />
           </div>
-          <div v-html="headerbanner"></div>
+          <!-- <div v-html="headerbanner"></div> -->
            <!-- <active-filters :filters="filters.available" /> -->
         </div> 
       </div>
@@ -413,7 +413,7 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">    
-          <div v-html="bannerbanner"></div>             
+          <div v-html="bannerbanner" style="margin-bottom: 20px;"></div>             
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -431,7 +431,7 @@
             </svg>
             <h3 style="text-align: center;"> Please wait for loading more... </h3>
           </div>
-          <div v-html="footerbanner"></div>
+          <!-- <div v-html="footerbanner"></div> -->
         </div>
       </div>
     </div>
@@ -602,10 +602,18 @@ export default {
         //     }
         // }
          console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising.content.header[0]);
-         this.headerbanner = searchResults.merchandising.content.header[0];
-         this.bannerbanner = searchResults.merchandising.content.banner[0];
-         this.leftbanner = searchResults.merchandising.content.left[0];
-         this.footerbanner = searchResults.merchandising.content.footer[0];
+         if(searchResults.merchandising.content.header[0]){
+            this.headerbanner = searchResults.merchandising.content.header[0];
+         }
+         if(searchResults.merchandising.content.banner[0]){
+            this.bannerbanner = searchResults.merchandising.content.banner[0];
+         }
+         if(searchResults.merchandising.content.left[0]){
+            this.leftbanner = searchResults.merchandising.content.left[0];
+         }
+         if(searchResults.merchandising.content.footer[0]){
+            this.footerbanner = searchResults.merchandising.content.footer[0];
+         }
 
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
