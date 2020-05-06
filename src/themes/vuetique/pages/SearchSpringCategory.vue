@@ -601,8 +601,9 @@ export default {
         //       return;
         //     }
         // }
-         console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising.content.header[0]);
+         
          if(searchResults.merchandising.content.header[0]){
+           console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising.content.header[0]);
             this.headerbanner = searchResults.merchandising.content.header[0];
          }
          if(searchResults.merchandising.content.banner[0]){
