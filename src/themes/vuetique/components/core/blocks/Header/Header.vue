@@ -151,12 +151,17 @@ header {
   &.is-visible {
     top: 0;
   }
-
   // @screen lg {
   //   top: -70px;
   // }
 
 }
+
+.menu-high-opacity {
+    header {
+     z-index: 6!important;
+    } 
+  }
 
 .header-placeholder {
   height: 70px;

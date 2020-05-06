@@ -108,6 +108,16 @@ export default {
      this.$store.dispatch('ui/toggleReviewPanel' , false)
     },
   },
+   beforeCreate () {
+    const el = document.body;
+    el.classList.add('menu-high-opacity');
+    document.documentElement.classList.add('menu-high-opacity')
+  },
+  destroyed () {
+    const el = document.body;
+    el.classList.remove('menu-high-opacity');
+    document.documentElement.classList.remove('menu-high-opacity')
+  }
   
 }
 </script>
