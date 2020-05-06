@@ -606,15 +606,31 @@ export default {
               if(searchResults.merchandising.content.header[0]){                
                   this.headerbanner = searchResults.merchandising.content.header[0];
               }
+              else{
+                  this.headerbanner = null;
+              }
               if(searchResults.merchandising.content.banner[0]){
                   this.bannerbanner = searchResults.merchandising.content.banner[0];
+              }
+              else{
+                  this.bannerbanner = null;
               }
               if(searchResults.merchandising.content.left[0]){
                   this.leftbanner = searchResults.merchandising.content.left[0];
               }
+              else{
+                  this.leftbanner = null;
+              }
               if(searchResults.merchandising.content.footer[0]){
                   this.footerbanner = searchResults.merchandising.content.footer[0];
+              }else{
+                  this.footerbanner = null;
               }
+          }else{
+              this.headerbanner = null;
+              this.bannerbanner = null;
+              this.leftbanner = null;
+              this.footerbanner = null;
           }
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
