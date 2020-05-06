@@ -402,7 +402,8 @@
                 <!-- </div> -->
                 </Accordion>
               </div>
-              <div v-html="leftbanner"></div>
+              <div v-if="getMerchandisingContent && getMerchandisingContent.left"
+              v-html="getMerchandisingContent.left[0]"></div>
             </div>
           </div>
         </div>
@@ -413,7 +414,9 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">    
-          <div v-html="bannerbanner" style="margin-bottom: 20px;"></div>             
+          <div v-if="getMerchandisingContent && getMerchandisingContent.banner"
+           v-html="getMerchandisingContent.banner[0]" style="margin-bottom: 20px;">
+           </div>             
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -487,7 +490,7 @@ export default {
       defaultColumnMobile: state => state.ui.defaultColumnMobile,
       mobileGridData: state => state.ui.mobileGridData
     }),
-    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath'])
+    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath', 'getMerchandisingContent'])
   },
   data () {
     return {
@@ -500,11 +503,7 @@ export default {
       searchedValue: '',
       searcingLoaderFlag: true,
       controller: null,
-      signal: null,
-      headerbanner: null,
-      bannerbanner: null,
-      leftbanner: null,
-      footerbanner: null,   
+      signal: null,  
       defaultColumn: 3,
       fixedOrderPanel: false,
       initialSearchFlag: true,
@@ -601,37 +600,6 @@ export default {
         //       return;
         //     }
         // }
-        console.log('CATEGORY BANNER >>>>>>>>>>', searchResults.merchandising);
-          if ( searchResults.merchandising && searchResults.merchandising.content) {
-              if(searchResults.merchandising.content.header[0]){                
-                  this.headerbanner = searchResults.merchandising.content.header[0];
-              }
-              else{
-                  this.headerbanner = null;
-              }
-              if(searchResults.merchandising.content.banner[0]){
-                  this.bannerbanner = searchResults.merchandising.content.banner[0];
-              }
-              else{
-                  this.bannerbanner = null;
-              }
-              if(searchResults.merchandising.content.left[0]){
-                  this.leftbanner = searchResults.merchandising.content.left[0];
-              }
-              else{
-                  this.leftbanner = null;
-              }
-              if(searchResults.merchandising.content.footer[0]){
-                  this.footerbanner = searchResults.merchandising.content.footer[0];
-              }else{
-                  this.footerbanner = null;
-              }
-          }else{
-              this.headerbanner = null;
-              this.bannerbanner = null;
-              this.leftbanner = null;
-              this.footerbanner = null;
-          }
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
           searchResults.results.filter(val => {
