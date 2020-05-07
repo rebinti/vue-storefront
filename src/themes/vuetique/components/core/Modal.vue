@@ -60,7 +60,13 @@ export default {
     ]),
     toggle (state) {
       this.isVisible = state
-      state ? this.setOverlay(state) : setTimeout(() => this.setOverlay(state), this.delay)
+      if (!this.isVisible) {
+        if (!this.$store.state.ui.wishlist) {
+          state ? this.setOverlay(state) : setTimeout(() => this.setOverlay(state), this.delay)
+        }
+      } else {
+         state ? this.setOverlay(state) : setTimeout(() => this.setOverlay(state), this.delay)
+      }
     },
     close () {
       this.toggle(false)

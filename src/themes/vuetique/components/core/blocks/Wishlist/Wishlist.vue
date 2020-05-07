@@ -95,7 +95,7 @@
     <div
       class="add_more_btn"
       v-show="viewType === 'boards'"
-      @click="$store.commit('ui/setBoardsElem', 'create-board');$bus.$emit('modal-show', 'modal-create-boards')"
+      @click="openCreateBoardPopup"
     >
       <a href="#" class="add_more_pls">
         <i class="fas fa-plus" />
@@ -105,6 +105,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Wishlist from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Wishlist';
 import Product from 'theme/components/core/blocks/Wishlist/Product';
 // const Boards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/Wishlist.vue')
@@ -112,7 +113,6 @@ import Boards from 'theme/components/core/blocks/Boards/Wishlist.vue';
 import NoScrollBackground from 'theme/mixins/noScrollBackground';
 import { SwipeList, SwipeOut } from 'vue-swipe-actions';
 import RemoveButton from './RemoveButton';
-import Vue from 'vue'
 
 export default {
   props: {
@@ -204,6 +204,19 @@ export default {
     },
     chageRenderFlag () {
       this.reRendBoards = false
+    },
+    openCreateBoardPopup () {
+        if(this.$store.state.user && this.$store.state.user.current === null) {
+          this.$store.dispatch('notification/spawnNotification', {
+            type: 'success',
+            message: 'Please sign-in for create boards!'
+          })
+          this.$store.commit('ui/setAuthElem', 'login')
+          Vue.prototype.$bus.$emit('modal-show', 'modal-signup')
+          return
+        }
+        this.$store.commit('ui/setBoardsElem', 'create-board');
+        this.$bus.$emit('modal-show', 'modal-create-boards');
     }
   }
 };
