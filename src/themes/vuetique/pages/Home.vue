@@ -66,11 +66,16 @@
         <prismic-cms-block :identifier="'vue-home-6banner'"/>
     </section>
     <Onboard />
+
+    <section class="container mb-16">
+      <div data-styla-slot="f0adc473-c041-43a6-9370-646ac8d44fae"></div>
+    </section>
+
     <div class="container mr_kst">
         <div class="menu-list col-6">
               <cms-block :identifier="'vue-cms-home-offer-banner'" />
         </div>
-    </div> 
+    </div>     
   </div>
 </template>
 
@@ -143,6 +148,9 @@ export default {
     this.$store.dispatch('checkout/load')
   },
   beforeMount () {
+    if (window.styla !== null) {
+       window.styla.init()
+    }
     if (this.$store.state.__DEMO_MODE__) {
       this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' }).then((onboardingClaim) => {
         if (!onboardingClaim) { // show onboarding info
@@ -194,6 +202,11 @@ export default {
         reject(err)
       })
     })
+  },
+  mounted() {
+    if (window.styla !== null) {
+       window.styla.init()
+    }
   }
 }
 </script>
