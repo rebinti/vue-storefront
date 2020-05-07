@@ -1,6 +1,6 @@
 <template>
   <div>
-       <cms-pagecustom :identifier="'privacy'" />
+       <cms-pagecustom :identifier="'about-us'" />
   </div>
 </template>
 <script>

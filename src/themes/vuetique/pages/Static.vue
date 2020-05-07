@@ -31,6 +31,7 @@ import i18n from '@vue-storefront/i18n'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs'
 import StaticExample from 'theme/components/theme/blocks/Static/Example'
 import ReturnExample from 'theme/components/theme/blocks/Static/Return'
+import PrivacyExample from 'theme/components/theme/blocks/Static/Privacy'
 
 export default {
   components: {
@@ -68,7 +69,8 @@ export default {
         { title: i18n.t('Store locator'), link: '/store-locator', component: StaticExample },
         { title: i18n.t('Delivery'), link: '/delivery', component: StaticExample },
         { title: i18n.t('Return policy'), link: '/returns', component: ReturnExample },
-        { title: i18n.t('Privacy policy'), link: '/privacy', component: StaticExample },
+        // { title: i18n.t('Return policy'), link: '/returns', component: Custompage },
+        { title: i18n.t('Privacy policy'), link: '/privacy', component: PrivacyExample },
         { title: i18n.t('Size guide'), link: '/size-guide', component: StaticExample },
         { title: i18n.t('Contact us'), link: '/contact', component: StaticExample }
       ],
