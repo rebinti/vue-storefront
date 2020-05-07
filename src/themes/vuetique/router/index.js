@@ -18,6 +18,7 @@ const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/p
 const Static = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static.vue')
 const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/CustomCmsPage.vue')
 const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData')
+const ContactUs = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/ContactUs.vue')
 
 const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin')
 // const SearchSpringSearch = () => import(/* webpackChunkName: "vsf-splash" */ 'theme/pages/SearchSpringSearch')
@@ -53,6 +54,7 @@ let routes = [
   { name: 'custom-cms-page', path: '/custom-cms-page', component: CustomCmsPage },
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
+  { name: 'contact-us', path: '/contact-us', component: ContactUs },
 
   { name: 'search-spring', path: '/search', component: SearchSpringSearch },
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
