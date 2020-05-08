@@ -39,18 +39,18 @@ export const EmarsysTracker =  {
         window.ScarabQueue.push(['cart', cart ]);
 
         /* Hits when the event (type = 'Product') 
-           form Products page
+           from Products page
         */ 
         if (event && event.type === 'Product') {
           window.ScarabQueue.push(['view', event.productSku]);
         }
         
         /* Hits when the event (type = 'Category') 
-           form Category page
+           from Category page
         */ 
         if (event && event.type === 'Category') {
           // Passing on the category path being visited. Must match the 'category' values listed in the Product Catalog
-          window.ScarabQueue.push(['category', 'Bikes > Road Bikes']);
+          window.ScarabQueue.push(['category', event.categoryData]);
         }
 
         window.ScarabQueue.push(['go']);

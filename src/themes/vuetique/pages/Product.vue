@@ -799,9 +799,15 @@ export default {
     imgUrlAlt(event) {
        event.target.src = "/assets/colour/multi.png"
     },
-    getRelatedProduct (relatedData) { 
+    getRelatedProduct (relatedData) {     
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return;
+
+    /* 
+      To set Emarsys Tracking Data
+    */
+    this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+
     // this.getProductId =  null
     const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
     this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
@@ -930,7 +936,7 @@ export default {
     // this.$bus.$off('product-after-load')
   },
   mounted() {
-    this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
   }
 }
 </script>

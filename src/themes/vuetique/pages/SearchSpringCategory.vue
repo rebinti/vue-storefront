@@ -563,8 +563,20 @@ export default {
       }
     }
     document.addEventListener('scroll',  this.handleScroll);
+    this.setEmarsysTracker();
+   // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.searchedValue.replace("/", " > ") });
   },
   methods: {
+   setEmarsysTracker () {
+      const routeUrl= this.breadcrumbs.routes.map((val , index) => {
+        if ( index !== 0) {
+          return val.name
+        }
+      }).join(' > ');              
+      const routeString = routeUrl ? routeUrl + ' > ' +  this.category.name : this.category.name;
+      this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: routeString });
+    },
+
     imgUrlAlt(event) {
        event.target.src = "/assets/colour/multi.png"
     }, 
@@ -572,6 +584,7 @@ export default {
         // console.log('validateRouteCategory',this.$route.path)
         this.searcingLoaderFlag = true;
         this.initialSearchFlag = true;
+        this.setEmarsysTracker();
         this.searchDataInSearchSpring();
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
     },
