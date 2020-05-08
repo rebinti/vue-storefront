@@ -732,7 +732,7 @@ export default {
           // window.StampedFn.loadDisplayWidgets()
     })
    },  
-  mounted () {
+  // mounted () {
     // console.log('window.StampedFn', window.StampedFn)
       // setTimeout(() => {
       //   window.StampedFn.reloadUGC()
@@ -745,7 +745,7 @@ export default {
     //       console.log('stamped:reviews:loaded', e);
     //   });
     // this.refreshStampedReview();
-  },
+  // },
   methods: {
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
@@ -928,6 +928,19 @@ export default {
     this.$bus.$off('product-after-related')
     this.$bus.$off('product-before-load')
     // this.$bus.$off('product-after-load')
+  },
+  mounted() {
+    if (window.styla !== null) {
+       window.styla.init()
+    }
+    if ( window.ScarabQueue) { 
+        console.log('window.ScarabQueue', window.ScarabQueue);
+        console.log('product.sku', this.product.sku);
+        window.ScarabQueue.push(['setEmail', 'lijo.john@rcggs.com']);
+        window.ScarabQueue.push(['view', this.product.sku]);
+        window.ScarabQueue.push(['go']);
+        console.log('window.ScarabQueue', window.ScarabQueue);
+    }
   }
 }
 </script>

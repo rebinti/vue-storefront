@@ -207,6 +207,12 @@ export default {
     if (window.styla !== null) {
        window.styla.init()
     }
+    if ( window.ScarabQueue) { 
+        console.log('window.ScarabQueue', window.ScarabQueue);
+        window.ScarabQueue.push(['setEmail', 'lijo.john@rcggs.com']);
+        window.ScarabQueue.push(['go']);
+        console.log('window.ScarabQueue', window.ScarabQueue);
+    }
   }
 }
 </script>

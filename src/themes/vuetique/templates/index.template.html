@@ -69,7 +69,18 @@
 	// .fitrec('icl','staging',{autoCalculate:false});
 	</script>
 	<script nodefer src="https://client-scripts.styla.com/scripts/clients/iclothing-ie.js" async="" type="text/javascript"></script>
-		
+	
+	<script nodefer type="text/javascript">
+		var ScarabQueue = ScarabQueue || [];
+		(function(id) {
+		  if (document.getElementById(id)) return;
+		  var js = document.createElement('script'); js.id = id;
+		  js.src = '//cdn.scarabresearch.com/js/1CF94B0E038F4075/scarab-v2.js';
+		  var fs = document.getElementsByTagName('script')[0];
+		  fs.parentNode.insertBefore(js, fs);
+		})('scarab-js-api');
+	</script>
+	<script src="https://d22q3dafggn5rg.cloudfront.net/emarsys-m1.js"></script>	
 		
 		{{{ renderResourceHints() }}}
 		{{{ renderStyles() }}}
