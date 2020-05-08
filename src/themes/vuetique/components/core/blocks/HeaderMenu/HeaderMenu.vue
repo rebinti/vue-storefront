@@ -107,6 +107,14 @@
           >{{ $t('Brands') }}
           </router-link>
         </li>
+
+        <li>
+          <router-link
+            class="menu-link"
+            :to="localizedRoute('/inspiration-landing')"
+            exact
+          >{{ $t('Inspiration') }}</router-link>
+        </li>        
       
         
       </ul>

@@ -16,6 +16,7 @@ const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/page
 const Compare = () => import(/* webpackChunkName: "vsf-compare" */ 'theme/pages/Compare.vue')
 const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/pages/MyAccount.vue')
 const Static = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static.vue')
+const Styla = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Styla.vue')
 const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/CustomCmsPage.vue')
 const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData')
 const ContactUs = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/ContactUs.vue')
@@ -32,6 +33,7 @@ let routes = [
   { name: 'legal', path: '/legal', component: Static, props: { page: 'lorem', title: 'Legal Notice' }, meta: { title: 'Legal Notice', description: 'Legal Notice - example of description usage' } },
   { name: 'privacy', path: '/privacy', component: Static, props: { page: 'lorem', title: 'Privacy' } },
   { name: 'magazine', path: '/magazine', component: Static, props: { page: 'lorem', title: 'Magazine' } },
+  { name: 'inspiration', path: '/inspiration-landing', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
   { name: 'sale', path: '/sale', component: Static, props: { page: 'lorem', title: 'Sale' } },
   { name: 'order-tracking', path: '/order-tracking', component: Static, props: { page: 'lorem', title: 'Track my Order' } },
   { name: 'my-account', path: '/my-account', component: MyAccount, meta: { requiresAuth: true } },
