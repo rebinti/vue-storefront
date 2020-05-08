@@ -55,6 +55,8 @@ import ModalSwitcher from 'theme/components/core/blocks/Switcher/Language.vue'
 import Announcement from 'theme/components/theme/blocks/Header/Announcement.vue'
 import Icons from 'theme/components/theme/Icons.vue'
 
+import {EmarsysTracker} from 'theme/mixins/emarsys/EmarsysTracker'
+
 import Head from 'theme/head'
 import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
 import PopupBoards  from 'theme/components/core/blocks/Boards/PopupBoards.vue'
@@ -171,7 +173,8 @@ export default {
     ReviewPanel,
     ProductSidePanel,
     ProductDetailsSidePanel
-  }
+  },
+   mixins: [EmarsysTracker]
 }
 </script>
 

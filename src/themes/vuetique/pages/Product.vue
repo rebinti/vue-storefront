@@ -930,17 +930,7 @@ export default {
     // this.$bus.$off('product-after-load')
   },
   mounted() {
-    if (window.styla !== null) {
-       window.styla.init()
-    }
-    if ( window.ScarabQueue) { 
-        console.log('window.ScarabQueue', window.ScarabQueue);
-        console.log('product.sku', this.product.sku);
-        window.ScarabQueue.push(['setEmail', 'lijo.john@rcggs.com']);
-        window.ScarabQueue.push(['view', this.product.sku]);
-        window.ScarabQueue.push(['go']);
-        console.log('window.ScarabQueue', window.ScarabQueue);
-    }
+    this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
   }
 }
 </script>
