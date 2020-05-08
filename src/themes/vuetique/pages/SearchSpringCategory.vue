@@ -568,11 +568,12 @@ export default {
   },
   methods: {
    setEmarsysTracker () {
-      const routeUrl= this.breadcrumbs.routes.map((val , index) => {
+      let routeUrl= this.breadcrumbs.routes.filter((val , index) => {
         if ( index !== 0) {
           return val.name
         }
-      }).join(' > ');              
+      });
+      routeUrl= routeUrl.map(val => val.name).join(' > ');    
       const routeString = routeUrl ? routeUrl + ' > ' +  this.category.name : this.category.name;
       this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: routeString });
     },
