@@ -1023,13 +1023,15 @@ export default {
                         .join(' ');
         routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
         if(routeString.includes('&')) {
-          routeString = encodeURIComponent(routeString)
+          routeString = encodeURIComponent(routeString);
         }
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
-
+        this.setEmarsysTracker ()
       } else {
         this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', valuesitem);
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + category.field + '=' + encodeURIComponent(valuesitem.value))
+        const routeString = valuesitem.value.split('/').join(' > ');
+        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: routeString });
       }
       this.showNotificationLoader();
       this.getSearchData();
