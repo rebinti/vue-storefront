@@ -4,6 +4,8 @@ import { quickSearchByQuery } from '@vue-storefront/core/lib/search'
 import SearchQuery from '@vue-storefront/core/lib/search/searchQuery'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
+import { TaskQueue } from '@vue-storefront/core/lib/sync'
+import fetch from 'isomorphic-fetch'
 
 const KEY = 'ui'
 const store = {
@@ -194,6 +196,35 @@ const store = {
     setBrandsFiltersAction({commit}, state) {
       commit('setBrandsFilters', state)
     },
+
+     getOrderDeatilsById ({commit}, orderId) {
+        return new Promise((resolve, reject) => {
+            fetch( 'https://vue.iclothing.com/api/urlorderdetails/urlorderdetails', {
+              method: 'POST',
+              mode: 'cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(orderId)
+            }).then(res => resolve(res.json())).catch(() => reject())
+        })
+    },
+    async getOrderedProducts ({commit}, orderId) {
+      console.log('getOrderedProducts',  orderId)
+          const task = await TaskQueue.execute({ url: '/api/urlorderdetails/urlorderdetails', 
+          payload: {  
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify({"orderid": orderId}) 
+          },
+          silent: false
+        });
+        if (task && task.resultCode === 200) {
+          console.log('api dataaaa Sucesss' , task.result)
+          return task.result
+        } else {
+          return task
+        }
+    }
   }
 }
 

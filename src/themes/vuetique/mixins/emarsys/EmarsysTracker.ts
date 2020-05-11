@@ -53,6 +53,14 @@ export const EmarsysTracker =  {
           window.ScarabQueue.push(['category', event.categoryData]);
         }
 
+        /* Hits when the event (type = 'Category') 
+          from Category page
+        */ 
+        if (event && event.type === 'Purchase') {
+          // Passing on the category path being visited. Must match the 'category' values listed in the Product Catalog
+          window.ScarabQueue.push(['purchase', event.purchaseData]);
+        }
+
         window.ScarabQueue.push(['go']);
         console.log('window.ScarabQueue', window.ScarabQueue);
       }

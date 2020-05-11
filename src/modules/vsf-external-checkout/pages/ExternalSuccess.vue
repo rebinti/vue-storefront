@@ -61,6 +61,8 @@ import ButtonOutline from 'theme/components/theme/ButtonOutline'
 import VueOfflineMixin from 'vue-offline/mixin'
 import { EmailForm } from '@vue-storefront/core/modules/mailer/components/EmailForm'
 import rootStore from '@vue-storefront/core/store'
+import { localizedRoute } from '@vue-storefront/core/lib/multistore'
+
 export default {
   name: 'ExternalThankYouPage',
   mixins: [Composite, VueOfflineMixin, EmailForm],
@@ -98,6 +100,7 @@ export default {
         this.clearTheCart()
       }
     })
+    this.submitEmarsysOrderData()
   },
   methods: {
     clearTheCart () {
@@ -151,8 +154,53 @@ export default {
         message,
         action1: { label: this.$t('OK') }
       })
+    },
+
+    async submitEmarsysOrderData () {
+      console.log('this.$router', this.$route)
+     if (this.$route.query.orderid) {
+       const res =   await this.$store.dispatch('ui/getOrderedProducts', this.$route.query.orderid)
+       console.log('order details', res);
+       const emarsys = {
+              orderId: this.$route.query.orderid,
+              items: []
+          }
+        res.filter(val => {
+          if (val.price != 0) {
+            emarsys.items.push({item: val.sku, price: val.price, quantity: val.qty_ordered})
+          } 
+        })
+        console.log(' emarsys', emarsys);
+        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
+      } else {
+           this.$router.push(this.localizedRoute('/'))
+      }
     }
   }
+  // async asyncData ({ store, route, context }) { // this is for SSR purposes to prefetch data
+  //   // return new Promise((resolve, reject) => {
+  //   //   store.dispatch('ui/getOrderDeatilsById', {
+  //   //       key: '_type',
+  //   //       value: "banner"
+  //   //   }).then(res => {
+  //   //     console.log('jsonplaceholder', res)
+  //   //     return resolve()
+  //   //   }, err => { reject()});
+  //   // })
+  //   try {
+  //     if (route.query.orderid) {
+  //       let res =  await store.dispatch('ui/getOrderDeatilsById', {
+  //         orderid: route.query.orderid
+  //       })
+  //       console.log('jsonplaceholder', res);
+  //     } else {
+
+  //     }
+     
+  //   } catch (error) {
+  //     throw error
+  //   }
+  // }
 }
 </script>
 
