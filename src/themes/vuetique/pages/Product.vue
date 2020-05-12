@@ -705,7 +705,7 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('product-after-related', this.getRelatedProduct)
-
+    this.$bus.$on('product-after-load', this.getDataFromThirdPartyModules)
     this.$bus.$on('product-before-load', this.changeProd)
 
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
@@ -803,70 +803,6 @@ export default {
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return;
 
-    /* 
-      To set Emarsys Tracking Data
-    */
-    this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
-
-    // this.getProductId =  null
-    const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-    this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
-    console.log('Stamped getProductId value', this.getProductId)
-    this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
-
-    /* 
-      For TrueFit Integration
-    */
-    let trufitIds = [{ id: 'DS20', color: 'navy'},
-                    { id: 'MA810108-P3022', color: 'green'},
-                    { id: 'KP0336', color: 'blue'  },
-                    { id: 'PD51162', color: 'orange'  },
-                    { id: 'MA810236', color: 'navy' },
-                    { id: '10222417', color: 'mustard'},
-                    { id: 'PD810608', color: 'navy' },
-                    {id: 'D146985', color: 'navy' }
-                    ];
-    this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
-    console.log('TrueFit Integration value', this.getTruefitProd)
-
-    // this.$forceUpdate();
-    let stampedContainer = document.querySelectorAll(".stamped-container");
-    if (stampedContainer.length > 0) {
-      stampedContainer.forEach(el => el.remove())
-    }
-    let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
-    if (stampedBadge.length > 0) {
-      stampedBadge.forEach(el => el.remove())
-    }
-    window.StampedFn.reloadUGC()
-
-    /* For reload the TrueFit part */ 
-    window.tfcapi('calculate');
-
-    // this.$forceUpdate();
-
-     setTimeout(() => {
-          //  let stampedBadge = document.querySelectorAll(".stamped-badge");
-          // if (stampedBadge.length > 0) {
-          //   stampedBadge.forEach(el => el.remove())
-          // }
-
-          // let elements = document.querySelectorAll(".stamped-container");
-          // if (elements.length > 0) {
-          //   elements.forEach(el => el.remove())
-          // }
-
-          // window.StampedFn.reloadUGC()
-
-          // window.StampedFn.reloadUGC()
-          
-          window.StampedFn.loadWidget()
-          window.StampedFn.loadBadges()
-          window.StampedFn.loadDisplayWidgets()
-          this.$forceUpdate();
-
-     }, 800);
-
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
         relatedProd.unshift({...this.product, activeProd: true});
@@ -883,59 +819,127 @@ export default {
       return formatProductLink(product, currentStoreView().storeCode)
     },
 
-    refreshStampedReview () {
-     const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-     this.getProductId = prod_ids[Math.floor((Math.random() * 5))];
-     console.log('Stamped getProductId value', this.getProductId)
+    // refreshStampedReview () {
+    //  const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
+    //  this.getProductId = prod_ids[Math.floor((Math.random() * 5))];
+    //  console.log('Stamped getProductId value', this.getProductId)
 
-    let stampedContainer = document.querySelectorAll(".stamped-container");
-    if (stampedContainer.length > 0) {
-      stampedContainer.forEach(el => el.remove())
-    }
+    // let stampedContainer = document.querySelectorAll(".stamped-container");
+    // if (stampedContainer.length > 0) {
+    //   stampedContainer.forEach(el => el.remove())
+    // }
 
-    let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
-    if (stampedBadge.length > 0) {
-      stampedBadge.forEach(el => el.remove())
-    }
+    // let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
+    // if (stampedBadge.length > 0) {
+    //   stampedBadge.forEach(el => el.remove())
+    // }
 
-    window.StampedFn.reloadUGC()
-    // this.$forceUpdate();
+    // window.StampedFn.reloadUGC()
+    // // this.$forceUpdate();
 
-     setTimeout(() => {
-           let stampedBadge = document.querySelectorAll(".stamped-badge");
-          if (stampedBadge.length > 0) {
-            stampedBadge.forEach(el => el.remove())
-          }
+    //  setTimeout(() => {
+    //        let stampedBadge = document.querySelectorAll(".stamped-badge");
+    //       if (stampedBadge.length > 0) {
+    //         stampedBadge.forEach(el => el.remove())
+    //       }
 
-          let elements = document.querySelectorAll(".stamped-container");
-          if (elements.length > 0) {
-            elements.forEach(el => el.remove())
-          }
+    //       let elements = document.querySelectorAll(".stamped-container");
+    //       if (elements.length > 0) {
+    //         elements.forEach(el => el.remove())
+    //       }
 
-          window.StampedFn.reloadUGC()
+    //       window.StampedFn.reloadUGC()
           
-          window.StampedFn.loadWidget()
-          window.StampedFn.loadBadges()
-          window.StampedFn.loadDisplayWidgets()
-          this.$forceUpdate();
+    //       window.StampedFn.loadWidget()
+    //       window.StampedFn.loadBadges()
+    //       window.StampedFn.loadDisplayWidgets()
+    //       this.$forceUpdate();
 
-     }, 1500);
+    //  }, 1500);
 
-    },
+    // },
     changeProd (val) {
-      console.log('changeProd changeProd changeProd', val)
+      // console.log('changeProd when another product clicked', val)
       if (val.route !== null) {
         this.getProductId = null;
       }
     },
 
+   /* To get data from Stamped , TrueFit and also send to Emarsys Tracking */
+    getDataFromThirdPartyModules () {
+      /* 
+        To set Emarsys Tracking Data
+      */
+        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+
+      /* 
+        For Stamped Review
+      */
+      // this.getProductId =  null
+        const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
+        this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
+        console.log('Stamped getProductId value', this.getProductId)
+        this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
+
+      /* 
+        For TrueFit Integration
+      */
+        let trufitIds = [{ id: 'DS20', color: 'navy'},
+                        { id: 'MA810108-P3022', color: 'green'},
+                        { id: 'KP0336', color: 'blue'  },
+                        { id: 'PD51162', color: 'orange'  },
+                        { id: 'MA810236', color: 'navy' },
+                        { id: '10222417', color: 'mustard'},
+                        { id: 'PD810608', color: 'navy' },
+                        {id: 'D146985', color: 'navy' }
+                        ];
+        this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
+        console.log('TrueFit Integration value', this.getTruefitProd)
+
+      /* For reload the stamped review section */ 
+        // this.$forceUpdate();
+        let stampedContainer = document.querySelectorAll(".stamped-container");
+        if (stampedContainer.length > 0) {
+          stampedContainer.forEach(el => el.remove())
+        }
+        let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
+        if (stampedBadge.length > 0) {
+          stampedBadge.forEach(el => el.remove())
+        }
+        window.StampedFn.reloadUGC()
+        // this.$forceUpdate();
+        setTimeout(() => {
+              //  let stampedBadge = document.querySelectorAll(".stamped-badge");
+              // if (stampedBadge.length > 0) {
+              //   stampedBadge.forEach(el => el.remove())
+              // }
+
+              // let elements = document.querySelectorAll(".stamped-container");
+              // if (elements.length > 0) {
+              //   elements.forEach(el => el.remove())
+              // }
+
+              // window.StampedFn.reloadUGC()
+              // window.StampedFn.reloadUGC()
+              window.StampedFn.loadWidget()
+              window.StampedFn.loadBadges()
+              window.StampedFn.loadDisplayWidgets()
+              this.$forceUpdate();
+        }, 800);
+
+     /* For reload the TrueFit part */ 
+        window.tfcapi('calculate');
+    }
+
   },
   destroyed () {
     this.$bus.$off('product-after-related')
     this.$bus.$off('product-before-load')
+    this.$bus.$off('product-after-load')
     // this.$bus.$off('product-after-load')
   },
   mounted() {
+    this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
   }
 }
