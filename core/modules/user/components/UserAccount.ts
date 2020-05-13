@@ -108,9 +108,9 @@ export const UserAccount = {
                 region: this.userCompany.region ? this.userCompany.region : null
               }
               updatedProfile.addresses[index].country_id = this.userCompany.country || ''
-              updatedProfile.addresses[index].postcode = this.userCompany.postcode || ''
-              updatedProfile.addresses[index].vat_id = this.userCompany.taxId || ''
-              updatedProfile.addresses[index].telephone = this.userCompany.phone || ''
+              updatedProfile.addresses[index].postcode = this.userCompany.postcode.toString() || ''
+              updatedProfile.addresses[index].vat_id = this.userCompany.taxId.toString() || ''
+              updatedProfile.addresses[index].telephone = this.userCompany.phone.toString() || ''
             } else {
               updatedProfile.addresses.splice(index, 1)
               this.userCompany = {
@@ -135,9 +135,9 @@ export const UserAccount = {
             city: this.userCompany.city,
             ...(this.userCompany.region ? { region: { region: this.userCompany.region } } : {}),
             country_id: this.userCompany.country,
-            postcode: this.userCompany.postcode,
-            vat_id: this.userCompany.taxId,
-            telephone: this.userCompany.phone,
+            postcode: this.userCompany.postcode.toString(),
+            vat_id: this.userCompany.taxId.toString(),
+            telephone: this.userCompany.phone.toString(),
             default_billing: true
           })
         }

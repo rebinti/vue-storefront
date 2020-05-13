@@ -422,7 +422,8 @@ const actions: ActionTree<UserState, RootState> = {
         message: i18n.t('Account data has successfully been updated'),
         action1: { label: i18n.t('OK') }
       })
-      rootStore.dispatch('user/setCurrentUser', event.result)
+      context.dispatch('me', { refresh: true, useCache: false });
+      // rootStore.dispatch('user/setCurrentUser', event.result)
     }
   },
   sessionAfterAuthorized (context, event) {
