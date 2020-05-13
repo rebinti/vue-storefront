@@ -282,7 +282,14 @@ const actions: ActionTree<UserState, RootState> = {
   /**
    * Update user profile with data from My Account page
    */
-  async update (context, userData: UserProfile) {
+  async update (context, userData: UserProfile) { //  userData: UserProfile)
+    if (userData.customer.addresses && userData.customer.addresses.length > 0) {
+        userData.customer.addresses.map((val) => {
+          if (val.postcode) val.postcode = val.postcode.toString();
+          if (val.vat_id) val.vat_id = val.vat_id.toString();
+          if (val.telephone) val.telephone = val.telephone.toString();
+      });
+    }
     await TaskQueue.queue({
       url: config.users.me_endpoint,
       payload: {
