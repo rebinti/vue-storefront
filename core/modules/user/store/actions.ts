@@ -429,7 +429,7 @@ const actions: ActionTree<UserState, RootState> = {
         message: i18n.t('Account data has successfully been updated'),
         action1: { label: i18n.t('OK') }
       })
-      context.dispatch('me', { refresh: true, useCache: false });
+      context.dispatch('forceUpdateUserDataFromMagentho');
       // rootStore.dispatch('user/setCurrentUser', event.result)
     }
   },
@@ -437,6 +437,25 @@ const actions: ActionTree<UserState, RootState> = {
     Logger.info('User session authorised ', 'user')()
     rootStore.dispatch('user/me', { refresh: navigator.onLine }, { root: true }).then((us) => {}) // this will load user cart
     rootStore.dispatch('user/getOrdersHistory', { refresh: navigator.onLine }, { root: true }).then((us) => {})
+  },
+  /**
+   * Force update user profile data from Magentho Server => My Account page
+   * Bug fix while updating adresss from FrontEnd..
+  */
+   forceUpdateUserDataFromMagentho (context) {
+      TaskQueue.execute({ url: config.users.me_endpoint,
+        payload: { method: 'GET',
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          }
+        }
+      }).then((resp: any) => {
+          if (resp.resultCode === 200) {
+            context.dispatch('setCurrentUser', resp.result)
+          }
+      });
   }
 }
 
