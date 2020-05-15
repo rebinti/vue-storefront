@@ -1,5 +1,6 @@
 <template>
   <div class="mb-8">
+    <div style="display: none;">
     <!-- My shipping details header -->
     <div class="row mb-4">
       <div class="col-12 sm:col-6" :class="{ 'cl-accent' : !isEdited }">
@@ -223,6 +224,17 @@
         </div>
       </div>
     </div>
+    </div>
+
+
+     <div class="row mb-4">
+      <div class="col-12 sm:col-6 cl-accent">
+        <h2 class="mb-1">
+          {{ $t('My shipping details') }}
+        </h2>
+      </div>
+     </div>
+    <customer-address></customer-address>
   </div>
 </template>
 
@@ -236,13 +248,16 @@ import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox'
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
 import BaseSelect from 'theme/components/core/blocks/Form/BaseSelect'
 
+import CustomerAddress from 'theme/components/core/blocks/MyAccount/AddressBook/CustomerAddress.vue'
+
 export default {
   components: {
     ButtonFull,
     Tooltip,
     BaseCheckbox,
     BaseInput,
-    BaseSelect
+    BaseSelect,
+    CustomerAddress
   },
   mixins: [MyShippingDetails],
   computed: {
