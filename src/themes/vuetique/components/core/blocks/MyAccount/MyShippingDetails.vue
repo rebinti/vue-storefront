@@ -5,7 +5,7 @@
     <div class="row mb-4">
       <div class="col-12 sm:col-6" :class="{ 'cl-accent' : !isEdited }">
         <h2 class="mb-1">
-          {{ $t('My shipping details') }}
+          {{ $t('My Address details') }}
         </h2>
       </div>
       <div class="col-12 sm:col-6">

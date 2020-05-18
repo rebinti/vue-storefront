@@ -7,14 +7,14 @@
         <h3 class="flex"> Billing Address  
         <sub v-if="getBillingAddress">  
           <a href="#" class="text-grey flex md:justify-end" 
-          style="margin-top: 8px;margin-left: 21px;" 
+          style="margin-left:60px;" 
           @click.prevent="editAddress(getBillingAddress.id)">
                 <i class="material-icons">edit</i>
-                 <span class="text-grey pr5" style="margin-top: 11px;
+                 <!-- <span class="text-grey pr5" style="margin-top: 11px;
                   text-decoration: none;
                   font-weight: 100 !important;">
-              Edit Address
-            </span>
+                  Edit Address
+                </span> -->
            </a>
          </sub>
         </h3>
@@ -49,14 +49,14 @@
         <h3 class="flex"> Shipping Address
           <sub v-if="getShippingAddress">  
             <a href="#" class="text-grey flex md:justify-end" 
-            style="margin-top: 8px;margin-left: 21px;" 
+            style="margin-left: 60px;" 
              @click.prevent="editAddress(getShippingAddress.id)">
                   <i class="material-icons">edit</i>
-                   <span class="text-grey pr5" style="margin-top: 11px;
+                   <!-- <span class="text-grey pr5" style="margin-top: 11px;
                     text-decoration: none;
                     font-weight: 100 !important;">
-                Edit Address
-              </span>
+                    Edit Address
+                  </span> -->
              </a>
            </sub>
         </h3>
@@ -89,26 +89,12 @@
     </div>
 
 
-
-    <div class="row gutter-md mb-5">
-      <div class="col-xs-12 col-md-6">
-        <button-full
-          @click.native="openAddEditAddressPopup"
-        >
-         <!-- v-show="!toggleAddressForm" -->
-          {{ $t('Add new address') }}
-        </button-full>
-      </div>
-    </div>
-
-
-
     <div class="customer-address-list mb15" v-if="getallAddresses.length > 0">
       <h3 class="mb30">
         {{ $t('Additional Addresses') }}
-      </h3>
+      </h3>  
       <div class="row gutter-md">
-        <div class="col-6 col-md-6 col-sm-6 col-xs-12 mb-5" :class="'customer-address-'+ address.id" v-for="address in getallAddresses" :key="address.id">
+        <div class="col-12 md:col-6 lg:col-3" :class="'customer-address-'+ address.id" v-for="address in getallAddresses" :key="address.id">
           <div class="address-box">
             <p class="mb15"><strong>{{ address.firstname }} {{ address.lastname }}</strong></p>
             <p v-if="address.company">
@@ -134,9 +120,19 @@
             <a href="javascript:void(0)" @click="removeCustomerAddress(address.id)">{{ $t('Remove') }}</a>
           </div>
         </div>
-      </div>
+      </div>    
     </div>
 
+    <div class="row gutter-md mb-5" style="margin-top: 15px;">
+      <div class="col-xs-12 col-md-6">
+        <button-full
+          @click.native="openAddEditAddressPopup"
+        >
+         <!-- v-show="!toggleAddressForm" -->
+          {{ $t('Add new address') }}
+        </button-full>
+      </div>
+    </div>
 
    <!--  <address-form
       v-if="toggleAddressForm"
