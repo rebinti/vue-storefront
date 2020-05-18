@@ -93,7 +93,7 @@
     <div class="row gutter-md mb-5">
       <div class="col-xs-12 col-md-6">
         <button-full
-          @click.native="openPopup"
+          @click.native="openAddEditAddressPopup"
         >
          <!-- v-show="!toggleAddressForm" -->
           {{ $t('Add new address') }}
@@ -239,8 +239,8 @@ export default {
         hasNoTimeout: true
       })
     },
-    openPopup () {
-      this.toggleAddressForm = !this.toggleAddressForm;
+    openAddEditAddressPopup () {
+      this.toggleAddressForm = true;
       this.currentAddressId = null;
       this.$bus.$emit('modal-show', 'modal-addressFromPopup')
     },
@@ -248,6 +248,7 @@ export default {
         let updatedShippingDetails = JSON.parse(JSON.stringify(this.$store.state.user.current))
         const selectedAddress = updatedShippingDetails.addresses.find(val => val.id === selectedAddressId);
         updatedShippingDetails.addresses = [];
+        // updatedShippingDetails.addresses.push({delete_address: true, address_id: selectedAddress.id})
         updatedShippingDetails.addresses.push({ ...selectedAddress, ...{delete_address: true, address_id: selectedAddress.id}})
         console.log('Delete Shipping Details', updatedShippingDetails);
         this.$bus.$emit('notification-progress-start', this.$t('Please wait ...'))
