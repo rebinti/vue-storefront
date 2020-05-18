@@ -112,6 +112,10 @@ export const AddAddress = {
            
            if (this.customer.default_shipping) updatedShippingDetailsAddress['default_shipping'] = true;
            if (this.customer.default_billing) updatedShippingDetailsAddress['default_billing'] = true;
+           if (!this.customer.default_shipping && !this.customer.default_billing) {  
+               updatedShippingDetailsAddress['plane_address'] = true;
+               updatedShippingDetailsAddress['extra_address_edit'] = true;                              
+           }   
            
            updatedShippingDetails.addresses = []
            updatedShippingDetails.addresses.push({ ...selectedAddress, ...updatedShippingDetailsAddress })

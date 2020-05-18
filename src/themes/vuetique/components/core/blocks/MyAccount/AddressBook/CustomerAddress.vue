@@ -154,7 +154,7 @@
 import AddressFormPopup from './AddressFormPopup'
 import ButtonFull from 'theme/components/theme/ButtonFull'
 import Countries from '@vue-storefront/i18n/resource/countries.json'
-import { RemoveAddress } from './RemoveAddress'
+// import { RemoveAddress } from './RemoveAddress'
 import i18n from '@vue-storefront/i18n'
 import toString from 'lodash-es/toString'
 
@@ -204,7 +204,7 @@ export default {
     ButtonFull,
     AddressFormPopup
   },
-  mixins: [ RemoveAddress ], // AddressForm
+  // mixins: [ RemoveAddress ], // AddressForm
   methods: {
     resetToggle () {
       this.toggleAddressForm = false
@@ -231,7 +231,8 @@ export default {
         action1: { label: i18n.t('Cancel'), action: 'close' },
         action2: { label: i18n.t('OK'),
           action: () => {
-            this.removeAddress(addressId)
+            // this.removeAddress(addressId)
+            this.deleteSelectedAddress(addressId);
             document.querySelector('.customer-address-' + addressId).remove()
           }
         },
@@ -240,7 +241,21 @@ export default {
     },
     openPopup () {
       this.toggleAddressForm = !this.toggleAddressForm;
+      this.currentAddressId = null;
       this.$bus.$emit('modal-show', 'modal-addressFromPopup')
+    },
+    deleteSelectedAddress (selectedAddressId) {
+        let updatedShippingDetails = JSON.parse(JSON.stringify(this.$store.state.user.current))
+        const selectedAddress = updatedShippingDetails.addresses.find(val => val.id === selectedAddressId);
+        updatedShippingDetails.addresses = [];
+        updatedShippingDetails.addresses.push({ ...selectedAddress, ...{delete_address: true, address_id: selectedAddress.id}})
+        console.log('Delete Shipping Details', updatedShippingDetails);
+        this.$bus.$emit('notification-progress-start', this.$t('Please wait ...'))
+        this.$bus.$emit('myAccount-before-updateUser', updatedShippingDetails)
+        this.$bus.$emit('modal-hide', 'modal-addressFromPopup')
+        setTimeout(() => {
+          this.$bus.$emit('notification-progress-stop')
+        }, 400);
     }
   }
 }
