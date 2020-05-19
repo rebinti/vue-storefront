@@ -340,4 +340,13 @@ export default {
   }
 }
 
+@media (min-width: 1024px) and (max-width: 2560px) {
+    .board_bx_out {
+        width: auto; 
+        height: 100vh;
+        left: auto;
+        right: 0;
+    }
+}
+
 </style>

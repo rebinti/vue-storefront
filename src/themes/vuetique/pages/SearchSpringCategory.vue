@@ -516,15 +516,15 @@ export default {
     };
   },
 
-  asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
-    return new Promise((resolve, reject) => {
-      store.dispatch('category/mergeSearchOptions', { // this is just an example how can you modify the search criteria in child components
-        sort: 'updated_at:desc'
-        // searchProductQuery: builder().query('range', 'price', { 'gt': 0 }).andFilter('range', 'visibility', { 'gte': 2, 'lte': 4 }) // this is an example on how to modify the ES query, please take a look at the @vue-storefront/core/helpers for refernce on how to build valid query
-      })
-      resolve()
-    })
-  },
+  // asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
+  //   return new Promise((resolve, reject) => {
+  //     store.dispatch('category/mergeSearchOptions', { // this is just an example how can you modify the search criteria in child components
+  //       sort: 'updated_at:desc'
+  //       // searchProductQuery: builder().query('range', 'price', { 'gt': 0 }).andFilter('range', 'visibility', { 'gte': 2, 'lte': 4 }) // this is an example on how to modify the ES query, please take a look at the @vue-storefront/core/helpers for refernce on how to build valid query
+  //     })
+  //     resolve()
+  //   })
+  // },
 
   beforeMount () {
     // console.log('beforeMount storee', this.$store.state.searchSpringCategory)
@@ -568,14 +568,7 @@ export default {
   },
   methods: {
    setEmarsysTracker () {
-      let routeUrl= this.breadcrumbs.routes.filter((val , index) => {
-        if ( index !== 0) {
-          return val.name
-        }
-      });
-      routeUrl= routeUrl.map(val => val.name).join(' > ');    
-      const routeString = routeUrl ? routeUrl + ' > ' +  this.category.name : this.category.name;
-      this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: routeString });
+      this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.getCurrentCategoryUrlPath(' > ')});
     },
 
     imgUrlAlt(event) {
@@ -690,19 +683,8 @@ export default {
     },
 
     searchDataInSearchSpring (squerydata=null) {
-      // console.log('this.$route.params.slug', this.$route ,this.$route.params.slug);
-      let routeString = this.$route.path.replace('-', ' ');
-      routeString = routeString.replace('/','').toLowerCase()
-                      .split('/')
-                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                      .join('/');
-      routeString = routeString
-                      .split(' ')
-                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                      .join(' ');
-      routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
-      // console.log('routeString', routeString);
-      this.searchedValue =  routeString
+      let routeString = this.getCurrentCategoryUrlPath() ;
+      this.searchedValue =  routeString;
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
       }
@@ -765,20 +747,8 @@ export default {
       }
 
       if ( this.findIndexInFilterItems ('filter.category_hierarchy')) {
-        this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy')
-
-        let routeString = this.$route.path.replace('-', ' ');
-        routeString = routeString.replace('/','').toLowerCase()
-                        .split('/')
-                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                        .join('/');
-        routeString = routeString
-                        .split(' ')
-                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                        .join(' ');
-        routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
-        // console.log('routeString', routeString);
-        // this.searchedValue =  routeString
+        this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.category_hierarchy');
+        let routeString = this.getCurrentCategoryUrlPath() ;
         if(routeString.includes('&')) {
           routeString = encodeURIComponent(routeString)
         }
@@ -821,17 +791,7 @@ export default {
     clearAllFilter () {
       this.$store.dispatch('searchSpringCategory/resetFilterData');
       this.$store.dispatch('searchSpringCategory/resetCategoryHierarchy');
-      let routeString = this.$route.path.replace('-', ' ');
-      routeString = routeString.replace('/','').toLowerCase()
-                      .split('/')
-                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                      .join('/');
-      routeString = routeString
-                      .split(' ')
-                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                      .join(' ');
-      routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
-      // console.log('routeString', routeString);
+      let routeString = this.getCurrentCategoryUrlPath() ;
       this.searchedValue =  routeString
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
@@ -1012,16 +972,7 @@ export default {
         return val
         })
         this.$store.dispatch('searchSpringCategory/set_categoryHierarchy', category);
-        let routeString = this.$route.path.replace('-', ' ');
-        routeString = routeString.replace('/','').toLowerCase()
-                        .split('/')
-                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                        .join('/');
-        routeString = routeString
-                        .split(' ')
-                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                        .join(' ');
-        routeString =  routeString.split('/').length > 1 ? routeString.split('/')[0] + '/' +  this.category.name : routeString;
+        let routeString = this.getCurrentCategoryUrlPath() ;
         if(routeString.includes('&')) {
           routeString = encodeURIComponent(routeString);
         }
@@ -1035,6 +986,18 @@ export default {
       }
       this.showNotificationLoader();
       this.getSearchData();
+    },
+
+    getCurrentCategoryUrlPath (joiningString = '/') {
+      let routeUrl= this.breadcrumbs.routes.filter((val , index) => {
+        if ( index > 0) {
+          return val.name
+        }
+      });
+      routeUrl= routeUrl.map(val => val.name).join(joiningString);    
+      let routeString = routeUrl ? routeUrl + joiningString +  this.category.name : this.category.name;
+      console.log('routeString', routeString);
+      return routeString  
     }
 
 

@@ -442,12 +442,12 @@ import filterColorSelector from 'src/modules/search-spring-search/components/Col
 
 export default {
   name: 'brandsCategory', 
-  computed: {
-    getParams() {
-      // console.log('this.$route.params.slug', this.$route ,this.$route.params.brandName);
-      return this.$route.params.brandName
-    }
-  },
+  // computed: {
+  //   getParams() {
+  //     // console.log('this.$route.params.slug', this.$route ,this.$route.params.brandName);
+  //     return this.$route.params.brandName
+  //   }
+  // },
   components: {
     'no-ssr': NoSSR,
     ProductListing,
