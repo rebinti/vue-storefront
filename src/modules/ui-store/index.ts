@@ -28,6 +28,7 @@ const store = {
       depth: false,
       path: []
     },
+    isUserInAccountsPage: false,
     mobileGridData: [{value: 2, image: '../assets/grid2.png', 'index': 0},
                     {'value': 3, 'image': '../assets/grid3.jpg', 'index': 1},
                     {'value': 4, 'image': '../assets/grid4.png', 'index': 2}],
@@ -71,6 +72,10 @@ const store = {
         }, 300)
       }
       state.submenu.depth = state.submenu.depth > 0 && depth
+    },
+    setUserInAccountsPageFlag (state, action) {
+        state.isUserInAccountsPage = action === true
+        state.submenu.path = [];
     },
     setSearchpanel (state, action) {
       state.searchpanel = action === true

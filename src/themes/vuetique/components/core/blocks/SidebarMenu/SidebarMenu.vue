@@ -12,7 +12,7 @@
       </svg>
     </button>
 
-    <div v-if="submenu.depth" class="absolute left-0 top-0">
+    <div v-if="submenu.depth && !isUserInAccountsPageFlag" class="absolute left-0 top-0">
       <sub-btn type="back" />
     </div>
 
@@ -208,7 +208,8 @@ export default {
     },
     ...mapState({
       submenu: state => state.ui.submenu,
-      currentUser: state => state.user.current
+      currentUser: state => state.user.current,
+      isUserInAccountsPageFlag: state => state.ui.isUserInAccountsPage
     }),
     getSubmenu () {
       return this.submenu

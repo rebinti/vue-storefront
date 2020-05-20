@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import MyAccount from '@vue-storefront/core/pages/MyAccount'
 import Breadcrumbs from '../components/core/Breadcrumbs'
 import MyProfile from '../components/core/blocks/MyAccount/MyProfile'
@@ -63,6 +64,19 @@ export default {
     MyRecentlyViewed
   },
   mixins: [MyAccount],
+  computed: {
+    ...mapState({
+      submenu: state => state.ui.submenu
+    })
+  },
+  mounted () {
+    // console.log('mountedddd', this.submenu , window.innerWidth)
+    if (window.innerWidth <= 1024) this.$store.commit('ui/setUserInAccountsPageFlag', true);
+    this.$store.commit('ui/setSubmenu', {
+          id: '',
+          depth: !this.submenu.depth ? ++this.submenu.depth : 1
+        })
+  },
   methods: {
     notify (title) {
       if (title === 'My loyalty card' || title === 'My product reviews') {
@@ -73,6 +87,13 @@ export default {
         })
       }
     }
+  },
+  destroyed () {
+   this.$store.commit('ui/setUserInAccountsPageFlag', false);
+   this.$store.commit('ui/setSubmenu', {
+          id: '',
+          depth: --this.submenu.depth
+        })
   }
 }
 </script>

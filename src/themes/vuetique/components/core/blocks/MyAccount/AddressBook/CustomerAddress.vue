@@ -146,11 +146,9 @@
 </template>
 <script>
 
-// import AddressForm from './AddressForm'
 import AddressFormPopup from './AddressFormPopup'
 import ButtonFull from 'theme/components/theme/ButtonFull'
 import Countries from '@vue-storefront/i18n/resource/countries.json'
-// import { RemoveAddress } from './RemoveAddress'
 import i18n from '@vue-storefront/i18n'
 import toString from 'lodash-es/toString'
 
@@ -189,7 +187,6 @@ export default {
     ButtonFull,
     AddressFormPopup
   },
-  // mixins: [ RemoveAddress ], // AddressForm
   methods: {
     resetToggle () {
       this.toggleAddressForm = false
@@ -216,7 +213,6 @@ export default {
         action1: { label: i18n.t('Cancel'), action: 'close' },
         action2: { label: i18n.t('OK'),
           action: () => {
-            // this.removeAddress(addressId)
             this.deleteSelectedAddress(addressId);
             document.querySelector('.customer-address-' + addressId).remove()
           }
