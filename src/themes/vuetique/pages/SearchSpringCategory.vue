@@ -508,6 +508,7 @@ export default {
       fixedOrderPanel: false,
       initialSearchFlag: true,
       sliderConfig: {
+            perPageCustom: [[0, 3], [768, 6], [1024, 6]],
             perPage: 3,
             paginationEnabled: false,
             // loop: true,

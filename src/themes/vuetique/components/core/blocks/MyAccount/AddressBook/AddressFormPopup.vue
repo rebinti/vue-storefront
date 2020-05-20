@@ -1,7 +1,9 @@
 <template>
   <modal name="modal-addressFromPopup" > <!-- :width="450" -->
     <p slot="header">
-       Address Details
+      <span v-if="addressId"> {{ $t('Edit') }} </span> 
+      <span v-else> {{ $t('Add') }} </span>
+      Address
     </p>
     <div slot="content"> 
 
@@ -181,7 +183,8 @@
           @click.native="addcustomerAddress"
           :disabled="$v.$invalid"
         >
-          {{ $t('Save') }}
+        <span v-if="addressId">  {{ $t('Update') }} </span> 
+        <span v-else> {{ $t('Save') }} </span>
         </button-full>
 
         <div class="flex middle-xs py10 mt15" style="float: left;">
@@ -400,4 +403,14 @@ export default {
     position: relative;
   }
 }
+.my_accnt_page_inner{
+    header{ display: block!important; }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .checkbox-wrap {
+      font-size: 11px;
+    }
+}
+
 </style>
