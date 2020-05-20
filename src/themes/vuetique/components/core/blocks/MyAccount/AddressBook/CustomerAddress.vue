@@ -18,7 +18,7 @@
            </a>
          </sub>
         </h3>
-        <template v-if="getBillingAddress">
+        <div v-if="getBillingAddress">
             <p class="mb15"><strong>{{ getBillingAddress.firstname }} {{ getBillingAddress.lastname }}</strong></p>
             <p v-if="getBillingAddress.company">
               {{ getBillingAddress.company }}
@@ -37,10 +37,10 @@
             <div v-if="getBillingAddress.telephone">
               {{ getBillingAddress.telephone }}
             </div>
-        </template >
-        <template v-else>
+        </div >
+        <div v-else>
           <p> No Address</p>
-        </template>
+        </div>
 
       </div>
 
@@ -60,7 +60,7 @@
              </a>
            </sub>
         </h3>
-        <template v-if="getShippingAddress">
+        <div v-if="getShippingAddress">
           <p class="mb15"><strong>{{ getShippingAddress.firstname }} {{ getShippingAddress.lastname }}</strong></p>
             <p v-if="getShippingAddress.company">
               {{ getShippingAddress.company }}
@@ -79,10 +79,10 @@
             <div v-if="getShippingAddress.telephone">
               {{ getShippingAddress.telephone }}
             </div>
-        </template >
-        <template v-else>
+        </div >
+        <div v-else>
           <p> No Address</p>
-        </template>
+        </div>
       </div>
 
 
@@ -166,15 +166,6 @@ export default {
   computed: {
     getallAddresses () {
       return this.$store.state.user.current ? this.$store.state.user.current.addresses.filter(address => address.default_shipping !== true && address.default_billing !== true) : {}
-
-      // if (this.$store.state.user.current) {
-      //    this.$store.state.user.current.addresses.filter(address => {
-      //       if (address.default_shipping  !== true )
-
-      //    });
-      // } else {
-
-      // }
     },
     getBillingAddress () {
         let billId; 
@@ -183,8 +174,7 @@ export default {
           return this.$store.state.user.current ? this.$store.state.user.current.addresses.find(address =>toString(address.id) === toString(billId)) : null
         } else {
           return null
-        }
-       
+        }       
     },
     getShippingAddress () {
        const shipId = this.$store.state.user && this.$store.state.user.current && this.$store.state.user.current.hasOwnProperty('default_shipping') ? this.$store.state.user.current.default_shipping : null
@@ -192,8 +182,7 @@ export default {
           return this.$store.state.user.current ? this.$store.state.user.current.addresses.find(address =>  toString(address.id) === toString(shipId)) : null
         } else {
           return null
-        }
-        // return this.$store.state.user.current ? this.$store.state.user.current.addresses.find(address => address.default_shipping === true) : null
+        }        
     }
   },
   components: {

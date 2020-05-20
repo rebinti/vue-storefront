@@ -230,7 +230,7 @@
      <div class="row mb-4">
       <div class="col-12 sm:col-6 cl-accent">
         <h2 class="mb-1">
-          {{ $t('My shipping details') }}
+          {{ $t('My address details') }}
         </h2>
       </div>
      </div>
