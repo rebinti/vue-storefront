@@ -138,11 +138,10 @@ export default {
       }
       this.lastScrollTop = this.scrollTop
     },
-    headmenuopen () {
-      if (this.$store.state.config.entities.category.categoriesDynamicPrefetch) this.$store.dispatch('category/list', { parent: this.id })
+    headmenuopen () {      
       this.$store.commit('ui/setSubmenu', {
-        id: this.id,
-        depth: ++this.submenu.depth
+        id:'',
+        depth: 0
       })
     }    
   }
