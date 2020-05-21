@@ -3,7 +3,7 @@
   <div class="mb15 mt20 customer-address">
 
     <div class="row mb-5">
-      <div class="col-6 text-h4 address-box">
+      <div class="col-12 md:col-6 text-h4 address-box">
         <h3 class="flex"> Billing Address  
         <sub v-if="getBillingAddress">  
           <a href="#" class="text-grey flex md:justify-end" 
@@ -45,7 +45,7 @@
       </div>
 
 
-      <div class="col-6 text-h4 address-box">
+      <div class="col-12 md:col-6 text-h4 address-box">
         <h3 class="flex"> Shipping Address
           <sub v-if="getShippingAddress">  
             <a href="#" class="text-grey flex md:justify-end" 
