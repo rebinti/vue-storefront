@@ -115,15 +115,25 @@
           </span>
         </router-link>
       </div>
-      <div class="col-12 md:col-auto">
-        <button-full
+      <div v-if="userlogin" class="col-12 md:col-auto">
+        <button-full          
           class="btn-primary py-3 px-6"
           :link="{ name: 'checkout' }"
           @click.native="closeMicrocartExtend"
         >
-          {{ $t('Go to checkout') }}
+          {{ $t('Go to checkout') }}          
         </button-full>
+
       </div>
+      <div v-else class="col-12 md:col-auto"        
+        @click="loginBeforeChecout"
+        >
+        <button-full          
+          class="btn-primary py-3 px-6"                    
+        >
+          {{ $t('Go to checkout not log') }}          
+        </button-full>          
+      </div>     
     </div>
     </div>
   </div>
@@ -180,7 +190,10 @@ export default {
   computed: {
     showMicrocart () {
       return this.isMicrocartOpen && this.componentLoaded
-    }
+    },
+    userlogin () {
+      return this.$store.state.user.current
+    }    
   },
   mounted () {
     this.$nextTick(() => {
@@ -248,7 +261,20 @@ export default {
     },
     forceRerender () {
       this.componentKey += 1
-    }
+    },
+    loginBeforeChecout () {
+      if (this.userlogin) {
+        //this.$router.push(this.localizedRoute('/my-account'))
+      } else {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'success',
+          message: 'Please sign-in to Checkout!',
+          action1: { label: i18n.t('OK') }
+        })        
+        this.$store.commit('ui/setAuthElem', 'login')
+        this.$bus.$emit('modal-show', 'modal-signup')
+      }
+    },
   }
 }
 </script>
