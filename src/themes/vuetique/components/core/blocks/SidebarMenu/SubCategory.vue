@@ -59,7 +59,7 @@
             <span class="top_txt mn_hd">{{ currentUser.firstname }} {{ currentUser.lastname }}</span>
           </div>
       </div>  
-      <li class="border-b flex" v-if="isUserInAccountsPageFlag">
+      <!-- <li class="border-b flex" v-if="isUserInAccountsPageFlag">
           <router-link
             class="menu-link"
             :to="localizedRoute('/')"
@@ -68,7 +68,7 @@
             {{ $t('Home Page') }}
           <svg data-v-24315a35="" viewBox="0 0 25 25" class="vt-icon--sm"><use data-v-24315a35="" xlink:href="#right"></use></svg>
         </router-link>
-      </li>
+      </li> -->
       <li
         class="border-b flex"
         :key="link.id"
