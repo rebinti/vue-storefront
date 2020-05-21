@@ -7,7 +7,7 @@
       <div class="container h-full">
         <div class="row gutter-md items-center h-full" v-if="!isCheckoutPage">
           <div class="col-auto sm:col-4 lg:col-auto lg_mnu">
-            <div>
+            <div @click.stop="headmenuopen()">
               <template v-if="!canGoBack">
                 <hamburger-icon class="p-3" />
               </template>
@@ -137,7 +137,14 @@ export default {
         this.navVisible = true
       }
       this.lastScrollTop = this.scrollTop
-    }
+    },
+    headmenuopen () {
+      if (this.$store.state.config.entities.category.categoriesDynamicPrefetch) this.$store.dispatch('category/list', { parent: this.id })
+      this.$store.commit('ui/setSubmenu', {
+        id: this.id,
+        depth: ++this.submenu.depth
+      })
+    }    
   }
 }
 </script>

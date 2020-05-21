@@ -5,7 +5,24 @@
       active-route="My Account"
     />
     <header class="container mt-2">
-      <h1>{{ $t('My Account') }}</h1>
+      <div v-if="isUserInAccountsPageFlag" class="acc-main-head">
+        <div class="acc-main-title">
+        <h1>{{ $t('My Account') }}</h1>
+        </div>
+        <div class="go-to-acc-menu col-auto sm:col-4 lg:col-auto lg_mnu">
+          <div @click.stop="getaccmenu()">
+            <template v-if="!canGoBack">
+              <hamburger-icon class="p-3" />
+            </template>
+            <template v-else>
+              <return-icon class="p-3" v-if="canGoBack" />
+            </template>
+          </div>
+        </div> 
+      </div> 
+      <div v-else>
+          <h1>{{ $t('My Account') }}</h1>
+      </div>    
     </header>
 
     <div class="container pt-10 pb-16">
@@ -39,6 +56,8 @@ import MyNewsletter from '../components/core/blocks/MyAccount/MyNewsletter'
 import MyOrders from '../components/core/blocks/MyAccount/MyOrders'
 import MyOrder from '../components/core/blocks/MyAccount/MyOrder'
 import MyRecentlyViewed from '../components/core/blocks/MyAccount/MyRecentlyViewed'
+import HamburgerIcon from 'theme/components/core/blocks/Header/HamburgerIcon'
+import ReturnIcon from 'theme/components/core/blocks/Header/ReturnIcon'
 
 export default {
   data () {
@@ -61,21 +80,25 @@ export default {
     MyNewsletter,
     MyOrders,
     MyOrder,
-    MyRecentlyViewed
+    MyRecentlyViewed,
+    HamburgerIcon,
+    ReturnIcon
   },
   mixins: [MyAccount],
   computed: {
     ...mapState({
-      submenu: state => state.ui.submenu
+      submenu: state => state.ui.submenu,
+      isUserInAccountsPageFlag: state => state.ui.isUserInAccountsPage
+
     })
   },
   mounted () {
     // console.log('mountedddd', this.submenu , window.innerWidth)
     if (window.innerWidth <= 1024) this.$store.commit('ui/setUserInAccountsPageFlag', true);
-    this.$store.commit('ui/setSubmenu', {
-          id: '',
-          depth: !this.submenu.depth ? ++this.submenu.depth : 1
-        })
+    // this.$store.commit('ui/setSubmenu', {
+    //       id: '',
+    //       depth: !this.submenu.depth ? ++this.submenu.depth : 1
+    //     })
   },
   methods: {
     notify (title) {
@@ -86,7 +109,13 @@ export default {
           action1: { label: this.$t('OK') }
         })
       }
-    }
+    },
+    getaccmenu () {
+        this.$store.commit('ui/setSubmenu', {
+          id: '',
+          depth: !this.submenu.depth ? ++this.submenu.depth : 1
+        })
+    }    
   },
   destroyed () {
    this.$store.commit('ui/setUserInAccountsPageFlag', false);
@@ -122,7 +151,10 @@ $color-tertiary: color(tertiary);
     }
   }
 }
-
+.acc-main-title{
+    width: 84%;
+    float: left;
+}
 
 @media (min-width: 577px) {
 
