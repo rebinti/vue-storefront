@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Login from '@vue-storefront/core/compatibility/components/blocks/Auth/Login'
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import BaseCheckbox from '../Form/BaseCheckbox.vue'
@@ -132,6 +133,11 @@ export default {
     return {
       hasRedirect: !!localStorage.getItem('redirect')
     }
+  },
+  computed: {
+    ...mapState({
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
+    })
   },
   methods: {
     close (e) {

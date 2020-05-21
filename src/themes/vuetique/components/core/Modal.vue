@@ -67,6 +67,7 @@ export default {
       } else {
          state ? this.setOverlay(state) : setTimeout(() => this.setOverlay(state), this.delay)
       }
+      if (!state) this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
     },
     close () {
       this.toggle(false)

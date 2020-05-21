@@ -180,6 +180,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Register from '@vue-storefront/core/compatibility/components/blocks/Auth/Register'
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox.vue'
@@ -220,6 +221,11 @@ export default {
     }
   },
   mixins: [Register],
+  computed: {
+    ...mapState({
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
+    })
+  },
   components: {
     ButtonFull,
     BaseCheckbox,

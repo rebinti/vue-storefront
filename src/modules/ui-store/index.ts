@@ -43,7 +43,8 @@ const store = {
     selectedSocialLoginType: null,
     mainSliderData: [],
     productSidePanelFlag: false,
-    productDetailsSidePanelFlag: false
+    productDetailsSidePanelFlag: false,
+    checkoutWithoutLogin: false
   },
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
@@ -143,6 +144,9 @@ const store = {
   setProductDetailsSidePanelFlag (state, action) {
     state.productDetailsSidePanelFlag = action === true
     state.overlay = action === true
+  },
+  setCheckoutWithoutLoginFlag (state, payload) {
+    state.checkoutWithoutLogin = payload === true
   }  
   },
   actions: {

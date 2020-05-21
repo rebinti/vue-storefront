@@ -126,7 +126,7 @@
 
       </div>
       <div v-else class="col-12 md:col-auto"        
-        @click="loginBeforeChecout"
+        @click="loginBeforeCheckout"
         >
         <button-full          
           class="btn-primary py-3 px-6"                    
@@ -262,16 +262,16 @@ export default {
     forceRerender () {
       this.componentKey += 1
     },
-    loginBeforeChecout () {
-      if (this.userlogin) {
-        //this.$router.push(this.localizedRoute('/my-account'))
-      } else {
+    loginBeforeCheckout () {
+      if (!this.userlogin) {
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
           message: 'Please sign-in to Checkout!',
           action1: { label: i18n.t('OK') }
-        })        
+        }) 
+        this.closeMicrocartExtend();       
         this.$store.commit('ui/setAuthElem', 'login')
+        this.$store.commit('ui/setCheckoutWithoutLoginFlag', true);
         this.$bus.$emit('modal-show', 'modal-signup')
       }
     },

@@ -30,7 +30,7 @@ export const Register = {
       this.$store.dispatch('user/register', { email: this.email, password: this.password, firstname: this.firstName, lastname: this.lastName, mobile: this.mobile }).then((result) => {
         Logger.debug(result, 'user')()
         // TODO Move to theme
-        this.$bus.$emit('notification-progress-stop')
+        if (!this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-stop')
         if (result.code !== 200) {
           this.onFailure(result)
           // If error includes a word 'password', focus on a corresponding field
@@ -53,6 +53,13 @@ export const Register = {
           this.$store.dispatch('user/login', { username: this.email, password: this.password })
           this.onSuccess()
           this.close()
+          if (this.checkoutWithoutLogin) {
+             setTimeout(() => {
+                this.$bus.$emit('notification-progress-stop', {})
+                this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+                this.$router.push(this.localizedRoute('/checkout'))
+             }, 300);
+          }
         }
       }).catch(err => {
         // TODO Move to theme
