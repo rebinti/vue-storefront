@@ -48,7 +48,7 @@
       
     <ul
      v-if="myAccountLinks && !path.length"
-      class="sidebar-submenu sidebar-myacc-mobile absolute w-full mn_ul_bg"
+      class="sidebar-submenu sidebar-myacc-mobile w-full mn_ul_bg"
       :style="styles"
     >
       <div class="login_profile_pic">
@@ -203,16 +203,20 @@ export default {
     min-height: 100%;
     transform: translateX(-100%);
   }
-/*  @media (max-width: 767px) {
-    .sidebar-submenu {
+ @media (max-width: 767px) {
+    /* .sidebar-submenu {
       left: 0;
       top: 0;
-      min-height: 100%;
+      min-height: 100%; */
       /* transform: translateX(-100%); */
       /*position:relative;*/
       /*overflow-y:scroll;*/
-   /* }
-  }*/
+    /* } */
+
+    .sidebar-myacc-mobile {  
+      position: absolute!important;
+    }
+  }
 </style>
 
 <style lang="scss" scoped>
