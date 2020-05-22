@@ -203,10 +203,16 @@ export default {
     min-height: 100%;
     transform: translateX(-100%);
   }
-
-
-
-
+  @media (max-width: 767px) {
+    .sidebar-submenu {
+      left: 0;
+      top: 0;
+      min-height: auto;
+      /* transform: translateX(-100%); */
+      position:relative;
+      overflow-y:scroll;
+    }
+  }
 </style>
 
 <style lang="scss" scoped>
