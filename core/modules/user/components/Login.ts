@@ -9,7 +9,7 @@ export const Login = {
       email: '',
       password: ''
     }
-  },
+  }, 
   methods: {
     callLogin () {
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'))
@@ -18,15 +18,18 @@ export const Login = {
 
         if (result.code !== 200) {
           this.onFailure(result)
+          this.$bus.$emit('notification-progress-stop', {})
         } else {
           this.onSuccess()
-          this.close()
+          if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {
+            this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
             setTimeout(() => {
-                this.$bus.$emit('notification-progress-stop', {})
+                // this.$bus.$emit('notification-progress-stop', {})
                 this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+                this.close()
                 this.$router.push(this.localizedRoute('/checkout'))
-            }, 300);
+            }, 1500);
           }
         }
       }).catch(err => {

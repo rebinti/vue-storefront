@@ -39,6 +39,7 @@ export const Register = {
             this.password = ''
             this.rPassword = ''
           }
+          this.$bus.$emit('notification-progress-stop')
         } else {
           /* 
           For Subscribe the Newsletter subscription Action to Server
@@ -52,13 +53,15 @@ export const Register = {
           }
           this.$store.dispatch('user/login', { username: this.email, password: this.password })
           this.onSuccess()
-          this.close()
+          if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {
+            this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
              setTimeout(() => {
-                this.$bus.$emit('notification-progress-stop', {})
+                // this.$bus.$emit('notification-progress-stop')
                 this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+                this.close()
                 this.$router.push(this.localizedRoute('/checkout'))
-             }, 300);
+             }, 1500);
           }
         }
       }).catch(err => {
