@@ -15,12 +15,12 @@ export const Register = {
       newsLatest: false
     }
   },
-  beforeMount () {
-    this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
-  },
-  beforeDestroy () {
-    this.$bus.$off('servercart-after-diff')
-  },
+  // beforeMount () {
+  //   this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
+  // },
+  // beforeDestroy () {
+  //   this.$bus.$off('servercart-after-diff')
+  // },
   methods: {
     switchElem () {
       // TODO Move to theme
@@ -77,12 +77,12 @@ export const Register = {
         Logger.error(err, 'user')()
       })
     },
-    gotoCheckpage (event) {
-      console.log('gotoCheckpage checkout goto checkout')
-        if (this.checkoutWithoutLogin) {
-         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
-         this.$router.push(this.localizedRoute('/checkout'))
-       }
-    }
+    // gotoCheckpage (event) {
+    //   console.log('gotoCheckpage checkout goto checkout')
+    //     if (this.checkoutWithoutLogin) {
+    //      this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+    //      this.$router.push(this.localizedRoute('/checkout'))
+    //    }
+    // }
   }
 }

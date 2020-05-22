@@ -10,12 +10,12 @@ export const Login = {
       password: ''
     }
   }, 
-  beforeMount () {
-    this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
-  },
-  beforeDestroy () {
-    this.$bus.$off('servercart-after-diff')
-  },
+  // beforeMount () {
+  //   this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
+  // },
+  // beforeDestroy () {
+  //   this.$bus.$off('servercart-after-diff')
+  // },
   methods: {
     callLogin () {
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'))
@@ -54,12 +54,12 @@ export const Login = {
       // TODO Move to theme
       this.$store.commit('ui/setAuthElem', 'forgot-pass')
     },
-    gotoCheckpage (event) {
-      console.log('gotoCheckpage checkout goto checkout')
-        if (this.checkoutWithoutLogin) {
-         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
-         this.$router.push(this.localizedRoute('/checkout'))
-       }
-    }
+    // gotoCheckpage (event) {
+    //   console.log('gotoCheckpage checkout goto checkout')
+    //     if (this.checkoutWithoutLogin) {
+    //      this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+    //      this.$router.push(this.localizedRoute('/checkout'))
+    //    }
+    // }
   }
 }

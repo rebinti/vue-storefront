@@ -20,7 +20,8 @@ export default {
   name: 'SignUp',
   computed: {
     ...mapState({
-      activeElem: state => state.ui.authElem
+      activeElem: state => state.ui.authElem,
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
     })
   },
   components: {
@@ -29,6 +30,21 @@ export default {
     Register,
     ForgotPass,
     SetSocialLoginPassword
+  },
+  beforeMount () {
+    this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
+  },
+  beforeDestroy () {
+    this.$bus.$off('servercart-after-diff')
+  },
+  methods: {
+    gotoCheckpage (event) {
+      console.log('gotoCheckpage checkout goto checkout')
+        if (this.checkoutWithoutLogin) {
+         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+         this.$router.push(this.localizedRoute('/checkout'))
+       }
+    }
   }
 }
 </script>
