@@ -131,7 +131,7 @@
         <button-full          
           class="btn-primary py-3 px-6"                    
         >
-          {{ $t('Go to checkout not log') }}          
+          {{ $t('Go to checkout.') }}          
         </button-full>          
       </div>     
     </div>
