@@ -15,6 +15,12 @@ export const Register = {
       newsLatest: false
     }
   },
+  beforeMount () {
+    this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
+  },
+  beforeDestroy () {
+    this.$bus.$off('servercart-after-diff')
+  },
   methods: {
     switchElem () {
       // TODO Move to theme
@@ -56,12 +62,12 @@ export const Register = {
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {
             this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
-             setTimeout(() => {
-                // this.$bus.$emit('notification-progress-stop')
-                this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
-                this.close()
-                this.$router.push(this.localizedRoute('/checkout'))
-             }, 1500);
+             // setTimeout(() => {
+             //    // this.$bus.$emit('notification-progress-stop')
+             //    this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+             //    this.close()
+             //    this.$router.push(this.localizedRoute('/checkout'))
+             // }, 1500);
           }
         }
       }).catch(err => {
@@ -70,6 +76,13 @@ export const Register = {
         this.$bus.$emit('notification-progress-stop')
         Logger.error(err, 'user')()
       })
+    },
+    gotoCheckpage (event) {
+      console.log('gotoCheckpage checkout goto checkout')
+        if (this.checkoutWithoutLogin) {
+         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+         this.$router.push(this.localizedRoute('/checkout'))
+       }
     }
   }
 }
