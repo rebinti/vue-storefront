@@ -10,6 +10,9 @@ export const Login = {
       password: ''
     }
   }, 
+  beforeMount () {
+    this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
+  },
   methods: {
     callLogin () {
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'))
@@ -24,12 +27,13 @@ export const Login = {
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {
             this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
-            setTimeout(() => {
-                // this.$bus.$emit('notification-progress-stop', {})
-                this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
-                this.close()
-                this.$router.push(this.localizedRoute('/checkout'))
-            }, 1500);
+            // setTimeout(() => {
+            //     console.log('checkoutttttt')
+            //     // this.$bus.$emit('notification-progress-stop', {})
+            //     this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+            //     // this.close()
+            //     // this.$router.push(this.localizedRoute('/checkout'))
+            // }, 1500);
           }
         }
       }).catch(err => {
@@ -46,6 +50,13 @@ export const Login = {
     callForgotPassword () {
       // TODO Move to theme
       this.$store.commit('ui/setAuthElem', 'forgot-pass')
+    },
+    gotoCheckpage (event) {
+      console.log('gotoCheckpage checkout goto checkout')
+        if (this.checkoutWithoutLogin) {
+         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);
+         this.$router.push(this.localizedRoute('/checkout'))
+       }
     }
   }
 }
