@@ -209,7 +209,7 @@ export default {
       top: 0;
       min-height: auto;
       /* transform: translateX(-100%); */
-      position:relative;
+      /*position:relative;*/
       overflow-y:scroll;
     }
   }
