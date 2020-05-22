@@ -50,6 +50,7 @@
      v-if="myAccountLinks && !path.length"
       class="sidebar-submenu absolute sidebar-myacc-mobile w-full mn_ul_bg"
       :style="styles"
+      style="top: -5px;"
     >
       <div class="login_profile_pic">
           <img src="/assets/vuetique-small-banners-4.jpg" alt="" />
