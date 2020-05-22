@@ -15,6 +15,7 @@
 </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import i18n from '@vue-storefront/i18n'
 import config from 'config'
 import facebookLogin from 'facebook-login-vuejs'
@@ -36,6 +37,11 @@ export default {
       picture: '',
     }
   },
+  computed: {
+    ...mapState({
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
+    })
+  },
   methods: {
 
 //  Facebook Login Start here
@@ -55,7 +61,7 @@ export default {
     sdkLoaded(payload) {
       this.isConnected = payload.isConnected
       this.FB = payload.FB
-      console.log('sdkLoaded', payload)
+      // console.log('sdkLoaded', payload)
       // if (this.isConnected) this.getUserData()
     },
     onLogin() {
@@ -180,13 +186,15 @@ export default {
       console.log('socialData Api', socialData);
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'));
       this.$store.dispatch('user/socialUserlogin', socialData).then((result) => {
-        this.$bus.$emit('notification-progress-stop', {})
+        if (!this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-stop', {})
 
         if (result.code !== 200) {
           this.onFailure(result)
+          this.$bus.$emit('notification-progress-stop', {})
         } else {
           this.onSuccess()
-          this.close()
+          if (!this.checkoutWithoutLogin) this.close()
+          if (this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
         }
       }).catch(err => {
         Logger.error(err, 'user')()

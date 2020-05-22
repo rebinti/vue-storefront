@@ -10,6 +10,7 @@
 </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import i18n from '@vue-storefront/i18n'
 import config from 'config'
 import GoogleLogin from 'vue-google-login';
@@ -32,6 +33,11 @@ export default {
           longtitle: true
       }
     }
+  },
+  computed: {
+    ...mapState({
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
+    })
   },
   methods: {
   /*  Google Login Start here 
@@ -116,13 +122,15 @@ export default {
       console.log('socialData Api', socialData);
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'));
       this.$store.dispatch('user/socialUserlogin', socialData).then((result) => {
-        this.$bus.$emit('notification-progress-stop', {})
+        if (!this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-stop', {})
 
         if (result.code !== 200) {
           this.onFailure(result)
+          this.$bus.$emit('notification-progress-stop', {})
         } else {
           this.onSuccess()
-          this.close()
+          if (!this.checkoutWithoutLogin) this.close()
+          if (this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
         }
       }).catch(err => {
         Logger.error(err, 'user')()

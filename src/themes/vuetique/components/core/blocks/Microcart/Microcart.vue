@@ -266,7 +266,7 @@ export default {
       if (!this.userlogin) {
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
-          message: 'Please sign-in to Checkout!',
+          message: 'Please Register/Sign-in to Checkout!',
           action1: { label: i18n.t('OK') }
         }) 
         this.closeMicrocartExtend();       
