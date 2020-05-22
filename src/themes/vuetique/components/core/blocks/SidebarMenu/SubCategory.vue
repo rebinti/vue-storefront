@@ -48,7 +48,7 @@
       
     <ul
      v-if="myAccountLinks && !path.length"
-      class="sidebar-submenu fixed w-full mn_ul_bg"
+      class="sidebar-submenu sidebar-myacc-mobile fixed w-full mn_ul_bg"
       :style="styles"
     >
       <div class="login_profile_pic">
