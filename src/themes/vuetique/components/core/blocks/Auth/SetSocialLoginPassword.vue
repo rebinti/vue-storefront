@@ -78,6 +78,7 @@ import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 import i18n from '@vue-storefront/i18n'
 import { Logger } from '@vue-storefront/core/lib/logger'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SetSocialLoginPassword',
@@ -102,6 +103,11 @@ export default {
     ButtonFull,
     BaseCheckbox,
     BaseInput
+  },
+  computed: {
+    ...mapState({
+      checkoutWithoutLogin: state => state.ui.checkoutWithoutLogin
+    })
   },
   methods: {
     register () {
@@ -167,7 +173,7 @@ export default {
         Logger.debug(result, 'user')()
         console.log('resgister User', result)
         // TODO Move to theme
-        this.$bus.$emit('notification-progress-stop')
+        if (!this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-stop')
         if (result.code !== 200) {
           this.onFailure(result)
           // If error includes a word 'password', focus on a corresponding field
@@ -176,6 +182,7 @@ export default {
             this.password = ''
             this.rPassword = ''
           }
+          this.$bus.$emit('notification-progress-stop')
         } else {
           /* 
           For Subscribe the Newsletter subscription Action to Server
@@ -189,7 +196,8 @@ export default {
           }
           this.$store.dispatch('user/login', { username: social_data.email, password: social_data.password })
           this.onSuccess()
-          this.close()
+          if (!this.checkoutWithoutLogin) this.close()
+          if (this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
         }
       }).catch(err => {
         // TODO Move to theme
