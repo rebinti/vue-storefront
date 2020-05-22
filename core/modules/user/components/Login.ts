@@ -13,6 +13,9 @@ export const Login = {
   beforeMount () {
     this.$bus.$on('servercart-after-diff', this.gotoCheckpage)
   },
+  beforeDestroy () {
+    this.$bus.$off('servercart-after-diff')
+  },
   methods: {
     callLogin () {
       this.$bus.$emit('notification-progress-start', i18n.t('Authorization in progress ...'))
