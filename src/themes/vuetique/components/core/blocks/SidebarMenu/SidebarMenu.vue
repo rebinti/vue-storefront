@@ -292,6 +292,9 @@ export default {
 
 @media (min-width: 576px){
 
+  .sidebar-menu__list{
+      margin-bottom: 60px;
+   }
   .sidebar-menu__list .menu_li_it .ico_main {
     float: left;
     margin-top: 1px;
@@ -309,7 +312,9 @@ export default {
 
 
 @media (max-width: 576px) {
-
+  .sidebar-menu__list{
+    margin-bottom: 60px;
+  }
   .sidebar-menu{
     z-index: 100;
   }
