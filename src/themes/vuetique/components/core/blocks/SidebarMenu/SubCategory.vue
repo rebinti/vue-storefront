@@ -47,10 +47,9 @@
     </ul>
       
     <ul
-     v-if="myAccountLinks && !path.length"
-      class="sidebar-submenu absolute sidebar-myacc-mobile w-full mn_ul_bg"
+     v-if="myAccountLinks && !path.length && depth === 1"
+      class="sidebar-submenu absolute w-full bg-white border-t"
       :style="styles"
-      style="top: -5px;"
     >
       <div class="login_profile_pic">
           <img src="/assets/vuetique-small-banners-4.jpg" alt="" />
@@ -146,6 +145,7 @@ export default {
     ...mapState({
       submenu: state => state.ui.submenu,
       path: state => state.ui.submenu.path,
+      depth: state => state.ui.submenu.depth,
       isUserInAccountsPageFlag: state => state.ui.isUserInAccountsPage
     }),
     getSubmenu () {
