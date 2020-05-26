@@ -30,6 +30,7 @@ export default {
     
     &.out-of-stock {
        background: #c5c5c5;
+       opacity: .75;
     }
 
     &:disabled {

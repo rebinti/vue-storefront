@@ -24,11 +24,13 @@ export default {
     padding-right: 8px;
 
     &.active {
-      @apply border-grey-dark text-black;
+       @apply border-black text-white;
+      background: #000000;
     }
 
     &.out-of-stock {
        background: #c5c5c5;
+       opacity: .75;
     }
 
     &:disabled {

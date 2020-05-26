@@ -24,6 +24,7 @@
       <sign-up />
       <popup-boards />
       <newsletter-popup />
+      <out-of-stock-popup />
       <cookie-notification />
       <offline-badge />
       <modal-switcher />
@@ -48,6 +49,7 @@ import Modal from 'theme/components/core/Modal.vue'
 import Notification from 'theme/components/core/Notification.vue'
 import SignUp from 'theme/components/core/blocks/Auth/SignUp.vue'
 import NewsletterPopup from 'theme/components/core/NewsletterPopup.vue'
+import OutOfStockPopup from 'theme/components/core/OutOfStockPopup.vue'
 import CookieNotification from 'theme/components/core/CookieNotification.vue'
 import OfflineBadge from 'theme/components/core/OfflineBadge.vue'
 import ModalSwitcher from 'theme/components/core/blocks/Switcher/Language.vue'
@@ -163,6 +165,7 @@ export default {
     Modal,
     SignUp,
     NewsletterPopup,
+    OutOfStockPopup,
     PopupBoards,
     CookieNotification,
     OfflineBadge,

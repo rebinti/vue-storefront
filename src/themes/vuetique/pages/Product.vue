@@ -177,8 +177,8 @@
                             :label="s.label"
                             context="product"
                             :code="option.attribute_code"
-
-                            :class="{ active: s.id == configuration[option.attribute_code].id }"
+                            :class="checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
+                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                             v-focus-clean
                           />
           
@@ -193,7 +193,8 @@
                             context="product"
                             :code="option.attribute_code"
 
-                            :class="{ active: s.id == configuration[option.attribute_code].id }"
+                            :class="checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
+                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                             v-focus-clean
                           />
                         </div>
@@ -387,7 +388,7 @@
                         context="product"
                         :code="option.attribute_code"
                         :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
-                       
+                        @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         v-focus-clean
                       />
 
@@ -403,7 +404,7 @@
                         context="product"
                         :code="option.attribute_code"
 
-                        
+                        @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         v-focus-clean
                       />
@@ -760,6 +761,8 @@ export default {
         message: this.$t('The product is out of stock and cannot be added to the cart!'),
         action1: { label: this.$t('OK') }
       })
+      // this.$bus.$emit('modal-show', 'modal-outofstocknotification')
+      // this.$bus.$emit('update-out-of-stock-data', true)
     },
     notifyWrongAttributes () {
       this.$store.dispatch('notification/spawnNotification', {
@@ -793,6 +796,20 @@ export default {
             }
           } else {
             return ''
+          }
+       }
+    },
+    outOfStockPopupCheck (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
+       if (optionIndex > 0) {
+          let data = this.product.configurable_children.find(val => {
+          return (val[loopItem.attribute_code] == loopItem.id) &&
+            (val[fullConfigOption[0].attribute_code] == this.options[fullConfigOption[0].attribute_code].find(val1 => val1.id === this.configuration[fullConfigOption[0].attribute_code].id).id)
+          });
+          if (data) {
+            if (data.stock.is_in_stock === false) {
+              this.$bus.$emit('modal-show', 'modal-outofstocknotification')
+              this.$bus.$emit('update-out-of-stock-data', true)
+            }
           }
        }
     },
