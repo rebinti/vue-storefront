@@ -83,7 +83,7 @@ export default {
     onSuccesfulSubmission () {
       this.$store.dispatch('notification/spawnNotification', {
         type: 'success',
-        // message: i18n.t('You have been successfully subscribed!'),
+        message: i18n.t('You have been successfully subscribed!'),
         action1: { label: i18n.t('OK') }
       })
       this.$bus.$emit('modal-hide', 'modal-outofstocknotification')
@@ -91,12 +91,13 @@ export default {
     subscribe () {
       // argument omitted for validation purposes
       if (!this.$v.$invalid) {
-        //   return this.$store.dispatch('newsletter/subscribe', this.email).then(res => {
-        //     if (success) this.onSuccesfulSubmission
-        //   }).catch(err => {
-        //     if (failure) console.log('error')
-        //   }
-        // )
+          const sendData = { pid: this.product.id ,email: this.email}
+          return this.$store.dispatch('ui/submitOutOfStockNotification', sendData).then(res => {
+            this.onSuccesfulSubmission
+          }).catch(err => {
+            // if (res.failure) console.log('error')
+          }
+        )
       }
     },
     forceUpdateData (event) {
