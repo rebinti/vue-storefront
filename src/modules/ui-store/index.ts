@@ -233,6 +233,24 @@ const store = {
         } else {
           return task
         }
+    },
+    async submitOutOfStockNotification ({commit}, data) {
+        console.log('submitOutOfStockNotification',  data)
+        const task = await TaskQueue.execute({ url: '/api/urlstocknotification/urlnotification', 
+        payload: {  
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
+          body: JSON.stringify(data) 
+        },
+        silent: false
+      });
+      if (task && task.resultCode === 200) {
+        console.log('api dataaaa Sucesss' , task.result)
+        return task.result
+      } else {
+        return task
+      }
     }
   }
 }
