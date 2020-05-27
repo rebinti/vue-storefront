@@ -92,8 +92,8 @@ export default {
       // argument omitted for validation purposes
       if (!this.$v.$invalid) {
           const sendData = { pid: this.product.id ,email: this.email}
-          return this.$store.dispatch('ui/submitOutOfStockNotification', sendData).then(res => {
-            this.onSuccesfulSubmission
+          this.$store.dispatch('ui/submitOutOfStockNotification', sendData).then(res => {
+            this.onSuccesfulSubmission();
           }).catch(err => {
             // if (res.failure) console.log('error')
           }
