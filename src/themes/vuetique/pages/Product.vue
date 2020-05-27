@@ -797,21 +797,44 @@ export default {
           } else {
             return ''
           }
+       } 
+       else if (optionIndex == 0) {
+          let data = this.product.configurable_children.find(val => val[loopItem.attribute_code] == loopItem.id);
+          if (data && fullConfigOption.length == 1) {
+            if (data.stock.is_in_stock === false) {
+              if (activeFlag) {
+               return 'active out-of-stock'
+              } else {
+                return 'out-of-stock'
+              }
+            } else if (activeFlag) {
+              return 'active'
+            }
+            else {
+              return ''
+            }
+          } else {
+            return ''
+          }
        }
     },
     outOfStockPopupCheck (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
        if (optionIndex > 0) {
-          let data = this.product.configurable_children.find(val => {
+          const data = this.product.configurable_children.find(val => {
           return (val[loopItem.attribute_code] == loopItem.id) &&
             (val[fullConfigOption[0].attribute_code] == this.options[fullConfigOption[0].attribute_code].find(val1 => val1.id === this.configuration[fullConfigOption[0].attribute_code].id).id)
           });
-          if (data) {
-            if (data.stock.is_in_stock === false) {
+          if (data && data.stock && data.stock.is_in_stock === false) {
               this.$bus.$emit('modal-show', 'modal-outofstocknotification')
               this.$bus.$emit('update-out-of-stock-data', true)
-            }
           }
-       }
+       } else if (optionIndex == 0) {
+          const data = this.product.configurable_children.find(val => val[loopItem.attribute_code] == loopItem.id);
+          if (data && data.stock && data.stock.is_in_stock === false && fullConfigOption.length == 1) {
+                this.$bus.$emit('modal-show', 'modal-outofstocknotification')
+                this.$bus.$emit('update-out-of-stock-data', true)
+          }
+      }
     },
     imgUrlAlt(event) {
        event.target.src = "/assets/colour/multi.png"
