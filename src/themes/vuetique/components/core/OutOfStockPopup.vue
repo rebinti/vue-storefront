@@ -2,7 +2,7 @@
   <modal name="modal-outofstocknotification" :width="450">
     <span slot="header"></span>
     <div slot="content" style="margin-top: -46px;">
-      <form @submit.prevent="subscribe()" novalidate>
+      <form @submit.prevent="subscribeOutOfStockNotification()" novalidate>
         <div>
           <h4>NOTIFY ME WHEN THIS PRODUCT IS IN STOCK:</h4>
           <div class="row sel-box" v-if="configuration && Object.keys(configuration).length>0">
@@ -74,28 +74,51 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('update-out-of-stock-data', this.forceUpdateData);
+    this.$bus.$on('user-after-loggedin', this.setLoggedInUserData)
+    this.$bus.$on('user-after-logout', this.setLoggedInUserData)
+    if (this.$store.state.user.current) this.setLoggedInUserData()
   },
   beforeDestroy () {
-    this.$off('validation-error');
-    this.$off('update-out-of-stock-data');
+    this.$bus.$off('validation-error');
+    this.$bus.$off('update-out-of-stock-data');
+    this.$bus.$off('user-after-loggedin');
+    this.$bus.$off('user-after-logout');
   },
   methods: {
-    onSuccesfulSubmission () {
+    setLoggedInUserData () {
+      if (this.$store.state.user.current) {
+         this.email = this.$store.state.user.current.email
+      } else {
+         this.email = ''
+      }
+    },
+    onSuccesfulSubmission (msg) {
       this.$store.dispatch('notification/spawnNotification', {
         type: 'success',
-        message: i18n.t('You have been successfully subscribed!'),
+        message: msg,
         action1: { label: i18n.t('OK') }
       })
       this.$bus.$emit('modal-hide', 'modal-outofstocknotification')
     },
-    subscribe () {
+    onErrorInSubmission () {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'error',
+          message: 'Error in while subscribing!',
+          action1: { label: i18n.t('OK') }
+        })
+    },
+    subscribeOutOfStockNotification () {
       // argument omitted for validation purposes
       if (!this.$v.$invalid) {
           const sendData = { pid: this.product.id ,email: this.email}
           this.$store.dispatch('ui/submitOutOfStockNotification', sendData).then(res => {
-            this.onSuccesfulSubmission();
+           if (res == 'Already notified') {
+            this.onSuccesfulSubmission('You are already subscribed!');
+           } else if ( res == 'Notified') {
+            this.onSuccesfulSubmission('You have been successfully subscribed!');
+           }
           }).catch(err => {
-            // if (res.failure) console.log('error')
+            this.onErrorInSubmission();
           }
         )
       }
