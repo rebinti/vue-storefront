@@ -171,31 +171,30 @@
                         <div class="sizes" v-else-if="option.label == 'Size'">
                           <size-selector
                             v-for="(s, i) in options[option.attribute_code]"
-                            v-if="isOptionAvailable(s)"
+                   
                             :key="i"
                             :id="s.id"
                             :label="s.label"
                             context="product"
                             :code="option.attribute_code"
-                            :class="checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
-                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                             v-focus-clean
+                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
           
                         </div>
                         <div :class="option.attribute_code" v-else>
                           <generic-selector
                             v-for="(s, i) in options[option.attribute_code]"
-                            v-if="isOptionAvailable(s)"
+                     
                             :key="i"
                             :id="s.id"
                             :label="s.label"
                             context="product"
                             :code="option.attribute_code"
-
-                            :class="checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
-                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                             v-focus-clean
+                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
                       </div>
