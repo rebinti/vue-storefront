@@ -1659,7 +1659,7 @@ export default {
   }
 
   .mob_size_box {
-        float: right;
+        float: left;
         width: 50%;
   }
 
