@@ -230,7 +230,7 @@
 
                   <div class="mob_add_cart_btn">
 
-                    <add-to-cart :product="product" class="py-3 text-sm"/>
+                    <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag" class="py-3 text-sm"/>
 
                   </div>
                   <div class="mob_add_wish_btn">
@@ -459,6 +459,7 @@
               <div class="flex-grow flex">
                 <add-to-cart
                   :product="product"
+                  :disabled="disableAddToCartButtonFlag"
                   class="py-3 text-sm"
                 />
               </div>

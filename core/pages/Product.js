@@ -17,7 +17,8 @@ export default {
   mixins: [Composite, AddToCompare, CompareProduct],
   data () {
     return {
-      loading: false
+      loading: false,
+      disableAddToCartButtonFlag: false
     }
   },
   computed: {
@@ -183,6 +184,7 @@ export default {
       this.$forceUpdate()
     },
     onAfterFilterChanged (filterOption) {
+      this.disableAddToCartButtonFlag = false;
       this.$bus.$emit('product-before-configure', { filterOption: filterOption, configuration: this.configuration })
       const prevOption = this.configuration[filterOption.attribute_code]
       this.configuration[filterOption.attribute_code] = filterOption
@@ -199,10 +201,11 @@ export default {
         }
         if (!selectedVariant) {
           if (typeof prevOption !== 'undefined' && prevOption) {
-            this.configuration[filterOption.attribute_code] = prevOption
+            // this.configuration[filterOption.attribute_code] = prevOption
           } else {
             delete this.configuration[filterOption.attribute_code]
           }
+          this.disableAddToCartButtonFlag = true;
           this.notifyWrongAttributes()
         }
       }).catch(err => Logger.error({
