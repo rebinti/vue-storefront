@@ -155,7 +155,7 @@
                           {{ configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()] ? configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()].label : null }}
                         </span>
                       </div>
-                      <div class="variants-wrapper">
+                      <!-- <div class="variants-wrapper">
                         <div v-if="option.label == 'Color'">
                           <color-selector
                             v-for="(c, i) in options[option.attribute_code]"
@@ -197,7 +197,7 @@
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 
@@ -386,7 +386,7 @@
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
-                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         v-focus-clean
                       />
@@ -404,7 +404,7 @@
                         :code="option.attribute_code"
 
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
-                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         v-focus-clean
                       />
                       <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
@@ -1028,6 +1028,13 @@ export default {
 .wishlist-button{
     border: 1px solid #000000;
     margin-left: 5px;
+}
+button.no-combination {
+    // display:none !important;
+    color: #dad0d0;
+    background: url(../assets/no-size.png); 
+    background-repeat: no-repeat;
+    background-size: 33px 33px;       
 }
 .variants-wrapper {
  .sizes {
@@ -1761,7 +1768,6 @@ export default {
        background: #c5c5c5;
     }
   }
-
   .color-inside {
     width: 33px;
     height: 33px;
