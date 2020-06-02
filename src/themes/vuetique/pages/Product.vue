@@ -178,7 +178,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
           
@@ -193,7 +193,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
@@ -1249,7 +1249,15 @@ button.no-combination {
     }
     .top-main{
       height: 908px;
-    }    
+    }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 50px 50px;   
+        border:none;    
+    }         
   }      
 }
 @media (max-width: 1920px) {
@@ -1346,6 +1354,14 @@ button.no-combination {
     .top-main{
       height: 691px;
     }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 36px 36px;   
+        border:none;    
+    }    
   }    
 }
 @media (max-width: 1440px) {
@@ -1435,7 +1451,15 @@ button.no-combination {
     }
     .top-main{
       height: 540px;
-    }    
+    }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 33px 33px;   
+        border:none;    
+    }         
   }  
 }
 @media (max-width: 1024px) {
