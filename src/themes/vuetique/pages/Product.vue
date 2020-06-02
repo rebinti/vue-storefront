@@ -155,7 +155,7 @@
                           {{ configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()] ? configuration[option.attribute_code ? option.attribute_code : option.label.toLowerCase()].label : null }}
                         </span>
                       </div>
-                      <!-- <div class="variants-wrapper">
+                      <div class="variants-wrapper">
                         <div v-if="option.label == 'Color'">
                           <color-selector
                             v-for="(c, i) in options[option.attribute_code]"
@@ -197,7 +197,7 @@
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
                 
