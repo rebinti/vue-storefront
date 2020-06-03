@@ -178,7 +178,11 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
+<<<<<<< HEAD
                             :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+=======
+                            :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+>>>>>>> abdd17310518730a8cf3f9373ffb94366617fbd8
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
           
@@ -193,7 +197,11 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
+<<<<<<< HEAD
                             :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+=======
+                            :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+>>>>>>> abdd17310518730a8cf3f9373ffb94366617fbd8
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
@@ -386,7 +394,11 @@
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
+<<<<<<< HEAD
                         :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config':checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+=======
+                        :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+>>>>>>> abdd17310518730a8cf3f9373ffb94366617fbd8
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         v-focus-clean
                       />
@@ -404,7 +416,11 @@
                         :code="option.attribute_code"
 
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
+<<<<<<< HEAD
                         :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+=======
+                        :class="!isOptionAvailable(s) ? 'no-combination' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+>>>>>>> abdd17310518730a8cf3f9373ffb94366617fbd8
                         v-focus-clean
                       />
                       <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
@@ -1035,6 +1051,13 @@ export default {
     border: 1px solid #000000;
     margin-left: 5px;
 }
+button.no-combination {
+    // display:none !important;
+    color: #dad0d0;
+    background: url(../assets/no-size.png); 
+    background-repeat: no-repeat;
+    background-size: 33px 33px;       
+}
 .variants-wrapper {
  .sizes {
     @media (max-width: 767px) {
@@ -1248,7 +1271,15 @@ export default {
     }
     .top-main{
       height: 908px;
-    }    
+    }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 50px 50px;   
+        border:none;    
+    }         
   }      
 }
 @media (max-width: 1920px) {
@@ -1345,6 +1376,14 @@ export default {
     .top-main{
       height: 691px;
     }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 36px 36px;   
+        border:none;    
+    }    
   }    
 }
 @media (max-width: 1440px) {
@@ -1434,7 +1473,15 @@ export default {
     }
     .top-main{
       height: 540px;
-    }    
+    }
+    button.no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../assets/no-size.png); 
+        background-repeat: no-repeat;
+        background-size: 33px 33px;   
+        border:none;    
+    }         
   }  
 }
 @media (max-width: 1024px) {
@@ -1767,7 +1814,6 @@ export default {
        background: #c5c5c5;
     }
   }
-
   .color-inside {
     width: 33px;
     height: 33px;
