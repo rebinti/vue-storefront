@@ -4,8 +4,10 @@
     :class="{ active: active }"
     @click="switchFilter(id, label)"
     :aria-label="$t('Select size ') + label"
+    style="position: relative;"
   >
     {{ label }}
+    <span class="x">X</span>
   </button>
 </template>
 
@@ -61,4 +63,22 @@ export default {
       min-width: 33px;
     }      
   }   
+  .no-config .x {
+     display: block;
+   }
+  .no-config.active{
+     color: black;
+     background: none;
+   }
+  .x {
+    display: none;
+    text-indent: -999em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url(https://cdn.iclothing.com/skin/frontend/codazon_fastest/baby/images/bg_x.png) center no-repeat transparent;
+    z-index: 5;
+}   
 </style>

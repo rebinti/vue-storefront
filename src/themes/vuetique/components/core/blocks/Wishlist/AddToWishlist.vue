@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 button.wishlist-bx{
-        margin: 6px;
+        margin-top: 6px;
 }
 @media (max-width: 768px){
   .p_detail_box button.wishlist-bx{        
