@@ -58,6 +58,14 @@
         </div>
         <div class="lg:col-3 pwishlist">
           <wishlist-button :product="product" />
+          <button
+            v-if="product.type_id !== 'simple'"
+            @click.prevent="openProductOptionsPopup"
+            class="inline-flex items-center text-grey-dark wishlist-bx"
+            type="button"
+              >
+              <img class="vt-icon fa-icon-list v-mobile" src="/assets/shop-bag.png" alt="" />
+            </button>
         </div>  
       </div>    
        <p class="product-category prd_cat" v-if="!onlyImage">
@@ -162,6 +170,10 @@ export default {
           }
         }
       }
+    },
+    openProductOptionsPopup () {
+      this.$bus.$emit('modal-show', 'modal-productwithoptions')
+      this.$bus.$emit('update-product-with-options-data', this.product)
     }
   },
   beforeMount () {

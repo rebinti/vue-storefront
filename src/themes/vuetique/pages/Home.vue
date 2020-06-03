@@ -99,7 +99,8 @@ import { Logger } from '@vue-storefront/core/lib/logger'
 import CmsBlock from '../components/core/blocks/Cms/Block'
 import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
 import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
-
+import config from 'config'
+import { isServer } from '@vue-storefront/core/helpers'
 
 export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
@@ -159,6 +160,10 @@ export default {
         }
       })
     }
+    this.$store.dispatch('attribute/list', { // load filter attributes for this specific category
+        filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+        includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+    });
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
     const config = store.state.config
@@ -177,7 +182,6 @@ export default {
         }).catch(err => {
           reject(err)
         }).then((res) => {
-          console.log('newProductsQuery --- ress' , res);
           if (res) {
             store.state.homepage.new_collection = res.items
           }

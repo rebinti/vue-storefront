@@ -23,6 +23,7 @@ export const AddToCart = {
       try {
         const diffLog = await this.$store.dispatch('cart/addItem', { productToAdd: product })
         if (diffLog) {
+          this.$bus.$emit('modal-hide', 'modal-productwithoptions')
           // console.log('notification',JSON.stringify(diffLog))
           if (diffLog.clientNotifications && diffLog.clientNotifications.length > 0) {
             diffLog.clientNotifications.forEach(notificationData => {
@@ -32,8 +33,8 @@ export const AddToCart = {
           if (diffLog && diffLog.items) {
               const diffData = diffLog.items.find(val => val.sku === product.sku)
               if (diffData && diffData.status === 'no-item' && diffLog.clientNotifications && diffLog.clientNotifications.length === 0) {
-                  this.$bus.$emit('modal-show', 'modal-outofstocknotification')
-                  this.$bus.$emit('update-out-of-stock-data', true)
+                this.$bus.$emit('modal-show', 'modal-outofstocknotification')
+                this.$bus.$emit('update-out-of-stock-data', true)
               }
           }
         } else {
@@ -43,6 +44,7 @@ export const AddToCart = {
             action1: { label: this.$t('OK') },
             action2: null
           })
+          this.$bus.$emit('modal-hide', 'modal-productwithoptions')  
         }
         return diffLog
       } catch (err) {
