@@ -178,7 +178,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
           
@@ -193,7 +193,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
@@ -386,7 +386,7 @@
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
-                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config':checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         v-focus-clean
                       />
@@ -404,7 +404,7 @@
                         :code="option.attribute_code"
 
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
-                        :class="!isOptionAvailable(s) ? 'out-of-stock' : checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         v-focus-clean
                       />
                       <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
@@ -795,7 +795,7 @@ export default {
               return ''
             }
           } else {
-            return ''
+            return 'no-config'
           }
        } 
        else if (optionIndex == 0) {
@@ -1023,6 +1023,12 @@ export default {
 .flex-grow {
   .bg-grey-dark{
     background-color: #4fce76;
+  }
+}
+.flex-grow {
+  .disabled {
+    background-color: rgba(237, 237, 237, var(--bg-opacity))!important;
+    color: #bdbdbd!important;
   }
 }
 .wishlist-button{
