@@ -113,6 +113,7 @@ export default {
     forceUpdateData (event) {
       console.log('producttt', event)
       // this.$forceUpdate()
+      this.configuration = {};
       this.setupVariants(event)
     },
       /**
@@ -220,7 +221,7 @@ export default {
       this.configuration = currentConfig;
       const product_option = setConfigurableProductOptionsAsync(this.$store, { product: this.product, configuration: currentConfig })
       this.product['product_option'] = product_option
-      this.$forceUpdate()
+      // this.$forceUpdate()
     }
   },
   components: {
