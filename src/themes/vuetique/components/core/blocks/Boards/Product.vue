@@ -55,11 +55,15 @@
         </div>
         <div class="absolute bottom-0 right-0 mb-3 button_bx_link">
             <!-- <a href="#" class="btn_box_lnk">Add to Bag</a> -->
-              <add-to-cart
+              <!-- <add-to-cart
                 :product="product"
                 :productname="'Add to Bag'"
                 class="btn_box_lnk"
-              />
+              /> -->
+            <add-to-cart-quick-prod-btn 
+              :product="product" 
+              :addtocarttype="'Text-Only'" 
+              class="btn_box_lnk" />
            
         </div>
 
@@ -73,9 +77,11 @@
 // import Product from '@vue-storefront/core/compatibility/components/blocks/Wishlist/Product'
 import { WishlistProduct } from '@vue-storefront/core/modules/boards/components/Product'
 import RemoveButton from './RemoveButton'
-import AddToCart from 'theme/components/core/AddToCart.vue'
+// import AddToCart from 'theme/components/core/AddToCart.vue'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
+import AddToCartQuickProdBtn from 'theme/components/core/AddToCartQuickProdBtn.vue'
+
 
 export default {
   name: 'Product',
@@ -88,7 +94,8 @@ export default {
   },
   components: {
     RemoveButton,
-    AddToCart
+    // AddToCart,
+    AddToCartQuickProdBtn
   },
   mixins: [ WishlistProduct], // Product
   mounted() {

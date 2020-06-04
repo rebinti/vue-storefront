@@ -149,8 +149,12 @@ export default {
     this.$store.dispatch('checkout/load')
   },
   beforeMount () {
+    this.$store.dispatch('attribute/list', { // load filter attributes for this specific category
+        filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+        includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+    });
     if (window.styla !== null) {
-       window.styla.init()
+       window.styla.init && window.styla.init()
     }
     if (this.$store.state.__DEMO_MODE__) {
       this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' }).then((onboardingClaim) => {
@@ -160,10 +164,6 @@ export default {
         }
       })
     }
-    this.$store.dispatch('attribute/list', { // load filter attributes for this specific category
-        filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
-        includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
-    });
   },
   asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
     const config = store.state.config

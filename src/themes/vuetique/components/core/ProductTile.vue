@@ -58,14 +58,7 @@
         </div>
         <div class="lg:col-3 pwishlist">
           <wishlist-button :product="product" />
-          <button
-            v-if="product.type_id !== 'simple'"
-            @click.prevent="openProductOptionsPopup"
-            class="inline-flex items-center text-grey-dark wishlist-bx"
-            type="button"
-              >
-              <img class="vt-icon fa-icon-list v-mobile" src="/assets/shop-bag.png" alt="" />
-            </button>
+          <add-to-cart-quick-prod-btn :product="product" :addtocarttype="'Only-Icon'"  />
         </div>  
       </div>    
        <p class="product-category prd_cat" v-if="!onlyImage">
@@ -103,11 +96,13 @@ import NoSSR from 'vue-no-ssr'
 import rootStore from '@vue-storefront/core/store'
 import { ProductTile } from '@vue-storefront/core/modules/catalog/components/ProductTile.ts'
 import config from 'config'
+import AddToCartQuickProdBtn from 'theme/components/core/AddToCartQuickProdBtn.vue'
 
 export default {
   mixins: [ProductTile],
   components: {
     'no-ssr': NoSSR,
+    AddToCartQuickProdBtn,
     'WishlistButton': () => import(/* webpackChunkName: "wishlist" */'theme/components/core/blocks/Wishlist/AddToWishlist'),
   },
   props: {
@@ -288,6 +283,7 @@ export default {
     .pwishlist{
       width: 10%;
       float: left;
+      padding-top: 10px;
     }
   }
   .price_bx_it{
