@@ -26,6 +26,7 @@
                             :code="option.attribute_code"
                             :class="{ active: c.id == configuration[option.attribute_code].id }"
                             @click.native="changeEditModeFilter(c)"
+                            :click-from-add-to-cart-popup-options="true"
                           />
                         </div>
                         <div class="sizes" v-else-if="option.label == 'Size'">
@@ -42,6 +43,7 @@
                         
                             v-focus-clean
                             @click.native="changeEditModeFilter(s)"
+                            :click-from-add-to-cart-popup-options="true"
                           />
           
                         </div>
@@ -60,6 +62,7 @@
                            
                             v-focus-clean
                             @click.native="changeEditModeFilter(s)"
+                            :click-from-add-to-cart-popup-options="true"
                           />
                         </div>
                       </div>
@@ -145,7 +148,7 @@ export default {
       product.configurable_options.filter(val => {
         this.configuration[val.attribute_code] = current_options[val.attribute_code][0]
       });
-      this.product = product;
+      this.product = JSON.parse(JSON.stringify(product));
       this.$forceUpdate()
     },
     isOptionAvailable (option) { // check if the option is available

@@ -29,13 +29,13 @@ export default {
 
     this.$store.dispatch('dnd-prismic-cms/refreshHomePageCollection').then((cmsBlocksCollection) => {
       let lang = storeCode.split('-')[0]
-      console.log('dnd-prismic-cms/refreshHomePageCollection' , cmsBlocksCollection);
+      // console.log('dnd-prismic-cms/refreshHomePageCollection' , cmsBlocksCollection);
       this.block = this.$store.getters[`dnd-prismic-cms/getCmsBlock`](this.identifier, lang)
     })
 
     this.$store.dispatch('dnd-prismic-cms/refreshCmsBlocksCollection').then((cmsBlocksCollection) => {
       let lang = storeCode.split('-')[0]
-      console.log('dnd-prismic-cms/refreshCmsBlocksCollection' , cmsBlocksCollection);
+      // console.log('dnd-prismic-cms/refreshCmsBlocksCollection' , cmsBlocksCollection);
       this.block = this.$store.getters[`dnd-prismic-cms/getCmsBlock`](this.identifier, lang)
     })
   }

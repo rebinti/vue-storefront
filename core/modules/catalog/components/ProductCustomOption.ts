@@ -20,7 +20,12 @@ export const ProductCustomOption = {
       type: null,
       required: false,
       default: () => false
-    }
+    },
+    clickFromAddToCartPopupOptions: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    },
   },
   data () {
     return {
@@ -50,6 +55,7 @@ export const ProductCustomOption = {
       this.active = false
     },
     switchFilter (id, label) {
+      if (this.clickFromAddToCartPopupOptions) return
       this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, label: label })
     }
   }

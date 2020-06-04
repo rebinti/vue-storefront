@@ -105,7 +105,7 @@ export const actions: ActionTree<DndPrismicCmsState, any> = {
 
   
   refreshHomePageCollection (context) {
-    console.log('refreshHomePageCollection')
+    // console.log('refreshHomePageCollection')
     return new Promise ((resolve, reject) => {
       // prepare a Request object
       const Request = {
@@ -116,7 +116,7 @@ export const actions: ActionTree<DndPrismicCmsState, any> = {
       }
       searchAdapter.search(Request).then((resp) => {
         let cmsBlocksData = searchAdapter.entities[Request.type].resultPorcessor(resp, 0, 200)
-        console.log('refreshHomePageCollection', cmsBlocksData);
+        // console.log('refreshHomePageCollection', cmsBlocksData);
         context.commit(types.SET_PRISMIC_CMS_BLOCKS, cmsBlocksData)
 
         resolve(cmsBlocksData)
