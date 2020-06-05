@@ -1,5 +1,5 @@
 <template>
-  <modal name="modal-productwithoptions" :width="450">
+  <modal name="modal-productwithoptions" :width="450" :trans-effect="transEffect">
     <span slot="header">Select options</span>
     <div slot="content" style="margin-top: -46px;">
       <div
@@ -93,7 +93,8 @@ export default {
       configuration: {},
       options: {},
       product: {},
-      disableAddToCartButtonFlag: false
+      disableAddToCartButtonFlag: false,
+      transEffect: 'fade-in-down'
     }
   },
   computed: {
@@ -105,6 +106,7 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('update-product-with-options-data', this.forceUpdateData);
+    if (window && window.innerWidth <= 1024) this.transEffect= 'fade-in-up'
   },
   beforeDestroy () {
     this.$bus.$off('update-product-with-options-data');
@@ -117,7 +119,7 @@ export default {
       console.log('producttt', event)
       // this.$forceUpdate()
       this.configuration = {};
-      this.setupVariants(event)
+      if(event) this.setupVariants(event)
     },
       /**
    * Setup product current variants

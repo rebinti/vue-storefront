@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade-in-down">
+  <transition :name="transEffect">
     <div
       class="modal"
       v-if="isVisible"
@@ -97,6 +97,11 @@ export default {
     width: {
       type: Number,
       default: 0
+    },
+    transEffect: {
+      required: false,
+      type: String,
+      default: () => 'fade-in-down'
     }
   },
   computed: {

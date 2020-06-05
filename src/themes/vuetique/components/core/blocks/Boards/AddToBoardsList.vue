@@ -346,6 +346,7 @@ export default {
         height: 100vh;
         left: auto;
         right: 0;
+        min-width: 400px;
     }
 }
 
