@@ -35,6 +35,7 @@ import { RemoveFromWishlist } from '@vue-storefront/core/modules/wishlist/compon
 // import { IsOnBoardsWishlist } from '@vue-storefront/core/modules/boards/components/IsOnWishlist'
 
 export default {
+  name: 'AddToWishlist',
   mixins: [ IsOnWishlist , AddToWishlist , RemoveFromWishlist ], // IsOnBoardsWishlist
   computed: {
     favoriteIcon () {

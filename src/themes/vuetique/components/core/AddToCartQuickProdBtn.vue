@@ -47,6 +47,7 @@ import { AddToCart } from '@vue-storefront/core/modules/cart/components/AddToCar
 import { setTimeout } from 'timers'
 
 export default {
+  name: 'AddToCartQuickProdBtn',
   mixins: [AddToCart],
   directives: { focusClean },
   components: { ButtonFull },
