@@ -124,5 +124,9 @@ export default {
 .modal .modal-container .modal-content {
   background: #ffffff !important;
 }
+.fix-bottom-side {
+  bottom: 0px !important;
+  top: unset !important;
+}
 }
 </style>

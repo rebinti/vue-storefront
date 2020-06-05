@@ -1,5 +1,5 @@
 <template>
-  <modal name="modal-productwithoptions" :width="450" :trans-effect="transEffect">
+  <modal name="modal-productwithoptions" :width="450" :trans-effect="transEffect" class="fix-bottom-side">
     <span slot="header">Select options</span>
     <div slot="content" style="margin-top: -46px;">
       <div
