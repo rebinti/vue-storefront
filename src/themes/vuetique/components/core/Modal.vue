@@ -5,7 +5,6 @@
       v-if="isVisible"
       ref="modal"
       @click.self="close"
-      :style="bottomstyle"
     >
       <div class="modal-wrapper">
         <div class="modal-center" >
@@ -108,14 +107,7 @@ export default {
   computed: {
     style () {
       return this.width ? `width: ${this.width}px` : false
-    },
-    bottomstyle () {
-      if(this.width<=425){
-        return 'bottom:0px;'
-      }else{
-        return ''
-      }      
-    }    
+    }  
   }
 }
 </script>
