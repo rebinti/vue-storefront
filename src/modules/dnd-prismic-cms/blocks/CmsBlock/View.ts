@@ -18,8 +18,8 @@ export default {
   methods: {},
   created () {
     const storeView = currentStoreView()
-    console.log('PrismicCmsBlock ', this.identifier);
-    let storeCode = 'en-in'
+    // console.log('PrismicCmsBlock ', this.identifier);
+    let storeCode = 'en-us'
     if (typeof config.prismic != 'undefined' && typeof config.prismic.defaultLocale != 'undefined') {
       // storeCode = config.prismic.defaultLocale
     }
