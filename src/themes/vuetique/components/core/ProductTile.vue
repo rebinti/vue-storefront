@@ -289,10 +289,7 @@ export default {
         .wish-icon{
           float: left;
           margin-left:10px;
-          margin-top: 2px;
-          .wishlist-bx{
-            margin-top: 0px !important;
-          }
+          margin-top: -4px;
         }       
     }   
   }
