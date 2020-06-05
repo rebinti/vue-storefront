@@ -57,14 +57,13 @@
           </p>
         </div>
         <div class="lg:col-3 pwishlist">
-          <wishlist-button :product="product" />
-          <add-to-cart-quick-prod-btn :product="product" :addtocarttype="'Only-Icon'"  />
+          <add-to-cart-quick-prod-btn :product="product" :addtocarttype="'Only-Icon'" class="cart-icon" />          
+          <wishlist-button :product="product" class="wish-icon" />          
         </div>  
       </div>    
        <p class="product-category prd_cat" v-if="!onlyImage">
           Coats & Jackets
-      </p>
-
+      </p> 
       <div class="mt-1 text-grey-dark font-medium price_bx_it">
         <span
           class="text-primary mr-2"
@@ -277,14 +276,22 @@ export default {
 .product{
   .title-and-wish{
     .ptitle{
-      width: 90%;
+      width: 82%;
       float: left;
     }
     .pwishlist{
-      width: 10%;
+      width: 18%;
       float: left;
       padding-top: 10px;
-    }
+        .cart-icon{
+          float: left;
+        }
+        .wish-icon{
+          float: left;
+          margin-left:10px;
+          margin-top: 2px;
+        }       
+    }   
   }
   .price_bx_it{
     clear: both;
