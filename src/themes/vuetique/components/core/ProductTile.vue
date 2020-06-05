@@ -290,8 +290,8 @@ export default {
           float: left;
           margin-left:10px;
           margin-top: 2px;
-          button.wishlist-bx{
-            margin-top: 0px;
+          .wishlist-bx{
+            margin-top: 0px !important;
           }
         }       
     }   
