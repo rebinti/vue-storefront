@@ -96,10 +96,14 @@ export default {
     addToCartWrapper (product) {
       this.added = false
       this.failed = false
-      if(this.product.type_id === 'simple') {
+      if((this.product.type_id === 'simple') || (this.product.type_id === 'virtual') || (this.product.type_id === 'bundle')) {
          this.addToCart(product)
       } else {
-        this.openProductOptionsPopup()
+        if((this.product.type_id === 'configurable')&&(product.configurable_children)){
+          this.openProductOptionsPopup()
+        }else{
+          this.addToCart(product)
+        }        
       }
     },
     openProductOptionsPopup () {
