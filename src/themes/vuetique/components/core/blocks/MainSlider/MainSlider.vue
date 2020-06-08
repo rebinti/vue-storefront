@@ -5,7 +5,8 @@
         <slide v-for="(slide, index) in mainSliderData" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
-              <div class="w-full px-10p">
+              <span v-html='slide.description'></span>
+              <!-- <div class="w-full px-10p" v-bind:class="['contentpos-'+slide.desc_position]">
                 <h1 class="text-hero mt-0 mb-8 text-center" data-testid="mainSliderTitle">
                   {{ slide.name }}
                 </h1>
@@ -14,7 +15,7 @@
                     {{ slide.button_text }}
                   </button-full>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </slide>
@@ -51,26 +52,29 @@ export default {
   },
   computed: {
      ...mapState({
-      mainSliderData: state => state.ui.mainSliderData.filter(val=> val.image !== null).map(slide => {
+      sliderData: state => state.ui.mainSliderData
+    }),
+    mainSliderData () {
+      return this.sliderData.filter(val=> val.image !== null).map(slide => {
         slide.button_text= 'Find your purpose'
         return slide
       })
-    }),
-  },
+    }
+  },  
   methods: {
-    updateSliderData (data) {
-      this.slides = data.slides
-      this.totalSlides = data.total
-    },
-    checkSliderData() {
-      if( this.windowWidth <= 760 ) {
-         this.updateSliderData(sliderData.mobile)
-      }
-      else {
-          this.updateSliderData(sliderData.web)
-      }
-    },
-    async getSliderData() {
+    // updateSliderData (data) {
+    //   this.slides = data.slides
+    //   this.totalSlides = data.total
+    // },
+    // checkSliderData() {
+    //   if( this.windowWidth <= 760 ) {
+    //      this.updateSliderData(sliderData.mobile)
+    //   }
+    //   else {
+    //       this.updateSliderData(sliderData.web)
+    //   }
+    // },
+    async getSliderData() {      
       if (this.mainSliderData.length > 0) { 
         return; 
       }
@@ -79,23 +83,25 @@ export default {
           value: "banner"
       }).then(res => {
         //  console.log('getSliderData', res );
+        console.log('BBBBBBBBBBBBB',this.sliderData)
+        console.log('ffffffffff',this.mainSliderData)
       });
    },
   },
   mounted () {
-    window.addEventListener('resize', () => {
-        this.windowWidth = window.innerWidth
-        this.checkSliderData();
-    });
-    this.windowWidth =  window.innerWidth;
-    this.checkSliderData();
-    setInterval(() => {
-      this.currentSlide = (this.currentSlide + 1) % (this.totalSlides)
-    }, 5000)
+    // window.addEventListener('resize', () => {
+    //     this.windowWidth = window.innerWidth
+    //     this.checkSliderData();
+    // });
+    // this.windowWidth =  window.innerWidth;
+    // this.checkSliderData();
+    // setInterval(() => {
+    //   this.currentSlide = (this.currentSlide + 1) % (this.totalSlides)
+    // }, 5000)
   },
   created () {
-    this.checkSliderData();
-    this.getSliderData();
+    // this.checkSliderData();
+    this.getSliderData();    
     //this.updateSliderData(sliderData.web)
   },
   destroyed () {
