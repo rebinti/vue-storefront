@@ -90,16 +90,6 @@ export default {
       });
    },
   },
-  beforeMount () {
-      this.windowWidth =  window.innerWidth;
-      console.log('WIIIIIIIIIIIIIII',this.windowWidth);
-      if( this.windowWidth <= 760 ) {
-        this.deviceslide = true
-      }
-      else {
-        this.desktopslide = true
-      }    
-  },
   mounted () {
     console.log('slider DAAAAAAAAAAAAA',this.sliderData)
       this.windowWidth =  window.innerWidth;
