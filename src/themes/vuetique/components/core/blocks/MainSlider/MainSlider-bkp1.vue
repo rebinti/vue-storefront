@@ -59,6 +59,7 @@ export default {
       });
    },
    setSliderData () {
+      this.windowWidth =  window.innerWidth;
       if (this.windowWidth <= 760 ) {
         this.mainSliderDataList = this.sliderData.filter(val=> (val.bannerslider_id === "2" && val.image !== null))
         this.desktop = false
