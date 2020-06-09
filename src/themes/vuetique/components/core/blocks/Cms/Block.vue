@@ -54,9 +54,20 @@ export default {
         key: queryKey,
         value: queryValue,
         skipCache: this.sync
+      }).then(res => { 
+          this.$emit('cmsDataChangedNew', { status: true, value : this.data });
       })
     }
   },
+//   watch:{
+//     data(val){
+//       if(val){
+//         this.$nextTick(()=>{
+//           this.$emit('cmsDataChangedNew');
+//         })
+//       }
+//     }
+// },
   computed: {
     data () {
       if (this.id) {

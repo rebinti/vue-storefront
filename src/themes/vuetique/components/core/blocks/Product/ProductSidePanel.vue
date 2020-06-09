@@ -12,11 +12,10 @@
       </svg>
     </button>
     
-    <h3>Size Guide</h3>
-
+    <!-- <h3 class="mb-8">Size Guide</h3> -->
     <!-- <cms-block :identifier="'product-size-guide'" :sync="true"/> -->
 
-      
+   <div class="row mt-5">  
     <Accordion class="mob_fltr"   
         :title="'Size Guide'"
       >
@@ -26,31 +25,34 @@
               class="col-xs-12 col-sm-6 mb10"
               name="brands"
               :options="getLabelAtrributeList.options"
-              :placeholder="$t('Select options *')"
+              :placeholder="$t('Select Brand *')"
               autocomplete="label"
+              :selected="selectedBrandID"
+              v-model="selectedBrandID"
+              @input="brandChanged"
             />
-                  Size Guide Block
-                  <cms-block :identifier="'brand-marc-angelo'" :sync="true"/>
-
-                
+              <div class="row" style="width: 100%;margin: 15px 0 0 0;" v-if="isCmsDataLoaded && showTabButtons">
+                <button id="cm-btn"  @click="centimetresClick($event)" class="tab-btn active-btn">Centimetres</button>
+                <button id="inch-btn" @click="inchesClick($event)" class="tab-btn">Inches</button>
+              </div>
+               <cms-block v-if="!isLoading && selectedBrandSearchTxt.length>0" @cmsDataChangedNew="cmsDataChangedEvent" :identifier="selectedBrandSearchTxt" :sync="true"/>
+               <p class="no-data" v-if="isLoading"> Loading... </p>
+              <p class="no-data" v-if="!isCmsDataLoaded && !isLoading"> No data found </p>
           </div>
         </template>
       </Accordion>
 
     <Accordion class="mob_fltr"
         :title="'How To Measure'"
+        :openType= "false"
       >
         <template>
             <div>
-               <p>
-                 Chest: Measure the circumference of your chest. Place one end of the tape measure at the fullest part of your bust, wrap it around (under your armpits, around your shoulder blades, and back to the front) to get the measurement. Waist: Measure the circumference of your waist. Use the tape to circle your waist (sort of like a belt would) at your natural waistline, which is located above your belly button and below your rib cage. (If you bend to the side, the crease that forms is your natural waistline.) Hips: Measure the circumference of your hips. Start at one hip and wrap the tape measure around your rear, around the other hip, and back to where you started. Make sure the tape is over the largest part of your buttocks. Inseam: This is the distance from the uppermost inner part of your thigh to the bottom of your ankle. You can measure your inseam in two ways.
-               </p>
+               <cms-block :identifier="'how-to-messure'" :sync="true"/>
             </div>
         </template>
     </Accordion>
-
-
-  
+  </div>
   </div>
 </template>
 <script>
@@ -65,6 +67,15 @@ export default {
   name: 'ProductSidePanel',
   props: {
   },
+  data () {
+    return {
+      selectedBrandID: '',
+      selectedBrandSearchTxt: '',  //`brand-marc-angelo`,   // 'brand-marc-angelo'
+      isLoading: false,
+      isCmsDataLoaded: false,
+      showTabButtons: false
+    }
+    },
   mixins: [CmsBlock],
   components: {
      CmsBlock, Accordion, BaseSelect
@@ -77,8 +88,9 @@ export default {
       return this.$store.state.ui.productSidePanelFlag
     },
     ...mapGetters({
+       product: 'product/productCurrent',
        attributesByCode: 'attribute/attributeListByCode',
-      attributesById: 'attribute/attributeListById',
+       attributesById: 'attribute/attributeListById',
      }),
      getLabelAtrributeList() {
        if (this.attributesByCode && this.attributesByCode.label) {
@@ -97,6 +109,10 @@ export default {
   },
   mounted () {
     //  console.log('yoptoProduct' , this.yoptoProduct);
+    if (this.getLabelAtrributeList) {
+        this.selectedBrandID  =  this.getCurrentProductLabelData.value
+        this.brandChanged()
+    }
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
@@ -112,7 +128,39 @@ export default {
     },
     closeSearchpanel () {
      this.$store.dispatch('ui/toggleProductSidePanel' , false)
-    }
+    },      
+    inchesClick (event) {
+         event.target.classList.add('active-btn');
+         document.getElementById("cm-btn").classList.remove( "active-btn" );
+         document.getElementById("inches").classList.add( "active" );
+      	 document.getElementById("centimetres").classList.remove( "active" );
+    },
+    centimetresClick (event) {
+           event.target.classList.add('active-btn');
+           document.getElementById("inch-btn").classList.remove( "active-btn" );
+           document.getElementById("centimetres").classList.add( "active" );
+           document.getElementById("inches").classList.remove( "active" );
+    },
+    cmsDataChangedEvent (event){
+      // console.log('cmsDataChangedEvent', event)
+      if (event && event.value) {
+          if(event.value.content.includes('bs-example-tabs')) this.showTabButtons = true;
+          this.isCmsDataLoaded = true;
+      }
+    },
+    brandChanged () {
+      this.isLoading = true;
+      this.isCmsDataLoaded = false;
+      this.showTabButtons = false;
+      const selectedData =  this.attributesByCode.label.options.find(val => val.value == this.selectedBrandID)
+      if (selectedData) {
+        let serachString = 'brand-' + selectedData.label.toLowerCase().split(' ').join('-');
+        this.selectedBrandSearchTxt =  serachString;
+      }
+      setTimeout(() => {
+         this.isLoading = false;
+      }, 250);
+    },
   },
   beforeCreate () {
     const el = document.body;
@@ -127,6 +175,61 @@ export default {
 }
 </script>
 
+<style >
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.tab-btn {
+   float: left;
+    width: 49%;
+    border: 1px solid #c5b1b1;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 4px;
+}
+
+.bs-example-tabs {
+  display: none!important;
+}
+
+.tab-btn.active-btn{
+  text-decoration: underline;
+}
+
+.size-select #product-attribute-specs-table th {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    background: #000;
+    border: 1px solid #000;
+    color: #fff;
+}
+
+.data-table tr td {
+    border-color: #e1e1e1;
+    padding: 14px 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.product-details-size #product-attribute-specs-table {
+    max-width: 100em;
+    margin-top: 10px;
+    float: left;
+}
+.no-data {
+      margin: 0 auto;
+    padding-top: 21px;
+    font-weight: 500;
+}
+</style>
+
 <style lang="scss" scoped>
 @import "~theme/css/animations/transitions";
 
@@ -135,5 +238,9 @@ export default {
     &:hover {
       opacity: 1;
     }
+  }
+
+  .mob_fltr {
+    width: 100%;
   }
 </style>
