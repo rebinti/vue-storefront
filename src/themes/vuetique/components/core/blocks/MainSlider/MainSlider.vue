@@ -1,26 +1,29 @@
 <template>
-  <section class="main-slider w-full text-white">
+  <section v-if="desktopslide" class="main-slider w-full text-white desktop">
     <no-ssr>
       <carousel :per-page="1" pagination-active-color="#ffffff" pagination-color="#e0e0e0">
         <slide v-for="(slide, index) in mainSliderData" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
               <span v-html='slide.description'></span>
-              <!-- <div class="w-full px-10p" v-bind:class="['contentpos-'+slide.desc_position]">
-                <h1 class="text-hero mt-0 mb-8 text-center" data-testid="mainSliderTitle">
-                  {{ slide.name }}
-                </h1>
-                <div class="mx-auto w-48">
-                  <button-full :link="{path: slide.click_url}" class="btn-primary">
-                    {{ slide.button_text }}
-                  </button-full>
-                </div>
-              </div> -->
             </div>
           </div>
         </slide>
-      </carousel>
+      </carousel>   
     </no-ssr>
+  </section>
+  <section v-else-if="deviceslide" class="main-slider w-full text-white device">
+    <no-ssr>
+      <carousel :per-page="1" pagination-active-color="#ffffff" pagination-color="#e0e0e0">           
+        <slide v-for="(deviceslide, index) in mainSliderDeviceData" :key="index">
+          <div class="slide w-full" v-lazy:background-image="imageBaseUrl + deviceslide.image">
+            <div class="slide-content flex items-center justify-center">
+              <span v-html='deviceslide.description'></span>
+            </div>
+          </div>
+        </slide>        
+      </carousel> 
+      </no-ssr>   
   </section>
 </template>
 
@@ -41,7 +44,9 @@ export default {
       slides: [],
       totalSlides: 1,
       windowWidth: 0,
-      imageBaseUrl: config.homePageMainSliderConfig.imageBaseUrl
+      imageBaseUrl: config.homePageMainSliderConfig.imageBaseUrl,
+      desktopslide:false,
+      deviceslide:false,
     }
   },
   components: {
@@ -55,25 +60,13 @@ export default {
       sliderData: state => state.ui.mainSliderData
     }),
     mainSliderData () {
-      return this.sliderData.filter(val=> val.image !== null).map(slide => {
-        slide.button_text= 'Find your purpose'
-        return slide
-      })
-    }
+      return this.sliderData.filter(val=> (val.bannerslider_id === "1" && val.image !== null))  
+    },
+    mainSliderDeviceData () {
+      return this.sliderData.filter(val=> (val.bannerslider_id === "2" && val.image !== null))             
+    }    
   },  
   methods: {
-    // updateSliderData (data) {
-    //   this.slides = data.slides
-    //   this.totalSlides = data.total
-    // },
-    // checkSliderData() {
-    //   if( this.windowWidth <= 760 ) {
-    //      this.updateSliderData(sliderData.mobile)
-    //   }
-    //   else {
-    //       this.updateSliderData(sliderData.web)
-    //   }
-    // },
     async getSliderData() {      
       if (this.mainSliderData.length > 0) { 
         return; 
@@ -83,21 +76,40 @@ export default {
           value: "banner"
       }).then(res => {
         //  console.log('getSliderData', res );
+        if( this.windowWidth <= 760 ) {
+          this.deviceslide = true
+          this.desktopslide = false
+        }
+        else {
+          this.desktopslide = true
+          this.deviceslide = false
+        }         
         console.log('BBBBBBBBBBBBB',this.sliderData)
         console.log('ffffffffff',this.mainSliderData)
+        console.log('ggggggggggg',this.mainSliderDeviceData)
       });
    },
   },
+  beforeMount () {
+      this.windowWidth =  window.innerWidth;
+      console.log('WIIIIIIIIIIIIIII',this.windowWidth);
+      if( this.windowWidth <= 760 ) {
+        this.deviceslide = true
+      }
+      else {
+        this.desktopslide = true
+      }    
+  },
   mounted () {
-    // window.addEventListener('resize', () => {
-    //     this.windowWidth = window.innerWidth
-    //     this.checkSliderData();
-    // });
-    // this.windowWidth =  window.innerWidth;
-    // this.checkSliderData();
-    // setInterval(() => {
-    //   this.currentSlide = (this.currentSlide + 1) % (this.totalSlides)
-    // }, 5000)
+    console.log('slider DAAAAAAAAAAAAA',this.sliderData)
+      this.windowWidth =  window.innerWidth;
+      console.log('WIIIIIIIIIIIIIII',this.windowWidth);
+      if( this.windowWidth <= 760 ) {
+        this.deviceslide = true
+      }
+      else {
+        this.desktopslide = true
+      }    
   },
   created () {
     // this.checkSliderData();
