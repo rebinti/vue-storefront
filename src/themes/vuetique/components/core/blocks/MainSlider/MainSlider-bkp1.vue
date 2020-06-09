@@ -1,8 +1,8 @@
 <template>
-  <section v-if="desktopslide" class="main-slider w-full text-white desktop">
+  <section class="main-slider w-full text-white" :class="{ desktop: desktop }">
     <no-ssr>
       <carousel :per-page="1" pagination-active-color="#ffffff" pagination-color="#e0e0e0">
-        <slide v-for="(slide, index) in mainSliderData" :key="index">
+        <slide v-for="(slide, index) in mainSliderDataList" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
               <span v-html='slide.description'></span>
@@ -12,31 +12,15 @@
       </carousel>   
     </no-ssr>
   </section>
-  <section v-else-if="deviceslide" class="main-slider w-full text-white device">
-    <no-ssr>
-      <carousel :per-page="1" pagination-active-color="#ffffff" pagination-color="#e0e0e0">           
-        <slide v-for="(deviceslide, index) in mainSliderDeviceData" :key="index">
-          <div class="slide w-full" v-lazy:background-image="imageBaseUrl + deviceslide.image">
-            <div class="slide-content flex items-center justify-center">
-              <span v-html='deviceslide.description'></span>
-            </div>
-          </div>
-        </slide>        
-      </carousel> 
-      </no-ssr>   
-  </section>
 </template>
-
+​
 <script>
 import config from 'config'
 import NoSSR from 'vue-no-ssr'
 import { Carousel, Slide } from 'vue-carousel'
 import sliderData from 'theme/resource/slider.json'
-
 import ButtonFull from 'theme/components/theme/ButtonFull'
-
 import { mapState } from 'vuex'
-
 export default {
   data () {
     return {
@@ -45,8 +29,8 @@ export default {
       totalSlides: 1,
       windowWidth: 0,
       imageBaseUrl: config.homePageMainSliderConfig.imageBaseUrl,
-      desktopslide:false,
-      deviceslide:false,
+      mainSliderDataList: [],
+      desktop:false
     }
   },
   components: {
@@ -58,17 +42,12 @@ export default {
   computed: {
      ...mapState({
       sliderData: state => state.ui.mainSliderData
-    }),
-    mainSliderData () {
-      return this.sliderData.filter(val=> (val.bannerslider_id === "1" && val.image !== null))  
-    },
-    mainSliderDeviceData () {
-      return this.sliderData.filter(val=> (val.bannerslider_id === "2" && val.image !== null))             
-    }    
+    }), 
   },  
   methods: {
     async getSliderData() {      
-      if (this.mainSliderData.length > 0) { 
+      if (this.sliderData.length > 0) { 
+        this.setSliderData();
         return; 
       }
       this.$store.dispatch('ui/getSliderData', {
@@ -76,33 +55,29 @@ export default {
           value: "banner"
       }).then(res => {
         //  console.log('getSliderData', res );
-        if( this.windowWidth <= 760 ) {
-          this.deviceslide = true
-          this.desktopslide = false
-        }
-        else {
-          this.desktopslide = true
-          this.deviceslide = false
-        }         
+         this.setSliderData();
       });
    },
-  },
-  mounted () {    
-      this.windowWidth =  window.innerWidth;      
-      if( this.windowWidth <= 760 ) {
-        this.deviceslide = true
+   setSliderData () {
+      if (this.windowWidth <= 760 ) {
+        this.mainSliderDataList = this.sliderData.filter(val=> (val.bannerslider_id === "2" && val.image !== null))
+        this.desktop = false
+      } else {
+        this.mainSliderDataList =  this.sliderData.filter(val=> (val.bannerslider_id === "1" && val.image !== null)) 
+        this.desktop = true
       }
-      else {
-        this.desktopslide = true
-      }    
+   }
+  },
+  beforeMount () {
+    this.windowWidth =  window.innerWidth;
+  },
+  mounted () {
+    this.windowWidth =  window.innerWidth;
   },
   created () {
-    // this.checkSliderData();
     this.getSliderData();    
-    //this.updateSliderData(sliderData.web)
   },
   destroyed () {
-    window.removeEventListener('resize' , null);
   }
 }
 </script>
@@ -162,3 +137,4 @@ export default {
   
 }
 </style>
+
