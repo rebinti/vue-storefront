@@ -35,10 +35,12 @@ export const ProductCustomOption = {
   beforeMount () {
     this.$bus.$on('filter-reset', this.filterReset)
     this.$bus.$on('filter-changed-' + this.context, this.filterChanged)
+    this.$bus.$on('filter-changed-frm-quk-cart-popup', this.filterChanged)
   },
   beforeDestroy () {
     this.$bus.$off('filter-reset', this.filterReset)
     this.$bus.$off('filter-changed-' + this.context, this.filterChanged)
+    this.$bus.$off('filter-changed-frm-quk-cart-popup', this.filterChanged)
   },
   methods: {
     filterChanged (filterOption) {
@@ -55,7 +57,10 @@ export const ProductCustomOption = {
       this.active = false
     },
     switchFilter (id, label) {
-      if (this.clickFromAddToCartPopupOptions) return
+      if (this.clickFromAddToCartPopupOptions) {  
+        this.$bus.$emit('filter-changed-frm-quk-cart-popup', { attribute_code: this.code, id: id, label: label })
+        return
+      }
       this.$bus.$emit('filter-changed-' + this.context, { attribute_code: this.code, id: id, label: label })
     }
   }
