@@ -17,6 +17,7 @@ export default {
   methods: {
     close () {
       Vue.prototype.$bus.$emit('close-sidebar-panel', true);
+      this.$bus.$emit('modal-hide', 'modal-productwithoptions')
       this.$store.commit('ui/setOverlay', false)
       this.$store.commit('ui/setMicrocart', false)
       this.$store.commit('ui/setWishlist', false)
