@@ -1,11 +1,11 @@
 <template>
-  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductSidePanelOpen }">
+  <div class="right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductSidePanelOpen }">
     <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
-      @click="closeSearchpanel"
-      data-testid="closeMicrocart"
+      @click="closeSizeGuidepanel"
+      data-testid="closeSizeGuide"
     >
       <svg viewBox="0 0 25 25" class="vt-icon--sm">
         <use xlink:href="#close" />
@@ -18,6 +18,7 @@
    <div class="row mt-5">  
     <Accordion class="mob_fltr"   
         :title="'Size Guide'"
+        :openType= opensizeguide
       >
         <template>
           <div class="row">
@@ -73,17 +74,15 @@ export default {
       selectedBrandSearchTxt: '',  //`brand-marc-angelo`,   // 'brand-marc-angelo'
       isLoading: false,
       isCmsDataLoaded: false,
-      showTabButtons: false
+      showTabButtons: false,
+      opensizeguide: true
     }
-    },
-  mixins: [CmsBlock],
+  },
+  mixins: [CmsBlock,onEscapePress, NoScrollBackground],
   components: {
      CmsBlock, Accordion, BaseSelect
   },
   computed: {
-    // ...mapState({
-    //   yoptoProduct: state => state.ui.yoptoProduct
-    // }),
     isProductSidePanelOpen () {
       return this.$store.state.ui.productSidePanelFlag
     },
@@ -102,31 +101,29 @@ export default {
     getCurrentProductLabelData () {
       if (this.attributesByCode && this.attributesByCode.label) {
          return this.attributesByCode.label.options.find(val => val.value == this.product.label)
-      } else {
+      } else {         
          return null
       }
     },
   },
-  mounted () {
-    //  console.log('yoptoProduct' , this.yoptoProduct);
+  beforeMount () {
+    if(!this.getCurrentProductLabelData){
+        this.opensizeguide = false        
+    }else{
+        this.opensizeguide = true
+    }
+  },
+  mounted () {    
     if (this.getLabelAtrributeList) {
         this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value
         this.brandChanged()
-    }
-  },
-  mixins: [onEscapePress, NoScrollBackground],
+    }    
+  },  
   methods: {
-    closeReviewPanel () {
-      this.$store.commit('ui/setSidebar', false)
-      this.$store.dispatch('ui/toggleProductSidePanel')
-    },
-    toggletoggleReviewPanel () {
-      this.$store.dispatch('ui/toggleProductSidePanel', false)
-    },
     onEscapePress () {
-      this.closeSearchpanel()
+      this.closeSizeGuidepanel()
     },
-    closeSearchpanel () {
+    closeSizeGuidepanel () {
      this.$store.dispatch('ui/toggleProductSidePanel' , false)
     },      
     inchesClick (event) {
