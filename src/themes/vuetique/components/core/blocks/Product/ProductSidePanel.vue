@@ -1,5 +1,5 @@
 <template>
-  <div class="right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductSidePanelOpen }">
+  <div class="size-guide-panel right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductSidePanelOpen }">
     <button
       type="button"
       :aria-label="$t('Close')"
@@ -143,6 +143,11 @@ export default {
       if (event && event.value) {
           if(event.value.content.includes('bs-example-tabs')) this.showTabButtons = true;
           this.isCmsDataLoaded = true;
+
+        var tr = document.querySelectorAll('#product-attribute-specs-table tr')
+        for(var i = 1; i < tr.length; i++) {
+          tr[i].style.background = i % 2 ? '#ECECEC' : '#FFFFFF';
+        }          
       }
     },
     brandChanged () {
@@ -215,10 +220,10 @@ export default {
 
 .data-table tr td {
     border-color: #e1e1e1;
-    padding: 14px 10px;
+    padding: 7px 5px;
     border-width: 1px;
     border-style: solid;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .product-details-size #product-attribute-specs-table {
@@ -231,6 +236,18 @@ export default {
     padding-top: 21px;
     font-weight: 500;
 }
+
+  .size-guide-panel .cms-content.py-10{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .size-guide-panel #cm-btn{
+    margin-left: 0px;
+  }
+  .size-guide-panel #inch-btn{
+    margin-left: 7px;
+  }
+
 
 @media screen and (max-width: 480px) {
   .data-table tr th {
