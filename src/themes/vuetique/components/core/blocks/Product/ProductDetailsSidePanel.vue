@@ -1,5 +1,5 @@
-<template>
-  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10">
+<template>                                                                         
+  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductDetailsSidePanelOpen }">
     <button
       type="button"
       :aria-label="$t('Close')"
@@ -111,15 +111,15 @@ export default {
      CmsBlock
   },
   computed: {
-    // ...mapState({
-    //   yoptoProduct: state => state.ui.yoptoProduct
-    // }),
+    ...mapState({
+      isProductDetailsSidePanelOpen: state => state.ui.productDetailsSidePanelFlag
+    }),
     ...mapGetters({
       product: 'product/productCurrent'
     }),    
-    isProductDeatilsSidePanelOpen () {
-      return this.$store.state.ui.productDetailsSidePanelFlag
-    }
+    // isProductDetailsSidePanelOpen () {
+    //   return this.$store.state.ui.productDetailsSidePanelFlag
+    // }
   },
   mounted () {
       console.log('PPPRODUCTTTT' , this.product);
