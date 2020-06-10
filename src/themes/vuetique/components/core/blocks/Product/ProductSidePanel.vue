@@ -240,6 +240,8 @@ export default {
   .size-guide-panel .cms-content.py-10{
     padding-top: 1rem;
     padding-bottom: 1rem;
+    padding-right: 0rem;
+    padding-left: 0rem;    
   }
   .size-guide-panel #cm-btn{
     margin-left: 0px;
