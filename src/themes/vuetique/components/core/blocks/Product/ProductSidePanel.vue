@@ -110,7 +110,7 @@ export default {
   mounted () {
     //  console.log('yoptoProduct' , this.yoptoProduct);
     if (this.getLabelAtrributeList) {
-        this.selectedBrandID  =  this.getCurrentProductLabelData.value
+        this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value
         this.brandChanged()
     }
   },
