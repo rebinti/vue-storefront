@@ -1,5 +1,5 @@
 <template>
-  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductDetailsSidePanelOpen }">
+  <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10">
     <button
       type="button"
       :aria-label="$t('Close')"

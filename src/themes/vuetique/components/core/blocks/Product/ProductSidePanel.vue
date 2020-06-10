@@ -203,12 +203,14 @@ export default {
   text-decoration: underline;
 }
 
-.size-select #product-attribute-specs-table th {
+.data-table tr th {
     border-right: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
+    padding: 14px 10px;
     background: #000;
     border: 1px solid #000;
     color: #fff;
+    font-size: 14px;
 }
 
 .data-table tr td {
@@ -216,6 +218,7 @@ export default {
     padding: 14px 10px;
     border-width: 1px;
     border-style: solid;
+    font-size: 12px;
 }
 
 .product-details-size #product-attribute-specs-table {
@@ -228,6 +231,31 @@ export default {
     padding-top: 21px;
     font-weight: 500;
 }
+
+@media screen and (max-width: 480px) {
+  .data-table tr th {
+        border-right: 1px solid #e1e1e1;
+        border-bottom: 1px solid #e1e1e1;
+        padding: 7px 0px;
+        background: #000;
+        border: 1px solid #000;
+        color: #fff;
+        font-size: 10px;
+    }
+
+    .data-table tr td {
+        border-color: #e1e1e1;
+        padding: 5px 3px;
+        border-width: 1px;
+        border-style: solid;
+        font-size: 9px;
+    }
+
+    .tab-btn {
+      width: 48%;
+    }
+}
+
 </style>
 
 <style lang="scss" scoped>
