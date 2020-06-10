@@ -21,7 +21,7 @@
       >
         <template>
           <div class="row">
-            <base-select v-if="getLabelAtrributeList && getLabelAtrributeList.options.length"
+            <base-select v-if="getLabelAtrributeList.options && getLabelAtrributeList.options.length"
               class="col-xs-12 col-sm-6 mb10"
               name="brands"
               :options="getLabelAtrributeList.options"
@@ -81,12 +81,12 @@ export default {
      CmsBlock, Accordion, BaseSelect
   },
   computed: {
-    // ...mapState({
-    //   yoptoProduct: state => state.ui.yoptoProduct
-    // }),
-    isProductSidePanelOpen () {
-      return this.$store.state.ui.productSidePanelFlag
-    },
+    ...mapState({
+      isProductSidePanelOpen: state => state.ui.productSidePanelFlag
+    }),
+    // isProductSidePanelOpen() {
+    //   return this.$store.state.ui.productSidePanelFlag
+    // },
     ...mapGetters({
        product: 'product/productCurrent',
        attributesByCode: 'attribute/attributeListByCode',
@@ -111,7 +111,7 @@ export default {
     //  console.log('yoptoProduct' , this.yoptoProduct);
     if (this.getLabelAtrributeList) {
         this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value
-        this.brandChanged()
+        this.brandChanged();
     }
   },
   mixins: [onEscapePress, NoScrollBackground],
@@ -152,7 +152,10 @@ export default {
       this.isLoading = true;
       this.isCmsDataLoaded = false;
       this.showTabButtons = false;
-      const selectedData =  this.attributesByCode.label.options.find(val => val.value == this.selectedBrandID)
+      let selectedData = null;
+      if (this.attributesByCode && this.attributesByCode.label && this.attributesByCode.label.options) {
+         selectedData =  this.attributesByCode.label.options.find(val => val.value == this.selectedBrandID)
+      }
       if (selectedData) {
         let serachString = 'brand-' + selectedData.label.toLowerCase().split(' ').join('-');
         this.selectedBrandSearchTxt =  serachString;
