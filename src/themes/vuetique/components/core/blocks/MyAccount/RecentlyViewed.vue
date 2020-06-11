@@ -29,6 +29,7 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
+import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
 import ProductListing from 'theme/components/core/ProductListing.vue'
 import ProductTile from 'theme/components/core/ProductTile'
@@ -72,6 +73,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      currentProduct: 'product/productCurrent',
+    }),
     getrecentwithoutcurrent () {
       if (this.items.length) {
          return this.items.filter(val => val.sku != this.currentproductsku)
@@ -79,6 +83,12 @@ export default {
          return null
       }
     },    
+  },
+  beforeMount () {
+    this.$bus.$on('product-after-load', ()=> { this.$store.dispatch('recently-viewed/addItem', this.currentProduct)})
+  },
+  beforeDestroy () {
+    this.$bus.$off('product-after-load')
   },
   components: {
     'no-ssr': NoSSR, ProductListing, Carousel, Slide, ProductTile
