@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="items && items.length">
+    <template v-if="getrecentwithoutcurrent && getrecentwithoutcurrent.length">
       <h2 class="mb-4 text-center">
         {{ $t('Recently viewed') }}
       </h2>
@@ -9,7 +9,7 @@
         <no-ssr>
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
-              v-for="product in items"
+              v-for="product in getrecentwithoutcurrent"
               :key="product.id"
             >
               <product-tile
@@ -22,7 +22,7 @@
         </no-ssr>
       </div>
 
-      <product-listing v-else columns="4" :products="items" />
+      <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />
     </template>
   </div>
 </template>
@@ -64,7 +64,21 @@ export default {
       type: String,
       required: false,
       default: 'normalView'
+    },
+    currentproductsku: {
+      type: String,
+      required: false,
+      default: 'skuvalue'
     }
+  },
+  computed: {
+    getrecentwithoutcurrent () {
+      if (this.items.length) {
+         return this.items.filter(val => val.sku != this.currentproductsku)
+      } else {
+         return null
+      }
+    },    
   },
   components: {
     'no-ssr': NoSSR, ProductListing, Carousel, Slide, ProductTile

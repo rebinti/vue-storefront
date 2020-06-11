@@ -616,7 +616,7 @@
     <related-products type="related" style="display: none;" />
     <div class="container my-4">
       <no-ssr>
-        <recently-viewed  typeofview="carousel" />
+        <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
       </no-ssr>
     </div>
   </div>
