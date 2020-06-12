@@ -19,7 +19,7 @@
           </nav>
         </div>
         <div class="col-12 md:col-9 leading-loose static-content">
-          <component :is="activeComponent" />
+          <component :is="activeComponent" :pageidentifier="pageidentifierfromindex"/>
         </div>
       </div>
     </div>
@@ -30,8 +30,10 @@
 import i18n from '@vue-storefront/i18n'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs'
 import StaticExample from 'theme/components/theme/blocks/Static/Example'
-import ReturnExample from 'theme/components/theme/blocks/Static/Return'
-import PrivacyExample from 'theme/components/theme/blocks/Static/Privacy'
+import MagentoCmsPage from 'theme/components/theme/blocks/Static/MagentoCmsPage'
+// import ReturnExample from 'theme/components/theme/blocks/Static/Return'
+// import PrivacyExample from 'theme/components/theme/blocks/Static/Privacy'
+// import ServiceExample from 'theme/components/theme/blocks/Static/Service'
 
 export default {
   components: {
@@ -54,7 +56,11 @@ export default {
     page: {
       type: String,
       required: true
-    }
+    },
+    pageidentifierfromindex: {
+      type: String,
+      required: true
+    }    
   },
   methods: {
     setContent (component) {
@@ -64,15 +70,24 @@ export default {
   data () {
     return {
       navigation: [
-        { title: i18n.t('About us'), link: '/about-us', component: StaticExample },
-        { title: i18n.t('Customer service'), link: '/customer-service', component: StaticExample },
-        { title: i18n.t('Store locator'), link: '/store-locator', component: StaticExample },
-        { title: i18n.t('Delivery'), link: '/delivery', component: StaticExample },
-        { title: i18n.t('Return policy'), link: '/returns', component: ReturnExample },
-        // { title: i18n.t('Return policy'), link: '/returns', component: Custompage },
-        { title: i18n.t('Privacy policy'), link: '/privacy', component: PrivacyExample },
-        { title: i18n.t('Size guide'), link: '/size-guide', component: StaticExample },
-        { title: i18n.t('Contact us'), link: '/contact', component: StaticExample }
+        // { title: i18n.t('About us'), link: '/about-us', component: StaticExample },
+        // { title: i18n.t('Customer service'), link: '/customer-service', component: ServiceExample },
+        // { title: i18n.t('Store locator'), link: '/store-locator', component: StaticExample },
+        // { title: i18n.t('Delivery'), link: '/delivery', component: StaticExample },
+        // { title: i18n.t('Return policy'), link: '/returns', component: ReturnExample },
+        // // { title: i18n.t('Return policy'), link: '/returns', component: Custompage },
+        // { title: i18n.t('Privacy policy'), link: '/privacy', component: PrivacyExample },
+        // { title: i18n.t('Size guide'), link: '/size-guide', component: StaticExample },
+        // { title: i18n.t('Contact us'), link: '/contact', component: StaticExample }
+        
+        { title: i18n.t('General'), link: '/customer-service', component: MagentoCmsPage },
+        { title: i18n.t('Contact us'), link: '/contact-us', component: StaticExample },
+        { title: i18n.t('My Account'), link: '/account', component: StaticExample },
+        { title: i18n.t('Privacy & Security'), link: '/privacy', component: MagentoCmsPage },        
+        { title: i18n.t('Help/Faqs'), link: '/help-faq', component: MagentoCmsPage },
+        { title: i18n.t('Delivery & Return'), link: '/delivery-returns', component: MagentoCmsPage },
+        { title: i18n.t('Students'), link: '/students', component: MagentoCmsPage },        
+        { title: i18n.t('Size guide'), link: '/size-guide', component: MagentoCmsPage },              
       ],
       activeComponent: null
     }
