@@ -224,15 +224,15 @@
     <div class="container mx-auto">
       <div class="row items-center justify-between py-6">
         <div class="col-12 md:col-6 flex mb-8 md:mb-0">
-          <span class="menu-link text-sm">© {{ currentYear }} Vuetique</span>
+          <span class="menu-link text-sm">© {{ currentYear }} ABJB Ltd. Trading As iCLOTHING All Rights Reserved. Registered with the CRO in Ireland: C482932</span>
 
-          <router-link class="menu-link ml-8 text-sm text-grey-dark" :to="localizedRoute('/terms')" exact>
+          <!-- <router-link class="menu-link ml-8 text-sm text-grey-dark" :to="localizedRoute('/terms')" exact>
             {{ $t('Terms') }}
           </router-link>
 
           <router-link class="menu-link ml-8 text-sm text-grey-dark" :to="localizedRoute('/privacy')" exact>
             {{ $t('Privacy') }}
-          </router-link>
+          </router-link> -->
         </div>
 
         <div class="col-12 md:col-6 flex md:justify-end">
