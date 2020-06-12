@@ -15,6 +15,9 @@ export default {
       required: true
     }
   },
+  watch: {
+    '$route': 'validateRoute'
+  },
   created () {
     let queryKey = ''
     let queryValue = ''
@@ -35,6 +38,21 @@ export default {
         if (this.pageidentifier) {
             return this.$store.getters[`cmsPage/cmsPageIdentifier`](this.pageidentifier)
         }
+    }
+  },
+  methods: {
+    validateRoute () {
+      let queryKey = ''
+      let queryValue = ''
+      if (this.pageidentifier) {
+        queryKey = 'identifier'
+        queryValue = this.pageidentifier
+      }
+      if (queryKey && queryValue) {
+        this.$store.dispatch('cmsPage/single', {key: queryKey,
+        value: queryValue,
+        skipCache: true })
+      }
     }
   }
 }
