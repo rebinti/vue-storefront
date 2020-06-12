@@ -1,13 +1,83 @@
 <template>
-  <modal name="modal-productwithoptions" :width="450" :trans-effect="transEffect" class="fix-bottom-side">
-    <span slot="header">Select options</span>
-    <div slot="content" style="margin-top: -46px;">
-      <div
-          class="relative mob_size_box"
-          v-for="(option, index) in product.configurable_options"
-          :key="index"
-          v-if="product && product.configurable_options"
-        >
+  <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" > 
+    <!-- class="fix-bottom-side" -->
+    <span slot="header"></span>
+    <div class="row" slot="content" style="margin-top: -55px;height: 100vh;"> 
+      <div class="col-6 sm:col-12 md:col-12 slider-section">
+              <!-- <product-gallery
+              ref="gallery"
+              :gallery="gallery"
+              :offline="offlineImage"
+              :configuration="configuration"
+              :product="product"
+            /> -->
+
+            <div class="media-gallery-carousel">
+              <carousel
+                :per-page="1"
+                :mouse-drag="false"
+                :navigation-enabled="true"
+                pagination-active-color="#828282"
+                pagination-color="transparent"
+                navigation-next-label="<i class='material-icons p15 cl-bg-tertiary pointer'>keyboard_arrow_right</i>"
+                navigation-prev-label="<i class='material-icons p15 cl-bg-tertiary pointer'>keyboard_arrow_left</i>"
+                ref="carousel"
+                :speed="carouselTransitionSpeed"
+              >
+                <slide
+                  v-for="(images) in gallery"
+                  :key="images.src"
+                >
+                  <div
+                    class="product-image-container bg-cl-secondary"
+                    :class="{'video-container w-100 flex relative': images.video}"
+                  >
+                    <product-image
+                      class="product-image pointer"
+                      :class="{'product-image--video': images.video}"
+                      :image="images"
+                    />
+                  </div>
+                </slide>
+              </carousel>
+            </div>
+      </div>
+
+      <div class="col-6 sm:col-12 md:col-12 content-section" style="padding-left: 50px;"> 
+
+           <h1 class="mb20 mt0 cl-mine-shaft product-name" data-testid="productName" itemprop="name">
+              {{ product.name | htmlDecode }}
+            </h1>
+
+            <div class="mt-1 text-grey-dark font-medium price_bx_it mb-10">
+              <span
+                class="text-primary mr-2"
+                v-if="product.special_price && parseFloat(product.special_price) > 0"
+              >
+                {{ product.priceInclTax | price }}
+              </span>
+
+              <span
+                class="line-through"
+                v-if="product.special_price && parseFloat(product.originalPriceInclTax) > 0"
+              >
+                {{ product.originalPriceInclTax | price }}
+              </span>
+
+              <span
+                v-if="!product.special_price && parseFloat(product.priceInclTax) > 0 "
+              >
+                {{ product.priceInclTax | price }}
+              </span> 
+              
+            </div>
+
+            <div 
+                class="relative mob_size_box"
+                v-for="(option, index) in product.configurable_options"
+                :key="index"
+                v-if="product && product.configurable_options"
+              >
                       <div class="pt-4 pb-2 mob_size_box_label" data-testid="variantsLabel">
                         <span class="font-bold">{{ option.label }}</span>:
                         <span>
@@ -66,13 +136,17 @@
                           />
                         </div>
                       </div>
+                                  
                     </div>
-
-                <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag"  class="py-3 text-sm mt-10"/>
+             <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag"  
+                :current-configration="configuration"
+                class="py-3 text-sm mt-10"/>
+</div>
     </div>
   </modal>
 </template>
 <script>
+import config from 'config'
 import i18n from '@vue-storefront/i18n'
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import Modal from 'theme/components/core/Modal'
@@ -86,6 +160,16 @@ import ColorSelector from 'theme/components/core/ColorSelector.vue'
 import SizeSelector from 'theme/components/core/SizeSelector.vue'
 import AddToCart from 'theme/components/core/AddToCart.vue'
 import { setConfigurableProductOptionsAsync, findConfigurableChildAsync, isOptionAvailableAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
+import {  getMediaGallery,
+  configurableChildrenImages,
+  attributeImages } from '@vue-storefront/core/modules/catalog/helpers'
+import uniqBy from 'lodash-es/uniqBy'
+// import ProductGallery from 'theme/components/theme/blocks/ProductQuickView/ProductGallery'
+// import ProductGallery from 'theme/components/core/ProductGallery'
+
+import { Carousel, Slide } from 'vue-carousel'
+import ProductImage from 'theme/components/theme/blocks/ProductQuickView/ProductImage'
+// import ProductVideo from 'theme/components/theme/blocks/ProductQuickView/ProductVideo'
 
 export default {
   data () {
@@ -94,7 +178,14 @@ export default {
       options: {},
       product: {},
       disableAddToCartButtonFlag: false,
-      transEffect: 'fade-in-down'
+      transEffect: 'fade-in-down',
+      gallery: [],
+      offlineImage: {},
+          carouselTransition: true,
+      carouselTransitionSpeed: 0,
+      currentColor: 0,
+      currentPage: 0,
+      hideImageAtIndex: null
     }
   },
   computed: {
@@ -119,6 +210,8 @@ export default {
       console.log('producttt', event)
       // this.$forceUpdate()
       this.configuration = {};
+      this.gallery = [];
+      this.offlineImage  = {}
       if(event) this.setupVariants(event)
     },
       /**
@@ -151,6 +244,7 @@ export default {
         this.configuration[val.attribute_code] = current_options[val.attribute_code][0]
       });
       this.product = JSON.parse(JSON.stringify(product));
+      this.setProductGallery( this.product )
       this.$forceUpdate()
     },
     isOptionAvailable (option) { // check if the option is available
@@ -227,14 +321,44 @@ export default {
       const product_option = setConfigurableProductOptionsAsync(this.$store, { product: this.product, configuration: currentConfig })
       this.product['product_option'] = product_option
       // this.$forceUpdate()
+    },
+    /**
+   * Set product gallery depending on product type
+   */
+   setProductGallery (  product ) {
+    let productGalleryData;
+    if (product.type_id === 'configurable' && product.hasOwnProperty('configurable_children')) {
+      if (!config.products.gallery.mergeConfigurableChildren && product.is_configured) {
+        // context.commit(types.CATALOG_UPD_GALLERY, attributeImages(context.state.current))
+        productGalleryData =  attributeImages(context.state.current);
+      } else {
+        let productGallery = uniqBy(configurableChildrenImages(product).concat(getMediaGallery(product)), 'src').filter(f => { return f.src && f.src !== config.images.productPlaceholder })
+        // context.commit(types.CATALOG_UPD_GALLERY, productGallery)
+        productGalleryData =  productGallery;
+      }
+    } else {
+      let productGallery = uniqBy(configurableChildrenImages(product).concat(getMediaGallery(product)), 'src').filter(f => { return f.src && f.src !== config.images.productPlaceholder })
+      // context.commit(types.CATALOG_UPD_GALLERY, productGallery)
+        productGalleryData =  productGallery;
     }
+    console.log('productGalleryData , productGalleryData', productGalleryData)
+     this.gallery = productGalleryData
+     this.offlineImage = this.gallery.length ? this.gallery[0] : false
+  },
   },
   components: {
     ButtonFull,
     Modal,
     BaseInput,
-     GenericSelector,
- ColorSelector , SizeSelector , AddToCart
+    GenericSelector,
+    ColorSelector , 
+    SizeSelector ,
+    AddToCart,
+  // ProductGallery,
+    Carousel,
+    Slide,
+    ProductImage,
+    // ProductVideo
   }
 }
 </script>
@@ -259,4 +383,23 @@ export default {
     margin-left: 10px;
     text-align: center;
   }
+
+    @media (max-width: 576px) {
+      .product-name {
+        font-size: 12px;;
+      }
+
+      /* .slider-section {
+        max-width: 100%!important;
+        width: 100%!important;
+        flex-basis: 100%!important;
+        height: 320px!important
+      }
+      .content-section {
+        max-width: 100%!important;
+         width: 100%!important;
+         flex-basis: 100%!important;
+      } */
+  }
+
 </style>

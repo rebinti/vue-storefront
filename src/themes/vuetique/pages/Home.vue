@@ -89,7 +89,7 @@ import Home from '@vue-storefront/core/pages/Home'
 // Theme core components
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductsSlider from 'theme/components/core/ProductsSlider'
-import MainSlider from 'theme/components/core/blocks/MainSlider/MainSlider'
+import MainSlider from 'theme/components/core/blocks/MainSlider/MainSlider-bkp1'  // MainSlider'
 
 // Theme local components
 import Onboard from 'theme/components/theme/blocks/Home/Onboard'
