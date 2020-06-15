@@ -1,9 +1,8 @@
 <template>
-  <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" > 
-    <!-- class="fix-bottom-side" -->
+  <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" class="fix-bottom-side" > 
     <span slot="header"></span>
-    <div class="row" slot="content" style="margin-top: -55px;height: 100vh;"> 
-      <div class="col-6 sm:col-12 md:col-12 slider-section">
+    <div class="row" slot="content" style="margin-top: -55px;"> 
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 hide-div-mob">
               <!-- <product-gallery
               ref="gallery"
               :gallery="gallery"
@@ -43,35 +42,36 @@
             </div>
       </div>
 
-      <div class="col-6 sm:col-12 md:col-12 content-section" style="padding-left: 50px;"> 
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-left: 50px;"> 
+          <div class="hide-div-mob">
+              <h1 class="mb20 mt0 cl-mine-shaft product-name" data-testid="productName" itemprop="name">
+                  {{ product.name | htmlDecode }}
+                </h1>
 
-           <h1 class="mb20 mt0 cl-mine-shaft product-name" data-testid="productName" itemprop="name">
-              {{ product.name | htmlDecode }}
-            </h1>
+                <div class="mt-1 text-grey-dark font-medium price_bx_it mb-10">
+                  <span
+                    class="text-primary mr-2"
+                    v-if="product.special_price && parseFloat(product.special_price) > 0"
+                  >
+                    {{ product.priceInclTax | price }}
+                  </span>
 
-            <div class="mt-1 text-grey-dark font-medium price_bx_it mb-10">
-              <span
-                class="text-primary mr-2"
-                v-if="product.special_price && parseFloat(product.special_price) > 0"
-              >
-                {{ product.priceInclTax | price }}
-              </span>
+                  <span
+                    class="line-through"
+                    v-if="product.special_price && parseFloat(product.originalPriceInclTax) > 0"
+                  >
+                    {{ product.originalPriceInclTax | price }}
+                  </span>
 
-              <span
-                class="line-through"
-                v-if="product.special_price && parseFloat(product.originalPriceInclTax) > 0"
-              >
-                {{ product.originalPriceInclTax | price }}
-              </span>
+                  <span
+                    v-if="!product.special_price && parseFloat(product.priceInclTax) > 0 "
+                  >
+                    {{ product.priceInclTax | price }}
+                  </span> 
+                  
+                </div>
 
-              <span
-                v-if="!product.special_price && parseFloat(product.priceInclTax) > 0 "
-              >
-                {{ product.priceInclTax | price }}
-              </span> 
-              
             </div>
-
             <div 
                 class="relative mob_size_box"
                 v-for="(option, index) in product.configurable_options"
@@ -141,7 +141,7 @@
              <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag"  
                 :current-configration="configuration"
                 class="py-3 text-sm mt-10"/>
-</div>
+          </div>
     </div>
   </modal>
 </template>
@@ -402,4 +402,9 @@ export default {
       } */
   }
 
+   @media (max-width: 767px) {
+      .hide-div-mob {
+         display: none;
+      }
+   }
 </style>
