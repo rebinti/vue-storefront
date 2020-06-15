@@ -409,16 +409,29 @@ export default {
    }
 
     .modal .modal-content {
-          padding: 9px 40px!important;
+          padding: 9px 11px!important;
       }
 </style>
-<style lang="scss" scoped>
+<style lang="scss" >
   .prd-option-popup {
     .modal-header {
       border-color: #FFFFFF !important;
+      background: #FFFFFF;
       h2{
-        height: 25px;
+        height: 50px;
       }
     }
   }
+  .media-gallery-carousel{
+    .VueCarousel-navigation{
+      .VueCarousel-navigation-prev{
+        transform: translateY(0%) translateX(130%) !important;        
+      }
+      .VueCarousel-navigation-next{
+        transform: translateY(0%) translateX(-130%) !important;        
+      }
+    }
+  }
+
+
 </style>
