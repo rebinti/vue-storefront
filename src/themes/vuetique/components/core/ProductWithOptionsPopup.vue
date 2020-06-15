@@ -1,5 +1,5 @@
 <template>
-  <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" class="fix-bottom-side" > 
+  <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" class="prd-option-popup fix-bottom-side" > 
     <span slot="header"></span>
     <div class="row" slot="content" style="margin-top: -55px;"> 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 hide-div-mob">
@@ -383,7 +383,6 @@ export default {
     margin-left: 10px;
     text-align: center;
   }
-
     @media (max-width: 576px) {
       .product-name {
         font-size: 12px;;
@@ -411,4 +410,14 @@ export default {
     .modal .modal-content {
           padding: 9px 40px!important;
       }
+</style>
+<style lang="scss" scoped>
+  .prd-option-popup {
+    .modal-header {
+      border-color: #FFFFFF !important;
+      h2{
+        height: 25px;
+      }
+    }
+  }
 </style>
