@@ -43,7 +43,7 @@
             </div>
       </div>
 
-      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-left: 50px;"> 
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-right: 25px;"> 
             <!-- <div class="hide-div-mob" >
                 <h1 class="mb20 mt0 cl-mine-shaft product-name " data-testid="productName" itemprop="name">
                     {{ product.name | htmlDecode }}
@@ -418,7 +418,7 @@ export default {
       border-color: #FFFFFF !important;
       background: #FFFFFF;
       h2{
-        height: 50px;
+        height: 50px !important;
       }
     }
     .media-gallery-carousel{
