@@ -43,7 +43,7 @@
             </div>
       </div>
 
-      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-left: 50px;"> 
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-right: 25px;"> 
             <!-- <div class="hide-div-mob" >
                 <h1 class="mb20 mt0 cl-mine-shaft product-name " data-testid="productName" itemprop="name">
                     {{ product.name | htmlDecode }}
@@ -414,13 +414,32 @@ export default {
           padding: 9px 40px;
       } */
 </style>
-<style lang="scss" scoped>
+<style lang="scss" >
   .prd-option-popup {
     .modal-header {
       border-color: #FFFFFF !important;
+      background: #FFFFFF;
       h2{
-        height: 25px;
+        height: 50px !important;
       }
     }
+    .media-gallery-carousel{
+      .VueCarousel-navigation{
+        .VueCarousel-navigation-prev{
+          transform: translateY(0%) translateX(130%) !important;        
+        }
+        .VueCarousel-navigation-next{
+          transform: translateY(0%) translateX(-130%) !important;        
+        }
+      }
+    }
+    .sizes{
+      .size-selector{
+        margin-bottom: 5px;
+      }
+    } 
+    .modal-close{
+      z-index: 1;
+    }   
   }
 </style>
