@@ -43,10 +43,10 @@
       </div>
 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-left: 50px;"> 
-          <div class="hide-div-mob">
-              <h1 class="mb20 mt0 cl-mine-shaft product-name" data-testid="productName" itemprop="name">
-                  {{ product.name | htmlDecode }}
-                </h1>
+            <!-- <div class="hide-div-mob" >
+                <h1 class="mb20 mt0 cl-mine-shaft product-name " data-testid="productName" itemprop="name">
+                    {{ product.name | htmlDecode }}
+                  </h1>
 
                 <div class="mt-1 text-grey-dark font-medium price_bx_it mb-10">
                   <span
@@ -71,7 +71,7 @@
                   
                 </div>
 
-            </div>
+            </div> -->
             <div 
                 class="relative mob_size_box"
                 v-for="(option, index) in product.configurable_options"
@@ -407,4 +407,8 @@ export default {
          display: none;
       }
    }
+
+    .modal .modal-content {
+          padding: 9px 40px!important;
+      }
 </style>
