@@ -16,6 +16,7 @@
                 :per-page="1"
                 :mouse-drag="false"
                 :navigation-enabled="true"
+                :pagination-enabled="false"
                 pagination-active-color="#828282"
                 pagination-color="transparent"
                 navigation-next-label="<i class='material-icons p15 cl-bg-tertiary pointer'>keyboard_arrow_right</i>"
