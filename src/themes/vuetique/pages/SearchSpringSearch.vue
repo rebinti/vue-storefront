@@ -832,31 +832,45 @@ export default {
       }
     },
     handleScroll (){
-            const checkWindow = window !== undefined && window.scrollY;
-            let offsety = window.pageYOffset;
-            // console.log("offsety>>>>>>>>>",offsety);
-            if (checkWindow && window.scrollY > 280) {
-              if(offsety > 10000){
-                  this.fixedOrderPanel = false
-              }else{
-                  this.fixedOrderPanel = true
-              }
-              
-            } else {
-              this.fixedOrderPanel = false
+          //   const checkWindow = window !== undefined && window.scrollY;
+          //   let offsety = window.pageYOffset;
+          //   if (checkWindow && window.scrollY > 280) {
+          //     if (offsety > 10000) {
+          //         this.fixedOrderPanel = false
+          //     } else {
+          //         this.fixedOrderPanel = true
+          //     }
+          //   } else {
+          //     this.fixedOrderPanel = false
+          // }
+          const viewFooterReachedflag = this.checkElemetReachedInViewPort('.news-letter')
+          const isHeaderCategoryShow = this.checkElemetReachedInViewPort('.pr_list_sec_main')
+          let filterdiv = document.querySelector('.filterdiv') 
+          if (isHeaderCategoryShow && viewFooterReachedflag ) {
+            if(filterdiv) {
+                filterdiv.classList.remove("fixed");
+                filterdiv.classList.remove("footerreached");
+            } 
+            return
           }
-          let viewflag = this.checkfooterreached()
-          // console.log("viewflag",viewflag)
-          
+          if (!isHeaderCategoryShow) {
+            if(!viewFooterReachedflag) {
+              // this.fixedOrderPanel = true
+              if(filterdiv) filterdiv.classList.add("fixed");
+            }
+          } else {
+            // this.fixedOrderPanel = false
+             if(filterdiv) filterdiv.classList.remove("fixed");
+          }
           // const footerheight = this.getdivheight('footer .bg-grey-lighter')
           // const newsletterheight = this.getdivheight('footer .news-letter')
           // const paydivheight = this.getdivheight('footer .mx-auto')
-          
-          let filterdiv = null;
-          if (viewflag==true) {
-            filterdiv = document.querySelector( '.filterdiv' ) // .classList.add("footerreached");
+          // let filterdiv = null;
+          if (viewFooterReachedflag) {
+            // filterdiv = document.querySelector( '.filterdiv' ) // .classList.add("footerreached");
             if (filterdiv) {
               filterdiv.classList.add("footerreached");
+              filterdiv.classList.remove("fixed");
             }
           } else {
             filterdiv = document.querySelector( '.filterdiv' ) // .classList.remove("footerreached");
@@ -866,8 +880,8 @@ export default {
           }
           
     },
-    checkfooterreached () {
-          const el = document.querySelector( '.news-letter' )
+    checkElemetReachedInViewPort (className) {
+          const el = document.querySelector(className) 
           const scroll = window.scrollY || window.pageYOffset
           const boundsTop = el.getBoundingClientRect().top + scroll
           // console.log('boundsTop', boundsTop)	
@@ -920,8 +934,11 @@ export default {
 <style lang="scss" scoped>
 .fixed{
   position: fixed;
-  top: 0px;  
+  top: 20px;  
   width: 380px;
+}
+.header-visible .fixed{
+    top: 73px;  
 }
 .footerreached{
     position: fixed;
