@@ -1,7 +1,7 @@
 <template>
   <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" class="prd-option-popup fix-bottom-side" > 
     <span slot="header"></span>
-    <div class="row" slot="content" style="margin-top: -55px;"> 
+    <div class="modal-content row quick-view" style="margin-top: -55px; padding: 9px 40px;"> 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 hide-div-mob">
               <!-- <product-gallery
               ref="gallery"
@@ -241,9 +241,11 @@ export default {
       }
       console.log('current_options current_options', current_options)
       this.options = current_options;
-      product.configurable_options.filter(val => {
-        this.configuration[val.attribute_code] = current_options[val.attribute_code][0]
-      });
+      if (product.configurable_options) {
+        product.configurable_options.filter(val => {
+          this.configuration[val.attribute_code] = current_options[val.attribute_code][0]
+        });
+      }
       this.product = JSON.parse(JSON.stringify(product));
       this.setProductGallery( this.product )
       this.$forceUpdate()
@@ -408,9 +410,9 @@ export default {
       }
    }
 
-    .modal .modal-content {
-          padding: 9px 40px!important;
-      }
+    /* .modal .modal-content {
+          padding: 9px 40px;
+      } */
 </style>
 <style lang="scss" scoped>
   .prd-option-popup {
