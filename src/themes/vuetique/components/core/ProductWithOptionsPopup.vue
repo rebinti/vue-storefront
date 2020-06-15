@@ -421,17 +421,23 @@ export default {
         height: 50px;
       }
     }
-  }
-  .media-gallery-carousel{
-    .VueCarousel-navigation{
-      .VueCarousel-navigation-prev{
-        transform: translateY(0%) translateX(130%) !important;        
-      }
-      .VueCarousel-navigation-next{
-        transform: translateY(0%) translateX(-130%) !important;        
+    .media-gallery-carousel{
+      .VueCarousel-navigation{
+        .VueCarousel-navigation-prev{
+          transform: translateY(0%) translateX(130%) !important;        
+        }
+        .VueCarousel-navigation-next{
+          transform: translateY(0%) translateX(-130%) !important;        
+        }
       }
     }
+    .sizes{
+      .size-selector{
+        margin-bottom: 5px;
+      }
+    } 
+    .modal-close{
+      z-index: 1;
+    }   
   }
-
-
 </style>
