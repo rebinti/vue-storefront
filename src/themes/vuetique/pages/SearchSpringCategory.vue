@@ -1057,7 +1057,7 @@ export default {
   padding-top: 52px;
   // top: 70px;
   height: 100vh;
-
+  top: 0;
   @screen md {
     // top: 73px;
   }
