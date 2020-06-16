@@ -140,7 +140,7 @@
                                   
                     </div>
              <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag"  
-                :current-configration="configuration"
+                :configuration="configuration"
                 class="py-3 text-sm mt-10"/>
           </div>
     </div>

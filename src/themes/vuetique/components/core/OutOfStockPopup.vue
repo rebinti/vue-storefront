@@ -10,7 +10,7 @@
               <span style="float: left;margin-right: 10px;"
               v-if="attributesByCode[selected]"
               >{{attributesByCode[selected].frontend_label}}: </span>
-               <div class="sel-item">  {{configuration[selected].label}} 
+               <div class="sel-item-div">  {{configuration[selected].label}} 
                 </div>
           </div>
           </div>
@@ -56,7 +56,9 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   data () {
     return {
-      email: ''
+      email: '',
+      product: {},
+      configuration: {}
     }
   },
   validations: {
@@ -67,9 +69,9 @@ export default {
   },
   computed: {
     ...mapState({
-       product: state => state.product.current,
+      //  product: state => state.product.current,
        attributesByCode: state => state.attribute.list_by_code,
-       configuration: state => state.product.current_configuration,
+      //  configuration: state => state.product.current_configuration,
     })
   },
   beforeMount () {
@@ -123,7 +125,11 @@ export default {
         )
       }
     },
-    forceUpdateData (event) {
+    forceUpdateData (info) {
+      if (info) {
+        this.product = info.product&&info.product;
+        this.configuration = info.configuration&&info.configuration;
+      }
       this.$forceUpdate()
     }
   },
@@ -137,7 +143,7 @@ export default {
 
 <style type="text/css">
   
-  .sel-item {
+  .sel-item-div {
     width: auto; 
     height: 33px;
     border-color: #222222;

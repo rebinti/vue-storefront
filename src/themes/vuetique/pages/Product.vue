@@ -229,8 +229,10 @@
 
                   <div class="mob_add_cart_btn">
 
-                    <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag" class="py-3 text-sm"/>
-
+                    <add-to-cart :product="product"
+                     :disabled="disableAddToCartButtonFlag" 
+                     :configuration="configuration"                     
+                     class="py-3 text-sm"  />
                   </div>
                   <div class="mob_add_wish_btn">
                       <wishlist-button :product="product" />
@@ -459,6 +461,7 @@
                 <add-to-cart
                   :product="product"
                   :disabled="disableAddToCartButtonFlag"
+                  :configuration="configuration"  
                   class="py-3 text-sm"
                 />
               </div>
@@ -826,13 +829,15 @@ export default {
           });
           if (data && data.stock && data.stock.is_in_stock === false) {
               this.$bus.$emit('modal-show', 'modal-outofstocknotification')
-              this.$bus.$emit('update-out-of-stock-data', true)
+              // this.$bus.$emit('update-out-of-stock-data', true)
+              this.$bus.$emit('update-out-of-stock-data', { product: this.product, configuration: this.configuration})
           }
        } else if (optionIndex == 0) {
           const data = this.product.configurable_children.find(val => val[loopItem.attribute_code] == loopItem.id);
           if (data && data.stock && data.stock.is_in_stock === false && fullConfigOption.length == 1) {
                 this.$bus.$emit('modal-show', 'modal-outofstocknotification')
-                this.$bus.$emit('update-out-of-stock-data', true)
+                this.$bus.$emit('update-out-of-stock-data', { product: this.product, configuration: this.configuration})
+                // this.$bus.$emit('update-out-of-stock-data', true)
           }
       }
     },
