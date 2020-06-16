@@ -302,21 +302,33 @@ export default {
       width: 580px;
       height: 870px;
   }
-  .item-2-6-grid.column4 .product-image img{
+  .item-4-3-grid.column4 .product-image img{
       width: 280px;
       height: 420px;
+  }
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 79%;
+        }
+        .pwishlist{
+          width: 21%;     
+        }   
+      }
+    }    
   }    
 }
 @media (max-width: 1440px) {
-  .item-2-6-grid .product-image img{
-      width: 228px;
-      height: 342px;
-  }
   .item-2-6-grid.column2 .product-image img{
       width: 352px;
       height: 528px;
   }
-  .item-2-6-grid.column4 .product-image img{
+  .item-3-12-grid.column3 .product-image img{
+      width: 228px;
+      height: 342px;
+  }   
+  .item-4-3-grid.column4 .product-image img{
       width: 166px;
       height: 249px;
   }     
@@ -339,19 +351,71 @@ export default {
           }       
       }   
     }
-  }    
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (max-width: 1024px) {
   .item-2-6-grid .product-image img{
       width: 228px;
       height: 342px;
-  }  
+  } 
+  .item-3-12-grid.column3 .product-image img{
+      width: 228px;
+      height: 342px;
+  }   
+  .item-4-3-gridcolumn4 .product-image img{
+      width: 166px;
+      height: 249px;
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (max-width: 768px) {
   .item-2-6-grid .product-image img{
       width: 236px;
       height: 354px;
   }  
+  .item-3-12-grid.column3 .product-image img{
+      width: 236px;
+      height: 354px;
+  }  
+  .item-4-3-grid.column4 .product-image img{
+      width: 172px;
+      height: 258px;
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (min-width: 577px) {
 
