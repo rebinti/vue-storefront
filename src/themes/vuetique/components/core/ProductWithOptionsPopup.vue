@@ -418,7 +418,7 @@ export default {
   .prd-option-popup {
     .modal-header {
       border-color: #FFFFFF !important;
-      background: #FFFFFF;
+      background: #FFFFFF !important;
       h2{
         height: 50px !important;
       }
