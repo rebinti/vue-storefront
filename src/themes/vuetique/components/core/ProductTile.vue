@@ -357,7 +357,27 @@ export default {
   .item-2-6-grid .product-image img{
       width: 228px;
       height: 342px;
-  }  
+  } 
+  .item-3-12-grid.column3 .product-image img{
+      width: 228px;
+      height: 342px;
+  }   
+  .item-4-3-gridcolumn4 .product-image img{
+      width: 166px;
+      height: 249px;
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (max-width: 768px) {
   .item-2-6-grid .product-image img{
@@ -371,7 +391,19 @@ export default {
   .item-4-3-grid.column4 .product-image img{
       width: 172px;
       height: 258px;
-  }   
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (min-width: 577px) {
 
