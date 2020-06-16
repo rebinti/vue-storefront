@@ -364,6 +364,14 @@ export default {
       width: 236px;
       height: 354px;
   }  
+  .item-3-12-grid.column3 .product-image img{
+      width: 236px;
+      height: 354px;
+  }  
+  .item-4-3-grid.column4 .product-image img{
+      width: 172px;
+      height: 258px;
+  }   
 }
 @media (min-width: 577px) {
 
