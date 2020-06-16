@@ -138,7 +138,7 @@ export default {
 <style type="text/css">
   
   .sel-item {
-    width: 39px;
+    width: auto; 
     height: 33px;
     border-color: #222222;
     color: #ffffff;

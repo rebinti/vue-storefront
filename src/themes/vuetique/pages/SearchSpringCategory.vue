@@ -14,7 +14,7 @@
           </h4>          
            <div class="col-2 hidden lg:block">
                 <label class="mr10">{{ $t('Columns') }}:</label>
-                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
           </div>
           <div class="col-2 hidden lg:block">
              <base-select
@@ -417,7 +417,7 @@
           <div v-if="getMerchandisingContent && getMerchandisingContent.banner"
            v-html="getMerchandisingContent.banner[0]" style="margin-bottom: 20px;">
            </div>             
-          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -488,6 +488,7 @@ export default {
     ...mapState({
       seletedMobileGrid: state => state.ui.seletedMobileGrid,
       defaultColumnMobile: state => state.ui.defaultColumnMobile,
+      defaultColumnWeb: state => state.ui.defaultColumnWeb,
       mobileGridData: state => state.ui.mobileGridData
     }),
     ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath', 'getMerchandisingContent'])
@@ -504,7 +505,7 @@ export default {
       searcingLoaderFlag: true,
       controller: null,
       signal: null,  
-      defaultColumn: 3,
+      // defaultColumn: 3,
       fixedOrderPanel: false,
       initialSearchFlag: true,
       sliderConfig: {
@@ -898,17 +899,17 @@ export default {
       this.$bus.$emit('HomefocusSearchInput') 
     },
     columnChangeWeb (column) {
-      if (column.type === 'lg') this.defaultColumn = column.selected
+      if (column.type === 'lg') {
+        this.$store.dispatch('ui/UpdateSeletedWebViewGrid',  column.selected);
+      }
     },
     columnChangeMobile (gridData) {
       // console.log('this.mobileGridData', this.mobileGridData)
       let tdata;
       if (gridData.index === 2) {
         tdata = this.mobileGridData[0];
-        this.defaultColumn = tdata.value
       } else {
         tdata = this.mobileGridData[gridData.index + 1];
-        this.defaultColumn = tdata.value
       }
       // this.defaultColumnMobile = tdata.value;
       this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);

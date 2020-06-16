@@ -41,6 +41,11 @@ export default {
       // productsColumns: [2, 3, 4, 6]
     }
   },
+  watch: {
+    dcolumn (value) {
+      this.column = this.dcolumn;
+    },
+  },
   methods: {
     changeColumn () {
       this.$emit('change-column', { 'selected': this.column, 'type': this.type } )

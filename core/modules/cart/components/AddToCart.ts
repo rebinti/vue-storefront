@@ -33,8 +33,11 @@ export const AddToCart = {
           if (diffLog && diffLog.items) {
               const diffData = diffLog.items.find(val => val.sku === product.sku)
               if (diffData && diffData.status === 'no-item' && diffLog.clientNotifications && diffLog.clientNotifications.length === 0) {
-                this.$bus.$emit('modal-show', 'modal-outofstocknotification')
-                this.$bus.$emit('update-out-of-stock-data', true)
+              setTimeout(() => {
+                  this.$bus.$emit('modal-show', 'modal-outofstocknotification')
+                  this.$bus.$emit('update-out-of-stock-data', true)
+                  this.$store.commit('ui/setOverlay', true)
+                }, 300);
               }
           }
         } else {

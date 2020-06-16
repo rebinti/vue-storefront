@@ -34,6 +34,7 @@ const store = {
                     {'value': 4, 'image': '../assets/grid4.png', 'index': 2}],
     seletedMobileGrid: {value: 2, image: '../assets/grid2.png', index: 0},
     defaultColumnMobile: 2,
+    defaultColumnWeb: 3,
     yoptoProduct: null,
     brandsList: [],
     brandSearchText: '',
@@ -49,6 +50,7 @@ const store = {
   getter: {
     getSelectedGridView: state => state.seletedMobileGrid,
     getDefaultColumnMobile: state => state.defaultColumnMobile,
+    getDefaultColumnWeb: state => state.defaultColumnWeb,
     getBrandsList: state => state.brandsList,
     getMainSliderData: state => state.mainSliderData
   },
@@ -111,6 +113,12 @@ const store = {
     setSeletedMobileGrid (state, data) {
       state.seletedMobileGrid = data
       state.defaultColumnMobile = data.value
+      state.defaultColumnWeb = data.value
+    },
+    setSeletedWebViewGrid (state, data) {
+      state.seletedMobileGrid = state.mobileGridData.find(val => val.value === data);
+      state.defaultColumnMobile = data
+      state.defaultColumnWeb = data
     },
     setBrandList (state, data) {
       state.brandsList = data;
@@ -170,6 +178,9 @@ const store = {
     },
     UpdateSeletedMobileGrid ({commit}, state) {
       commit('setSeletedMobileGrid', state)
+    },
+    UpdateSeletedWebViewGrid ({commit}, state) {
+      commit('setSeletedWebViewGrid', state)
     },
     getBrandList ({commit}, { key = 'type', value, excludeFields = null, includeFields = null, skipCache = false }) {
         let query = new SearchQuery()

@@ -12,7 +12,7 @@
           </h1>
            <div class="col-2 hidden lg:block">
                 <label class="mr10">{{ $t('Columns') }}:</label>
-                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/>
+                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
           </div>
           <div class="col-2 hidden lg:block">
              <base-select
@@ -397,7 +397,7 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
-          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumn" :products="serachedProd" />
+          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
           <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -467,6 +467,7 @@ export default {
     ...mapState({
       seletedMobileGrid: state => state.ui.seletedMobileGrid,
       defaultColumnMobile: state => state.ui.defaultColumnMobile,
+      defaultColumnWeb: state => state.ui.defaultColumnWeb,
       mobileGridData: state => state.ui.mobileGridData
     }),
     ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath'])
@@ -484,7 +485,7 @@ export default {
       controller: null,
       signal: null,
 
-      defaultColumn: 3,
+      // defaultColumn: 3,
       fixedOrderPanel: false
     };
   },
@@ -847,7 +848,10 @@ export default {
       this.$bus.$emit('HomefocusSearchInput') 
     },
     columnChangeWeb (column) {
-      if (column.type === 'lg') this.defaultColumn = column.selected
+      if (column.type === 'lg') {
+        // this.defaultColumn = column.selected
+        this.$store.dispatch('ui/UpdateSeletedWebViewGrid',  column.selected);
+      }
     },
     columnChangeMobile (gridData) {
       // console.log('this.mobileGridData', this.mobileGridData)
