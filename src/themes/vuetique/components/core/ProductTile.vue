@@ -320,15 +320,15 @@ export default {
   }    
 }
 @media (max-width: 1440px) {
-  .item-2-6-grid .product-image img{
-      width: 228px;
-      height: 342px;
-  }
   .item-2-6-grid.column2 .product-image img{
       width: 352px;
       height: 528px;
   }
-  .item-2-6-grid.column4 .product-image img{
+  .item-3-12-grid.column3 .product-image img{
+      width: 228px;
+      height: 342px;
+  }   
+  .item-4-3-grid.column4 .product-image img{
       width: 166px;
       height: 249px;
   }     
@@ -351,7 +351,19 @@ export default {
           }       
       }   
     }
-  }    
+  } 
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 69%;
+        }
+        .pwishlist{
+          width: 31%;     
+        }   
+      }
+    }    
+  }      
 }
 @media (max-width: 1024px) {
   .item-2-6-grid .product-image img{
