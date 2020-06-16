@@ -105,8 +105,8 @@
               </div>
 
         </div>        
-        <div class="col-4  lg:hidden mgrid">
-              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
+        <div class="col-4  lg:hidden mgrid" @click="columnChangeMobile(seletedMobileGrid)">
+              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" > 
                   <span> view</span> 
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
                   </div>                  
@@ -905,8 +905,10 @@ export default {
       let tdata;
       if (gridData.index === 2) {
         tdata = this.mobileGridData[0];
+        this.defaultColumn = tdata.value
       } else {
         tdata = this.mobileGridData[gridData.index + 1];
+        this.defaultColumn = tdata.value
       }
       // this.defaultColumnMobile = tdata.value;
       this.$store.dispatch('ui/UpdateSeletedMobileGrid', tdata);
