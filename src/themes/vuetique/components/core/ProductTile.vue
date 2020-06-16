@@ -302,9 +302,21 @@ export default {
       width: 580px;
       height: 870px;
   }
-  .item-2-6-grid.column4 .product-image img{
+  .item-4-3-grid.column4 .product-image img{
       width: 280px;
       height: 420px;
+  }
+  .column4{
+    .product{
+      .title-and-wish{
+        .ptitle{
+          width: 79%;
+        }
+        .pwishlist{
+          width: 21%;     
+        }   
+      }
+    }    
   }    
 }
 @media (max-width: 1440px) {
