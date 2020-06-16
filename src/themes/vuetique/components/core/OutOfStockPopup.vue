@@ -1,5 +1,5 @@
 <template>
-  <modal name="modal-outofstocknotification" :width="450">
+  <modal name="modal-outofstocknotification" :width="450" class="out-of-stock-popup" >
     <span slot="header"></span>
     <div slot="content" style="margin-top: -46px;">
       <form @submit.prevent="subscribeOutOfStockNotification()" novalidate>
@@ -155,4 +155,11 @@ export default {
     margin-left: 10px;
     text-align: center;
   }
+
+  .out-of-stock-popup .modal-header {
+      border-color: #fff!important;
+      background: #fff!important;
+      height: 50px!important;
+  }
+  
 </style>

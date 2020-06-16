@@ -1,7 +1,7 @@
 <template>
   <modal name="modal-productwithoptions" :width="850" :trans-effect="transEffect" class="prd-option-popup fix-bottom-side" > 
     <span slot="header"></span>
-    <div class="modal-content row quick-view" style="margin-top: -55px; padding: 9px 40px;"> 
+    <div class="row quick-view" slot="content" style="margin-top: -55px;"> 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 hide-div-mob">
               <!-- <product-gallery
               ref="gallery"
@@ -43,7 +43,7 @@
             </div>
       </div>
 
-      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding-right: 25px;"> 
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding: 0 5px 0 20px;"> 
             <!-- <div class="hide-div-mob" >
                 <h1 class="mb20 mt0 cl-mine-shaft product-name " data-testid="productName" itemprop="name">
                     {{ product.name | htmlDecode }}
@@ -417,8 +417,8 @@ export default {
 <style lang="scss" >
   .prd-option-popup {
     .modal-header {
-      border-color: #FFFFFF !important;
-      background: #FFFFFF;
+      border-color: #fff!important;
+      background: #Ffff!important;
       h2{
         height: 50px !important;
       }
