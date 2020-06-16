@@ -297,11 +297,29 @@ export default {
     clear: both;
   }
 }
+@media (max-width: 2560px) {
+  .item-2-6-grid.column2 .product-image img{
+      width: 580px;
+      height: 870px;
+  }
+  .item-2-6-grid.column4 .product-image img{
+      width: 280px;
+      height: 420px;
+  }    
+}
 @media (max-width: 1440px) {
   .item-2-6-grid .product-image img{
       width: 228px;
       height: 342px;
   }
+  .item-2-6-grid.column2 .product-image img{
+      width: 352px;
+      height: 528px;
+  }
+  .item-2-6-grid.column4 .product-image img{
+      width: 166px;
+      height: 249px;
+  }     
   .product{
     .title-and-wish{
       .ptitle{

@@ -3,7 +3,7 @@
     <div
       v-for="(product, index) in products"
       :key="product.id"
-      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10]" 
+      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10 +' '+'column'+(12/((12/columns)%10))]" 
     >
     <!-- :class="['md:col-' + (12/columns)%10]" -->
       <product-tile :product="product"/>

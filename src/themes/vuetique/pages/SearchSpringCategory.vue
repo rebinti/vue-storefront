@@ -24,7 +24,7 @@
                 v-model="sortingFilterSelectedValue"
                 :options="sortingFilterOptions"
                 :selected="sortingFilterSelectedValue"
-                :placeholder="$t('Sorting *')"
+                :placeholder="$t('Sorting')"
                 @input="sortingFilterChange"
               />
           </div>
@@ -1151,7 +1151,7 @@ input {
 .onlymobile .col-4{
     float: left;
     width: 33.33%;
-    border: 2px solid #4e4e4e;
+    // border: 2px solid #4e4e4e;
 }
 .onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select select{
       height: 42px;
@@ -1159,7 +1159,8 @@ input {
 .onlymobile .col-4.mgrid{
     line-height: 1;
     margin-top: 0px; 
-    height: 49px;   
+    height: 46px;
+    border: 1px solid #CCC; 
 }
 .onlymobile .col-4.mgrid div span{
     position: absolute;
@@ -1174,7 +1175,10 @@ input {
     height: 45px;   
 }
 .onlymobile .col-4.mfilter .mt-6 button{
-      height: 45px;
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #000;
 }
 .onlymobile .txt_blk_select:after{
   top:20px;

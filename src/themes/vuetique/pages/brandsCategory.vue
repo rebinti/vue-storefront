@@ -1062,7 +1062,7 @@ input {
 .onlymobile .col-4{
     float: left;
     width: 33.33%;
-    border: 2px solid #4e4e4e;
+    // border: 2px solid #4e4e4e;
 }
 .onlymobile .col-4.msort .category_filter_bx_sortby .txt_blk_select select{
       height: 42px;
@@ -1070,7 +1070,8 @@ input {
 .onlymobile .col-4.mgrid{
     line-height: 1;
     margin-top: 0px; 
-    height: 49px;   
+    height: 46px;
+    border: 1px solid #CCC; 
 }
 .onlymobile .col-4.mgrid div span{
     position: absolute;
