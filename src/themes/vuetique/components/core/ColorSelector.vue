@@ -64,6 +64,11 @@ export default {
 }
 
 
-
+  .no-combination.active{
+     border: 1px solid!important;
+     --border-opacity: 1!important;
+     border-color: #222222!important;
+     border-color: rgba(34, 34, 34, var(--border-opacity))!important;
+   }
 
 </style>

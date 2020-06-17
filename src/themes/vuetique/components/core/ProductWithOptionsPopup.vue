@@ -208,19 +208,16 @@ export default {
       this.$bus.$emit('modal-hide', 'modal-productwithoptions')
     },
     forceUpdateData (event) {
-      console.log('producttt', event)
-      // this.$forceUpdate()
       this.configuration = {};
       this.gallery = [];
       this.offlineImage  = {}
       if(event) this.setupVariants(event)
     },
-      /**
+   /**
    * Setup product current variants
    */
   setupVariants ( product) {
     let current_options = {};
-    console.log('this.$store.state.attribute', this.$store.state.attribute)
     if (product && product.type_id === 'configurable' && product.hasOwnProperty('configurable_options')) {
         for (let option of product.configurable_options) {
           for (let ov of option.values) {
@@ -239,7 +236,6 @@ export default {
           }
         }
       }
-      console.log('current_options current_options', current_options)
       this.options = current_options;
       if (product.configurable_options) {
         product.configurable_options.filter(val => {
@@ -248,20 +244,24 @@ export default {
       }
       this.product = JSON.parse(JSON.stringify(product));
       this.setProductGallery( this.product )
+      this.changeEditModeFilter();
       this.$forceUpdate()
     },
+    /**
+     * check if the option is available and returns boolean value
+     */
     isOptionAvailable (option) { // check if the option is available
       let currentConfig = Object.assign({}, this.configuration)
       currentConfig[option.attribute_code] = option
       return isOptionAvailableAsync(this.$store, { product: this.product, configuration: currentConfig })
     },
+    /**
+     * check if the option is available and returns the child prod
+     */
     isOptionAvailableWithData (option) { // check if the option is available
       let currentConfig = Object.assign({}, this.configuration)
-      currentConfig[option.attribute_code] = option
-      console.log('isOptionAvailableWithData', currentConfig, this.product)
+      if (option && option.attribute_code) currentConfig[option.attribute_code] = option
       const variant = findConfigurableChildAsync({ product:  this.product, configuration: currentConfig, availabilityCheck: true })
-      console.log('isOptionAvailableWithData', variant)
-      
       return typeof variant !== 'undefined' && variant !== null ? variant : null
     },
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
@@ -289,7 +289,7 @@ export default {
        } 
        else if (optionIndex == 0) {
           let data = this.product.configurable_children.find(val => val[loopItem.attribute_code] == loopItem.id);
-          if (data && fullConfigOption.length == 1) {
+          if (data ) { // (data && fullConfigOption.length == 1)
             if (data.stock.is_in_stock === false) {
               if (activeFlag) {
                return 'active out-of-stock'
@@ -307,25 +307,27 @@ export default {
           }
        }
     },
-    changeEditModeFilter (option) {
+   /**
+   * When change the prod options and merge the child prod
+   * to the current prod and also add the product_option in it.
+   */
+    changeEditModeFilter (option = null) {
       this.disableAddToCartButtonFlag = false;
-      const res= this.isOptionAvailableWithData(option)
-      console.log('finedddd', res)
-      if(res) {
+      let currentConfig = Object.assign({}, this.configuration)      
+      if (option && option.attribute_code) currentConfig[option.attribute_code] = option
+      this.configuration = currentConfig;
+      const variant = this.isOptionAvailableWithData(option)
+      if (variant) {
+        this.product = Object.assign(this.product, variant);
+        const product_option = setConfigurableProductOptionsAsync(this.$store, { product: this.product, configuration: currentConfig })
+        this.product['product_option'] = product_option
         this.disableAddToCartButtonFlag = false;
-        this.product = Object.assign(this.product, res);
       } else {
          this.disableAddToCartButtonFlag = true;
       }
-      console.log('this.product', this.product)
-      let currentConfig = Object.assign({}, this.configuration)      
-      currentConfig[option.attribute_code] = option
-      this.configuration = currentConfig;
-      const product_option = setConfigurableProductOptionsAsync(this.$store, { product: this.product, configuration: currentConfig })
-      this.product['product_option'] = product_option
       // this.$forceUpdate()
     },
-    /**
+  /**
    * Set product gallery depending on product type
    */
    setProductGallery (  product ) {
@@ -344,7 +346,6 @@ export default {
       // context.commit(types.CATALOG_UPD_GALLERY, productGallery)
         productGalleryData =  productGallery;
     }
-    console.log('productGalleryData , productGalleryData', productGalleryData)
      this.gallery = productGalleryData
      this.offlineImage = this.gallery.length ? this.gallery[0] : false
   },

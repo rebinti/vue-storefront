@@ -16,7 +16,7 @@ const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/page
 const Compare = () => import(/* webpackChunkName: "vsf-compare" */ 'theme/pages/Compare.vue')
 const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/pages/MyAccount.vue')
 const Static = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static.vue') // footer links CMS page use this
-const Styla = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Styla.vue')
+const Styla = () => import(/* webpackChunkName: "vsf-styla" */ 'theme/pages/Styla.vue')
 const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/CustomCmsPage.vue')
 const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData')
 const ContactUs = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/ContactUs.vue')

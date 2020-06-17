@@ -6,7 +6,7 @@
     </header>
     <div class="container pb-16">
         <div class="col-12 md:col-9 leading-loose static-content">
-          <component :is="activeComponent" />
+          <!-- <component :is="activeComponent" /> -->
           <div id="stylaMagazine" data-area="inspiration-landing"></div>
         </div>
     </div>

@@ -803,7 +803,7 @@ export default {
        } 
        else if (optionIndex == 0) {
           let data = this.product.configurable_children.find(val => val[loopItem.attribute_code] == loopItem.id);
-          if (data && fullConfigOption.length == 1) {
+          if (data) { //  (data && fullConfigOption.length == 1)
             if (data.stock.is_in_stock === false) {
               if (activeFlag) {
                return 'active out-of-stock'
