@@ -221,9 +221,14 @@ export default {
       })
     },
     openAddEditAddressPopup () {
-      this.toggleAddressForm = true;
-      this.currentAddressId = null;
-      this.$bus.$emit('modal-show', 'modal-addressFromPopup')
+      if (this.toggleAddressForm) {
+        this.toggleAddressForm = false
+      }
+      setTimeout(() => {
+        this.toggleAddressForm = true;
+        this.currentAddressId = null;
+        this.$bus.$emit('modal-show', 'modal-addressFromPopup')
+      }, 1);
     },
     deleteSelectedAddress (selectedAddressId) {
         let updatedShippingDetails = JSON.parse(JSON.stringify(this.$store.state.user.current))

@@ -275,4 +275,9 @@ export default {
 
 }
 
+.txt_blk_out {
+  .text-grey-dark {
+    right: 13px;
+  }
+} 
 </style>

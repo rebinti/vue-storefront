@@ -137,14 +137,14 @@
       </template>
 
       <!-- Company information (edit mode) -->
-      <base-checkbox
+      <!-- <base-checkbox
         class="col-12 mb-4 mt-2 "
         id="addCompany"
         v-model="addCompany"
         @click="addCompany = !addCompany"
       >
         {{ $t('I have a company and want to receive an invoice for every order') }}
-      </base-checkbox>
+      </base-checkbox> -->
 
       <template v-if="addCompany">
         <base-input
@@ -308,7 +308,7 @@
         <p>
           {{ currentUser.email }}
         </p>
-        <base-checkbox
+        <!-- <base-checkbox
           v-if="addCompany"
           class="mb-6"
           id="addCompanyFilled"
@@ -316,7 +316,7 @@
           disabled
         >
           {{ $t('I have a company and want to receive an invoice for every order') }}
-        </base-checkbox>
+        </base-checkbox> -->
         <template v-if="addCompany">
           <p class="mb-6">
             {{ userCompany.company }}

@@ -54,7 +54,7 @@ export const AddAddress = {
             }
         } 
 
-        if (this.currentUser.hasOwnProperty('default_shipping') || this.currentUser.hasOwnProperty('default_billing')) {
+        // if (this.currentUser.hasOwnProperty('default_shipping') || this.currentUser.hasOwnProperty('default_billing')) {
             if (this.customer.default_shipping) updatedShippingDetailsAddress['default_shipping'] = true;
             if (this.customer.default_billing) updatedShippingDetailsAddress['default_billing'] = true;
             if (!this.customer.default_shipping && !this.customer.default_billing) {  
@@ -62,9 +62,9 @@ export const AddAddress = {
             }
             updatedShippingDetails.addresses = []
             updatedShippingDetails.addresses.push(updatedShippingDetailsAddress)
-        }
+        // }
 
-        console.log('updatedShippingDetails', JSON.stringify(updatedShippingDetails));
+        // console.log('updatedShippingDetails', JSON.stringify(updatedShippingDetails));
         // return;
         this.$bus.$emit('notification-progress-start', this.$t('Please wait ...'))
         this.$bus.$emit('myAccount-before-updateUser', updatedShippingDetails)
