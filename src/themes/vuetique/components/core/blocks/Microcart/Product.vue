@@ -145,6 +145,7 @@ export default {
     applyQuantity () {
       this.updateQuantity(this.product.qty)
       this.isEditing = false
+      this.$emit('parentevent')
     },
     movingHandler (data) {
       // console.log('movingHandler', data.touches[0])
