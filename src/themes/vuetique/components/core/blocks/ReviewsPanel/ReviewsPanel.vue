@@ -21,16 +21,19 @@
           data-url="yoptoProduct.url_path"
           data-image-url="yoptoProduct.image">
         </div>  -->
-
-         <div id="stamped-main-widget" 
-                  :data-product-id="yoptoProduct" 
-                  :data-name="'test'" 
-                  :data-url="'test'" 
-                  :data-image-url="'test'" 
-                  :data-description="'Testing prduct'" 
-                  :data-product-sku="'test'"> 
-          </div>
-  </div>
+        <div v-if="reviewpanelloaded"  style="margin: 150px;">
+          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
+        </div> 
+        <div id="stamped-main-widget" 
+                :data-product-id="yoptoProduct" 
+                :data-name="'test'" 
+                :data-url="'test'" 
+                :data-image-url="'test'" 
+                :data-description="'Testing prduct'" 
+                :data-product-sku="'test'"> 
+        </div>
+         
+  </div>  
 </template>
 
 <script>
@@ -40,6 +43,11 @@ import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
 export default {
   name: 'ReviewPanel',
+  data () {
+    return {
+      reviewpanelloaded:true
+    }
+  },  
   props: {
 
   },
@@ -61,7 +69,7 @@ export default {
           // window.StampedFn.loadBadges()
           // window.StampedFn.loadDisplayWidgets()
       return this.$store.state.ui.reviewPanel
-    }
+    },
   },
    mounted () {
      console.log('yoptoProduct' , this.yoptoProduct);
@@ -72,6 +80,10 @@ export default {
           window.StampedFn.reloadUGC()
           window.StampedFn.loadWidget()
           window.StampedFn.loadDisplayWidgets()
+          //this.reviewpanelloaded = true
+          document.addEventListener( 'stamped:reviews:loaded', () => {
+            this.reviewpanelloaded = false;
+          });          
   },
   //  watch: {
   //   isReviewPanelOpen: {
@@ -117,8 +129,8 @@ export default {
     const el = document.body;
     el.classList.remove('menu-high-opacity');
     document.documentElement.classList.remove('menu-high-opacity')
-  }
-  
+    document.removeEventListener('stamped:reviews:loaded', null)         
+  }  
 }
 </script>
 
