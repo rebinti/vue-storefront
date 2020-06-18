@@ -110,7 +110,7 @@
                             context="product"
                             :code="option.attribute_code"
                            
-                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         
                             v-focus-clean
                             @click.native="changeEditModeFilter(s)"
@@ -128,7 +128,7 @@
                             context="product"
                             :code="option.attribute_code"
                             
-                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-config active' : 'no-config': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         
                            
                             v-focus-clean
@@ -441,6 +441,74 @@ export default {
     } 
     .modal-close{
       z-index: 1;
-    }   
+    }
+    .size-selector{
+      width: 36px;
+      height: 36px;      
+    }
+    .no-combination {
+        // display:none !important;
+        color: #dad0d0;
+        background: url(../../assets/no-size.png); 
+        background-repeat: no-repeat;         
+        border:none;
+    } 
+    .no-combination.active {
+        // display:none !important;        
+        color: #6b6b6b !important;
+        background: url(../../assets/no-size.png) !important; 
+        background-repeat: no-repeat;             
+        border: 1px solid #6b6b6b !important;
+    }          
   }
+  @media (max-width: 2560px) {
+    .prd-option-popup {
+      .no-combination {
+          background-size: 50px 50px !important;     
+      } 
+      .no-combination.active {
+          background-size: 50px 50px !important;     
+      }       
+      .size-selector{
+        width: 50px;
+        height: 50px;      
+      }             
+    }
+  }
+  @media (max-width: 1920px) {
+    .prd-option-popup {
+      .no-combination {
+          background-size: 36px 36px !important;     
+      }
+      .no-combination.active {
+          background-size: 36px 36px !important;     
+      }        
+      .size-selector{
+        width: 36px;
+        height: 36px;      
+      }               
+    }
+  }
+  @media (max-width: 1440px) {
+    .prd-option-popup {
+      .no-combination {
+          background-size: 33px 33px !important;     
+      }
+      .no-combination.active {
+          background-size: 33px 33px !important;      
+      }       
+      .size-selector{
+        width: 33px;
+        height: 33px;      
+      }             
+    }
+  }
+  @media (max-width: 1024px) {
+    .prd-option-popup {
+      .no-combination {
+          background-size: 33px 33px !important;     
+      }       
+    }
+  }      
+
 </style>

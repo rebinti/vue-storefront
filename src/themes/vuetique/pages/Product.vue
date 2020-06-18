@@ -1034,6 +1034,8 @@ export default {
   .disabled {
     background-color: rgba(237, 237, 237, var(--bg-opacity))!important;
     color: #bdbdbd!important;
+    border: 1px solid #ededed;
+    cursor: default; 
   }
 }
 .wishlist-button{
@@ -1046,6 +1048,10 @@ button.no-combination {
     background: url(../assets/no-size.png); 
     background-repeat: no-repeat;
     background-size: 33px 33px;       
+}
+.no-combination.active {           
+    color: #6b6b6b !important;           
+    border: 1px solid #6b6b6b !important;
 }
 .variants-wrapper {
  .sizes {

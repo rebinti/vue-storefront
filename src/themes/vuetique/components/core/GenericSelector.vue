@@ -70,12 +70,12 @@ export default {
      color: black;
      background: none;
    }
-   .no-combination.active{
-     border: 1px solid!important;
-     --border-opacity: 1!important;
-     border-color: #222222!important;
-     border-color: rgba(34, 34, 34, var(--border-opacity))!important;
-   }
+  //  .no-combination.active{
+  //    border: 1px solid!important;
+  //    --border-opacity: 1!important;
+  //    border-color: #222222!important;
+  //    border-color: rgba(34, 34, 34, var(--border-opacity))!important;
+  //  }
   .x {
     display: none;
     text-indent: -999em;
