@@ -97,8 +97,11 @@
         <div class="col-auto total-price-label">
           {{ segment.title }}
         </div>
-        <div class="col-auto total-price-value">
+        <div v-if="loadtotals" class="col-auto total-price-value">
           {{ segment.value | price }}
+        </div>
+        <div v-else>
+          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
         </div>
       </div>
     </div>
@@ -177,7 +180,8 @@ export default {
       couponCode: '',
       componentLoaded: false,
       selectedRemoveProduct: null,
-      componentKey: 0
+      componentKey: 0,
+      loadtotals:true
     }
   },
   props: {
@@ -187,6 +191,13 @@ export default {
       default: () => false
     }
   },
+  watch: {
+      checktotalsupdatewatch (val, oldVal) {
+        if (val !== oldVal) {
+          this.loadtotals = true
+        }
+      }
+    },  
   computed: {
     showMicrocart () {
       return this.isMicrocartOpen && this.componentLoaded
@@ -241,6 +252,7 @@ export default {
       }
     },
     removeItem (product) {
+      this.loadtotals = false
       this.selectedRemoveProduct = product;
       // if (config.cart.askBeforeRemoveProduct) {
       //   this.$store.dispatch('notification/spawnNotification', {
