@@ -61,9 +61,9 @@
           <wishlist-button :product="product" class="wish-icon" />          
         </div>  
       </div>    
-       <p class="product-category prd_cat" v-if="!onlyImage">
+       <!-- <p class="product-category prd_cat" v-if="!onlyImage">
           Coats & Jackets
-      </p> 
+      </p>  -->
       <div class="mt-1 text-grey-dark font-medium price_bx_it">
         <span
           class="text-primary mr-2"
