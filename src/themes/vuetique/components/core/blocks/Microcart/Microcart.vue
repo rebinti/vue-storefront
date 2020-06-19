@@ -49,7 +49,7 @@
     </ul> -->
     <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
-      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item"> 
+      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'"> 
         <!-- 
         <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
          -->
