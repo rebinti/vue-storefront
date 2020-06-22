@@ -316,6 +316,7 @@ export default {
    width:100%;
    margin-bottom: 150px;
    margin-top: 15px;
+   padding-bottom: 50px;
  }
 
     .mob_microcart .h_title{

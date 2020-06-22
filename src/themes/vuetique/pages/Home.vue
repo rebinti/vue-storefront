@@ -81,7 +81,7 @@
 
 <script>
 // 3rd party dependecies
-import { isServer, onlineHelper } from '@vue-storefront/core/helpers'
+import { isServer } from '@vue-storefront/core/helpers'
 import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/common'
 
 // Core pages
