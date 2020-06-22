@@ -47,7 +47,7 @@ const store = {
     productDetailsSidePanelFlag: false,
     checkoutWithoutLogin: false
   },
-  getter: {
+  getters: {
     getSelectedGridView: state => state.seletedMobileGrid,
     getDefaultColumnMobile: state => state.defaultColumnMobile,
     getDefaultColumnWeb: state => state.defaultColumnWeb,
@@ -155,7 +155,7 @@ const store = {
   },
   setCheckoutWithoutLoginFlag (state, payload) {
     state.checkoutWithoutLogin = payload === true
-  }  
+  }
   },
   actions: {
     toggleMicrocart ({ commit, state }) {

@@ -20,15 +20,15 @@ export const EmarsysTracker =  {
   },
   methods: {
     sendDataToEmarsys (event=null) {
-      console.log('event sendDataToEmarsys', event);
+      // console.log('event sendDataToEmarsys', event);
 
       let cart = [];
       this.productsInCart.filter(val => {
           cart.push({item: val.sku,price: val.price,quantity: val.qty})
       });
   
-      if (window.ScarabQueue) {
-        console.log('window.ScarabQueue', window.ScarabQueue);
+      if (window && window.ScarabQueue) {
+        // console.log('window.ScarabQueue', window.ScarabQueue);
         
         // For logged user to tracker 
         if (this.$store.state.user && this.$store.state.user.current !== null) {
@@ -62,7 +62,7 @@ export const EmarsysTracker =  {
         }
 
         window.ScarabQueue.push(['go']);
-        console.log('window.ScarabQueue', window.ScarabQueue);
+        // console.log('window.ScarabQueue', window.ScarabQueue);
       }
     }
   }
