@@ -14,7 +14,7 @@
                 <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                 <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
           </div>
-          <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block">
+          <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block mt-5">
              <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
