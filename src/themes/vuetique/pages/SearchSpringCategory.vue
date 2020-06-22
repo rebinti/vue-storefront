@@ -12,9 +12,10 @@
           <h4 class="col-8 lg:hidden">
             {{ category.name }}
           </h4>          
-           <div class="col-2 hidden lg:block">
-                <label class="mr10">{{ $t('Columns') }}:</label>
-                <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
+           <div class="col-2 hidden lg:block" style="margin-top: -23px;">
+                <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
+                <columns 
+                 @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
           </div>
           <div class="col-2 hidden lg:block">
              <base-select
@@ -1501,5 +1502,11 @@ input {
 .mobile-filters_new h2{
       line-height: 1.5rem;
 }
+
+  .columns-label {
+    float: left;
+    margin-top: 10px;
+    padding-right: 9px;
+  }
 
 </style>

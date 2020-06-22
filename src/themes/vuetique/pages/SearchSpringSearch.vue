@@ -269,7 +269,7 @@
             </div>
              <div class="col-2 hidden lg:block xs:col-6">
                  <div v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-                    <label class="mr10">{{ $t('Columns') }}:</label>
+                    <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                     <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
                  </div>   
               </div>
@@ -1243,5 +1243,11 @@ input {
   
 .mobile-filters_new h2{
       line-height: 1.5rem;
+}
+
+.columns-label {
+    float: left;
+    margin-top: 10px;
+    padding-right: 9px;
 }
 </style>
