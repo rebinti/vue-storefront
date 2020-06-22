@@ -340,7 +340,7 @@ export default {
     .mob_summary .mob_d_item{
       border-bottom:1px solid #ededed;
       padding-bottom: 20px;
-      display: block;
+      // display: block;
     }
 
     .mob_summary .mob_rw_list{
