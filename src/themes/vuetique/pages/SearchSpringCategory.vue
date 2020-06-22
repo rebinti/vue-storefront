@@ -6,18 +6,18 @@
     <header class="row bg-grey-lightest mb-6 head_category"> <!-- pb-5 -->
       <div class="container d_item">
         <div class="row items-center mt-2">
-          <h1 class="col-8 hidden lg:block">
+          <h1 class="col-10 hidden lg:block">
             {{ category.name }}
           </h1>
-          <h4 class="col-8 lg:hidden">
+          <h4 class="col-10 lg:hidden">
             {{ category.name }}
           </h4>          
-           <div class="col-2 hidden lg:block" style="margin-top: -23px;">
+           <div class="col-1 hidden lg:block" style="margin-top: -23px;">
                 <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                 <columns 
                  @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
           </div>
-          <div class="col-2 hidden lg:block">
+          <div class="col-1 hidden lg:block">
              <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"

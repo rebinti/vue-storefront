@@ -210,12 +210,35 @@ export default {
                 }
           }
 }
-
+@media screen and (min-width: 769px) and (max-width: 1599px)  {
+  .head_category{
+    .container{
+      .row{
+        .col-10{
+          width:60% !important;
+          flex-basis: 60% !important;
+          max-width: 60% !important;
+        }
+        .col-1{
+          width:20% !important;
+        }
+        .col-1{
+          width:20% !important;
+        }                
+      }
+    }
+  }
+  .columns {
+    &::after {
+          right: 25px;
+    }
+  }
+}
 
 @media screen and (min-width: 1600px) and (max-width: 2560px)  {
   .columns {
     &::after {
-          right: 132px;
+          right: 25px;
     }
   }
 }
