@@ -713,8 +713,8 @@ export default {
     this.$bus.$on('product-before-load', this.changeProd)
 
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
-    document.addEventListener( 'stamped:reviews:loaded', function(e) {
-      console.log('Stampled addEventListener', e);
+    // document.addEventListener( 'stamped:reviews:loaded', function(e) {
+    //   console.log('Stampled addEventListener', e);
 
       // document.getElementById("stamped-main-widget").contentWindow.location.reload(true);
 // id="stamped-badge-mobile"  stamped-main-widget
@@ -734,7 +734,7 @@ export default {
           // window.StampedFn.loadWidget()
           // window.StampedFn.loadBadges()
           // window.StampedFn.loadDisplayWidgets()
-    })
+    // })
    },  
   // mounted () {
     // console.log('window.StampedFn', window.StampedFn)
