@@ -90,14 +90,17 @@ export default {
     position: relative;
     height: 100%;
   }
-
+  @media (min-width: 1024px) {
+    .newsletter-btn{
+      border: 1px solid #FFFFFF;
+    }
+  }
   @media (max-width: 1023px) {
     .newsletter-button {
       padding-top: 25px;
-      text-align: center;
+      text-align: center;      
     }
   }
-
   @media (max-width: 767px) {
     .h3 {
       font-size: 18px;
