@@ -201,7 +201,7 @@ export const isBottomVisible = () => {
   }
   let bottomUpValue = 400;
   if (window && window.innerWidth <= 1024) bottomUpValue = 600;
-  if (window && window.innerWidth <= 580) bottomUpValue = 900;
+  if (window && window.innerWidth <= 580) bottomUpValue = 1100;
   const scrollY = window.scrollY
   const visible = window.innerHeight
   const pageHeight = document.documentElement.scrollHeight - bottomUpValue // 400
