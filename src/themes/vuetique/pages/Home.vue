@@ -81,6 +81,7 @@
 
 <script>
 // 3rd party dependecies
+import { isServer, onlineHelper } from '@vue-storefront/core/helpers'
 import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/common'
 
 // Core pages
@@ -100,7 +101,7 @@ import CmsBlock from '../components/core/blocks/Cms/Block'
 import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
 import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
 import config from 'config'
-import { isServer } from '@vue-storefront/core/helpers'
+import { mapGetters } from 'vuex'
 
 export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
@@ -117,6 +118,7 @@ export default {
   },
   data () {
     return {
+      loading: true,
       sliderConfig: {
         perPage: 1,
         perPageCustom: [[0, 2], [1024, 4]],
@@ -134,78 +136,107 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
     categories () {
       return this.$store.state.category.list
     },
-    newCollection () {
-      return this.$store.state.homepage.new_collection
-    },
-    salesCollection () {
-      return this.$store.state.homepage.sales_collection
-    }
+    // newCollection () {
+    //   return this.$store.state.homepage.new_collection
+    // },
+    // salesCollection () {
+    //   return this.$store.state.homepage.sales_collection
+    // },
   },
   created () {
     // Load personal and shipping details for Checkout page from IndexedDB
     this.$store.dispatch('checkout/load')
   },
-  beforeMount () {
-    this.$store.dispatch('attribute/list', { // load filter attributes for this specific category
-        filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
-        includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
-    });
+  async beforeMount () {
+    // this.$store.dispatch('attribute/list', { // load filter attributes for this specific category
+    //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+    //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+    // });
     if (window.styla !== null) {
        window.styla.init && window.styla.init()
     }
     if (this.$store.state.__DEMO_MODE__) {
-      this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' }).then((onboardingClaim) => {
-        if (!onboardingClaim) { // show onboarding info
-          this.$bus.$emit('modal-toggle', 'modal-onboard')
-          this.$store.dispatch('claims/set', { claimCode: 'onboardingAccepted', value: true })
-        }
-      })
+      const onboardingClaim  = await this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' });
+      if (!onboardingClaim) { // show onboarding info
+        this.$bus.$emit('modal-toggle', 'modal-onboard')
+        this.$store.dispatch('claims/set', { claimCode: 'onboardingAccepted', value: true })
+      }
     }
   },
-  asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
-    const config = store.state.config
-    return new Promise((resolve, reject) => {
-      Logger.info('Calling asyncData in Home (theme)')()
+  // asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
+  //   const config = store.state.config
+  //   return new Promise((resolve, reject) => {
+  //     Logger.info('Calling asyncData in Home (theme)')()
 
-      let newProductsQuery = prepareQuery({ queryConfig: 'Accessories' })
-      let salesQuery = prepareQuery({ queryConfig: 'inspirations' })
-      console.log('dataaaaaaaaaaa ===' , newProductsQuery);
-      store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }).then((categories) => {
-        store.dispatch('product/list', {
-          query: newProductsQuery,
-          size: 8,
-          sort: 'created_at:desc',
-          includeFields: config.entities.optimize ? (config.products.setFirstVarianAsDefaultInURL ? config.entities.productListWithChildren.includeFields : config.entities.productList.includeFields) : []
-        }).catch(err => {
-          reject(err)
-        }).then((res) => {
-          if (res) {
-            store.state.homepage.new_collection = res.items
-          }
+  //     let newProductsQuery = prepareQuery({ queryConfig: 'Accessories' })
+  //     let salesQuery = prepareQuery({ queryConfig: 'inspirations' })
+  //     console.log('dataaaaaaaaaaa ===' , newProductsQuery);
+  //     store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }).then((categories) => {
+  //       store.dispatch('product/list', {
+  //         query: newProductsQuery,
+  //         size: 8,
+  //         sort: 'created_at:desc',
+  //         includeFields: config.entities.optimize ? (config.products.setFirstVarianAsDefaultInURL ? config.entities.productListWithChildren.includeFields : config.entities.productList.includeFields) : []
+  //       }).catch(err => {
+  //         reject(err)
+  //       }).then((res) => {
+  //         if (res) {
+  //           store.state.homepage.new_collection = res.items
+  //         }
 
-          store.dispatch('product/list', {
-            query: salesQuery,
-            size: 12,
-            sort: 'created_at:desc',
-            includeFields: config.entities.optimize ? (config.products.setFirstVarianAsDefaultInURL ? config.entities.productListWithChildren.includeFields : config.entities.productList.includeFields) : []
-          }).then((res) => {
-            if (res) {
-              store.state.homepage.sales_collection = res.items
-            }
-            return resolve()
-          }).catch(err => {
-            reject(err)
-          })
-        }).catch(err => {
-          reject(err)
+  //         store.dispatch('product/list', {
+  //           query: salesQuery,
+  //           size: 12,
+  //           sort: 'created_at:desc',
+  //           includeFields: config.entities.optimize ? (config.products.setFirstVarianAsDefaultInURL ? config.entities.productListWithChildren.includeFields : config.entities.productList.includeFields) : []
+  //         }).then((res) => {
+  //           if (res) {
+  //             store.state.homepage.sales_collection = res.items
+  //           }
+  //           return resolve()
+  //         }).catch(err => {
+  //           reject(err)
+  //         })
+  //       }).catch(err => {
+  //         reject(err)
+  //       })
+  //     }).catch(err => {
+  //       reject(err)
+  //     })
+  //   })
+  // },
+
+
+  async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
+    Logger.info('Calling asyncData in Home (theme)')()
+
+    await Promise.all([
+      store.dispatch('attribute/list', { // load filter attributes for this specific category
+          filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+          includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+      }),
+      store.dispatch('ui/getSliderData', {
+          key: '_type',
+          value: "banner"
+      }),
+      store.dispatch('homepage/fetchNewCollection'),
+      store.dispatch('homepage/loadBestsellers'),
+    ])
+  },
+  beforeRouteEnter (to, from, next) {
+    if (!isServer && !from.name) { // Loading products to cache on SSR render
+      next(vm =>
+        vm.$store.dispatch('homepage/fetchNewCollection').then(res => {
+          vm.loading = false
         })
-      }).catch(err => {
-        reject(err)
-      })
-    })
+      )
+    } else {
+      next()
+    }
   },
   mounted() {
     if (window.styla !== null) {
