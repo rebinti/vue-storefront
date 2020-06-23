@@ -306,6 +306,18 @@ menu-list button.btn.btn-primary.p_btn{
     border: 1px solid #e2dddd;
   }
 }
+@media (min-width: 768px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 222.66px;
+            height: 333.99px;
+        }
+      }
+    }
+  }  
+}
 @media (min-width: 1024px) {
   .VueCarousel-slide{
     .collection-product{
