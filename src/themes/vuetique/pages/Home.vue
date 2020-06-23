@@ -306,6 +306,42 @@ menu-list button.btn.btn-primary.p_btn{
     border: 1px solid #e2dddd;
   }
 }
+@media (min-width: 320px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 120px;
+            height: 180px;
+        }
+      }
+    }
+  }  
+}
+@media (min-width: 3758px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 147.5px;
+            height: 221.25px;
+        }
+      }
+    }
+  }  
+}
+@media (min-width: 425px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 172.5px;
+            height: 258.75px;
+        }
+      }
+    }
+  }  
+}
 @media (min-width: 768px) {
   .VueCarousel-slide{
     .collection-product{
