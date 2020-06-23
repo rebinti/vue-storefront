@@ -44,9 +44,9 @@
         </header>
       </div>
       <div class="row center-xs">
-        <!-- <products-slider :products="newCollection" :config="sliderConfig"/> -->       
-      </div>
-
+          <no-ssr>
+            <products-slider :products="newCollection" :config="sliderConfig"/>
+          </no-ssr>
           <hooper :settings="hooperSettings">
             <slide
               v-for="product in newCollection"
@@ -61,13 +61,14 @@
             <hooper-navigation slot="hooper-addons"></hooper-navigation>
             <hooper-pagination slot="hooper-addons"></hooper-pagination>            
           </hooper>       
+      </div>      
     </section>
 
     <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> 
     <!-- <promoted-offers collection="smallBanners" :limit="2" :offset="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> -->
-
-    <products-slider class="mb-16" :title="$t('Sale and discount')" :products="salesCollection" :config="sliderConfig" />
-
+    <no-ssr>
+      <products-slider class="mb-16" :title="$t('Sale and discount')" :products="salesCollection" :config="sliderConfig" />
+    </no-ssr>
     <section class="container mb-16">
       <div class="justify-center">
         <header class="mb-6">
@@ -95,6 +96,7 @@
 </template>
 
 <script>
+import NoSSR from 'vue-no-ssr'
 // 3rd party dependecies
 import { isServer } from '@vue-storefront/core/helpers'
 import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/common'
@@ -126,6 +128,7 @@ import ProductTile from 'theme/components/core/ProductTile'
 export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
   components: {
+    'no-ssr': NoSSR,
     MainSlider,
     Onboard,
     ProductListing,
@@ -146,9 +149,10 @@ export default {
     return {
       loading: true,
       sliderConfig: {
-        perPage: 1,
-        perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
-        paginationEnabled: false,        
+        perPage: 5,
+        // perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],  // Use this in product slider - to fix an infinte load issue
+        paginationEnabled: false,
+        loop: true,
         paginationSize: 6,
         navigationEnabled: true,
         navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
