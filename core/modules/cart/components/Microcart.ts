@@ -15,7 +15,7 @@ export const Microcart = {
       return this.$store.getters['cart/getTotals']
     },
     checktotalsupdatewatch (): CartTotalSegments {
-      return this.$store.getters['cart/getTotals'].find(element => element.code == 'subtotal').value;
+      return this.$store.getters['cart/getTotals'].find(val => val.code == 'subtotal')&&this.$store.getters['cart/getTotals'].find(val => val.code == 'subtotal').value;
     },
     isOpen (): boolean {
       return this.$store.state.cart.isMicrocartOpen

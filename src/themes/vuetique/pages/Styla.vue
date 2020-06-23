@@ -15,9 +15,11 @@
 
 <script>
 import i18n from '@vue-storefront/i18n'
+import Breadcrumbs from '../components/core/Breadcrumbs.vue'
 
 export default {
   components: {
+    Breadcrumbs
   },
   metaInfo () {
     return {

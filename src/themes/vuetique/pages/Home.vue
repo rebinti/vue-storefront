@@ -215,6 +215,7 @@ export default {
     Logger.info('Calling asyncData in Home (theme)')()
 
     await Promise.all([
+      store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }),
       store.dispatch('attribute/list', { // load filter attributes for this specific category
           filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
           includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
