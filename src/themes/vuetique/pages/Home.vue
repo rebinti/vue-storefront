@@ -44,7 +44,7 @@
         </header>
       </div>
       <div class="row center-xs">
-        <product-listing columns="4" :products="newCollection" />
+        <products-slider :products="newCollection" :config="sliderConfig"/>
       </div>
     </section>
 
@@ -121,11 +121,14 @@ export default {
       loading: true,
       sliderConfig: {
         perPage: 1,
-        perPageCustom: [[0, 2], [1024, 4]],
-        paginationEnabled: true,
+        perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
+        paginationEnabled: false,
         loop: true,
-        paginationSize: 6
-      }
+        paginationSize: 6,
+        navigationEnabled: true,
+        navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
+        navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
+      } 
     }
   },
   methods: {
@@ -259,5 +262,72 @@ menu-list button.btn.btn-primary.p_btn{
         color: green !important;
         font-size: 42px;
        }
+  } 
+</style>
+<style lang="scss">
+.VueCarousel {
+  .VueCarousel-dot {
+    line-height: 1;
+
+    &:focus {
+      outline: none;
+    }
   }
+
+  .VueCarousel-navigation--disabled {
+    display: none;
+  }
+
+
+  .carousel-nav-nxt { 
+    position: absolute;
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
+  }
+  .carousel-nav-nxt svg {
+    margin: 0 auto;
+  }
+  .carousel-nav-pre svg {
+    margin: 0 auto;
+  }
+  .carousel-nav-pre {
+    position: absolute;
+    right: -75px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    bottom: 15px;
+    border: 1px solid #e2dddd;
+  }
+}
+@media (min-width: 1024px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 218px;
+            height: 327px;
+        }
+      }
+    }
+  }  
+}
+@media (min-width: 1600px) {
+  .VueCarousel-slide{
+    .collection-product{
+      .product-link{
+        .prod_list{
+            width: 292px;
+            height: 438px;
+        }
+      }
+    }
+  }
+} 
 </style>
