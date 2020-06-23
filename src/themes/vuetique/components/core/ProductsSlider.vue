@@ -6,7 +6,9 @@
       </h2>
     </header>
     <no-ssr>
-      <carousel v-bind="config" @pageChange="setMuted">
+ <carousel v-bind="config"
+    :per-page-custom="[[0, 2], [768, 3], [1024, 4], [1600, 5]]"
+    @pageChange="setMuted">
         <slide
           v-for="product in products"
           :key="product.id"
@@ -24,7 +26,7 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
-import { Carousel, Slide } from 'vue-carousel'
+// import { Carousel, Slide } from 'vue-carousel'
 
 import ProductTile from 'theme/components/core/ProductTile'
 
@@ -45,8 +47,8 @@ export default {
     }
   },
   components: {
-    Slide,
-    Carousel,
+    'Carousel': () => import('vue-carousel').then(Slider => Slider.Carousel),
+    'Slide': () => import('vue-carousel').then(Slider => Slider.Slide),
     ProductTile,
     'no-ssr': NoSSR
   },
