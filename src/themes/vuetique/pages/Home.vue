@@ -44,8 +44,23 @@
         </header>
       </div>
       <div class="row center-xs">
-        <products-slider :products="newCollection" :config="sliderConfig"/>
+        <!-- <products-slider :products="newCollection" :config="sliderConfig"/> -->       
       </div>
+
+          <hooper :settings="hooperSettings">
+            <slide
+              v-for="product in newCollection"
+              :key="product.id"
+            >
+              <product-tile
+                class="collection-product"
+                :product="product"
+                :labels-active="false"
+              />
+            </slide>
+            <hooper-navigation slot="hooper-addons"></hooper-navigation>
+            <hooper-pagination slot="hooper-addons"></hooper-pagination>            
+          </hooper>       
     </section>
 
     <promoted-offers collection="smallBanners" :limit="2" :columns="2" class="mt-2 mb-16 sm:my-8" /> 
@@ -102,6 +117,11 @@ import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/Vie
 import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
 import config from 'config'
 import { mapGetters } from 'vuex'
+import { Hooper,Slide,Pagination as HooperPagination} from 'hooper'
+import { Progress as HooperProgress} from 'hooper'
+import { Navigation as HooperNavigation} from 'hooper'
+import 'hooper/dist/hooper.css';
+import ProductTile from 'theme/components/core/ProductTile'
 
 export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
@@ -114,7 +134,13 @@ export default {
     TileLinks,
     CmsBlock,
     PrismicCmsBlock,
-    PrismicCmsPage
+    PrismicCmsPage,
+    Hooper,
+    Slide,
+    HooperProgress,
+    HooperPagination,
+    HooperNavigation,
+    ProductTile     
   },
   data () {
     return {
@@ -122,13 +148,38 @@ export default {
       sliderConfig: {
         perPage: 1,
         perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
-        paginationEnabled: false,
-        loop: true,
+        paginationEnabled: false,        
         paginationSize: 6,
         navigationEnabled: true,
         navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
         navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
-      } 
+      },
+      hooperSettings: {
+          infiniteScroll: true,
+          centerMode: true,
+          autoPlay: true,
+          playSpeed: 3500,
+          breakpoints: {
+              1600: { 
+                  itemsToShow: 5
+              },
+              1024: { 
+                  itemsToShow: 4
+              },
+              768: { 
+                  itemsToShow: 3
+              },
+              425: {
+                  itemsToShow: 2
+              },
+              320: { 
+                  itemsToShow: 1
+              },
+              0: { 
+                  itemsToShow: 1
+              }
+          }
+      }        
     }
   },
   methods: {
@@ -307,7 +358,13 @@ menu-list button.btn.btn-primary.p_btn{
   }
 }
 @media (min-width: 320px) {
-  .VueCarousel-slide{
+  .new-collection{
+    .hooper{
+      height: 180px;
+    }  
+  }    
+  .hooper-list{
+    height: 180px;
     .collection-product{
       .product-link{
         .prod_list{
@@ -318,8 +375,14 @@ menu-list button.btn.btn-primary.p_btn{
     }
   }  
 }
-@media (min-width: 3758px) {
-  .VueCarousel-slide{
+@media (min-width: 375px) {
+  .new-collection{
+    .hooper{
+      height: 221.25px;
+    }  
+  }   
+  .hooper-list{
+    height: 221.25px;
     .collection-product{
       .product-link{
         .prod_list{
@@ -331,7 +394,13 @@ menu-list button.btn.btn-primary.p_btn{
   }  
 }
 @media (min-width: 425px) {
-  .VueCarousel-slide{
+  .new-collection{
+    .hooper{
+      height: 258.75px;
+    }  
+  }    
+  .hooper-list{
+    height: 258.75px;
     .collection-product{
       .product-link{
         .prod_list{
@@ -343,7 +412,14 @@ menu-list button.btn.btn-primary.p_btn{
   }  
 }
 @media (min-width: 768px) {
-  .VueCarousel-slide{
+  .new-collection{
+    .hooper{
+      height: 333.99px;
+    }  
+  }
+ 
+  .hooper-list{
+    height: 333.99px;
     .collection-product{
       .product-link{
         .prod_list{
@@ -355,7 +431,14 @@ menu-list button.btn.btn-primary.p_btn{
   }  
 }
 @media (min-width: 1024px) {
-  .VueCarousel-slide{
+  .new-collection{
+    .hooper{
+      height: 327px;
+    } 
+  }
+ 
+  .hooper-list{
+    height: 327px;
     .collection-product{
       .product-link{
         .prod_list{
@@ -367,7 +450,16 @@ menu-list button.btn.btn-primary.p_btn{
   }  
 }
 @media (min-width: 1600px) {
-  .VueCarousel-slide{
+  .new-collection{
+    .hooper{
+      height: 438px;
+    }
+  }
+  .hooper{
+    height: 438px;
+  }
+  .hooper-list{
+    height: 438px;
     .collection-product{
       .product-link{
         .prod_list{
