@@ -39,7 +39,7 @@
       <div>
         <header class="mb-6">
           <h2 class="text-h1 leading-h1 text-center">
-            {{ $t('Shop new arrivals') }}
+            {{ $t('Shop new arrivals') }} -  Collection
           </h2>
         </header>
       </div>
@@ -282,8 +282,8 @@ export default {
           key: '_type',
           value: "banner"
       }),
-      store.dispatch('homepage/fetchNewCollection'),
-      store.dispatch('homepage/loadBestsellers'),
+      // store.dispatch('homepage/fetchNewCollection'),
+      // store.dispatch('homepage/loadBestsellers'),
     ])
   },
   beforeRouteEnter (to, from, next) {
@@ -303,6 +303,10 @@ export default {
     }
     
     this.$bus.$emit('send-to-emarsys-tracking');
+
+    this.$store.dispatch('homepage/fetchNewCollection')
+
+    this.$store.dispatch('homepage/loadBestsellers')
   }
 }
 </script>
