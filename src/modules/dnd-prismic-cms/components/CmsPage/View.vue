@@ -1,6 +1,6 @@
 <template>
   <div class="prismic-cmspage">
-    <span v-if="page" v-html="page.title" />
+    <div v-if="page" v-html="page.title" />
     <div v-if="page" v-html="page.content" />
   </div>
 </template>

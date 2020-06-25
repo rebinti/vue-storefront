@@ -77,7 +77,7 @@ export default {
     */
     async logInWithFacebook () {
       const This = this;
-      if (window.FB) {
+      if (window && window.FB) {
          window.FB.login(function(response) {
           if (response.authResponse) {
             console.log("You are logged in &amp; cookie set!", response);

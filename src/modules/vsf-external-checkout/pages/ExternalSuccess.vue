@@ -102,6 +102,10 @@ export default {
     })
     this.submitEmarsysOrderData()
   },
+  destroyed () {
+    this.$bus.$off('application-after-loaded');
+    this.$bus.$off('cart-after-itemchanged');
+  },
   methods: {
     clearTheCart () {
       if (this.getNumberOfItemsInCart() > 0) {
@@ -171,7 +175,7 @@ export default {
           } 
         })
         console.log(' emarsys', emarsys);
-        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
+        // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
       } else {
            this.$router.push(this.localizedRoute('/'))
       }

@@ -77,9 +77,9 @@ export default {
           if (elements.length > 0) {
             elements.forEach(el => el.remove())
           }
-          window.StampedFn.reloadUGC()
-          window.StampedFn.loadWidget()
-          window.StampedFn.loadDisplayWidgets()
+          window.StampedFn&&window.StampedFn.reloadUGC()
+          window.StampedFn&&window.StampedFn.loadWidget()
+          window.StampedFn&&window.StampedFn.loadDisplayWidgets()
           //this.reviewpanelloaded = true
           document.addEventListener( 'stamped:reviews:loaded', () => {
             this.reviewpanelloaded = false;

@@ -214,7 +214,7 @@ export default {
     //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
     //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
     // });
-    if (window.styla !== null) {
+    if (window && window.styla !== null) {
        window.styla.init && window.styla.init()
     }
     if (this.$store.state.__DEMO_MODE__) {
@@ -298,7 +298,7 @@ export default {
     }
   },
   mounted() {
-    if (window.styla !== null) {
+    if (window && window.styla !== null) {
        window.styla.init()
     }
     

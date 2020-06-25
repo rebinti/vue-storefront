@@ -5,7 +5,7 @@
         <slide v-for="(slide, index) in mainSliderDataList" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
-              <span v-html='slide.description'></span>
+              <div v-html='slide.description'></div>
             </div>
           </div>
         </slide>
@@ -59,7 +59,7 @@ export default {
       });
    },
    setSliderData () {
-      this.windowWidth =  window.innerWidth;
+      this.windowWidth = window.innerWidth;
       if (this.windowWidth <= 760 ) {
         this.mainSliderDataList = this.sliderData.filter(val=> (val.bannerslider_id === "2" && val.image !== null))
         this.desktop = false
@@ -70,13 +70,14 @@ export default {
    }
   },
   beforeMount () {
-    this.windowWidth =  window.innerWidth;
+    this.windowWidth = window.innerWidth;
+    this.getSliderData();  
   },
   mounted () {
-    this.windowWidth =  window.innerWidth;
+    this.windowWidth = window.innerWidth;
   },
   created () {
-    this.getSliderData();    
+    // this.getSliderData(); 
   },
   destroyed () {
   }

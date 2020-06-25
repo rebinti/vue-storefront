@@ -216,7 +216,7 @@ export default {
     }
   },
   created () {
-    this.windowWidth =  window.innerWidth; 
+    this.windowWidth =  window&&window.innerWidth ? window.innerWidth: 0; 
     this.checkWindowSize();    
   },
   destroyed () {

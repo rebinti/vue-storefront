@@ -144,7 +144,10 @@ export default {
         depth: 0
       })
     }    
-  }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', null);
+  }  
 }
 </script>
 

@@ -951,7 +951,7 @@ export default {
         if (stampedBadge.length > 0) {
           stampedBadge.forEach(el => el.remove())
         }
-        window.StampedFn.reloadUGC()
+        window&&window.StampedFn&&window.StampedFn.reloadUGC()
         // this.$forceUpdate();
         setTimeout(() => {
               //  let stampedBadge = document.querySelectorAll(".stamped-badge");
@@ -966,14 +966,14 @@ export default {
 
               // window.StampedFn.reloadUGC()
               // window.StampedFn.reloadUGC()
-              window.StampedFn.loadWidget()
-              window.StampedFn.loadBadges()
-              window.StampedFn.loadDisplayWidgets()
+               window&&window.StampedFn&&window.StampedFn.loadWidget()
+               window&&window.StampedFn&&window.StampedFn.loadBadges()
+               window&&window.StampedFn&&window.StampedFn.loadDisplayWidgets()
               this.$forceUpdate();
         }, 800);
 
      /* For reload the TrueFit part */ 
-        window.tfcapi('calculate');
+         window&&window.tfcapi&&window.tfcapi('calculate');
     }
 
   },

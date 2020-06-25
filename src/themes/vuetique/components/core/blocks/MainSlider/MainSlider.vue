@@ -5,7 +5,7 @@
         <slide v-for="(slide, index) in mainSliderData" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + slide.image">
             <div class="slide-content flex items-center justify-center">
-              <span v-html='slide.description'></span>
+              <div v-html='slide.description'></div>
             </div>
           </div>
         </slide>
@@ -18,7 +18,7 @@
         <slide v-for="(deviceslide, index) in mainSliderDeviceData" :key="index">
           <div class="slide w-full" v-lazy:background-image="imageBaseUrl + deviceslide.image">
             <div class="slide-content flex items-center justify-center">
-              <span v-html='deviceslide.description'></span>
+              <div v-html='deviceslide.description'></div>
             </div>
           </div>
         </slide>        
