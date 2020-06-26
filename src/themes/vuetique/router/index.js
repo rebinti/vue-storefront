@@ -18,14 +18,15 @@ const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/p
 const Static = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static.vue') // footer links CMS page use this
 const Styla = () => import(/* webpackChunkName: "vsf-styla" */ 'theme/pages/Styla.vue')
 const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/CustomCmsPage.vue')
-const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData')
+const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData.vue')
 const ContactUs = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/ContactUs.vue')
 
-const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin')
+const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin.vue')
 // const SearchSpringSearch = () => import(/* webpackChunkName: "vsf-splash" */ 'theme/pages/SearchSpringSearch')
 
 // const Brands = () => import(/* webpackChunkName: "vsf-brands" */ 'theme/pages/brands')
 // const BrandsCategory = () => import(/* webpackChunkName: "vsf-brand-category" */ 'theme/pages/brandsCategory')
+const ExternalThankYouPage = () => import(/* webpackChunkName: "vsf-ext-order-success" */ 'theme/pages/ExternalSuccess.vue')
 
 let routes = [
   { name: 'home', path: '/', component: Home, alias: '/pwa.html' },
@@ -60,10 +61,12 @@ let routes = [
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
   { name: 'contact-us', path: '/contact-us', component: ContactUs },
 
-  { name: 'search-spring', path: '/search', component: SearchSpringSearch },
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
+  { name: 'search-spring', path: '/search', component: SearchSpringSearch },
   { name: 'brands', path: '/brands', component: Brands },
-  { name: 'brands-category', path: '/brands/:brandName', component: BrandsCategory }
+  { name: 'brands-category', path: '/brands/:brandName', component: BrandsCategory },
+
+  { name: 'external-thank-you', path: '/order-success', component: ExternalThankYouPage }
 ]
 if (!config.products.useShortCatalogUrls) {
   routes = routes.concat([{ name: 'virtual-product', path: '/p/:parentSku/:slug', component: Product }, // :sku param can be marked as optional with ":sku?" (https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js#L16), but it requires a lot of work to adjust the rest of the site

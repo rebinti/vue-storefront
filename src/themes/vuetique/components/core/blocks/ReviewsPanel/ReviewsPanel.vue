@@ -12,15 +12,7 @@
       </svg>
     </button>
        <h3>Product Reviews</h3>
-        <!-- <div v-if="yoptoProduct !== null"
-          class="yotpo yotpo-main-widget"
-          data-product-id="yoptoProduct.id"
-          data-price="yoptoProduct.price"
-          data-currency="yoptoProduct.currency"
-          data-name="yoptoProduct.name"
-          data-url="yoptoProduct.url_path"
-          data-image-url="yoptoProduct.image">
-        </div>  -->
+
         <div v-if="reviewpanelloaded"  style="margin: 150px;">
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
         </div> 

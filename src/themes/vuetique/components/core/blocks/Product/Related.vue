@@ -11,7 +11,7 @@
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
       <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul">
-        <!-- <no-ssr> -->
+        <no-ssr>
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
               v-for="product in product.related[type].slice(0,8)"
@@ -24,7 +24,7 @@
               />
             </slide>
           </carousel>
-        <!-- </no-ssr> -->
+        </no-ssr>
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,8)" />
     </div>

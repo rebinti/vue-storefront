@@ -11,28 +11,35 @@
       <!-- <svg viewBox="0 0 25 25" class="vt-icon">
         <use xlink:href="#user" />
       </svg> -->
-    <div class="ic_list_m"><img src="/assets/u_s_account.png" alt=""/></div>
+    <span class="ic_list_m"><img src="/assets/u_s_account.png" alt=""/></span>
+       <!-- <i class="material-icons block">account_circle</i> -->
     </button>
-    <ul v-if="currentUser" class="dropdown-content">
-      <li v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">
-        <router-link class="dropdown-item-link" :to="localizedRoute(page.link)">
-          {{ page.title }}
-        </router-link>
-      </li>
-      <li>
-        <a href="#" class="dropdown-item-link" @click.prevent="logout">
-          {{ $t('Logout') }}
-        </a>
-      </li>
-    </ul>
+    <no-ssr>
+      <ul v-if="currentUser" class="dropdown-content">
+        <li v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">
+          <router-link class="dropdown-item-link" :to="localizedRoute(page.link)">
+            {{ page.title }}
+          </router-link>
+        </li>
+        <li>
+          <a href="#" class="dropdown-item-link" @click.prevent="logout">
+            {{ $t('Logout') }}
+          </a>
+        </li>
+      </ul>
+    </no-ssr>
   </div>
 </template>
 
 <script>
+import NoSSR from 'vue-no-ssr'
 import AccountIcon from '@vue-storefront/core/compatibility/components/blocks/Header/AccountIcon'
 
 export default {
   mixins: [AccountIcon],
+  components: {
+    'no-ssr': NoSSR
+  },
   data () {
     return {
       navigation: [

@@ -10,7 +10,7 @@
     class="bg-transparent border-0"
     data-testid="openSearchPanel"
   >
-      <!-- @click="toggleSearchpanel" -->
+  
     <svg viewBox="0 0 25 25" class="vt-icon">
       <use xlink:href="#search" />
     </svg>

@@ -47,20 +47,6 @@
           <no-ssr>
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
-          <!-- <hooper :settings="hooperSettings">
-            <slide
-              v-for="product in newCollection"
-              :key="product.id"
-            >
-              <product-tile
-                class="collection-product"
-                :product="product"
-                :labels-active="false"
-              />
-            </slide>
-            <hooper-navigation slot="hooper-addons"></hooper-navigation>
-            <hooper-pagination slot="hooper-addons"></hooper-pagination>            
-          </hooper>        -->
       </div>      
     </section>
 
@@ -214,9 +200,9 @@ export default {
     //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
     //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
     // });
-    if (window && window.styla !== null) {
-       window.styla.init && window.styla.init()
-    }
+    // if (window && window.styla !== null) {
+    //    window.styla.init && window.styla.init()
+    // }
     if (this.$store.state.__DEMO_MODE__) {
       const onboardingClaim  = await this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' });
       if (!onboardingClaim) { // show onboarding info
@@ -298,9 +284,9 @@ export default {
     }
   },
   mounted() {
-    if (window && window.styla !== null) {
-       window.styla.init()
-    }
+    // if (window && window.styla !== null) {
+    //    window.styla.init()
+    // }
     
     this.$bus.$emit('send-to-emarsys-tracking');
 

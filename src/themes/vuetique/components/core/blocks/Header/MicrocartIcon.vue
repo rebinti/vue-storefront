@@ -9,12 +9,12 @@
     <!-- <svg viewBox="0 0 25 25" class="vt-icon">
       <use xlink:href="#cart" />
     </svg> -->
-    <div class="ic_list_m"><img src="/assets/shop-bag.png" alt="" /></div>
+    <span class="ic_list_m"><img src="/assets/shop-bag.png" alt="" /></span>
     <span
       class="minicart-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary"
       v-cloak
       data-testid="minicartCount"
-    >  <!-- v-show="totalQuantity" -->
+    > 
       {{ totalQuantity }}
     </span>
   </button>
