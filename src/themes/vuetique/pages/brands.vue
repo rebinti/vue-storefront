@@ -11,7 +11,7 @@
                 </div>
               </div>
             <div class="row" style="margin-top: 30px;">          
-                  <div :class="['char-box', disableBrandsChar(char) ? 'disable-char-box' : char === selectedBrandChar ? 'active-char' : '']" v-for="(char,index) in charList" :key="index"
+                  <div :class="['char-box', disableBrandsChar(char) ? 'disable-char-box' : char === brandSelectedChar ? 'active-char' : '']" v-for="(char,index) in charList" :key="index"
                   @click="sortbrands(char)">
                       <p> 
                           {{char}}
@@ -50,8 +50,8 @@
 
 <script>
 import config from 'config'
-import { mapState, mapGetters, mapActions } from 'vuex'
-import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
+import { mapGetters } from 'vuex'
+// import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
 
 export default {
   name: 'brands',
@@ -60,36 +60,27 @@ export default {
       search: '',
       imagesPath: config.brand.imageUrl,
       alphabetsList : [],
-      brandsLoadedFlag: false,
-      selectedBrandChar: '',
       charList : Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i))
     };
   },
-  components: {
-
-    
-
+  components: { },
+  async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
+      await store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
+       key: '_type',
+        value: "brand"
+      })
   },
-  // asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
-  //   return new Promise((resolve, reject) => {
-  //     store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
-  //      key: '_type',
-  //       value: "brand"
-  //     })
-  //     resolve()
-  //   })
-  // },
   mixins: [],
   created () {
-      this.getBrandsData();
+      // this.getBrandsData();
   },
   computed: {
-     ...mapState({
-      brandsList: state => state.ui.brandsList,
-      brandSearchText:  state => state.ui.brandSearchText,
-      brandSelectedChar:  state => state.ui.brandSelectedChar
+    ...mapGetters({
+        brandsLoadedFlag: 'ui/getBrandsLoadedFlag',
+        brandSearchText: 'ui/getBrandSearchText',
+        brandSelectedChar: 'ui/getBrandSelectedChar',
+        brandsList: 'ui/getBrandsList',
     }),
-    // ...mapGetters('ui', ['getBrandsList']),
     alphabetList() {
       this.brandsList.filter(val => {
           if (!this.alphabetsList.includes(val.slug.charAt(0).toUpperCase())) {
@@ -100,55 +91,47 @@ export default {
     },
     visibleProducts () {
       const brandsList = this.brandsList || []
-      if (this.selectedBrandChar.length > 0 && this.search.length > 0 ) {
+      if (this.brandSelectedChar.length > 0 && this.brandSearchText.length > 0 ) {
         return brandsList.filter(brand => 
-        brand.slug.charAt(0).toUpperCase() === this.selectedBrandChar && brand.slug.includes(this.search) );
-      } else if (this.selectedBrandChar.length > 0) {
+        brand.slug.charAt(0).toUpperCase() === this.brandSelectedChar && brand.slug.includes(this.brandSearchText) );
+      } else if (this.brandSelectedChar.length > 0) {
         return brandsList.filter(brand => 
-        brand.slug.charAt(0).toUpperCase() === this.selectedBrandChar);
-      } else if (this.search.length > 0) {
-        return brandsList.filter(brand => brand.slug.includes(this.search));
+        brand.slug.charAt(0).toUpperCase() === this.brandSelectedChar);
+      } else if (this.brandSearchText.length > 0) {
+        return brandsList.filter(brand => brand.slug.includes(this.brandSearchText));
       }
       return brandsList
     },
   },
   mounted () {
-      // console.log('char', Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)))
+    this.search = this.brandSearchText;
+    // console.log('char', Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)))
   },
   methods: {
-    async getBrandsData() {
-      if (this.brandsList.length > 0) { 
-        this.brandsLoadedFlag = true;
-         this.search =  this.brandSearchText;
-         this.selectedBrandChar =  this.brandSelectedChar;
-        return; 
-      }
-      this.$store.dispatch('ui/getBrandList', {
-          key: '_type',
-          value: "brand"
-      }).then(res => {
-         this.brandsLoadedFlag = true;
-      });
-   },
+  //   async getBrandsData() {
+  //     if (this.brandsList.length > 0) { 
+  //       return; 
+  //     }
+  //     this.$store.dispatch('ui/getBrandList', {
+  //         key: '_type',
+  //         value: "brand"
+  //     }).then(res => {
+  //     });
+  //  },
    sortbrands (brandChar) {
      if (this.disableBrandsChar(brandChar)) return;
-     this.selectedBrandChar = brandChar;
-     this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: this.search, selChar: brandChar });
+     this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: this.brandSearchText, selChar: brandChar });
    },
    clearSort () {
-      this.selectedBrandChar = '';
-      this.search = '';
-      this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: '', selChar: '' });
+     this.search = '';
+     this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: '', selChar: '' });
    },
    disableBrandsChar (brandChar) {
      return !this.brandsList.some(val => val.slug.charAt(0).toUpperCase() === brandChar);
    },
    inputEvent ($event) {
-      this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: $event.target.value, selChar: this.selectedBrandChar });
+      this.$store.dispatch('ui/setBrandsFiltersAction',{ selText: $event.target.value, selChar: this.brandSelectedChar });
     }
-  },
-  destroyed () {
-   
   }
 };
 </script>

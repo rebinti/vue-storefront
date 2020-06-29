@@ -37,6 +37,7 @@ const store = {
     defaultColumnWeb: 3,
     yoptoProduct: null,
     brandsList: [],
+    brandsLoadedFlag: false,
     brandSearchText: '',
     brandSelectedChar: '',
     fbLoggedInfo: null,
@@ -52,7 +53,10 @@ const store = {
     getDefaultColumnMobile: state => state.defaultColumnMobile,
     getDefaultColumnWeb: state => state.defaultColumnWeb,
     getBrandsList: state => state.brandsList,
-    getMainSliderData: state => state.mainSliderData
+    getMainSliderData: state => state.mainSliderData,
+    getBrandsLoadedFlag: state => state.brandsLoadedFlag,
+    getBrandSearchText: state => state.brandSearchText,
+    getBrandSelectedChar:  state => state.brandSelectedChar
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -122,6 +126,11 @@ const store = {
     },
     setBrandList (state, data) {
       state.brandsList = data;
+      if (data && data.length > 0) {
+        state.brandsLoadedFlag = true
+      } else {
+        state.brandsLoadedFlag = false
+      }
     },
     setBrandsFilters (state, data) {
       state.brandSearchText = data.selText;
@@ -196,6 +205,7 @@ const store = {
             return resp.items
           })
           .catch(err => {
+            commit('setBrandList', []);
             Logger.error(err, 'ui/brands')()
           })
     },
@@ -216,8 +226,7 @@ const store = {
     setBrandsFiltersAction({commit}, state) {
       commit('setBrandsFilters', state)
     },
-
-     getOrderDeatilsById ({commit}, orderId) {
+    getOrderDeatilsById ({commit}, orderId) {
         return new Promise((resolve, reject) => {
             fetch( 'https://vue.iclothing.com/api/urlorderdetails/urlorderdetails', {
               method: 'POST',
