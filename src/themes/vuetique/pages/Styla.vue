@@ -2,11 +2,11 @@
   <div>
     <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="$props.title" />
     <header class="container mt-2">
-      <!-- <h1>{{ $props.title }}</h1> -->
+
     </header>
     <div class="container pb-16">
         <div class="col-12 md:col-9 leading-loose static-content">
-          <!-- <component :is="activeComponent" /> -->
+
           <div id="stylaMagazine" data-area="inspiration-landing"></div>
         </div>
     </div>
@@ -45,8 +45,8 @@ export default {
     }
   },
   mounted() {
-    if (window.styla !== null) {
-       window.styla.init()
+     if (window.styla !== null && typeof window.styla.init !== "undefined") {
+      if (window.styla.isReady) window.styla.init()
     }
   }  
 }

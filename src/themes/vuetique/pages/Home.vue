@@ -200,9 +200,6 @@ export default {
     //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
     //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
     // });
-    // if (window && window.styla !== null) {
-    //    window.styla.init && window.styla.init()
-    // }
     if (this.$store.state.__DEMO_MODE__) {
       const onboardingClaim  = await this.$store.dispatch('claims/check', { claimCode: 'onboardingAccepted' });
       if (!onboardingClaim) { // show onboarding info
@@ -268,8 +265,8 @@ export default {
           key: '_type',
           value: "banner"
       }),
-      // store.dispatch('homepage/fetchNewCollection'),
-      // store.dispatch('homepage/loadBestsellers'),
+      store.dispatch('homepage/fetchNewCollection'),
+      store.dispatch('homepage/loadBestsellers'),
     ])
   },
   beforeRouteEnter (to, from, next) {
@@ -284,15 +281,12 @@ export default {
     }
   },
   mounted() {
-    // if (window && window.styla !== null) {
-    //    window.styla.init()
-    // }
-    
     this.$bus.$emit('send-to-emarsys-tracking');
-
-    this.$store.dispatch('homepage/fetchNewCollection')
-
-    this.$store.dispatch('homepage/loadBestsellers')
+    // this.$store.dispatch('homepage/fetchNewCollection')
+    // this.$store.dispatch('homepage/loadBestsellers')
+    if (window.styla !== null && typeof window.styla.init !== "undefined") {
+      if (window.styla.isReady) window.styla.init()
+    }
   }
 }
 </script>
