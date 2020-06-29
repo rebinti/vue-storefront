@@ -37,7 +37,7 @@ import OrderReview from 'theme/components/core/blocks/Checkout/OrderReview'
 import CartSummary from 'theme/components/core/blocks/Checkout/CartSummary'
 import ThankYouPage from 'theme/components/core/blocks/Checkout/ThankYouPage'
 
-import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
+// import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
 
 export default {
   components: {
@@ -47,7 +47,7 @@ export default {
     OrderReview,
     CartSummary,
     ThankYouPage,
-    BraintreeDropin
+    // BraintreeDropin
   },
   mixins: [Checkout],
   methods: {

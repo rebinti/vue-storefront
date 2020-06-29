@@ -16,7 +16,7 @@
           <shipping class="line relative" :is-active="activeSection.shipping" />
           <payment class="line relative" :is-active="activeSection.payment" />
           <div class="payment">
-            <braintree-dropin v-if="payment.paymentMethod === 'braintree'"/>
+            <!-- <braintree-dropin v-if="payment.paymentMethod === 'braintree'"/> -->
           </div>
           <order-review class="line relative" :is-active="activeSection.orderReview" />
           <div id="custom-steps" />
@@ -40,8 +40,7 @@ import OrderReview from 'theme/components/core/blocks/Checkout/OrderReview'
 import CartSummary from 'theme/components/core/blocks/Checkout/CartSummary'
 import ThankYouPage from 'theme/components/core/blocks/Checkout/ThankYouPage'
 
-import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'  // M 2
-// import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
+// import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'  // M 2
 
 export default {
   components: {
@@ -51,7 +50,7 @@ export default {
     OrderReview,
     CartSummary,
     ThankYouPage,
-    BraintreeDropin
+    // BraintreeDropin
   },
   data() {
     return {

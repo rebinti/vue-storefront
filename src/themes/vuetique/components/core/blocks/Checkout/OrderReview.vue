@@ -123,8 +123,7 @@ import Modal from 'theme/components/core/Modal'
 import { OrderReview } from '@vue-storefront/core/modules/checkout/components/OrderReview'
 import ValidationError from 'theme/components/core/ValidationError'
 
-import PaypalButton from 'src/modules/paypal/components/Button'
-import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
+// import PaypalButton from 'src/modules/paypal/components/Button'
 // import BraintreeDropin from 'src/modules/payment-braintree/components/Dropin'
 
 export default {
@@ -133,9 +132,9 @@ export default {
     ButtonFull,
     CartSummary,
     Modal,
-    PaypalButton,
+    // PaypalButton,
     ValidationError,
-    BraintreeDropin
+    // BraintreeDropin
   },
   mixins: [OrderReview, Composite],
   validations: {
