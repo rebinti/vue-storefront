@@ -284,7 +284,9 @@ export default {
     this.$bus.$emit('send-to-emarsys-tracking');
     // this.$store.dispatch('homepage/fetchNewCollection')
     // this.$store.dispatch('homepage/loadBestsellers')
-    if (window.styla !== null && window.styla['isReady']) {
+
+    if ('styla' in window && styla.isReady) {
+    // if (window.styla !== null && window.styla['isReady'] !== undefined) {
       if (typeof window.styla.init !== "undefined") window.styla.init()
     }
   }
