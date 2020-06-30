@@ -285,9 +285,10 @@ export default {
     // this.$store.dispatch('homepage/fetchNewCollection')
     // this.$store.dispatch('homepage/loadBestsellers')
 
-    if ('styla' in window && styla.isReady) {
+    if ('styla' in window) {
     // if (window.styla !== null && window.styla['isReady'] !== undefined) {
-      if (typeof window.styla.init !== "undefined") window.styla.init()
+      // if (typeof window.styla.init !== "undefined") window.styla.init()
+       styla.init !== "undefined"&&styla.init()
     }
   }
 }
