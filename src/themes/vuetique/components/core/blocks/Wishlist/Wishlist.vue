@@ -44,7 +44,7 @@
       </span>
     </div>
 
-    <!--  Wish list lsiting -->
+
     <div
       class="wish_wrap_box"
       :class="{'item-in-it': productsInWishlist.length>0}"
@@ -54,9 +54,7 @@
         <img src="/assets/wishlisticon.png" alt>
       </div>
 
-      <!-- <h2 v-if="productsInWishlist.length" class="mb-8 upper-letter" >
-        {{ $t('Wishlist') }}
-      </h2>-->
+
 
       <h4 v-if="!productsInWishlist.length" class="mb-2">
         {{ $t('Your wishlist is empty.') }}
@@ -76,14 +74,10 @@
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
           <product :product="item" @click="removeFromWishlist"/>
         </template>
-        <!-- <template v-slot:left="{ item, close, index }">
-        <div class="swipeout-action red" title="remove" @click="remove(item)">
-          <i class="fa fa-trash"></i>
-        </div>
-        </template>-->
+ 
         <template v-slot:right="{ item }">
           <div class="swipeout-action red button_bx_link_lrg" @click="removeFromWishlist(item)">
-            <!-- <i class="fa fa-trash"></i> -->
+         
             <remove-button class="cl-accent" />
           </div>
         </template>
@@ -207,6 +201,7 @@ export default {
     },
     openCreateBoardPopup () {
         if(this.$store.state.user && this.$store.state.user.current === null) {
+          this.closeWishlist();
           this.$store.dispatch('notification/spawnNotification', {
             type: 'success',
             message: 'Please sign-in for create boards!'
