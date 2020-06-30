@@ -3,13 +3,7 @@
     <span slot="header"></span>
     <div class="row quick-view" slot="content" style="margin-top: -55px;"> 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 hide-div-mob">
-              <!-- <product-gallery
-              ref="gallery"
-              :gallery="gallery"
-              :offline="offlineImage"
-              :configuration="configuration"
-              :product="product"
-            /> -->
+       
 
             <div class="media-gallery-carousel">
               <carousel
@@ -44,35 +38,7 @@
       </div>
 
       <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding: 0 5px 0 20px;"> 
-            <!-- <div class="hide-div-mob" >
-                <h1 class="mb20 mt0 cl-mine-shaft product-name " data-testid="productName" itemprop="name">
-                    {{ product.name | htmlDecode }}
-                  </h1>
-
-                <div class="mt-1 text-grey-dark font-medium price_bx_it mb-10">
-                  <span
-                    class="text-primary mr-2"
-                    v-if="product.special_price && parseFloat(product.special_price) > 0"
-                  >
-                    {{ product.priceInclTax | price }}
-                  </span>
-
-                  <span
-                    class="line-through"
-                    v-if="product.special_price && parseFloat(product.originalPriceInclTax) > 0"
-                  >
-                    {{ product.originalPriceInclTax | price }}
-                  </span>
-
-                  <span
-                    v-if="!product.special_price && parseFloat(product.priceInclTax) > 0 "
-                  >
-                    {{ product.priceInclTax | price }}
-                  </span> 
-                  
-                </div>
-
-            </div> -->
+          
             <div 
                 class="relative mob_size_box"
                 v-for="(option, index) in product.configurable_options"
@@ -246,6 +212,10 @@ export default {
       this.setProductGallery( this.product )
       this.changeEditModeFilter();
       this.$forceUpdate()
+      
+      const el = document.body;
+      el.classList.add('set-overlay-on-top');
+      document.documentElement.classList.add('set-overlay-on-top')
     },
     /**
      * check if the option is available and returns boolean value
@@ -363,6 +333,11 @@ export default {
     Slide,
     ProductImage,
     // ProductVideo
+  },
+  destroyed () {
+    const el = document.body;
+    el.classList.remove('set-overlay-on-top');
+    document.documentElement.classList.remove('set-overlay-on-top')
   }
 }
 </script>

@@ -71,6 +71,9 @@ export default {
     },
     close () {
       this.toggle(false)
+      const el = document.body;
+      el.classList.remove('set-overlay-on-top');
+      document.documentElement.classList.remove('set-overlay-on-top')
     }
   },
   beforeMount () {

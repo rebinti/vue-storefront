@@ -76,6 +76,9 @@ export default {
       if (this.selectedBoardItem === null) {
         this.$store.commit('ui/setSelectedBoardItem', null);
         this.$bus.$emit('modal-hide', 'modal-create-boards')
+        const el = document.body;
+        el.classList.remove('set-overlay-on-top');
+        document.documentElement.classList.remove('set-overlay-on-top');
       } else {
         this.$store.commit('ui/setBoardsElem', 'add-to-board');
       }
@@ -126,6 +129,16 @@ export default {
       //   this.$store.commit('ui/setBoardsElem', 'add-to-board');
       // }
     }
+  },
+  beforeMount () {
+      const el = document.body;
+      el.classList.add('set-overlay-on-top');
+      document.documentElement.classList.add('set-overlay-on-top')
+  },
+  destroyed () {
+    const el = document.body;
+    el.classList.remove('set-overlay-on-top');
+    document.documentElement.classList.remove('set-overlay-on-top')
   }
 }
 </script>

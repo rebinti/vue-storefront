@@ -27,7 +27,11 @@ export const AddToCart = {
       try {
         const diffLog = await this.$store.dispatch('cart/addItem', { productToAdd: product })
         if (diffLog) {
-          this.$bus.$emit('modal-hide', 'modal-productwithoptions')
+          this.$bus.$emit('modal-hide', 'modal-productwithoptions');
+          const el = document.body;
+          el.classList.remove('set-overlay-on-top');
+          document.documentElement.classList.remove('set-overlay-on-top')
+
           // console.log('notification',JSON.stringify(diffLog))
           if (diffLog.clientNotifications && diffLog.clientNotifications.length > 0) {
             diffLog.clientNotifications.forEach(notificationData => {

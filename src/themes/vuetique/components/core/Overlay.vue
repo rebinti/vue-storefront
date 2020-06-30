@@ -18,6 +18,9 @@ export default {
     close () {
       Vue.prototype.$bus.$emit('close-sidebar-panel', true);
       this.$bus.$emit('modal-hide', 'modal-productwithoptions')
+      const el = document.body;
+      el.classList.remove('set-overlay-on-top');
+      document.documentElement.classList.remove('set-overlay-on-top')
       this.$store.commit('ui/setOverlay', false)
       this.$store.commit('ui/setMicrocart', false)
       this.$store.commit('ui/setWishlist', false)
@@ -35,4 +38,8 @@ export default {
 .overlay-fix {
   z-index: 5;
 }
+.set-overlay-on-top .overlay-fix {
+    z-index: 10;
+}
+
 </style>
