@@ -126,11 +126,7 @@ const store = {
     },
     setBrandList (state, data) {
       state.brandsList = data;
-      if (data && data.length > 0) {
-        state.brandsLoadedFlag = true
-      } else {
-        state.brandsLoadedFlag = false
-      }
+      state.brandsLoadedFlag = true
     },
     setBrandsFilters (state, data) {
       state.brandSearchText = data.selText;
