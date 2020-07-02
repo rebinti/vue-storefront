@@ -31,8 +31,13 @@
           </ul>
         </div>
         <div class="board-button-wrap">
-          <button-full class="mb-2 w-full lrge_btn" type="submit" data-testid="loginSubmit" style="background: black;">
-            {{ $t('Create Board') }}
+          <button-full class="mb-2 w-full lrge_btn" type="submit"
+           data-testid="loginSubmit" :disabled="isSubmitBoard"
+            style="background: black;">
+            <div class="flex items-center justify-center">
+              <span class="mr-2"> {{ $t('Create Board') }} </span>
+              <div v-show="isSubmitBoard" class="loader ml-1" />
+            </div>
           </button-full>
         </div>
       </form>
@@ -52,7 +57,8 @@ export default {
   data () {
     return {
       hasRedirect: !!localStorage.getItem('redirect'),
-      boardname: ''
+      boardname: '',
+      isSubmitBoard: false
     }
   },
   computed: {
@@ -93,19 +99,23 @@ export default {
         })
         return
       }
+      this.isSubmitBoard = true;
       console.log('this.selectedBoardItem', this.selectedBoardItem);
       let Boarddata = { name: this.boardname, items: [] };
       if (this.selectedBoardItem) Boarddata.items.push(this.selectedBoardItem);
       try {
         const result = await this.$store.dispatch('boards/createBoard', Boarddata)
-        console.log('resultttttt', result)
+        // console.log('resultttttt', result)
         if (result) {
-          console.log('resultttttt success', result);
+          this.isSubmitBoard = false;
+          // console.log('resultttttt success', result);
           if (this.selectedBoardItem === null) {
             this.$bus.$emit('modal-hide', 'modal-create-boards')
           } else {
             this.$bus.$emit('modal-hide', 'modal-create-boards')
           }
+        } else {
+          this.isSubmitBoard = false;
         }
         return
       } catch (err) {
@@ -115,8 +125,10 @@ export default {
           message: this.$t('Please try again!'),
           action1: { label: this.$t('OK') }
         })
+        this.isSubmitBoard = false;
         return
       } finally {
+        this.isSubmitBoard = false;
         console.log('finally')
       }
 
@@ -187,5 +199,20 @@ export default {
   text-transform: capitalize !important;
 }
 
+}
+
+.loader {
+  display: inline-block;
+  border: 3px solid #fff;
+  border-top: 3px solid theme('colors.primary');
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
