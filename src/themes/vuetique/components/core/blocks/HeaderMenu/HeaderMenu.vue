@@ -251,4 +251,9 @@ div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li a{
 	font-size: 14px;
 	color: #666666;
 }
+@media (min-width: 1200px) and (max-width: 1599px){
+  .container {
+      max-width: 1200px;
+  }
+}
 </style>

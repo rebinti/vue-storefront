@@ -204,4 +204,9 @@ header {
     }
   }
 }
+@media (min-width: 1200px) and (max-width: 1599px){
+  .container {
+      max-width: 1200px;
+  }
+}
 </style>
