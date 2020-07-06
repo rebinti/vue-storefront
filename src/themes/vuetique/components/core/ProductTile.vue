@@ -58,7 +58,7 @@
         </div>
         <div class="lg:col-3 pwishlist">
           <add-to-cart-quick-prod-btn :product="product" :addtocarttype="'Only-Icon'" class="cart-icon" />          
-          <wishlist-button :product="product" class="wish-icon" />          
+          <!-- <wishlist-button :product="product" class="wish-icon" />           -->
         </div>  
       </div>    
        <!-- <p class="product-category prd_cat" v-if="!onlyImage">
@@ -87,6 +87,11 @@
         
       </div>
     </router-link>
+    <div class="title-and-wish relative-wishlist">
+      <div class="pwishlist">                 
+        <wishlist-button :product="product" class="wish-icon" />          
+      </div>  
+    </div>     
   </div>
 </template>
 
@@ -272,6 +277,14 @@ export default {
       // @apply text-primary;
     }
   }
+}
+.product.w-full{
+    position: relative;
+}
+.relative-wishlist{
+    top: 0px;
+    position: absolute;
+    right: 0px;  
 }
 .product{
   .title-and-wish{
