@@ -297,12 +297,14 @@ export default {
       float: left;
       padding-top: 10px;
         .cart-icon{
-          float: left;
+          float: right;
+          margin-right: 4px;
         }
         .wish-icon{
           float: left;
           margin-left:10px;
           margin-top: -4px;
+          margin-right: 20px;
         }       
     }   
   }
@@ -361,6 +363,7 @@ export default {
           }
           .wish-icon{
             width: 20px;
+            margin-right: 20px;
           }       
       }   
     }
@@ -522,6 +525,7 @@ export default {
       .pwishlist{
         .wish-icon{
           margin-left:8px;
+          margin-right: 20px;
         }       
       }   
     }
@@ -541,6 +545,7 @@ export default {
         width: 30%;
         .wish-icon{
           margin-left:5px;
+          margin-right: 20px;
         }       
       }   
     }
