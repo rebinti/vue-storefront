@@ -11,7 +11,7 @@
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
               <div class="menu-list col-6">
-                    <!-- <cms-block :identifier="'new-in-cmsmenu'" /> -->
+                     <cms-block :identifier="'new-in-cmsmenu'" />
               </div>
              </div> 
           </div>
@@ -25,7 +25,7 @@
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
               <div class="menu-list col-6">
-                    <!-- <cms-block :identifier="'dresses-cmsmenu'" /> -->
+                    <cms-block :identifier="'dresses-cmsmenu'" />
               </div>
              </div> 
           </div>
@@ -39,7 +39,7 @@
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
               <div class="menu-list col-6">
-                    <!-- <cms-block :identifier="'womens-cmsmenu'" /> -->
+                    <cms-block :identifier="'womens-cmsmenu'" />
               </div>
              </div> 
           </div>
