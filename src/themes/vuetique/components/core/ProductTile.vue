@@ -12,6 +12,11 @@
         class="product-image w-full relative prod_list"
         :class="[{ sale: labelsActive && isOnSale }, { new: labelsActive && isNew }]"
       >
+       <div class="title-and-wish relative-wishlist">
+          <div class="pwishlist">                 
+            <wishlist-button :product="product" class="wish-icon wish-icon-inside-img" />          
+          </div>  
+        </div>    
         <img
           :alt="product.name"
           :src="thumbnailObj.loading"
@@ -87,11 +92,6 @@
         
       </div>
     </router-link>
-    <div class="title-and-wish relative-wishlist">
-      <div class="pwishlist">                 
-        <wishlist-button :product="product" class="wish-icon" />          
-      </div>  
-    </div>     
   </div>
 </template>
 
@@ -289,23 +289,31 @@ export default {
 .product{
   .title-and-wish{
     .ptitle{
-      width: 82%;
+      width: 90%;
       float: left;
+      padding-right: 10px;
     }
     .pwishlist{
-      width: 18%;
+      width: 10%;
       float: left;
       padding-top: 10px;
         .cart-icon{
           float: right;
-          margin-right: 4px;
+          // margin-right: 4px;
         }
         .wish-icon{
           float: left;
-          margin-left:10px;
-          margin-top: -4px;
-          margin-right: 20px;
-        }       
+          // margin-left:10px;
+          // margin-top: -4px;
+          // margin-right: 10px;
+          width: 20px; 
+        }
+        .wish-icon-inside-img{
+          width: 20px;
+          position: absolute;
+          top: 45px;
+          right: 0;
+        }              
     }   
   }
   .price_bx_it{
@@ -325,10 +333,14 @@ export default {
     .product{
       .title-and-wish{
         .ptitle{
-          width: 79%;
+          width: 90%;
+          padding-right: 10px;
         }
         .pwishlist{
-          width: 21%;     
+          width: 10%;    
+            .wish-icon{
+              width: 20px;
+            }     
         }   
       }
     }    
@@ -350,10 +362,11 @@ export default {
   .product{
     .title-and-wish{
       .ptitle{
-        width: 75%;
+        width: 90%;
+        padding-right: 10px;
       }
       .pwishlist{
-        width: 25%;
+        width: 10%;
           .cart-icon{
             width: 20px;
             .vt-icon{
@@ -363,7 +376,6 @@ export default {
           }
           .wish-icon{
             width: 20px;
-            margin-right: 20px;
           }       
       }   
     }
@@ -372,10 +384,11 @@ export default {
     .product{
       .title-and-wish{
         .ptitle{
-          width: 69%;
+          width: 90%;
+          padding-right: 10px;
         }
         .pwishlist{
-          width: 31%;     
+          width: 10%;     
         }   
       }
     }    
@@ -398,10 +411,11 @@ export default {
     .product{
       .title-and-wish{
         .ptitle{
-          width: 69%;
+          width: 90%;
+          padding-right: 10px;
         }
         .pwishlist{
-          width: 31%;     
+          width: 10%;     
         }   
       }
     }    
@@ -424,10 +438,11 @@ export default {
     .product{
       .title-and-wish{
         .ptitle{
-          width: 69%;
+          width: 90%;
+          padding-right: 10px;
         }
         .pwishlist{
-          width: 31%;     
+          width: 10%;     
         }   
       }
     }    
@@ -524,8 +539,10 @@ export default {
     .title-and-wish{
       .pwishlist{
         .wish-icon{
-          margin-left:8px;
-          margin-right: 20px;
+          // margin-left:8px;
+          // margin-right: 10px;
+          top: 36px;
+          right: -9px;
         }       
       }   
     }
@@ -539,13 +556,16 @@ export default {
   .product{
     .title-and-wish{
       .ptitle{
-        width: 70%;
+        width: 90%;
+        padding-right: 10px;
       }
       .pwishlist{
-        width: 30%;
+        width: 10%;
         .wish-icon{
-          margin-left:5px;
-          margin-right: 20px;
+          // margin-left:5px;
+          // margin-right: 10px;
+         top: 36px;
+         right: -9px;
         }       
       }   
     }

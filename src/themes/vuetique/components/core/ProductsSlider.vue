@@ -108,14 +108,14 @@ export default {
             height: 180px;
         }
       }
-      .title-and-wish{
-        .ptitle{
-          width: 61%;
-        }
-        .pwishlist{
-          width: 38%;     
-        }   
-      }      
+      // .title-and-wish{
+        // .ptitle{
+        //   width: 61%;
+        // }
+        // .pwishlist{
+        //   width: 38%;     
+        // }   
+      // }      
     }
   }  
 }
@@ -128,14 +128,14 @@ export default {
             height: 221.25px;
         }
       }
-      .title-and-wish{
-        .ptitle{
-          width: 69%;
-        }
-        .pwishlist{
-          width: 31%;     
-        }   
-      }       
+      // .title-and-wish{
+        // .ptitle{
+        //   width: 69%;
+        // }
+        // .pwishlist{
+        //   width: 31%;     
+        // }   
+      // }       
     }
   }  
 }
@@ -148,14 +148,14 @@ export default {
             height: 258.75px;
         }
       }
-      .title-and-wish{
-        .ptitle{
-          width: 71%;
-        }
-        .pwishlist{
-          width: 29%;     
-        }   
-      }        
+      // .title-and-wish{
+        // .ptitle{
+        //   width: 71%;
+        // }
+        // .pwishlist{
+        //   width: 29%;     
+        // }   
+      // }        
     }
   }  
 }
@@ -192,14 +192,14 @@ export default {
             height: 438px;
         }
       }
-      .title-and-wish{
-        .ptitle{
-          width: 80%;
-        }
-        .pwishlist{
-          width: 20%;     
-        }   
-      }      
+      // .title-and-wish{
+        // .ptitle{
+        //   width: 80%;
+        // }
+        // .pwishlist{
+        //   width: 20%;     
+        // }   
+      // }      
     }
   }
 } 
