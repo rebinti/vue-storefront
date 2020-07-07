@@ -311,8 +311,8 @@ export default {
         .wish-icon-inside-img{
           width: 20px;
           position: absolute;
-          top: 45px;
-          right: 0;
+          top: 41px;
+          right: -3px;
         }              
     }   
   }
