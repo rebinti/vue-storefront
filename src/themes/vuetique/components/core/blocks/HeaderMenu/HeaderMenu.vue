@@ -8,6 +8,7 @@
           <router-link class="menu-link" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/'+menu.className)" exact>{{ menu.title }}</router-link>
           <div v-show="activeSubMenu === menu.identifier"
             class="main-item row cms-block-menu"
+            @click="onMenuSubCategoryClick($event)"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
               <div class="menu-list col-6">
@@ -170,6 +171,13 @@ export default {
     },
     categoryLink (category) {
       return formatCategoryLink(category)
+    },
+    onMenuSubCategoryClick (event) {
+      if (event.path[0] && event.path[0].attributes && event.path[0].attributes[0].name === 'href') {
+       setTimeout(() => {
+          this.activeSubMenu= null;
+       }, 300);
+      } 
     }
   }
 };
