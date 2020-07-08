@@ -63,6 +63,35 @@ export function formatCategoryLink (category: { url_path: string, slug: string }
   return config.seo.useUrlDispatcher ? ('/' + category.url_path).replace('.html' , '') : ('/c/' + category.slug)
 }
 
+
+/*
+    For Working the routing from a href tag link
+    from the CMS block
+    @params refrence of the v-html element
+*/
+export function vHtmlRouter (refs) {
+  let links = refs.querySelectorAll('a')
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', (event) => {
+      event.preventDefault()
+      let target = event.target
+      while (target) {
+        if (target instanceof HTMLAnchorElement) {
+          let link = target.getAttribute('href')
+          if (link.substr(0, 4) === 'http') {
+            window.location.href = link
+          } else {
+            router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+          }
+          break
+        }
+        target = target.parentNode
+      }
+      event.preventDefault()
+    })
+  }
+}
+
 export function formatProductLink (
   product: {
     parentSku?: string,

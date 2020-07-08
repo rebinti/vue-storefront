@@ -2,11 +2,13 @@
   <div
     :class="['cms-content py-10', { 'container': sync }]"
     v-if="data"
+    :ref="'refElement-'+ identifier"
     v-html="data.content"
   />
 </template>
 
 <script>
+import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
 export default {
   name: 'CmsBlock',
   props: {
@@ -56,6 +58,7 @@ export default {
         skipCache: this.sync
       }).then(res => { 
           this.$emit('cmsDataChangedNew', { status: true, value : this.data });
+          if (res !== undefined) vHtmlRouter(this.$refs['refElement-'+ this.identifier])
       })
     }
   },
