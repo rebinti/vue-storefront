@@ -185,6 +185,7 @@ export default {
     padding: 15px;
     line-height: 1.25rem;
     text-decoration: none;
+    text-transform: uppercase;
 
     &:hover,
     &:focus {
