@@ -3,52 +3,21 @@
     <div class="container">
       <ul class="flex menu">
 
-       <li @mouseenter="activeSubMenu = 'new-in-cmsmenu'"
-           @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :class="{active: activeSubMenu == 'new-in-cmsmenu'}"  :to="localizedRoute('/sale')" exact>{{ $t('NEW IN') }}</router-link>
-          <div v-show="activeSubMenu === 'new-in-cmsmenu'"
+      <li v-for="menu in headerMenuList" :key="menu.id" @mouseenter="activeSubMenu = menu.identifier"
+           @mouseleave="activeSubMenu = null" v-if="headerMenuList.length && menu.active" :class="menu.className">
+          <router-link class="menu-link" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/sale')" exact>{{ menu.title }}</router-link>
+          <div v-show="activeSubMenu === menu.identifier"
             class="main-item row cms-block-menu"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
              <div class="container">
               <div class="menu-list col-6">
-                     <cms-block :identifier="'new-in-cmsmenu'" />
+                    <cms-block :identifier="menu.identifier" />
               </div>
              </div> 
           </div>
-      </li>
+      </li> 
 
-       <li @mouseenter="activeSubMenu = 'dresses-cmsmenu'"
-           @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :class="{active: activeSubMenu == 'dresses-cmsmenu'}" :to="localizedRoute('/sale')" exact>{{ $t('DRESSES') }}</router-link>
-          <div v-show="activeSubMenu === 'dresses-cmsmenu'"
-            class="main-item row cms-block-menu"
-            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
-             <div class="container">
-              <div class="menu-list col-6">
-                    <cms-block :identifier="'dresses-cmsmenu'" />
-              </div>
-             </div> 
-          </div>
-      </li>
-
-      <li  @mouseenter="activeSubMenu = 'womens-cmsmenu'"
-           @mouseleave="activeSubMenu = null">
-          <router-link class="menu-link" :class="{active: activeSubMenu == 'womens-cmsmenu'}"  :to="localizedRoute('/sale')" exact>{{ $t('WOMENS') }}</router-link>
-          <div v-show="activeSubMenu === 'womens-cmsmenu'"
-            class="main-item row cms-block-menu"
-            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
-             <div class="container">
-              <div class="menu-list col-6">
-                    <cms-block :identifier="'womens-cmsmenu'" />
-              </div>
-             </div> 
-          </div>
-      </li>  
-
-
-
-
-        <li
+      <!-- <li
           class="relative"
           :key="category.slug"
           v-for="category in visibleCategories"
@@ -79,7 +48,8 @@
             :parent-path="category.url_path"
             class="left-0"
           />
-        </li>
+        </li> -->
+
         <!-- <li>
           <router-link
             class="menu-link"
@@ -88,8 +58,7 @@
           >
             {{ $t('Sale') }}
           </router-link>
-        </li>-->
-
+        </li>
 
         <li>
           <router-link
@@ -106,7 +75,7 @@
             exact
           >{{ $t('Brands') }}
           </router-link>
-        </li>
+        </li> -->
 
         <li>
           <router-link
@@ -115,14 +84,13 @@
             exact
           >{{ $t('Inspiration') }}</router-link>
         </li>        
-      
-        
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import config from 'config'
 import { mapGetters, mapState } from "vuex";
 import onEscapePress from "@vue-storefront/core/mixins/onEscapePress";
 import SubCategory from "theme/components/core/blocks/HeaderMenu/SubCategory";
@@ -141,7 +109,8 @@ export default {
   data() {
     return {
       allCategories: [],
-      activeSubMenu: null
+      activeSubMenu: null,
+      headerMenuList:  config.headerMenuList || []
     };
   },
   computed: {
