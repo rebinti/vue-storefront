@@ -11,7 +11,7 @@
             v-show="placeholderImagesMap[index]"
             key="placeholderImage"
             class="product-image inline-flex cursor-pointer mw-full"
-            src="/assets/placeholder.jpg"
+            src="/assets/placeholder.png"
             ref="images"
             :alt="productName | htmlDecode"
           >
