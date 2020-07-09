@@ -65,7 +65,7 @@
                 </p>
               </div>
               <div class="review-div">
-                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
               </div>
             </div>
               <div class="mob_headline_out">
@@ -269,7 +269,7 @@
                 </p>
               </div>
               <div class="review-div">
-                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span>
+                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
               </div>
             </div>
             <h1 data-testid="productName" itemprop="name">
@@ -701,7 +701,7 @@ export default {
     getSpecialPercent () {
       if(this.product.originalPriceInclTax){
       let percent = 100- ((this.product.priceInclTax*100)/this.product.originalPriceInclTax);        
-         return Math.round(percent)+"%";
+         return '-' + Math.round(percent)+"%";
       } else {
         return null
       }
@@ -711,6 +711,8 @@ export default {
     this.$bus.$on('product-after-related', this.getRelatedProduct)
     this.$bus.$on('product-after-load', this.getDataFromThirdPartyModules)
     this.$bus.$on('product-before-load', this.changeProd)
+    this.$bus.$on('user-after-loggedin', this.reloadTruefitValues)
+    this.$bus.$on('user-after-logout', this.reloadTruefitValues)
 
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
     // document.addEventListener( 'stamped:reviews:loaded', function(e) {
@@ -921,25 +923,32 @@ export default {
         For Stamped Review
       */
       // this.getProductId =  null
-        const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-        this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
-        console.log('Stamped getProductId value', this.getProductId)
-        this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
+        // const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
+        // this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
+        // console.log('Stamped getProductId value', this.getProductId)
+        // this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
 
       /* 
         For TrueFit Integration
       */
-        let trufitIds = [{ id: 'DS20', color: 'navy'},
-                        { id: 'MA810108-P3022', color: 'green'},
-                        { id: 'KP0336', color: 'blue'  },
-                        { id: 'PD51162', color: 'orange'  },
-                        { id: 'MA810236', color: 'navy' },
-                        { id: '10222417', color: 'mustard'},
-                        { id: 'PD810608', color: 'navy' },
-                        {id: 'D146985', color: 'navy' }
-                        ];
-        this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
-        console.log('TrueFit Integration value', this.getTruefitProd)
+        // let trufitIds = [{ id: 'DS20', color: 'navy'},
+        //                 { id: 'MA810108-P3022', color: 'green'},
+        //                 { id: 'KP0336', color: 'blue'  },
+        //                 { id: 'PD51162', color: 'orange'  },
+        //                 { id: 'MA810236', color: 'navy' },
+        //                 { id: '10222417', color: 'mustard'},
+        //                 { id: 'PD810608', color: 'navy' },
+        //                 {id: 'D146985', color: 'navy' }
+        //                 ];
+        // this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
+        if (this.attributesByCode.color && this.product.color) {
+           const colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === this.product.color)
+          let truefitData = { id: this.product.stylenumber, color: colorSwatch.label }; 
+          this.getTruefitProd = truefitData; 
+        } else {
+          this.getTruefitProd = null;
+        }
+        // console.log('TrueFit Integration value', this.getTruefitProd)
 
       /* For reload the stamped review section */ 
         // this.$forceUpdate();
@@ -974,14 +983,22 @@ export default {
 
      /* For reload the TrueFit part */ 
          window&&window.tfcapi&&window.tfcapi('calculate');
-    }
+    },
+    reloadTruefitValues () {
+      console.log('onLoggedIn the user')
+      setTimeout(() => {
+       window&&window.tfcapi&&window.tfcapi('calculate');
+      }, 250);
+    },
 
   },
-  destroyed () {
+  beforeDestroy () {
     this.$bus.$off('product-after-related')
     this.$bus.$off('product-before-load')
     this.$bus.$off('product-after-load')
     // this.$bus.$off('product-after-load')
+    this.$bus.$off('user-after-loggedin', this.reloadTruefitValues)
+    this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {
     this.getDataFromThirdPartyModules();

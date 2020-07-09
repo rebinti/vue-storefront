@@ -17,19 +17,19 @@
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
         </div> 
         <div id="stamped-main-widget" 
-                :data-product-id="yoptoProduct" 
-                :data-name="'test'" 
-                :data-url="'test'" 
-                :data-image-url="'test'" 
-                :data-description="'Testing prduct'" 
-                :data-product-sku="'test'"> 
+                :data-product-id="originalProduct.id" 
+                :data-name="originalProduct.name" 
+                :data-url="originalProduct.url_path" 
+                :data-image-url="originalProduct.image" 
+                :data-description="originalProduct.description" 
+                :data-product-sku="originalProduct.sku"> 
         </div>
          
   </div>  
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
 import NoScrollBackground from 'theme/mixins/noScrollBackground'
 
@@ -48,23 +48,27 @@ export default {
   },
   computed: {
     ...mapState({
-      yoptoProduct: state => state.ui.yoptoProduct
+      // yoptoProduct: state => state.ui.yoptoProduct,
+      isReviewPanelOpen: state => state.ui.reviewPanel,
     }),
-    isReviewPanelOpen () {
-      console.log('state all data' , this.$store.state);
-          // let elements = document.querySelectorAll(".stamped-container");
-          // if (elements.length > 0) {
-          //   elements.forEach(el => el.remove())
-          // }
-          // window.StampedFn.reloadUGC()
-          // window.StampedFn.loadWidget()
-          // window.StampedFn.loadBadges()
-          // window.StampedFn.loadDisplayWidgets()
-      return this.$store.state.ui.reviewPanel
-    },
+    ...mapGetters({
+      originalProduct: 'product/productOriginal',
+    }),
+    // isReviewPanelOpen () {
+    //   console.log('state all data' , this.$store.state);
+    //       // let elements = document.querySelectorAll(".stamped-container");
+    //       // if (elements.length > 0) {
+    //       //   elements.forEach(el => el.remove())
+    //       // }
+    //       // window.StampedFn.reloadUGC()
+    //       // window.StampedFn.loadWidget()
+    //       // window.StampedFn.loadBadges()
+    //       // window.StampedFn.loadDisplayWidgets()
+    //   return this.$store.state.ui.reviewPanel
+    // },
   },
    mounted () {
-     console.log('yoptoProduct' , this.yoptoProduct);
+    //  console.log('yoptoProduct' , this.yoptoProduct);
          let elements = document.querySelectorAll(".stamped-container");
           if (elements.length > 0) {
             elements.forEach(el => el.remove())
@@ -97,7 +101,7 @@ export default {
   methods: {
     closeReviewPanel () {
       // this.$store.dispatch('ui/closeReviewPanel')
-      console.log('yoptoProduct' , this.yoptoProduct)
+      // console.log('yoptoProduct' , this.yoptoProduct)
       this.$store.commit('ui/setSidebar', false)
 
       this.$store.dispatch('ui/toggleReviewPanel')

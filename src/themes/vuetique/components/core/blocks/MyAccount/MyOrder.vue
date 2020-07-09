@@ -110,7 +110,7 @@
     <!-- mobile design -->
     <div>
           <!-- My orders header -->
-      <div class="row mb-4">
+      <div class="row mb-4"  style="display: none;">
         <div class="col-12 sm:col-6">
           <h2 class="mb-1 align-C">
             {{ $t('My orders') }}
