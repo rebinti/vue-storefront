@@ -852,6 +852,7 @@ export default {
 
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
+        relatedProd = relatedProd.filter(val => val.id !== this.product.id);
         relatedProd.unshift({...this.product, activeProd: true});
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
           .map(val => { 
@@ -909,6 +910,7 @@ export default {
       // console.log('changeProd when another product clicked', val)
       if (val.route !== null) {
         this.getProductId = null;
+        this.colorSwatchRelateProduct = [];
       }
     },
 

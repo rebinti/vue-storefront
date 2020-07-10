@@ -49,7 +49,7 @@ export default {
               return index%3 == 0 ? '12 item-3-12-grid one-item' : '6 item-3-6-grid';
               break;
         case 4:
-              return '3  item-4-3-grid'
+              return '4  item-4-3-grid'
               break;
         default:
              return '6'

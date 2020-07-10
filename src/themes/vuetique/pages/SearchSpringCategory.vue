@@ -89,7 +89,9 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-      <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;" v-if="!searcingLoaderFlag">
+      <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;"
+        :class="classNameTab"
+       v-if="!searcingLoaderFlag">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top search">
@@ -510,12 +512,18 @@ export default {
       fixedOrderPanel: false,
       initialSearchFlag: true,
       sliderConfig: {
-            perPageCustom: [[0, 3], [768, 6], [1024, 6]],
+            perPageCustom: [[0, 3], [425, 4], [768, 6], [1024, 6]],
             perPage: 3,
             paginationEnabled: false,
             // loop: true,
             // paginationSize: 6
-      }
+      },
+      navVisible: true,
+      isScrolling: false,
+      scrollTop: 0,
+      lastScrollTop: 0,
+      navbarHeight: 70,
+      classNameTab: ''
     };
   },
 
@@ -539,6 +547,18 @@ export default {
         this.initialSearchFlag = false;
       }
     this.$bus.$on('close-sidebar-panel', this.closeFilters);
+
+    window.addEventListener('scroll', () => {
+      this.isScrolling = true
+      this.handleScroll()
+    }, {passive: true})
+
+    setInterval(() => {
+      if (this.isScrolling) {
+        this.hasScrolled()
+        this.isScrolling = false
+      }
+    }, 250)
   },
   created () {
       // if(this.getStoredCurrentRouterPath !== this.$route.path ) {
@@ -565,11 +585,27 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
-    document.addEventListener('scroll',  this.handleScroll);
+    // document.addEventListener('scroll',  this.handleScroll);
     this.setEmarsysTracker();
    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.searchedValue.replace("/", " > ") });
   },
   methods: {
+    hasScrolled () {
+      this.scrollTop = window.scrollY
+      if (this.scrollTop <= 150) {
+          this.classNameTab = ''
+          this.lastScrollTop = this.scrollTop
+          return
+      }
+      if (this.scrollTop > this.lastScrollTop && this.scrollTop > this.navbarHeight) {
+        this.navVisible = true
+        this.classNameTab = 'filtertab_pos-fixed-top-on-bottom' 
+      } else {
+        this.navVisible = false
+        this.classNameTab = 'filtertab_pos-fixed-top-on-top'
+      }
+      this.lastScrollTop = this.scrollTop
+    },
    setEmarsysTracker () {
       this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.getCurrentCategoryUrlPath(' > ')});
     },
@@ -1020,7 +1056,7 @@ export default {
       });
       routeUrl= routeUrl.map(val => val.name).join(joiningString);    
       let routeString = routeUrl ? routeUrl + joiningString +  this.category.name : this.category.name;
-      console.log('routeString', routeString);
+      // console.log('routeString', routeString);
       return routeString  
     }
 
@@ -1508,5 +1544,33 @@ input {
     margin-top: 10px;
     padding-right: 9px;
   }
+
+  .filtertab_pos-fixed-top-on-bottom{
+    margin-bottom: 5px;
+    position: fixed;
+    top: 129px;
+    -webkit-transform: translate3d(0,-200%,8px);
+    transform: translate3d(0,-200%,8px);
+    z-index: 4;
+    padding: 7px 5px 5px 5px;
+    background: #fff;
+    width: 100%;
+    height: 57px;
+    max-width: 100%;
+}
+
+  .filtertab_pos-fixed-top-on-top {
+    margin-bottom: 5px;
+    position: fixed;
+    top: 201px;
+    -webkit-transform: translate3d(0,-200%,8px);
+    transform: translate3d(0,-200%,8px);
+    z-index: 4;
+    padding: 7px 5px 5px 5px;
+    background: #fff;
+    width: 100%;
+    height: 57px;
+    max-width: 100%;
+}
 
 </style>
