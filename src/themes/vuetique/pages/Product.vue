@@ -134,7 +134,7 @@
                             <div class="clr_img_out">
                               <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                               <img 
-                              style="border-radius: 50px;width: 33px;height: 33px;" 
+                             class="color-swatch-inner"
                               :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
                                  @error="imgUrlAlt" alt="" >
                               </div>
@@ -1012,6 +1012,24 @@ export default {
 <style lang="scss" scoped>
 .error {
   @apply text-error font-bold pb-4;
+}
+
+.color-swatch-inner {
+   border-radius: 50px;
+   width: 33px;
+   height: 33px;
+}
+.color-swatch-active {
+    border: 1px solid #000000;
+    border-radius: 50px;
+    width: 38px;
+    height: 38px;
+    img{
+      margin-top: 4px;
+      margin-left: 4px;
+      width: 28px;
+      height: 28px;
+    }
 }
 
 .price {
