@@ -117,11 +117,12 @@ const store = {
     setSeletedMobileGrid (state, data) {
       state.seletedMobileGrid = data
       state.defaultColumnMobile = data.value
-      state.defaultColumnWeb = data.value
+      if (data.value === 4) state.defaultColumnWeb = 4;
+      // state.defaultColumnWeb = data.value
     },
     setSeletedWebViewGrid (state, data) {
-      state.seletedMobileGrid = state.mobileGridData.find(val => val.value === data);
-      state.defaultColumnMobile = data
+      // state.seletedMobileGrid = state.mobileGridData.find(val => val.value === data);
+      // state.defaultColumnMobile = data
       state.defaultColumnWeb = data
     },
     setBrandList (state, data) {
