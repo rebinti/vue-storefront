@@ -94,14 +94,18 @@
                         >
                           <div
                             class="text-h1 gg mob_p"
+                            style="width: 100%;"
                             v-if="product.special_price && product.priceInclTax && product.originalPriceInclTax"
                           >
-                            <span class="font-bold">
-                              {{ product.priceInclTax * product.qty | price }}
-                            </span>
-                            <span class="text-h2 text-grey line-through">
-                              {{ product.originalPriceInclTax * product.qty | price }}
-                            </span>
+                            <span class="text-h2 text-grey line-through" style="width: auto;margin: 2px 8px 0 0;">
+                            {{ product.originalPriceInclTax * product.qty | price }}
+                            </span>&nbsp;                
+                            <span class="font-bold" style="width: auto;margin-right: 8px;">
+                            {{ product.priceInclTax * product.qty | price }}
+                            </span>&nbsp; 
+                            <span class="promotions__stamp-label" style="width: auto;top: 0;padding: 3px 6px 3px 7px;">
+                            {{getSpecialPercent}}
+                            </span> 
                           </div>
                           <div
                             v-if="!product.special_price && product.priceInclTax"
@@ -1179,6 +1183,26 @@ button.no-combination {
     }
   }
 }
+.price{
+    div{
+      span.line-through{
+        color: #000000 !important;;
+      }
+      span.font-bold{
+        color: #BA0C2F !important;;
+      } 
+      span.promotions__stamp-label{
+      border: 1px dashed #BA0C2F;
+      color: #BA0C2F;
+      font-size: 12px !important;
+      line-height: 15px;
+      margin-top: 0 !important;
+      padding: 0px 6px;
+      position: relative;
+      top: -3px;
+     }     
+    }
+  }
 .details-section{
   .price{
     div{
@@ -1937,9 +1961,10 @@ button.no-combination {
           margin-top: 15px;
         .fit-label{
           font-size: 9px;
-          width: 20%;
+          width: auto;
           float: left;
           margin-top: 10px;
+          margin-right: 6px;
         }
         .truefit-button{
           float: left;
@@ -2018,9 +2043,10 @@ button.no-combination {
           margin-top: 15px;
         .fit-label{
           font-size: 9px;
-          width: 26%;
+          width: auto;
           float: left;
           margin-top: 10px;
+          margin-right: 6px;
         }
         .truefit-button{
           float: left;
