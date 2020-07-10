@@ -68,7 +68,7 @@ export default {
       store: store,
       route: route,
       current: 0,
-      perPage: 50,
+      perPage: 5,
       sort,
       filters: config.products.defaultFilters,
       includeFields: config.entities.optimize && isServer ? config.entities.productList.includeFields : null,
@@ -94,13 +94,13 @@ export default {
           searchProductQuery: baseFilterProductsQuery(parentCategory, defaultFilters)
         })
       }
-      // const subloaders = await store.dispatch('category/products', query)
-      // if (subloaders) {
-      //   await Promise.all(subloaders)
-      await EventBus.$emitFilter('category-after-load', { store: store, route: route })
-      // } else {
-      //   throw new Error('Category query returned empty result')
-      // }
+      const subloaders = await store.dispatch('category/products', query)
+      if (subloaders) {
+        await Promise.all(subloaders)
+        await EventBus.$emitFilter('category-after-load', { store: store, route: route })
+      } else {
+        throw new Error('Category query returned empty result')
+      }
     } catch (err) {
       Logger.error(err)()
       throw err
