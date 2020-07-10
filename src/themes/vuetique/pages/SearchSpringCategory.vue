@@ -1562,7 +1562,7 @@ input {
   .filtertab_pos-fixed-top-on-top {
     margin-bottom: 5px;
     position: fixed;
-    top: 201px;
+    top: 198px;
     -webkit-transform: translate3d(0,-200%,8px);
     transform: translate3d(0,-200%,8px);
     z-index: 4;
