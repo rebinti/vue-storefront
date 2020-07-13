@@ -60,7 +60,7 @@ export default {
         case 33: 
               return '3  item-4-3-grid'
               break;
-        case 33: 
+        case 44: 
               return '4  item-4-3-grid'
               break;                            
         case 4:
