@@ -158,11 +158,11 @@ export default {
               top:36px;
             }
             select{
-              background:#fafafa;
-              border: 0px;
-              border-bottom: 1px solid #e0e0e0;
-              height: 80px;
-              color:#000000;
+              // background:#fafafa;
+              // border: 0px;
+              // border-bottom: 1px solid #e0e0e0;
+              // height: 80px;
+              // color:#000000;
             }
             label{
               top:25px;
@@ -176,7 +176,7 @@ export default {
                   top:21px !important;
                 }
                 select{
-                  height: auto !important;
+                  // height: auto !important;
                 }
                 label{
                   top:10px !important;
