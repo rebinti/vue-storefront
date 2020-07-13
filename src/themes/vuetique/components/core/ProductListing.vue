@@ -41,15 +41,23 @@ export default {
   },
   methods: {
     checkGridView(index) {
+      if (window && (window.innerWidth >= 580) && (window.innerWidth <= 768)){
+        if(this.mobColumns==3){
+           this.mobColumns = 33  // it for 768 screen 3 column fix 
+        }
+      } 
       switch(this.mobColumns) {
         case 2: 
               return '6 item-2-6-grid'
-        break;
+              break;
         case 3: 
               return index%3 == 0 ? '12 item-3-12-grid one-item' : '6 item-3-6-grid';
               break;
+        case 33: 
+              return '3  item-4-3-grid'
+              break;              
         case 4:
-              return '4  item-4-3-grid'
+              return '3  item-4-3-grid'
               break;
         default:
              return '6'
