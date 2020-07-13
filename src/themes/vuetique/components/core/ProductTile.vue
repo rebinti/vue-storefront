@@ -433,7 +433,11 @@ export default {
   .item-4-3-grid.column4 .product-image img{
       width: 172px;
       height: 258px;
-  } 
+  }
+  .item-4-3-grid.column3 .product-image img{
+      width: 236px;
+      height: 354px;
+  }   
   .column4{
     .product{
       .title-and-wish{
