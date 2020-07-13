@@ -535,6 +535,10 @@ export default {
       width: 192.5px;
       height: 288.75px;
   }
+  .item-3-12-grid.column3 .product-image img{
+      width: 405px;
+      height: 607.5px;    
+  }  
   .item-3-6-grid.column3 .product-image img{
       width: 192.5px;
       height: 288.75px;
@@ -560,7 +564,11 @@ export default {
   .item-2-6-grid.column2 .product-image img{
       width: 167.5px;
       height: 251.25px;
-  }  
+  } 
+  .item-3-12-grid.column3 .product-image img{
+      width: 355px;
+      height: 532.5px;    
+  }    
   .item-3-6-grid.column3 .product-image img{
       width: 167.5px;
       height: 251.25px;  
