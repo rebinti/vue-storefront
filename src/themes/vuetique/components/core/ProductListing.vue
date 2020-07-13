@@ -45,6 +45,10 @@ export default {
         if(this.mobColumns==3){
            this.mobColumns = 33  // it for 768 screen 3 column fix 
         }
+      }else if(window && (window.innerWidth < 580)){
+        if(this.mobColumns==4){
+           this.mobColumns = 44  // it for mobile screen 3 column fix 
+        }        
       } 
       switch(this.mobColumns) {
         case 2: 
@@ -55,7 +59,10 @@ export default {
               break;
         case 33: 
               return '3  item-4-3-grid'
-              break;              
+              break;
+        case 33: 
+              return '4  item-4-3-grid'
+              break;                            
         case 4:
               return '3  item-4-3-grid'
               break;
