@@ -727,17 +727,19 @@ export default {
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
 
     tfcapi('event','tfc-fitrec-register','addtobag',function(e) {
-          // var size = e.size;
-          console.log('addtobag addtobag' , e)
+          console.log('addtobag addtobag' , e) // var size = e.size;
     });
-    tfcapi('event', 'tfc-fitrec-product', 'success', function(context) {
-      console.log('fitRecommendation success' , context)
-          // if (typeof fitrec_selectSize === 'function') {
-          // fitrec_selectSize(context.fitRecommendation.size,
-          // context.fitRecommendation.score);
-          // }
-      });
-
+    var self = this;
+    tfcapi('event', 'tfc-fitrec-product', 'success' , function(context )  {
+        console.log('fitRecommendation success' , context)
+        if (self.options['size']) {
+          const recommendatedOption = self.options['size'].find(val => val.label == context.fitRecommendation.size)
+          console.log('fitRecommendation finded', recommendatedOption)
+          if (recommendatedOption) {
+            self.$bus.$emit('filter-changed-product', { attribute_code: recommendatedOption.attribute_code, id: recommendatedOption.id, label: recommendatedOption.label })
+          }
+        }
+    });
 
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
     // document.addEventListener( 'stamped:reviews:loaded', function(e) {
