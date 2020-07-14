@@ -740,7 +740,6 @@ export default {
           }
         }
     });
-
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
     // document.addEventListener( 'stamped:reviews:loaded', function(e) {
     //   console.log('Stampled addEventListener', e);
@@ -974,13 +973,13 @@ export default {
         if (this.attributesByCode.color && this.product.color) {
           const colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === this.product.color)
           let availablesizes = [];
-          if (this.product.configurable_options.length && this.product.configurable_options.length > 1) {
+          if (this.product.configurable_options && this.product.configurable_options.length && this.product.configurable_options.length > 1) {
               this.options[this.product.configurable_options[1].attribute_code].filter(val11 => {
                   this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
                       availablesizes.push(val11.label.replace('"', '') + ' x ' + val1.label.replace('"', ''))
                   });
               });
-          } else if (this.product.configurable_options.length){
+          } else if (this.product.configurable_options && this.product.configurable_options.length){
               this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
                   availablesizes.push(val1.label)
               });
