@@ -127,7 +127,12 @@ export default {
     left: 0;
 
     .iframe-container {
-      padding-top: 56.25%;
+      // padding-top: 56.25%;
+      .video-play-tag { 
+          width:100%;
+          // margin-top: -3px;
+          height: 101%; 
+       }
 
       iframe {
         top: 0;
