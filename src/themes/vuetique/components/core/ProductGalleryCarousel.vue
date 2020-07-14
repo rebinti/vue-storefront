@@ -45,6 +45,7 @@
           <product-video-slide
             v-if="images.video && images.video !== null"
             :video_id="images.video"
+            :video_thumbnail="images.src"
             :index="index"
           />
         </div>

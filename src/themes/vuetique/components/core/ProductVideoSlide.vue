@@ -11,7 +11,9 @@
       <!-- <LoaderScoped v-if="!iframeLoaded" /> -->
       <div class="iframe-container w-full">
  
-        <video class="video-fluid video-play-tag" ref="videoElement" id="videoElement" loop controls @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
+        <video class="video-fluid video-play-tag" :poster="video_thumbnail"
+        ref="videoElement" id="videoElement" 
+        loop controls @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
           <source :src="video_id" type="video/mp4" />
         </video>
       </div>
@@ -35,6 +37,10 @@ export default {
   },
   props: {
     video_id: {
+      type: String,
+      required: true
+    },
+    video_thumbnail: {
       type: String,
       required: true
     },
