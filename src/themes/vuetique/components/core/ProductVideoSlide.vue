@@ -10,13 +10,8 @@
     <div  class="iframe-wrapper absolute w-full" v-if="videoStarted">
       <!-- <LoaderScoped v-if="!iframeLoaded" /> -->
       <div class="iframe-container w-full">
-        <!-- <iframe
-          :src="embedUrl"
-          class="absolute w-full h-full"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          @load="iframeIsLoaded()"
-        /> -->
-        <video class="video-fluid" ref="videoElement" id="videoElement" loop controls height="720" style="width:100%;margin-top: -313px;height: 720px;}" @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
+ 
+        <video class="video-fluid video-play-tag" ref="videoElement" id="videoElement" loop controls @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
           <source :src="video_id" type="video/mp4" />
         </video>
       </div>
