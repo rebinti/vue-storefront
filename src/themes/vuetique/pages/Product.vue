@@ -213,7 +213,10 @@
                 <div class="truefit-button tfc-fitrec-product" 
                   v-if="getTruefitProd !== null"
                   :id="getTruefitProd.id" :data-userid="getCurrentUserId"
-                  :data-colorid="getTruefitProd.color" data-locale="en_GB">
+                  :data-colorid="getTruefitProd.color" 
+                  :data-availablesizes="getTruefitProd.availablesizes"
+                  data-locale="en_GB"
+                  >
                 </div>
                 <div class="size-guide-b">
                   <a href="javascript:void(0);"  
@@ -436,8 +439,11 @@
               <div class="fit-label">FIND YOUR SIZE</div>
               <div class="truefit-button tfc-fitrec-product" 
                 v-if="getTruefitProd !== null"
-                :id="getTruefitProd.id" :data-userid="getCurrentUserId"
-                :data-colorid="getTruefitProd.color" data-locale="en_GB">
+                :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
+                  :data-colorid="getTruefitProd.color" 
+                  :data-availablesizes="getTruefitProd.availablesizes"
+                  data-locale="en_GB"
+                >
               </div>
               <div class="size-guide-b">
                 <a href="javascript:void(0);"  
@@ -718,6 +724,21 @@ export default {
     this.$bus.$on('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$on('user-after-logout', this.reloadTruefitValues)
 
+    // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
+
+    tfcapi('event','tfc-fitrec-register','addtobag',function(e) {
+          // var size = e.size;
+          console.log('addtobag addtobag' , e)
+    });
+    tfcapi('event', 'tfc-fitrec-product', 'success', function(context) {
+      console.log('fitRecommendation success' , context)
+          // if (typeof fitrec_selectSize === 'function') {
+          // fitrec_selectSize(context.fitRecommendation.size,
+          // context.fitRecommendation.score);
+          // }
+      });
+
+
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
     // document.addEventListener( 'stamped:reviews:loaded', function(e) {
     //   console.log('Stampled addEventListener', e);
@@ -915,6 +936,7 @@ export default {
       if (val.route !== null) {
         this.getProductId = null;
         this.colorSwatchRelateProduct = [];
+         this.getTruefitProd = null;
       }
     },
 
@@ -948,13 +970,25 @@ export default {
         //                 ];
         // this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
         if (this.attributesByCode.color && this.product.color) {
-           const colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === this.product.color)
-          let truefitData = { id: this.product.stylenumber, color: colorSwatch.label }; 
-          this.getTruefitProd = truefitData; 
+          const colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === this.product.color)
+          let availablesizes = [];
+          if (this.product.configurable_options.length && this.product.configurable_options.length > 1) {
+              this.options[this.product.configurable_options[1].attribute_code].filter(val11 => {
+                  this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
+                      availablesizes.push(val11.label.replace('"', '') + ' x ' + val1.label.replace('"', ''))
+                  });
+              });
+          } else if (this.product.configurable_options.length){
+              this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
+                  availablesizes.push(val1.label)
+              });
+          }
+          let truefitData = { id: this.product.stylenumber, color: colorSwatch.label , availablesizes: availablesizes.join(':') }; 
+          this.getTruefitProd = truefitData;
         } else {
           this.getTruefitProd = null;
         }
-        // console.log('TrueFit Integration value', this.getTruefitProd)
+        console.log('TrueFit Integration value', this.getTruefitProd)
 
       /* For reload the stamped review section */ 
         // this.$forceUpdate();
