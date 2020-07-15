@@ -15,7 +15,6 @@
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
               v-for="product in product.related[type].slice(0,8)"
-               v-if="!product._dontShowInListingFlag"
               :key="product.id"
             >
               <product-tile
@@ -121,7 +120,7 @@ export default {
         if (response) {
           this.$store.dispatch('product/related', {
             key: this.type,
-            items: response.items
+            items: response.items.filter(val => val._dontShowInListingFlag == false)
           })
           this.loadingNewProdFlag = false;
           this.$forceUpdate()
