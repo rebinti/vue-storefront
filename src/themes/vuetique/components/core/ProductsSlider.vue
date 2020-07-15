@@ -11,6 +11,7 @@
     @pageChange="setMuted">
         <slide
           v-for="product in products"
+          v-if="!product._dontShowInListingFlag"
           :key="product.id"
         >
           <product-tile

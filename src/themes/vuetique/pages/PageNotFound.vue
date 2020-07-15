@@ -44,6 +44,7 @@
                     <slide
                       v-for="product in ourBestsellersCollection"
                       :key="product.id"
+                      v-if="!product._dontShowInListingFlag"
                     >
                       <product-tile
                         class="collection-product"

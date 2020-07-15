@@ -357,6 +357,16 @@ const actions: ActionTree<ProductState, RootState> = {
           }
         }
         // commit update products list mutation
+        /*
+        * For filter non stock items and set a _dontShowInListingFlag
+        *  in product list
+        */
+        resp.items.map(val => {
+            if (val.configurable_children) {
+              val._dontShowInListingFlag = val.configurable_children.every(option => option.stock.is_in_stock === false && option.stock.qty == 0)
+            } else val._dontShowInListingFlag = false
+            return val
+        })
         if (updateState) {
           context.commit(types.CATALOG_UPD_PRODUCTS, { products: resp, append: append })
         }

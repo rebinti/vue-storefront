@@ -10,6 +10,7 @@
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
               v-for="product in getrecentwithoutcurrent"
+              v-if="!product._dontShowInListingFlag"
               :key="product.id"
             >
               <product-tile
