@@ -659,6 +659,7 @@ import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/Promote
 import QtyInput from 'theme/components/theme/QtyInput'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
+import {  findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
 
 export default {
   components: {
@@ -941,6 +942,15 @@ export default {
       }
     },
 
+
+    /**
+     * check if the option is available and returns the child prod
+     */
+    isOptionAvailableWithData (currentConfig) { // check if the option is available
+      const variant = findConfigurableChildAsync({ product:  this.product, configuration: currentConfig, availabilityCheck: true })
+      return typeof variant !== 'undefined' && variant !== null ? variant : null
+    },
+
    /* To get data from Stamped , TrueFit and also send to Emarsys Tracking */
     getDataFromThirdPartyModules () {
       /* 
@@ -975,13 +985,24 @@ export default {
           let availablesizes = [];
           if (this.product.configurable_options && this.product.configurable_options.length && this.product.configurable_options.length > 1) {
               this.options[this.product.configurable_options[1].attribute_code].filter(val11 => {
+                  let currentConfig = Object.assign({}, this.configuration)
+                  if (val11 && val11.attribute_code) currentConfig[val11.attribute_code] = val11
                   this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
-                      availablesizes.push(val11.label.replace('"', '') + ' x ' + val1.label.replace('"', ''))
+                      if (val1 && val1.attribute_code) currentConfig[val1.attribute_code] = val1
+                      const variant = this.isOptionAvailableWithData(currentConfig)
+                      if (variant && variant.stock && variant.stock.is_in_stock === true && variant.stock.qty > 0) {
+                        availablesizes.push(val11.label.replace('"', '') + ' x ' + val1.label.replace('"', ''))
+                      }
                   });
               });
           } else if (this.product.configurable_options && this.product.configurable_options.length){
               this.options[this.product.configurable_options[0].attribute_code].filter(val1 => {
-                  availablesizes.push(val1.label)
+                  let currentConfig = Object.assign({}, this.configuration)
+                  if (val1 && val1.attribute_code) currentConfig[val1.attribute_code] = val1
+                  const variant = this.isOptionAvailableWithData(currentConfig)
+                  if (variant && variant.stock && variant.stock.is_in_stock === true && variant.stock.qty > 0) {
+                    availablesizes.push(val1.label)
+                  }
               });
           }
           let truefitData = { id: this.product.stylenumber, color: colorSwatch.label , availablesizes: availablesizes.join(':') }; 
