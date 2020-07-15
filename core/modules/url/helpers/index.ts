@@ -70,7 +70,9 @@ export function formatCategoryLink (category: { url_path: string, slug: string }
     @params refrence of the v-html element
 */
 export function vHtmlRouter (refs) {
+  if(!refs) return
   let links = refs.querySelectorAll('a')
+  if (!links) return
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('click', (event) => {
       event.preventDefault()

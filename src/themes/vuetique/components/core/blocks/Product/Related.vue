@@ -14,7 +14,7 @@
         <no-ssr>
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
-              v-for="product in product.related[type].slice(0,8)"
+              v-for="product in product.related[type].slice(0,20)"
               :key="product.id"
             >
               <product-tile
@@ -26,7 +26,7 @@
           </carousel>
         </no-ssr>
       </div>
-      <product-listing v-else columns="4" :products="product.related[type].slice(0,8)" />
+      <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>
   </section>
 </template>
@@ -113,7 +113,7 @@ export default {
 
       this.$store.dispatch('product/list', {
         query: relatedProductsQuery,
-        size: 20,
+        size: 25,
         prefetchGroupProducts: false,
         updateState: false
       }).then((response) => {
