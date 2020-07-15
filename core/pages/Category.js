@@ -68,7 +68,7 @@ export default {
       store: store,
       route: route,
       current: 0,
-      perPage: 5,
+      perPage: 15,
       sort,
       filters: config.products.defaultFilters,
       includeFields: config.entities.optimize && isServer ? config.entities.productList.includeFields : null,
