@@ -1,17 +1,5 @@
 <template>
-  <!-- <div class="login_out_bx">
-    <header class="modal-header">
-      <svg viewBox="0 0 25 25" class="vt-icon modal-close p-1 m-2" slot="close" @click="close">
-        <use xlink:href="#close" />
-      </svg>
-      <h2>{{ $t('Add To Boards') }}</h2>
-    </header>
-    <div class="modal-content">
-        <p> Modal Content Add to boards</p>
-    </div>
-  </div> -->
 
-  <!-- popup -->
 
       <div class="board_bx_out" >
          <header class="modal-header">
@@ -42,8 +30,7 @@
                       <img v-if="board.items.length > 1" v-lazy="thumbnail(board.items[1].image)" alt="" title="">
                       <img v-else src="/assets/small_1.png"/>
                       
-                      <!-- <img src="/assets/wishlist-image3.jpg"/>
-                      <img src="/assets/wishlist-image4.jpg"/>   -->
+                    
                   </div>
                   <div class="img_col_2 lg_img_two">
                      <img v-if="board.items.length > 2" v-lazy="thumbnail(board.items[2].image)" alt="" title="">
@@ -52,8 +39,7 @@
                      <img v-if="board.items.length > 3" v-lazy="thumbnail(board.items[3].image)" alt="" title="">
                      <img v-else src="/assets/mid_1.png"/>
  
-                    <!-- <img src="/assets/wishlist-image5.jpg"/>
-                    <img src="/assets/wishlist-image6.jpg"/> -->
+               
                   </div>
               </div>
 
@@ -63,24 +49,7 @@
 
           </div>
 
-          <!-- <div class="board_list">
 
-            <div class="image-block-col brd_bx_li">
-                  <div class="img_col_2 lg_img_one">
-                      <img src="/assets/wishlist-image3.jpg"/>
-                      <img src="/assets/wishlist-image4.jpg"/>  
-                  </div>
-                  <div class="img_col_2 lg_img_two">
-                    <img src="/assets/wishlist-image5.jpg"/>
-                    <img src="/assets/wishlist-image6.jpg"/>
-                  </div>
-              </div>
-
-              <div class="ft_text">
-                Spring Style
-              </div>
-
-          </div> -->
         </div>
 
       </div>

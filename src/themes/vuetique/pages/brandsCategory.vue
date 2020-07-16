@@ -7,7 +7,6 @@
       <div class="container d_item">
         <div class="row items-center mt-2">
           <h1 class="col-8 md:col-8 lg:col-8 xl:col-10">
-            <!-- {{ category.name }} -->
              {{searchedValue}}
           </h1>
            <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block">
@@ -26,45 +25,9 @@
                 @input="sortingFilterChange"
               />
           </div>
-           <!-- <active-filters :filters="filters.available" /> -->
         </div> 
       </div>
 
-       <!-- <div class="category_filter_out_pop_box">
-
-          <div class="category_filter_bx_it">
-              <div class="category_filter_bx_sortby filter-top">
-                   <base-select
-                      v-if="sortingFilterOptions && sortingFilterOptions.length"
-                      class="col-12 md:col-6 mb-6 txt_blk_select"
-                      name="sort"
-                      v-model="sortingFilterSelectedValue"
-                      :options="sortingFilterOptions"
-                      :selected="sortingFilterSelectedValue"
-                      :placeholder="$t('Sorting *')"
-                      @input="sortingFilterChange"
-                    /> 
-              </div>
-
-              <div v-if="seletedMobileGrid" class="category_filter_bx_grid_view filter-top" @click="columnChangeMobile(seletedMobileGrid)"> 
-                  <span> view</span> 
-                  <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
-                  </div>                  
-              </div>              
-              <div class="category_filter_bx_filter filter-top" @click="openFilters"> 
-                 <span>filter</span>
-
-                   <div class="filter_bx">               
-                  <button-full class="w-full" @click.native="openFilters"> 
-                    {{ $t('Filters') }}
-                  </button-full>
-                  </div>   
-
-              </div>
-
-          </div>
-
-      </div>  -->
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
@@ -93,8 +56,7 @@
                   <div class="filter_bx filter_bx_grid" :style="'background: url(' + seletedMobileGrid.image + ') no-repeat;'"> 
                   </div>                  
               </div>   
-              <!-- <label class="mr10">{{ $t('Columns') }}:</label>
-              <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumn" :type="'lg'"/> -->
+         
         </div>
         <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
           <div class="row gutter-md mt-6">
@@ -125,7 +87,6 @@
         </button>
         <div class="">
           <div class="sidebar">
-            <!-- <h1>Filters</h1> -->
              <div class="container pb-5 md: ml-2 lg:hidden">
                 <span
                   class="filter-box clearall-filter"
@@ -156,11 +117,6 @@
             </div>
 
             <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-              <!-- <div
-                v-for="facetsitem in searchRes.facets"
-                :key="facetsitem.field"
-                class="filterdata"
-              > -->
                 <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
@@ -168,7 +124,7 @@
                     :title="$t(facetsitem.label)"
                     v-if="(facetsitem.label !== 'Brand') && ((facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0))"
                   >
-                <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
+
 
                 <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                   <p @click="setCategoryFilterHistory({type: 'view all'})"
@@ -221,7 +177,7 @@
                     @sliderChanged="priceSliderChanged"
                   />
                 </div>
-              <!-- </div> -->
+
               </Accordion>
             </div>
 
@@ -260,34 +216,13 @@
     </div>
 
     <div class="container pb-16" v-if="!searcingLoaderFlag">
-        <!-- <div class="col-12 lg:col-9 pr_list_sec_main">
-          <div class="row">
-            <div class="col-9 xs:col-12 searchtitle" v-if="searchRes">
-              <h2 style="width:100%;padding-bottom:25px;">
-                 {{searchedValue.replace('/', '>')}}
-                <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
-              </h2>
-            </div>
-            <div class="col-3 xs:col-12">
-              <base-select
-                v-if="sortingFilterOptions && sortingFilterOptions.length"
-                class="col-12 md:col-6 mb-6 txt_blk_select"
-                name="sort"
-                v-model="sortingFilterSelectedValue"
-                :options="sortingFilterOptions"
-                :selected="sortingFilterSelectedValue"
-                :placeholder="$t('Sorting *')"
-                @input="sortingFilterChange"
-              />
-            </div>
-          </div>
-        </div>        -->
+
       <div class="row gutter-md">      
         <!-- Sidebar For web view   -->
         <div class="col-3 hidden lg:block">
           <div class="">
             <div class="sidebar filterdiv"  :class="{ fixed: fixedOrderPanel }">
-              <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
+
               <span
                 class="filter-box clearall-filter"
                 v-if="searchRes && searchRes.filterSummary && searchRes.filterSummary.length>1"
@@ -315,11 +250,7 @@
                 </div>
               </div>
               <div class="container leading-loose static-content customm" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
-                <!-- <div
-                  v-for="facetsitem in searchRes.facets"
-                  :key="facetsitem.field"
-                  class="filterdata"
-                > -->
+
                  <Accordion class="mob_fltr"
                     v-for="(facetsitem) in searchRes.facets"
                     :key="facetsitem.field"
@@ -327,7 +258,7 @@
                     :title="$t(facetsitem.label)"
                     v-if="(facetsitem.label !== 'Brand') && ((facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0))"
                   >
-                  <!-- <h2><b>{{ facetsitem.label }}</b></h2> -->
+
 
                   <div v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'" style="min-height: 20px;">
                     <p @click="setCategoryFilterHistory({type: 'view all'})"
@@ -384,7 +315,7 @@
                       @sliderChanged="priceSliderChanged"
                     />
                   </div>
-                <!-- </div> -->
+
                 </Accordion>
               </div>
             </div>
@@ -398,7 +329,7 @@
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
-          <!-- <img src="/assets/svg-loaders/tail-spin.svg" /> -->
+
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">

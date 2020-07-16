@@ -71,9 +71,6 @@
           {{ $t('Log in to your account') }}
         </button-full>
 
-         <!-- <div class="login_bx">
-             <span @click="logInWithFacebook"><img src="/assets/fcbk_login.png" alt=""></span>
-          </div> -->
         
         <div class="text-center">
           {{ $t('or') }}
@@ -91,12 +88,7 @@
         <div class="login_box_out">
            <facebook-sign-in></facebook-sign-in>
             <google-sign-in></google-sign-in>
-          <!-- <div class="login_bx">
-             <a href="#"><img src="/assets/fcbk_login.png" alt=""/></a>
-          </div>
-           <div class="login_bx">
-             <a href="#"><img src="/assets/gle_login.png" alt=""/></a>
-          </div> -->
+
         </div>
         <div class="login_box_out_web">
           <facebook-sign-in></facebook-sign-in>

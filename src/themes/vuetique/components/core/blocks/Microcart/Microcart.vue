@@ -39,20 +39,16 @@
         </template>
         <template v-slot:right="{ item }">
           <div class="swipeout-action red button_bx_link_lrg" @click="removeItem(item)">
-            <!-- <i class="fa fa-trash"></i> -->
+
             <remove-button class="cl-accent" />
           </div>
         </template>
      </swipe-list>
-    <!-- <ul v-if="productsInCart.length" class="products p-0 m-0 p_crt_list">
-       <product v-for="product in productsInCart" :key="product.sku" :product="product"  />
-    </ul> -->
+
     <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
       <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'"> 
-        <!-- 
-        <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'">
-         -->
+       
         <div class="flex-grow mr-2">
           {{ segment.title }}
           <button v-if="appliedCoupon && segment.code === 'discount'" type="button" class="close delete-button" @click="clearCoupon">
@@ -64,34 +60,7 @@
         </div>
       </div>
       
-      <!-- <Accordion class="mob_fltr cart_filter_hd" v-if="OnlineOnly"
-              :title="$t('Use Promotional code')"
-              :openType=false
-            >
-          <template >
-              <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
-                <div class="mr-3 flex-grow">
-                  <base-input type="text" class="mob_t_bx" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
-                </div>
-                <div>
-                  <button-full :disabled="!couponCode" @click.native="setCoupon" class="ht_bx">
-                    {{ $t('Apply') }}
-                  </button-full>
-                </div>
-              </div>
-          </template>
-      </Accordion> -->
-
-      <!-- <div v-if="OnlineOnly" class="py-3 flex mob_rw_list">
-        <div class="mr-3 flex-grow">
-          <base-input type="text" class="mob_t_bx" id="couponinput" :placeholder="$t('Add discount code')" :autofocus="true" v-model.trim="couponCode" @keyup.enter="setCoupon" />
-        </div>
-        <div>
-          <button-full :disabled="!couponCode" @click.native="setCoupon" class="ht_bx">
-            {{ $t('Apply') }}
-          </button-full>
-        </div>
-      </div> -->
+    
 
       <div class="row justify-between py-3 font-serif text-h2 font-bold mob_rw_price" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
         <div class="col-auto total-price-label">
@@ -336,6 +305,7 @@ export default {
     }
     .right-sidebar.microcart .summary{
       padding-top: 0px;
+      padding-right: 10px;
     }
 
     .mob_summary .mob_d_item{

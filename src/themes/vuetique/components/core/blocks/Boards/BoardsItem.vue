@@ -1,26 +1,12 @@
 <template>
-  <!-- <li class="row mb-3 pb-3 border-b border-grey-light relative p_list_block" 
-     :style="'transform: translate(' + swipedValue +  'px, 0px);'"
-      v-touch:swipe.left="swipeLeftHandler"
-      v-touch:swipe.right="swipeRightHandler"
-      v-touch:moving="movingHandler"
-  > -->
+
   <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
-    <!-- <div class="col-12 flex-col justify-start sm:justify-between prdct_cnt">
-      <div>
-        {{product.name}}
-        <div class="absolute top-0 right-0 mb-3 button_bx_link_lrg">
-          <div class="ic_dlt_bx">
-              <span @click.prevent="removeFromBoards(product)"><remove-button class="cl-accent" /></span>
-           </div>
-        </div>
-      </div>
-    </div> -->
+ 
 
     <div class="image-block-wrapper-out">
         <div @click="$emit('click')">
           <div class="image-block-wrapper clearfix">
-              <!-- <div class="image-block-col" v-for="(prod,index) in product.items.slice(0,6)" :key="prod.id" v-show="product.items.length > 0"> -->
+            
 
 
                 <div class="image-block-col">
@@ -52,25 +38,12 @@
                 </div>
               </div>
 
-              <!-- <div class="image-block-wrapper clearfix">
-                <div class="image-block-col"><img src="/assets/wishlist-image1.jpg"/></div>
-                <div class="image-block-col"><img src="/assets/wishlist-image2.jpg"/></div>
-                <div class="image-block-col">
-                    <div class="img_col_2 lg_img_one">
-                        <img src="/assets/wishlist-image3.jpg"/>
-                        <img src="/assets/wishlist-image4.jpg"/>  
-                    </div>
-                    <div class="img_col_2 lg_img_two">
-                      <img src="/assets/wishlist-image5.jpg"/>
-                      <img src="/assets/wishlist-image6.jpg"/>
-                    </div>
-                </div>
-            </div> -->
+    
           </div>
 
           <div class="image-block-more">
             <h5>{{ product.name }}</h5>
-            <!-- <span class="sp_txt" v-if="product && product.items && product.items.length"> {{ product.items.length }} Items</span> -->
+         
              <span class="sp_txt" v-if="product && product.items_count"> {{ product.items_count }} Items</span>
              <span class="sp_txt" v-else>0 Items</span>       
           </div>
@@ -82,8 +55,7 @@
           </div>
        </div>
     </div>
- <!-- </div> -->
-  <!-- </li> -->
+
 </template>
 
 <script>

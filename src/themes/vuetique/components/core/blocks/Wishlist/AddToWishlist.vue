@@ -7,24 +7,13 @@
     :class="{'act': isOnWishlist}"
     data-testid="addToWishlist"
   >
-    <!-- <svg v-if="!isOnWishlist" viewBox="0 0 25 25" class="vt-icon pr-1">
-      <use xlink:href="#wishlist" />
-    </svg> -->
+
     <img v-if="!isOnWishlist" class="vt-icon fa-icon-list  v-mobile" src="/assets/wishlist-fav.svg" alt="" />
     <img v-if="isOnWishlist" class="vt-icon fa-icon-list v-mobile" src="/assets/wishlist-fav-fill.svg" alt="" />
-    <!-- <template v-if="!isOnWishlist">
-     <span class="h-mobile"> {{ $t('Add to Wishlist') }}</span>
-    </template>
-    <template v-else>
-       <span class="h-mobile"> {{ $t('Remove') }} </span>
-    </template> -->
+
   </button>
 
-  <!-- <button v-if="isOnWishlist" class="inline-flex items-center text-grey-dark wishlist-bx" type="button"
-  style="left: 2px;width: 100px;background: black;color: white;padding: 0px 0 1px 6px;font-weight: 500;}"
-  @click.prevent="$store.commit('ui/setSelectedBoardItem', product);$store.commit('ui/setBoardsElem', 'add-to-board');$bus.$emit('modal-show', 'modal-create-boards')"
-  >   Add to board
-  </button> -->
+
 </div>
 </template>
 

@@ -1,11 +1,6 @@
 <template>
   <div class="fb-view">
-      <!-- <facebook-login
-            :appId="FBappId"
-            @login="onLogin"
-            @get-initial-status="getUserData"
-            @sdk-loaded="sdkLoaded">
-      </facebook-login> -->
+
 
       <div class="login_bx" >
           <span @click="logInWithFacebook" >
