@@ -548,7 +548,7 @@ export default {
       }
     this.$bus.$on('close-sidebar-panel', this.closeFilters);
 
-    window.addEventListener('scroll', () => {
+    document.addEventListener('scroll', () => {
       this.isScrolling = true
       this.handleScroll()
     }, {passive: true})
