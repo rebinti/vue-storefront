@@ -40,7 +40,9 @@
   
 
 
-    <div class="container onlymobile col-12" style="margin-bottom: 5px;" v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
+    <div class="container onlymobile col-12" style="margin-bottom: 5px;" 
+    :class="classNameTab"
+    v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
         <div class="col-4  lg:hidden msort">
               <div class="category_filter_bx_sortby filter-top">
@@ -450,11 +452,29 @@ export default {
       detailsAccordion: null,
       fixedOrderPanel: false,
       // defaultColumn: 3
+
+      navVisible: true,
+      isScrolling: false,
+      scrollTop: 0,
+      lastScrollTop: 0,
+      navbarHeight: 70,
+      classNameTab: ''
     };
   },
   beforeMount () {
     this.$bus.$on('search-in-search-spring', this.dataFromHeader);
     this.$bus.$on('close-sidebar-panel', this.closeFilters);
+    document.addEventListener('scroll', () => {
+      this.isScrolling = true
+      this.handleScroll()
+    }, {passive: true})
+
+    setInterval(() => {
+      if (this.isScrolling) {
+        this.hasScrolled()
+        this.isScrolling = false
+      }
+    }, 250)
   },
   beforeDestroy () {
     this.$bus.$off('search-in-search-spring');
@@ -477,9 +497,25 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
-    document.addEventListener('scroll',  this.handleScroll);
+    // document.addEventListener('scroll',  this.handleScroll);
   },
   methods: {
+    hasScrolled () {
+      this.scrollTop = window.scrollY
+      if (this.scrollTop <= 150) {
+          this.classNameTab = ''
+          this.lastScrollTop = this.scrollTop
+          return
+      }
+      if (this.scrollTop > this.lastScrollTop && this.scrollTop > this.navbarHeight) {
+        this.navVisible = true
+        this.classNameTab = 'filtertab_pos-fixed-top-on-bottom' 
+      } else {
+        this.navVisible = false
+        this.classNameTab = 'filtertab_pos-fixed-top-on-top'
+      }
+      this.lastScrollTop = this.scrollTop
+    },
     async getSearchData (onScroll = false, abortApiCallFlag = false) {
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
@@ -1211,5 +1247,33 @@ input {
     float: left;
     margin-top: 10px;
     padding-right: 9px;
+}
+
+.filtertab_pos-fixed-top-on-bottom{
+    margin-bottom: 5px;
+    position: fixed;
+    top: 129px;
+    -webkit-transform: translate3d(0,-200%,8px);
+    transform: translate3d(0,-200%,8px);
+    z-index: 4;
+    padding: 7px 5px 5px 5px;
+    background: #fff;
+    width: 100%;
+    height: 57px;
+    max-width: 100%;
+}
+
+  .filtertab_pos-fixed-top-on-top {
+    margin-bottom: 5px;
+    position: fixed;
+    top: 198px;
+    -webkit-transform: translate3d(0,-200%,8px);
+    transform: translate3d(0,-200%,8px);
+    z-index: 4;
+    padding: 7px 5px 5px 5px;
+    background: #fff;
+    width: 100%;
+    height: 57px;
+    max-width: 100%;
 }
 </style>
