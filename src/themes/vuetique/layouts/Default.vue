@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import config from 'config'
 import { mapState } from 'vuex'
 import EventBus from '@vue-storefront/core/compatibility/plugins/event-bus'
 
@@ -123,7 +124,13 @@ export default {
         this.navVisible = false
       }
       this.lastScrollTop = this.scrollTop
+    },
+    fetchCmsBlockData () {
+       return this.$store.dispatch('cmsBlock/list', {filterValues: config.cmsBlocksDataFetchConfig.cmsBLockList})
     }
+  },
+  serverPrefetch () {
+    return this.fetchCmsBlockData()
   },
   beforeMount () {
     // Progress bar on top of the page

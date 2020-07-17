@@ -203,7 +203,7 @@ export default {
       this.$set(this.highQualityImagesErrorsMap, index, !success)
     },
     checkWindowSize() {
-      console.log('this.windowWidth' , this.windowWidth)
+      // console.log('this.windowWidth' , this.windowWidth)
       if( this.windowWidth < 768 ) {
          this.Itemshow = 1
       }else if(this.windowWidth == 768 ){

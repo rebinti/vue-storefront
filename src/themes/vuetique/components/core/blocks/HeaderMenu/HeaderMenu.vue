@@ -111,7 +111,7 @@ export default {
     return {
       allCategories: [],
       activeSubMenu: null,
-      headerMenuList:  config.headerMenuList || []
+      headerMenuList:  config.cmsBlocksDataFetchConfig.headerMenuList || []
     };
   },
   computed: {

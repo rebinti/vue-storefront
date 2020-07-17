@@ -17,7 +17,7 @@
         <div class="row" v-if="!orderApiCheck">
           <div class="col-md-6 pl20 pr20">
             <h3 v-if="OnlineOnly" >
-              {{ $t('Your purchase') }}
+              {{ $t('Your purchase') }}  was successful #{{$route.query.orderid}}
             </h3>
             <p v-html="this.$t('You have successfuly placed the order. You can check status of your order by using our <b>delivery status</b> feature. You will receive an order confirmation e-mail with details of your order and a link to track its progress.')" />
             <p v-html="this.$t('E-mail us at <b>demo@vuestorefront.io</b> with any questions, suggestions how we could improve products or shopping experience')"/>
