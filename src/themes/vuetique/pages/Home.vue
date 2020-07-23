@@ -17,7 +17,7 @@
     
      <div class="container banner_3_sec">
           <div class="menu-list col-6">
-                <cms-block :identifier="'vue-cms-home-block1'" />
+                <cms-block :identifier="'vue_cms_home_block1'" />
           </div>
     </div> 
     <div class="container">
@@ -31,7 +31,7 @@
 
     <div class="container">
               <div class="menu-list col-6">
-                    <cms-block :identifier="'vue-home-2banner'"  />
+                    <cms-block :identifier="'vue_home_2banner'"  />
               </div>
     </div> 
 
@@ -75,7 +75,7 @@
 
     <div class="container mr_kst">
         <div class="menu-list col-6">
-              <cms-block :identifier="'vue-cms-home-offer-banner'" />
+              <cms-block :identifier="'vue_cms_home_offer_banner'" />
         </div>
     </div>     
   </div>

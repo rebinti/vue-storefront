@@ -49,7 +49,7 @@
       >
         <template>
             <div>
-               <cms-block :identifier="'how-to-messure'" :sync="true"/>
+               <cms-block :identifier="'how_to_messure'"/>
             </div>
         </template>
     </Accordion>
