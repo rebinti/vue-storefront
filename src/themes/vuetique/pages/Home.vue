@@ -14,6 +14,11 @@
     </div>
     
     <main-slider />
+
+    <section class="pl-3 pr-3">
+      <div id="stylaMagazine" data-language="en_GB" data-pluginversion="1.1.0.0">
+        </div>
+    </section>
     
      <div class="container banner_3_sec">
           <div class="menu-list col-6">
