@@ -549,7 +549,7 @@ const actions: ActionTree<CartState, RootState> = {
     const productActionOptions = async (serverItem) => {
       if (serverItem.product_type === 'configurable') {
         let query = new SearchQuery()
-        query = query.applyFilter({key: 'configurable_children.sku', value: {'eq': serverItem.sku}})
+        query = query.applyFilter({key: 'id', value: {'eq': serverItem.item_product_id}})
 
         const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
 
@@ -708,7 +708,7 @@ const actions: ActionTree<CartState, RootState> = {
                     return null
                   }
 
-                  const product = await dispatch('product/single', { options: actionOtions, assignDefaultVariant: true, setCurrentProduct: false, selectDefaultVariant: false }, { root: true })
+                  const product = await dispatch('product/single', { options: actionOtions, assignDefaultVariant: true, setCurrentProduct: false, selectDefaultVariant: false, skipCache: false }, { root: true })
 
                   if (!product) {
                     return null

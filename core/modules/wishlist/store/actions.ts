@@ -48,7 +48,7 @@ const actions: ActionTree<WishlistState, RootState> = {
         // console.log('data datadata data', data);
         data.filter(async item => {
           let query = new SearchQuery()
-          query = query.applyFilter({key: 'sku', value: {'eq': item.sku}})
+          query = query.applyFilter({key: 'id', value: {'eq': item.entity_id}})
           const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
           clientCartAddItems.push({...items[0], wishlist_item_id: item.wishlist_item_id })
           // console.log('clientCartAddItems' , clientCartAddItems);

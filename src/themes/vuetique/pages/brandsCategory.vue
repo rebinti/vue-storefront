@@ -526,7 +526,7 @@ export default {
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
           searchResults.results.filter(val => {
-            prodSku.push(val.sku);
+            prodSku.push(val.uid);
           });
           // console.log('last data', prodSku);
           await this.getDataFromElastic(prodSku, onScroll);
@@ -581,7 +581,7 @@ export default {
 
     async getDataFromElastic (searchedData, onScroll = false) {
       let query = new SearchQuery();
-      query = query.applyFilter({ key: 'sku', value: { eq: searchedData } });
+      query = query.applyFilter({ key: 'id', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
         'product/list',
         { query, start: 0, size: searchedData.length, updateState: false },
@@ -589,7 +589,7 @@ export default {
       );
       // console.log('Es results', items);
       const sortedData = items.sort((a, b) =>
-        searchedData.indexOf(a.sku) - searchedData.indexOf(b.sku)
+        searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
       );
       this.$store.dispatch('searchSpringCategory/addProdcutsItems', {onScroll: onScroll, products: sortedData})
       return this.serachedProd;

@@ -55,7 +55,7 @@ const actions: ActionTree<BoardsState, RootState> = {
               let clientBoardItems = [];
               board.items.filter(async (boardItem , indexItem) => {
                 let query = new SearchQuery()
-                query = query.applyFilter({key: 'sku', value: {'eq': boardItem.sku}})
+                query = query.applyFilter({key: 'id', value: {'eq': boardItem.product_id}})
                 const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
                 // clientBoardItems.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
                 copyData[index].items.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
