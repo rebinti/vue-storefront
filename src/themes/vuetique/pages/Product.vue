@@ -954,6 +954,7 @@ export default {
 
    /* To get data from Stamped , TrueFit and also send to Emarsys Tracking */
     getDataFromThirdPartyModules () {
+      if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
       /* 
         To set Emarsys Tracking Data
       */
@@ -1066,6 +1067,7 @@ export default {
   mounted() {
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+    if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
   }
 }
 </script>
