@@ -207,10 +207,13 @@
                 
               </div>
               <!-- size fit part in device -->     
-              <div class="size-fit-part-mob">
+              <div class="size-fit-part-mob" style="min-height: 30px;">
                 <!-- For TrueFit Review button -->
-                <div class="fit-label">FIND YOUR SIZE</div>
+                <div class="fit-label"
+                :style="{ display: product.type_id =='configurable'? 'block':'none' }"
+                >FIND YOUR SIZE</div>
                 <div class="truefit-button tfc-fitrec-product" 
+                :style="{ display: product.type_id =='configurable'? 'block':'none' }"
                   v-if="getTruefitProd !== null"
                   :id="getTruefitProd.id" :data-userid="getCurrentUserId"
                   :data-colorid="getTruefitProd.color" 
@@ -434,10 +437,11 @@
               v-else-if="product.custom_options && product.custom_options.length > 0 && !loading"
               :product="product"
             />
-            <div class="size-fit-part">
+            <div class="size-fit-part" style="min-height: 30px;">
               <!-- For TrueFit Review button -->
-              <div class="fit-label">FIND YOUR SIZE</div>
+              <div class="fit-label"  :style="{ display: product.type_id =='configurable'? 'block':'none' }">FIND YOUR SIZE</div>
               <div class="truefit-button tfc-fitrec-product" 
+              :style="{ display: product.type_id =='configurable'? 'block':'none' }"
                 v-if="getTruefitProd !== null"
                 :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
                   :data-colorid="getTruefitProd.color" 
@@ -1133,6 +1137,7 @@ export default {
 .flex-grow {
   .disabled {
     background-color: rgba(237, 237, 237,237)!important;
+    // background-color: rgba(237, 237, 237, var(--bg-opacity))!important;
     color: #bdbdbd!important;
     border: 1px solid #ededed;
     cursor: default; 
