@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      product: 'product/productCurrent',
+      product: 'product/productCurrentFilterSwaped',
       originalProduct: 'product/productOriginal',
       parentProduct: 'product/productParent',
       attributesByCode: 'attribute/attributeListByCode',
