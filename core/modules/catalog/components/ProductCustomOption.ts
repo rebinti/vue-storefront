@@ -46,7 +46,8 @@ export const ProductCustomOption = {
     filterChanged (filterOption) {
       if (filterOption.attribute_code === this.code) {
         if (filterOption.id === this.id) {
-          this.active = !this.active
+          // this.active = !this.active
+          this.active = true
         } else {
           this.active = false
         }

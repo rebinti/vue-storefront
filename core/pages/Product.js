@@ -18,7 +18,7 @@ export default {
   data () {
     return {
       loading: false,
-      disableAddToCartButtonFlag: false
+      disableAddToCartButtonFlag: true
     }
   },
   computed: {
@@ -184,7 +184,20 @@ export default {
       this.$forceUpdate()
     },
     onAfterFilterChanged (filterOption) {
-      this.disableAddToCartButtonFlag = false;
+      setTimeout(() => {
+        const activatedFilters = document.getElementById('product').getElementsByClassName('active');
+        if (this.product.configurable_options && this.product.configurable_options.length === 1) {
+          if (activatedFilters && activatedFilters.length === 2) {
+            this.disableAddToCartButtonFlag = false;
+          } else {
+            this.disableAddToCartButtonFlag = true;
+          }
+        } else if (activatedFilters && activatedFilters.length >= 4) {
+          this.disableAddToCartButtonFlag = false;
+        } else {
+          this.disableAddToCartButtonFlag = true;
+        }
+      }, 150);
       this.$bus.$emit('product-before-configure', { filterOption: filterOption, configuration: this.configuration })
       const prevOption = this.configuration[filterOption.attribute_code]
       this.configuration[filterOption.attribute_code] = filterOption

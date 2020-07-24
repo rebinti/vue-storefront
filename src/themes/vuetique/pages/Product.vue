@@ -182,7 +182,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active_first_not' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
           
@@ -197,7 +197,7 @@
                             context="product"
                             :code="option.attribute_code"
                             v-focus-clean
-                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                            :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active_first_not' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                             @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                           />
                         </div>
@@ -395,7 +395,7 @@
                         :label="s.label"
                         context="product"
                         :code="option.attribute_code"
-                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination':checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active_first_not' : 'no-combination':checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
                         v-focus-clean
                       />
@@ -413,7 +413,7 @@
                         :code="option.attribute_code"
 
                         @click.native="outOfStockPopupCheck(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options)"
-                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
+                        :class="!isOptionAvailable(s) ? s.id == configuration[option.attribute_code].id ? 'no-combination active_first_not' : 'no-combination': checkOutOfstock(s.id === configuration[option.attribute_code].id , s ,index , product.configurable_options ) "
                         v-focus-clean
                       />
                       <!-- :class="{ active: s.id == configuration[option.attribute_code].id }" -->
@@ -816,12 +816,12 @@ export default {
           if (data) {
             if (data.stock.is_in_stock === false) {
               if (activeFlag) {
-               return 'active out-of-stock'
+               return ' out-of-stock' // 'active out-of-stock'
               } else {
                 return 'out-of-stock'
               }
             } else if (activeFlag) {
-              return 'active'
+              // return 'active'
             }
             else {
               return ''
@@ -835,12 +835,12 @@ export default {
           if (data) { //  (data && fullConfigOption.length == 1)
             if (data.stock.is_in_stock === false) {
               if (activeFlag) {
-               return 'active out-of-stock'
+               return 'out-of-stock'  // 'active out-of-stock'
               } else {
                 return 'out-of-stock'
               }
             } else if (activeFlag) {
-              return 'active'
+              // return 'active'
             }
             else {
               return ''
@@ -938,7 +938,8 @@ export default {
       if (val.route !== null) {
         this.getProductId = null;
         this.colorSwatchRelateProduct = [];
-         this.getTruefitProd = null;
+        this.getTruefitProd = null;
+        this.disableAddToCartButtonFlag= true;
       }
     },
 
