@@ -1132,7 +1132,7 @@ export default {
 }
 .flex-grow {
   .disabled {
-    background-color: rgba(237, 237, 237, var(--bg-opacity))!important;
+    background-color: rgba(237, 237, 237,237)!important;
     color: #bdbdbd!important;
     border: 1px solid #ededed;
     cursor: default; 
