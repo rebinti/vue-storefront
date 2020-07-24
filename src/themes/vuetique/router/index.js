@@ -5,7 +5,8 @@ import Brands from 'theme/pages/brands'
 import BrandsCategory from 'theme/pages/brandsCategory'
 import SearchSpringSearch from 'theme/pages/SearchSpringSearch'
 
-const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
+// const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
+const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */ 'theme/pages/HomeWithStyla.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
 const Product = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/Product.vue')
@@ -29,7 +30,7 @@ const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'the
 const ExternalThankYouPage = () => import(/* webpackChunkName: "vsf-ext-order-success" */ 'theme/pages/ExternalSuccess.vue')
 
 let routes = [
-  { name: 'home', path: '/', component: Home, alias: '/pwa.html' },
+  { name: 'home', path: '/', component: HomeWithStyla, alias: '/pwa.html' },
   { name: 'checkout', path: '/checkout', component: Checkout },
   { name: 'legal', path: '/legal', component: Static, props: { page: 'lorem', title: 'Legal Notice' }, meta: { title: 'Legal Notice', description: 'Legal Notice - example of description usage' } },
   { name: 'customer-service', path: '/customer-service', component: Static, props: { page: 'lorem', title: 'Customer service', pageidentifierfromindex: 'customer-service' } },
