@@ -40,7 +40,6 @@ let routes = [
   { name: 'students', path: '/students', component: Static, props: { page: 'lorem', title: 'Students', pageidentifierfromindex: 'students' } },
   { name: 'size-guide', path: '/size-guide', component: Static, props: { page: 'lorem', title: 'Size guide', pageidentifierfromindex: 'size-guide' } },
   { name: 'magazine', path: '/magazine', component: Static, props: { page: 'lorem', title: 'Magazine' } },
-  { name: 'inspiration', path: '/inspiration-landing', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
   { name: 'sale', path: '/sale', component: Static, props: { page: 'lorem', title: 'Sale' } },
   { name: 'order-tracking', path: '/order-tracking', component: Static, props: { page: 'lorem', title: 'Track my Order' } },
   { name: 'my-account', path: '/my-account', component: MyAccount, meta: { requiresAuth: true } },
@@ -67,7 +66,12 @@ let routes = [
   { name: 'brands', path: '/brands', component: Brands },
   { name: 'brands-category', path: '/brands/:brandName', component: BrandsCategory },
 
-  { name: 'external-thank-you', path: '/order-success', component: ExternalThankYouPage }
+  { name: 'external-thank-you', path: '/order-success', component: ExternalThankYouPage },
+
+  { name: 'inspiration', path: '/inspiration-landing', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration', path: '/inspiration', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration', path: '/inspiration/:slug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration', path: '/inspiration/:slug/:childSlug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } }
 ]
 if (!config.products.useShortCatalogUrls) {
   routes = routes.concat([{ name: 'virtual-product', path: '/p/:parentSku/:slug', component: Product }, // :sku param can be marked as optional with ":sku?" (https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js#L16), but it requires a lot of work to adjust the rest of the site
