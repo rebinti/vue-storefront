@@ -210,7 +210,7 @@
               <div class="size-fit-part-mob" style="min-height: 30px;">
                 <!-- For TrueFit Review button -->
                 <div class="fit-label"
-                :style="{ display: product.type_id =='configurable'? 'block':'none' }"
+                :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
                 >FIND YOUR SIZE</div>
                 <div class="truefit-button tfc-fitrec-product" 
                 :style="{ display: product.type_id =='configurable'? 'block':'none' }"
@@ -439,9 +439,9 @@
             />
             <div class="size-fit-part" style="min-height: 30px;">
               <!-- For TrueFit Review button -->
-              <div class="fit-label"  :style="{ display: product.type_id =='configurable'? 'block':'none' }">FIND YOUR SIZE</div>
+              <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div>
               <div class="truefit-button tfc-fitrec-product" 
-              :style="{ display: product.type_id =='configurable'? 'block':'none' }"
+              :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':'54%'}"
                 v-if="getTruefitProd !== null"
                 :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
                   :data-colorid="getTruefitProd.color" 
@@ -694,7 +694,8 @@ export default {
       currentGalleryPage: 0,
       colorSwatchRelateProduct: [],
       getProductId: null,
-      getTruefitProd: null
+      getTruefitProd: null,
+      isProductHavRecommOptFrmTrufitFlag: false
     }
   },
   directives: { focusClean },
@@ -741,6 +742,7 @@ export default {
           const recommendatedOption = self.options['size'].find(val => val.label == context.fitRecommendation.size)
           console.log('fitRecommendation finded', recommendatedOption)
           if (recommendatedOption) {
+            self.isProductHavRecommOptFrmTrufitFlag = true;
             self.$bus.$emit('filter-changed-product', { attribute_code: recommendatedOption.attribute_code, id: recommendatedOption.id, label: recommendatedOption.label })
           }
         }
@@ -944,6 +946,7 @@ export default {
         this.colorSwatchRelateProduct = [];
         this.getTruefitProd = null;
         this.disableAddToCartButtonFlag= true;
+        this.isProductHavRecommOptFrmTrufitFlag = false;
       }
     },
 
