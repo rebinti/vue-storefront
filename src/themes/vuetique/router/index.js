@@ -40,7 +40,7 @@ let routes = [
   { name: 'students', path: '/students', component: Static, props: { page: 'lorem', title: 'Students', pageidentifierfromindex: 'students' } },
   { name: 'size-guide', path: '/size-guide', component: Static, props: { page: 'lorem', title: 'Size guide', pageidentifierfromindex: 'size-guide' } },
   { name: 'magazine', path: '/magazine', component: Static, props: { page: 'lorem', title: 'Magazine' } },
-  { name: 'sale', path: '/sale', component: Static, props: { page: 'lorem', title: 'Sale' } },
+  { name: 'sales', path: '/sales', component: Static, props: { page: 'lorem', title: 'Sales' } },
   { name: 'order-tracking', path: '/order-tracking', component: Static, props: { page: 'lorem', title: 'Track my Order' } },
   { name: 'my-account', path: '/my-account', component: MyAccount, meta: { requiresAuth: true } },
   { name: 'my-shipping-details', path: '/my-account/shipping-details', component: MyAccount, props: { activeBlock: 'MyShippingDetails' }, meta: { requiresAuth: true } },
