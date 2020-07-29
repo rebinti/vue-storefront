@@ -40,7 +40,7 @@
   
 
 
-    <div class="container onlymobile col-12" style="margin-bottom: 5px;" 
+    <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;" 
     :class="classNameTab"
     v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 

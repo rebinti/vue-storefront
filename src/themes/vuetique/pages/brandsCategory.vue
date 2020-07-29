@@ -33,7 +33,7 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait.finding best results... </h3>
       </div>
-      <div class="container onlymobile col-12" style="margin-bottom: 5px;" 
+      <div class="container onlymobile col-12 lg:hidden " style="margin-bottom: 5px;" 
        :class="classNameTab"
       v-if="!searcingLoaderFlag && searchRes && searchRes.facets && searchRes.facets.length > 0">
 
