@@ -638,9 +638,10 @@ export default {
           this.controller = new AbortController();
           this.signal = this.controller.signal; 
         }
-        // console.log("22222222222222",this.filterData);        
-        this.filterData.push("filter.size=8");
-        this.filterData.push("filter.size=XS");
+        // console.log("22222222222222",this.filterData); 
+             
+        // this.filterData.push("filter.size=8");
+        // this.filterData.push("filter.size=XS");
         const searchResults = await this.$store.dispatch('searchSpringCategory/searchInSearchSpringPlatform', {filterData: this.filterData, signal: this.signal })
         // console.log('Search Spring Results', searchResults);
         // if (this.squery.length < 2) {
@@ -730,11 +731,20 @@ export default {
       this.searchedValue =  routeString;
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
-      }
+      }      
       this.$store.dispatch('searchSpringCategory/setCurrentRouterPath' ,  this.$route.path);
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
       this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
+      let fullurlpath = this.$route.fullPath;
+      let extraurlpath = fullurlpath.split("?");      
+      if(extraurlpath[1]){ 
+        let i;   
+        let paramarray = extraurlpath[1].split("&");
+        for(i in paramarray) {   
+          this.$store.dispatch('searchSpringCategory/addFilterItems', paramarray[i])
+        }                 
+      }      
       this.getSearchData(false, true);
     },
 
@@ -751,10 +761,7 @@ export default {
         if ( this.filterData.includes('filter.' + facetssection.field + '=' + encodeURIComponent(item.value))) {
           this.$store.dispatch('searchSpringCategory/removeFilterItem', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
         } else {
-          this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' +
-              facetssection.field +
-              '=' +
-              encodeURIComponent(item.value))
+          this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.' + facetssection.field + '=' + encodeURIComponent(item.value));
         }
       }
       // console.log(' this.filterData', this.filterData);
@@ -1053,7 +1060,7 @@ export default {
       this.getSearchData();
     },
 
-    getCurrentCategoryUrlPath (joiningString = '/') {
+    getCurrentCategoryUrlPath (joiningString = '/') {            
       let routeUrl= this.breadcrumbs.routes.filter((val , index) => {
         if ( index > 0) {
           return val.name
