@@ -638,6 +638,9 @@ export default {
           this.controller = new AbortController();
           this.signal = this.controller.signal; 
         }
+        // console.log("22222222222222",this.filterData);        
+        this.filterData.push("filter.size=8");
+        this.filterData.push("filter.size=XS");
         const searchResults = await this.$store.dispatch('searchSpringCategory/searchInSearchSpringPlatform', {filterData: this.filterData, signal: this.signal })
         // console.log('Search Spring Results', searchResults);
         // if (this.squery.length < 2) {
@@ -723,6 +726,7 @@ export default {
 
     searchDataInSearchSpring (squerydata=null) {
       let routeString = this.getCurrentCategoryUrlPath() ;
+      console.log("getCurrentCategoryUrlPath >>>>>>>>",routeString);
       this.searchedValue =  routeString;
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
