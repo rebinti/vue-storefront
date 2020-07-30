@@ -430,6 +430,13 @@ export default {
     }),
     ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
   },
+  created () {
+    if (this.$route.query.tag) {
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
+      this.searcingLoaderFlag = true;
+      this.getSearchData(false, true);
+    }
+  },
   data () {
     return {
       currentPage: 1,
