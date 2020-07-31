@@ -284,10 +284,21 @@ i {
 }
 
 .wishlist.wishlist_out {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow-y: hidden;
 }
-
+.wishlist.wishlist_out .wish_wrap_box.item-in-it {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.wishlist.wishlist_out .wish_wrap_box.item-in-it .swipeout {
+  margin-right: 15px !important;
+}
+.wish_wrap_box.item-in-it .swipeout {
+  margin-right: 15px;
+}
 .upper-letter {
   font-weight: bold;
   text-transform: uppercase;
