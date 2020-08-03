@@ -5,7 +5,7 @@
       v-touch:swipe.right="swipeRightHandler"
       v-touch:moving="movingHandler"
      > -->
-  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" >
+  <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block" style="margin-right: 15px;">
     <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="productLink"
