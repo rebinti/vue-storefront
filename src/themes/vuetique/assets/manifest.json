@@ -1,10 +1,10 @@
 {
-    "short_name": "Vuetique",
-    "name": "Vuetique Theme",
+    "short_name": "iCLOTHING",
+    "name": "iCLOTHING",
     "background_color": "#ffffff",
     "display": "standalone",
     "theme_color": "#ffffff",
-    "start_url": "/pwa.html",
+    "start_url": "/",
     "icons": [
       {
         "src": "/assets/android-icon-48x48.png",
