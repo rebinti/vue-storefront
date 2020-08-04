@@ -69,7 +69,7 @@ export default {
   mixins: [SearchPanel, VueOfflineMixin],
   data () {
     return {
-      searchFocus: false,
+      searchFocus: true,
       resultsHover: false,
       showResults: 5
     }
