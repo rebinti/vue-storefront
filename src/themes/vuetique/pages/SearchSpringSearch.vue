@@ -888,6 +888,7 @@ export default {
     },
     checkElemetReachedInViewPort (className) {
           const el = document.querySelector(className) 
+          if (!el) return false
           const scroll = window.scrollY || window.pageYOffset
           const boundsTop = el.getBoundingClientRect().top + scroll
           // console.log('boundsTop', boundsTop)	

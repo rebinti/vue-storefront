@@ -122,6 +122,9 @@ export default {
       showSearchBoxSection: false
     }
   },
+  watch: {
+    '$route': 'changeSerachBoxView'
+  },
   beforeMount () {
     window.addEventListener('scroll', () => {
       this.isScrolling = true
@@ -136,10 +139,21 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      if (this.$route.path === '/search') this.toggleSearchBox()
+      if (this.$route.path === '/search' && window.innerWidth <= 991) this.toggleSearchBox()
     })
   },
   methods: {
+    changeSerachBoxView () {
+      if (window.innerWidth <= 991)  {
+        if (this.$route.path === '/search') {
+          this.openSearchPanel = true
+          this.showSearchBoxSection = true
+        } else {
+          this.openSearchPanel = false
+          this.showSearchBoxSection = false
+        }
+      }
+    },
     toggleSearchBox () {
         this.openSearchPanel = !this.openSearchPanel
         this.showSearchBoxSection = !this.showSearchBoxSection
