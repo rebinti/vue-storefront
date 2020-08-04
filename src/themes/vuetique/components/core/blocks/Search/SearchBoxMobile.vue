@@ -12,9 +12,9 @@
     > -->
     <div class="flex items-center">
       <base-input
-        ref="search"
+        ref="searchMobile"
         type="text"
-        id="search_input"
+        id="searchMobile"
         :aria-label="$t('Type what you are looking for...')"
         :placeholder="$t('Type what you are looking for...')"
         class="w-full"
@@ -78,6 +78,15 @@ export default {
     showpanelflag: {
       type: Boolean,
       required: true
+    }
+  },
+  watch : {
+    showpanelflag (value) {
+      if (value) {
+        setTimeout(() => {
+          document.querySelector('#searchMobile input[type="text"]').focus()
+        }, 300);
+      } 
     }
   },
   computed: {
