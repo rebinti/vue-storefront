@@ -9,6 +9,7 @@
     :aria-label="$t('Open search panel')"
     class="bg-transparent border-0"
     data-testid="openSearchPanel"
+    @click="$emit('click')"
   >
   
     <svg viewBox="0 0 25 25" class="vt-icon">

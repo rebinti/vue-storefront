@@ -19,12 +19,17 @@
           <div class="col-grow m_logo sm:col-4 lg:col-grow flex items-center justify-center lg:justify-start">
             <logo />
           </div>
-          <div class="col-6 hidden lg:block">
-            <search />
+           <div class="col-6 hidden lg:block">
+              <search />
+          </div>
+           <div class="lg:col-6 md:col-6 sm:col-12 w-full hidden toogle-search"
+           :style="{ display: openSearchPanel ? 'block': 'none' }">
+             <search-box-mobile :showpanelflag="showSearchBoxSection" @click="toggleSearchBox"/>
           </div>
           <div class="col-auto sm:col-4 lg:col-grow justify-end">
             <div class="right-icons flex">
-              <search-icon class="p-3 xs:block lg:hidden" style="margin-top: 5px;"/> 
+              <search-icon class="p-3 xs:block lg:hidden" style="margin-top: 5px;"
+               @click="toggleSearchBox" /> 
               <!-- p-3 hidden xs:block xsm:block md:block lg:hidden -->
               <account-icon class="p-3" />
               <compare-icon class="p-3 hidden sm:block" />
@@ -83,6 +88,7 @@ import ReturnIcon from 'theme/components/core/blocks/Header/ReturnIcon'
 import SearchIcon from 'theme/components/core/blocks/Header/SearchIcon'
 import WishlistIcon from 'theme/components/core/blocks/Header/WishlistIcon'
 import Search from 'theme/components/core/blocks/Search/Search'
+import SearchBoxMobile from 'theme/components/core/blocks/Search/SearchBoxMobile'
 
 export default {
   name: 'Header',
@@ -95,7 +101,8 @@ export default {
     ReturnIcon,
     SearchIcon,
     WishlistIcon,
-    Search
+    Search,
+    SearchBoxMobile
   },
   mixins: [CurrentPage],
   computed: {
@@ -110,7 +117,9 @@ export default {
       isScrolling: false,
       scrollTop: 0,
       lastScrollTop: 0,
-      navbarHeight: 70
+      navbarHeight: 70,
+      openSearchPanel: false,
+      showSearchBoxSection: false
     }
   },
   beforeMount () {
@@ -125,7 +134,20 @@ export default {
       }
     }, 250)
   },
+  mounted () {
+    this.$nextTick(() => {
+      if (this.$route.path === '/search') this.toggleSearchBox()
+    })
+  },
   methods: {
+    toggleSearchBox () {
+        this.openSearchPanel = !this.openSearchPanel
+        this.showSearchBoxSection = !this.showSearchBoxSection
+        if (!this.showSearchBoxSection && this.$route.path == '/search') {
+          if (window.history.length <= 2) this.$router.push(this.localizedRoute('/'))
+          else  this.$router.back()
+        }
+    },
     gotoAccount () {
       this.$bus.$emit('modal-toggle', 'modal-signup')
     },
@@ -209,4 +231,8 @@ header {
       max-width: 1200px;
   }
 }
+ .toogle-search {
+    display: block;
+   background: #ffff;z-index: 100;margin-top: -39px;margin-left: 3px;width: 101%;
+ }
 </style>

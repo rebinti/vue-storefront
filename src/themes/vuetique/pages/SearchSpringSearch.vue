@@ -2,10 +2,10 @@
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-12 md:col-12 sm:col-12 lg:hidden devicetitle" style="margin:0 auto">
-        <h4 class="col-6">
+        <h4 class="col-6 pb-5">
           Search
         </h4>
-        <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
+        <!-- <div class="col-6 flex items-center relative mb-4" style="margin-top: 10px;">
           <base-input
             ref="search"
             name="search"
@@ -29,7 +29,7 @@
           >
             Clear All
           </button-full>
-        </div>
+        </div> -->
       </div>
     </div>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
