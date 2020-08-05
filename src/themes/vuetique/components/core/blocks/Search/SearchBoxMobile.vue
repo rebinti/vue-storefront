@@ -29,7 +29,7 @@
       <i @click="$emit('click')" class="material-icons p15">close</i>
     </div>
       <!-- </router-link> -->
-    <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
+    <!-- <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
       <div v-if="showDrop" class="bg-white border border-grey border-t-0">
         <product :key="product.id" v-for="product in results" :product="product" @click.native="resultsHover = false" />
         <transition name="fade">
@@ -47,15 +47,15 @@
           </div>
         </transition>
       </div>
-    </div>
+    </div> -->
   </div>
   </transition>
 </template>
 
 <script>
 import Vue from 'vue'
-import SearchPanel from '@vue-storefront/core/compatibility/components/blocks/SearchPanel/SearchPanel'
-import Product from 'theme/components/core/blocks/Search/Product'
+// import SearchPanel from '@vue-storefront/core/compatibility/components/blocks/SearchPanel/SearchPanel'
+// import Product from 'theme/components/core/blocks/Search/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
 
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
@@ -63,10 +63,10 @@ import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
 export default {
   name: 'SearchBoxMobile',
   components: {
-    Product,
+    // Product,
     BaseInput
   },
-  mixins: [SearchPanel, VueOfflineMixin],
+  mixins: [ VueOfflineMixin],  //SearchPanel,
   data () {
     return {
       searchFocus: true,
@@ -90,17 +90,17 @@ export default {
       } 
     }
   },
-  computed: {
-    showDrop () {
-      return false // (this.searchFocus && this.search !== '') || this.resultsHover
-    },
-    results () {
-      return this.products.slice(0, this.showResults)
-    },
-    moreResults () {
-      return this.products.length > this.showResults
-    },   
-  },
+  // computed: {
+  //   showDrop () {
+  //     return false // (this.searchFocus && this.search !== '') || this.resultsHover
+  //   },
+  //   results () {
+  //     return this.products.slice(0, this.showResults)
+  //   },
+  //   moreResults () {
+  //     return this.products.length > this.showResults
+  //   },   
+  // },
   methods: {
    searchDataInSearchSpring () {
       // console.log('searchDataInSearchSpring', this.search, this.searchFocus);
