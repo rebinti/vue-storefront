@@ -85,7 +85,8 @@ export default {
       if (value) {
         setTimeout(() => {
           document.querySelector('#searchMobile input[type="text"]').focus()
-        }, 300);
+          document.getElementById("searchMobile").focus();
+        }, 200);
       } 
     }
   },
