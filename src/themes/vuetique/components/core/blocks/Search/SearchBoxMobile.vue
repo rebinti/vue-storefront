@@ -70,8 +70,9 @@ export default {
   data () {
     return {
       searchFocus: true,
-      resultsHover: false,
-      showResults: 5
+      search: '',
+      // resultsHover: false,
+      // showResults: 5,
     }
   },
   props: {
