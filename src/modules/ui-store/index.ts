@@ -196,12 +196,16 @@ const store = {
         if (includeFields === null) {
           // includeFields = config.brand.includeFields;
         }
-        return quickSearchByQuery({ query, entityType: 'brand', excludeFields, includeFields })
+        return quickSearchByQuery({ query, size: 500 ,entityType: 'brand', excludeFields, includeFields })
           .then((resp) => {
-            commit('setBrandList', resp.items);
-            return resp.items
-          })
-          .catch(err => {
+            if (Array.isArray(resp.items) && resp.items.length){ 
+              const brandsList = resp.items.sort((a, b)=> a.url_key.localeCompare(b.url_key));
+              commit('setBrandList', brandsList); // brandsList.filter(v => v.status == 1));
+              return brandsList
+            } else {
+              commit('setBrandList', []);
+            }
+          }).catch(err => {
             commit('setBrandList', []);
             Logger.error(err, 'ui/brands')()
           })

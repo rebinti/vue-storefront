@@ -63,7 +63,8 @@ export default {
         navigationEnabled: true,
         navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
         navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
-      },     
+      }, 
+      setTimeoutSubscription: null    
     }
   },
   methods: {
@@ -120,6 +121,19 @@ export default {
       // if (typeof window.styla.init !== "undefined") window.styla.init()
        styla.init !== "undefined"&&styla.init()
     }
+    this.$nextTick(() => {
+      if ('styla' in window) {
+        styla.init()
+      }
+    })
+    this.setTimeoutSubscription = setTimeout(() => {
+      if ('styla' in window) {
+        styla.init()
+      }
+    }, 5000);
+  },
+  beforeDestroy () {
+    if (this.setTimeoutSubscription) clearTimeout(this.setTimeoutSubscription)
   }
 }
 </script>
