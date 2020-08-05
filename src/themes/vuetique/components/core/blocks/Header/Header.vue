@@ -22,11 +22,11 @@
            <div class="col-6 hidden lg:block">
               <search />
           </div>
-           <div class="lg:col-6 md:col-6 sm:col-12 w-full hidden toogle-search"
+           <div class="lg:col-6 md:col-12 sm:col-12 w-full hidden toogle-search mob-search-box"
            :style="{ display: openSearchPanel ? 'block': 'none' }">
              <search-box-mobile :showpanelflag="showSearchBoxSection" @click="toggleSearchBox"/>
           </div>
-          <div class="col-auto sm:col-4 lg:col-grow justify-end">
+          <div class="col-auto sm:col-4 lg:col-grow justify-end" :style="{ display: !openSearchPanel ? 'block': 'none' }">
             <div class="right-icons flex">
               <search-icon class="p-3 xs:block lg:hidden" style="margin-top: 5px;"
                @click="toggleSearchBox" /> 
@@ -249,4 +249,5 @@ header {
     display: block;
    background: #ffff;z-index: 100;margin-top: -39px;margin-left: 3px;width: 101%;
  }
+ .mob-search-box{ height: 50px; }
 </style>
