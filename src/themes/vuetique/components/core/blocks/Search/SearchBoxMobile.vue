@@ -13,6 +13,7 @@
     <div class="flex items-center">
       <base-input
         ref="searchMobile"
+        focus
         type="text"
         id="searchMobile"
         :aria-label="$t('Type what you are looking for...')"

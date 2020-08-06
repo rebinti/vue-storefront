@@ -155,6 +155,8 @@ export default {
       }
     },
     toggleSearchBox () {
+        // console.log('window.history', window.history)
+        console.log('window.history length', window.history.length)
         this.openSearchPanel = !this.openSearchPanel
         this.showSearchBoxSection = !this.showSearchBoxSection
         if (!this.showSearchBoxSection && this.$route.path == '/search') {
