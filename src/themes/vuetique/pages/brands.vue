@@ -29,9 +29,9 @@
                 exact>
                 <div>
                   <img v-if="brand.image" :src="imagesPath + brand.image" alt="" 
-                      width="150px" height="150px" class="brand-image" />
-                  <p class="brand-name" :class="[!brand.image ? 'no-image' : '']">
-                    {{ brand.slug }}
+                      width="150px" height="150px" class="brand-image" />                     
+                    <p class="brand-name" :class="[!brand.image ? 'no-image' : '']">
+                      {{ brand.name }}
                     </p>
                 </div>
               </router-link>
