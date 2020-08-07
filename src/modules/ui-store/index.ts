@@ -200,7 +200,8 @@ const store = {
           .then((resp) => {
             if (Array.isArray(resp.items) && resp.items.length){ 
               const brandsList = resp.items.sort((a, b)=> a.url_key.localeCompare(b.url_key));
-              commit('setBrandList', brandsList); // brandsList.filter(v => v.status == 1));
+              //commit('setBrandList', brandsList); // brandsList.filter(v => v.status == 1));
+              commit('setBrandList', brandsList.filter(v => v.is_active == 1)); 
               return brandsList
             } else {
               commit('setBrandList', []);
