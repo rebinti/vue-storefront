@@ -86,7 +86,14 @@ const actions: ActionTree<ProductState, RootState> = {
           }
         }
         if (typeof catForBreadcrumbs !== 'undefined') {
-          await context.dispatch('category/single', { key: 'id', value: catForBreadcrumbs.id }, { root: true }).then(() => { // this sets up category path and current category
+         if (context.rootState.category.current && context.rootState.category.current['id'] && (catForBreadcrumbs.id !== context.rootState.category.current['id'])) {
+            if (rootCat.id === context.rootState.category.current['id']) {
+              catForBreadcrumbs = rootCat
+            } else {
+              catForBreadcrumbs = context.rootState.category.current
+            }
+         }
+         await context.dispatch('category/single', { key: 'id', value: catForBreadcrumbs.id }, { root: true }).then((res) => { // this sets up category path and current category          
             setBreadcrumbRoutesFromPath(context.rootGetters['category/getCurrentCategoryPath'])
           }).catch(err => {
             setBreadcrumbRoutesFromPath(context.rootGetters['category/getCurrentCategoryPath'])
