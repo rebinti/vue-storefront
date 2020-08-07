@@ -1,8 +1,12 @@
 <template>
   <div id="product" itemscope itemtype="http://schema.org/Product">
-    <breadcrumbs class="brd_out"
+    <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out"
       :routes="breadcrumbs.routes"
       :active-route="breadcrumbs.name"
+    />
+  <breadcrumbs v-else class="brd_out"
+      :routes="[{name:'Default Category',route_link:'/undefined'}]"
+      :active-route="product.name"
     />
     <section class="bg-grey-lightest">
           <div class="w-full md:w-12/12 top-main">
@@ -695,8 +699,22 @@ export default {
       colorSwatchRelateProduct: [],
       getProductId: null,
       getTruefitProd: null,
-      isProductHavRecommOptFrmTrufitFlag: false
+      isProductHavRecommOptFrmTrufitFlag: false,
+      showDefaultBreadCrumbs: false
     }
+  },
+  beforeRouteEnter(to, from, next) {
+   next(vm => {
+    if (vm.category && vm.category.url_path) {
+      if (from.fullPath !== '/' + vm.category.url_path) {
+        vm.showDefaultBreadCrumbs = true
+      } else {
+        vm.showDefaultBreadCrumbs = false
+      }
+    } else {
+      vm.showDefaultBreadCrumbs = true
+    }
+   })
   },
   directives: { focusClean },
   computed: {
