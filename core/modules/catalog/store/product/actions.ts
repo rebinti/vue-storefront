@@ -64,7 +64,7 @@ const actions: ActionTree<ProductState, RootState> = {
       context.commit(types.CATALOG_SET_BREADCRUMBS, breadcrumbs)
     }
 
-    if (product.category && product.category.length > 0) {
+    if (product.category && product.category.length > 0 && context.rootState.category.current && context.rootState.category.current['id']) {
       const categoryIds = product.category.reverse().map(cat => cat.category_id)
       await context.dispatch('category/list', { key: 'id', value: categoryIds }, { root: true }).then(async (categories) => {
         const catList = []
