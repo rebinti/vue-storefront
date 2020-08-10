@@ -37,6 +37,7 @@ const store = {
     defaultColumnWeb: 3,
     yoptoProduct: null,
     brandsList: [],
+    // specificBrandsList: [],
     brandsLoadedFlag: false,
     brandSearchText: '',
     brandSelectedChar: '',
@@ -53,10 +54,14 @@ const store = {
     getDefaultColumnMobile: state => state.defaultColumnMobile,
     getDefaultColumnWeb: state => state.defaultColumnWeb,
     getBrandsList: state => state.brandsList,
+    // getSpecificBrandsList: state => state.specificBrandsList,
     getMainSliderData: state => state.mainSliderData,
     getBrandsLoadedFlag: state => state.brandsLoadedFlag,
     getBrandSearchText: state => state.brandSearchText,
-    getBrandSelectedChar:  state => state.brandSelectedChar
+    getBrandSelectedChar:  state => state.brandSelectedChar,
+    brandPageTitle: (state) => (url_key) => {
+      return state.brandsList.find(item => item.url_key === url_key)
+    }    
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -128,7 +133,10 @@ const store = {
     setBrandList (state, data) {
       state.brandsList = data;
       state.brandsLoadedFlag = true
-    },
+    }, 
+    // setSpecificBrandList (state, data) {
+    //   state.specificBrandsList = data;      
+    // },    
     setBrandsFilters (state, data) {
       state.brandSearchText = data.selText;
       state.brandSelectedChar = data.selChar;
@@ -211,6 +219,30 @@ const store = {
             Logger.error(err, 'ui/brands')()
           })
     },
+  //   getSpecificBrandList({commit}, { key = 'type', value, routeString = null, excludeFields = null, includeFields = null, skipCache = false }) {
+  //     let query = new SearchQuery()
+  //     if (value) {
+  //       query = query.applyFilter({key: key, value: {'eq': value}})
+  //     }
+  //     if (includeFields === null) {
+  //       // includeFields = config.brand.includeFields;
+  //     }
+  //     console.log(">>>>>>>>>>>>>>>>",this.$route)
+  //     return quickSearchByQuery({ query, size: 500 ,entityType: 'brand', excludeFields, includeFields })
+  //       .then((resp) => {
+  //         if (Array.isArray(resp.items) && resp.items.length){ 
+  //           const specificBrandsList = resp.items.sort((a, b)=> a.url_key.localeCompare(b.url_key));
+  //           //commit('setBrandList', brandsList); // brandsList.filter(v => v.status == 1));
+  //           commit('setSpecificBrandList', specificBrandsList.filter(v => v.is_active == 1)); 
+  //           return specificBrandsList
+  //         } else {
+  //           commit('setSpecificBrandList', []);
+  //         }
+  //       }).catch(err => {
+  //         commit('setSpecificBrandList', []);
+  //         Logger.error(err, 'ui/brands')()
+  //       })
+  // },
     getSliderData ({commit}, { key = '_type', value, excludeFields = null, includeFields = null, skipCache = false }) {
       let query = new SearchQuery()
       if (value) {
