@@ -700,14 +700,15 @@ export default {
       getProductId: null,
       getTruefitProd: null,
       isProductHavRecommOptFrmTrufitFlag: false,
-      showDefaultBreadCrumbs: false
+      showDefaultBreadCrumbs: false,
+      showBreadCrumbsToSamePath: false
     }
   },
   beforeRouteEnter(to, from, next) {
    next(vm => {
     if (vm.category && vm.category.url_path) {
-      if (from.fullPath !== '/' + vm.category.url_path) {
-        vm.showDefaultBreadCrumbs = true
+      if ((from.fullPath !== '/' + vm.category.url_path) && !vm.showBreadCrumbsToSamePath) {
+         vm.showDefaultBreadCrumbs = true
       } else {
         vm.showDefaultBreadCrumbs = false
       }
@@ -715,6 +716,9 @@ export default {
       vm.showDefaultBreadCrumbs = true
     }
    })
+  },
+  watch: {
+    '$route': 'setBreadCrumbToSamePath'
   },
   directives: { focusClean },
   computed: {
@@ -804,6 +808,7 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
+    setBreadCrumbToSamePath () { this.showBreadCrumbsToSamePath = true; },
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
     },
