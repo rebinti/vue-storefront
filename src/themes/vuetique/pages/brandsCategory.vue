@@ -394,13 +394,12 @@ export default {
     Columns,
     filterColorSelector
   },
-  // async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
-  //     await store.dispatch('ui/getSpecificBrandList', { // this is just an example how can you modify the search criteria in child components
-  //      key: '_type',
-  //       value: "brand", 
-  //       routeString: route,      
-  //     })
-  // },  
+  async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
+      await store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
+       key: '_type',
+        value: "brand"
+      })
+  }, 
   mixins: [onBottomScroll],
 
   computed: {
@@ -614,6 +613,8 @@ export default {
       // console.log('this.$route.params.slug', this.$route ,this.$route.params.brandName);
       let routeString = this.$route.params.brandName; // this.$route.path.replace('-', ' ');
       console.log("CCCCCCCCCCCCCCCCCCCCC222222222222",routeString);
+      console.log("BBBBBBBBBBBBBB",this.getBrandPageTitle.name);
+      console.log("PPPPPPPPPPPPPPPP",this.getBrandPageTitle.name.replace(/&/g, '%26'));
       routeString = routeString.split('-')
                       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                       .join(' ');
@@ -625,7 +626,7 @@ export default {
       this.$store.dispatch('searchSpringCategory/setCurrentRouterPath' ,  this.$route.path);
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
-      this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.label=' + routeString)
+      this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.label=' + this.getBrandPageTitle.name.replace(/&/g, '%26'))
       this.getSearchData(false, true);
     },
 
