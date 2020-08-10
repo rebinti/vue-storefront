@@ -724,7 +724,13 @@ export default {
   computed: {
     getBrandLabelDetails () {
       if (this.attributesByCode && this.attributesByCode.label) {
-         return this.attributesByCode.label.options.find(val => val.value == this.product.label)
+        const brand = this.attributesByCode.label.options.find(val => val.value == this.product.label)
+        if (brand && this.$store.getters[`ui/checkBrandActiveFlag`]({brandAttributeId: this.product.label})) {
+          return brand
+        } else {
+          return null
+        }
+        // return this.attributesByCode.label.options.find(val => val.value == this.product.label)
       } else {
          return null
       }

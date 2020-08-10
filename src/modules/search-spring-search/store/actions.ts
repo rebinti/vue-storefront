@@ -2,6 +2,7 @@ import { SearchSpringState } from '../types/SearchSpringState'
 import { ActionTree } from 'vuex';
 import * as types from './mutation-types'
 import config from 'config'
+import rootStore from '@vue-storefront/core/store'
 
 
 export const actions: ActionTree<SearchSpringState, any> = {
@@ -36,7 +37,16 @@ export const actions: ActionTree<SearchSpringState, any> = {
     },
 
     addSearchSpringSearchResult ({ commit }, searchRes) {
-        
+        searchRes.facets = searchRes.facets.map(val => {
+            if (val.label === 'Brand') {
+                val.values = val.values.filter(brand => {
+                    if (rootStore.getters[`ui/checkBrandActiveFlag`]({name: brand.label})) return brand
+                })
+                return val
+            } else return val
+        })
+
+        console.log(' searchRes.facets ',  searchRes.facets )
         if (searchRes) {
             commit(types.SET_SEARCH_RESULTS, searchRes)
         }

@@ -158,6 +158,12 @@ export default {
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)
   },
+  created () {
+      this.$store.dispatch('ui/getBrandList', {
+        key: '_type',
+        value: "brand"
+      })
+  },
   metaInfo: Head,
   components: {
     MainHeader,

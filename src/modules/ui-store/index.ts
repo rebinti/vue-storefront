@@ -61,7 +61,15 @@ const store = {
     getBrandSelectedChar:  state => state.brandSelectedChar,
     brandPageTitle: (state) => (url_key) => {
       return state.brandsList.find(item => item.url_key === url_key)
-    }    
+    },
+    checkBrandActiveFlag: (state) => ( { url_key = null ,brandId = null , name= null , brandAttributeId = null} ) => {
+      // console.log(`url_key: ${url_key} ,brandId: ${brandId} , name: ${name} , brandAttributeId ${brandAttributeId}`)
+      if (state.brandsList.some(item => (item.url_key === url_key || item.id === brandId || item.name === name || item.option_id === brandAttributeId))) {
+        return true
+       } else {
+         return false
+       }
+    }     
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -196,7 +204,10 @@ const store = {
     UpdateSeletedWebViewGrid ({commit}, state) {
       commit('setSeletedWebViewGrid', state)
     },
-    getBrandList ({commit}, { key = 'type', value, excludeFields = null, includeFields = null, skipCache = false }) {
+    getBrandList ({commit, state}, { key = 'type', value, excludeFields = null, includeFields = null, skipCache = false }) {
+        if (state.brandsList.length > 0) { 
+          return state.brandsList; 
+        }
         let query = new SearchQuery()
         if (value) {
           query = query.applyFilter({key: key, value: {'eq': value}})
