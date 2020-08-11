@@ -22,10 +22,10 @@
       >
         <template>
           <div class="row">
-            <base-select v-if="getLabelAtrributeList.options && getLabelAtrributeList.options.length"
+            <base-select v-if="getAllBrandsList && getAllBrandsList.length"
               class="col-xs-12 col-sm-6 mb10"
               name="brands"
-              :options="getLabelAtrributeList.options"
+              :options="getAllBrandsList"
               :placeholder="$t('Select Brand *')"
               autocomplete="label"
               :selected="selectedBrandID"
@@ -90,7 +90,12 @@ export default {
        product: 'product/productCurrent',
        attributesByCode: 'attribute/attributeListByCode',
        attributesById: 'attribute/attributeListById',
+       brandsList: 'ui/getBrandsList'
      }),
+     getAllBrandsList () {
+       return this.brandsList.map((val ) => { return {...val,
+         label: val.name, sort_order: 0, value:val.option_id} })
+     },
      getLabelAtrributeList() {
        if (this.attributesByCode && this.attributesByCode.label) {
          return this.attributesByCode.label
