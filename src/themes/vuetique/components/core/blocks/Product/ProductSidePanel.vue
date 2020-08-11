@@ -78,7 +78,7 @@ export default {
       opensizeguide: true
     }
   },
-  mixins: [CmsBlock,onEscapePress, NoScrollBackground],
+  mixins: [onEscapePress, NoScrollBackground],
   components: {
      CmsBlock, Accordion, BaseSelect
   },
@@ -94,7 +94,7 @@ export default {
      }),
      getAllBrandsList () {
        return this.brandsList.map((val ) => { return {...val,
-         label: val.name, sort_order: 0, value:val.option_id} })
+         label: val.name, sort_order: 0, value: val.option_id.toString()} })
      },
      getLabelAtrributeList() {
        if (this.attributesByCode && this.attributesByCode.label) {
@@ -104,8 +104,8 @@ export default {
       }
      },
     getCurrentProductLabelData () {
-      if (this.attributesByCode && this.attributesByCode.label) {
-         return this.attributesByCode.label.options.find(val => val.value == this.product.label)
+      if (this.getAllBrandsList && this.getAllBrandsList.length) {
+         return this.getAllBrandsList.find(val => val.value == this.product.label)
       } else {         
          return null
       }
@@ -118,11 +118,11 @@ export default {
         this.opensizeguide = true
     }
   },
-  mounted () {    
-    if (this.getLabelAtrributeList) {
-        this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value
+  mounted () { 
+    if (this.getAllBrandsList) {
+        this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value.toString()
         this.brandChanged();
-    }
+    }   
   },
   methods: {
     onEscapePress () {

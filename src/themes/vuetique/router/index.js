@@ -68,10 +68,10 @@ let routes = [
 
   { name: 'external-thank-you', path: '/order-success', component: ExternalThankYouPage },
 
-  { name: 'inspiration', path: '/inspiration-landing', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
-  { name: 'inspiration', path: '/inspiration', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
-  { name: 'inspiration', path: '/inspiration/:slug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
-  { name: 'inspiration', path: '/inspiration/:slug/:childSlug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } }
+  { name: 'inspiration-landing', path: '/inspiration-landing', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration-home', path: '/inspiration', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration-sub', path: '/inspiration/:slug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } },
+  { name: 'inspiration-sub-child', path: '/inspiration/:slug/:childSlug', component: Styla, props: { page: 'lorem', title: 'Inspiration' } }
 ]
 if (!config.products.useShortCatalogUrls) {
   routes = routes.concat([{ name: 'virtual-product', path: '/p/:parentSku/:slug', component: Product }, // :sku param can be marked as optional with ":sku?" (https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js#L16), but it requires a lot of work to adjust the rest of the site
