@@ -59,12 +59,12 @@
           <div class="w-full m_item p_detail_box">
             <div class="brand-review-div">
               <div class="brand-div">
-                <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="">   
+                <p v-if="getBrandLabelDetails && getBrandLabelDetails.name" style="">   
                   <router-link
                     class="menu-link brand-mob-link"
-                    :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
+                    :to="localizedRoute('/brands/' + getBrandLabelDetails.url_key)"
                     exact
-                    >{{ getBrandLabelDetails.label }}
+                    >{{ getBrandLabelDetails.name }}
                   </router-link>
                 </p>
               </div>
@@ -273,12 +273,12 @@
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
             <div class="brand-review-div">
               <div class="brand-div">
-                <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
+                <p v-if="getBrandLabelDetails && getBrandLabelDetails.name" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
                   <router-link
                     class="menu-link"
-                    :to="localizedRoute('/brands/' + getBrandUrlPath(getBrandLabelDetails.label))"
+                    :to="localizedRoute('/brands/' + getBrandLabelDetails.url_key)"
                     exact
-                    >{{ getBrandLabelDetails.label }}
+                    >{{ getBrandLabelDetails.name }}
                   </router-link>
                 </p>
               </div>
@@ -726,7 +726,7 @@ export default {
       if (this.attributesByCode && this.attributesByCode.label) {
         const brand = this.attributesByCode.label.options.find(val => val.value == this.product.label)
         if (brand && this.$store.getters[`ui/checkBrandActiveFlag`]({brandAttributeId: this.product.label})) {
-          return brand
+          return this.$store.getters[`ui/checkBrandActiveFlag`]({brandAttributeId: this.product.label , rtnBrandDataFlag: true})
         } else {
           return null
         }

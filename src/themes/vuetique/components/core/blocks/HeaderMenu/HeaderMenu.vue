@@ -5,7 +5,7 @@
 
       <li v-for="menu in headerMenuList" :key="menu.id" @mouseenter="activeSubMenu = menu.identifier"
            @mouseleave="activeSubMenu = null" v-if="headerMenuList.length && menu.active" :class="menu.className">
-          <router-link class="menu-link" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/'+menu.className)" exact>{{ menu.title }}</router-link>
+          <router-link class="menu-link"  @click.native="onMenuSubCategoryClick($event)" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/'+menu.className)" exact>{{ menu.title }}</router-link>
           <div v-show="activeSubMenu === menu.identifier"
             class="main-item row cms-block-menu"
             @click="onMenuSubCategoryClick($event)"
@@ -111,7 +111,8 @@ export default {
     return {
       allCategories: [],
       activeSubMenu: null,
-      headerMenuList:  config.cmsBlocksDataFetchConfig.headerMenuList || []
+      headerMenuList:  config.cmsBlocksDataFetchConfig.headerMenuList || [],
+      hideMenuOptions: false
     };
   },
   computed: {

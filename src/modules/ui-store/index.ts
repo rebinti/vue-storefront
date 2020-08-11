@@ -62,8 +62,12 @@ const store = {
     brandPageTitle: (state) => (url_key) => {
       return state.brandsList.find(item => item.url_key === url_key)
     },
-    checkBrandActiveFlag: (state) => ( { url_key = null ,brandId = null , name= null , brandAttributeId = null} ) => {
-      // console.log(`url_key: ${url_key} ,brandId: ${brandId} , name: ${name} , brandAttributeId ${brandAttributeId}`)
+    checkBrandActiveFlag: (state) => ( { url_key = null ,brandId = null , name= null , brandAttributeId = null, rtnBrandDataFlag= false} ) => {
+      // console.log(`url_key: ${url_key} ,brandId: ${brandId} , name: ${name} , brandAttributeId ${brandAttributeId} , rtnBrandDataFlag ${rtnBrandDataFlag}`)
+      if (rtnBrandDataFlag) {
+        console.log('brand', state.brandsList.find(item => (item.url_key === url_key || item.id === brandId || item.name === name || item.option_id === brandAttributeId)))
+        return state.brandsList.find(item => (item.url_key === url_key || item.id === brandId || item.name === name || item.option_id === brandAttributeId)) || null 
+      }
       if (state.brandsList.some(item => (item.url_key === url_key || item.id === brandId || item.name === name || item.option_id === brandAttributeId))) {
         return true
        } else {
