@@ -24,7 +24,7 @@
                 name="sort"
                 v-model="sortingFilterSelectedValue"
                 :options="sortingFilterOptions"
-                :selected="sortingFilterSelectedValue"
+                :selected="sortingFilterSelected"
                 :placeholder="$t('Sorting')"
                 @input="sortingFilterChange"
               />
@@ -101,7 +101,7 @@
                   name="sort"
                   v-model="sortingFilterSelectedValue"
                   :options="sortingFilterOptions"
-                  :selected="sortingFilterSelectedValue"
+                  :selected="sortingFilterSelected"
                   :placeholder="$t('Sorting *')"
                   @input="sortingFilterChange"
                 />

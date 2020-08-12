@@ -54,6 +54,9 @@ export const mutations: MutationTree<any> = {
     state.priceSliderData = filterData.sliderData;
     state.priceSliderActiveRange = filterData.sliderActiveRange;
     state.sortingFilterOptions = filterData.sortingFilterOptions;
+    if (filterData.sortingFilterOptions && filterData.sortingFilterOptions.length) {
+      state.sortingFilterSelected = `${filterData.sortingFilterOptions[0].field}$${filterData.sortingFilterOptions[0].direction}`
+    }
   },
 
   [types.set_priceSliderActiveRange] (state, activeRange) {
