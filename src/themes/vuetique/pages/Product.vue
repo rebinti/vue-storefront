@@ -445,7 +445,7 @@
               <!-- For TrueFit Review button -->
               <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div>
               <div class="truefit-button tfc-fitrec-product" 
-              :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':(windowWidth>1400) ? '50%' : '54%'}"
+              :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':(windowScreenWidth>1400) ? '50%' : '54%'}"
                 v-if="getTruefitProd !== null"
                 :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
                   :data-colorid="getTruefitProd.color" 
@@ -700,7 +700,7 @@ export default {
       getProductId: null,
       getTruefitProd: null,
       isProductHavRecommOptFrmTrufitFlag: false,      
-      windowWidth: window.innerWidth,
+      windowScreenWidth: 0,
       showDefaultBreadCrumbs: false,
       showBreadCrumbsToSamePath: false
     }
@@ -752,7 +752,8 @@ export default {
       }
     }      
   },
-  beforeMount () {    
+  beforeMount () { 
+    this.windowScreenWidth = window.innerWidth;   
     this.$bus.$on('product-after-related', this.getRelatedProduct)
     this.$bus.$on('product-after-load', this.getDataFromThirdPartyModules)
     this.$bus.$on('product-before-load', this.changeProd)
@@ -1102,6 +1103,7 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {
+    this.windowScreenWidth = window.innerWidth; 
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
     if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
