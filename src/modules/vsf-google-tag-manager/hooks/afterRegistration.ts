@@ -13,6 +13,7 @@ const injectJs = function(w,d,s,l,i) {
   j.async=true;
   j.src= 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
   f.parentNode.insertBefore(j, f);
+  console.log( `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`)
 }
 
 export function afterRegistration({ Vue, config, store, isServer }){
