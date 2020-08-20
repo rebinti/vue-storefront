@@ -2,15 +2,15 @@ import config from 'config'
 // import SocialLogin from 'theme/pages/SocialLogin'
 // import SplashScreen from 'theme/pages/SplashScreen'
 import Brands from 'theme/pages/brands'
-import BrandsCategory from 'theme/pages/brandsCategory'
-import SearchSpringSearch from 'theme/pages/SearchSpringSearch'
+import BrandsCategory from 'theme/pages/search-spring/brandsCategory'
+import SearchSpringSearch from 'theme/pages/search-spring/SearchSpringSearch'
 
 // const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
 const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */ 'theme/pages/HomeWithStyla.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
 const Product = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/Product.vue')
-const Category = () => import(/* webpackChunkName: "vsf-category" */ 'theme/pages/SearchSpringCategory.vue') // Category.vue
+const Category = () => import(/* webpackChunkName: "vsf-category" */ 'theme/pages/search-spring/SearchSpringCategory.vue') // Category.vue
 const CmsPage = () => import(/* webpackChunkName: "vsf-cms" */ 'theme/pages/CmsPage.vue')
 const CmsBlockDemoPageSsr = () => import(/* webpackChunkName: "vsf-cms-demo" */ 'theme/pages/CmsBlockDemoPageSsr.vue')
 const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/pages/Checkout.vue')

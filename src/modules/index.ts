@@ -36,9 +36,12 @@ import { FacebookPixel } from './vsf-facebook-pixel'
 
 import { ExternalCheckout } from './vsf-external-checkout'
 
-import { SearchSpringSearch } from './search-spring-search';
+// import { SearchSpringSearch } from './search-spring-search';
 
-import { SearchSpringCategory } from './search-spring-category';
+// import { SearchSpringCategory } from './search-spring-category';
+
+
+import { SearchSpring } from './search-spring';
 
 
 // import { Example } from './module-template'
@@ -105,8 +108,9 @@ export const registerModules: VueStorefrontModule[] = [
   // Braintree,
   FacebookPixel,
   ExternalCheckout,
-  SearchSpringSearch,
-  SearchSpringCategory
+  // SearchSpringSearch,
+  // SearchSpringCategory
   // layeredNavigationModule
   // Example
+  SearchSpring
 ]
