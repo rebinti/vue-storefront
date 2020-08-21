@@ -2,7 +2,7 @@
 export default {
     methods: {
         setFilterData ({facetssection = null , item = null , searchType = this.searchPageType}) {
-          console.log('setFilterData', facetssection, item , searchType)
+
            item.active = true;
           if (facetssection.field === 'category_hierarchy') {
             if ( this.findIndexInFilterItems ('filter.category_hierarchy') ) {
@@ -22,7 +22,7 @@ export default {
         },
     
         setCategoryFilterData ({ facetssection = null, item = null , searchType = this.searchPageType }) {
-          this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: facetssection.field, active: true})
+          this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: facetssection.field, active: true, serachFrom: this.serachFrom})
           if (facetssection.field === 'category_hierarchy') {
             if (this.findIndexInFilterItems ('filter.category_hierarchy')) {
               this.$store.dispatch(`${searchType}/removeFilterItem`, 'filter.category_hierarchy')
@@ -34,20 +34,20 @@ export default {
           }
         },
     
-        setCategoryFilterHistory ({ item=null, index = 0 , searchType = this.searchPageType }) {
+        setCategoryFilterHistory ({ item=null, index = 0 , searchType = this.searchPageType, serachFrom = this.serachFrom }) {
           if (item.active) { return; }
           if (item && item.type === 'view all') {
             this.$store.dispatch(`${searchType}/reset_categoryFilterOption`)
           } else {
             this.$store.dispatch(`${searchType}/reset_categoryFilterOption`)
             this.$store.dispatch(`${searchType}/set_categoryHierarchy`, this.categoryHierarchy.filter((val, i) => i < index))
-            this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: item.field, active: true})
+            this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: item.field, active: true , serachFrom: this.serachFrom})
           }
     
           if ( this.findIndexInFilterItems ('filter.category_hierarchy')) {
             this.$store.dispatch(`${searchType}/removeFilterItem`, 'filter.category_hierarchy')
             /** Diff checking added */
-            if (searchType === 'searchSpringCategory') {
+            if (serachFrom === 'category') {
                  let routeString = this.getCurrentCategoryUrlPath() ;
                 if(routeString.includes('&')) {
                   routeString = encodeURIComponent(routeString)
@@ -107,9 +107,8 @@ export default {
             if(routeString.includes('&')) {
               routeString = encodeURIComponent(routeString)
             }
-            this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.label=' + routeString)
+            this.$store.dispatch(`${searchType}/addFilterItems`, 'filter.label=' + routeString)
           } else {
-              console.log('this.searchedValue', this.searchedValue)
               this.$store.dispatch(`${searchType}/addFilterItems`, 'rq=' + this.searchedValue)
           }
           this.$bus.$emit('reset-price-slider');

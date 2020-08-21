@@ -46,7 +46,7 @@
           >
             <div
               v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'"
-              style="min-height: 20px;"
+              style="min-height: 20px;cursor: pointer;"
             >
               <p
                 @click="$emit('setCategoryFilterHistory' , { item : { type: 'view all' }})"

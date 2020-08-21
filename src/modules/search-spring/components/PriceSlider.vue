@@ -106,13 +106,13 @@ export default {
   // },
   methods: {
     setPrice: function (e) {
-      console.log('this.priceRange', this.priceRange);
+
       let val = e.val
       let from = val[0]
       let to = val[1]
       let id = val[1]
       this.remove = isEqual(val, this.priceRange)
-      console.log('setPrice', id, from, to , this.remove , val, this.priceRange)
+      
       // this.switchFilter(id, from, to)
       this.$emit('sliderChanged', {from: from, to: to})
     },

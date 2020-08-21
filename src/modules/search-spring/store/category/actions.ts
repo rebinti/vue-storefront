@@ -46,7 +46,7 @@ export const actions: ActionTree<SearchSpringCategoryState, any> = {
             } else return val
         })
 
-        console.log(' searchRes.facets ',  searchRes.facets )
+        
 
         if (searchRes) {
             commit(types.SET_SEARCH_RESULTS, searchRes)
