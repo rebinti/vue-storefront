@@ -77,12 +77,13 @@
                   v-for="(categ, index) in categoryHierarchy"
                   :key="categ.value + index"
                   @click="$emit('setCategoryFilterHistory' , { item: categ, index: index })"
-                  :class="{'active': categ.active}"
+                  :class="{'active': categ.active}"   :style="'margin-left:' + 5 * (index) + 'px;'"
                 >{{ categ.label }}</p>
                 <p
                   v-for="(valuesitem) in facetsitem.values"
                   :key="valuesitem.value"
                   @click="$emit('setCategoryFilterData', { facetssection: facetsitem, item: valuesitem })"
+                  :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : 'margin-left:0px;'"
                 >{{ valuesitem.label }}</p>
               </div>
 
