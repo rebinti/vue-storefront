@@ -63,7 +63,7 @@
               :key="facetsitem.field"
               :openType="facetsitem.facet_active === 0 ? false : true"
               :title="$t(facetsitem.label)"
-              v-if="facetsitem.type !== 'hierarchy' && (facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
+              v-if="(facetsitem.values && facetsitem.values.length > 0 ) || (facetsitem.type === 'slider') || (categoryHierarchy.length > 0)"
             >
               <div
                 v-if="facetsitem && facetsitem.type && facetsitem.type === 'hierarchy'"
