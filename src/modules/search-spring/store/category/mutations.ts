@@ -44,7 +44,11 @@ export const mutations: MutationTree<any> = {
       if (filterData.serachFrom && filterData.serachFrom === 'brand') {
         delete filterData.serachFrom
         state.categoryHierarchy.map(val => { if (val.active) val.active = false; });
-        state.categoryHierarchy.push(filterData);
+        if (Array.isArray(filterData)) {
+          state.categoryHierarchy = filterData;
+        } else {
+          state.categoryHierarchy.push(filterData);
+        }
       } else {
         if (filterData.serachFrom) delete filterData.serachFrom
         state.categoryHierarchy.values.map(val => { if (val.active) val.active = false; });

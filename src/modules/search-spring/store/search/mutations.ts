@@ -38,7 +38,11 @@ export const mutations: MutationTree<any> = {
 
   [types.set_categoryHierarchy]  (state, filterData) {
     state.categoryHierarchy.map(val => { if (val.active) val.active = false; });
-    state.categoryHierarchy.push(filterData);
+    if (Array.isArray(filterData)) {
+      state.categoryHierarchy = filterData;
+    } else {
+      state.categoryHierarchy.push(filterData);
+    }
   },
 
   [types.set_priceSliderData] (state, filterData) {

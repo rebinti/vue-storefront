@@ -39,8 +39,9 @@ export default {
           if (item && item.type === 'view all') {
             this.$store.dispatch(`${searchType}/reset_categoryFilterOption`)
           } else {
+            let category = [...this.categoryHierarchy]
             this.$store.dispatch(`${searchType}/reset_categoryFilterOption`)
-            this.$store.dispatch(`${searchType}/set_categoryHierarchy`, this.categoryHierarchy.filter((val, i) => i < index))
+            this.$store.dispatch(`${searchType}/set_categoryHierarchy`, category.filter((val, i) => i < index))
             this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: item.field, active: true , serachFrom: this.serachFrom})
           }
     
