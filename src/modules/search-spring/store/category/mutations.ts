@@ -103,5 +103,14 @@ export const mutations: MutationTree<any> = {
 
   [types.SET_ROUTER_FULL_PATH] (state, fullPath) {
     state.routerFullPath = fullPath ? fullPath : ''
+  },
+
+  [types.RESET_CATEGORY_FILTER_INNER_DATA] (state) {
+    if (state.searchRes && state.searchRes.facets) {
+      state.searchRes.facets =  state.searchRes.facets.map(val => {
+          if (val.type === 'hierarchy') val.values = []
+          return val
+      })
+    }
   }
 }

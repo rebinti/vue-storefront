@@ -127,7 +127,11 @@ export const actions: ActionTree<SearchSpringCategoryState, any> = {
 
     setCurrentRouterPath ({ commit }, fullPath) {
         commit(types.SET_ROUTER_FULL_PATH, fullPath )
-    }
+    },
+
+    resetCategoryFilterData ({ commit }) {
+        commit(types.RESET_CATEGORY_FILTER_INNER_DATA)
+    },
     
 
 }
