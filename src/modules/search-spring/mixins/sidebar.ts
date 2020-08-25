@@ -23,6 +23,7 @@ export default {
     
         setCategoryFilterData ({ facetssection = null, item = null , searchType = this.searchPageType }) {
           this.$store.dispatch(`${searchType}/set_categoryHierarchy`, {...item, field: facetssection.field, active: true, serachFrom: this.serachFrom})
+          this.$store.dispatch(`${searchType}/resetCategoryFilterData`);
           if (facetssection.field === 'category_hierarchy') {
             if (this.findIndexInFilterItems ('filter.category_hierarchy')) {
               this.$store.dispatch(`${searchType}/removeFilterItem`, 'filter.category_hierarchy')
@@ -36,6 +37,7 @@ export default {
     
         setCategoryFilterHistory ({ item=null, index = 0 , searchType = this.searchPageType, serachFrom = this.serachFrom }) {
           if (item.active) { return; }
+          this.$store.dispatch(`${searchType}/resetCategoryFilterData`);
           if (item && item.type === 'view all') {
             this.$store.dispatch(`${searchType}/reset_categoryFilterOption`)
           } else {

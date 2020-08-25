@@ -62,7 +62,7 @@
                 v-for="(valuesitem) in facetsitem.values"
                 :key="valuesitem.value"
                 @click="$emit('setCategoryFilterData', { facetssection: facetsitem, item: valuesitem })"
-                :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : categoryHierarchy.length > 0 ? 'display:none;' : 'margin-left:0px;'"
+                :style="facetsitem.facet_active === 1 ? 'margin-left:' + 5 * categoryHierarchy.length + 'px;' : 'margin-left:0px;'"
               >{{ valuesitem.label }}</p>
             </div>
 

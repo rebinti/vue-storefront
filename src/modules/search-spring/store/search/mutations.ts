@@ -84,5 +84,14 @@ export const mutations: MutationTree<any> = {
 
   [types.RESET_CATEGORY_HIERARCHY] (state) {
     state.categoryHierarchy = []
+  },
+
+  [types.RESET_CATEGORY_FILTER_INNER_DATA] (state) {
+      if (state.searchRes && state.searchRes.facets) {
+        state.searchRes.facets =  state.searchRes.facets.map(val => {
+            if (val.type === 'hierarchy') val.values = []
+            return val
+        })
+      }
   }
 }

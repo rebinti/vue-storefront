@@ -121,7 +121,11 @@ export const actions: ActionTree<SearchSpringState, any> = {
             return err;
         });
         return searchResults
-    }
+    },
+
+    resetCategoryFilterData ({ commit }) {
+        commit(types.RESET_CATEGORY_FILTER_INNER_DATA)
+    },
     
 
 }
