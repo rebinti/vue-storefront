@@ -117,7 +117,8 @@ export default {
           this.$bus.$emit('reset-price-slider');
           this.showNotificationLoader(true);
           /** Diff checking added */
-          if (searchType === 'searchSpringCategory') this.initialSearchFlag = true;
+          // if (searchType === 'searchSpringCategory') this.initialSearchFlag = true;
+          if (serachFrom === 'category') this.initialSearchFlag = true;
           // this.$bus.$emit('notification-progress-start', 'Please wait...');
           this.getSearchData(false, false, searchType);
         },
