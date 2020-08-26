@@ -229,9 +229,9 @@ export default {
   data () {
     return {
         searcingLoaderFlag: true,
-        searchPageType: 'searchSpringCategory',
-        serachFrom: 'category',
-        initialSearchFlag: true,
+        searchPageType: 'searchSpringCategory',  // which store
+        serachFrom: 'category', // where from
+        initialSearchFlag: true, // category - filter higherachy value manage category page - other for brand and search
     };
   },
 
