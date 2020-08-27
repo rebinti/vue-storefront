@@ -196,6 +196,7 @@
           <!-- <div v-html="footerbanner"></div> -->
         </div>
       </div>
+       <div id="seg-cat-reco"></div>
     </div>
   </div>
 </template>
@@ -292,8 +293,20 @@ export default {
     // document.addEventListener('scroll',  this.handleScroll);
     this.setEmarsysTracker();
    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.searchedValue.replace("/", " > ") });
+  
+  // For working Segmentify
+    this.setSegmentify();
   },
   methods: {
+    setSegmentify() {
+      // For working Segmentify
+      let subCategorySrt = this.breadcrumbs && this.breadcrumbs.routes.map((v,i)=> { if (i>0 && v.name) { return v.name }}).join('> ') || '' 
+      subCategorySrt += this.getCurrentCategory && this.getCurrentCategory.name && `> ${this.getCurrentCategory.name}` || ''
+      window.segPageInf = {
+        "category": "Category Page",
+        "subCategory": subCategorySrt.replace('> ','')
+      }
+    },
 
     validateRouteCategory () {
         this.searcingLoaderFlag = true;
@@ -301,6 +314,7 @@ export default {
         this.setEmarsysTracker();
         this.searchDataInSearchSpring();
         this.$store.dispatch('searchSpringCategory/reset_categoryFilterOption')
+        this.setSegmentify();
     },
 
     searchDataInSearchSpring (squerydata=null) {

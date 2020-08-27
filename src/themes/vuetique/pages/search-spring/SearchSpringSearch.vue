@@ -145,6 +145,7 @@
         </div>
       </div>
     </div>
+    <div id="seg-search-reco"></div>
   </div>
 </template>
 
@@ -207,8 +208,16 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
+    this.setSegmentify()
   },
   methods: {
+    setSegmentify() {
+      // For working Segmentify
+      window.segPageInf = {
+        "category": "Search Page",
+        "subCategory": ''
+      }
+    },
     searchDataInSearchSpring (squerydata) {
       if (this.squery.length > 2) {
         this.$store.dispatch('searchSpringSearch/resetFilterData')

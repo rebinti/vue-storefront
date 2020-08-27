@@ -108,6 +108,12 @@ export default {
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
     this.submitEmarsysOrderData()
   },
+  mounted() {
+    window.segPageInf = {
+        "category": "Checkout Success Page",
+        "subCategory": ''
+      }
+  },
   destroyed () {
     this.$bus.$off('application-after-loaded');
     this.$bus.$off('cart-after-itemchanged');
@@ -173,6 +179,7 @@ export default {
        console.log('order details', res);
        if (res && res.length > 0) {
             this.orderApiCheck = false;
+            let productList= [];
             const emarsys = {
                   orderId: this.$route.query.orderid,
                   items: []
@@ -180,10 +187,21 @@ export default {
             res.filter(val => {
               if (val.Price != 0) {
                 emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})
+                productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
               } 
             })
             console.log(' emarsys', emarsys);
-            this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
+            console.log( ' Segmentify',  {
+                orderNo: this.$route.query.orderid, // only on the thank you page
+                totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
+                productList: productList
+            });
+            window.segCheckoutObject = {
+                orderNo: this.$route.query.orderid, // only on the thank you page
+                totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
+                productList: productList
+            };
+          this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
        } else {
           this.$router.push(this.localizedRoute('/'))
        }

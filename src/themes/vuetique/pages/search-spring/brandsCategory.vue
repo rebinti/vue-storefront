@@ -140,6 +140,7 @@
         </div>
       </div>
     </div>
+    <div id="seg-brand-reco"></div>
   </div>
 </template>
 
@@ -222,11 +223,21 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
+    this.setSegmentify();
   },
   methods: {
+    setSegmentify() {
+      console.log('getBrandPageTitle.meta_title', this.getBrandPageTitle.meta_title)
+      // For working Segmentify
+      window.segPageInf = {
+        "category": "Brand Page",
+        "subCategory": this.getBrandPageTitle && this.getBrandPageTitle.meta_title || ''
+      }
+    },
     validateRouteCategory () {
         this.searcingLoaderFlag = true;
         this.searchDataInSearchSpring();
+        this.setSegmentify();
     },
   
     searchDataInSearchSpring (squerydata=null) { // this.$route.params.brandName

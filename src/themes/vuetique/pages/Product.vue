@@ -640,6 +640,7 @@
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
       </no-ssr>
     </div>
+    <div id="seg-prod-reco"></div>
   </div>
 </template>
 
@@ -816,7 +817,17 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
-    setBreadCrumbToSamePath () { this.showBreadCrumbsToSamePath = true; },
+    setSegmentify() {
+      // For working Segmentify
+      window.segPageInf = {
+        "category": "Product Page",
+        "subCategory": this.product.sku
+      }
+    },
+    setBreadCrumbToSamePath () { 
+      this.showBreadCrumbsToSamePath = true; 
+      this.setSegmentify()
+    },
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
     },
@@ -1103,6 +1114,7 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {
+    this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});

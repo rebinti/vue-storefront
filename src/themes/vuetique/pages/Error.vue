@@ -53,6 +53,7 @@
         </section>
       </div>
     </section>
+    <div id="seg-404-reco"></div>
   </div>
 </template>
 
@@ -115,7 +116,13 @@ export default {
         })
       })
     })
-  }
+  },
+  mounted() {
+    window.segPageInf = {
+        "category": "404 Page",
+        "subCategory": ''
+      }
+  },
 }
 </script>
 

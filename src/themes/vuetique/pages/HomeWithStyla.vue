@@ -18,7 +18,7 @@
           </no-ssr>
       </div>      
     </section>
-
+  <div id='seg-home-reco'></div>
   </div>
 </template>
 
@@ -68,6 +68,13 @@ export default {
     }
   },
   methods: {
+    setSegmentify() {
+      // For working Segmentify
+      window.segPageInf = {
+        "category": "Home Page",
+        "subCategory": ""
+      }
+    }
   },
   computed: {
     ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
@@ -131,6 +138,8 @@ export default {
         styla.init()
       }
     }, 5000);
+    // For working Segmentify
+    this.setSegmentify()
   },
   beforeDestroy () {
     if (this.setTimeoutSubscription) clearTimeout(this.setTimeoutSubscription)
