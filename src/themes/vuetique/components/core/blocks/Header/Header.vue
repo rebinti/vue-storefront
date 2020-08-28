@@ -138,11 +138,27 @@ export default {
     }, 250)
   },
   mounted () {
+    this.setSegmentifyUserObject()
     this.$nextTick(() => {
       if (this.$route.path === '/search' && window.innerWidth <= 991) this.toggleSearchBox()
-    })
+    })    
   },
   methods: {
+    setSegmentifyUserObject() {
+      // For working Segmentify UserObject      
+      if(this.currentUser){
+        window.segUserObject = {
+            email: this.currentUser.email,
+            userId: this.currentUser.id,
+            fullName: this.currentUser.firstname+" "+this.currentUser.lastname,
+            isRegistered :true/false,
+            isLogin:true,
+            emailPermission: true,
+            birthDate: "Nill",
+            gender: "Nill"
+        }
+      }
+    },
     changeSerachBoxView () {
       if (window.innerWidth <= 991)  {
         if (this.$route.path === '/search') {
@@ -153,6 +169,7 @@ export default {
           this.showSearchBoxSection = false
         }
       }
+      this.setSegmentifyUserObject()
     },
     toggleSearchBox () {
         // console.log('window.history', window.history)
