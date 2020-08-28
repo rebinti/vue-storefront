@@ -151,7 +151,7 @@ export default {
             email: this.currentUser.email,
             userId: this.currentUser.id,
             fullName: this.currentUser.firstname+" "+this.currentUser.lastname,
-            isRegistered :true/false,
+            isRegistered :true,
             isLogin:true,
             emailPermission: true,
             birthDate: "Nill",
