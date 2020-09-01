@@ -106,8 +106,7 @@ export default {
       }
     })
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
-    this.submitEmarsysOrderData()
-    this.submitSegmentifyOrderData()
+    this.submitOrderDataforEmarsysandSegmentify()    
   },
   mounted() {
     window.segPageInf = {
@@ -172,35 +171,7 @@ export default {
         action1: { label: this.$t('OK') }
       })
     },
-
-    async submitEmarsysOrderData () {
-      console.log('this.$router', this.$route)
-     if (this.$route.query.orderid) {
-       const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
-       console.log('order details', res);
-       if (res && res.length > 0) {
-            this.orderApiCheck = false;
-            let productList= [];
-            const emarsys = {
-                  orderId: this.$route.query.orderid,
-                  items: []
-            }
-            res.filter(val => {
-              if (val.Price != 0) {
-                emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})
-                productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
-              } 
-            })
-            console.log(' emarsys', emarsys);
-          this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
-       } else {
-          this.$router.push(this.localizedRoute('/'))
-       }
-      } else {
-           this.$router.push(this.localizedRoute('/'))
-      }
-    },
-    async submitSegmentifyOrderData () {
+    async submitOrderDataforEmarsysandSegmentify () {
      if (this.$route.query.orderid) {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
        console.log('order details Newwww  111111', res);
@@ -209,8 +180,13 @@ export default {
        if (res && res.itemsresult.length > 0) {
             this.orderApiCheck = false;
             let productList= [];
+            const emarsys = {
+                  orderId: this.$route.query.orderid,
+                  items: []
+            }            
             res.itemsresult.filter(val => {
-              if (val.Price != 0) {                
+              if (val.Price != 0) {  
+                emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})              
                 productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
               } 
             })            
@@ -223,7 +199,9 @@ export default {
                 orderNo: this.$route.query.orderid, // only on the thank you page
                 totalPrice: res.grandtotal,
                 productList: productList
-            };          
+            };  
+            console.log(' emarsys', emarsys);
+            this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });                    
        } else {
           this.$router.push(this.localizedRoute('/'))
        }
