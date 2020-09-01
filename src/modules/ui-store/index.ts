@@ -285,26 +285,8 @@ const store = {
             }).then(res => resolve(res.json())).catch(() => reject())
         })
     },
-    async getOrderedProducts ({commit}, orderId) {
-      console.log('getOrderedProducts',  orderId)
-          const task = await TaskQueue.execute({ url: '/api/urlorderdetails/urlorderdetails', 
-          payload: {  
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            mode: 'cors',
-            body: JSON.stringify({"orderid": orderId}) 
-          },
-          silent: false
-        });
-        if (task && task.resultCode === 200) {
-          console.log('api dataaaa Sucesss' , task.result)
-          return task.result
-        } else {
-          return task
-        }
-    },
     async getOrderedDetails ({commit}, orderId) {
-      console.log('getOrderedProducts',  orderId)
+      console.log('getOrderedDetails',  orderId)
           const task = await TaskQueue.execute({ url: '/api/urlorderdetails/urlorderdetails', 
           payload: {  
             method: 'POST',

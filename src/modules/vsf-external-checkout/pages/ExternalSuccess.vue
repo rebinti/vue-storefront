@@ -163,7 +163,7 @@ export default {
     async submitEmarsysOrderData () {
       console.log('this.$router', this.$route)
      if (this.$route.query.orderid) {
-       const res =   await this.$store.dispatch('ui/getOrderedProducts', this.$route.query.orderid)
+       const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
        console.log('order details', res);
        const emarsys = {
               orderId: this.$route.query.orderid,
