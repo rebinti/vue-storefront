@@ -107,6 +107,7 @@ export default {
     })
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
     this.submitEmarsysOrderData()
+    this.submitSegmentifyOrderData()
   },
   mounted() {
     window.segPageInf = {
@@ -191,16 +192,6 @@ export default {
               } 
             })
             console.log(' emarsys', emarsys);
-            console.log( ' Segmentify',  {
-                orderNo: this.$route.query.orderid, // only on the thank you page
-                totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
-                productList: productList
-            });
-            window.segCheckoutObject = {
-                orderNo: this.$route.query.orderid, // only on the thank you page
-                totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
-                productList: productList
-            };
           this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });
        } else {
           this.$router.push(this.localizedRoute('/'))
@@ -208,7 +199,44 @@ export default {
       } else {
            this.$router.push(this.localizedRoute('/'))
       }
-    }
+    },
+    async submitSegmentifyOrderData () {
+     if (this.$route.query.orderid) {
+       const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
+       console.log('order details Newwww  111111', res);
+       console.log('order details Newwww 222222', res.itemsresult);
+       console.log('order details Newwww 3333333', res.grandtotal);
+      //  if (res && res.length > 0) {
+      //       this.orderApiCheck = false;
+      //       let productList= [];
+      //       res.filter(val => {
+      //         if (val.Price != 0) {
+      //           emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})
+      //           productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
+      //         } 
+      //       })            
+      //       console.log( ' Segmentify',  {
+      //           orderNo: this.$route.query.orderid, // only on the thank you page
+      //           totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
+      //           productList: productList
+      //       });
+      //       window.segCheckoutObject = {
+      //           orderNo: this.$route.query.orderid, // only on the thank you page
+      //           totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
+      //           productList: productList
+      //       };          
+      //  } else {
+      //     this.$router.push(this.localizedRoute('/'))
+      //  }
+      } else {
+           this.$router.push(this.localizedRoute('/'))
+      }      
+        // window.segCheckoutObject = {
+        //     orderNo: this.$route.query.orderid, // only on the thank you page
+        //     totalPrice: productList.reduce((c,v) => c + parseInt(v.price),0),
+        //     productList: productList
+        // };      
+    }    
   }
   // async asyncData ({ store, route, context }) { // this is for SSR purposes to prefetch data
   //   // return new Promise((resolve, reject) => {

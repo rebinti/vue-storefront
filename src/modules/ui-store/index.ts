@@ -303,6 +303,24 @@ const store = {
           return task
         }
     },
+    async getOrderedDetails ({commit}, orderId) {
+      console.log('getOrderedProducts',  orderId)
+          const task = await TaskQueue.execute({ url: '/api/urlorderdetails/urlorderdetails', 
+          payload: {  
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify({"orderid": orderId, "tid":"segmentify"}) 
+          },
+          silent: false
+        });
+        if (task && task.resultCode === 200) {
+          console.log('api dataaaa Sucesss' , task.result)
+          return task.result
+        } else {
+          return task
+        }
+    },    
     async submitOutOfStockNotification ({commit}, data) {
         console.log('submitOutOfStockNotification',  data)
         const task = await TaskQueue.execute({ url: '/api/urlstocknotification/urlnotification', 
