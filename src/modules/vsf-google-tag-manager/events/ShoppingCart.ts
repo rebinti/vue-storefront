@@ -21,11 +21,16 @@ export default (currency): void => {
                 }
 
                 const pr = product.product
+
+                console.log('AAAAAAAAAAA >>>>>>> 1111',product)
+                console.log('BBBBBBBBBBBB >>>>>>> 1111',product.product)
+
+
                 let categoryName = productCategoryName(pr)
                  
                   const productData: ProductData = {
                     name: pr.name,
-                    id: pr.sku,
+                    id: pr.parentSku,  // id: pr.sku,
                     price: pr.priceInclTax,
                     quantity: pr.qty,
                     variant: pr.sku.split('-')[1],
@@ -57,7 +62,7 @@ export default (currency): void => {
                  
                   const productData: ProductData = {
                     name: pr.name,
-                    id: pr.sku,
+                    id: pr.parentSku,  // id: pr.sku,
                     price: pr.priceInclTax,
                     quantity: pr.qty,
                     variant: pr.sku.split('-')[1],
@@ -91,11 +96,15 @@ export default (currency): void => {
                 // console.log('delete', product)
                 const pr = product.items[0]
 
+
+                console.log('AAAAAAAAAAA >>>>>>> 3333',product)
+                console.log('BBBBBBBBBBBB >>>>>>> 3333',pr)
+
                 let categoryName = productCategoryName(pr)
                  
                   const productData: ProductData = {
                     name: pr.name,
-                    id: pr.sku,
+                    id: pr.parentSku,  // id: pr.sku,
                     price: pr.priceInclTax,
                     quantity: pr.qty,
                     variant: pr.sku.split('-')[1],
