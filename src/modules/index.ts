@@ -17,8 +17,8 @@ import { PromotedOffers } from './promoted-offers'
 import { Ui } from './ui-store'
 // import { GoogleAnalytics } from './google-analytics';
 // import { Hotjar } from './hotjar';
-// import { googleTagManager } from './google-tag-manager';
-import { VsfGoogleTagManager } from './vsf-google-tag-manager'
+import { googleTagManager } from './google-tag-manager';
+// import { VsfGoogleTagManager } from './vsf-google-tag-manager'
 import { AmpRenderer } from './amp-renderer';
 import { PaymentBackendMethods } from './payment-backend-methods';
 import { PaymentCashOnDelivery } from './payment-cash-on-delivery';
@@ -91,8 +91,8 @@ export const registerModules: VueStorefrontModule[] = [
   Homepage,
   Claims,
   PromotedOffers,
-  // googleTagManager,
-  VsfGoogleTagManager,
+  googleTagManager,
+  // VsfGoogleTagManager,
   // GoogleAnalytics,
   // Hotjar,
   PaymentBackendMethods,
