@@ -32,7 +32,7 @@ export default (currency): void => {
                     brand: "Kubota",
                     category: categoryName
                   }
-        
+                  console.log('cart-before-add >>>>>>> 1111',productData)
                   dataLayer.push({
                     'event': 'addToCart',
                     'ecommerce': {
@@ -64,7 +64,7 @@ export default (currency): void => {
                     brand: "Kubota",
                     category: categoryName
                   }
-        
+                  console.log('cart-before-itemchanged >>>>>>> 22222',productData)
                   dataLayer.push({
                     'event': 'addToCart',
                     'ecommerce': {
@@ -102,7 +102,7 @@ export default (currency): void => {
                     brand: "Kubota",
                     category: categoryName
                   }
-        
+                  console.log('cart-before-delete >>>>>>> 3333',productData)
                   // dataLayer.push({
                   //   'event': 'removeFromCart',
                   //   'ecommerce': {
@@ -150,6 +150,7 @@ export default (currency): void => {
             // console.log(lastProducts.items[lpIndex], 'present?: ', present)
           }
           // console.log('unique', unique)
+          console.log('cart-after-delete >>>>>>> 4444',unique)
           dataLayer.push({
               'event': 'removeFromCart',
               'ecommerce': {
