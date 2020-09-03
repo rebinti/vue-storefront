@@ -59,6 +59,8 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
             }
           }
         });
+        console.log("KKKKKKKKKK",payload)
+        // Product click event
         Vue.gtm.trackEvent({
           event: 'productClick',
           ecommerce: {
