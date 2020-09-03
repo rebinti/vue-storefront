@@ -1,12 +1,11 @@
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
 
-export function afterRegistration ({ Vue, config, store, isServer }) {
+export function afterRegistration ({ Vue, config, store, isServer }) {  
   if (config.googleTagManager.id && !isServer) {
     const storeView = currentStoreView()
-    const currencyCode = storeView.i18n.currencyCode
-
+    const currencyCode = storeView.i18n.currencyCode    
     const getProduct = (item) => {
-      const { name, id, sku, priceInclTax: price, category, qty: quantity } = item
+      const { name, parentSku:id, sku, priceInclTax: price, category, qty: quantity } = item
       let product = {
         name,
         id,
@@ -22,8 +21,9 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       return product
     }
-
+               
     store.subscribe(({ type, payload }, state) => {
+     // console.log('state data', state)
       // Adding a Product to a Shopping Cart
       if (type === 'cart/cart/ADD') {
         Vue.gtm.trackEvent({
@@ -60,23 +60,45 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       // Measuring Views of Product Details
       if (type === 'product/product/SET_PRODUCT_CURRENT') {
+        const getProductcustom = (item) => {
+          const { name, parentSku:id, sku, priceInclTax: price, category, brand, qty: quantity } = item
+          let product = {
+            name,
+            id,
+            sku,
+            price
+          }
+          if (quantity) {
+            product['quantity'] = quantity
+          }
+          if(brand){
+            if(state.attribute.labels.label[payload.label]){
+              product['brand'] = state.attribute.labels.label[payload.label]; 
+            }
+          }
+          if (category && category.length > 0) {
+            product['category'] = category.slice(-1)[0].name
+          }
+    
+          return product
+        }         
         Vue.gtm.trackEvent({
           ecommerce: {
             detail: {
               'actionField': { 'list': '' }, // 'detail' actions have an optional list property.
-              'products': [getProduct(payload)]
+              'products': [getProductcustom(payload)]
             }
           }
         });
-        console.log("KKKKKKKKKK",payload)
-        // Product click event
+        //console.log("KKKKKKKKKK",payload)
+        // Product click event        
         Vue.gtm.trackEvent({
           event: 'productClick',
           ecommerce: {
             currencyCode: currencyCode,
             click: {
               'actionField': { 'list': '' }, // 'detail' actions have an optional list property.
-              'products': [getProduct(payload)]
+              'products': [getProductcustom(payload)]
             }
           }
         });         
