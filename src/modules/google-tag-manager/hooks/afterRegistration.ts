@@ -59,6 +59,16 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
             }
           }
         });
+        Vue.gtm.trackEvent({
+          event: 'productClick',
+          ecommerce: {
+            currencyCode: currencyCode,
+            click: {
+              'actionField': { 'list': '' }, // 'detail' actions have an optional list property.
+              'products': [getProduct(payload)]
+            }
+          }
+        });         
       }
 
       // Measuring Purchases
