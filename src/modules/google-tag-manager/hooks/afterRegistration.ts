@@ -49,6 +49,15 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
         });
       }
 
+      // When adding wishlist items
+      if (type === 'wishlist/wishlist/ADD') {
+        console.log('wishlist/wishlist/ADD', payload)
+        Vue.gtm.trackEvent({
+          event: 'Wishlist',
+          eventLabel: payload.product.name
+        });
+      }
+
       // Measuring Views of Product Details
       if (type === 'product/product/SET_PRODUCT_CURRENT') {
         Vue.gtm.trackEvent({
