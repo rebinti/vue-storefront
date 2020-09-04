@@ -51,7 +51,7 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       // When adding wishlist items
       if (type === 'wishlist/wishlist/ADD') {
-        console.log('wishlist/wishlist/ADD', payload)
+        //console.log('wishlist/wishlist/ADD', payload)
         Vue.gtm.trackEvent({
           event: 'addToWishlist',
           eventLabel: payload.product.name
@@ -60,6 +60,8 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       // Measuring Views of Product Details
       if (type === 'product/product/SET_PRODUCT_CURRENT') {
+        //console.log("state ???????",state)        
+        const branditem = state.attribute.list_by_code.label.options.find(f => f.value == payload.label)             
         const getProductcustom = (item) => {
           const { name, parentSku:id, sku, priceInclTax: price, category, brand, qty: quantity } = item
           let product = {
@@ -72,8 +74,8 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
             product['quantity'] = quantity
           }
           if(brand){
-            if(state.attribute.labels.label[payload.label]){
-              product['brand'] = state.attribute.labels.label[payload.label]; 
+            if(branditem){
+              product['brand'] = branditem.label; 
             }
           }
           if (category && category.length > 0) {
