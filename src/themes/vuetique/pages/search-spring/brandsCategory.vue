@@ -7,7 +7,7 @@
       <div class="container d_item">
         <div class="row items-center mt-2">
           <h2 class="col-8 md:col-8 lg:col-8 xl:col-10">
-             {{getBrandPageTitle.meta_title}}
+             {{getBrandPageTitle.name}}
           </h2>
            <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block">
                 <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
@@ -223,15 +223,14 @@ export default {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
     }
-    this.setSegmentify();
+    this.setSegmentify();    
   },
   methods: {
-    setSegmentify() {
-      console.log('getBrandPageTitle.meta_title', this.getBrandPageTitle.meta_title)
+    setSegmentify() {      
       // For working Segmentify
       window.segPageInf = {
         "category": "Brand Page",
-        "subCategory": this.getBrandPageTitle && this.getBrandPageTitle.meta_title || ''
+        "subCategory": this.getBrandPageTitle && this.getBrandPageTitle.name || ''
       }
     },
     validateRouteCategory () {
