@@ -222,7 +222,7 @@ export default {
       }
     }
     this.setSegmentify();    
-    console.log('getBrandPageTitle >>>>>>>>>',getBrandPageTitle)
+    console.log('getBrandPageTitle >>>>>>>>>',this.getBrandPageTitle)
   },
   methods: {
     setSegmentify() {      
