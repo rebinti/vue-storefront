@@ -6,7 +6,7 @@
     <header class="pb-10 row bg-grey-lightest mb-6 head_category">
       <div class="container d_item">
         <div class="row items-center mt-2">
-          <h2 class="col-8 md:col-8 lg:col-8 xl:col-10">
+          <h2 v-if="getBrandPageTitle.name" class="col-8 md:col-8 lg:col-8 xl:col-10">
              {{getBrandPageTitle.name}}
           </h2>
            <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block">
@@ -162,14 +162,12 @@ export default {
      SiderbarFilter,
     MobileSiderbarFilter,
   },
-
-  // async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
-  //     await store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
-  //      key: '_type',
-  //       value: "brand"
-  //     })
-  // },
-
+  async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
+      await store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
+       key: '_type',
+        value: "brand"
+      })
+  },
   mixins: [SearchSpringMixin, SidebarMixin, onBottomScroll],
   computed: {
     ...mapState({
@@ -224,6 +222,7 @@ export default {
       }
     }
     this.setSegmentify();    
+    console.log('getBrandPageTitle >>>>>>>>>',getBrandPageTitle)
   },
   methods: {
     setSegmentify() {      
