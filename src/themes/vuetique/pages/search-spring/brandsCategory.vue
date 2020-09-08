@@ -223,6 +223,9 @@ export default {
     }
     this.setSegmentify();    
     console.log('getBrandPageTitle >>>>>>>>>',this.getBrandPageTitle)
+    // For Google Analytics - brand click
+    ga('send', 'event', 'Brand', 'Click', this.getBrandPageTitle.name);
+
   },
   methods: {
     setSegmentify() {      
