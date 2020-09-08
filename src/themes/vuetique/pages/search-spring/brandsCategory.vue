@@ -146,6 +146,7 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
+import Vue from 'vue'
 import config from 'config'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapState, mapGetters, mapActions } from 'vuex'
@@ -226,6 +227,10 @@ export default {
     // For Google Analytics - brand click
     ga('send', 'event', 'Brand', 'Click', this.getBrandPageTitle.name);
 
+    Vue.gtm.trackEvent({
+      'event': 'brandClick',
+      'brand': this.getBrandPageTitle.name,
+    });  
   },
   methods: {
     setSegmentify() {      
