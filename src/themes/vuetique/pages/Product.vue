@@ -646,6 +646,7 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
+import Vue from 'vue'
 import Product from '@vue-storefront/core/pages/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
 import RelatedProducts from 'theme/components/core/blocks/Product/Related.vue'
@@ -854,6 +855,12 @@ export default {
     toggleReviewPanel () {
       // this.$store.dispatch('ui/updateYoptoProduct' , this.product)
       this.$store.dispatch('ui/toggleReviewPanel')
+      // For GTM - review click
+      Vue.gtm.trackEvent({
+        'event': 'stampedReviewClick',
+        'productsku': this.product.sku,
+        'name': this.product.name,
+      });       
     },
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
        if (optionIndex > 0) {
