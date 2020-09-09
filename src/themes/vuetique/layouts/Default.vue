@@ -39,6 +39,8 @@
 import config from 'config'
 import { mapState } from 'vuex'
 import EventBus from '@vue-storefront/core/compatibility/plugins/event-bus'
+import { router } from '@vue-storefront/core/app'
+import { localizedRoute, currentStoreView } from '@vue-storefront/core/lib/multistore'
 
 import MainHeader from 'theme/components/core/blocks/Header/Header.vue'
 import MainFooter from 'theme/components/core/blocks/Footer/Footer.vue'
@@ -154,6 +156,39 @@ export default {
         this.isScrolling = false
       }
     }, 250)
+
+    /*
+      For managing Styla module pages contents and its routing href tags
+      and changing those href tags to Vue.js based internel routing.
+    */
+    setTimeout(() => {
+      window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
+        if (!domNode) {
+          return;
+        }
+        // Apply here any desired intervention over the module's DOM structure
+        let anchors = domNode.querySelectorAll('a');
+        let anchorClickLogic = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          let target = event.target
+          while (target) {
+              if (target instanceof HTMLAnchorElement) {
+                let link = target.getAttribute('href')
+                if (link.substr(0, 4) === 'http') {
+                 const newLoaction = link.replace('https://www.iclothing.com', '')
+                  router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
+                } else {
+                  router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+                }
+                break
+              }
+              target = target.parentNode
+          }
+        };
+        anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
+      }, 'render' );
+    }, 2500);
   },
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)

@@ -23,7 +23,7 @@ import { LocalizedRoute } from '@vue-storefront/core/lib/types'
 import { localizedRoute, currentStoreView } from '@vue-storefront/core/lib/multistore'
 import i18n from '@vue-storefront/i18n'
 import Breadcrumbs from '../components/core/Breadcrumbs.vue'
-import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
+// import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
 
 export default {
   components: {
@@ -70,7 +70,7 @@ export default {
       }, 500);
       setTimeout(() => {
           // this.vHtmlRouterNew(this.$refs['stylaMagazine-inspiration'])
-          this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
+          // this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          this.keyRerendeDiv += 1;
          if (window.styla !== null && typeof window.styla.init !== "undefined") {
@@ -124,7 +124,7 @@ export default {
      if (window.styla !== null && typeof window.styla.init !== "undefined") {
       if (window.styla.isReady) window.styla.init()
       setTimeout(() => {
-        vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
+        // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          if (window.styla.isReady) window.styla.init()
       }, 1000);
     }
