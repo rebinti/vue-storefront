@@ -859,7 +859,7 @@ export default {
       Vue.gtm.trackEvent({
         'event': 'stampedReviewClick',
         'productsku': this.product.sku,
-        'productsku': this.product.name,
+        'name': this.product.name,
       });       
     },
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
