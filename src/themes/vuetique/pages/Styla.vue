@@ -23,7 +23,7 @@ import { LocalizedRoute } from '@vue-storefront/core/lib/types'
 import { localizedRoute, currentStoreView } from '@vue-storefront/core/lib/multistore'
 import i18n from '@vue-storefront/i18n'
 import Breadcrumbs from '../components/core/Breadcrumbs.vue'
-// import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
+import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
 
 export default {
   components: {
@@ -57,33 +57,33 @@ export default {
   },
   methods: {
     activateHashSection () {
-      window.styla.hooks.register( 'moduleRender', function( _data, domNode ){
-        console.log('stylaaaaaaaa page 111111', _data, domNode)
-        if (!domNode) {
-          return;
-        }
-        // Apply here any desired intervention over the module's DOM structure
-        let anchors = domNode.querySelectorAll('a');
-        let anchorClickLogic = (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          let target = event.target          
-          while (target) {
-              if (target instanceof HTMLAnchorElement) {
-                let link = target.getAttribute('href')
-                if (link.substr(0, 4) === 'http') {
-                 const newLoaction = link.replace('https://www.iclothing.com', '')
-                  router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
-                } else {
-                  router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
-                }
-                break
-              }
-              target = target.parentNode
-          }
-        };
-        anchors.forEach(anchor => anchor.onclick = anchorClickLogic);        
-      }, 'render' );
+      // window.styla.hooks.register( 'moduleRender', function( _data, domNode ){
+      //   console.log('stylaaaaaaaa page 111111', _data, domNode)
+      //   if (!domNode) {
+      //     return;
+      //   }
+      //   // Apply here any desired intervention over the module's DOM structure
+      //   let anchors = domNode.querySelectorAll('a');
+      //   let anchorClickLogic = (event) => {
+      //     event.preventDefault();
+      //     event.stopPropagation();
+      //     let target = event.target          
+      //     while (target) {
+      //         if (target instanceof HTMLAnchorElement) {
+      //           let link = target.getAttribute('href')
+      //           if (link.substr(0, 4) === 'http') {
+      //            const newLoaction = link.replace('https://www.iclothing.com', '')
+      //             router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
+      //           } else {
+      //             router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+      //           }
+      //           break
+      //         }
+      //         target = target.parentNode
+      //     }
+      //   };
+      //   anchors.forEach(anchor => anchor.onclick = anchorClickLogic);        
+      // }, 'render' );
 
       //  let elements =  document.getElementById( 'stylaMagazine' )
       //  console.log('elements', elements)
@@ -104,7 +104,7 @@ export default {
       }, 500);
       setTimeout(() => {
           // this.vHtmlRouterNew(this.$refs['stylaMagazine-inspiration'])
-          // this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
+          this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          this.keyRerendeDiv += 1;
          if (window.styla !== null && typeof window.styla.init !== "undefined") {
@@ -151,7 +151,7 @@ export default {
      if (window.styla !== null && typeof window.styla.init !== "undefined") {
       if (window.styla.isReady) window.styla.init()
       setTimeout(() => {
-        // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
+        vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          if (window.styla.isReady) window.styla.init()
       }, 1000);
     }
