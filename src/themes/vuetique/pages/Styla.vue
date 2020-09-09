@@ -39,6 +39,12 @@ export default {
   watch: {
     '$route': 'activateHashSection',
   },
+  data () {
+    return {
+      changeDiv: true,
+      keyRerendeDiv: 0
+    }
+  },  
   props: {
     title: {
       type: String,
@@ -112,13 +118,6 @@ export default {
           }
         }, 1000);
       }
-  },
-  data () {
-    return {
-      changeDiv: true,
-      keyRerendeDiv: 0
-
-    }
   },
   mounted() {
      if (window.styla !== null && typeof window.styla.init !== "undefined") {

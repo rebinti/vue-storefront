@@ -163,6 +163,7 @@ export default {
     */
     setTimeout(() => {
       window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
+        console.log('stylaaaaaaaa', _data, domNode)
         if (!domNode) {
           return;
         }
@@ -171,12 +172,12 @@ export default {
         let anchorClickLogic = (event) => {
           event.preventDefault();
           event.stopPropagation();
-          let target = event.target
+          let target = event.target          
           while (target) {
               if (target instanceof HTMLAnchorElement) {
                 let link = target.getAttribute('href')
                 if (link.substr(0, 4) === 'http') {
-                 const newLoaction = link.replace('https://www.iclothing.com', '')
+                 const newLoaction = link.replace('https://www.iclothing.com', 'https://vue.iclothing.com')
                   router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
                 } else {
                   router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
@@ -189,6 +190,30 @@ export default {
         anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
       }, 'render' );
     }, 2500);
+
+
+    // setTimeout(() => {
+    //   window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
+    //     console.log('stylaaaaaaaa', _data, domNode)
+    //     if (!domNode) {
+    //       return;
+    //     }
+    //     // Apply here any desired intervention over the module's DOM structure
+    //     // Example:
+    //     var anchors = domNode.querySelectorAll('a');
+    //     var anchorClickLogic = function( e ) {
+    //       console.log('stylaaaaaaaa event', e.target)
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     alert('Intercepted click. Original href: ' + e.target.href );
+    //     };
+    //     anchors.forEach( function( anchor ) {
+    //     anchor.onclick = anchorClickLogic;
+    //         } );
+    // }, 'render' );
+    // }, 3000);
+
+
   },
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)
