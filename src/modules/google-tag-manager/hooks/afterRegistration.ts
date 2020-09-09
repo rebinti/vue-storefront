@@ -60,8 +60,16 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       // Measuring Views of Product Details
       if (type === 'product/product/SET_PRODUCT_CURRENT') {
-        //console.log("state ???????",state)        
-        const branditem = state.attribute.list_by_code.label.options.find(f => f.value == payload.label)             
+        //console.log("state ???????",state)
+        let brandlabel;   
+        let checkbrandcategory = state.route.fullPath.includes("brands")
+        if(checkbrandcategory){
+          const branditem = state.ui.brandsList.find(f => f.option_id == payload.label)
+          brandlabel = branditem.name           
+        }else{
+          const branditem = state.attribute.list_by_code.label.options.find(f => f.value == payload.label)
+          brandlabel = branditem.label
+        }      
         const getProductcustom = (item) => {
           const { name, parentSku:id, sku, priceInclTax: price, category, brand, qty: quantity } = item
           let product = {
@@ -74,8 +82,8 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
             product['quantity'] = quantity
           }
           if(brand){
-            if(branditem){
-              product['brand'] = branditem.label; 
+            if(brandlabel){
+              product['brand'] = brandlabel;
             }
           }
           if (category && category.length > 0) {
