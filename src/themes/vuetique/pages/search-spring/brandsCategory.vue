@@ -224,8 +224,7 @@ export default {
     }
     this.setSegmentify();    
     console.log('getBrandPageTitle >>>>>>>>>',this.getBrandPageTitle)
-    // For Google Analytics - brand click
-    ga('send', 'event', 'Brand', 'Click', this.getBrandPageTitle.name);
+    // For Google Tag Manager - brand click    
 
     Vue.gtm.trackEvent({
       'event': 'brandClick',
