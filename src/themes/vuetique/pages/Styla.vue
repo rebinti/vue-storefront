@@ -57,6 +57,34 @@ export default {
   },
   methods: {
     activateHashSection () {
+      window.styla.hooks.register( 'moduleRender', function( _data, domNode ){
+        console.log('stylaaaaaaaa page 111111', _data, domNode)
+        if (!domNode) {
+          return;
+        }
+        // Apply here any desired intervention over the module's DOM structure
+        let anchors = domNode.querySelectorAll('a');
+        let anchorClickLogic = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          let target = event.target          
+          while (target) {
+              if (target instanceof HTMLAnchorElement) {
+                let link = target.getAttribute('href')
+                if (link.substr(0, 4) === 'http') {
+                 const newLoaction = link.replace('https://www.iclothing.com', '')
+                  router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
+                } else {
+                  router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+                }
+                break
+              }
+              target = target.parentNode
+          }
+        };
+        anchors.forEach(anchor => anchor.onclick = anchorClickLogic);        
+      }, 'render' );
+
       //  let elements =  document.getElementById( 'stylaMagazine' )
       //  console.log('elements', elements)
       //  elements.remove()
@@ -128,6 +156,7 @@ export default {
       }, 1000);
     }
     console.log('this.$route.params.slug', this.$route ,this.$route.params);
+    this.activateHashSection ()   
   }  
 }
 </script>

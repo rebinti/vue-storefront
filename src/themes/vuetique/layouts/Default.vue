@@ -161,58 +161,34 @@ export default {
       For managing Styla module pages contents and its routing href tags
       and changing those href tags to Vue.js based internel routing.
     */
-    setTimeout(() => {
-      window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
-        if (!domNode) {
-          return;
-        }
-        // Apply here any desired intervention over the module's DOM structure
-        let anchors = domNode.querySelectorAll('a');
-        let anchorClickLogic = (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          let target = event.target          
-          while (target) {
-              if (target instanceof HTMLAnchorElement) {
-                let link = target.getAttribute('href')
-                if (link.substr(0, 4) === 'http') {
-                 const newLoaction = link.replace('https://www.iclothing.com', '')
-                  router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
-                } else {
-                  router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
-                }
-                break
-              }
-              target = target.parentNode
-          }
-        };
-        anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
-      }, 'render' );
-    }, 2000);
-
-
     // setTimeout(() => {
     //   window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
-    //     console.log('stylaaaaaaaa', _data, domNode)
     //     if (!domNode) {
     //       return;
     //     }
     //     // Apply here any desired intervention over the module's DOM structure
-    //     // Example:
-    //     var anchors = domNode.querySelectorAll('a');
-    //     var anchorClickLogic = function( e ) {
-    //       console.log('stylaaaaaaaa event', e.target)
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //     alert('Intercepted click. Original href: ' + e.target.href );
+    //     let anchors = domNode.querySelectorAll('a');
+    //     let anchorClickLogic = (event) => {
+    //       event.preventDefault();
+    //       event.stopPropagation();
+    //       let target = event.target          
+    //       while (target) {
+    //           if (target instanceof HTMLAnchorElement) {
+    //             let link = target.getAttribute('href')
+    //             if (link.substr(0, 4) === 'http') {
+    //              const newLoaction = link.replace('https://www.iclothing.com', '')
+    //               router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
+    //             } else {
+    //               router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+    //             }
+    //             break
+    //           }
+    //           target = target.parentNode
+    //       }
     //     };
-    //     anchors.forEach( function( anchor ) {
-    //     anchor.onclick = anchorClickLogic;
-    //         } );
-    // }, 'render' );
-    // }, 3000);
-
-
+    //     anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
+    //   }, 'render' );
+    // }, 2000);
   },
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)
