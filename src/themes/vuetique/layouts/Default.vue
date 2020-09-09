@@ -163,7 +163,6 @@ export default {
     */
     setTimeout(() => {
       window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
-        console.log('stylaaaaaaaa', _data, domNode)
         if (!domNode) {
           return;
         }
@@ -177,7 +176,7 @@ export default {
               if (target instanceof HTMLAnchorElement) {
                 let link = target.getAttribute('href')
                 if (link.substr(0, 4) === 'http') {
-                 const newLoaction = link.replace('https://www.iclothing.com', 'https://vue.iclothing.com')
+                 const newLoaction = link.replace('https://www.iclothing.com', '')
                   router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
                 } else {
                   router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
@@ -189,7 +188,7 @@ export default {
         };
         anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
       }, 'render' );
-    }, 2500);
+    }, 2000);
 
 
     // setTimeout(() => {
