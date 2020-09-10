@@ -183,7 +183,7 @@ export default {
                       };
                       anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
                     }, 'render' );
-                  }, 1000);
+                  }, 2000);
                }
             );
         }
