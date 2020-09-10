@@ -4,10 +4,10 @@
     <!-- <header class="container mt-2">
 
     </header> -->
-    <div class="container-fluid pb-16 pl-2 pr-2">
+    <div class="container-fluid pb-16 pl-2 pr-2" style="min-height: 100vh;" id="stylaOuter">
         <!-- <div class="col-12 md:col-9 leading-loose static-content"> -->
 
-            <div :class="'testing_' + keyRerendeDiv" v-if="changeDiv" :key="keyRerendeDiv" ref="stylaMagazine-inspiration" id="stylaMagazine" ></div>
+            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine" ></div>
             <!-- <div id="stylaMagazine" 
             v-if="changeDiv" ref="stylaMagazine-inspiration" 
             :data-area="this.$route.params.childSlug"> </div>-->
@@ -57,45 +57,19 @@ export default {
   },
   methods: {
     activateHashSection () {
-      // window.styla.hooks.register( 'moduleRender', function( _data, domNode ){
-      //   console.log('stylaaaaaaaa page 111111', _data, domNode)
-      //   if (!domNode) {
-      //     return;
-      //   }
-      //   // Apply here any desired intervention over the module's DOM structure
-      //   let anchors = domNode.querySelectorAll('a');
-      //   let anchorClickLogic = (event) => {
-      //     event.preventDefault();
-      //     event.stopPropagation();
-      //     let target = event.target          
-      //     while (target) {
-      //         if (target instanceof HTMLAnchorElement) {
-      //           let link = target.getAttribute('href')
-      //           if (link.substr(0, 4) === 'http') {
-      //            const newLoaction = link.replace('https://www.iclothing.com', '')
-      //             router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
-      //           } else {
-      //             router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
-      //           }
-      //           break
-      //         }
-      //         target = target.parentNode
-      //     }
-      //   };
-      //   anchors.forEach(anchor => anchor.onclick = anchorClickLogic);        
-      // }, 'render' );
-
-      //  let elements =  document.getElementById( 'stylaMagazine' )
-      //  console.log('elements', elements)
-      //  elements.remove()
-      //  if (elements.length > 0) {
-      //     elements.forEach(el => el.remove())
-      //  }
       this.keyRerendeDiv += 1;
-      this.changeDiv = false
+      // this.changeDiv = false
       console.log('activateHashSection')
       setTimeout(() => {
-          this.changeDiv = true
+          // this.changeDiv = true
+          const stylaDiv = document.getElementById("stylaMagazine")
+          if(stylaDiv) stylaDiv.remove();
+          setTimeout(() => {
+              const stylaId = 'stylaMagazine';
+              let node = document.createElement('div');
+              node.id= stylaId;
+              document.getElementById("stylaOuter").appendChild(node);
+          }, 100);
       }, 100);
       setTimeout(() => {
        if (window.styla !== null && typeof window.styla.init !== "undefined") {
@@ -104,9 +78,9 @@ export default {
       }, 500);
       setTimeout(() => {
           // this.vHtmlRouterNew(this.$refs['stylaMagazine-inspiration'])
-          this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
+          // this.vHtmlRouterNew(document.getElementById('stylaMagazine'))
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
-         this.keyRerendeDiv += 1;
+        //  this.keyRerendeDiv += 1;
          if (window.styla !== null && typeof window.styla.init !== "undefined") {
            if (window.styla.isReady) window.styla.init()
          }
@@ -148,15 +122,15 @@ export default {
       }
   },
   mounted() {
-     if (window.styla !== null && typeof window.styla.init !== "undefined") {
-      if (window.styla.isReady) window.styla.init()
+    //  if (window.styla !== null && typeof window.styla.init !== "undefined") {
+    //   if (window.styla.isReady) window.styla.init()
       setTimeout(() => {
-        vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
+        // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          if (window.styla.isReady) window.styla.init()
       }, 1000);
-    }
-    console.log('this.$route.params.slug', this.$route ,this.$route.params);
-    this.activateHashSection ()   
+    // }
+    // console.log('this.$route.params.slug', this.$route ,this.$route.params);
+    // this.activateHashSection ()   
   }  
 }
 </script>

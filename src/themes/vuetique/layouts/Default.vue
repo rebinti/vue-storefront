@@ -129,7 +129,67 @@ export default {
     },
     fetchCmsBlockData () {
        return this.$store.dispatch('cmsBlock/list', {filterValues: config.cmsBlocksDataFetchConfig.cmsBLockList})
+    },
+    stylaScriptsInsatallation (f, b, e, v, callback) {
+      let t, s;
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+      t.onload = callback;
+    },
+    initStyla() {
+      this.stylaScriptsInsatallation(
+      window,
+      document,
+      "script",
+      "https://client-scripts.styla.com/scripts/clients/iclothing-import.js",
+      () => { 
+        this.stylaScriptsInsatallation(
+                window,
+                document,
+                "script",
+                "https://engine.styla.com/init.js",
+                () => {
+                  /*
+                    For managing Styla module pages contents and its routing href tags
+                    and changing those href tags to Vue.js based internel routing.
+                  */
+                      setTimeout(() => {
+                          window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
+                          if (!domNode) {
+                            return;
+                          }
+                          // Apply here any desired intervention over the module's DOM structure
+                          let anchors = domNode.querySelectorAll('a');
+                          let anchorClickLogic = (event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            let target = event.target          
+                            while (target) {
+                                if (target instanceof HTMLAnchorElement) {
+                                  let link = target.getAttribute('href')
+                                  if (link.substr(0, 4) === 'http') {
+                                  const newLocation = link.replace('https://www.iclothing.com', '')
+                                    router.push(localizedRoute(newLocation, currentStoreView().storeCode))
+                                  } else {
+                                    router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
+                                  }
+                                  break
+                            }
+                            target = target.parentNode
+                          }
+                      };
+                      anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
+                    }, 'render' );
+                  }, 1000);
+               }
+            );
+        }
+     )
     }
+
   },
   serverPrefetch () {
     return this.fetchCmsBlockData()
@@ -156,39 +216,8 @@ export default {
         this.isScrolling = false
       }
     }, 250)
-
-    /*
-      For managing Styla module pages contents and its routing href tags
-      and changing those href tags to Vue.js based internel routing.
-    */
-    // setTimeout(() => {
-    //   window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
-    //     if (!domNode) {
-    //       return;
-    //     }
-    //     // Apply here any desired intervention over the module's DOM structure
-    //     let anchors = domNode.querySelectorAll('a');
-    //     let anchorClickLogic = (event) => {
-    //       event.preventDefault();
-    //       event.stopPropagation();
-    //       let target = event.target          
-    //       while (target) {
-    //           if (target instanceof HTMLAnchorElement) {
-    //             let link = target.getAttribute('href')
-    //             if (link.substr(0, 4) === 'http') {
-    //              const newLoaction = link.replace('https://www.iclothing.com', '')
-    //               router.push(localizedRoute(newLoaction, currentStoreView().storeCode))
-    //             } else {
-    //               router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
-    //             }
-    //             break
-    //           }
-    //           target = target.parentNode
-    //       }
-    //     };
-    //     anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
-    //   }, 'render' );
-    // }, 2000);
+  
+    this.initStyla();
   },
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)
