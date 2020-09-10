@@ -197,7 +197,7 @@ export default {
               };
               anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
             }, 'render' );
-        }, 1000);
+        }, 2000);
     }
 
   },
@@ -207,13 +207,13 @@ export default {
   beforeMount () {
     // Progress bar on top of the page
     this.$router.beforeEach((to, from, next) => {
-      if(!this.stylaLoaded) this.setStylaPageModuleTracker()
       this.$Progress.start()
       this.$Progress.increase(40)
       next()
     })
     this.$router.afterEach((to, from) => {
       this.$Progress.finish()
+      if(!this.stylaLoaded) this.setStylaPageModuleTracker()
     })
     EventBus.$on('offline-order-confirmation', this.onOrderConfirmation)
 
