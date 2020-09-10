@@ -153,8 +153,7 @@ export default {
                 "script",
                 "https://engine.styla.com/init.js",
                 () => {
-                  
-                 if(this.$route.path === '/' && this.$route.path.includes('inspiration')){
+                 if(this.$route.path === '/' || this.$route.path.includes('inspiration')){
                    this.setStylaPageModuleTracker() 
                  } 
                }
@@ -198,7 +197,7 @@ export default {
               };
               anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
             }, 'render' );
-        }, 2000);
+        }, 1000);
     }
 
   },
