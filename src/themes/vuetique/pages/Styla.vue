@@ -126,7 +126,7 @@ export default {
     //   if (window.styla.isReady) window.styla.init()
       setTimeout(() => {
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
-         if (window.styla.isReady) window.styla.init()
+         if (window.styla) window.styla.init()
       }, 1000);
     // }
     // console.log('this.$route.params.slug', this.$route ,this.$route.params);
