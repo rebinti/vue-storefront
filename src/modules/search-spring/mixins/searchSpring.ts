@@ -98,7 +98,7 @@ export default {
 
          if (this.controller !== null && abortApiCallFlag) {
             // Cancel the previous request
-            this.controller.abort();
+            this.controller.abort(); //default one - to break other apis
         }
 
         if ("AbortController" in window) {
@@ -113,11 +113,11 @@ export default {
             prodSku.push(val.uid);
           });
           
-          await this.getDataFromElastic(prodSku, onScroll , searchType);
+          await this.getDataFromElastic(prodSku, onScroll , searchType); // Here the IM point - prodSku used here before - now the variable is id (prodSku) - value
           this.paginationLoader = false;
           this.searcingLoaderFlag = false;
           if (this.filterData.length === 1) {
-
+// price slider once set - not need change
             const priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
