@@ -481,6 +481,7 @@
                   :disabled="disableAddToCartButtonFlag"
                   :configuration="configuration"  
                   class="py-3 text-sm"
+                  id="add-to-cart-button"
                 />
               </div>
 
@@ -763,11 +764,17 @@ export default {
     this.$bus.$on('user-after-logout', this.reloadTruefitValues)
 
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
-
-    tfcapi('event','tfc-fitrec-register','addtobag',function(e) {
-          console.log('addtobag addtobag' , e) // var size = e.size;
-    });
     var self = this;
+    tfcapi('event','tfc-fitrec-register','addtobag',function(context) {
+          console.log('addtobag data' , context) // var size = e.size; //{color:"multi",size:"8",style: "8397"}
+          if (self.options['size']) {
+            const recommendatedOption = self.options['size'].find(val => val.label == context.size)
+            if (recommendatedOption) {
+              const addToCartButton = document.getElementById("add-to-cart-button");
+              if(addToCartButton) addToCartButton.click();
+            }
+         }
+    });
     tfcapi('event', 'tfc-fitrec-product', 'success' , function(context )  {
         console.log('fitRecommendation success' , context)
         if (self.options['size']) {
