@@ -171,6 +171,7 @@ export default {
          setTimeout(() => {
                 if(this.stylaLoaded) return
                 if(window.styla && window.styla.hooks) this.stylaLoaded = true;
+                else return
                   window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
                   if (!domNode) {
                     return;
