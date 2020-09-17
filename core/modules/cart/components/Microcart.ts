@@ -6,7 +6,19 @@ export const Microcart = {
   name: 'Microcart',
   computed: {
     productsInCart (): Product[] {
-      return this.$store.state.cart.cartItems
+      const updatedAtFlag = this.$store.state.cart.cartItems.every(val => { 
+        if (val.server_updated_at && val.server_updated_at !== null) return true
+        else return false
+      })
+      if (this.$store.state.cart.cartItems.length && updatedAtFlag) {
+        return this.$store.state.cart.cartItems.sort((a: any, b: any) => {
+          const newDateA:any = new Date(a.server_updated_at)
+          const newDateB:any = new Date(b.server_updated_at)
+          return newDateB-newDateA
+        })
+      } else {
+        return this.$store.state.cart.cartItems.reverse()
+      }
     },
     appliedCoupon (): AppliedCoupon | false {
       return this.$store.getters['cart/getCoupon']

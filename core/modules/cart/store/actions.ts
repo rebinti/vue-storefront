@@ -402,7 +402,7 @@ const actions: ActionTree<CartState, RootState> = {
         for (let item of totalsObj.items) {
           if (item.options && isString(item.options)) item.options = JSON.parse(item.options)
           itemsAfterTotal[item.item_id] = item
-          await dispatch('updateItem', { product: { server_item_id: item.item_id, totals: item, qty: item.qty } }) // update the server_id reference
+          await dispatch('updateItem', { product: { server_item_id: item.item_id, server_updated_at: item.updated_at, totals: item, qty: item.qty } }) // update the server_id reference
         }
         commit(types.CART_UPD_TOTALS, { itemsAfterTotal: itemsAfterTotal, totals: totalsObj, platformTotalSegments: platformTotalSegments })
         commit(types.CART_SET_TOTALS_SYNC)
