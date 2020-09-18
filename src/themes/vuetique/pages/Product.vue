@@ -825,11 +825,11 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
-    setSegmentify() {
+    setSegmentify() {      
       // For working Segmentify
       window.segPageInf = {
         "category": "Product Page",
-        "subCategory": this.product.sku
+        "subCategory": this.product.parentSku
       }
     },
     setBreadCrumbToSamePath () { 
