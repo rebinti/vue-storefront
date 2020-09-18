@@ -90,7 +90,8 @@ export default {
       let selectedItem = Object.assign({}, this.selectedProduct);
       console.log('selectedItem to board', this.selectedProduct);
       try {
-        const result = await this.addToWishlist({product: selectedItem, board: board, index: index});
+        const _index = this.$store.state.boards.items.findIndex(val => val.wboard_id == board.wboard_id)
+        const result = await this.addToWishlist({product: selectedItem, board: board, index: _index});
         if (result) {
           console.log('resultttttt success', result);
           this.$bus.$emit('modal-hide', 'modal-create-boards');
