@@ -12,7 +12,38 @@ export const Wishlist = {
       return this.$store.state.ui.wishlist
     },
     productsInWishlist () {
-      return this.$store.state.wishlist.items
+     // return this.$store.state.wishlist.items
+
+      // if(this.$store.state.wishlist.items.length){
+        // const wishList = [...this.$store.state.wishlist.items]
+        // const updatedAtFlag = this.$store.state.wishlist.items[0].every(val => { 
+        //   if (val.wishlist_updated_at && val.wishlist_updated_at !== null) return true
+        //   else return false
+        // })
+        // if (this.$store.state.wishlist.items[0].length && updatedAtFlag) {
+        //   wishList[0] = wishList[0].sort((a: any, b: any) => {
+        //     const newDateA:any = new Date(a.wishlist_updated_at)
+        //     const newDateB:any = new Date(b.wishlist_updated_at)
+        //     return newDateB-newDateA
+        //   })
+        //   return wishList
+        // } else {
+          // wishList[0] = wishList[0].reverse()
+          // return wishList
+        // }
+      // } else {
+      //   return this.$store.state.wishlist.items
+      // }
+
+      const wishList = [...this.$store.state.wishlist.items]
+      if (wishList[0]) {
+        const wishLsitItems = [...wishList[0]]
+        let wishlistReversed = [];
+        wishlistReversed.push(wishLsitItems.reverse())
+        return wishlistReversed
+      } else {
+        return wishList
+      }
     }
   },
   methods: {

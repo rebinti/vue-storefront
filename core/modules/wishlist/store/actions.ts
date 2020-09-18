@@ -50,11 +50,14 @@ const actions: ActionTree<WishlistState, RootState> = {
           let query = new SearchQuery()
           query = query.applyFilter({key: 'id', value: {'eq': item.entity_id}})
           const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
-          clientCartAddItems.push({...items[0], wishlist_item_id: item.wishlist_item_id })
+          clientCartAddItems.push({...items[0], wishlist_item_id: item.wishlist_item_id, wishlist_updated_at: item.created_at })
           // console.log('clientCartAddItems' , clientCartAddItems);
           // commit(types.WISH_LOAD_WISH, items[0])
           if(clientCartAddItems.length === data.length) {
-            commit(types.WISH_LOAD_WISH, clientCartAddItems)
+            const sortedData = clientCartAddItems.sort((a, b) =>
+                data.findIndex(val => val.entity_id.toString() == a.id.toString()) - data.findIndex(val => val.entity_id.toString() == b.id.toString()) 
+            );
+            commit(types.WISH_LOAD_WISH, sortedData)
             cacheStorage.setItem('current-wishlist', clientCartAddItems).catch((reason) => {
                 Logger.error(reason, 'wishlist') // it doesn't work on SSR
             })
@@ -81,7 +84,7 @@ const actions: ActionTree<WishlistState, RootState> = {
 
     /** To get the add Item to server */
     function addToboard() {
-      rootStore.commit('ui/setSelectedBoardItem', product);
+      rootStore.commit('ui/setSelectedBoardItem', {...product, board_updated_at: new Date()});
       rootStore.commit('ui/setBoardsElem', 'add-to-board');
       Vue.prototype.$bus.$emit('modal-show', 'modal-create-boards')
     }
@@ -107,6 +110,7 @@ const actions: ActionTree<WishlistState, RootState> = {
       if (task.resultCode === 200) {
         console.log('api dataaaa Sucesss' , task.result)
         product.wishlist_item_id = task.result; // wishlist_item_id
+        product.wishlist_updated_at= new Date();
         commit(types.WISH_ADD_ITEM, { product })
 
         rootStore.dispatch('notification/spawnNotification', {

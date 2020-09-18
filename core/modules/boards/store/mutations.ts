@@ -83,11 +83,12 @@ const mutations: MutationTree<BoardsState> = {
    
    // state.items[boardData.board.boardIndex].items = boardData.board
 
-    const record = state.items.find(p => p.wboard_id === boardData.board.wboard_id)
-    if (!record) {
-      state.items.push( boardData.board)
+    // const record = state.items.find(p => p.wboard_id === boardData.board.wboard_id)
+    // if (!record) {
+    //   state.items.push( boardData.board)
+    // }
 
-    }
+    state.items = boardData.board
 
   },
 

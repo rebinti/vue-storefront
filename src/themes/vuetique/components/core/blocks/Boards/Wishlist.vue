@@ -206,9 +206,11 @@ export default {
       }
     },
     async removeFromBoardsProduct (product) {
+      product.index = this.$store.state.boards.items.findIndex(val => val.wboard_id == this.selectedBoardItem.wboard_id)
       // console.log('remove From Boards-->', product);
       // return this.$store.state['boards'] ? this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem}) : false;
-
+      const index = this.selectedBoardItem.items.findIndex(val => val.id == product.product.id)
+      if(index >= 0) this.selectedBoardItem.items.splice(index, 1);
       try {
         const result = await this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem});
         this.forceRerenderProduct();

@@ -169,7 +169,7 @@ export default {
         const result = await this.$store.dispatch('wishlist/removeItem', {...product })
         console.log('result after delete', result)
         if ((this.productsInWishlist.length > 0) && this.productsInWishlist[this.page].length > 1) {
-          this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku));
+          this.$set(this.productsInWishlist, this.page, this.productsInWishlist[this.page].filter(p => p.parentSku !== product.parentSku).reverse());
         } else {
           this.$store.dispatch('wishlist/syncWishlist', []);
           return

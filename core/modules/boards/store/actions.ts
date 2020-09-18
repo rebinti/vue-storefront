@@ -58,14 +58,24 @@ const actions: ActionTree<BoardsState, RootState> = {
                 query = query.applyFilter({key: 'id', value: {'eq': boardItem.product_id}})
                 const { items } = await dispatch('product/list', { query, start: 0, size: 1, updateState: false }, { root: true })
                 // clientBoardItems.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
-                copyData[index].items.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id })
+                copyData[index].items.push({...items[0], wishlistId: boardItem.wishlist_id , "wishlist_item_id": boardItem.wishlist_item_id, board_updated_at: boardItem.created_at })
                 if(copyData[index].items.length === board.items.length) {
                   console.log('clientBoardItems' , clientBoardItems);
-                  commit(types.BOARDS_BOARD_PRODUCT_LIST , { products: clientBoardItems, board: {...copyData[index], boardIndex: index} })
+                  copyData[index].boardIndex = index;
+                  copyData[index].items = copyData[index].items.sort((a, b) =>
+                    storedItems[index].items.findIndex(val => val.wishlist_item_id.toString() == a.wishlist_item_id.toString()) - storedItems[index].items.findIndex(val => val.wishlist_item_id.toString() == b.wishlist_item_id.toString()) 
+                  );
+                  // commit(types.BOARDS_BOARD_PRODUCT_LIST , { products: clientBoardItems, board: {...copyData[index], boardIndex: index} })
                 }
               })
             } else {
-              commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...copyData[index], boardIndex: index} })
+              // commit(types.BOARDS_BOARD_PRODUCT_LIST , { board: {...copyData[index], boardIndex: index} })
+            }
+            if((index+1) >= storedItems.length ) {
+              const sortedData = copyData.sort((a, b) =>
+                storedItems.findIndex(val => val.wboard_id.toString() == a.wboard_id.toString()) - storedItems.findIndex(val => val.wboard_id.toString() == b.wboard_id.toString()) 
+              );
+              commit(types.BOARDS_BOARD_PRODUCT_LIST , { products: [], board: sortedData })
             }
           });
         }
@@ -99,6 +109,7 @@ const actions: ActionTree<BoardsState, RootState> = {
     });
     if (task && task.resultCode === 200) {
       console.log('api dataaaa Sucesss' , task.result)
+      product.board_updated_at = new Date();
       commit(types.BOARDS_ADD_ITEM, { product })
       return task
     } else {
