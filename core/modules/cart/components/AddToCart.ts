@@ -1,5 +1,5 @@
 import Product from '@vue-storefront/core/modules/catalog/types/Product'
-
+declare const _paq
 export const AddToCart = {
   name: 'AddToCart',
   data () {
@@ -23,6 +23,13 @@ export const AddToCart = {
   },
   methods: {
     async addToCart (product: Product) {
+          // PAPERPLANES - ADD TO CART
+          //let _paq = window._paq;
+          this.$store.state.cart.cartItems.forEach(product => {
+            _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
+          })              
+          _paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals.grand_total]);
+          _paq.push(['trackPageView']);          
       this.isAddingToCart = true
       try {
         const diffLog = await this.$store.dispatch('cart/addItem', { productToAdd: product })
@@ -55,7 +62,7 @@ export const AddToCart = {
             action1: { label: this.$t('OK') },
             action2: null
           })
-          this.$bus.$emit('modal-hide', 'modal-productwithoptions')  
+          this.$bus.$emit('modal-hide', 'modal-productwithoptions')         
         }
         return diffLog
       } catch (err) {
