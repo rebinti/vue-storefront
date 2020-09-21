@@ -29,7 +29,7 @@ export const AddToCart = {
           this.$store.state.cart.cartItems.forEach(product => {
             _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
           })              
-          _paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals.grand_total]);
+          _paq.push(['trackEcommerceCartUpdate', this.$store.state.platformTotals && this.$store.state.platformTotals.grand_total ? this.$store.state.platformTotals.grand_total : '']);          
           _paq.push(['trackPageView']);          
       this.isAddingToCart = true
       try {
