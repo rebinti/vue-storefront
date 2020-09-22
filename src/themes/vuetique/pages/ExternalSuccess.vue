@@ -205,9 +205,7 @@ export default {
             // PAPERPLANES - ORDER SUCCESS PAGE
             if (window && window._paq  != undefined) {
                 console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
-                this.$store.state.cart.cartItems.forEach(product => {
-                  window._paq.push(paperplane_productList);                     
-                })              
+                window._paq.push(paperplane_productList);                                 
                 window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
                 let couponst = res.is_coupon ? true : false              
                 window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
