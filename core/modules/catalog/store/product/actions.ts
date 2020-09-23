@@ -458,7 +458,7 @@ const actions: ActionTree<ProductState, RootState> = {
 
       const syncProducts = () => {
         let searchQuery = new SearchQuery()
-        searchQuery = searchQuery.applyFilter({key: key, value: {'eq': options[key]}})
+        searchQuery = searchQuery.applyFilter({key: key + '.keyword', value: {'eq': options[key]}})
 
         return context.dispatch('list', { // product list syncs the platform price on it's own
           query: searchQuery,
