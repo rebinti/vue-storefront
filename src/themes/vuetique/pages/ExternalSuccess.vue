@@ -180,6 +180,7 @@ export default {
        if (res && res.itemsresult.length > 0) {
             this.orderApiCheck = false;
             let productList= [];
+            let paperplane_productList= [];
             const emarsys = {
                   orderId: this.$route.query.orderid,
                   items: []
@@ -188,6 +189,7 @@ export default {
               if (val.Price != 0) {  
                 emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})              
                 productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
+                paperplane_productList.push({0:'addEcommerceItem',1:val.Sku, 2:val.Name,3:'',4:val.Price,5:val.Qty})
               } 
             })            
             console.log( ' Segmentify',  {
@@ -199,7 +201,24 @@ export default {
                 orderNo: this.$route.query.orderid, // only on the thank you page
                 totalPrice: res.grandtotal,
                 productList: productList
-            };  
+            };
+            // PAPERPLANES - ORDER SUCCESS PAGE
+            if (window && window._paq  != undefined) {
+                console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
+                window._paq.push(paperplane_productList);                                 
+                window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
+                let couponst = res.is_coupon ? true : false              
+                window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
+                window._paq.push(['setCustomVariable', 1, "First_Name", res.first_name, 'visit']);
+                window._paq.push(['setCustomVariable', 2, "Last_Name", res.last_name, 'visit']);
+                window._paq.push(['setCustomVariable', 3, "Address1", res.address1, 'visit']);
+                window._paq.push(['setCustomVariable', 4, "Address2", res.address2, 'visit']);
+                window._paq.push(['setCustomVariable', 5, "Address3", res.address3, 'visit']);
+                window._paq.push(['setCustomVariable', 6, "Address4", res.address4, 'visit']);
+                window._paq.push(['setCustomVariable', 7, "Address5", res.address5, 'visit']);  
+                window._paq.push(['trackEvent', 'Ecommerce', 'DiscountCode', res.coupon_code]);	                                               
+                window._paq.push(['trackPageView']);  
+              }                
             console.log(' emarsys', emarsys);
             this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });                    
        } else {

@@ -26,11 +26,13 @@ export const AddToCart = {
           // PAPERPLANES - ADD TO CART
           //let _paq = window._paq;
           console.log("PAPERPLANE AAAAAAAAA",this.$store.state.cart)
-          this.$store.state.cart.cartItems.forEach(product => {
-            _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
-          })              
-          _paq.push(['trackEcommerceCartUpdate', this.$store.state.platformTotals && this.$store.state.platformTotals.grand_total ? this.$store.state.platformTotals.grand_total : '']);          
-          _paq.push(['trackPageView']);          
+          if (window && _paq != undefined) {
+            this.$store.state.cart.cartItems.forEach(product => {
+              _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
+            })              
+            _paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '']);
+            _paq.push(['trackPageView']);          
+          }
       this.isAddingToCart = true
       try {
         const diffLog = await this.$store.dispatch('cart/addItem', { productToAdd: product })

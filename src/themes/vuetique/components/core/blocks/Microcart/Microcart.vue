@@ -175,6 +175,18 @@ export default {
       return this.$store.state.user.current
     }    
   },
+  beforeMount () { 
+      // PAPERPLANES - MICRO CART
+      console.log("PAPERPLANE MICRO CART BBBBBBBBBB INNN",this.$store.state.cart)
+      if (window && window._paq != undefined) {
+          console.log("PAPERPLANE MICRO CART BBBBBBBBBB",this.$store.state.cart)
+          this.$store.state.cart.cartItems.forEach(product => {
+            window._paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
+          })              
+          window._paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '']);          
+          window._paq.push(['trackPageView']);  
+        }     
+  },
   mounted () {
     this.$nextTick(() => {
       this.componentLoaded = true
