@@ -22,7 +22,7 @@ export default {
     let queryKey = ''
     let queryValue = ''
     if (this.pageidentifier) {
-      queryKey = 'identifier'
+      queryKey = 'identifier.keyword'
       queryValue = this.pageidentifier
     }
     if (queryKey && queryValue) {
@@ -45,7 +45,7 @@ export default {
       let queryKey = ''
       let queryValue = ''
       if (this.pageidentifier) {
-        queryKey = 'identifier'
+        queryKey = 'identifier.keyword'
         queryValue = this.pageidentifier
       }
       if (queryKey && queryValue) {
