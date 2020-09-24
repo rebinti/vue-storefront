@@ -100,16 +100,16 @@ export default {
   methods: {
     refreshList () {
       this.loadingNewProdFlag = true;
-      let id = this.productLinks ? this.productLinks
+      let sku = this.productLinks ? this.productLinks
         .filter(pl => pl.link_type === this.type)
-        .map(pl => pl.linked_product_id) : null
+        .map(pl => pl.linked_product_sku) : null
 
-      let key = 'id'   // here using SKU changes to Id ; reason : some issue with product get using SKU
-      if ((id === null || (id.length === 0)) && this.type != 'related') {
-        id = this.product.current.category.map(cat => cat.category_id)
+      let key = 'sku.keyword'
+      if ((sku === null || (sku.length === 0)) && this.type != 'related') {
+        sku = this.product.current.category.map(cat => cat.category_id)
         key = 'category_ids'
       }
-      let relatedProductsQuery = prepareRelatedQuery(key, id)
+      let relatedProductsQuery = prepareRelatedQuery(key, sku)
 
       this.$store.dispatch('product/list', {
         query: relatedProductsQuery,
