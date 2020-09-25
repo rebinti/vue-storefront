@@ -9,8 +9,14 @@
     >
       <div class="container">
         <div class="row justify-center md:justify-between">
+
+           <div class="footer-menu sm:flex col-12 lg:col-6 justify-around mt-8 lg:mt-0">
+                <cms-block :identifier="'footer_help_block'"  style="margin-top:-40px;"/>
+
+                <cms-block :identifier="'footer_quick_links_block'" style="margin-top:-40px;" />
+          </div>
       
-          <div class="footer-menu sm:flex col-12 lg:col-9 justify-around mt-8 lg:mt-0">
+          <!-- <div class="footer-menu sm:flex col-12 lg:col-9 justify-around mt-8 lg:mt-0">
             <div class="hidden md:block">
               <h3>
                 {{ $t('Shop') }}
@@ -170,12 +176,57 @@
                 </router-link>
               </div>
             </Accordion>
-          </div>
+          </div> -->
 
-              <div class="col-12 lg:col-3 flex flex-col">
+          <div class="col-12 lg:col-3 flex flex-col">
             <div class="">
               <!-- <Newsletter /> --> 
-              <h3> Join in on the chit chat </h3>
+              <h3> JOIN IN ON THE CHIT CHAT </h3>
+            </div>
+
+            <div class="flex justify-center lg:justify-start social-footer mt-12">
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mr-1 rounded-full"
+                href="https://www.facebook.com/iclothingie"
+                :aria-label="$t('Go to Facebook')"
+              >
+                <img src="/assets/icons/social-f.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.instagram.com/iclothing"
+                :aria-label="$t('Go to Instagram')"
+              >
+                <img src="/assets/icons/social-i.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.pinterest.com/iclothing"
+                :aria-label="$t('Go to Pinterest')"
+              >
+                <img src="/assets/icons/social-p.svg" alt="">
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full"
+                href="https://www.youtube.com/user/iclothingie"
+                :aria-label="$t('Go to Youtube')"
+              >
+                <img src="/assets/icons/social-y.svg" alt="">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-3 flex flex-col">
+            <div class="">
+              <h3> DOWNLOAD OUR APP</h3>
             </div>
 
             <div class="flex justify-center lg:justify-start social-footer mt-12">
@@ -188,33 +239,7 @@
               >
                 <img src="/assets/icons/social-f.svg" alt="">
               </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.instagram.com"
-                :aria-label="$t('Go to Instagram')"
-              >
-                <img src="/assets/icons/social-i.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.pinterest.com"
-                :aria-label="$t('Go to Pinterest')"
-              >
-                <img src="/assets/icons/social-p.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.youtube.com"
-                :aria-label="$t('Go to Youtube')"
-              >
-                <img src="/assets/icons/social-y.svg" alt="">
-              </a>
+    
             </div>
           </div>
         </div>
@@ -296,6 +321,7 @@ import CurrentPage from 'theme/mixins/currentPage'
 import LanguageSwitcher from '../../LanguageSwitcher.vue'
 import Newsletter from 'theme/components/core/blocks/Footer/Newsletter'
 
+import CmsBlock from '../Cms/Block'
 import Accordion from 'theme/components/theme/Accordion'
 
 export default {
@@ -312,7 +338,8 @@ export default {
   components: {
     Newsletter,
     LanguageSwitcher,
-    Accordion
+    Accordion,
+    CmsBlock
   }
 }
 </script>

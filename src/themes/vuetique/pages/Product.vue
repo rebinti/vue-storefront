@@ -269,13 +269,13 @@
           <!-- mobile product details sec ends -->
 
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section"
-             style="z-index:10" v-if="showProducVideoPopupFlag">
+             style="z-index:1" v-if="showProducVideoPopupFlag && productVideoData">
               <i
                 slot="close"
                 class="modal-close material-icons p15 cl-bg-tertiary"
                 @click="showProducVideoPopup(false)"
                 data-testid="closeModalButton"
-                style="z-index: 100;position: absolute;right: 10px;top: 10px;cursor: pointer;"
+                style="z-index: 3;position: absolute;right: 10px;top: 10px;cursor: pointer;"
               >
                 close
               </i>
@@ -284,8 +284,9 @@
                 style="height: 100%;width: 100%;position: absolute;left: 0;"
                 ref="videoElement" id="videoElement" 
                 loop controls autoPictureInPicture preload autoplay="true" >
-                  <source src="http://m2.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" type="video/mp4" />
+                  <source :src="productVideoData.video" type="video/mp4" />
                 </video>
+                <!-- src="http://m2.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
             </div>
           </div>
 

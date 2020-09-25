@@ -34,6 +34,10 @@ export default {
       category: 'category/getCurrentCategory',
       gallery: 'product/productGallery'
     }),
+    productVideoData () {
+      if (this.gallery.length) return this.gallery.find(val => (val.video && val.video !== undefined)) || null
+      else return null
+    },
     productName () {
       return this.product ? this.product.name : ''
     },
