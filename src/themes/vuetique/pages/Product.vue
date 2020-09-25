@@ -12,7 +12,7 @@
           <div class="w-full md:w-12/12 top-main">
             <product-gallery
               ref="gallery"
-              :gallery="gallery"
+              :gallery="galleryDataFilter"
               :offline="offlineImage"
               :configuration="configuration"
               :product="product"
@@ -306,7 +306,7 @@
                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>                  
               </div>
               <div class="product-top-div">
-                  <div class="video-thum" id="left" style=""
+                  <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
                     @click="showProducVideoPopup">
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />

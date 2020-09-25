@@ -18,7 +18,8 @@ export default {
   data () {
     return {
       loading: false,
-      disableAddToCartButtonFlag: true
+      disableAddToCartButtonFlag: true,
+      isInMobileView: false
     }
   },
   computed: {
@@ -37,6 +38,20 @@ export default {
     productVideoData () {
       if (this.gallery.length) return this.gallery.find(val => (val.video && val.video !== undefined)) || null
       else return null
+    },
+    galleryDataFilter () {
+      if (this.gallery.length) {
+        let galleryFiltered = [...this.gallery]
+        const index = galleryFiltered.findIndex(val => (val.video && val.video !== undefined))
+        if (index >= 0 && !this.isInMobileView) {
+          galleryFiltered.splice(index, 1);
+          return galleryFiltered
+        } else {
+          return galleryFiltered
+        }
+      } else {
+        return []
+      }
     },
     productName () {
       return this.product ? this.product.name : ''
@@ -95,6 +110,8 @@ export default {
     }
     this.onStateCheck()
     this.$store.dispatch('recently-viewed/addItem', this.product)
+    if (window.innerWidth <= 768) this.isInMobileView = true
+    else this.isInMobileView = false
   },
   methods: {
     validateRoute (route = this.$route) {
