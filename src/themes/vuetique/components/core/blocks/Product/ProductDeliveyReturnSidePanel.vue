@@ -51,12 +51,18 @@ export default {
     // }
   },
   mounted () {
-      window.styla.init();
-     if ('styla' in window) {
-      // if (window.styla !== null && window.styla['isReady'] !== undefined) {
-      // if (typeof window.styla.init !== "undefined") window.styla.init()
-       styla.init !== "undefined"&&styla.init()
-    }      
+    this.$nextTick(()=>{
+       window.styla.init();
+        setTimeout(() => {
+              window.styla.init();
+              window.styla.init();
+              window.styla.init();
+              window.styla.init();
+              if ('styla' in window) {
+                styla.init !== "undefined"&&styla.init()
+              }  
+          }, 2500);
+    })
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
