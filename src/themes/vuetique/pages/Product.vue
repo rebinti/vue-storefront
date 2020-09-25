@@ -302,14 +302,22 @@
                 </p>
               </div>
               <div class="review-div">
-                  <div class="video-thum" style="float: left;position: absolute;left: 0;"
+                  <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>                  
+              </div>
+              <div class="product-top-div">
+                  <div class="video-thum" id="left" style=""
                     @click="showProducVideoPopup">
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
-                  </div>
-                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
-              </div>
-            </div>
+                  </div> 
+                  <div class="social-share-button" id="right">
+                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+                  </div>                    
+                  <div class="wishlist-button" id="center">
+                    <wishlist-button :product="product" />
+                  </div>                                                                
+              </div>  
+            </div>            
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
@@ -476,20 +484,7 @@
                   :data-availablesizes="getTruefitProd.availablesizes"
                   data-locale="en_GB"
                 >
-              </div>
-              <div class="size-guide-b">
-                <a href="javascript:void(0);"  
-                    style="position: absolute;
-                        right: 0;
-                        top: 0;
-                        color: #000;
-                        border-bottom: 1px solid #b3b3b3;
-                        font-weight: 400;"
-                  @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
-                  data-testid="sizeGuide">
-                    Size Guide
-                </a> 
-              </div>             
+              </div>          
             </div>
             <div class="flex mt-6 pb-5 border-b">
               <qty-input
@@ -509,9 +504,6 @@
                 />
               </div>
 
-               <div class="col-6 wishlist-button">
-                <wishlist-button :product="product" />
-              </div>
             </div>
 
             <!-- <div class="row text-sm md:py-5 text-center add-to-buttons">
@@ -554,17 +546,34 @@
                 </button>
               </div>
             </div> -->
-
-              <div class="product-details">
-                <a href="javascript:void(0);"  
-                  style=""
-                  @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
-                  data-testid="productDetails">
-                    PRODUCT DETAILS
-                </a> 
+              <div class="product-details desk">   
+                <div class="inner">                                 
+                  <a href="javascript:void(0);"  
+                      style=""
+                      @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
+                      data-testid="productDetails">  
+                    <div class="p-list border-bottom">
+                      PRODUCT DETAILS
+                    </div>
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                    data-testid="sizeGuide">               
+                    <div class="p-list border-bottom">
+                      SIZE GUIDE
+                    </div>
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                    data-testid="sizeGuide">               
+                    <div class="p-list">
+                      DELIVERY & RETURNS
+                    </div>
+                  </a>    
+                </div>          
               </div> 
-
-
           </div>
         </section>
       </div>
@@ -1204,7 +1213,7 @@ export default {
   height: 38px;
   overflow: hidden;
   .brand-div{
-    width: 30%;
+    width: 35%;
     float: left;
     p{
       margin-top: 10px;
@@ -1213,17 +1222,66 @@ export default {
         font-size: 18px;
       }
     }
+    p:after{
+      content: '\007C';
+      color: #777;
+      font-weight: 500;
+      float: right;
+      margin-right: 15px; 
+    }
   }
   .review-div{
+    // float: left;
+    // position: absolute;
+    // right: 0px;
+    // width: 38%;
+    // float: right;
+    // margin-top: 8px;
+
+
     float: left;
-    position: absolute;
-    right: 0px;
-    width: 70%;
-    float: right;
-    margin-top: 8px;
+    position: relative;    
+    width: 38%;    
+    margin-top: 8px;    
     .stamped-main-badge{
-        float: right;
+        float: left;
     }
+  }
+  .product-top-div{
+    width: 27%;
+    float: right;
+    position: relative;
+    margin-top: 8px;
+    .video-thum{
+      width: 33.33%;
+      position: relative;
+      float: left;
+    }
+    .social-share-button{
+      width: 33.33%;
+      position: absolute;
+      float: right !important;
+      left: 34px;
+      top: -7px;  
+      //border: 1px solid #000;
+      height: 32px;  
+      img{
+        margin: 0px auto;
+        margin-top: 5px;        
+      }        
+    }
+    .wishlist-button{
+      width: 33.33%;
+      position: absolute;
+      float: left;
+      left: 66px;
+      top: -7px;
+      height: 32px;
+      border:none;
+      .button.wishlist-bx{
+        margin-top: 0px !important;
+      }
+    }    
   }
 }
 .flex-grow {
@@ -1254,6 +1312,39 @@ button.no-combination {
 .no-combination.active {           
     color: #6b6b6b !important;           
     border: 1px solid #6b6b6b !important;
+}
+.product-details.desk{
+  background-color: #eee;
+}
+.product-details .inner{
+    margin-left: 15px;
+    margin-right: 10px;
+}
+.product-details .p-list {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 6px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 12px;
+  transition: 0.4s;
+  padding-left: 0px;
+}
+.product-details .p-list.border-bottom{
+    border-bottom: 1px solid #bfbfbf;;
+}
+.active, .product-details .p-list:hover {
+  background-color: #ccc; 
+}
+.p-list:after{
+    content: '\003E';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;  
 }
 .variants-wrapper {
  .sizes {
