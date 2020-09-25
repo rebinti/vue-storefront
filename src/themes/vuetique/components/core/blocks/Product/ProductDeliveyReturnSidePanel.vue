@@ -15,6 +15,8 @@
     <h3>Delivey & Return</h3>
     <br>          
     <div data-styla-slot="09f5c950-74a6-405e-9c11-20f841e3a08a"></div>
+<!-- <div data-styla-slot="b134b9e4-ce80-454e-ab79-c5da2b127128"></div>
+<div data-styla-slot="683f8903-1766-49e8-b027-5744da543c01"></div>     -->
   </div>
 </template>
 
