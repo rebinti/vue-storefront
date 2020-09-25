@@ -14,7 +14,7 @@
     
     <h3>Delivey & Return</h3>
     <br>          
-    <div data-styla-slot=“09f5c950-74a6-405e-9c11-20f841e3a08a”></div>
+    <div data-styla-slot="09f5c950-74a6-405e-9c11-20f841e3a08a"></div>
   </div>
 </template>
 
@@ -51,7 +51,12 @@ export default {
     // }
   },
   mounted () {
-      console.log('PPPRODUCTTTT' , this.product);
+      window.styla.init();
+     if ('styla' in window) {
+      // if (window.styla !== null && window.styla['isReady'] !== undefined) {
+      // if (typeof window.styla.init !== "undefined") window.styla.init()
+       styla.init !== "undefined"&&styla.init()
+    }      
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
