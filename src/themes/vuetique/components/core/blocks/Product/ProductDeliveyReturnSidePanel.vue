@@ -51,7 +51,12 @@ export default {
     // }
   },
   mounted () {
-      console.log('PPPRODUCTTTT' , this.product);
+      window.styla.init();
+     if ('styla' in window) {
+      // if (window.styla !== null && window.styla['isReady'] !== undefined) {
+      // if (typeof window.styla.init !== "undefined") window.styla.init()
+       styla.init !== "undefined"&&styla.init()
+    }      
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
