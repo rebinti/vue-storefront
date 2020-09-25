@@ -271,7 +271,7 @@ export default {
     ReviewPanel,
     ProductSidePanel,
     ProductDetailsSidePanel,
-    productDeliveyReturnSidePanel
+    ProductDeliveyReturnSidePanel
   },
    mixins: [EmarsysTracker]
 }
