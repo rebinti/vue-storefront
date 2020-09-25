@@ -206,7 +206,13 @@ export default {
             if (window && window._paq  != undefined) {
                 console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
                 window._paq.push(paperplane_productList);                                 
-                window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
+               // window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
+                if(res.guest_email_md5){
+                  window._paq.push(['setUserId', res.guest_email_md5]);  
+                }else if(res.customer_email_md5){
+                  window._paq.push(['setUserId', res.customer_email_md5]);  
+                }
+
                 let couponst = res.is_coupon ? true : false              
                 window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
                 window._paq.push(['setCustomVariable', 1, "First_Name", res.first_name, 'visit']);
