@@ -268,7 +268,26 @@
           </div>
           <!-- mobile product details sec ends -->
 
-
+          <div class="w-full md:w-2/5 md:px-10 ds_item details-section"
+             style="z-index:10" v-if="showProducVideoPopupFlag">
+              <i
+                slot="close"
+                class="modal-close material-icons p15 cl-bg-tertiary"
+                @click="showProducVideoPopup(false)"
+                data-testid="closeModalButton"
+                style="z-index: 100;position: absolute;right: 10px;top: 10px;cursor: pointer;"
+              >
+                close
+              </i>
+              <div class="iframe-container w-full">
+                <video class="video-fluid video-play-tag"
+                style="height: 100%;width: 100%;position: absolute;left: 0;"
+                ref="videoElement" id="videoElement" 
+                loop controls autoPictureInPicture preload autoplay="true" >
+                  <source src="http://m2.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" type="video/mp4" />
+                </video>
+            </div>
+          </div>
 
           <div class="w-full md:w-2/5 md:px-10 ds_item details-section">
             <div class="brand-review-div">
@@ -283,6 +302,11 @@
                 </p>
               </div>
               <div class="review-div">
+                  <div class="video-thum" style="float: left;position: absolute;left: 0;"
+                    @click="showProducVideoPopup">
+                    <img  style="float: left;cursor: pointer"
+                    src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
+                  </div>
                    <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
               </div>
             </div>
@@ -705,7 +729,8 @@ export default {
       isProductHavRecommOptFrmTrufitFlag: false,      
       windowScreenWidth: 0,
       showDefaultBreadCrumbs: false,
-      showBreadCrumbsToSamePath: false
+      showBreadCrumbsToSamePath: false,
+      showProducVideoPopupFlag: false
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -1118,6 +1143,14 @@ export default {
       }, 250);
     },
 
+    showProducVideoPopup(showFlag=true) {
+        this.showProducVideoPopupFlag = showFlag;
+        if(showFlag) {
+          setTimeout(() => {
+            this.$refs.videoElement.play();
+          }, 200);
+        }
+    }
   },
   beforeDestroy () {
     this.$bus.$off('product-after-related')
@@ -1171,7 +1204,7 @@ export default {
   height: 38px;
   overflow: hidden;
   .brand-div{
-    width: 50%;
+    width: 30%;
     float: left;
     p{
       margin-top: 10px;
@@ -1182,7 +1215,10 @@ export default {
     }
   }
   .review-div{
-    width: 50%;
+    float: left;
+    position: absolute;
+    right: 0px;
+    width: 70%;
     float: right;
     margin-top: 8px;
     .stamped-main-badge{
