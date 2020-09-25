@@ -47,6 +47,7 @@ const store = {
     mainSliderData: [],
     productSidePanelFlag: false,
     productDetailsSidePanelFlag: false,
+    productDeliveyReturnSidePanelFlag: false,
     checkoutWithoutLogin: false
   },
   getters: {
@@ -179,6 +180,10 @@ const store = {
     state.productDetailsSidePanelFlag = action === true
     state.overlay = action === true
   },
+  setProductDeliveyReturnSidePanelFlag (state, action) {
+    state.productDeliveyReturnSidePanelFlag = action === true
+    state.overlay = action === true
+  },  
   setCheckoutWithoutLoginFlag (state, payload) {
     state.checkoutWithoutLogin = payload === true
   }
@@ -198,7 +203,10 @@ const store = {
     },
     toggleProductDetailsSidePanel ({ commit, state }) {
       commit('setProductDetailsSidePanelFlag', !state.productDetailsSidePanelFlag)
-    },    
+    },
+    toggleProductDeliveyReturnSidePanel ({ commit, state }) {
+      commit('setProductDeliveyReturnSidePanelFlag', !state.productDeliveyReturnSidePanelFlag)
+    },            
     updateYoptoProduct ({commit}, state) {
       commit('setYoptoProduct', state)
     },

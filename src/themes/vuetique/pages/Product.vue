@@ -567,8 +567,8 @@
                   </a>
                   <a href="javascript:void(0);"  
                       style=""
-                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
-                    data-testid="sizeGuide">               
+                    @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
+                    data-testid="productDeliveyReturn">               
                     <div class="p-list">
                       DELIVERY & RETURNS
                     </div>
