@@ -73,6 +73,11 @@ export default {
       type: String,
       required: false,
       default: i18n.t('Similar products')
+    },
+    fetchRelatedProdctsFlag: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   components: {
@@ -99,6 +104,7 @@ export default {
   },
   methods: {
     refreshList () {
+      if (this.fetchRelatedProdctsFlag) return
       this.loadingNewProdFlag = true;
       let sku = this.productLinks ? this.productLinks
         .filter(pl => pl.link_type === this.type)

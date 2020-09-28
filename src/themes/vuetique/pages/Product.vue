@@ -316,7 +316,7 @@
                   </div>                    
                   <div class="wishlist-button" id="center">
                     <wishlist-button :product="product" />
-                  </div>                                                                
+                  </div>                                                          
               </div>  
             </div>            
             <h1 data-testid="productName" itemprop="name">
@@ -382,6 +382,7 @@
                       >
                         <button 
                             :aria-label="$t('Select color ') + prod.colorSwatch.label"
+                            @click="onColorSwatchClick(prod)"
                           >
                           <div class="clr_img_out">
                              <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
@@ -665,11 +666,13 @@
       <related-products
         type="upsell"
         typeofview="carousel"
+        :fetchRelatedProdctsFlag="fromRelatedProdcutClick"
         :heading="$t('We found other products you might like')"
       />
     </no-ssr>
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
-    <related-products type="related" style="display: none;" />
+    <related-products type="related" style="display: none;" 
+    :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
     <div class="container my-4">
       <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
@@ -740,7 +743,8 @@ export default {
       windowScreenWidth: 0,
       showDefaultBreadCrumbs: false,
       showBreadCrumbsToSamePath: false,
-      showProducVideoPopupFlag: false
+      showProducVideoPopupFlag: false,
+      fromRelatedProdcutClick: false
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -971,6 +975,7 @@ export default {
        event.target.src = "/assets/colour/multi.png"
     },
     getRelatedProduct (relatedData) {     
+      if (this.fetchRelatedProdctsFlag) return
     // Vue.prototype.$bus.$emit('product-after-related', { key: key, items: items })
     if (relatedData && relatedData.key !== 'related') return;
 
@@ -1034,7 +1039,7 @@ export default {
       // console.log('changeProd when another product clicked', val)
       if (val.route !== null) {
         this.getProductId = null;
-        this.colorSwatchRelateProduct = [];
+        if(!this.fromRelatedProdcutClick) this.colorSwatchRelateProduct = [];
         this.getTruefitProd = null;
         this.disableAddToCartButtonFlag= true;
         this.isProductHavRecommOptFrmTrufitFlag = false;
@@ -1052,6 +1057,9 @@ export default {
 
    /* To get data from Stamped , TrueFit and also send to Emarsys Tracking */
     getDataFromThirdPartyModules () {
+      setTimeout(() => {
+        this.fromRelatedProdcutClick= false;
+      }, 300);
       if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
       /* 
         To set Emarsys Tracking Data
@@ -1160,6 +1168,13 @@ export default {
             this.$refs.videoElement.play();
           }, 200);
         }
+    },
+    onColorSwatchClick (prod){
+      this.colorSwatchRelateProduct= this.colorSwatchRelateProduct.map(val => { val.activeProd = false; return val});
+      this.colorSwatchRelateProduct= this.colorSwatchRelateProduct.map(val => { 
+        if(val.id == prod.id) { val.activeProd= true; return val }
+        else {return val} });
+      this.fromRelatedProdcutClick= true;
     }
   },
   beforeDestroy () {
