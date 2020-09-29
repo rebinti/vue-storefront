@@ -1229,13 +1229,14 @@ export default {
   height: 38px;
   overflow: hidden;
   .brand-div{
-    width: 35%;
+    width: auto;
     float: left;
     p{
       margin-top: 10px;
       a{
         text-transform: uppercase;
         font-size: 18px;
+        margin-right: 6px;
       }
     }
     p:after{
@@ -1247,17 +1248,9 @@ export default {
     }
   }
   .review-div{
-    // float: left;
-    // position: absolute;
-    // right: 0px;
-    // width: 38%;
-    // float: right;
-    // margin-top: 8px;
-
-
     float: left;
     position: relative;    
-    width: 38%;    
+    width: auto;    
     margin-top: 8px;    
     .stamped-main-badge{
         float: left;
@@ -1291,7 +1284,7 @@ export default {
       position: absolute;
       float: left;
       left: 66px;
-      top: -7px;
+      top: -13px;
       height: 32px;
       border:none;
       .button.wishlist-bx{
@@ -1604,7 +1597,15 @@ button.no-combination {
         background-size: 50px 50px;   
         border:none;    
     }         
-  }      
+  }
+  .brand-review-div{ 
+    .product-top-div{
+    width: 20%;
+    }
+    .review-div{
+      margin-top: 15px;
+    }
+  }        
 }
 @media (max-width: 1920px) {
   #product{
@@ -1708,7 +1709,15 @@ button.no-combination {
         background-size: 36px 36px;   
         border:none;    
     }    
-  }    
+  }
+  .brand-review-div{ 
+    .product-top-div{
+      width: 25%;
+    }
+    .review-div{
+      margin-top: 10px;
+    }
+  }       
 }
 @media (max-width: 1440px) {
   #product{
@@ -1806,7 +1815,18 @@ button.no-combination {
         background-size: 33px 33px;   
         border:none;    
     }         
-  }  
+  }
+  .brand-review-div{ 
+    .product-top-div{
+    width: 23%;
+    .social-share-button{
+      left: 25px;     
+    }
+    .wishlist-button{
+      left: 43px;
+      }    
+    }
+  }
 }
 @media (max-width: 1024px) {
   #product{
