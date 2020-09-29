@@ -981,7 +981,7 @@ export default {
 
     let relatedProd = this.$store.state.product.related && this.$store.state.product.related.related ? this.$store.state.product.related.related : []
       if (relatedProd.length > 0 && this.attributesByCode.color) {
-        relatedProd = relatedProd.filter(val => val.id !== this.product.id);
+        relatedProd = relatedProd.filter(val => val.id !== this.product.id).map(val=> { val.activeProd = false; return val});
         relatedProd.unshift({...this.product, activeProd: true});
           this.colorSwatchRelateProduct = relatedProd.filter(val => val.color)
           .map(val => { 
@@ -1169,11 +1169,11 @@ export default {
           }, 200);
         }
     },
-    onColorSwatchClick (prod){
-      this.colorSwatchRelateProduct= this.colorSwatchRelateProduct.map(val => { val.activeProd = false; return val});
+    onColorSwatchClick (prod) {
       this.colorSwatchRelateProduct= this.colorSwatchRelateProduct.map(val => { 
-        if(val.id == prod.id) { val.activeProd= true; return val }
-        else {return val} });
+        if(val.id == prod.id)  val.activeProd= true; 
+        else val.activeProd= false;
+        return val; });
       this.fromRelatedProdcutClick= true;
     }
   },
