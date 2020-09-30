@@ -3,6 +3,7 @@ import App from './App.vue'
 import routes from './router'
 import Vue from 'vue'
 import VueProgressBar from 'vue-progressbar'
+import VueSocialSharing from 'vue-social-sharing'
 import '@vue-storefront/core/lib/passive-listeners'
 import { RouterManager } from '@vue-storefront/core/lib/router-manager'
 import { once } from '@vue-storefront/core/helpers'
@@ -14,7 +15,8 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
 once('__VUE_EXTEND_DROPPOINT_VPB__', () => {
-  Vue.use(VueProgressBar)
+  Vue.use(VueProgressBar);
+  Vue.use(VueSocialSharing);
 })
 
 // once('__VUE_EXTEND_DROPPOINT_VPB__', () => {

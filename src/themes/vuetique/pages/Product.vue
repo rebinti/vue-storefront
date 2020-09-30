@@ -311,14 +311,20 @@
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
-                  <div class="social-share-button" id="right">
-                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+                  <div class="social-share-button" id="right" @click="showShareDiv = !showShareDiv">
+                    <img class="vt-icon fa-icon-list" 
+                    style="width: 21px;height: 20px;position: absolute;top: 2px;"
+                    src="/assets/icons/shareicon.png" alt="" />
                   </div>                    
-                  <div class="wishlist-button" id="center">
+                  <div class="wishlist-button" id="center" style="width: 31px;">
                     <wishlist-button :product="product" />
                   </div>                                                          
               </div>  
-            </div>            
+            </div>    
+            <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
+            class="share-box bg-grey-lighter shadow-box">
+                <product-share :product="product"/>
+            </div>         
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}
             </h1>
@@ -709,6 +715,8 @@ import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
 import {  findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
 
+import ProductShare from 'theme/components/core/blocks/Product/ProductShare.vue'
+
 export default {
   components: {
     'no-ssr': NoSSR,
@@ -728,7 +736,8 @@ export default {
     Reviews,
     SizeSelector,
     RecentlyViewed,
-    QtyInput
+    QtyInput,
+    ProductShare
   },
   mixins: [Product, VueOfflineMixin],
   data () {
@@ -744,7 +753,8 @@ export default {
       showDefaultBreadCrumbs: false,
       showBreadCrumbsToSamePath: false,
       showProducVideoPopupFlag: false,
-      fromRelatedProdcutClick: false
+      fromRelatedProdcutClick: false,
+      showShareDiv: false  
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -1274,6 +1284,7 @@ export default {
       top: -7px;  
       //border: 1px solid #000;
       height: 32px;  
+      cursor: pointer;
       img{
         margin: 0px auto;
         margin-top: 5px;        
@@ -1820,10 +1831,10 @@ button.no-combination {
     .product-top-div{
     width: 23%;
     .social-share-button{
-      left: 25px;     
+      left: 28px;     
     }
     .wishlist-button{
-      left: 43px;
+      left: 42px;
       }    
     }
   }
@@ -2383,5 +2394,19 @@ button.no-combination {
       }     
     }
   }
+}
+.shadow-box {
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,.5);
+}
+.share-box {
+    z-index: 3;
+    width: 80%;
+    height: 50px;
+    border: 2px solid #fff8f8;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: -3px;
 }
 </style>
