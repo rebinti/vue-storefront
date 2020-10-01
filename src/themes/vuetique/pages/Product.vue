@@ -312,11 +312,9 @@
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
                   <div class="social-share-button" id="right" @click="showShareDiv = !showShareDiv">
-                    <img class="vt-icon fa-icon-list" 
-                    style="width: 21px;height: 20px;position: absolute;top: 2px;"
-                    src="/assets/icons/shareicon.png" alt="" />
-                  </div>                    
-                  <div class="wishlist-button" id="center" style="width: 31px;">
+                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+                  </div>                                   
+                  <div class="wishlist-button" id="center">
                     <wishlist-button :product="product" />
                   </div>                                                          
               </div>  
