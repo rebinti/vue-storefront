@@ -9,7 +9,7 @@
       :title="product.name"
       :description="product.description"
     >
-      <i :class="network.icon" class="cursor: pointer;"></i>
+      <i :class="network.icon" class="cursor: pointer;"></i>      
     </ShareNetwork>
   </div>
 </template>
@@ -34,6 +34,8 @@ export default {
         { network: 'twitter', name: 'Twitter', icon: 'fab fah fa-lg fa-twitter', color: '#1da1f2' },
         { network: 'linkedin', name: 'LinkedIn', icon: 'fab fah fa-lg fa-linkedin', color: '#007bb5' },
         { network: 'pinterest', name: 'Pinterest', icon: 'fab fah fa-lg fa-pinterest', color: '#bd081c' },
+        { network: 'googleplus', name: 'Google +', icon: 'fab fah fa-lg fa-google-plus', color: '#000000' },
+        { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fah fa-lg fa-whatsapp', color: '#bd081c' },
       ]
     }
   },
