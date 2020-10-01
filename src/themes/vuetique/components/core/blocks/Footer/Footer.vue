@@ -11,9 +11,9 @@
         <div class="row justify-center md:justify-between">
 
            <div class="footer-menu sm:flex col-12 lg:col-6 justify-around mt-8 lg:mt-0">
-                <cms-block :identifier="'footer_help_block'"  style="margin-top:-40px;"/>
+                <cms-block :identifier="'footer_help_block_new'"  style="margin-top:-40px;"/>
 
-                <cms-block :identifier="'footer_quick_links_block'" style="margin-top:-40px;" />
+                <cms-block :identifier="'footer_quick_links_block_new'" style="margin-top:-40px;" />
           </div>
       
           <!-- <div class="footer-menu sm:flex col-12 lg:col-9 justify-around mt-8 lg:mt-0">
