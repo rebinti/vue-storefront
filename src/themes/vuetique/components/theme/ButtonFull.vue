@@ -44,6 +44,8 @@ export default {
     @apply text-grey bg-grey-light cursor-default;
   }
 
-
+  button {
+      background-color: #0e0e0e !important;
+  }
 
 </style>
