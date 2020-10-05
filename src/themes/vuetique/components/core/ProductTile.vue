@@ -56,7 +56,7 @@
         </div>          
       </div>
       <div>
-        <span class="promotions__stamp-label">
+        <span class="promotions__stamp-label" v-if="getSpecialPercent">
           {{getSpecialPercent}}
         </span> 
       </div>
@@ -720,12 +720,24 @@ export default {
   font-size: 13px;
   font-weight: 500;
   width: auto;
-  top: 0;
   padding: 3px 6px 3px 7px;
   position: absolute;
   top: 15px;
   background: #fff;
   color: red;
+  left: 0;
 }
+
+.new-collection {
+  .promotions__stamp-label{
+      left: 10px;
+  }
+} 
+
+.recent-view {
+  .promotions__stamp-label{
+      left: 10px;
+  }
+} 
 
 </style>
