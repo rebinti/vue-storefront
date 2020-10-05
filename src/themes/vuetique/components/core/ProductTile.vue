@@ -55,6 +55,11 @@
             </div>                  
         </div>          
       </div>
+      <div>
+        <span class="promotions__stamp-label" style="width: auto;top: 0;padding: 3px 6px 3px 7px;">
+          {{getSpecialPercent}}
+        </span> 
+      </div>
       <div class="w-full title-and-wish">
         <div class="lg:col-9 ptitle">  
           <p class="product-name mb-0 font-medium text-grey-dark mt-3" v-if="!onlyImage">
@@ -144,7 +149,15 @@ export default {
         loading: this.thumbnail,
         error: this.thumbnail
       }
-    }
+    },
+    getSpecialPercent () {
+      if(this.product.originalPriceInclTax){
+      let percent = 100- ((this.product.priceInclTax*100)/this.product.originalPriceInclTax);        
+         return '-' + Math.round(percent)+"%";
+      } else {
+        return null
+      }
+    }      
   },
   methods: {
     onProductPriceUpdate (product) {
