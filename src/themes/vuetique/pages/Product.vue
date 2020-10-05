@@ -321,7 +321,7 @@
             </div>    
             <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
             class="share-box bg-grey-lighter shadow-box">
-                <product-share :product="product"/>
+                <product-share :product="product" :imgpath="image.src"/>
             </div>         
             <h1 data-testid="productName" itemprop="name">
               {{ product.name | htmlDecode }}

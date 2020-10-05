@@ -8,6 +8,7 @@
       :url="'https://vue.iclothing.com/'+ localizedRoute(product.url_path)"
       :title="product.name"
       :description="product.description"
+      :image="imgpath"
     >
       <i :class="network.icon" class="cursor: pointer;"></i>      
     </ShareNetwork>
@@ -44,7 +45,15 @@ export default {
       type: Object,
       required: true,
       default: {}
-    }
+    },
+    imgpath: {
+      type: Object,
+      required: true,
+      default: String
+    }    
+  },
+  beforeMount () { 
+    console.log("JHJHJHJHJHJH",this.imgpath)
   }
 }
 </script>
