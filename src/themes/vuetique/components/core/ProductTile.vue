@@ -37,8 +37,8 @@
           class="hover-image"
         >
         
-        <div v-if="product.badge" :badge="product.badge" class="product-badge">
-            <div v-if="product.badge_type === 241" class="rectangle"> <!-- 237 for rectangle -->
+        <div v-if="product.badge" :class="`product-badge ${product.badge_type}`">
+            <div v-if="product.badge_type == 1034" class="rectangle"> <!-- 237,241 for rectangle 1034-->
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
@@ -56,7 +56,7 @@
         </div>          
       </div>
       <div>
-        <span class="promotions__stamp-label" style="width: auto;top: 0;padding: 3px 6px 3px 7px;">
+        <span class="promotions__stamp-label">
           {{getSpecialPercent}}
         </span> 
       </div>
@@ -654,36 +654,78 @@ export default {
       height: 157.5px;
   }    
 }
-.product-badge{
+.product-badge {
     color: #000;
     text-transform: uppercase;
     float: left;
     width: 100%;
     bottom: 0px;
     position: absolute;
-    .squre,.rectangle{
+      .squre, .rectangle {
         text-align: center;
-        .badge{
+          .badge {
+              display: inline-block;
+              min-width: 10px;
+              font-size: 16px;
+              font-weight: 500;
+              color: #000;
+              vertical-align: middle;
+              white-space: nowrap;
+              background-color: #777;
+              border-radius: 10px;   
+              width: 100%;
+              background: rgba(255,255,255, 0.3);
+              padding-top: 8px;
+              padding-bottom: 8px; 
+              letter-spacing: 11px;                  
+          }
+      }
+    .round {
+      z-index: 3;
+      background: #020202;
+      left: 3px;
+      top: 0px;
+      width: 100%;
+      float: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fbfbfb;
+      width: 70px;
+      text-transform: uppercase;
+      line-height: 70px;
+      height: 70px;
+      -webkit-border-radius: 100%;
+      -moz-border-radius: 100%;
+      border-radius: 100%; 
+          .badge {
+            font-size: 11px!important;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 2px!important;
+            padding-bottom: 2px;
             display: inline-block;
             min-width: 10px;
-            padding: 3px 7px;
-            font-size: 16px;
-            font-weight: 500;
-            color: #000;
-            line-height: 1;
+            padding: 3px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.3;
             vertical-align: middle;
-            white-space: nowrap;
             text-align: center;
-            background-color: #777;
-            border-radius: 10px;   
-            width: 100%;
-            float: left;
-            background: rgba(255,255,255, 0.3);
-            padding-top: 8px;
-            padding-bottom: 8px;                   
-        }
-
-  }
+            border-radius: 10px;
+          }
+    }
+}
+.promotions__stamp-label{
+  font-size: 13px;
+  font-weight: 500;
+  width: auto;
+  top: 0;
+  padding: 3px 6px 3px 7px;
+  position: absolute;
+  top: 15px;
+  background: #fff;
+  color: red;
 }
 
 </style>
