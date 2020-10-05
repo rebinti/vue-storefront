@@ -11,7 +11,7 @@
         <use xlink:href="#close" />
       </svg>
     </button>
-       <h3>Product Reviews</h3>
+       <h3 style="margin-top: -25px;">Product Reviews</h3>
 
         <div v-if="reviewpanelloaded"  style="margin: 150px;">
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">

@@ -12,7 +12,7 @@
       </svg>
     </button>
     
-    <h3>Product Details</h3>
+    <h3 style="margin-top: -25px;">Product Details</h3>
     <br>          
         <div
             v-html="product.short_description"

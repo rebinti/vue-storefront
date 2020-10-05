@@ -15,7 +15,7 @@
     <!-- <h3 class="mb-8">Size Guide</h3> -->
     <!-- <cms-block :identifier="'product-size-guide'" :sync="true"/> -->
 
-   <div class="row mt-5">  
+   <div class="row mt-5" style="margin-top: -25px;width: 96%;">  
     <Accordion class="mob_fltr"   
         :title="'Size Guide'"
         :openType= opensizeguide
