@@ -103,7 +103,7 @@
         <button-full          
           class="btn-primary py-3 px-6"                    
         >
-          {{ $t('Go to checkout.') }}          
+          {{ $t('Go to checkout') }}          
         </button-full>          
       </div>     
     </div>
@@ -488,7 +488,7 @@ export default {
 .swipeout-right {
   padding-left: 15px;
 }
-.microcart .btn-primary{
-  background: #4fce76 !important;
-}
+// .microcart .btn-primary{
+//   background: #4fce76 !important;
+// }
 </style>
