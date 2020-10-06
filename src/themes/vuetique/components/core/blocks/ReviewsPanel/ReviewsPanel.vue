@@ -5,7 +5,7 @@
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
       @click="closeReviewPanel"
-      data-testid="closeMicrocart"
+      data-testid="closeReviewPanel"
     >
       <svg viewBox="0 0 25 25" class="vt-icon--sm">
         <use xlink:href="#close" />
@@ -79,7 +79,24 @@ export default {
           //this.reviewpanelloaded = true
           document.addEventListener( 'stamped:reviews:loaded', () => {
             this.reviewpanelloaded = false;
-          });          
+          });  
+          let start = null;
+          window.addEventListener("touchstart",function(event){
+              if(event.touches.length === 1) start = event.touches.item(0).clientX;
+              else  start = null;
+          });
+          window.addEventListener("touchend", (event) => {
+              const offset = 100;
+              if(start){
+                const end = event.changedTouches.item(0).clientX;
+                // if(end > start + offset) console.log('swiped left -> right swipe')
+                if(end < start - offset ){
+                  if(this.swipeToClosePanelFlag) return
+                  this.swipeToClosePanelFlag = true;
+                  this.closeReviewPanel()
+                } 
+              }
+          });
   },
   //  watch: {
   //   isReviewPanelOpen: {
@@ -120,6 +137,10 @@ export default {
     const el = document.body;
     el.classList.add('menu-high-opacity');
     document.documentElement.classList.add('menu-high-opacity')
+  },
+  beforeDestroy () {
+    window.removeEventListener("touchstart", null);
+    window.removeEventListener("touchend", null);
   },
   destroyed () {
     const el = document.body;

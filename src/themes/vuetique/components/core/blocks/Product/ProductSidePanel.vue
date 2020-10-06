@@ -75,7 +75,8 @@ export default {
       isLoading: false,
       isCmsDataLoaded: false,
       showTabButtons: false,
-      opensizeguide: true
+      opensizeguide: true,
+      swipeToClosePanelFlag: false
     }
   },
   mixins: [onEscapePress, NoScrollBackground],
@@ -123,6 +124,23 @@ export default {
         this.selectedBrandID  =  this.getCurrentProductLabelData&&this.getCurrentProductLabelData.value.toString()
         this.brandChanged();
     }   
+    let start = null;
+    window.addEventListener("touchstart",function(event){
+        if(event.touches.length === 1) start = event.touches.item(0).clientX;
+        else  start = null;
+    });
+    window.addEventListener("touchend", (event) => {
+        const offset = 100;
+        if(start){
+          const end = event.changedTouches.item(0).clientX;
+          // if(end > start + offset) console.log('swiped left -> right swipe')
+          if(end < start - offset ){
+            if(this.swipeToClosePanelFlag) return
+            this.swipeToClosePanelFlag = true;
+            this.closeSizeGuidepanel()
+          } 
+        }
+    });
   },
   methods: {
     onEscapePress () {
@@ -176,6 +194,10 @@ export default {
     const el = document.body;
     el.classList.add('menu-high-opacity');
     document.documentElement.classList.add('menu-high-opacity')
+  },
+  beforeDestroy () {
+    window.removeEventListener("touchstart", null);
+    window.removeEventListener("touchend", null);
   },
   destroyed () {
     const el = document.body;
