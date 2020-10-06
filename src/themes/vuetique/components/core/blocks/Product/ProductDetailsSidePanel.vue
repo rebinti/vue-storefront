@@ -67,22 +67,28 @@ export default {
   },
   mounted () {
       let start = null;
-      window.addEventListener("touchstart",function(event){
-            if(event.touches.length === 1) start = event.touches.item(0).clientX;
-            else  start = null;
-      });
-      window.addEventListener("touchend", (event) => {
+      const touchStart = (event) => {
+          if(event.touches.length === 1) start = event.touches.item(0).clientX;
+          else  start = null;
+      }
+      const touchend = (event) => {
           const offset = 100;
           if(start){
             const end = event.changedTouches.item(0).clientX;
-            // if(end > start + offset) console.log('swiped left -> right swipe')
+            // if(end > start + offset) console.log('swiped left -> right swipe***')
             if(end < start - offset ){
               if(this.swipeToClosePanelFlag) return
               this.swipeToClosePanelFlag = true;
               this.closeSearchpanel()
             } 
           }
-      });
+      }
+      document.addEventListener("touchstart", touchStart);
+      document.addEventListener("touchend", touchend);
+      this.$once('hook:destroyed', () => {
+          document.removeEventListener('touchstart', touchStart)
+          document.removeEventListener('touchend', touchend)
+      })
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
@@ -113,11 +119,6 @@ export default {
     const el = document.body;
     el.classList.remove('menu-high-opacity');
     document.documentElement.classList.remove('menu-high-opacity')
-    // window.removeEventListener("touchend", null);
-  },
-  beforeDestroy () {
-    window.removeEventListener("touchstart", null);
-    window.removeEventListener("touchend", null);
   }
   
 }
