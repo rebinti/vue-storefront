@@ -181,7 +181,7 @@
           <div class="col-12 lg:col-3 flex flex-col">
             <div class="">
               <!-- <Newsletter /> --> 
-              <h3> JOIN IN ON THE CHIT CHAT </h3>
+              <h3> Join in on the chit chat </h3>
             </div>
 
             <div class="flex justify-center lg:justify-start social-footer mt-12">
@@ -226,7 +226,7 @@
 
           <div class="col-12 lg:col-3 flex flex-col">
             <div class="">
-              <h3> DOWNLOAD OUR APP</h3>
+              <h3> Download our app</h3>
             </div>
 
             <div class="flex justify-center lg:justify-start social-footer mt-12">

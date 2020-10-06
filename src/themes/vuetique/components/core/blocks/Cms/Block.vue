@@ -191,5 +191,12 @@ export default {
     overflow: hidden;
 }
 
-
+.footer-menu .cms-content .menu-link {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    --text-opacity: 1;
+    color: #666666;
+    color: rgba(102, 102, 102, var(--text-opacity));
+    -webkit-font-smoothing: antialiased;
+}
 </style>
