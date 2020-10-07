@@ -5,23 +5,25 @@
     class="mobile-filters lg:hidden mobile_filter"
   >
     <div class="mobile-filters_new">
-      <h2 class="absolute top-0 left-0 m-4 h-4">Filters</h2>
-      <button
-        type="button"
-        :aria-label="$t('Close')"
-        class="absolute top-0 right-0 m-4 h-4"
-        @click="$emit('closeFilters')"
-      >
-        <svg viewBox="0 0 25 25" class="vt-icon--sm">
-          <use xlink:href="#close" />
-        </svg>
-      </button>
+     <div class="mobile-filters fixed" style="height: 60px;box-shadow: 0 3px 3px -3px #00000045;padding-bottom: 0">
+        <h2 class="absolute top-0 left-0 m-4 h-4">Filters</h2>
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4"
+          @click="$emit('closeFilters')"
+        >
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
+        </div>
       <div class>
         <div class="sidebar">
           <!-- <h1>Filters</h1> -->
 
           <!-- New applied filter list Div -->
-          <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: 10px;">
+          <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: -20px;">
             <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
             <span
               class="filter-box clearall-filter"

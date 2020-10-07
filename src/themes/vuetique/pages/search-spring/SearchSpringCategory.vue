@@ -116,7 +116,7 @@
         <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
           <div class="row gutter-md mt-6">
             <div class="col-12">
-              <button-full class="w-full" @click.native="openFilters">
+              <button-full class="w-full" @click.native="openFilters" style="background-color: #fff !important;">
                 {{ $t('Filters') }}
               </button-full>
             </div>
