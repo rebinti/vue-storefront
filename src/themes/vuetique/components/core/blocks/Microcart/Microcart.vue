@@ -24,7 +24,7 @@
     </h2>
   </div>
 
-    <h4 v-if="!productsInCart.length" class="mb-2">
+    <h4 v-if="!productsInCart.length" class="mb-2" style="margin-top: 64px;">
       {{ $t('Your shopping cart is empty.') }}
     </h4>
     <div v-if="!productsInCart.length" @click="closeMicrocartExtend">
