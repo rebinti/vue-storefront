@@ -5,11 +5,12 @@
     data-testid="microcart"
   >
 
-  <div class="hd_fix">
+  <div class="right-sidebar max-w-full fixed" style="height: 50px;box-shadow: 0 3px 3px -3px #00000045;">
     <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
+      style="margin-top: 14px;"
       @click="closeMicrocartExtend"
       data-testid="closeMicrocart"
     >
@@ -18,7 +19,7 @@
       </svg>
     </button>
 
-    <h2 v-if="productsInCart.length" class="mb-8 h_title">
+    <h2 v-if="productsInCart.length" class="mb-8 h_title" style="margin-top: 2px;">
      <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
     </h2>
   </div>
@@ -33,7 +34,9 @@
       </router-link>
       {{ $t('to find something beautiful for You!') }}
     </div>
-     <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" ref="list" :items="productsInCart" item-key="sku" :key="componentKey">
+     <swipe-list v-if="productsInCart.length" class="products p-0 m-0 p_crt_list" 
+     ref="list" :items="productsInCart" item-key="sku" 
+     style="margin-top: 60px;" :key="componentKey">
         <template v-slot="{ item, index, revealLeft, revealRight, close, revealed }" class="mb-3">
           <product :product="item" @click="removeItem" @parentevent="getupdateclick" />
         </template>

@@ -1,9 +1,11 @@
 <template>
   <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isReviewPanelOpen }">
+   <div class="right-sidebar max-w-full fixed" style="height: 60px;box-shadow: 0 3px 3px -3px #00000045;">
     <button
       type="button"
       :aria-label="$t('Close')"
       class="absolute top-0 right-0 m-4 h-4"
+      style="top: 10px;right: 10px;"
       @click="closeReviewPanel"
       data-testid="closeReviewPanel"
     >
@@ -11,9 +13,9 @@
         <use xlink:href="#close" />
       </svg>
     </button>
-       <h3 style="margin-top: -25px;">Product Reviews</h3>
-
-        <div v-if="reviewpanelloaded"  style="margin: 150px;">
+     <h3 style="position: absolute;top: 20px;left: 41px;">Product Reviews</h3>
+    </div>
+      <div v-if="reviewpanelloaded"  style="margin: 150px;">
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
         </div> 
         <div id="stamped-main-widget" 

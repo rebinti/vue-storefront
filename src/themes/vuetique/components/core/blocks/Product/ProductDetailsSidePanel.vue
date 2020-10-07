@@ -1,22 +1,24 @@
 <template>                                                                         
   <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductDetailsSidePanelOpen }">
-    <button
-      type="button"
-      :aria-label="$t('Close')"
-      class="absolute top-0 right-0 m-4 h-4"
-      @click="closeSearchpanel"
-      data-testid="closeMicrocart"
-    >
-      <svg viewBox="0 0 25 25" class="vt-icon--sm">
-        <use xlink:href="#close" />
-      </svg>
-    </button>
-    
-    <h3 style="margin-top: -25px;">Product Details</h3>
+    <div class="right-sidebar max-w-full fixed" style="height: 60px;box-shadow: 0 3px 3px -3px #00000045;">
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          @click="closeSearchpanel"
+          class="absolute top-0 right-0 m-4 h-4 "
+          style="top: 10px;right: 10px;"
+          data-testid="closeMicrocart"
+        >
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
+        <h3 style="position: absolute;top: 20px;left: 41px;">Product Details</h3>
+    </div>
     <br>          
         <div
             v-html="product.short_description"
-            style="margin-left: 10px;"
+            style="margin-left: 10px; margin-top: 10px;"
         />
                                       
     <br>    

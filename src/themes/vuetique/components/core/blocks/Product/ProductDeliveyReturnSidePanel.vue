@@ -1,18 +1,21 @@
 <template>                                                                         
   <div class="wishlist right-sidebar max-w-full fixed p-8 pt-10" :class="{ active: isProductDeliveyReturnSidePanelOpen }">
-    <button
-      type="button"
-      :aria-label="$t('Close')"
-      class="absolute top-0 right-0 m-4 h-4"
-      @click="closeSearchpanel"
-      data-testid="closeMicrocart"
-    >
-      <svg viewBox="0 0 25 25" class="vt-icon--sm">
-        <use xlink:href="#close" />
-      </svg>
-    </button>
-    
-    <h3 style="margin-top: -25px;">Delivey & Return</h3>
+    <div class="right-sidebar max-w-full fixed" style="height: 60px;box-shadow: 0 3px 3px -3px #00000045;">
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4"
+          style="top: 10px;right: 10px;"
+          @click="closeSearchpanel"
+          data-testid="closeMicrocart"
+        >
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button>
+        
+        <h3 style="position: absolute;top: 20px;left: 41px;">Delivey & Return</h3>
+      </div>
     <br>          
     <div data-styla-slot="09f5c950-74a6-405e-9c11-20f841e3a08a"></div>
 <!-- <div data-styla-slot="b134b9e4-ce80-454e-ab79-c5da2b127128"></div>
