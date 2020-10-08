@@ -5,7 +5,7 @@
     data-testid="microcart"
   >
 
-  <div class="right-sidebar max-w-full fixed" style="height: 50px;box-shadow: 0 3px 3px -3px #00000045;">
+  <div class="right-sidebar max-w-full fixed" style="height: 50px;box-shadow: 0px 3px 2px -3px #00000045;overflow: hidden;">
     <button
       type="button"
       :aria-label="$t('Close')"
