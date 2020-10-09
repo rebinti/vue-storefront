@@ -38,21 +38,26 @@
         >
         
         <div v-if="product.badge" :class="`product-badge ${product.badge_type}`">
-            <div v-if="product.badge_type == 1034" class="rectangle"> <!-- 237,241 for rectangle 1034-->
+            <div v-if="product.badge_type == 1034" class="rectangle">
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>
-            <div v-else-if="product.badge_type === 237"  class="squre"> <!-- 236 for round -->
+            <div v-else-if="product.badge_type === 1025"  class="squre">
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
             </div>
-            <div v-else class="round">
+            <div v-else-if="product.badge_type === 1024" class="round">
                 <span class="badge badge1">
                   	<span class="badge-inner1">{{product.badge}}</span>
                 </span>
-            </div>                  
+            </div>  
+            <div v-else  class="rectangle">
+                <span class="badge badge1">
+                  	<span class="badge-inner1">{{product.badge}}</span>
+                </span>
+            </div>                
         </div>          
       </div>
       <div>
