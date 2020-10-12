@@ -2129,7 +2129,18 @@ button.no-combination {
      float: left;
     width: 12%;
     text-align: left;
-  }    
+  } 
+  .social-share-button-mob,.video-thum-mob{
+    border: 1px solid #000000;
+      height: 46px;
+    // width: 46px;
+      margin: 0px;
+      margin-right: 4px;
+  }
+  .social-share-button-mob img,.video-thum-mob img{
+    margin-left: 9px;
+      margin-top: 9px;
+  }      
   // .product-details-mob{
   //   a{
   //       border-bottom: 1px solid rgb(179, 179, 179);
@@ -2370,7 +2381,17 @@ button.no-combination {
       width: 12%;
       text-align: left;
     }   
-   
+.social-share-button-mob,.video-thum-mob{
+	border: 1px solid #000000;
+    height: 46px;
+   // width: 46px;
+    margin: 0px;
+    margin-right: 4px;
+}
+.social-share-button-mob img,.video-thum-mob img{
+	margin-left: 9px;
+    margin-top: 9px;
+}   
     // .product-details-mob{
     //   a{
     //       border-bottom: 1px solid rgb(179, 179, 179);
