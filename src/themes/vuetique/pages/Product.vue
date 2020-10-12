@@ -138,6 +138,7 @@
                         >
                           <button 
                               :aria-label="$t('Select color ') + prod.colorSwatch.label"
+                              @click="onColorSwatchClick(prod)"
                             >
                             <div class="clr_img_out">
                               <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
