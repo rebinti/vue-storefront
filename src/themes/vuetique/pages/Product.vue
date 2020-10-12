@@ -249,6 +249,14 @@
                      :configuration="configuration"                     
                      class="py-3 text-sm"  />
                   </div>
+                  <div class="video-thum-mob" id="left" v-if="productVideoData"
+                    @click="showProducVideoPopup">
+                    <img  style="float: left;cursor: pointer"
+                    src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
+                  </div> 
+                  <div class="social-share-button-mob" id="right" @click="showShareDiv = !showShareDiv">
+                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+                  </div>                   
                   <div class="mob_add_wish_btn">
                       <wishlist-button :product="product" />
                   </div>
@@ -2103,15 +2111,25 @@ button.no-combination {
   } 
   .mob_add_cart_btn{
     float: left;
-    width: 85%;
+    width: 61%;
     padding: 0 5% 0px 10%;
   }
 
   .mob_add_wish_btn{
      float: left;
-    width: 15%;
+    width: 12%;
     text-align: left;
   }
+  .video-thum-mob{
+     float: left;
+    width: 12%;
+    text-align: left;
+  }
+  .social-share-button-mob{
+     float: left;
+    width: 12%;
+    text-align: left;
+  }    
   // .product-details-mob{
   //   a{
   //       border-bottom: 1px solid rgb(179, 179, 179);
@@ -2334,14 +2352,25 @@ button.no-combination {
     }
     .mob_add_cart_btn{
       float: left;
-      width: 85%;
+      width: 61%;
       padding: 0 3% 0px 5%;
     }
     .mob_add_wish_btn{
       float: left;
-      width: 15%;
+      width: 12%;
       text-align: left;
-    }    
+    }
+    .video-thum-mob{
+      float: left;
+      width: 12%;
+      text-align: left;
+    }
+    .social-share-button-mob{
+      float: left;
+      width: 12%;
+      text-align: left;
+    }   
+   
     // .product-details-mob{
     //   a{
     //       border-bottom: 1px solid rgb(179, 179, 179);
