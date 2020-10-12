@@ -257,14 +257,34 @@
                 
                 
               </div> 
-              <div class="product-details-mob">
-                <a href="javascript:void(0);"  
-                  style=""
-                  @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
-                  data-testid="productDetails">
-                    Product Details
-                </a> 
-              </div>
+              <div class="product-details mob">   
+                <div class="inner">                                 
+                  <a href="javascript:void(0);"  
+                      style=""
+                      @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
+                      data-testid="productDetails">  
+                    <div class="p-list border-bottom">
+                      PRODUCT DETAILS
+                    </div>
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
+                    data-testid="sizeGuide">               
+                    <div class="p-list border-bottom">
+                      SIZE GUIDE
+                    </div>
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
+                    data-testid="productDeliveyReturn">               
+                    <div class="p-list">
+                      DELIVERY & RETURNS
+                    </div>
+                  </a>    
+                </div>          
+              </div>               
 
           </div>
           <!-- mobile product details sec ends -->
@@ -1335,6 +1355,9 @@ button.no-combination {
 .product-details.desk{
   background-color: #eee;
 }
+.product-details.mob{
+  background-color: #eee;
+}
 .product-details .inner{
     margin-left: 15px;
     margin-right: 10px;
@@ -1518,7 +1541,7 @@ button.no-combination {
       margin-left: 4px;
     }
   }
-  .product-details,.product-details-mob{
+  .product-details{
     text-align: center;
     font-weight: 500;
     text-decoration: underline;
@@ -2089,15 +2112,15 @@ button.no-combination {
     width: 15%;
     text-align: left;
   }
-  .product-details-mob{
-    a{
-        border-bottom: 1px solid rgb(179, 179, 179);
-        font-weight: 400;
-        text-transform: none;
-        font-size: 12px;
-        position: absolute;
-    }
-  } 
+  // .product-details-mob{
+  //   a{
+  //       border-bottom: 1px solid rgb(179, 179, 179);
+  //       font-weight: 400;
+  //       text-transform: none;
+  //       font-size: 12px;
+  //       position: absolute;
+  //   }
+  // } 
   .mob_add_cart_btn button{
     background: #4fce76;
     color: #ffffff;
@@ -2319,15 +2342,15 @@ button.no-combination {
       width: 15%;
       text-align: left;
     }    
-    .product-details-mob{
-      a{
-          border-bottom: 1px solid rgb(179, 179, 179);
-          font-weight: 400;
-          text-transform: none;
-          font-size: 12px;
-          position: absolute;
-      }
-    }    
+    // .product-details-mob{
+    //   a{
+    //       border-bottom: 1px solid rgb(179, 179, 179);
+    //       font-weight: 400;
+    //       text-transform: none;
+    //       font-size: 12px;
+    //       position: absolute;
+    //   }
+    // }    
   }  
 }
 @media (max-width: 375px) {	
