@@ -267,6 +267,17 @@
               </div> 
               <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
                 class="share-box bg-grey-lighter shadow-box">
+                  <button
+                    type="button"
+                    @click="showShareDiv = !showShareDiv"
+                    :aria-label="$t('Close')"
+                    class="absolute top-0 right-0 m-4 h-4"
+                    style="top: -9px;right: -6px;"
+                    >
+                    <svg viewBox="0 0 25 25" class="vt-icon--sm">
+                        <use xlink:href="#close" />
+                    </svg>
+                    </button>
                   <product-share :product="product" :imgpath="image.src"/>
               </div> 
               <div class="product-details mob">   
