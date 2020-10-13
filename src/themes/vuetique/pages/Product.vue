@@ -2130,7 +2130,7 @@ button.no-combination {
   } 
   .mob_add_cart_btn{
     float: left;
-    width: 61%;
+    width: 71%;
     padding: 0 5% 0px 10%;
   }
 
@@ -2141,12 +2141,12 @@ button.no-combination {
   }
   .video-thum-mob{
      float: left;
-    width: 12%;
+    width: 6%;
     text-align: left;
   }
   .social-share-button-mob{
      float: left;
-    width: 12%;
+    width: 6%;
     text-align: left;
   } 
   .social-share-button-mob,.video-thum-mob{
@@ -2318,6 +2318,12 @@ button.no-combination {
     }
   }
     
+}
+
+@media (max-width: 375px) {	
+  .mob_add_cart_btn{
+    width: 59% !important;
+  }
 }
 @media (max-width: 425px) {	
   .container{
