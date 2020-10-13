@@ -1,6 +1,6 @@
 <template>
   <div class="media-gallery-carousel">
-    <hooper :infiniteScroll="true" :itemsToShow="Itemshow" :centerMode="true" pagination="yes" :progress="true">
+    <hooper :infiniteScroll="true" ref="carousel" :itemsToShow="Itemshow" :centerMode="true" pagination="yes" :progress="true">
       <slide
         v-for="(images, index) in gallery"
         :key="images.src"
@@ -139,6 +139,7 @@ export default {
   beforeMount () {
     this.$bus.$on('filter-changed-product', this.selectVariant)
     this.$bus.$on('product-after-load', this.selectVariant)
+    this.$bus.$on('change-slide-carousel-view', this.slideToAnySlide)
   },
   mounted () {
     this.selectVariant()
@@ -163,8 +164,12 @@ export default {
   beforeDestroy () {
     this.$bus.$off('filter-changed-product', this.selectVariant)
     this.$bus.$off('product-after-load', this.selectVariant)
+    this.$bus.$off('change-slide-carousel-view', null)
   },
   methods: {
+    slideToAnySlide (index) {
+      this.$refs.carousel.slideTo(index);
+    },
     navigate (index) {
       if (this.$refs.carousel) {
         this.$refs.carousel.goToPage(index)

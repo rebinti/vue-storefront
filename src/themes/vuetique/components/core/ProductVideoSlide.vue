@@ -52,6 +52,12 @@ export default {
   components: {
     LoaderScoped
   },
+  beforeMount () {
+    this.$bus.$on('change-slide-carousel-view', this.playVideoSlide)
+  },
+  beforeDestroy () {
+    this.$bus.$off('change-slide-carousel-view', null)
+  },
   computed: {
     embedUrl () {
       switch (this.type) {
@@ -66,6 +72,12 @@ export default {
     playing () { return !this.paused; }
   },
   methods: {
+    playVideoSlide () {
+         setTimeout(() => {
+            this.initVideo()
+            window.scrollTo(0, 0)
+         }, 200)
+    },
     initVideo () {
       this.videoStarted = true
       // this.play()

@@ -250,7 +250,7 @@
                      class="py-3 text-sm"  />
                   </div>
                   <div class="video-thum-mob" id="left" v-if="productVideoData"
-                    @click="showProducVideoPopup">
+                    @click="changeToVideoCarouselSlide">
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
@@ -264,6 +264,10 @@
                  
                 
                 
+              </div> 
+              <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
+                class="share-box bg-grey-lighter shadow-box">
+                  <product-share :product="product" :imgpath="image.src"/>
               </div> 
               <div class="product-details mob">   
                 <div class="inner">                                 
@@ -901,6 +905,10 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
+    changeToVideoCarouselSlide () {
+      let index = this.galleryDataFilter.findIndex(val => (val.video && val.video !== undefined))
+      if(index >= 0)  this.$bus.$emit('change-slide-carousel-view', index)
+    },
     setSegmentify() {      
       // For working Segmentify
       window.segPageInf = {

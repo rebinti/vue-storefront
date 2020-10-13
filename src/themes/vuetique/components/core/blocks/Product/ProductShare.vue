@@ -35,7 +35,7 @@ export default {
         { network: 'twitter', name: 'Twitter', icon: 'fab fah fa-lg fa-twitter', color: '#1da1f2' },
         { network: 'linkedin', name: 'LinkedIn', icon: 'fab fah fa-lg fa-linkedin', color: '#007bb5' },
         { network: 'pinterest', name: 'Pinterest', icon: 'fab fah fa-lg fa-pinterest', color: '#bd081c' },
-        { network: 'googleplus', name: 'Google +', icon: 'fab fah fa-lg fa-google-plus', color: '#000000' },
+        // { network: 'googleplus', name: 'Google +', icon: 'fab fah fa-lg fa-google-plus', color: '#000000' },
         { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fah fa-lg fa-whatsapp', color: '#bd081c' },
       ]
     }
@@ -47,13 +47,10 @@ export default {
       default: {}
     },
     imgpath: {
-      type: Object,
+      type: String,
       required: true,
       default: String
     }    
-  },
-  beforeMount () { 
-    console.log("JHJHJHJHJHJH",this.imgpath)
   }
 }
 </script>
