@@ -50,7 +50,8 @@ const actions: ActionTree<CmsPageState, RootState> = {
   single (context, { key = 'identifier', value, excludeFields = null, includeFields = null, skipCache = false, setCurrent = true }) {
     let query = new SearchQuery()
     if (value) {
-      query = query.applyFilter({key: key + '.keyword', value: { 'like': value }})
+      if(value.includes('-')) key = 'identifier.keyword'
+      query = query.applyFilter({key: key , value: { 'like': value }})
     }
     if (skipCache || (!context.state.items || context.state.items.length === 0) || !context.state.items.find(p => p[key] === value)) {
       return quickSearchByQuery({ query, entityType: 'cms_page', excludeFields, includeFields })
