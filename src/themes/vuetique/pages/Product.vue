@@ -240,7 +240,7 @@
                   </a> 
                 </div>             
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 5,top: `${mobileCartFixedHeight}px`}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 5,bottom: '0px', right: '10px'}">
 
                   <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
 
@@ -1251,21 +1251,21 @@ export default {
   mounted() {
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
-     this.mobileCartFixedHeight= window.innerHeight-65;
-     this.$nextTick(()=> {
-        this.mobileCartFixedHeight= window.innerHeight-65;
-     });
+    //  this.mobileCartFixedHeight= window.innerHeight-65;
+    //  this.$nextTick(()=> {
+    //     this.mobileCartFixedHeight= window.innerHeight-65;
+    //  });
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
     if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
-    const scrollHandler = () => {
-      this.mobileCartFixedHeight= window.innerHeight-65;
-      console.log('mobileCartFixedHeight', this.mobileCartFixedHeight)
-    }
-    document.addEventListener('scroll', scrollHandler)
-    this.$once('hook:destroyed', () => {
-      document.removeEventListener('scroll', scrollHandler)
-    })
+    // const scrollHandler = () => {
+    //   this.mobileCartFixedHeight= window.innerHeight-65;
+    //   console.log('mobileCartFixedHeight', this.mobileCartFixedHeight)
+    // }
+    // document.addEventListener('scroll', scrollHandler)
+    // this.$once('hook:destroyed', () => {
+    //   document.removeEventListener('scroll', scrollHandler)
+    // })
   }
 }
 </script>
