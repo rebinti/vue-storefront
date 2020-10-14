@@ -1258,6 +1258,13 @@ export default {
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
     if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
+    const scrollHandler = () => {
+      this.mobileCartFixedHeight= document.documentElement.clientHeight-65;
+    }
+    document.addEventListener('scroll', scrollHandler)
+    this.$once('hook:destroyed', () => {
+      document.removeEventListener('scroll', scrollHandler)
+    })
   }
 }
 </script>
