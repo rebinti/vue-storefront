@@ -240,9 +240,9 @@
                   </a> 
                 </div>             
               </div>
-              <div class="mob_crt_button_out">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 5,top: `${mobileCartFixedHeight}px`}">
 
-                  <div class="mob_add_cart_btn">
+                  <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
 
                     <add-to-cart :product="product"
                      :disabled="disableAddToCartButtonFlag" 
@@ -796,7 +796,8 @@ export default {
       showBreadCrumbsToSamePath: false,
       showProducVideoPopupFlag: false,
       fromRelatedProdcutClick: false,
-      showShareDiv: false  
+      showShareDiv: false,
+      mobileCartFixedHeight: 0  
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -847,6 +848,7 @@ export default {
     }      
   },
   beforeMount () { 
+    this.mobileCartFixedHeight=  window.screen.height-65;
     this.windowScreenWidth = window.innerWidth;   
     this.$bus.$on('product-after-related', this.getRelatedProduct)
     this.$bus.$on('product-after-load', this.getDataFromThirdPartyModules)
@@ -916,6 +918,11 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
+    openProductOptionsPopup () {
+      if(!this.disableAddToCartButtonFlag) return 
+      this.$bus.$emit('modal-show', 'modal-productwithoptions')
+      this.$bus.$emit('update-product-with-options-data', this.product)
+    },
     changeToVideoCarouselSlide () {
       let index = this.galleryDataFilter.findIndex(val => (val.video && val.video !== undefined))
       if(index >= 0)  this.$bus.$emit('change-slide-carousel-view', index)
@@ -2127,6 +2134,9 @@ button.no-combination {
     padding: 10px 0px;
     position: relative;
     left: -5%;
+
+
+    // position: fixed;background: #fff;z-index: 5;bottom: 0;
   } 
   .mob_add_cart_btn{
     float: left;
