@@ -848,7 +848,7 @@ export default {
     }      
   },
   beforeMount () { 
-    this.mobileCartFixedHeight=  window.screen.height-65;
+    this.mobileCartFixedHeight= document.documentElement.clientHeight-65;
     this.windowScreenWidth = window.innerWidth;   
     this.$bus.$on('product-after-related', this.getRelatedProduct)
     this.$bus.$on('product-after-load', this.getDataFromThirdPartyModules)
@@ -1251,6 +1251,10 @@ export default {
   mounted() {
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
+     this.mobileCartFixedHeight= document.documentElement.clientHeight-65;
+     this.$nextTick(()=> {
+        this.mobileCartFixedHeight= document.documentElement.clientHeight-65;
+     });
     this.getDataFromThirdPartyModules();
     // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
     if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
