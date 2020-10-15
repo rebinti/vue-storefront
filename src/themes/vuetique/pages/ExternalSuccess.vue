@@ -1,5 +1,28 @@
 <template>
-  <div id="thank_you_external" style="padding-bottom: 50px;">
+  <div id="thank_you_external" style="padding-bottom: 30px;">
+    <div class="thank-you-content align-justify py40 pl20" style="text-align: center;">
+      <div class="container">
+        <div v-if="orderApiCheck" style="height:300px;margin-top:50px;padding-top: 110px;">
+           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
+             <h3 style="text-align: center;"> Please wait... </h3>
+        </div>
+        <div class="row success-block" v-if="!orderApiCheck">
+          <div class="col-md-6 pl20 pr20">
+            <h2 class="category-title" style="text-transform: uppercase;">Your order has been received.</h2>
+            <h3 class="mt-4" style="text-transform: uppercase;"> Thank you for your purchase! </h3>
+            <p class="mt-4"> Your order # is: <span style="color: #787878;"> {{$route.query.orderid}}. </span> </p>
+            <p>You will receive an order confirmation email with details of your order and a link to track its progress.</p>
+            <div class="mb-8"> <p> <a href="#" class="print-order">Click here </a> print a copy of your order confirmation. </p> </div>
+            <router-link class="continue-button" :to="localizedRoute('/')">
+              CONTINUE SHOPPING
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- <div id="thank_you_external" style="padding-bottom: 50px;">
     <header class="thank-you-title bg-cl-secondary py35 pl20">
       <div class="container">
         <breadcrumbs
@@ -50,7 +73,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -265,5 +288,21 @@ export default {
 <style lang="scss" scoped>
   #thank_you_external ~ .notifications {
     display: none;
+  }
+  .success-block{ 
+    padding: 50px;
+    line-height: 2.3;
+  }
+
+  .continue-button {
+    padding: 12px;
+    border: 1px solid;
+    color: #fff;
+    background: black;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .print-order {
+    color: #787878;
   }
 </style>
