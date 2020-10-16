@@ -1,13 +1,13 @@
 <template>
   <div class="header">
     <header
-      class="fixed lg:static top-0 z-header w-full bg-white border-b border-solid"
+      class="fixed lg:static top-0 z-header w-full bg-white border-b border-solid mobile-header"
       :class="{ 'is-visible': navVisible }"
     >
       <div class="container h-full">
         <div class="row gutter-md items-center h-full" v-if="!isCheckoutPage">
           <div class="col-auto sm:col-4 lg:col-auto lg_mnu">
-            <div @click.stop="headmenuopen()">
+            <div @click.stop="headmenuopen()" style="float: left;margin-top: 5px">
               <template v-if="!canGoBack">
                 <hamburger-icon class="p-3" />
               </template>
@@ -15,7 +15,10 @@
                 <return-icon class="p-3" v-if="canGoBack" />
               </template>
             </div>
+            <search-icon class="p-3 xs:block lg:hidden" style="float: left;margin-top: 5px;padding-left: 3px;"
+               @click="toggleSearchBox" /> 
           </div>
+
           <div class="col-grow m_logo sm:col-4 lg:col-grow flex items-center justify-center lg:justify-start">
             <logo />
           </div>
@@ -28,10 +31,8 @@
           </div>
           <div class="col-auto sm:col-4 lg:col-grow justify-end" :style="{ display: !openSearchPanel ? 'block': 'none' }">
             <div class="right-icons flex">
-              <search-icon class="p-3 xs:block lg:hidden" style="margin-top: 5px;"
-               @click="toggleSearchBox" /> 
               <!-- p-3 hidden xs:block xsm:block md:block lg:hidden -->
-              <account-icon class="p-3" />
+              <account-icon class="p-3 hidden xs:hidden xsm:hidden md:hidden lg:block" />
               <compare-icon class="p-3 hidden sm:block" />
               <wishlist-icon class="p-3" />
               <microcart-icon class="p-3" />
@@ -263,6 +264,12 @@ header {
   .container {
       max-width: 1200px;
   }
+}
+
+@media (min-width: 320px) and (max-width: 768px){
+   .mobile-header {
+       height: 50px;
+   }
 }
  .toogle-search {
     display: block;

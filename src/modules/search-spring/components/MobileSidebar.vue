@@ -23,7 +23,7 @@
           <!-- <h1>Filters</h1> -->
 
           <!-- New applied filter list Div -->
-          <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: -20px;">
+          <div class="container pb-5 md: ml-2 lg:hidden" style="margin-top: 15px;">
             <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
             <span
               class="filter-box clearall-filter"
@@ -668,9 +668,9 @@ input {
   }
   .mobile-filters {
     padding-bottom: 70px;
-    width: 85%;
-    right: 0;
-    left: inherit;
+    width: 85% !important;
+    right: 0 !important;
+    left: inherit !important;
   }
   .mob-siderbar-footer {
     // position: fixed;

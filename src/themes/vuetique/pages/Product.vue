@@ -19,7 +19,7 @@
               @page-change="(page) => currentGalleryPage = page"
             />
           </div>       
-      <div class="container">            
+      <div class="container mobile-cart-div">            
         <section class="md:flex">     
           <div class="w-full md:w-3/5">
             <div class="flex">
@@ -212,7 +212,7 @@
                 
               </div>
               <!-- size fit part in device -->     
-              <div class="size-fit-part-mob" style="min-height: 30px;">
+              <div class="size-fit-part-mob" style="min-height: 30px;margin-bottom: 10px;">
                 <!-- For TrueFit Review button -->
                 <div class="fit-label"
                 :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
@@ -226,7 +226,7 @@
                   data-locale="en_GB"
                   >
                 </div>
-                <div class="size-guide-b">
+                <!-- <div class="size-guide-b">
                   <a href="javascript:void(0);"  
                       style="position: absolute;
                           right: 0;
@@ -238,9 +238,9 @@
                     data-testid="sizeGuide">
                       Size Guide
                   </a> 
-                </div>             
+                </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 5,bottom: '0px', right: '10px'}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 3,bottom: '0px', right: '10px'}">
 
                   <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
 
@@ -1403,6 +1403,10 @@ button.no-combination {
 }
 .product-details.mob{
   background-color: #eee;
+  line-height: 2.5;
+}
+.product-details.mob .p-list{
+    font-size: 1rem;
 }
 .product-details .inner{
     margin-left: 15px;
@@ -2052,6 +2056,9 @@ button.no-combination {
 }
 
 @media (max-width: 768px) {	
+  .mobile-cart-div {
+    background: #fff;
+  }
   #product{
     .top-main{
       height: unset;
@@ -2209,8 +2216,9 @@ button.no-combination {
   }
   
   .mob_pro_varients .mob_size_box .size-selector{
-    height: 33px;
-    min-width: 33px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 1rem;
     line-height: 20px;
     float: left;
     border: 1px solid #909090;
@@ -2288,6 +2296,7 @@ button.no-combination {
     .truefit-button{
       float: left;
       width: 55%;
+      font-size: .7rem;
     }
     .size-guide-b{
         float: right;

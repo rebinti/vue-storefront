@@ -48,16 +48,16 @@
           :parent-path="category.url_path"
         />
       </li>
-      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
+      <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
           :to="localizedRoute('/sale')"
           exact
         >
 
-          {{ $t('Sale') }}
+          SALE
         </router-link>
-      </li>
+      </li> -->
 
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
@@ -65,11 +65,11 @@
           :to="localizedRoute('/brands')"
           exact
         >
-          {{ $t('Brands') }}
+          BRANDS
         </router-link>
       </li>
 
-      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
+      <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
           :to="localizedRoute('/magazine')"
@@ -78,7 +78,7 @@
           
           {{ $t('Magazine') }}
         </router-link>
-      </li>
+      </li> -->
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b md:hidden">
         <!-- <button
           class="menu-link text-left"
@@ -92,7 +92,7 @@
           :to="localizedRoute('/search')"
           exact
         >
-          {{ $t('Search') }}
+          SEARCH 
         </router-link>
       </li>
       <li @click="closeMenu" v-if="compareIsActive && isCurrentMenuShowed" class="border-b">
@@ -104,7 +104,7 @@
           {{ $t('Compare products') }}
         </router-link>
       </li>
-      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
+      <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
           :to="localizedRoute('/order-tracking')"
@@ -112,7 +112,7 @@
         >
           {{ $t('Track my order') }}
         </router-link>
-      </li>
+      </li> -->
       <li @click="closeMenu" class="flex border-b menu_li_it">
         <sub-btn
           v-if="currentUser"
