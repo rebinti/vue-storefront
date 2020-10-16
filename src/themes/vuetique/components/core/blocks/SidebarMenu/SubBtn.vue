@@ -98,8 +98,8 @@ button {
    .menu_li_it .btn-list_menu{
       padding-left: 65px;
       font-size: 18px;
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding-top: 25px;
+      padding-bottom: 25px;
       text-transform: uppercase;
       text-align: left;
       &.no-img-thumb{

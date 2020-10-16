@@ -1,16 +1,55 @@
 <template>
   <div class="sidebar-menu h-screen fixed max-w-full bg-white pt-12">
-    <button
-      type="button"
-      :aria-label="$t('Close')"
-      class="absolute top-0 right-0 m-4 h-4"
-      @click="closeMenu"
-    >
+      <div style="
+    position: absolute;
+    top: 10px;
+    width: 100%;
+">
+      <div @click="closeMenu" style="    float: left;
+    position: relative;
+    width: 60%;
+    margin-left: 15px;">                
+        <sub-btn
+          v-if="currentUser"
+          :name="$t('My account')"
+          class=""
+        />
+        <sub-category
+          v-if="currentUser"
+          :my-account-links="myAccountLinks"
+          :id="'foo'"
+        />
+        <a
+          v-if="!currentUser && isCurrentMenuShowed"
+          href="#"
+          @click.prevent="login"
+          class=""
+        >
+        <span class="ic_list_m">
+          <span class="acc-icon"><img src="/assets/u_s_account.png" alt=""/></span>
+          <span class="acc-label">{{ $t('My account') }}</span>          
+        </span>        
+        </a>  
+      </div> 
+      <div style="    float: left;
+    position: relative;
+    width: 35%;
+    top: -11px;
+">
+        <button
+          type="button"
+          :aria-label="$t('Close')"
+          class="absolute top-0 right-0 m-4 h-4"
+          @click="closeMenu"
+        >
 
-      <svg viewBox="0 0 25 25" class="vt-icon--sm">
-        <use xlink:href="#close" />
-      </svg>
-    </button>
+          <svg viewBox="0 0 25 25" class="vt-icon--sm">
+            <use xlink:href="#close" />
+          </svg>
+        </button> 
+      </div>           
+      </div> 
+
 
     <div v-if="submenu.depth && !isUserInAccountsPageFlag" class="absolute left-0 top-0">
       <sub-btn type="back" />
@@ -114,24 +153,7 @@
         </router-link>
       </li> -->
       <li @click="closeMenu" class="flex border-b menu_li_it">
-        <sub-btn
-          v-if="currentUser"
-          :name="$t('My account')"
-          class=""
-        />
-        <sub-category
-          v-if="currentUser"
-          :my-account-links="myAccountLinks"
-          :id="'foo'"
-        />
-        <a
-          v-if="!currentUser && isCurrentMenuShowed"
-          href="#"
-          @click.prevent="login"
-          class="menu-link"
-        >
-          {{ $t('My account') }}
-        </a>
+            <!-- account code move -->
       </li>
     </ul>
   </div>
@@ -150,7 +172,7 @@ import NoScrollBackground from 'theme/mixins/noScrollBackground'
 export default {
   components: {
     SubCategory,
-    SubBtn
+    SubBtn    
   },
   mixins: [SidebarMenu, AccountButton, NoScrollBackground],
   data () {
@@ -250,7 +272,14 @@ export default {
     max-height: calc(100vh - 70px);
   }
 }
-
+.acc-icon{
+  float:left;
+}
+.acc-label{
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-left: 15px;
+}
 .sidebar-menu {
   width: 100vh;
   top: 0px;
