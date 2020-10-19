@@ -12,12 +12,31 @@
       </svg>
     </button>
 
+     <router-link @click.native="closeMenu"
+            v-if="currentUser && isCurrentMenuShowed  "
+            class=" hide-item-full flex"
+             style="position: absolute;top: 10px;left: 25px;"
+            :to="localizedRoute('/my-account-menu')"
+          >
+           <img style="width: 20px;height: 20px;margin-right: 16px;float: left;" src="/assets/u_s_account.png" alt="" >
+           MY ACCOUNT
+          </router-link>
+    <a  @click="closeMenu"
+          v-if="!currentUser && isCurrentMenuShowed"
+          href="#"
+          @click.prevent="login"
+          class="flex div-mobile-acc"
+         style="position: absolute;top: 10px;left: 25px;"
+      >  <img style="width: 20px;height: 20px;margin-right: 16px;    float: left;" src="/assets/u_s_account.png" alt="" >
+         MY ACCOUNT
+    </a>
+
     <div v-if="submenu.depth && !isUserInAccountsPageFlag" class="absolute left-0 top-0">
       <sub-btn type="back" />
     </div>
 
     <ul class="relative border-t sidebar-menu__list" :style="mainListStyles">
-      <li @click="closeMenu" class="flex border-b menu_li_it hide-item-full" >
+      <!-- <li @click="closeMenu" class="flex border-b menu_li_it" >
          <router-link
             v-if="currentUser"
             class="category-link"
@@ -33,7 +52,7 @@
         >
          MY ACCOUNT
         </a>
-      </li>
+      </li> -->
       <li
         class="border-b flex menu_li_it"
         :key="category.slug"
@@ -130,7 +149,7 @@
           {{ $t('Track my order') }}
         </router-link>
       </li> -->
-      <li @click="closeMenu" class="flex border-b menu_li_it hide-item-full" >
+      <li @click="closeMenu" class="flex border-b menu_li_it div-web-acc" >
         <sub-btn
           v-if="currentUser"
           :name="$t('My account')"
@@ -354,14 +373,20 @@ export default {
 }
 
 @media (max-width: 768px) {
-    .hide-item-full {
-      display: none;
+    .div-mobile-acc{
+       display: block;
+    }
+    .div-web-acc{
+       display: none;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 2560px) {
-    .hide-item-full {
+    .div-mobile-acc{
        display: none;
+    }
+    .div-web-acc{
+       display: block;
     }
 }
 
