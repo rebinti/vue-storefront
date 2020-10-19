@@ -14,7 +14,7 @@
 
      <router-link @click.native="closeMenu"
             v-if="currentUser && isCurrentMenuShowed  "
-            class=" hide-item-full flex"
+            class="div-mobile-acc flex"
              style="position: absolute;top: 10px;left: 25px;"
             :to="localizedRoute('/my-account-menu')"
           >
@@ -381,7 +381,7 @@ export default {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 2560px) {
+@media screen and (min-width: 769px) and (max-width: 2560px) {
     .div-mobile-acc{
        display: none;
     }
