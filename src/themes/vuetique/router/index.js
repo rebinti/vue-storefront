@@ -16,6 +16,7 @@ const CmsBlockDemoPageSsr = () => import(/* webpackChunkName: "vsf-cms-demo" */ 
 const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/pages/Checkout.vue')
 const Compare = () => import(/* webpackChunkName: "vsf-compare" */ 'theme/pages/Compare.vue')
 const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/pages/MyAccount.vue')
+const MyAccountMenu = () => import(/* webpackChunkName: "vsf-my-account-menu" */ 'theme/pages/MyAccountMenu.vue')
 const Static = () => import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static.vue') // footer links CMS page use this
 const Styla = () => import(/* webpackChunkName: "vsf-styla" */ 'theme/pages/Styla.vue')
 const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/CustomCmsPage.vue')
@@ -42,6 +43,7 @@ let routes = [
   { name: 'magazine', path: '/magazine', component: Static, props: { page: 'lorem', title: 'Magazine' } },
   { name: 'sales', path: '/sales', component: Static, props: { page: 'lorem', title: 'Sales' } },
   { name: 'order-tracking', path: '/order-tracking', component: Static, props: { page: 'lorem', title: 'Track my Order' } },
+  { name: 'my-account-menu', path: '/my-account-menu', component: MyAccountMenu, meta: { requiresAuth: true } },
   { name: 'my-account', path: '/my-account', component: MyAccount, meta: { requiresAuth: true } },
   { name: 'my-shipping-details', path: '/my-account/shipping-details', component: MyAccount, props: { activeBlock: 'MyShippingDetails' }, meta: { requiresAuth: true } },
   { name: 'my-newsletter', path: '/my-account/newsletter', component: MyAccount, props: { activeBlock: 'MyNewsletter' }, meta: { requiresAuth: true } },

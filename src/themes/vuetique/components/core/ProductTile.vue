@@ -82,6 +82,7 @@
       <div class="mt-1 text-grey-dark font-medium price_bx_it">
         <span
           class="text-primary mr-2"
+          style="color: #FF0000;"
           v-if="product.special_price && parseFloat(product.special_price) > 0 && !onlyImage"
         >
           {{ product.priceInclTax | price }}

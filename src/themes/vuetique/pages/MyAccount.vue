@@ -5,23 +5,19 @@
       active-route="My Account"
     />
     <header class="container mt-2">
-      <div v-if="isUserInAccountsPageFlag" class="acc-main-head">
-        <div class="acc-main-title">
-        <h1>{{ $t('My Account') }}</h1>
-        </div>
-        <div class="go-to-acc-menu col-auto sm:col-4 lg:col-auto lg_mnu">
-          <div @click.stop="getaccmenu()">
-            <template v-if="!canGoBack">
-              <hamburger-icon class="p-3" />
-            </template>
-            <template v-else>
-              <return-icon class="p-3" v-if="canGoBack" />
-            </template>
-          </div>
-        </div> 
-      </div> 
-      <div v-else>
-          <h1>{{ $t('My Account') }}</h1>
+    <button
+      class="inline-flex  px-5 py-4 pr-4 font-medium mob-back lg: hidden"
+      type="button"
+      style="float:left"
+      @click="goBack()"
+    >
+      <svg viewBox="0 0 25 25" class="vt-icon--sm">
+        <use xlink:href="#left" />
+      </svg>
+    </button>
+
+      <div >
+          <h1 class="mob-head-button">{{ $t('My Account') }}</h1>
       </div>    
     </header>
 
@@ -115,7 +111,10 @@ export default {
           id: '',
           depth: !this.submenu.depth ? ++this.submenu.depth : 1
         })
-    }    
+    } ,
+    goBack()  {
+       this.$router.push('/my-account-menu')
+    }  
   },
   destroyed () {
    this.$store.commit('ui/setUserInAccountsPageFlag', false);
@@ -173,6 +172,15 @@ $color-tertiary: color(tertiary);
   }
 
 
+}
+
+@media (max-width: 768px) {
+  .mob-back {
+    display: block !important;
+  }
+  .mob-head-button{
+    margin-left: 2.5rem;
+  }
 }
 
 </style>

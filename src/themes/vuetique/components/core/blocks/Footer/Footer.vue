@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row justify-center md:justify-between">
 
-           <div class="footer-menu sm:flex col-12 lg:col-6 justify-around mt-8 lg:mt-0">
+           <div class="footer-menu sm:flex col-12 md:col-6 lg:col-6 justify-around mt-8 lg:mt-0">
                 <cms-block :identifier="'footer_help_block_new'"  style="margin-top:-40px;"/>
 
                 <cms-block :identifier="'footer_quick_links_block_new'" style="margin-top:-40px;" />
@@ -178,13 +178,13 @@
             </Accordion>
           </div> -->
 
-          <div class="col-12 lg:col-3 flex flex-col">
+          <div class="col-12 md:col-3 md:mt-8 lg:col-3 flex flex-col">
             <div class="">
               <!-- <Newsletter /> --> 
               <h3> Join in on the chit chat </h3>
             </div>
 
-            <div class="flex justify-center lg:justify-start social-footer mt-12">
+            <div class="flex justify-center lg:justify-start social-footer mt-12 app-share-div">
               <a
                 target="_blank"
                 rel="noopener"
@@ -224,12 +224,12 @@
             </div>
           </div>
 
-          <div class="col-12 lg:col-3 flex flex-col">
+          <div class="col-12 md:col-3 md:mt-8 lg:col-3 flex flex-col">
             <div class="">
               <h3> Download our app</h3>
             </div>
 
-            <div class="flex justify-center lg:justify-start social-footer mt-12">
+            <div class="flex justify-center lg:justify-start social-footer mt-12 app-share-div">
               <a
                 target="_blank"
                 rel="noopener"
@@ -380,5 +380,14 @@ export default {
     -webkit-font-smoothing: antialiased;
   }
 }
+
+@media (max-width: 767px) {
+    .app-share-div {
+        -ms-flex-pack: start;
+        justify-content: start;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+ }
 
 </style>

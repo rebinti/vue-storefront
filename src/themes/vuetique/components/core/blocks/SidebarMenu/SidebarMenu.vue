@@ -17,6 +17,23 @@
     </div>
 
     <ul class="relative border-t sidebar-menu__list" :style="mainListStyles">
+      <li @click="closeMenu" class="flex border-b menu_li_it hide-item-full" >
+         <router-link
+            v-if="currentUser"
+            class="category-link"
+            :to="localizedRoute('/my-account-menu')"
+          >
+            MY ACCOUNT
+          </router-link>
+        <a
+          v-if="!currentUser && isCurrentMenuShowed"
+          href="#"
+          @click.prevent="login"
+          class="menu-link"
+        >
+         MY ACCOUNT
+        </a>
+      </li>
       <li
         class="border-b flex menu_li_it"
         :key="category.slug"
@@ -113,7 +130,7 @@
           {{ $t('Track my order') }}
         </router-link>
       </li> -->
-      <li @click="closeMenu" class="flex border-b menu_li_it">
+      <li @click="closeMenu" class="flex border-b menu_li_it hide-item-full" >
         <sub-btn
           v-if="currentUser"
           :name="$t('My account')"
@@ -335,5 +352,18 @@ export default {
   .sidebar-menu__list .menu_li_it .vt-icon--sm{ float: right; margin-top: 3px;  }
 
 }
+
+@media (max-width: 768px) {
+    .hide-item-full {
+      display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 2560px) {
+    .hide-item-full {
+       display: none;
+    }
+}
+
 
 </style>

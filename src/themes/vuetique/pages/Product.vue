@@ -18,7 +18,7 @@
               :product="product"
               @page-change="(page) => currentGalleryPage = page"
             />
-          </div>       
+            </div>   
       <div class="container mobile-cart-div">            
         <section class="md:flex">     
           <div class="w-full md:w-3/5">
@@ -214,9 +214,9 @@
               <!-- size fit part in device -->     
               <div class="size-fit-part-mob" style="min-height: 30px;margin-bottom: 10px;">
                 <!-- For TrueFit Review button -->
-                <div class="fit-label"
+                <!-- <div class="fit-label"
                 :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
-                >FIND YOUR SIZE</div>
+                >FIND YOUR SIZE</div> -->
                 <div class="truefit-button tfc-fitrec-product" 
                 :style="{ display: product.type_id =='configurable'? 'block':'none' }"
                   v-if="getTruefitProd !== null"
@@ -261,11 +261,7 @@
                       <wishlist-button :product="product" />
                   </div>
 
-                 
-                
-                
-              </div> 
-              <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
+               <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
                 class="share-box bg-grey-lighter shadow-box">
                   <button
                     type="button"
@@ -280,6 +276,24 @@
                     </button>
                   <product-share :product="product" :imgpath="image.src"/>
               </div> 
+                
+                
+              </div> 
+              <!-- <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
+                class="share-box bg-grey-lighter shadow-box">
+                  <button
+                    type="button"
+                    @click="showShareDiv = !showShareDiv"
+                    :aria-label="$t('Close')"
+                    class="absolute top-0 right-0 m-4 h-4"
+                    style="top: -9px;right: -6px;"
+                    >
+                    <svg viewBox="0 0 25 25" class="vt-icon--sm">
+                        <use xlink:href="#close" />
+                    </svg>
+                    </button>
+                  <product-share :product="product" :imgpath="image.src"/>
+              </div>  -->
               <div class="product-details mob">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
@@ -2348,6 +2362,18 @@ button.no-combination {
         } 
     }
   }
+  .share-box {
+    z-index: 3;
+    width: 69%;
+    height: 50px;
+    border: 2px solid #fff8f8;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    /* margin-top: -6px; */
+    top: -52px;
+    left: 50px;
+}
     
 }
 
@@ -2550,4 +2576,5 @@ button.no-combination {
     border-radius: 5px;
     margin-top: -3px;
 }
+
 </style>

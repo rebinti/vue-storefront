@@ -270,6 +270,9 @@ header {
    .mobile-header {
        height: 50px;
    }
+   .header-placeholder {
+    height: 50px;
+   }
 }
  .toogle-search {
     display: block;

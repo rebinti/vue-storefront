@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adj-margin">
     <template v-if="getrecentwithoutcurrent && getrecentwithoutcurrent.length">
       <h2 class="mb-4 text-center">
         {{ $t('Recently viewed') }}
@@ -273,4 +273,11 @@ export default {
     }
   }
 } 
+
+@media (max-width: 768px) {
+  .adj-margin {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
 </style>
