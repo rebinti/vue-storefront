@@ -415,7 +415,7 @@
                   <span class="font-bold">
                     {{ product.priceInclTax * product.qty | price }}
                   </span>&nbsp; 
-                  <span class="promotions__stamp-label" style="">
+                  <span class="promotions__stamp-label" style="top: 0;">
                     {{getSpecialPercent}}
                   </span> 
                 </div>
@@ -1812,7 +1812,7 @@ button.no-combination {
       width: 25%;
     }
     .review-div{
-      margin-top: 10px;
+      margin-top: 8px;
     }
   }       
 }

@@ -4,7 +4,85 @@
       :routes="[{name: 'Homepage', route_link: '/'}]"
       active-route="My Account"
     />
-    <header class="container mt-2">
+
+    <div class="my-account-subnav div-mobile-acc">
+      <ul class="my-account-nav">
+          <li class="MenuItemNewsletterPrefs">
+
+            <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account-menu')"
+                exact
+              >
+               <i class="material-icons">home</i>
+             </router-link>
+
+          </li>
+
+          <li class="MenuItemMyAccount">
+
+              <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account')"
+                exact
+              >
+                <i class="material-icons">account_circle</i>
+              </router-link>
+
+          </li>
+      
+          <li class="MenuItemYourDetails">
+              <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account/shipping-details')"
+                exact
+              >
+                 <i class="material-icons">edit</i>
+              </router-link>
+
+
+          </li>
+      
+          <li class="MenuItemYourOrders">
+
+                       <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account/newsletter')"
+                exact
+              >
+                 <i class="material-icons">subtitles</i>
+              </router-link>
+
+          </li>
+      
+          <li class="MenuItemAddressBook">
+                       <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account/orders')"
+                exact
+              >
+                <i class="material-icons">account_box</i>
+              </router-link>
+
+
+          </li>
+      
+          <li class="MenuItemYourCards">
+
+                       <router-link
+                class="menu-link"
+                :to="localizedRoute('/my-account/recently-viewed')"
+                exact
+              >
+                <i class="material-icons">request_quote</i>
+              </router-link>
+
+          </li>
+          
+        </ul>
+    </div>
+
+    <header class="container mt-2 md: mt-10 mob-acc-header">
     <button
       class="inline-flex  px-5 py-4 pr-4 font-medium mob-back lg: hidden"
       type="button"
@@ -170,6 +248,9 @@ $color-tertiary: color(tertiary);
     .cn_it_inner{ display: none; }
 
   }
+  .mob-acc-header {
+    margin-top: 2rem;
+  }
 
 
 }
@@ -181,6 +262,78 @@ $color-tertiary: color(tertiary);
   .mob-head-button{
     margin-left: 2.5rem;
   }
+  .mob-acc-header {
+    margin-top: 2rem;
+  }
+}
+
+    .my-account-subnav {
+        position: sticky;
+        position: -webkit-sticky;
+        top: 51px;
+        left: 0;
+        width: 100%;
+        z-index: 11;
+        background-color: #252525;
+        height: 40px;
+    }
+
+    .my-account-nav {
+        position: relative;
+        max-width: 75em;
+        margin-left: auto;
+        margin-right: auto;
+        list-style: none;
+        height: 100%;
+    }
+
+    .my-account-nav li {
+        display: inline-block;
+        color: #D7D7D7;
+        float: left;
+        text-align: center;
+        background-color: #252525;
+        height: 100%;
+        width: 16.6%;
+    }
+
+    .my-account-nav li a {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #ffffff;
+        padding: 2em 0;
+        display: block;
+        height: 100%;
+        position: relative;
+        top: -23px;
+    }
+
+    .my-account-nav li.active a {
+      color: #FFFFFF;
+      padding: 00;
+   }
+
+  .my-account-nav li a.router-link-active {
+      color: #81ef93;
+   }
+
+   @media (max-width: 768px) {
+    .div-mobile-acc{
+       display: block;
+    }
+    .div-web-acc{
+       display: none;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 2560px) {
+    .div-mobile-acc{
+       display: none;
+    }
+    .div-web-acc{
+       display: block;
+    }
 }
 
 </style>
