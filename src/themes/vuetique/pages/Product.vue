@@ -254,7 +254,8 @@
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
-                  <div class="social-share-button-mob" id="right" @click="showShareDiv = !showShareDiv">
+                  <div class="social-share-button-mob" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->
+                    
                     <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
                   </div>                   
                   <div class="mob_add_wish_btn">
@@ -369,7 +370,7 @@
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
-                  <div class="social-share-button" id="right" @click="showShareDiv = !showShareDiv">
+                  <div class="social-share-button" id="right" @click="showShareDiv = !showShareDiv" >
                     <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
                   </div>                                   
                   <div class="wishlist-button" id="center">
@@ -985,6 +986,10 @@ export default {
         'name': this.product.name,
       });       
     },
+    clicksharediv () {
+      this.$bus.$emit('modal-show', 'modal-productsocialshare')
+      this.$bus.$emit('product-data-for-share', this.product)      
+    },    
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
        if (optionIndex > 0) {
           let data = this.product.configurable_children.find(val => {
