@@ -2172,10 +2172,13 @@ button.no-combination {
     padding: 15px 15px;
     position: relative;
     left: -5%;
-
-
     // position: fixed;background: #fff;z-index: 5;bottom: 0;
   } 
+  @supports (-webkit-touch-callout: none) {
+      .mob_crt_button_out{
+        padding-bottom: 22px;        
+      } 
+  }  
   .mob_add_cart_btn{
     float: left;
     width: 71%;
