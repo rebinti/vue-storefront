@@ -234,21 +234,6 @@ $color-tertiary: color(tertiary);
     width: 84%;
     float: left;
 }
-@media (max-width: 320px) {
-  .my-account-nav li a img{
-    margin-left: 13px;
-  }
-}
-@media (max-width: 475px) {
-  .my-account-nav li a img{
-    margin-left: 17px;
-  }
-}
-@media (max-width: 425px) {
-  .my-account-nav li a img{
-    margin-left: 23px;
-  }
-}
 @media (min-width: 577px) {
 
   
@@ -347,7 +332,23 @@ $color-tertiary: color(tertiary);
     .div-web-acc{
        display: none;
     }
-}
+  }
+  @media (max-width: 425px) {
+    .my-account-nav li a img{
+      margin-left: 23px;
+    }
+  }
+  @media (max-width: 375px) {
+  .my-account-nav li a img{
+    margin-left: 17px;
+    }
+  }
+  @media (max-width: 320px) {
+    .my-account-nav li a img{
+      margin-left: 13px;
+    }
+  }
+
 
 @media screen and (min-width: 769px) and (max-width: 2560px) {
     .div-mobile-acc{
