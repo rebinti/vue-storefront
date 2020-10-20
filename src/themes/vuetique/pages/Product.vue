@@ -217,7 +217,7 @@
                 <!-- <div class="fit-label"
                 :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
                 >FIND YOUR SIZE</div> -->
-                <div class="truefit-button tfc-fitrec-product" 
+                <!-- <div class="truefit-button tfc-fitrec-product" 
                 :style="{ display: product.type_id =='configurable'? 'block':'none' }"
                   v-if="getTruefitProd !== null"
                   :id="getTruefitProd.id" :data-userid="getCurrentUserId"
@@ -225,7 +225,7 @@
                   :data-availablesizes="getTruefitProd.availablesizes"
                   data-locale="en_GB"
                   >
-                </div>
+                </div> -->
                 <!-- <div class="size-guide-b">
                   <a href="javascript:void(0);"  
                       style="position: absolute;
@@ -937,6 +937,7 @@ export default {
       if(!this.disableAddToCartButtonFlag) return 
       this.$bus.$emit('modal-show', 'modal-productwithoptions')
       this.$bus.$emit('update-product-with-options-data', this.product)
+      this.$bus.$emit('update-product-truefit-data', this.getTruefitProd)
     },
     changeToVideoCarouselSlide () {
       let index = this.galleryDataFilter.findIndex(val => (val.video && val.video !== undefined))

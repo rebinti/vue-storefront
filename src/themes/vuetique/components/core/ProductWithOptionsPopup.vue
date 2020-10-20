@@ -37,8 +37,7 @@
             </div>
       </div>
 
-      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding: 0 5px 0 20px;"> 
-          
+      <div class="sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 content-section" style="padding: 0 5px 0 20px;">            
             <div 
                 class="relative mob_size_box"
                 v-for="(option, index) in product.configurable_options"
@@ -105,6 +104,15 @@
                       </div>
                                   
                     </div>
+                <div class="truefit-button tfc-fitrec-product" 
+                  :style="{marginTop: '10px', display: product.type_id =='configurable'? 'block':'none' }"
+                    v-if="getTruefitProd !== null"
+                    :id="getTruefitProd.id" :data-userid="getCurrentUserId"
+                    :data-colorid="getTruefitProd.color" 
+                    :data-availablesizes="getTruefitProd.availablesizes"
+                    data-locale="en_GB"
+                    >
+              </div>
              <add-to-cart :product="product" :disabled="disableAddToCartButtonFlag"  
                 :configuration="configuration"
                 class="py-3 text-sm mt-10"/>
@@ -152,7 +160,8 @@ export default {
       carouselTransitionSpeed: 0,
       currentColor: 0,
       currentPage: 0,
-      hideImageAtIndex: null
+      hideImageAtIndex: null,
+      getTruefitProd: null
     }
   },
   computed: {
@@ -161,15 +170,34 @@ export default {
     //    attributesByCode: state => state.attribute.list_by_code,
     //    configuration1111: state => state.product.current_configuration,
     // }),
+    getCurrentUserId () {
+      if (this.$store.state.user.current !== null) {
+          return this.$store.state.user.current.id
+      } else {
+        return ''
+      }
+    }
   },
   beforeMount () {
     this.$bus.$on('update-product-with-options-data', this.forceUpdateData);
+    this.$bus.$on('update-product-truefit-data', this.setTrufitData);
     if (window && window.innerWidth <= 1024) this.transEffect= 'fade-in-up'
   },
   beforeDestroy () {
     this.$bus.$off('update-product-with-options-data');
+    this.$bus.$off('update-product-truefit-data', this.setTrufitData);
   },
   methods: {
+    setTrufitData(event) {
+       if(event) {
+         this.getTruefitProd = event;
+         setTimeout(()=> {
+           window&&window.tfcapi&&window.tfcapi('calculate');
+         },300);
+       } else {
+          this.getTruefitProd = null;
+       } 
+    },
     closemodel () {
       this.$bus.$emit('modal-hide', 'modal-productwithoptions')
     },

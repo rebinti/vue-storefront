@@ -50,7 +50,8 @@
                 :to="localizedRoute('/my-account/newsletter')"
                 exact
               >
-                 <i class="material-icons">subtitles</i>
+                 <!-- <i class="material-icons">subtitles</i> -->
+                 <img style="width: 26px;margin-left: 15px;" src="/assets/icons/newsletter.png" alt="">
               </router-link>
 
           </li>
@@ -61,7 +62,8 @@
                 :to="localizedRoute('/my-account/orders')"
                 exact
               >
-                <i class="material-icons">account_box</i>
+                <!-- <i class="material-icons">account_box</i> -->
+                <img style="width: 26px;margin-left: 15px;" src="/assets/icons/order.png" alt="">
               </router-link>
 
 
