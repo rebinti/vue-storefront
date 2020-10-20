@@ -27,6 +27,7 @@
       <newsletter-popup />
       <out-of-stock-popup />
       <product-with-options-popup />
+      <product-social-share />
       <cookie-notification />
       <offline-badge />
       <modal-switcher />
@@ -56,6 +57,7 @@ import SignUp from 'theme/components/core/blocks/Auth/SignUp.vue'
 import NewsletterPopup from 'theme/components/core/NewsletterPopup.vue'
 import OutOfStockPopup from 'theme/components/core/OutOfStockPopup.vue'
 import ProductWithOptionsPopup from 'theme/components/core/ProductWithOptionsPopup.vue'
+import ProductSocialShare from 'theme/components/core/ProductSocialShare.vue'
 import CookieNotification from 'theme/components/core/CookieNotification.vue'
 import OfflineBadge from 'theme/components/core/OfflineBadge.vue'
 import ModalSwitcher from 'theme/components/core/blocks/Switcher/Language.vue'
@@ -261,6 +263,7 @@ export default {
     NewsletterPopup,
     OutOfStockPopup,
     ProductWithOptionsPopup,
+    ProductSocialShare,
     PopupBoards,
     CookieNotification,
     OfflineBadge,

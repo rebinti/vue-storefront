@@ -18,6 +18,7 @@ export default {
     close () {
       Vue.prototype.$bus.$emit('close-sidebar-panel', true);
       this.$bus.$emit('modal-hide', 'modal-productwithoptions')
+      this.$bus.$emit('modal-hide', 'modal-productsocialshare')
       const el = document.body;
       el.classList.remove('set-overlay-on-top');
       document.documentElement.classList.remove('set-overlay-on-top')
