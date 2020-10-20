@@ -243,11 +243,13 @@
               <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 3,bottom: '0px', right: '10px'}">
 
                   <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
-
+<!-- disableAddToCartButtonFlag -->
                     <add-to-cart :product="product"
-                     :disabled="disableAddToCartButtonFlag" 
+                     :disabled="product.type_id == 'configurable' && product.configurable_children === undefined" 
                      :configuration="configuration"                     
-                     class="py-3 text-sm"  />
+                     class="py-3 text-sm"  
+                     :style="product.type_id == 'configurable' && product.configurable_children === undefined ? { backgroundColor: '#bdbdbd !important'} : ''"
+                     />
                   </div>
                   <div class="video-thum-mob" id="left" v-if="productVideoData"
                     @click="changeToVideoCarouselSlide">
@@ -935,6 +937,7 @@ export default {
   methods: {
     openProductOptionsPopup () {
       if(!this.disableAddToCartButtonFlag) return 
+      if(this.product.type_id == 'configurable' && this.product.configurable_children === undefined) return
       this.$bus.$emit('modal-show', 'modal-productwithoptions')
       this.$bus.$emit('update-product-with-options-data', this.product)
       this.$bus.$emit('update-product-truefit-data', this.getTruefitProd)
