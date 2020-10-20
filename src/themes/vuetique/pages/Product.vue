@@ -2169,7 +2169,7 @@ button.no-combination {
     display: inline-block;
     width: 108%;
     background: #fff;
-    padding: 10px 0px;
+    padding: 15px 15px;
     position: relative;
     left: -5%;
 
