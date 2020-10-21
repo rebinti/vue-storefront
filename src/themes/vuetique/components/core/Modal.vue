@@ -134,5 +134,8 @@ export default {
   .prd-video-popup.fix-bottom-side{
     top: 0px !important;
   }
+  .prd-video-popup .modal-header{
+    margin-bottom: -1px !important;
+  }
 }
 </style>
