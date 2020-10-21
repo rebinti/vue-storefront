@@ -5,7 +5,7 @@
             <video class="video-fluid video-play-tag"
             style="height: 100%;width: 100%;left: 0;"
             ref="videoElement" id="videoElement" 
-            loop controls autoPictureInPicture preload autoplay="true" >
+            loop controls autoPictureInPicture preload autoplay >
               <source :src="productvideo.video" type="video/mp4" />
             </video>
             <!-- src="http://m2.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
@@ -29,6 +29,11 @@ export default {
   },
   beforeDestroy () {
     this.$bus.$off('product-data-for-video');
+  },
+  mounted(){
+    setTimeout(() => {
+      this.$refs.videoElement.play();
+    }, 200);
   },
   methods: {
     closemodel () {
