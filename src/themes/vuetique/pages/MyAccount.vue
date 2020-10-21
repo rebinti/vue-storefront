@@ -51,7 +51,7 @@
                 exact
               >
                  <!-- <i class="material-icons">subtitles</i> -->
-                 <img style="width: 26px;margin-left: 15px;" src="/assets/icons/newsletter.png" alt="">
+                 <img style="width: 26px;" src="/assets/icons/newsletter.png" alt="">
               </router-link>
 
           </li>
@@ -63,7 +63,7 @@
                 exact
               >
                 <!-- <i class="material-icons">account_box</i> -->
-                <img style="width: 26px;margin-left: 15px;" src="/assets/icons/order.png" alt="">
+                <img style="width: 26px;" src="/assets/icons/order.png" alt="">
               </router-link>
 
 
@@ -234,7 +234,6 @@ $color-tertiary: color(tertiary);
     width: 84%;
     float: left;
 }
-
 @media (min-width: 577px) {
 
   
@@ -267,6 +266,9 @@ $color-tertiary: color(tertiary);
   .mob-acc-header {
     margin-top: 2rem;
   }
+  .my-account-nav li a img{
+    margin-left: 51px;
+  }
 }
 
     .my-account-subnav {
@@ -294,9 +296,10 @@ $color-tertiary: color(tertiary);
         color: #D7D7D7;
         float: left;
         text-align: center;
-        background-color: #252525;
+        background-color: #000000;
         height: 100%;
         width: 16.6%;
+        border-right: 1px solid #FFF;
     }
 
     .my-account-nav li a {
@@ -310,7 +313,9 @@ $color-tertiary: color(tertiary);
         position: relative;
         top: -23px;
     }
-
+    .my-account-nav li.active{
+      box-shadow: 1px 1px 1px 1px #888888;
+    } 
     .my-account-nav li.active a {
       color: #FFFFFF;
       padding: 00;
@@ -327,7 +332,23 @@ $color-tertiary: color(tertiary);
     .div-web-acc{
        display: none;
     }
-}
+  }
+  @media (max-width: 425px) {
+    .my-account-nav li a img{
+      margin-left: 23px;
+    }
+  }
+  @media (max-width: 375px) {
+  .my-account-nav li a img{
+    margin-left: 17px;
+    }
+  }
+  @media (max-width: 320px) {
+    .my-account-nav li a img{
+      margin-left: 13px;
+    }
+  }
+
 
 @media screen and (min-width: 769px) and (max-width: 2560px) {
     .div-mobile-acc{
