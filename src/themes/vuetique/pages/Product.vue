@@ -245,7 +245,7 @@
                   <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
 <!-- disableAddToCartButtonFlag -->
                     <add-to-cart :product="product"
-                     :disabled="product.type_id == 'configurable' && product.configurable_children === undefined" 
+                     :disabled="disableAddToCartButtonFlag || (product.type_id == 'configurable' && product.configurable_children === undefined)" 
                      :configuration="configuration"                     
                      class="py-3 text-sm"  
                      :style="product.type_id == 'configurable' && product.configurable_children === undefined ? { backgroundColor: '#bdbdbd !important'} : ''"
