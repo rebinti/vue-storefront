@@ -13,6 +13,7 @@ export default {
   data () {
     return {
       product: {},
+      transEffect: 'fade-in-down',
     }
   },
   beforeMount () {
