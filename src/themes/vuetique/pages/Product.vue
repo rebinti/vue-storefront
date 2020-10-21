@@ -217,7 +217,7 @@
                 <!-- <div class="fit-label"
                 :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
                 >FIND YOUR SIZE</div> -->
-                <!-- <div class="truefit-button tfc-fitrec-product" 
+                <div class="truefit-button tfc-fitrec-product" 
                 :style="{ display: product.type_id =='configurable'? 'block':'none' }"
                   v-if="getTruefitProd !== null"
                   :id="getTruefitProd.id" :data-userid="getCurrentUserId"
@@ -225,7 +225,7 @@
                   :data-availablesizes="getTruefitProd.availablesizes"
                   data-locale="en_GB"
                   >
-                </div> -->
+                </div>
                 <!-- <div class="size-guide-b">
                   <a href="javascript:void(0);"  
                       style="position: absolute;
@@ -738,7 +738,7 @@
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
-    <div class="container my-4 recent-view">
+    <div class="lg:pl-6 pr-5 container my-4 recent-view">
       <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
       </no-ssr>
@@ -1825,9 +1825,16 @@ button.no-combination {
       width: 25%;
     }
     .review-div{
-      margin-top: 8px;
+      margin-top: 10px;
     }
   }       
+}
+@media (max-width: 768px) {
+  .brand-review-div{ 
+    .review-div{
+      margin-top: 8px;
+    }
+  } 
 }
 @media (max-width: 1440px) {
   #product{
