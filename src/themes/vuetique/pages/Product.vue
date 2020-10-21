@@ -300,7 +300,7 @@
               <div class="product-details mob">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
-                      style=""
+                  style=""
                       @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
                       data-testid="productDetails">  
                     <div class="p-list border-bottom">
@@ -628,7 +628,7 @@
               <div class="product-details desk">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                       @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
                       data-testid="productDetails">  
                     <div class="p-list border-bottom">
@@ -636,7 +636,7 @@
                     </div>
                   </a>
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                     @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
                     data-testid="sizeGuide">               
                     <div class="p-list border-bottom">
@@ -644,7 +644,7 @@
                     </div>
                   </a>
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                     @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
                     data-testid="productDeliveyReturn">               
                     <div class="p-list">
@@ -2209,7 +2209,7 @@ button.no-combination {
   .mob_add_cart_btn{
     float: left;
     width: 71%;
-    padding: 0 5% 0px 10%;
+    padding: 0 2% 0px 10%;
   }
 
   .mob_add_wish_btn{
@@ -2232,7 +2232,7 @@ button.no-combination {
       height: 46px;
     // width: 46px;
       margin: 0px;
-      margin-right: 4px;
+      margin-right: 10px;
   }
   .social-share-button-mob img,.video-thum-mob img{
     margin-left: 9px;
@@ -2506,7 +2506,7 @@ button.no-combination {
     margin-right: 4px;
 }
 .social-share-button-mob img,.video-thum-mob img{
-	  margin-left: 14px;
+	  margin-left: 13px;
     margin-top: 9px;
 }   
     // .product-details-mob{
@@ -2583,7 +2583,7 @@ button.no-combination {
       }     
     }
     .social-share-button-mob img,.video-thum-mob img{
-      margin-left: 11px;
+      margin-left: 9px;
       margin-top: 9px;
     }     
   }
@@ -2592,7 +2592,7 @@ button.no-combination {
 @media (max-width: 320px) {	
   .container{
       .social-share-button-mob img,.video-thum-mob img{
-      margin-left: 8px;
+      margin-left: 5px;
       margin-top: 9px;
     } 
   }
@@ -2614,21 +2614,26 @@ button.no-combination {
 
 
 .web-video-div {
-    width: 70px;margin-right: 4px;margin-left: 4px;border: 1px solid #191919;padding: 10px 10px 0 10px;
+    width: 70px;margin-right: 4px;margin-left: 4px;border: 1px solid #000000;padding: 10px 10px 0 10px;
 }
 
 .web-share-div {
-    width: 70px;margin-right: 4px;margin-left: 2px;border: 1px solid #191919;padding: 10px 10px 0 10px;
+    width: 70px;margin-right: 4px;margin-left: 2px;border: 1px solid #000000;padding: 10px 10px 0 10px;
 }
 
 .web-wishlist-div {
-    width: 70px;margin-right: 2px;margin-left: 2px;border: 1px solid #191919;padding: 7px 8px 0px;
+    width: 70px;margin-right: 2px;margin-left: 2px;border: 1px solid #000000;padding: 7px 8px 0px;
 }
 
 @media (min-width: 1440px) and (max-width: 2650px){
   .web-wishlist-div {
     padding: 7px 15px 0px;
   }
+}
+
+a:-webkit-any-link {
+  text-decoration: none !important;
+  outline: none !important;;
 }
 
 </style>
