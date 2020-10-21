@@ -43,7 +43,8 @@ export default {
       if (this.gallery.length) {
         let galleryFiltered = [...this.gallery]
         const index = galleryFiltered.findIndex(val => (val.video && val.video !== undefined))
-        if (index >= 0 && !this.isInMobileView) {
+        if (index >= 0) {
+          // if video not need to remove from device galary slider if (index >= 0 && !this.isInMobileView)
           galleryFiltered.splice(index, 1);
           return galleryFiltered
         } else {
