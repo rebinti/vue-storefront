@@ -1166,7 +1166,7 @@ export default {
       /* 
         To set Emarsys Tracking Data
       */
-        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+        this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: 'g/'+this.product.parentSku});
 
       /* 
         For Stamped Review
