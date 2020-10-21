@@ -252,7 +252,7 @@
                      />
                   </div>
                   <div class="video-thum-mob" id="left" v-if="productVideoData"
-                    @click="changeToVideoCarouselSlide">
+                    @click="clickvideodiv">   <!-- @click="changeToVideoCarouselSlide" -->
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
@@ -993,7 +993,11 @@ export default {
     clicksharediv () {
       this.$bus.$emit('modal-show', 'modal-productsocialshare')
       this.$bus.$emit('product-data-for-share', this.product)      
-    },    
+    },
+    clickvideodiv () {
+      this.$bus.$emit('modal-show', 'modal-productvideopopup')
+      this.$bus.$emit('product-data-for-video', this.productVideoData)      
+    },         
     checkOutOfstock (activeFlag, loopItem, optionIndex, fullConfigOption) { // loopItem fullConfigOption optionIndex
        if (optionIndex > 0) {
           let data = this.product.configurable_children.find(val => {

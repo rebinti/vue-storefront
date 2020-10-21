@@ -118,18 +118,21 @@ export default {
 <style scoped>
 
 @media (max-width: 576px) {
-.modal {
-  top: 0px !important;
-}
-.modal .modal-container{
-  background: transparent;
-}
-.modal .modal-container .modal-content {
-  background: #ffffff !important;
-}
-.fix-bottom-side {
-  bottom: 0px !important;
-  top: unset !important;
-}
+  .modal {
+    top: 0px !important;
+  }
+  .modal .modal-container{
+    background: transparent;
+  }
+  .modal .modal-container .modal-content {
+    background: #ffffff !important;
+  }
+  .fix-bottom-side {
+    bottom: 0px !important;
+    top: unset !important;
+  }
+  .prd-video-popup.fix-bottom-side{
+    top: 0px !important;
+  }
 }
 </style>
