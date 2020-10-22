@@ -105,6 +105,16 @@
         </router-link>
       </li>
 
+      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
+        <router-link
+          class="menu-link"
+          :to="localizedRoute('/gift-card')"
+          exact
+        >
+          Gift Card
+        </router-link>
+      </li>
+
       <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
