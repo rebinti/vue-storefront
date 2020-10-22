@@ -300,7 +300,7 @@
               <div class="product-details mob">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
-                      style=""
+                  style=""
                       @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
                       data-testid="productDetails">  
                     <div class="p-list border-bottom">
@@ -366,7 +366,7 @@
               <div class="review-div">
                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>                  
               </div>
-              <div class="product-top-div">
+              <!-- <div class="product-top-div">
                   <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
                     @click="showProducVideoPopup">
                     <img  style="float: left;cursor: pointer"
@@ -378,7 +378,7 @@
                   <div class="wishlist-button" id="center">
                     <wishlist-button :product="product" />
                   </div>                                                          
-              </div>  
+              </div>   -->
             </div>    
             <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
             class="share-box bg-grey-lighter shadow-box">
@@ -569,6 +569,18 @@
                   class="py-3 text-sm"
                   id="add-to-cart-button"
                 />
+
+                  <div class="video-thum-mob web-video-div" id="left" v-if="productVideoData"
+                    @click="clickvideodiv">   <!-- @click="changeToVideoCarouselSlide" -->
+                    <img  style="float: left;cursor: pointer; width: 30px;height: 27px;"
+                    src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
+                  </div> 
+                  <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->                  
+                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+                  </div>                   
+                  <div class="mob_add_wish_btn web-wishlist-div" >
+                      <wishlist-button :product="product" />
+                  </div>
               </div>
 
             </div>
@@ -616,7 +628,7 @@
               <div class="product-details desk">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                       @click.prevent="$store.dispatch('ui/toggleProductDetailsSidePanel')" 
                       data-testid="productDetails">  
                     <div class="p-list border-bottom">
@@ -624,7 +636,7 @@
                     </div>
                   </a>
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                     @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
                     data-testid="sizeGuide">               
                     <div class="p-list border-bottom">
@@ -632,7 +644,7 @@
                     </div>
                   </a>
                   <a href="javascript:void(0);"  
-                      style=""
+                       style="text-decoration: none !important; outline: none !important;"
                     @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
                     data-testid="productDeliveyReturn">               
                     <div class="p-list">
@@ -2197,7 +2209,7 @@ button.no-combination {
   .mob_add_cart_btn{
     float: left;
     width: 71%;
-    padding: 0 5% 0px 10%;
+    padding: 0 2% 0px 10%;
   }
 
   .mob_add_wish_btn{
@@ -2220,7 +2232,7 @@ button.no-combination {
       height: 46px;
     // width: 46px;
       margin: 0px;
-      margin-right: 4px;
+      margin-right: 10px;
   }
   .social-share-button-mob img,.video-thum-mob img{
     margin-left: 9px;
@@ -2494,7 +2506,7 @@ button.no-combination {
     margin-right: 4px;
 }
 .social-share-button-mob img,.video-thum-mob img{
-	  margin-left: 14px;
+	  margin-left: 13px;
     margin-top: 9px;
 }   
     // .product-details-mob{
@@ -2571,7 +2583,7 @@ button.no-combination {
       }     
     }
     .social-share-button-mob img,.video-thum-mob img{
-      margin-left: 11px;
+      margin-left: 9px;
       margin-top: 9px;
     }     
   }
@@ -2580,7 +2592,7 @@ button.no-combination {
 @media (max-width: 320px) {	
   .container{
       .social-share-button-mob img,.video-thum-mob img{
-      margin-left: 8px;
+      margin-left: 5px;
       margin-top: 9px;
     } 
   }
@@ -2598,6 +2610,30 @@ button.no-combination {
     background-color: white;
     border-radius: 5px;
     margin-top: -3px;
+}
+
+
+.web-video-div {
+    width: 70px;margin-right: 4px;margin-left: 4px;border: 1px solid #000000;padding: 10px 10px 0 10px;
+}
+
+.web-share-div {
+    width: 70px;margin-right: 4px;margin-left: 2px;border: 1px solid #000000;padding: 10px 10px 0 10px;
+}
+
+.web-wishlist-div {
+    width: 70px;margin-right: 2px;margin-left: 2px;border: 1px solid #000000;padding: 7px 8px 0px;
+}
+
+@media (min-width: 1440px) and (max-width: 2650px){
+  .web-wishlist-div {
+    padding: 7px 15px 0px;
+  }
+}
+
+a:-webkit-any-link {
+  text-decoration: none !important;
+  outline: none !important;;
 }
 
 </style>
