@@ -570,8 +570,8 @@
                   id="add-to-cart-button"
                 />
 
-                  <div class="video-thum-mob web-video-div" id="left" v-if="productVideoData"
-                    @click="clickvideodiv">   <!-- @click="changeToVideoCarouselSlide" -->
+                  <div class="video-thum-mob web-video-div" id="left" v-if="productVideoData && !isInMobileView"
+                     @click="showProducVideoPopup">   <!-- @click="changeToVideoCarouselSlide" -->
                     <img  style="float: left;cursor: pointer; width: 30px;height: 27px;"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 

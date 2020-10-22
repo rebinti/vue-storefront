@@ -10,7 +10,7 @@ const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
 const Product = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/Product.vue')
-const GiftCard = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/GiftCard.vue')
+const GiftCard = () => import(/* webpackChunkName: "vsf-gift-card" */ 'theme/pages/GiftCard.vue')
 const Category = () => import(/* webpackChunkName: "vsf-category" */ 'theme/pages/search-spring/SearchSpringCategory.vue') // Category.vue
 const CmsPage = () => import(/* webpackChunkName: "vsf-cms" */ 'theme/pages/CmsPage.vue')
 const CmsBlockDemoPageSsr = () => import(/* webpackChunkName: "vsf-cms-demo" */ 'theme/pages/CmsBlockDemoPageSsr.vue')
@@ -52,7 +52,7 @@ let routes = [
   { name: 'my-order', path: '/my-account/orders/:orderId', component: MyAccount, props: { activeBlock: 'MyOrder' }, meta: { requiresAuth: true } },
   { name: 'my-recently-viewed', path: '/my-account/recently-viewed', component: MyAccount, props: { activeBlock: 'MyRecentlyViewed' }, meta: { requiresAuth: true } },
   { name: 'store-locator', path: '/store-locator', component: Static, props: { page: 'lorem', title: 'Store locator' } },
-  { name: 'gift-card', path: '/gift-card', component: Static, props: { page: 'lorem', title: 'Gift card' } },
+  // { name: 'gift-card', path: '/gift-card', component: Static, props: { page: 'lorem', title: 'Gift card' } },
   { name: 'delivery', path: '/delivery', component: Static, props: { page: 'lorem', title: 'Delivery' } },
   { name: 'order-from-catalog', path: '/order-from-catalog', component: Static, props: { page: 'lorem', title: 'Order from catalog' } },
   { name: 'contact', path: '/contact', component: Static, props: { page: 'contact', title: 'Contact' } },
@@ -63,7 +63,7 @@ let routes = [
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
   { name: 'contact-us', path: '/contact-us', component: ContactUs },
-  { name: 'gift-card', path: '/gift-card', component: GiftCard },
+  { name: 'gift-cards', path: '/gift-card', component: GiftCard },
 
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
   { name: 'search-spring', path: '/search', component: SearchSpringSearch },
