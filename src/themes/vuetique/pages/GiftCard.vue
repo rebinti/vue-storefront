@@ -1,12 +1,68 @@
 <template>
-   <div style="width: auto;height: 300px;width: auto;margin-left:10px;" 
+   <!-- <div style="width: auto;height:auto;width: auto;margin-left:10px;" 
    class="gift-card"> 
 
      <h1> Gift card </h1>
      <add-to-cart-quick-prod-btn  v-if="product !== null"
         :product="product"  
-        class="cart-icon" :addtocarttype="'Text-Only'" />          
-  </div>
+        class="cart-icon" :addtocarttype="'Text-Only'" />    -->
+<div  class="container">
+   <section  class="md:flex">
+      <div  class="w-full md:w-2/3">
+         <div  class="flex">
+          <div class="giftcard-product-media" id="giftcard-product-media" style="transform: scale(1.76167);height: 643.008px;">
+            <div class="background-popup" style="cursor: pointer; -moz-transform-origin: left top;" onclick="getPreview()">
+                <div id="giftcard-template-back" style="">           
+                      <div class="giftcard-template-content" style="display: none; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/background/default.png');"></div>
+                      <div class="giftcard-change-image-background-popup giftcard-change-image" style="background-size: 600px 365px; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/images/Screenshot-2020-06-16-at-17.19.41.jpg');">          
+                            <div class="giftcard-logo"><img src="https://cdn.iclothing.com/media/giftvoucher/pdf/logo/default/giftlogowhite.png"></div>
+                            <div class="expire-day expire-day-top" id="expire-day-background" style="font-size: 10px; float: right; margin-top: 5px;margin-right: 5px; color: white; font-weight: bold; "></div> 
+                            <div class="title-value giftcard-logo-background">
+                                <div class="giftcard-style-color giftcard-title">Gift Card</div>
+                                <div class="giftcard-value-color">
+                                    <span class="giftcard-style-color">Value</span>
+                                    <span class="giftcard-style-color giftcard-price-change">€20.00</span>
+                                </div>
+                            </div>
+                            <div class="from-to-barcode-background">
+                                <div class="from-to">
+                                    <div class="giftcard-form">
+                                        <label class="giftcard-text-color" for="giftcard-from" style="color: rgb(0, 0, 0);">From:</label>
+                                        <span class="giftcard-style-color giftcard-send-from" id="giftcard-from"></span>
+                                    </div>
+                                    <div class="giftcard-to" style="">
+                                        <label class="giftcard-text-color" for="giftcard-to" style="color: rgb(0, 0, 0);">To: </label>
+                                        <span class="giftcard-style-color giftcard-send-to" id="giftcard-to"></span>
+                                    </div>
+                                </div>
+                                <div class="giftcard-barcode">                
+                                                        <div class="giftcard-number">                
+                                            <span class="giftcard-style-color" style="">GIFT-XXXX-XXXX</span>
+                                        </div>
+                                                </div>
+                            </div>
+                            <div class="giftcard-box-background">
+                                <div class="giftcard-text-box"><pre class="giftcard-text-color giftcard-custom-message" style="color: rgb(0, 0, 0);"></pre></div>
+                            </div>
+                            <div class="giftcard-note-background">
+                                <div class="form-note">
+                                    <p class="giftcard-text-color" style="color: rgb(0, 0, 0);">T&amp;Cs:Converting to cash is not allowed. You can use the gift card code or redeem it to pay for your order at www.iclothing.com</p>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+              </div>
+            </div>      
+         </div>
+      </div>
+      <div  class="w-full md:w-1/3 md:px-10">
+ <!-- right block -->
+      </div>
+   </section>
+</div>               
+  <!-- </div> -->
+  
 </template>
 
 <script>
@@ -51,5 +107,172 @@ export default {
     width: 200px;
     margin-left: 10px;
     margin-top: 50px;
+}
+.giftcard-product-media {
+    float: Left;
+    width: 600px;
+   /* height: 365px;
+    transform-origin: top left;*/
+    -webkit-transform-origin: top left;
+}
+#giftcard-template-back {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+#giftcard-template-back .giftcard-template-content {
+    /* display: none; */
+    height: 0px;
+}
+#giftcard-template-back .giftcard-change-image-background-popup {
+    width: 100%;
+    position: absolute;
+    top: 0%;
+}
+.giftcard-change-image-background-popup .giftcard-logo {
+    float: left;
+    height: 84px;
+    margin-left: 15px;
+}
+.giftcard-change-image-background-popup .giftcard-logo img {
+    margin-bottom: 15px;
+    border-radius: 0px 0px 5px 5px;
+    max-height: 70px;
+    float: left;
+}
+.giftcard-change-image img {
+    height: 63px;
+    max-width: 100%;
+    display: inline;
+}
+.title-value.giftcard-logo-background {
+    float: left;
+    width: 100%;
+    background: url(https://cdn.iclothing.com/skin/frontend/base/default/css/magestore/giftvoucher/bkg-title.png) no-repeat;
+    height: 50px;
+    background-size: 100%;
+}
+.from-to-barcode-background {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.giftcard-box-background {
+    width: 93% !important;
+    height: 95px;
+    padding: 5px 3%;
+    margin-top: 0px !important;
+    box-sizing: content-box;
+    float: left;
+}
+.giftcard-box-background {
+    overflow: hidden;
+    width: 95%;
+    margin: 0 auto;
+}
+.giftcard-note-background {
+    /* margin-top: 8px; */
+    float: left;
+    box-sizing: content-box;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 8px;
+    height: 30px;
+}
+.giftcard-note-background .form-note {
+    width: 100%;
+    margin: 0 auto;
+}
+.giftcard-note-background .giftcard-text-color {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    padding: 0 15px;
+    font-weight: 600;
+    max-height: 33px;
+    overflow: hidden;
+}
+.giftcard-logo-background .giftcard-value-color {
+    float: right;
+    background: url(https://cdn.iclothing.com/skin/frontend/base/default/css/magestore/giftvoucher/bkg-value.png) no-repeat left center;
+    height: 50px;
+    text-align: right;
+    padding-right: 15px;
+    padding-left: 20px;
+    line-height: 48px;
+}
+.giftcard-logo-background .giftcard-style-color.giftcard-price-change {
+    font-size: 26px;
+    margin-top: 6px;
+}
+.giftcard-logo-background .giftcard-title {
+    float: left;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 15px;
+    line-height: 52px;
+    font-weight: 600;
+}
+.from-to-barcode-background .from-to {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    margin-left: 15px;
+}
+.from-to-barcode-background .from-to .giftcard-form {
+    float: left;
+    text-align: left;
+    margin-top: 10px;
+}
+.from-to-barcode-background .from-to .giftcard-text-color {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+.from-to-barcode-background .from-to .giftcard-style-color {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+.from-to-barcode-background .from-to .giftcard-to {
+    float: left;
+    text-align: left;
+    clear: both;
+}
+.giftcard-to {
+    max-height: 25px;
+}
+.from-to-barcode-background .giftcard-barcode {
+    float: right;
+    margin-right: 15px;
+}
+.giftcard-box-background .giftcard-text-box {
+    display: inherit !important;
+    background-size: 100% !important;
+    width: 100% !important;
+    height: 98px;
+    text-align: left;
+}
+.giftcard-box-background .giftcard-text-box {
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    padding: 0;
+    padding-bottom: 10px;
+    padding-top: 3px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.giftcard-box-background .giftcard-text-color.giftcard-custom-message {
+    margin: 0;
+    white-space: pre-wrap;
+    max-height: 85px;
+    overflow: hidden;
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0px 5px;
+    color: black !important;
 }
 </style>
