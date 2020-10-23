@@ -131,7 +131,6 @@ export default {
         }).then((items) => {
             // console.log('gift card data---->', items);
             this.product = items.items[0];
-            this.product.gift_price = 88;
             this.giftCardAmount  = this.product.gift_from;
             this.giftCardUserValue = this.product.gift_from;
             this.isGiftCardDataFetchedFlag = true;

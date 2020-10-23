@@ -631,7 +631,9 @@ const actions: ActionTree<CartState, RootState> = {
               cartItem: {
                 sku: clientItem.parentSku && config.cart.setConfigurableProductOptions ? clientItem.parentSku : clientItem.sku,
                 qty: clientItem.qty,
-                product_option: clientItem.product_option
+                product_option: clientItem.product_option,
+                price: clientItem.type_id == 'giftvoucher' ? clientItem.price ? clientItem.price : '' : '',
+                type_id:  clientItem.type_id
               }
             })
             _afterServerItemUpdated({ dispatch, commit }, event, clientItem)
