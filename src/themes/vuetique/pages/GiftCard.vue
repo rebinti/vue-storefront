@@ -7,21 +7,23 @@
         :product="product"  
         class="cart-icon" :addtocarttype="'Text-Only'" />    -->
 <div  class="container">
-   <section  class="md:flex">
-      <div  class="w-full md:w-2/3">
+     <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="'Gift card'" />
+   <section class="pt-2">
+     <div class="row"> 
+      <div  class="col-9" style="overflow: hidden;">
          <div  class="flex">
           <div class="giftcard-product-media" id="giftcard-product-media" style="transform: scale(1.76167);height: 643.008px;">
             <div class="background-popup" style="cursor: pointer; -moz-transform-origin: left top;" onclick="getPreview()">
                 <div id="giftcard-template-back" style="">           
                       <div class="giftcard-template-content" style="display: none; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/background/default.png');"></div>
-                      <div class="giftcard-change-image-background-popup giftcard-change-image" style="background-size: 600px 365px; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/images/Screenshot-2020-06-16-at-17.19.41.jpg');">          
+                      <div class="giftcard-change-image-background-popup giftcard-change-image" style=" background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/images/Screenshot-2020-06-16-at-17.19.41.jpg');">          
                             <div class="giftcard-logo"><img src="https://cdn.iclothing.com/media/giftvoucher/pdf/logo/default/giftlogowhite.png"></div>
                             <div class="expire-day expire-day-top" id="expire-day-background" style="font-size: 10px; float: right; margin-top: 5px;margin-right: 5px; color: white; font-weight: bold; "></div> 
                             <div class="title-value giftcard-logo-background">
                                 <div class="giftcard-style-color giftcard-title">Gift Card</div>
                                 <div class="giftcard-value-color">
                                     <span class="giftcard-style-color">Value</span>
-                                    <span class="giftcard-style-color giftcard-price-change">€20.00</span>
+                                    <span class="giftcard-style-color giftcard-price-change">€{{giftCardAmount}}.00</span>
                                 </div>
                             </div>
                             <div class="from-to-barcode-background">
@@ -56,9 +58,38 @@
             </div>      
          </div>
       </div>
-      <div  class="w-full md:w-1/3 md:px-10">
+      <div  class="col-3  md:px-10">
  <!-- right block -->
+         <div class="product-name">
+				<h1 itemprop="name" class="product-name-h1">Gift Card</h1>
+        </div>
+
+        <div class="price-box mt-5">
+            <span class="regular-price">
+                <span class="price" id="giftcard-product-price">€{{giftCardAmount}}.00</span>
+            </span>
+        </div>
+
+        <div class="col-xs-12 text-left mt-10">
+                <input :value="giftCardUserValue" id="amount_range"
+                :min="product.gift_from" :max="product.gift_to" name="amount"
+                type="number" 
+                class="input-text required-entry validate-greater-than-zero form-control" 
+                @change="isWithinTheLimit" >
+                <span style="font-size: 12px;">
+                (<span class="price"><span class="price">€{{product.gift_from}}.00</span></span> -  <span class="price">
+                    <span class="price">€{{product.gift_to}}.00</span></span>)
+                    </span>
+        </div>
+
+
+
+
+      <add-to-cart-quick-prod-btn  v-if="isGiftCardDataFetchedFlag"
+            :product="product"  
+            class="cart-icon mt-10" :addtocarttype="'Text-Only'" />  
       </div>
+     </div>
    </section>
 </div>               
   <!-- </div> -->
@@ -69,15 +100,20 @@
 import Vue from 'vue'
 import SearchQuery from '@vue-storefront/core/lib/search/searchQuery'
 import AddToCartQuickProdBtn from 'theme/components/core/AddToCartQuickProdBtn.vue'
+import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
 
 export default {
   name: 'GiftCardPage',
   components: {
-    AddToCartQuickProdBtn
+    AddToCartQuickProdBtn,
+    Breadcrumbs
   },
   data () {
   return {
-      product: null
+      product: {},
+      giftCardUserValue: 0,
+      giftCardAmount: 0,
+      isGiftCardDataFetchedFlag: false
     }
   },
   created () {
@@ -95,7 +131,35 @@ export default {
         }).then((items) => {
             // console.log('gift card data---->', items);
             this.product = items.items[0];
+            this.product.gift_price = 88;
+            this.giftCardAmount  = this.product.gift_from;
+            this.giftCardUserValue = this.product.gift_from;
+            this.isGiftCardDataFetchedFlag = true;
+        }, err => {
+            this.isGiftCardDataFetchedFlag = false;
         });
+      },
+      checkGiftCardPriceAmount (addedCardAmt= 0) {
+           if (this.product.gift_type == 2) {
+               if ( this.product.gift_price_type == 3 ) { // Fixed Price
+                    this.giftCardAmount =  (addedCardAmt*this.product.gift_price)/100;
+                    this.product['price'] =  this.giftCardAmount
+                } else {
+                    this.giftCardAmount = 0
+                }
+            }
+      },
+      isWithinTheLimit (event) {
+            const value = event.target.value
+            console.log(value, this.giftCardUserValue)
+            if (value>= 10 && value <= 300) {
+                this.giftCardUserValue = value
+                this.checkGiftCardPriceAmount(this.giftCardUserValue )
+            } else {
+                if(value >= this.product.gift_to) this.giftCardUserValue = this.product.gift_to
+                else this.giftCardUserValue = this.product.gift_from
+                this.checkGiftCardPriceAmount(this.giftCardUserValue)
+            }
       }
   },
 
@@ -110,7 +174,7 @@ export default {
 }
 .giftcard-product-media {
     float: Left;
-    width: 600px;
+    width: 54%;
    /* height: 365px;
     transform-origin: top left;*/
     -webkit-transform-origin: top left;
@@ -274,5 +338,40 @@ export default {
     font-family: 'Open Sans', sans-serif;
     padding: 0px 5px;
     color: black !important;
+}
+
+
+
+
+.product-view.giftcard-product #amount_range {
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    margin-bottom: 10px;
+}
+#amount_range {
+    width: 160px;
+}
+input.input-text {
+    font: 500 16px/1.55 PT , brandon_grotesque, Helvetica Neue, Verdana, Arial, sans-serif;
+    width: 100%;
+    height: 40px !important;
+    color: #000000;
+    border: 1px solid #e1e1e1;
+}
+
+ .product-name h1 {
+    font: 600 24px/1.35 PT, brandon_grotesque, Helvetica Neue, Verdana, Arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+
+.regular-price .price {
+    font: 600 24px/1.35 PT, brandon_grotesque, Helvetica Neue, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    padding-top: 0px;
 }
 </style>
