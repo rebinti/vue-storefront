@@ -68,7 +68,7 @@
             <div class="col-auto font-bold text-right leading-6 price_left_out pb_b_text">
             <div v-if="product.type_id=='giftvoucher'">
                 <div class="text-grey-dark"  data-testid="productPrice">
-                  {{ product.priceInclTax * product.qty | price }}
+                  {{ product.price * product.qty | price }}
                 </div>              
             </div>    
             <div v-else>
