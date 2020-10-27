@@ -10,9 +10,9 @@
      <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="'Gift card'" />
    <section class="pt-2">
      <div class="row"> 
-      <div  class="col-9" style="overflow: hidden;">
+      <div  class="col-9 md:col-12 sm:col-12 card-style-div" style="overflow: hidden;">
          <div  class="flex">
-          <div class="giftcard-product-media" id="giftcard-product-media" style="transform: scale(1.76167);height: 643.008px;">
+          <div class="giftcard-product-media scalling-div" id="giftcard-product-media" >
             <div class="background-popup" style="cursor: pointer; -moz-transform-origin: left top;" onclick="getPreview()">
                 <div id="giftcard-template-back" style="">           
                       <div class="giftcard-template-content" style="display: none; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/background/default.png');"></div>
@@ -30,11 +30,11 @@
                                 <div class="from-to">
                                     <div class="giftcard-form">
                                         <label class="giftcard-text-color" for="giftcard-from" style="color: rgb(0, 0, 0);">From:</label>
-                                        <span class="giftcard-style-color giftcard-send-from" id="giftcard-from"></span>
+                                        <span class="giftcard-style-color giftcard-send-from" id="giftcard-from"> {{senderName}}</span>
                                     </div>
                                     <div class="giftcard-to" style="">
                                         <label class="giftcard-text-color" for="giftcard-to" style="color: rgb(0, 0, 0);">To: </label>
-                                        <span class="giftcard-style-color giftcard-send-to" id="giftcard-to"></span>
+                                        <span class="giftcard-style-color giftcard-send-to" id="giftcard-to"> {{recipientName}} </span>
                                     </div>
                                 </div>
                                 <div class="giftcard-barcode">                
@@ -44,7 +44,10 @@
                                                 </div>
                             </div>
                             <div class="giftcard-box-background">
-                                <div class="giftcard-text-box"><pre class="giftcard-text-color giftcard-custom-message" style="color: rgb(0, 0, 0);"></pre></div>
+                                <div class="giftcard-text-box"
+                                style="white-space: pre-line;"
+                                v-html="customMessage"
+                                ><pre class="giftcard-text-color giftcard-custom-message" style="color: rgb(0, 0, 0);"></pre></div>
                             </div>
                             <div class="giftcard-note-background">
                                 <div class="form-note">
@@ -58,7 +61,7 @@
             </div>      
          </div>
       </div>
-      <div  class="col-3  md:px-10">
+      <div  class="col-3 md:col-12 sm:col-12 card-data-div">
  <!-- right block -->
          <div class="product-name">
 				<h1 itemprop="name" class="product-name-h1">Gift Card</h1>
@@ -70,31 +73,121 @@
             </span>
         </div>
 
-        <div class="col-xs-12 text-left mt-10">
+        <div class="col-xs-12 text-left mt-8">
                 <input :value="giftCardUserValue" id="amount_range"
                 :min="product.gift_from" :max="product.gift_to" name="amount"
                 type="number" 
                 class="input-text required-entry validate-greater-than-zero form-control" 
-                @change="isWithinTheLimit" >
+                @change="isWithinTheLimit" > <br/>
                 <span style="font-size: 12px;">
                 (<span class="price"><span class="price">€{{product.gift_from}}.00</span></span> -  <span class="price">
                     <span class="price">€{{product.gift_to}}.00</span></span>)
                     </span>
         </div>
 
+        <div class="giftcard-send-friend form-group mt-5">
+            <div class="checkbox">
+                <label for="send_friend label">Send Gift Card to friend<input style="margin-left: 5px;" type="checkbox" value="1" name="send_friend" id="send_friend"
+                 @click="sendGiftCardToFriendFlag = !sendGiftCardToFriendFlag" >
+                 </label>
+            </div>
+        </div>
 
+        <div class="giftvoucher-receiver form-group mt-3" id="giftvoucher-receiver" style="" v-if="sendGiftCardToFriendFlag">
+          <form @submit.prevent="addTOCartBefore" novalidate style="padding-bottom: 15px;">
+            <div class="form-group">
+                 <base-input
+                    class="mb-3 w-full tx_bx_out"
+                    type="text"
+                    name="senderName"
+                    v-model="senderName"
+                    @blur="$v.senderName.$touch()"
+                    :placeholder="'Sender name (optional)'"
+                />
+                
+            </div>
+            <div class="form-group">
+                <base-input
+                class="mb-3 w-full tx_bx_out"
+                type="text"
+                name="recipientName"
+                v-model="recipientName"
+                @blur="$v.recipientName.$touch()"
+                :placeholder="'Recipient name'"
+                :validation="{
+                    condition: !$v.recipientName.required && $v.recipientName.$error,
+                    text: $t('Field is required.')
+                }"
+              />
+            </div>
+            <div class="form-group">
+              <base-input
+                class="mb-3 w-full tx_bx_out"
+                type="recipientEmail"
+                name="recipientEmail"
+                autocomplete="recipientEmail"
+                v-model="recipientEmail"
+                @blur="$v.recipientEmail.$touch()"
+                :placeholder="'Recipient email address'"
+                :validations="[
+                    {
+                    condition: !$v.recipientEmail.required && $v.recipientEmail.$error,
+                    text: $t('Field is required.')
+                    },
+                    {
+                    condition: !$v.recipientEmail.email && $v.recipientEmail.$error,
+                    text: $t('Please provide valid e-mail address.')
+                    }
+                ]"
+                />
+            </div>
+            <div class="form-group">
+                  <base-textarea
+                     class="w-full tx_bx_out"
+                    type="text"
+                    name="customMessage"
+                    v-model="customMessage"
+                    @blur="$v.customMessage.$touch()"
+                    :placeholder="'Custom message'"
+                    :validation="{
+                        condition: !$v.customMessage.required && $v.customMessage.$error,
+                        text: $t('Field is required.')
+                    }"
+                />
+                <small>Characters Remaining: <span id="giftvoucher_char_remaining"> {{ customMessageMaxLength - customMessage.length}} </span></small>
+            </div>
+            <div class="form-group mt-3">
+                <div class="checkbox">
+                <base-checkbox
+                    class="mb-3 text-black"
+                    id="getEmailNotification"
+                    v-model="getEmailNotification"
+                    @click="getEmailNotification = !getEmailNotification"
+                    @change="$v.getEmailNotification.$touch()"
+                    >
+                    Get notification email when your friend receives Gift Card
+                </base-checkbox>
+                </div>
+            </div>
 
+           <add-to-cart-quick-prod-btn  v-if="isGiftCardDataFetchedFlag"
+            :product="product"   :addtocartButtonType="'submit'" 
+            class="mb-2 w-full d_lgn gift-card-add-button" :addtocarttype="'Text-Only'" 
+            @click.native="addTOCartBefore"  :addtocartFormValidationFlag="$v.$invalid" 
+            />  
+          </form>
+        </div>
 
-      <add-to-cart-quick-prod-btn  v-if="isGiftCardDataFetchedFlag"
+      <add-to-cart-quick-prod-btn  v-if="isGiftCardDataFetchedFlag && !sendGiftCardToFriendFlag"
             :product="product"  
             class="cart-icon mt-10" :addtocarttype="'Text-Only'" />  
       </div>
      </div>
    </section>
 </div>               
-  <!-- </div> -->
   
 </template>
+
 
 <script>
 import Vue from 'vue'
@@ -102,24 +195,87 @@ import SearchQuery from '@vue-storefront/core/lib/search/searchQuery'
 import AddToCartQuickProdBtn from 'theme/components/core/AddToCartQuickProdBtn.vue'
 import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
 
+import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox.vue'
+import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
+import BaseTextarea from 'theme/components/core/blocks/Form/BaseTextarea.vue'
+import ButtonFull from 'theme/components/theme/ButtonFull.vue'
+
+import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+
+
 export default {
   name: 'GiftCardPage',
   components: {
     AddToCartQuickProdBtn,
-    Breadcrumbs
+    Breadcrumbs,
+
+    BaseCheckbox,
+    BaseInput,
+    BaseTextarea,
+    ButtonFull,
   },
   data () {
   return {
       product: {},
       giftCardUserValue: 0,
       giftCardAmount: 0,
-      isGiftCardDataFetchedFlag: false
+      isGiftCardDataFetchedFlag: false,
+
+
+      sendGiftCardToFriendFlag: false,
+      customMessageMaxLength: 220,
+
+      senderName: '',
+      recipientName: '',
+      recipientEmail: '',
+      customMessage: '',
+      getEmailNotification: false 
+
+    }
+  },
+  validations: {
+    senderName: {
+
+    },
+    recipientName: {
+      required
+    },
+    recipientEmail: {
+      required,
+      email
+    },
+    customMessage: {
+      maxLength: maxLength(220),
+      required
+    },
+    getEmailNotification: {
+
+    }
+  },
+  computed: {
+    isProductDisabled () {
+      return this.disabled || formatProductMessages(this.product.errors) !== '' || this.isAddingToCart
     }
   },
   created () {
       this.getGiftCardProductData()
   },
   methods: {
+      addTOCartBefore () {
+        if (this.$v.$invalid) {
+            this.$v.$touch()
+            this.product['sendGiftCardToFrnd'] = {};
+            return
+        }
+        const giftData = { senderName: this.senderName || '',
+                           recipientName: this.recipientName || '',
+                           recipientEmail: this.recipientEmail || '',
+                           customMessage: this.customMessage || '',
+                           getEmailNotification: this.getEmailNotification || '' 
+                        };
+        this.product['sendGiftCardToFrnd'] = giftData;
+        console.log("Product Data ", this.product);
+      },
       getGiftCardProductData () {
         let query = new SearchQuery()
         query = query.applyFilter({key: 'id', value: {'eq': 92323}})
@@ -372,5 +528,57 @@ input.input-text {
     font: 600 24px/1.35 PT, brandon_grotesque, Helvetica Neue, Verdana, Arial, sans-serif;
     font-size: 14px;
     padding-top: 0px;
+}
+
+
+
+
+
+.loader {
+  display: inline-block;
+  border: 3px solid #fff;
+  border-top: 3px solid theme('colors.primary');
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-style {
+ display: inline-block;
+ background: #d2c4c47d !important;
+ padding: 3px 9px 0 4px;
+ margin-left: -8px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .card-style-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+    .card-data-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .scalling-div {
+        transform: scale(0.5);
+        height: 182.5px;
+    }
+
+
+
+}
+
+.scalling-div {
+    transform: scale(1.76167);
+    height: 643.008px;
 }
 </style>

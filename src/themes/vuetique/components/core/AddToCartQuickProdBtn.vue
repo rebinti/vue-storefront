@@ -1,5 +1,5 @@
 <template>
-   <button-full 
+   <button-full :type="addtocartButtonType"
    v-if="addtocarttype === 'Text-Only'"
    @click.native="addToCartWrapper(product)" 
    :disabled="isProductDisabled" 
@@ -70,7 +70,17 @@ export default {
       type: String,
       required: false,
       default: 'Only-Icon'
-    } 
+    },
+    addtocartButtonType: {  
+      type: String,
+      required: false,
+      default: 'button'
+    },
+    addtocartFormValidationFlag: {
+      type: Boolean,
+      required: false,
+      default: false
+    }  
   },
   computed: {
     isProductDisabled () {
@@ -94,6 +104,8 @@ export default {
       }, 2000)
     },
     addToCartWrapper (product) {
+      this.$emit('click');
+      if(this.addtocartFormValidationFlag)  return
       this.added = false
       this.failed = false
       if((this.product.type_id === 'simple') || (this.product.type_id === 'virtual') || (this.product.type_id === 'bundle')) {

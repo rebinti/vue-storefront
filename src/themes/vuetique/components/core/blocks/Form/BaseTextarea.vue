@@ -152,4 +152,80 @@ export default {
       color: $color-hover;
     }
   }
+
+
+  
+  .mob_summary .mob_rw_list .mob_t_bx input[type="text"]{
+      border:1px solid #000;
+    }
+
+
+@media (max-width: 576px) {
+    .txt_blk_out{
+      width:100%!important;
+      position: relative;
+      padding-left: 0px!important;
+      padding-right: 0px!important;
+      margin-bottom: 0px!important;
+      margin-top: 0px!important;
+      .text-sm{
+        background:#fafafa;
+        border: 0px;
+        border-bottom: 1px solid #e0e0e0;
+        height: 80px;
+        color:#000000;
+        button{
+          &.icon{
+            top:25px;
+          }
+        }
+      }
+      .text-error{
+        position: absolute;
+        left:0px;
+        bottom: 0px;
+        width:100%;
+        padding: 0 10px;
+      }
+      button{
+          &.icon{
+            top:25px;
+          }
+        }
+    }
+
+    .modal .login_out_bx .modal-content .tx_bx_out.board_input_box .text-sm {
+        background: #f2f2f2;
+        border: 0px;
+        border-bottom: 0px;
+        height: 40px;
+        color: #000000;
+        margin: 0 3%;
+        border-radius: 4px;
+        width: 94%;
+    }
+
+    .modal .login_out_bx .modal-content.board_input_outer .text-error {
+        padding-left: 13px;
+        position: absolute;
+        width: 100%;
+        bottom: -25px;
+        left: 0px;
+    }
+    .modal .login_out_bx .modal-content.board_input_outer .vt-icon--sm{ right:20px; }
+
+}
+
+.txt_blk_out {
+  .text-grey-dark {
+    right: 13px;
+  }
+} 
+
+.cl-error {
+    --text-opacity: 1;
+    color: #eb415c;
+    color: rgba(235, 65, 92, var(--text-opacity));
+    font-size: 0.75rem;
+}
 </style>
