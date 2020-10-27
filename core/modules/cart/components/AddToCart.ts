@@ -35,6 +35,12 @@ export const AddToCart = {
           }
       this.isAddingToCart = true
       try {
+        
+        if (this.product.type_id=='giftvoucher') {
+          const addedGiftItem = this.$store.state.cart.cartItems.find(val=> val.type_id =='giftvoucher') || null
+          if(addedGiftItem) await this.$store.dispatch('cart/removeItem', { product: addedGiftItem })
+        }
+
         const diffLog = await this.$store.dispatch('cart/addItem', { productToAdd: product })
         if (diffLog) {
           this.$bus.$emit('modal-hide', 'modal-productwithoptions');
