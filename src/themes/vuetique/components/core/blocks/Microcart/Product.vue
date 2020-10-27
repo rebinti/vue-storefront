@@ -66,28 +66,35 @@
             </div>
 
             <div class="col-auto font-bold text-right leading-6 price_left_out pb_b_text">
-            <div v-if="!product.totals">
-              <div class="text-error" v-if="product.special_price">
-                {{ product.priceInclTax * product.qty | price }}
+            <div v-if="product.type_id=='giftvoucher'">
+                <div class="text-grey-dark"  data-testid="productPrice">
+                  {{ product.priceInclTax * product.qty | price }}
+                </div>              
+            </div>    
+            <div v-else>
+              <div v-if="!product.totals">
+                <div class="text-error" v-if="product.special_price">
+                  {{ product.priceInclTax * product.qty | price }}
+                </div>
+                <div class="line-through text-sm text-grey-dark" v-if="product.special_price">
+                  {{ product.originalPriceInclTax * product.qty | price }}
+                </div>
+                <div class="text-grey-dark" v-if="!product.special_price" data-testid="productPrice">
+                  {{ product.priceInclTax * product.qty | price }}
+                </div>
               </div>
-              <div class="line-through text-sm text-grey-dark" v-if="product.special_price">
-                {{ product.originalPriceInclTax * product.qty | price }}
+              <div v-if="product.totals">
+                <div class="text-error" v-if="product.totals.discount_amount">
+                  {{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }}
+                </div>
+                <div class="line-through text-sm text-grey-dark" v-if="product.totals.discount_amount">
+                  {{ product.totals.row_total_incl_tax | price }}
+                </div>
+                <div class="text-grey-dark" v-if="!product.totals.discount_amount">
+                  {{ product.totals.row_total_incl_tax | price }}
+                </div>
               </div>
-              <div class="text-grey-dark" v-if="!product.special_price" data-testid="productPrice">
-                {{ product.priceInclTax * product.qty | price }}
-              </div>
-            </div>
-            <div v-if="product.totals">
-              <div class="text-error" v-if="product.totals.discount_amount">
-                {{ product.totals.row_total_incl_tax - product.totals.discount_amount | price }}
-              </div>
-              <div class="line-through text-sm text-grey-dark" v-if="product.totals.discount_amount">
-                {{ product.totals.row_total_incl_tax | price }}
-              </div>
-              <div class="text-grey-dark" v-if="!product.totals.discount_amount">
-                {{ product.totals.row_total_incl_tax | price }}
-              </div>
-            </div>
+            </div>  
           </div>
 
       </div>
@@ -144,6 +151,7 @@ export default {
     },
     applyQuantity () {
       this.updateQuantity(this.product.qty)
+      console.log("ttttttttttt",this.product);      
       this.isEditing = false
       this.$emit('parentevent')
     },
