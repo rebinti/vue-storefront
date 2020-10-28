@@ -2256,7 +2256,7 @@ button.no-combination {
       height: 46px;
     // width: 46px;
       margin: 0px;
-      margin-right: 10px;
+      margin-right: 4px;
   }
   .social-share-button-mob img,.video-thum-mob img{
     margin-left: 9px;
@@ -2530,7 +2530,7 @@ button.no-combination {
     margin-right: 4px;
 }
 .social-share-button-mob img,.video-thum-mob img{
-	  margin-left: 13px;
+	  margin-left: 10px;
     margin-top: 9px;
 }   
     // .product-details-mob{
