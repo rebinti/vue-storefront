@@ -6,9 +6,9 @@
      <add-to-cart-quick-prod-btn  v-if="product !== null"
         :product="product"  
         class="cart-icon" :addtocarttype="'Text-Only'" />    -->
-<div  class="container">
+<div  class="container-fluid">
      <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="'Gift card'" />
-   <section class="pt-2">
+   <section class="pt-2 pl-20 pr-10 content-mob-section">
      <div class="row"> 
       <div  class="col-9 md:col-12 sm:col-12 card-style-div" style="overflow: hidden;">
          <div  class="flex">
@@ -85,7 +85,7 @@
                     </span>
         </div>
 
-        <div class="giftcard-send-friend form-group mt-5">
+        <div class="giftcard-send-friend form-group mt-5" v-if="isGiftCardDataFetchedFlag">
             <div class="checkbox">
                 <label for="send_friend label">Send Gift Card to friend<input style="margin-left: 5px;" type="checkbox" value="1" name="send_friend" id="send_friend"
                  @click="sendGiftCardToFriendFlag = !sendGiftCardToFriendFlag" >
@@ -570,17 +570,23 @@ input.input-text {
         width: 100% !important;
         max-width: 100% !important;
         flex-basis: 100% !important;
+        margin-bottom: 1.5rem;
+            padding-top: 25px;
     }
 
     .scalling-div {
         transform: scale(1) !important;
-        height: 182.5px;
+        height: 350px;
     }
     .giftcard-product-media{
         width: 100% !important;
     }
+    .content-mob-section {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    } 
 }
-@media screen and (min-width: 321px) and (max-width: 375px) {
+@media screen and (min-width: 320px) and (max-width: 375px) {
     .card-style-div {
         width: 100% !important;
         max-width: 100% !important;
@@ -591,17 +597,23 @@ input.input-text {
         width: 100% !important;
         max-width: 100% !important;
         flex-basis: 100% !important;
+        margin-bottom: 1.5rem;
+            padding-top: 25px;
     }
 
     .scalling-div {
         transform: scale(1) !important;
-        height: 182.5px;
+        height: 350px;
     }
     .giftcard-product-media{
         width: 100% !important;
-    }    
+    }  
+    .content-mob-section {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }   
 }
-@media screen and (min-width: 376px) and (max-width: 425px) {
+@media screen and (min-width: 375px) and (max-width: 425px) {
     .card-style-div {
         width: 100% !important;
         max-width: 100% !important;
@@ -612,17 +624,23 @@ input.input-text {
         width: 100% !important;
         max-width: 100% !important;
         flex-basis: 100% !important;
+        margin-bottom: 1.5rem;
+            padding-top: 25px;
     }
 
     .scalling-div {
         transform: scale(1) !important;
-        height: 182.5px;        
+        height: 350px;       
     }
     .giftcard-product-media{
         width: 100% !important;
-    }    
+    }  
+    .content-mob-section {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }   
 }
-@media screen and (min-width: 426px) and (max-width: 768px) {
+@media screen and (min-width: 425px) and (max-width: 768px) {
     .card-style-div {
         width: 100% !important;
         max-width: 100% !important;
@@ -632,12 +650,21 @@ input.input-text {
         width: 100% !important;
         max-width: 100% !important;
         flex-basis: 100% !important;
+        margin-bottom: 1.5rem;
+            padding-top: 25px;
     }
 
     .scalling-div {
-        transform: scale(0.5);
-        height: 182.5px;
+        transform: scale(1) !important;
+        height: 350px;
     }
+   .giftcard-product-media{
+        width: 100% !important;
+    }   
+    .content-mob-section {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    } 
 }
 
 </style>
