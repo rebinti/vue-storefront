@@ -16,7 +16,8 @@
             <div class="background-popup" style="cursor: pointer; -moz-transform-origin: left top;" onclick="getPreview()">
                 <div id="giftcard-template-back" style="">           
                       <div class="giftcard-template-content" style="display: none; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/background/default.png');"></div>
-                      <div class="giftcard-change-image-background-popup giftcard-change-image" style=" background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/images/Screenshot-2020-06-16-at-17.19.41.jpg');">          
+                      <div class="giftcard-change-image-background-popup giftcard-change-image" style=" background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/images/Screenshot-2020-06-16-at-17.19.41.jpg');background-repeat: no-repeat;background-size: cover;
+                      ">          
                             <div class="giftcard-logo"><img src="https://cdn.iclothing.com/media/giftvoucher/pdf/logo/default/giftlogowhite.png"></div>
                             <div class="expire-day expire-day-top" id="expire-day-background" style="font-size: 10px; float: right; margin-top: 5px;margin-right: 5px; color: white; font-weight: bold; "></div> 
                             <div class="title-value giftcard-logo-background">
@@ -571,7 +572,6 @@ input.input-text {
         max-width: 100% !important;
         flex-basis: 100% !important;
         margin-bottom: 1.5rem;
-            padding-top: 25px;
     }
 
     .scalling-div {
@@ -585,6 +585,16 @@ input.input-text {
         padding-left: 5px !important;
         padding-right: 5px !important;
     } 
+        .giftcard-value-color {
+      height: 28px !important;
+    line-height: 32px !important;
+
+    }
+
+    .giftcard-title {
+        line-height: 27px !important;
+        color: #fff !important;
+    }
 }
 @media screen and (min-width: 320px) and (max-width: 375px) {
     .card-style-div {
@@ -598,7 +608,6 @@ input.input-text {
         max-width: 100% !important;
         flex-basis: 100% !important;
         margin-bottom: 1.5rem;
-            padding-top: 25px;
     }
 
     .scalling-div {
@@ -612,6 +621,16 @@ input.input-text {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }   
+      .giftcard-value-color {
+      height: 28px !important;
+        line-height: 32px !important;
+         color: #fff !important;
+    }
+
+        .giftcard-title {
+        line-height: 27px !important;
+        color: #fff !important;
+    }
 }
 @media screen and (min-width: 375px) and (max-width: 425px) {
     .card-style-div {
@@ -625,7 +644,6 @@ input.input-text {
         max-width: 100% !important;
         flex-basis: 100% !important;
         margin-bottom: 1.5rem;
-            padding-top: 25px;
     }
 
     .scalling-div {
@@ -639,6 +657,17 @@ input.input-text {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }   
+       .giftcard-value-color {
+        height: 32px !important;
+        line-height: 36px !important;
+        color: #fff !important;
+    }
+
+    
+        .giftcard-title {
+        line-height: 36px !important;
+        color: #fff !important;
+    }
 }
 @media screen and (min-width: 425px) and (max-width: 768px) {
     .card-style-div {
@@ -651,7 +680,6 @@ input.input-text {
         max-width: 100% !important;
         flex-basis: 100% !important;
         margin-bottom: 1.5rem;
-            padding-top: 25px;
     }
 
     .scalling-div {
@@ -665,6 +693,52 @@ input.input-text {
         padding-left: 5px !important;
         padding-right: 5px !important;
     } 
+
+    .giftcard-value-color {
+        height: 36px !important;
+        line-height: 40px !important;
+        color: #fff !important;
+    }
+
+    .giftcard-title {
+        line-height: 40px !important;
+        color: #fff !important;
+    }
+
+    .giftcard-logo-background .giftcard-value-color { 
+        height: 50px !important;
+        line-height: 60px !important;
+    }
+}
+
+.giftcard-style-color {
+    color: #fff !important;
+}
+
+ .giftcard-title {
+           color: #fff !important;
+    }
+
+ .giftcard-text-color {
+      color: #fff !important;
+ }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+    .giftcard-value-color {
+         height: 32px !important;
+        line-height: 40px !important;
+    }
+
+    .giftcard-title {
+        line-height: 36px  !important;
+    }
+
+    .content-mob-section {
+        padding-left: 21px !important;
+        padding-right: 5px !important;
+    } 
+
 }
 
 </style>
