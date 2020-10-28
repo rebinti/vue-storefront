@@ -2055,6 +2055,30 @@ button.no-combination {
     }    
   }      
 }
+@media (min-width: 425px) and (max-width: 767px) {
+    .mob_add_cart_btn{
+      float: left;
+      width: 63% !important;
+      padding: 0 2% 0px 10%;
+    }
+
+    .mob_add_wish_btn{
+      float: left;
+      width: 12% !important;
+      text-align: left;
+    }
+    .video-thum-mob{
+      float: left;
+      width: 10% !important;
+      text-align: left;
+    }
+    .social-share-button-mob{
+      float: left;
+      width: 10% !important;
+      text-align: left;
+    } 
+
+}
 @media (min-width: 425px) and (max-width: 768px) {
   .md\:w-3\/5{
     width:0% !important;
@@ -2627,7 +2651,10 @@ button.no-combination {
 
 @media (min-width: 1440px) and (max-width: 2650px){
   .web-wishlist-div {
-    padding: 7px 15px 0px;
+      padding: 7px 19px 0px;
+  }
+  .web-share-div {
+    padding: 10px 11px 0px 16px;
   }
 }
 

@@ -9,11 +9,9 @@
           v-if="filteredSearchRes && filteredSearchRes.filterSummary && filteredSearchRes.filterSummary.length>0"
           @click="$emit('clearAllFilter')"
         >Clear All</span>
-        <div class="container pb-5 md: ml-2 selectedone">
-          <div
-            class="row gutter-md"
-            v-if="filteredSearchRes && filteredSearchRes.filterSummary && filteredSearchRes.filterSummary.length>0"
-          >
+        <div class="container pb-5 md: ml-2 selectedone"
+        v-if="filteredSearchRes && filteredSearchRes.filterSummary && filteredSearchRes.filterSummary.length>0">
+          <div class="row gutter-md">
             <span
               v-for="filter in filteredSearchRes.filterSummary"
               :key="filter.label"
