@@ -124,9 +124,8 @@
             <div class="form-group">
               <base-input
                 class="mb-3 w-full tx_bx_out"
-                type="recipientEmail"
+                type="text"
                 name="recipientEmail"
-                autocomplete="recipientEmail"
                 v-model="recipientEmail"
                 @blur="$v.recipientEmail.$touch()"
                 :placeholder="'Recipient email address'"
@@ -654,8 +653,8 @@ input.input-text {
         width: 100% !important;
     }  
     .content-mob-section {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }   
        .giftcard-value-color {
         height: 32px !important;
@@ -664,7 +663,7 @@ input.input-text {
     }
 
     
-        .giftcard-title {
+    .giftcard-title {
         line-height: 36px !important;
         color: #fff !important;
     }
@@ -736,9 +735,14 @@ input.input-text {
 
     .content-mob-section {
         padding-left: 21px !important;
-        padding-right: 5px !important;
-    } 
+        padding-right: 21px !important;
+    }
+}
 
+@media (min-width: 1440px) {
+ .scalling-div {
+        transform: scale(1.82) !important;
+    }
 }
 
 </style>
