@@ -556,7 +556,73 @@ input.input-text {
  margin-left: -8px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+.scalling-div {
+    transform: scale(1.76167);
+    height: 643.008px;
+}
+@media screen (max-width: 320px) {
+    .card-style-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+    .card-data-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .scalling-div {
+        transform: scale(1) !important;
+        height: 182.5px;
+    }
+    .giftcard-product-media{
+        width: 100% !important;
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    .card-style-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+        height: 360px !important
+    }
+    .card-data-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .scalling-div {
+        transform: scale(1) !important;
+        height: 182.5px;
+    }
+    .giftcard-product-media{
+        width: 100% !important;
+    }    
+}
+@media screen and (min-width: 376px) and (max-width: 425px) {
+    .card-style-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+        height: 360px !important;
+    }
+    .card-data-div {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .scalling-div {
+        transform: scale(1) !important;
+        height: 182.5px;        
+    }
+    .giftcard-product-media{
+        width: 100% !important;
+    }    
+}
+@media screen and (min-width: 426px) and (max-width: 768px) {
     .card-style-div {
         width: 100% !important;
         max-width: 100% !important;
@@ -572,13 +638,6 @@ input.input-text {
         transform: scale(0.5);
         height: 182.5px;
     }
-
-
-
 }
 
-.scalling-div {
-    transform: scale(1.76167);
-    height: 643.008px;
-}
 </style>
