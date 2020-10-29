@@ -208,6 +208,8 @@ import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters } from 'vuex'
 import NoSSR from 'vue-no-ssr'
 import { Carousel, Slide } from 'vue-carousel'
+import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
+import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
 
 import  SearchSpringMixin from 'src/modules/search-spring/mixins/searchSpring.ts'
 import  SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
@@ -376,6 +378,23 @@ export default {
     },
 
   },
+  metaInfo () {
+    const storeView = currentStoreView()
+    return {
+      link: [
+        { rel: 'amphtml',
+          href: this.$router.resolve(localizedRoute({
+            name: 'category-amp',
+            params: {
+              slug: this.category.slug
+            }
+          }, storeView.storeCode)).href
+        }
+      ],
+      title: htmlDecode(this.category.meta_title || this.categoryName),
+      meta: this.category.meta_description ? [{ vmid: 'description', name: 'description', content: htmlDecode(this.category.meta_description) }] : []
+    }
+  }
   
 };
 </script>

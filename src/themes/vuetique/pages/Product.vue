@@ -1463,6 +1463,7 @@ button.no-combination {
   font-size: 12px;
   transition: 0.4s;
   padding-left: 0px;
+  display:inline-block;
 }
 .product-details .p-list.border-bottom{
     border-bottom: 1px solid #bfbfbf;;
