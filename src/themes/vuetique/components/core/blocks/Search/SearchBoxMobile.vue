@@ -24,7 +24,7 @@
         @focus="searchFocus = true;"
         @blur="searchFocus = false"
       />
-      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch" >
+      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click="searchTextData(search)">
         <use xlink:href="#search" />
       </svg>
       <i @click="$emit('click')" class="material-icons p15">close</i>
@@ -49,13 +49,40 @@
         </transition>
       </div>
     </div> -->
+    <div class="absolute z-20 w-full mobile-autocomplete" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
+      <div v-show="showDrop" class="bg-white border border-grey border-t-0">
+        <transition name="fade">
+          <div v-if="emptyResults" class="w-full p-4 text-black font-medium">
+            {{ $t('No results were found.') }}
+          </div>
+        </transition>
+
+         <transition name="fade">
+          <div class="w-full p-4 text-black font-medium" v-if="autoCompleteResults" >
+            <h3>Search suggestions</h3>
+            <p v-for="trend in autoCompleteResults.alternatives" :key="trend.popularity"
+            @click="searchTextData(trend.text)"
+            > {{trend.text}} </p>
+          </div>
+        </transition>
+
+         <transition name="fade">
+          <div class="w-full p-4 text-black font-medium"  v-if="trendingSearches.length">
+            <h3>Trending Searches</h3>
+            <p v-for="trend in trendingSearches" :key="trend.popularity"
+            @click="searchTextData(trend.searchQuery)"
+            > {{trend.searchQuery}} </p>
+          </div>
+        </transition>
+      </div>
+    </div>    
   </div>
   </transition>
 </template>
 
 <script>
 import Vue from 'vue'
-// import SearchPanel from '@vue-storefront/core/compatibility/components/blocks/SearchPanel/SearchPanel'
+import SearchPanel from '@vue-storefront/core/compatibility/components/blocks/SearchPanel/SearchPanel'
 // import Product from 'theme/components/core/blocks/Search/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
 
@@ -67,13 +94,15 @@ export default {
     // Product,
     BaseInput
   },
-  mixins: [ VueOfflineMixin],  //SearchPanel,
+  mixins: [ VueOfflineMixin,SearchPanel],  //SearchPanel,
   data () {
     return {
-      searchFocus: true,
+      searchFocus: false,
+      resultsHover: false,
+      showResults: 5,
       search: '',
-      // resultsHover: false,
-      // showResults: 5,
+      trendingSearches: [],
+      autoCompleteResults: null
     }
   },
   props: {
@@ -92,24 +121,35 @@ export default {
       } 
     }
   },
-  // computed: {
-  //   showDrop () {
-  //     return false // (this.searchFocus && this.search !== '') || this.resultsHover
-  //   },
-  //   results () {
-  //     return this.products.slice(0, this.showResults)
-  //   },
-  //   moreResults () {
-  //     return this.products.length > this.showResults
-  //   },   
-  // },
+  computed: {
+    showDrop () {
+      return this.searchFocus || this.resultsHover
+      //(this.searchFocus && this.search !== '') || this.resultsHover
+    },
+    results () {
+      return this.products.slice(0, this.showResults)
+    },
+    moreResults () {
+      return this.products.length > this.showResults
+    },   
+  },
   methods: {
-   searchDataInSearchSpring () {
+   async searchDataInSearchSpring () {
       // console.log('searchDataInSearchSpring', this.search, this.searchFocus);
-      if (this.searchFocus) {
-        Vue.prototype.$bus.$emit('search-in-search-spring', this.search );
-      }
-    }
+      // if (this.searchFocus) {
+      //   Vue.prototype.$bus.$emit('search-in-search-spring', this.search );
+      // }
+       if (this.searchFocus && this.search.length >1) {
+          const searchResults = await this.$store.dispatch('searchSpringSearch/getAutoSuggectionsFromSearchSpring', this.search)
+         this.autoCompleteResults = searchResults
+       } else {
+          this.autoCompleteResults = null
+       }      
+    },
+    searchTextData (text) {
+         Vue.prototype.$bus.$emit('search-in-search-spring', text );
+         this.resultsHover = false
+    }    
   },
   mounted () {
     this.$bus.$on('focusSearchInput', () => {
@@ -117,7 +157,11 @@ export default {
         this.$refs.search.focus()
       }
     })
-  }
+  },
+  async beforeMount () {
+      const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
+      this.trendingSearches = searchResults.trending ? searchResults.trending.queries : [];
+  }  
 }
 </script>
 
@@ -134,5 +178,25 @@ export default {
   .slide-fade-enter, .slide-fade-leave-to{
     transform: translateY(10px);
     opacity: 0;
+  }  
+  @media (max-width: 768px) {
+    .mobile-autocomplete{
+      width: 96.8%;
+    }
   }
+  @media (max-width: 425px) {
+    .mobile-autocomplete{
+      width: 94%;
+    }    
+  }
+  @media (max-width: 375px) {
+    .mobile-autocomplete{
+      width: 93.2%;
+    }     
+  }
+  @media (max-width: 320px) {
+    .mobile-autocomplete{
+      width: 92%;
+    }     
+  }      
 </style>
