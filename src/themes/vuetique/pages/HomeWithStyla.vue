@@ -4,7 +4,7 @@
     <Styla-home-magazine  />
 
     <!-- For loading the new arrivals Slider -->
-    <section class="new-collection container mb-16">
+    <section class="new-collection container gggggggggg mb-16">
       <div>
         <header class="mb-6">
           <h2 class="text-h1 leading-h1 text-center">
@@ -16,7 +16,12 @@
           <no-ssr>
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
-      </div>      
+      </div> 
+  <!-- <div
+    class="cms-content py-10 page-content"
+    v-if="cmspageseodata"
+    v-html="cmspageseodata.meta_description"
+  />            -->
     </section>
   <div id='seg-home-reco'></div>
   </div>
@@ -44,6 +49,9 @@ import ProductTile from 'theme/components/core/ProductTile'
 
 import StylaHomeMagazine from "theme/components/theme/blocks/Styla/StylaHomeMagazine";
 
+import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
+import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
+
 export default {
   mixins: [Home ],
   components: {
@@ -54,6 +62,7 @@ export default {
   data () {
     return {
       loading: true,
+      cmspageidentifier:'amphomepage',
       sliderConfig: {
         perPage: 5,
         // perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],  // Use this in product slider - to fix an infinte load issue
@@ -78,6 +87,11 @@ export default {
   },
   computed: {
     ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
+    cmspageseodata () {
+        
+            return this.$store.getters[`cmsPage/cmsPageIdentifier`]('amphomepage')
+        
+    },
   },
   created () {
     // Load personal and shipping details for Checkout page from IndexedDB
@@ -108,6 +122,9 @@ export default {
       // }),
       store.dispatch('homepage/fetchNewCollection'),
       store.dispatch('homepage/loadBestsellers'),
+      store.dispatch('cmsPage/single', {key: 'identifier.keyword',
+        value: 'amphomepage',
+        skipCache: true }),
     ])
   },
   beforeRouteEnter (to, from, next) {
@@ -122,6 +139,7 @@ export default {
     }
   },
   mounted() {
+    console.log("GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",this.cmspageseodata)
     this.$bus.$emit('send-to-emarsys-tracking');
     if ('styla' in window) {
     // if (window.styla !== null && window.styla['isReady'] !== undefined) {
@@ -143,7 +161,24 @@ export default {
   },
   beforeDestroy () {
     if (this.setTimeoutSubscription) clearTimeout(this.setTimeoutSubscription)
-  }
+  },
+  metaInfo () {
+    const storeView = currentStoreView()
+    return {
+      link: [
+        { rel: 'amphomepage',
+          href: this.$router.resolve(localizedRoute({
+            name: 'home-amp',
+            params: {
+              slug: '/'
+            }
+          }, storeView.storeCode)).href
+        }
+      ],
+      title: htmlDecode(this.cmspageseodata.meta_title || 'Iclothing Homeee'),
+      meta: this.cmspageseodata.meta_description ? [{ vmid: 'description', name: 'description', content: htmlDecode(this.cmspageseodata.meta_description) }] : []
+    }
+  }  
 }
 </script>
 <style>
