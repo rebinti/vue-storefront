@@ -567,6 +567,7 @@
                   :disabled="disableAddToCartButtonFlag"
                   :configuration="configuration"  
                   class="py-3 text-sm"
+                  style="margin-right: 4px;"
                   id="add-to-cart-button"
                 />
 
@@ -1957,6 +1958,10 @@ button.no-combination {
       }    
     }
   }
+
+  .flex-grow .web-share-div {
+    padding: 10px 10px 0px 10px;
+  } 
 }
 @media (max-width: 1024px) {
   #product{
@@ -2683,4 +2688,5 @@ a:-webkit-any-link {
       width: 46px !important;
   }
 }
+
 </style>
