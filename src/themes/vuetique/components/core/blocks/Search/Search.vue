@@ -135,13 +135,11 @@ export default {
         this.$refs.search.focus()
       }
     })
+    window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
   },
   async beforeMount () {
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
       this.trendingSearches = searchResults.trending ? searchResults.trending.queries : [];
-  },
-  beforeMount() {
-    window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
   },
   destroyed() {
     window.removeEventListener('keydown', this.handleKeyDown); //will detach the event listener once the component is destroyed
