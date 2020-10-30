@@ -119,6 +119,11 @@ export default {
           this.autoCompleteResults = null
        }
     },
+    handleKeyDown(e) { //method to handle the keypress
+      if (e.code === 'Enter') {
+        this.searchTextData(this.search);
+      }
+    },    
     searchTextData (text) {
          Vue.prototype.$bus.$emit('search-in-search-spring', text );
          this.resultsHover = false
@@ -134,7 +139,13 @@ export default {
   async beforeMount () {
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
       this.trendingSearches = searchResults.trending ? searchResults.trending.queries : [];
-  }
+  },
+  created() {
+    window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this.handleKeyDown); //will detach the event listener once the component is destroyed
+  }  
 }
 </script>
 
