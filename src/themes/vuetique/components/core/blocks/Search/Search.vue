@@ -140,7 +140,7 @@ export default {
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
       this.trendingSearches = searchResults.trending ? searchResults.trending.queries : [];
   },
-  created() {
+  beforeMount() {
     window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
   },
   destroyed() {
