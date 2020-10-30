@@ -240,9 +240,9 @@
                   </a> 
                 </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 3,bottom: '0px', right: '10px'}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 3,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
 
-                  <div class="mob_add_cart_btn" @click="openProductOptionsPopup">
+                  <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup">
 <!-- disableAddToCartButtonFlag -->
                     <add-to-cart :product="product"
                      :disabled="disableAddToCartButtonFlag || (product.type_id == 'configurable' && product.configurable_children === undefined)" 
@@ -2063,19 +2063,23 @@ button.no-combination {
       padding: 0 2% 0px 10%;
     }
 
+    .mob_crt_button_out .no_video_button {
+       width: 71% !important;
+    }
+    
     .mob_add_wish_btn{
       float: left;
-      width: 12% !important;
+      // width: 12% !important;
       text-align: left;
     }
     .video-thum-mob{
       float: left;
-      width: 10% !important;
+      // width: 10% !important;
       text-align: left;
     }
     .social-share-button-mob{
       float: left;
-      width: 10% !important;
+      // width: 10% !important;
       text-align: left;
     } 
 
@@ -2239,17 +2243,17 @@ button.no-combination {
 
   .mob_add_wish_btn{
      float: left;
-    width: 12%;
+    // width: 12%;
     text-align: left;
   }
   .video-thum-mob{
      float: left;
-    width: 6%;
+    // width: 6%;
     text-align: left;
   }
   .social-share-button-mob{
      float: left;
-    width: 6%;
+    // width: 6%;
     text-align: left;
   } 
   .social-share-button-mob,.video-thum-mob{
@@ -2439,7 +2443,10 @@ button.no-combination {
 
 @media (max-width: 375px) {	
   .mob_add_cart_btn{
-    width: 59% !important;
+    width: 52% ;
+  }
+  .no_video_button{
+    width: 68% ;
   }
 }
 @media (max-width: 425px) {	
@@ -2505,22 +2512,22 @@ button.no-combination {
     }
     .mob_add_cart_btn{
       float: left;
-      width: 61%;
+      // width: 61%;
       padding: 0 3% 0px 5%;
     }
     .mob_add_wish_btn{
       float: left;
-      width: 12%;
+      // width: 12%;
       text-align: left;
     }
     .video-thum-mob{
       float: left;
-      width: 12%;
+      // width: 12%;
       text-align: left;
     }
     .social-share-button-mob{
       float: left;
-      width: 12%;
+      // width: 12%;
       text-align: left;
     }   
 .social-share-button-mob,.video-thum-mob{
@@ -2617,8 +2624,8 @@ button.no-combination {
 @media (max-width: 320px) {	
   .container{
       .social-share-button-mob img,.video-thum-mob img{
-      margin-left: 5px;
-      margin-top: 9px;
+         margin-left: 10px;
+         margin-top: 8px;
     } 
   }
 }
@@ -2647,12 +2654,17 @@ button.no-combination {
 }
 
 .web-wishlist-div {
-    width: 70px;margin-right: 2px;margin-left: 2px;border: 1px solid #000000;padding: 7px 8px 0px;
+    width: 70px;margin-right: 2px;margin-left: 2px;border: 1px solid #000000;
+    // padding: 7px 8px 0px;
+      padding: 7px 12px 0px;
+      text-align: center;
+      padding-top: 6px;
 }
 
 @media (min-width: 1440px) and (max-width: 2650px){
   .web-wishlist-div {
-      padding: 7px 19px 0px;
+      // padding: 7px 19px 0px;\
+          padding: 7px 12px 0px;
   }
   .web-share-div {
     padding: 10px 11px 0px 16px;
@@ -2664,4 +2676,11 @@ a:-webkit-any-link {
   outline: none !important;;
 }
 
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .social-share-button-mob, .mob_add_wish_btn, .video-thum-mob  {
+      height: 46px !important;
+      width: 46px !important;
+  }
+}
 </style>
