@@ -751,7 +751,7 @@
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
-    <div class="lg:pl-6 pr-5 container my-4 recent-view">
+    <div class="lg:pl-6  container my-4 recent-view">
       <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
       </no-ssr>
