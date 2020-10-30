@@ -132,6 +132,9 @@ export default {
       this.$bus.$on('user-after-logout', this.onUserPricesRefreshed)
     }
   },
+  mounted () {
+    console.log('CATEGORY DESCCCCCCCC', this.category)
+  },
   beforeDestroy () {
     this.$bus.$off('list-change-sort', this.onSortOrderChanged)
     this.$bus.$off('filter-changed-category', this.onFilterChanged)
