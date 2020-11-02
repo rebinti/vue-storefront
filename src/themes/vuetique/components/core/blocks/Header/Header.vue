@@ -185,6 +185,7 @@ export default {
         }
         if (window.innerWidth <= 991)  { // code from SearchBoxMobile - just open the keyboard on focus
           if ((this.$route.path === '/search') && (dataval=='searchclick')) {
+              console.log("INNNNNNNNNNNNNN","onlyclick")
               setTimeout(() => {
                 if(this.clickedFromMobileSearchIcon) {
                   document.querySelector('#searchMobile input[type="text"]').focus()
