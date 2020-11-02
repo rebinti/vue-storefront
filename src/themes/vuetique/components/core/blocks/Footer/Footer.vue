@@ -178,66 +178,91 @@
             </Accordion>
           </div> -->
 
-          <div class="col-12 md:col-3 md:mt-8 lg:col-3 flex flex-col">
+          <div class="col-12 md:col-4  lg:col-3 flex flex-col footer-app-dwld-div">
             <div class="">
               <!-- <Newsletter /> --> 
               <h3> Join in on the chit chat </h3>
             </div>
 
-            <div class="flex justify-center lg:justify-start social-footer mt-12 app-share-div">
+            <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
                 rel="noopener"
-                class="social-icon mr-1 rounded-full"
+                class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/iclothingie"
                 :aria-label="$t('Go to Facebook')"
               >
-                <img src="/assets/icons/social-f.svg" alt="">
+                <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
+                <i class="fab fa-facebook-f"></i>
               </a>
               <a
                 target="_blank"
                 rel="noopener"
-                class="social-icon mx-1 rounded-full"
+                class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.instagram.com/iclothing"
                 :aria-label="$t('Go to Instagram')"
               >
-                <img src="/assets/icons/social-i.svg" alt="">
+                <!-- <img src="/assets/icons/social-i.svg" alt=""> -->
+                <i class="fab fa-instagram"></i>
               </a>
-              <a
+               <a
                 target="_blank"
                 rel="noopener"
-                class="social-icon mx-1 rounded-full"
-                href="https://www.pinterest.com/iclothing"
-                :aria-label="$t('Go to Pinterest')"
-              >
-                <img src="/assets/icons/social-p.svg" alt="">
-              </a>
-              <a
-                target="_blank"
-                rel="noopener"
-                class="social-icon mx-1 rounded-full"
+                class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.youtube.com/user/iclothingie"
                 :aria-label="$t('Go to Youtube')"
               >
-                <img src="/assets/icons/social-y.svg" alt="">
+                <!-- <img src="/assets/icons/social-y.svg" alt=""> -->
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full new_footer_icons"
+                href="https://www.pinterest.com/iclothing"
+                :aria-label="$t('Go to Pinterest')"
+              >
+                <!-- <img src="/assets/icons/social-p.svg" alt=""> -->
+                <i class="fab fa-pinterest-p"></i>
+              </a> 
+              <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mx-1 rounded-full new_footer_icons"
+                href="https://twitter.com/iclothing"
+                :aria-label="$t('Go to Twitter')"
+              >
+                <i class="fab fa-twitter"></i>
               </a>
             </div>
           </div>
 
-          <div class="col-12 md:col-3 md:mt-8 lg:col-3 flex flex-col">
+          <div class="col-12 md:col-2  lg:col-3 flex flex-col footer-app-dwld-div">
             <div class="">
               <h3> Download our app</h3>
             </div>
 
-            <div class="flex justify-center lg:justify-start social-footer mt-12 app-share-div">
+            <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
                 rel="noopener"
-                class="social-icon mr-1 rounded-full"
+                class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/"
                 :aria-label="$t('Go to Facebook')"
               >
-                <img src="/assets/icons/social-f.svg" alt="">
+                <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
+                <i class="fab fa-android"></i>
+              </a>
+
+               <a
+                target="_blank"
+                rel="noopener"
+                class="social-icon mr-1 rounded-full new_footer_icons"
+                href="https://www.facebook.com/"
+                :aria-label="$t('Go to Facebook')"
+              >
+                <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
+                <i class="fab fa-apple"></i>
               </a>
     
             </div>
@@ -389,5 +414,41 @@ export default {
         margin-bottom: 1rem;
     }
  }
+
+ @media screen and (min-width: 728px) and (max-width: 1023px) {
+    .footer-app-dwld-div{
+          margin-top: 2rem;
+    }
+
+}
+
+.new_footer_icons {
+      /* width: 25px; */
+    /* height: 25px; */
+    line-height: 26px;
+    margin-right: 5px;
+    background-color: #282828;
+    color: #FFF;
+    border-radius: 25px;
+    border: 1px solid;
+    border-color: #282828;
+    display: inline-block;
+    vertical-align: top;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    margin: 0 10px 5px 0;
+    -moz-transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid;
+}
+
 
 </style>

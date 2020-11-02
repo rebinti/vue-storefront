@@ -443,4 +443,14 @@ i {
 .wishlist.wishlist_out.pt-10 {
         padding-top: 0.50rem;
 }
+
+
+@media (max-width: 375px) {
+  .wishlist-top-button-row .button-blck .button-type1 {
+    width: 150px;
+    font-size: 13px;
+  }
+}
+
+   
 </style>
