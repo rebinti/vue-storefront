@@ -448,6 +448,7 @@ export default {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border: 1px solid;
+    padding-top: 1px;
 }
 
 

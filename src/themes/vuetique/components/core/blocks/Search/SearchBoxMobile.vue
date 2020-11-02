@@ -13,7 +13,7 @@
     <div class="flex items-center">
       <base-input
         ref="searchMobile"
-        focus
+        :focus="clickFromHeaderMobileSearch"
         type="text"
         id="searchMobile"
         :aria-label="$t('Type what you are looking for...')"
@@ -27,7 +27,7 @@
       <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click="searchTextData(search)">
         <use xlink:href="#search" />
       </svg>
-      <i @click="$emit('click')" class="material-icons p15">close</i>
+      <i @click="searchFocus = false" class="material-icons p15">close</i>
     </div>
       <!-- </router-link> -->
     <!-- <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
@@ -109,6 +109,11 @@ export default {
     showpanelflag: {
       type: Boolean,
       required: true
+    },
+    clickFromHeaderMobileSearch: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   watch : {
@@ -153,7 +158,7 @@ export default {
   },
   mounted () {
     this.$bus.$on('focusSearchInput', () => {
-      if (!this.$store.state.ui.searchpanel) {
+      if (!this.$store.state.ui.searchpanel && this.clickFromHeaderMobileSearch ) {
         this.$refs.search.focus()
       }
     })
