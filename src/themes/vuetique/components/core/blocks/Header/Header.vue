@@ -27,7 +27,7 @@
           </div>
            <div class="lg:col-6 md:col-12 sm:col-12 w-full hidden toogle-search mob-search-box"
            :style="{ display: openSearchPanel ? 'block': 'none' }">
-             <search-box-mobile :showpanelflag="showSearchBoxSection" @click="toggleSearchBox"/>
+             <search-box-mobile :showpanelflag="showSearchBoxSection" @click="toggleSearchBox(searchclick)"/>
           </div>
           <div class="col-auto sm:col-4 lg:col-grow justify-end" :style="{ display: !openSearchPanel ? 'block': 'none' }">
             <div class="right-icons flex">
@@ -141,7 +141,7 @@ export default {
   mounted () {
     this.setSegmentifyUserObject()
     this.$nextTick(() => {
-      if (this.$route.path === '/search' && window.innerWidth <= 991) this.toggleSearchBox()
+     if (this.$route.path === '/search' && window.innerWidth <= 991) this.toggleSearchBox()
     })    
   },
   methods: {
@@ -172,7 +172,7 @@ export default {
       }
       this.setSegmentifyUserObject()
     },
-    toggleSearchBox () {
+    toggleSearchBox (dataval) {
         // console.log('window.history', window.history)
         console.log('window.history length', window.history.length)
         this.openSearchPanel = !this.openSearchPanel
@@ -181,6 +181,14 @@ export default {
           if (window.history.length <= 2) this.$router.push(this.localizedRoute('/'))
           else  this.$router.back()
         }
+        if (window.innerWidth <= 991)  { // code from SearchBoxMobile - just open the keyboard on focus
+          if ((this.$route.path === '/search') && (dataval=='searchclick')) {
+              setTimeout(() => {
+                document.querySelector('#searchMobile input[type="text"]').focus()
+                document.getElementById("searchMobile").focus();
+              }, 200);
+          } 
+        }        
     },
     gotoAccount () {
       this.$bus.$emit('modal-toggle', 'modal-signup')

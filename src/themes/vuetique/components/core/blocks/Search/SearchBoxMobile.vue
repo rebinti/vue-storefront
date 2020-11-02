@@ -112,14 +112,14 @@ export default {
     }
   },
   watch : {
-    showpanelflag (value) {
-      if (value) {
-        setTimeout(() => {
-          document.querySelector('#searchMobile input[type="text"]').focus()
-          document.getElementById("searchMobile").focus();
-        }, 200);
-      } 
-    }
+    // showpanelflag (value) {   // issue with device search back - from product page - same code move in to header
+    //   if (value) {
+    //     setTimeout(() => {
+    //       document.querySelector('#searchMobile input[type="text"]').focus()
+    //       document.getElementById("searchMobile").focus();
+    //     }, 200);
+    //   } 
+    // }
   },
   computed: {
     showDrop () {
