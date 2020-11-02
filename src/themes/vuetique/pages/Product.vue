@@ -240,7 +240,7 @@
                   </a> 
                 </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 3,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 2,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
 
                   <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup">
 <!-- disableAddToCartButtonFlag -->

@@ -224,5 +224,13 @@ export default {
           right: 25px;
     }
   }
+
+  .search_page_size_div {
+    .columns {
+        &::after {
+              right: 132px;
+        }
+    }
+  }
 }
 </style>

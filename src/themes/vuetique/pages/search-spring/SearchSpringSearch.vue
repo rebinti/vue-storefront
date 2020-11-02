@@ -79,7 +79,7 @@
               </h2>
             </div>
              <div class="col-2 hidden lg:block xs:col-6">
-                 <div v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
+                 <div v-if="searchRes && searchRes.facets && searchRes.facets.length > 0" class="search_page_size_div">
                     <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                     <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
                  </div>   
