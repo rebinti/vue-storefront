@@ -91,6 +91,7 @@ export default {
       resultsHover: false,
       showResults: 5,
       search: '',
+      searchparam: '',
       trendingSearches: [],
       autoCompleteResults: null
     }
@@ -126,12 +127,17 @@ export default {
     //     this.searchTextData(this.search);
     //   }
     // },        
-    searchTextData (text) {
-          this.$router.push({ path: 'search', query: { q: text }})
-          // Vue.prototype.$bus.$emit('search-in-search-spring', text );
-          this.resultsHover = false
-          this.searchFocus = false
-    }
+    searchTextData (text) {        
+        if((text!="") && (text.length >= 2)){
+          let searchparam = text;
+          this.$router.push({ path: 'search', query: { q: searchparam }})
+        }else{
+          let searchparam = this.$route.query.q;
+        }
+         Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+         this.resultsHover = false
+         this.searchFocus = false
+    }    
   },
   mounted () {
     this.$bus.$on('focusSearchInput', () => {
