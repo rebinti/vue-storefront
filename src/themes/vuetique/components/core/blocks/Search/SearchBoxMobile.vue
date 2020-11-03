@@ -26,7 +26,7 @@
         @keyup.enter="searchTextData(search)"
         @click.native="searchFocus = true;"
       />
-      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click="searchTextData(search)">
+      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click.stop="searchTextData(search)">
         <use xlink:href="#search" />
       </svg>
       <i @click="$emit('click')" class="material-icons p15">close</i>
@@ -156,12 +156,13 @@ export default {
     },
     searchTextData (text) {        
         if((text!="") && (text.length >= 2)){
-          let searchparam = text;
-          this.$router.push({ path: 'search', query: { q: searchparam }})
+          this.searchparam = text;
+          this.$router.push({ path: 'search', query: { q: this.searchparam }})
         }else{
-          let searchparam = this.$route.query.q;
+          this.searchparam = this.$route.query.q;
+          this.search = this.searchparam
         }
-         Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+         Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
          this.resultsHover = false
          this.searchFocus = false
     }    
