@@ -174,7 +174,7 @@ export default {
       }
       this.setSegmentifyUserObject()
     },
-    toggleSearchBox (dataval) {
+    toggleSearchBox () {
         // console.log('window.history', window.history)
         console.log('window.history length', window.history.length)
         this.openSearchPanel = !this.openSearchPanel
