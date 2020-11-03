@@ -101,6 +101,7 @@ export default {
       resultsHover: false,
       showResults: 5,
       search: '',
+      searchparam: '',
       trendingSearches: [],
       autoCompleteResults: null
     }
@@ -151,8 +152,14 @@ export default {
           this.autoCompleteResults = null
        }      
     },
-    searchTextData (text) {
-         Vue.prototype.$bus.$emit('search-in-search-spring', text );
+    searchTextData (text) {        
+        if((text!="") && (text.length >= 2)){
+          let searchparam = text;
+          this.$router.push({ path: 'search', query: { q: searchparam }})
+        }else{
+          let searchparam = this.$route.query.q;
+        }
+         Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
          this.resultsHover = false
     }    
   },
@@ -162,6 +169,10 @@ export default {
         this.$refs.search.focus()
       }
     })
+    if(this.$route.query.q){
+      let searchparam = this.$route.query.q;
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+    }
   },
   async beforeMount () {
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
