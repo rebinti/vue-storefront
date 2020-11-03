@@ -16,15 +16,15 @@
         <h3 style="position: absolute;top: 20px;left: 41px;">Product Details</h3>
     </div>
     <br>          
-        <div
+        <div class="description"
             v-html="product.short_description"
-            style="margin-left: 10px; margin-top: 10px;"
+            style="margin-left: 10px; margin-top: 10px;white-space: pre-line;"
         />
                                       
     <br>    
-        <div 
+        <div  class="description"
             v-html="product.description" 
-            style="margin-left: 10px;"
+            style="margin-left: 10px;white-space: pre-line;"
         />
                                  
     
@@ -135,4 +135,25 @@ export default {
       opacity: 1;
     }
   }
+</style>
+
+<style>
+
+  .description p {
+    margin-bottom: -30px;
+
+  }
+  .description ul {
+      list-style: disc outside;
+  }
+
+  .description ul li {
+     margin-bottom: 2px;
+    width: 300px;
+    margin-left: 17px;
+    margin-bottom: 0;
+    padding: 0;
+    margin-bottom: -17px;
+ }
+
 </style>
