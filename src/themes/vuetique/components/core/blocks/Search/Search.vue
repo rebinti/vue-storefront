@@ -23,7 +23,7 @@
         @keyup.enter="searchTextData(search)"
         @click.native="searchFocus = true;"        
       />
-      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey" @click.native="searchTextData(search)">
+      <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey" @click="searchTextData(search)">
         <use xlink:href="#search" />
       </svg>
     </div>
