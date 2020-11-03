@@ -181,7 +181,7 @@ export default {
         this.showSearchBoxSection = !this.showSearchBoxSection
         if (!this.showSearchBoxSection && this.$route.path == '/search') {
           if (window.history.length <= 2) this.$router.push(this.localizedRoute('/'))
-          else  this.$router.back()
+          //else  this.$router.back()
         }
         if (window.innerWidth <= 991)  { // code from SearchBoxMobile - just open the keyboard on focus
               setTimeout(() => {
