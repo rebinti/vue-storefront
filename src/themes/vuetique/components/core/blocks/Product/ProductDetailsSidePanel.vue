@@ -29,15 +29,20 @@
                                  
     
   <div style="margin-top:10px;">
-    <h4>Model Details</h4>
-      <p v-if="modelName">Model: {{modelName.label}} </p>
-      <div v-if="productModelDetails">
-        <img :src="productModelDetails.image" width="100" height="100" />
-         <p>Height: {{productModelDetails.height}} </p>
-         <p>Hips: {{productModelDetails.hips}} </p>
-         <p>Waist {{productModelDetails.waist}} </p>
-         <p>Bust: {{productModelDetails.bust}} </p>
-         <p>Details: {{productModelDetails.details}} </p>
+    <!-- <h4>Model Details</h4> -->
+      
+      <div v-if="productModelDetails" class="model">
+        <img :src="'https://cdn.iclothing.com/media/'+productModelDetails.image" width="100%" height="100" />
+          <br/>
+          <p v-if="modelName" style="font-weight:400;">Model: {{modelName.label}} </p>
+          <br/>
+          <ul class="modeldata">
+            <li>Height: {{productModelDetails.height}} </li>
+            <li>Hips: {{productModelDetails.hips}} </li>
+            <li>Waist {{productModelDetails.waist}} </li>
+            <li>Bust: {{productModelDetails.bust}} </li>
+            <li>Details: {{productModelDetails.details}} </li>
+         </ul>
       </div>
 
   </div>
@@ -47,6 +52,7 @@
 </template>
 
 <script>
+import config from 'config'
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
@@ -62,7 +68,8 @@ export default {
     return {      
         detailsOpen: false,        
         detailsAccordion: 'details',
-        swipeToClosePanelFlag: false
+        swipeToClosePanelFlag: false,
+        //mediaimageurl: config.cdnimage.mediaurl,
     }
   },  
   components: {
@@ -92,6 +99,7 @@ export default {
     }
   },
   mounted () {
+    //console.log("TTTTTTTTTTT",this.$store.state.config.cdnimage.mediaurl)
       let start = null;
       const touchStart = (event) => {
           if(event.touches.length === 1) start = event.touches.item(0).clientX;
@@ -178,6 +186,16 @@ export default {
     margin-bottom: 0;
     padding: 0;
     margin-bottom: -17px;
+ }
+ 
+ .model .ul.modeldata li{
+   line-height: 2.5rem;
+    margin-bottom: 2px;
+    width: 300px;
+    margin-left: 17px;
+    margin-bottom: 0;
+    padding: 0;
+    margin-bottom: -17px;   
  }
 
 </style>
