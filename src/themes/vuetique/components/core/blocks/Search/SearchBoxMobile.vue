@@ -23,6 +23,8 @@
         @input="searchDataInSearchSpring"
         @focus="searchFocus = true;"
         @blur="searchFocus = false"
+        @keyup.enter="searchTextData(search)"
+        @click.native="searchFocus = true;"
       />
       <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click="searchTextData(search)">
         <use xlink:href="#search" />
@@ -152,8 +154,10 @@ export default {
        }      
     },
     searchTextData (text) {
-         Vue.prototype.$bus.$emit('search-in-search-spring', text );
+         this.$router.push({ path: 'search', query: { q: text }})
+         // Vue.prototype.$bus.$emit('search-in-search-spring', text );
          this.resultsHover = false
+         this.searchFocus = false
     }    
   },
   mounted () {

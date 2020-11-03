@@ -183,8 +183,12 @@ export default {
       this.getSearchData(false, true, 'searchSpringSearch');
     }
   },
+  watch: {
+    '$route': 'searchActiveQueryValueResults'
+  },
   beforeMount () {
-    this.$bus.$on('search-in-search-spring', this.dataFromHeader);
+    this.searchActiveQueryValueResults()
+    // this.$bus.$on('search-in-search-spring', this.dataFromHeader);
 
     document.addEventListener('scroll', () => {
       this.isScrolling = true
@@ -199,7 +203,7 @@ export default {
     }, 250)
   },
   beforeDestroy () {
-    this.$bus.$off('search-in-search-spring');
+    // this.$bus.$off('search-in-search-spring');
   },
   mounted () {
     if (this.filterData && this.filterData.length > 0) {
@@ -211,6 +215,12 @@ export default {
     this.setSegmentify()
   },
   methods: {
+    searchActiveQueryValueResults() {
+        if (this.$route.query.q && this.$route.query.q !== this.searchedValue) {
+          this.squery= this.$route.query.q;
+          this.searchDataInSearchSpring (this.$route.query.q)
+        }
+    },
     setSegmentify() {
       // For working Segmentify
       window.segPageInf = {

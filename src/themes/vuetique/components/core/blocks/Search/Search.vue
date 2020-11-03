@@ -20,6 +20,8 @@
         @input="searchDataInSearchSpring"
         @focus="searchFocus = true;"
         @blur="searchFocus = false"
+        @keyup.enter="searchTextData(search)"
+        @click.native="searchFocus = true;"
       />
       <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey" @click="searchTextData(search)">
         <use xlink:href="#search" />
@@ -119,14 +121,16 @@ export default {
           this.autoCompleteResults = null
        }
     },
-    handleKeyDown(e) { //method to handle the keypress
-      if (e.code === 'Enter') {
-        this.searchTextData(this.search);
-      }
-    },    
+    // handleKeyDown(e) { //method to handle the keypress
+    //   if (e.code === 'Enter') {
+    //     this.searchTextData(this.search);
+    //   }
+    // },        
     searchTextData (text) {
-         Vue.prototype.$bus.$emit('search-in-search-spring', text );
-         this.resultsHover = false
+          this.$router.push({ path: 'search', query: { q: text }})
+          // Vue.prototype.$bus.$emit('search-in-search-spring', text );
+          this.resultsHover = false
+          this.searchFocus = false
     }
   },
   mounted () {
@@ -135,15 +139,15 @@ export default {
         this.$refs.search.focus()
       }
     })
-    window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
+    // window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
   },
   async beforeMount () {
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
       this.trendingSearches = searchResults.trending ? searchResults.trending.queries : [];
   },
-  destroyed() {
-    window.removeEventListener('keydown', this.handleKeyDown); //will detach the event listener once the component is destroyed
-  }  
+  // destroyed() {
+    // window.removeEventListener('keydown', this.handleKeyDown); //will detach the event listener once the component is destroyed
+  // }  
 }
 </script>
 
