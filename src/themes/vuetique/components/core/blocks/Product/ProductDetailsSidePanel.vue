@@ -28,7 +28,19 @@
         />
                                  
     
+  <div style="margin-top:10px;">
+    <h4>Model Details</h4>
+      <p v-if="modelName">Model: {{modelName.label}} </p>
+      <div v-if="productModelDetails">
+        <img :src="productModelDetails.image" width="100" height="100" />
+         <p>Height: {{productModelDetails.height}} </p>
+         <p>Hips: {{productModelDetails.hips}} </p>
+         <p>Waist {{productModelDetails.waist}} </p>
+         <p>Bust: {{productModelDetails.bust}} </p>
+         <p>Details: {{productModelDetails.details}} </p>
+      </div>
 
+  </div>
           
 
   </div>
@@ -61,11 +73,23 @@ export default {
       isProductDetailsSidePanelOpen: state => state.ui.productDetailsSidePanelFlag
     }),
     ...mapGetters({
-      product: 'product/productCurrent'
+      product: 'product/productCurrent',
+      modelsList: 'ui/getModelsList',
+      attributesByCode: 'attribute/attributeListByCode',
     }),    
     // isProductDetailsSidePanelOpen () {
     //   return this.$store.state.ui.productDetailsSidePanelFlag
     // }
+    productModelDetails () {
+      return this.modelsList.find(val=> val.name == this.product.model) || null
+    },
+    modelName () {
+      if (this.attributesByCode && this.attributesByCode.model) {
+        return this.attributesByCode.model.options.find(val => val.value == this.product.model) || null
+      } else {
+        return null
+      }
+    }
   },
   mounted () {
       let start = null;
