@@ -29,7 +29,7 @@
       <svg viewBox="0 0 25 25" class="vt-icon--sm absolute right-0 mr-2 w-6 h-6 text-grey toogleSearch"  @click="searchTextData(search)">
         <use xlink:href="#search" />
       </svg>
-      <i @click="searchFocus = false" class="material-icons p15">close</i>
+      <i @click="$emit('click')" class="material-icons p15">close</i>
     </div>
       <!-- </router-link> -->
     <!-- <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">

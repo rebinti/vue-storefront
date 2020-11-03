@@ -174,25 +174,22 @@ export default {
       }
       this.setSegmentifyUserObject()
     },
-    toggleSearchBox (dataval) {
+    toggleSearchBox () {
         // console.log('window.history', window.history)
         console.log('window.history length', window.history.length)
         this.openSearchPanel = !this.openSearchPanel
         this.showSearchBoxSection = !this.showSearchBoxSection
         if (!this.showSearchBoxSection && this.$route.path == '/search') {
           if (window.history.length <= 2) this.$router.push(this.localizedRoute('/'))
-          else  this.$router.back()
+          //else  this.$router.back()
         }
         if (window.innerWidth <= 991)  { // code from SearchBoxMobile - just open the keyboard on focus
-          if ((this.$route.path === '/search') && (dataval=='searchclick')) {
-              console.log("INNNNNNNNNNNNNN","onlyclick")
               setTimeout(() => {
                 if(this.clickedFromMobileSearchIcon) {
                   document.querySelector('#searchMobile input[type="text"]').focus()
                   document.getElementById("searchMobile").focus();
                 }
               }, 200);
-          } 
         }        
     },
     gotoAccount () {
