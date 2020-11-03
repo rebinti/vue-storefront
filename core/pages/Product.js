@@ -33,7 +33,8 @@ export default {
       configuration: 'product/currentConfiguration',
       options: 'product/currentOptions',
       category: 'category/getCurrentCategory',
-      gallery: 'product/productGallery'
+      gallery: 'product/productGallery',
+      modelsList: 'ui/getModelsList'
     }),
     productVideoData () {
       if (this.gallery.length) return this.gallery.find(val => (val.video && val.video !== undefined)) || null

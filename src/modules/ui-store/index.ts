@@ -39,6 +39,8 @@ const store = {
     brandsList: [],
     // specificBrandsList: [],
     brandsLoadedFlag: false,
+    modelsList: [],
+    modelsLoadedFlag: false,
     brandSearchText: '',
     brandSelectedChar: '',
     fbLoggedInfo: null,
@@ -55,6 +57,7 @@ const store = {
     getDefaultColumnMobile: state => state.defaultColumnMobile,
     getDefaultColumnWeb: state => state.defaultColumnWeb,
     getBrandsList: state => state.brandsList,
+    getModelsList: state => state.modelsList,
     // getSpecificBrandsList: state => state.specificBrandsList,
     getMainSliderData: state => state.mainSliderData,
     getBrandsLoadedFlag: state => state.brandsLoadedFlag,
@@ -146,7 +149,11 @@ const store = {
     setBrandList (state, data) {
       state.brandsList = data;
       state.brandsLoadedFlag = true
-    }, 
+    },
+    setModelsList (state, data) {
+      state.modelsList = data;
+      state.modelsLoadedFlag = true
+    },  
     // setSpecificBrandList (state, data) {
     //   state.specificBrandsList = data;      
     // },    
@@ -242,6 +249,31 @@ const store = {
             Logger.error(err, 'ui/brands')()
           })
     },
+    getModelsList ({commit, state}, { key = 'type', value, excludeFields = null, includeFields = null, skipCache = false }) {
+      if (state.modelsList.length > 0) { 
+        return state.modelsList; 
+      }
+      let query = new SearchQuery()
+      if (value) {
+        query = query.applyFilter({key: key, value: {'eq': value}})
+      }
+      if (includeFields === null) {
+        // includeFields = config.brand.includeFields;
+      }
+      return quickSearchByQuery({ query, size: 500 ,entityType: 'iclothingmodel', excludeFields, includeFields })
+        .then((resp) => {
+          console.log('Response Models List', resp)
+          if (Array.isArray(resp.items) && resp.items.length){ 
+            commit('setModelsList', resp.items); 
+            return resp.items
+          } else {
+            commit('setModelsList', []);
+          }
+        }).catch(err => {
+          commit('setModelsList', []);
+          Logger.error(err, 'ui/ModelsList')()
+        })
+  },
   //   getSpecificBrandList({commit}, { key = 'type', value, routeString = null, excludeFields = null, includeFields = null, skipCache = false }) {
   //     let query = new SearchQuery()
   //     if (value) {

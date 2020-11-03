@@ -216,5 +216,14 @@ export class SearchAdapter {
         return this.handleResult(resp, 'cms_hierarchy', start, size)
       }
     })
+    this.registerEntityType('iclothingmodel', {
+      queryProcessor: (query) => {
+        // function that can modify the query each time before it's being executed
+        return query
+      },
+      resultPorcessor: (resp, start, size) => {
+        return this.handleResult(resp, 'iclothingmodel', start, size)
+      }
+    })
   }
 }

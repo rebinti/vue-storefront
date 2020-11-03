@@ -843,6 +843,12 @@ export default {
     }
    })
   },
+  async asyncData ({ store, route, context }) {
+    await store.dispatch('ui/getModelsList', {
+       key: '_type',
+        value: "iclothingmodel"
+      })
+  },
   watch: {
     '$route': 'setBreadCrumbToSamePath'
   },
@@ -1306,6 +1312,10 @@ export default {
     // this.$once('hook:destroyed', () => {
     //   document.removeEventListener('scroll', scrollHandler)
     // })
+
+    console.log('dataaaaaaa', this.product)
+    console.log('dataaaaaaa', this.originalProduct)
+    console.log('this.attributesByCode', this.attributesByCode)
   }
 }
 </script>
