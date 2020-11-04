@@ -28,21 +28,23 @@
         />
                                  
     
-  <div style="margin-top:10px;">
+  <div class="mt-10">
     <!-- <h4>Model Details</h4> -->
       
-      <div v-if="productModelDetails" class="model">
-        <img :src="productModelDetails.image" width="100%" height="100" />
-          <br/>
-          <p v-if="modelName" style="font-weight:400;">Model: {{modelName.label}} </p>
-          <br/>
-          <ul class="modeldata">
-            <li>Height: {{productModelDetails.height}} </li>
-            <li>Hips: {{productModelDetails.hips}} </li>
-            <li>Waist {{productModelDetails.waist}} </li>
-            <li>Bust: {{productModelDetails.bust}} </li>
-            <li>Details: {{productModelDetails.details}} </li>
-         </ul>
+      <div v-if="productModelDetails" class="model flex model-div">
+          <div>
+            <img :src="productModelDetails.image" class="model-image" />
+          </div>
+          <div>
+              <p v-if="modelName" class="mb-8 name_sec">Model: {{modelName.label}} </p>
+                <ul class="modeldata">
+                  <li>Height: {{productModelDetails.height}} </li>
+                  <li>Hips: {{productModelDetails.hips}} </li>
+                  <li>Waist {{productModelDetails.waist}} </li>
+                  <li>Bust: {{productModelDetails.bust}} </li>
+                  <li class="mt-8 detail_sec" >Details: {{productModelDetails.details}} </li>
+              </ul>
+          </div>
       </div>
 
   </div>
@@ -204,4 +206,27 @@ export default {
     margin-bottom: -17px;   
  }
 
+.model-image { width: 85%;}
+
+.model-div ul li, .model-div p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media (max-width: 375px) {
+  .model-div ul li, .model-div p {
+    font-size: 14px;
+  }
+  .name_sec {
+    margin-bottom: 1rem;  }
+  .detail_sec {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 768px) {
+  .model-div ul li, .model-div p {
+    font-size: 16px;
+  }
+}
 </style>
