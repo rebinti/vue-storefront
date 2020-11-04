@@ -32,7 +32,7 @@
     <!-- <h4>Model Details</h4> -->
       
       <div v-if="productModelDetails" class="model">
-        <img :src="'https://cdn.iclothing.com/media/'+productModelDetails.image" width="100%" height="100" />
+        <img :src="productModelDetails.image" width="100%" height="100" />
           <br/>
           <p v-if="modelName" style="font-weight:400;">Model: {{modelName.label}} </p>
           <br/>
@@ -88,7 +88,13 @@ export default {
     //   return this.$store.state.ui.productDetailsSidePanelFlag
     // }
     productModelDetails () {
-      return this.modelsList.find(val=> val.name == this.product.model) || null
+        const model = this.modelsList.find(val=> val.name == this.product.model) || null
+        if (model) {
+            model.image = config.models_Image_Base_Url + model.image;
+            return model
+        } else {
+          return null
+        }
     },
     modelName () {
       if (this.attributesByCode && this.attributesByCode.model) {
@@ -99,7 +105,7 @@ export default {
     }
   },
   mounted () {
-    //console.log("TTTTTTTTTTT",this.$store.state.config.cdnimage.mediaurl)
+    console.log("TTTTTTTTTTT",config)
       let start = null;
       const touchStart = (event) => {
           if(event.touches.length === 1) start = event.touches.item(0).clientX;
