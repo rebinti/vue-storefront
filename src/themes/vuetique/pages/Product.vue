@@ -1312,10 +1312,6 @@ export default {
     // this.$once('hook:destroyed', () => {
     //   document.removeEventListener('scroll', scrollHandler)
     // })
-
-    console.log('dataaaaaaa', this.product)
-    console.log('dataaaaaaa', this.originalProduct)
-    console.log('this.attributesByCode', this.attributesByCode)
   }
 }
 </script>

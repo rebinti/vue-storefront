@@ -33,7 +33,7 @@
       
       <div v-if="productModelDetails" class="model flex model-div">
           <div>
-            <img :src="productModelDetails.image" class="model-image" />
+            <img :src="modelImage" class="model-image" />
           </div>
           <div>
               <p v-if="modelName" class="mb-8 name_sec">Model: {{modelName.label}} </p>
@@ -90,13 +90,10 @@ export default {
     //   return this.$store.state.ui.productDetailsSidePanelFlag
     // }
     productModelDetails () {
-        const model = this.modelsList.find(val=> val.name == this.product.model) || null
-        if (model) {
-            model.image = config.models_Image_Base_Url + model.image;
-            return model
-        } else {
-          return null
-        }
+        return this.modelsList.find(val=> val.name == this.product.model) || null
+    },
+    modelImage () {
+      return this.productModelDetails && this.productModelDetails.image ? config.models_Image_Base_Url + this.productModelDetails.image : null
     },
     modelName () {
       if (this.attributesByCode && this.attributesByCode.model) {
@@ -107,7 +104,6 @@ export default {
     }
   },
   mounted () {
-    console.log("TTTTTTTTTTT",config)
       let start = null;
       const touchStart = (event) => {
           if(event.touches.length === 1) start = event.touches.item(0).clientX;
