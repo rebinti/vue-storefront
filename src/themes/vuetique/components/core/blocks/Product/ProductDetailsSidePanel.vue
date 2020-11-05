@@ -36,13 +36,13 @@
             <img :src="modelImage" class="model-image" />
           </div>
           <div>
-              <p v-if="modelName" class="mb-8 name_sec">Model: {{modelName.label}} </p>
+              <p v-if="modelName" class="mb-8 name_sec">Model:&nbsp;  {{modelName.label}} </p>
                 <ul class="modeldata">
-                  <li>Height: {{productModelDetails.height}} </li>
-                  <li>Hips: {{productModelDetails.hips}} </li>
-                  <li>Waist {{productModelDetails.waist}} </li>
-                  <li>Bust: {{productModelDetails.bust}} </li>
-                  <li class="mt-8 detail_sec" >Details: {{productModelDetails.details}} </li>
+                  <li>Height:&nbsp;  {{productModelDetails.height}} </li>
+                  <li>Hips:&nbsp;  {{productModelDetails.hips}} </li>
+                  <li>Waist:&nbsp;  {{productModelDetails.waist}} </li>
+                  <li>Bust:&nbsp;  {{productModelDetails.bust}} </li>
+                  <li class="mt-8 detail_sec" >Details:&nbsp;  {{productModelDetails.details}} </li>
               </ul>
           </div>
       </div>
@@ -203,10 +203,12 @@ export default {
  }
 
 .model-image { width: 85%;}
-
+.model-div div {
+  width: 50%;  
+}
 .model-div ul li, .model-div p {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 @media (max-width: 375px) {
