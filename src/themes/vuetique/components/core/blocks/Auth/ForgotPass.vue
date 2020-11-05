@@ -33,7 +33,7 @@
               ]"
             />
           </div>
-          <button-full class="mb-5 w-full l_login" type="submit">
+          <button-full class="mb-5 w-full l_login" type="submit" style="display:block;">
             {{ $t('Reset password') }}
           </button-full>
           <div class="text-center t_mrg">
