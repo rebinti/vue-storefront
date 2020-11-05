@@ -1,8 +1,8 @@
 <template>
-  <section
+  <section 
     class="container py-8 px-6 new-collection"
   >
-    <div>
+    <div v-if="product.related[type] && product.related[type].length > 0">
       <header>
         <h2 class="text-center py-8">
           {{ heading }}
