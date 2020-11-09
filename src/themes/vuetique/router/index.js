@@ -11,6 +11,7 @@ const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
 const Product = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/Product.vue')
 const GiftCard = () => import(/* webpackChunkName: "vsf-gift-card" */ 'theme/pages/GiftCard.vue')
+const ResetPasswordPost = () => import(/* webpackChunkName: "vsf-reset-password-post" */ 'theme/pages/ResetPasswordPost.vue')
 const Category = () => import(/* webpackChunkName: "vsf-category" */ 'theme/pages/search-spring/SearchSpringCategory.vue') // Category.vue
 const CmsPage = () => import(/* webpackChunkName: "vsf-cms" */ 'theme/pages/CmsPage.vue')
 const CmsBlockDemoPageSsr = () => import(/* webpackChunkName: "vsf-cms-demo" */ 'theme/pages/CmsBlockDemoPageSsr.vue')
@@ -64,6 +65,7 @@ let routes = [
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
   { name: 'contact-us', path: '/contact-us', component: ContactUs },
   { name: 'gift-cards', path: '/gift-card', component: GiftCard },
+  { name: 'reset-password-post', path: '/reset-password-post', component: ResetPasswordPost },
 
   { name: 'mobile-social-login', path: '/social-login', component: SocialLogin },
   { name: 'search-spring', path: '/search', component: SearchSpringSearch },

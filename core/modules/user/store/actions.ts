@@ -72,6 +72,22 @@ const actions: ActionTree<UserState, RootState> = {
     })
   },
   /**
+   * Send password reset post link for specific e-mail
+   */
+  resetPasswordPost (context, { email }) {
+    return TaskQueue.execute({ url: config.users.resetPasswordPost_endpoint,
+      payload: {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      }
+    })
+  },  
+  /**
    * Login user and return user profile and current token
    */
   login (context, { username, password }) {
