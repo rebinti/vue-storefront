@@ -5,7 +5,7 @@
       :network="network.network"
       :key="network.network"
       :class="'share-items'"
-      :url="'https://vue.iclothing.com/'+ localizedRoute(product.url_path)"
+      :url="productURL"
       :title="product.name"
       :description="product.description"
       :image="imgpath"
@@ -16,6 +16,7 @@
 </template>
 <script>
 import NoSSR from 'vue-no-ssr'
+import config from 'config'
 import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
 
 export default {
@@ -37,7 +38,13 @@ export default {
         { network: 'pinterest', name: 'Pinterest', icon: 'fab fah fa-lg fa-pinterest', color: '#bd081c' },
         // { network: 'googleplus', name: 'Google +', icon: 'fab fah fa-lg fa-google-plus', color: '#000000' },
         { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fah fa-lg fa-whatsapp', color: '#bd081c' },
-      ]
+      ],
+
+    }
+  },
+  computed: {
+    productURL () {
+      return config.shareProductBaseURL + localizedRoute(this.product.url_path)
     }
   },
   props: {

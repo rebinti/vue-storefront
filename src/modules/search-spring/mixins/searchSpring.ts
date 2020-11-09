@@ -156,6 +156,7 @@ export default {
       } catch (e) { 
         this.$bus.$emit('notification-progress-stop') 
         this.paginationLoader = false;
+        this.searcingLoaderFlag = false;
         }
     },
 
