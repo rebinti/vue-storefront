@@ -74,7 +74,7 @@ const actions: ActionTree<UserState, RootState> = {
   /**
    * Send password reset post link for specific e-mail
    */
-  resetPasswordPost (context, { email }) {
+  resetPasswordPost (context, { password }) {
     return TaskQueue.execute({ url: config.users.resetPasswordPost_endpoint,
       payload: {
         method: 'POST',
@@ -83,7 +83,7 @@ const actions: ActionTree<UserState, RootState> = {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({ password: password })
       }
     })
   },  

@@ -63,6 +63,8 @@ export default {
     return {
       password: '',
       rPassword: '',
+      token: '',
+      id: '',
     }
   },    
   validations: {
@@ -89,7 +91,8 @@ export default {
       }
 
       this.$bus.$emit('notification-progress-start', i18n.t('Resetting the password ... '))
-      this.$store.dispatch('user/resetPasswordPost', { password: this.password,confirmation: this.rPassword,token:'example-tttt',id:122222 }).then((response) => {        
+      this.password = "test123#@!11111"	
+      this.$store.dispatch('user/resetPasswordPost', {password: this.password}).then((response) => {        
         this.$bus.$emit('notification-progress-stop')
         if (response.code === 200) {
           this.passwordSent = true
