@@ -140,4 +140,10 @@ export default {
       padding-right: 20px;
     }
   }
+  @media (min-width: 1024px) {
+    .modal-content{
+      margin-right: 400px;
+      margin-left: 400px;
+    }
+  }
 </style>
