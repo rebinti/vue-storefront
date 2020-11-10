@@ -1,6 +1,9 @@
 <template>
   <div class="container-fluid">
-    <div class="modal-content pt30 pb60 px65 cl-secondary" style="padding: 50px;">
+    <div>
+      <h2 style="text-align: center;">RESET A PASSWORD</h2>
+    </div>
+    <div class="modal-content pt30 pb60 px65 cl-secondary" style="padding: 25px;">
       <template>
         <form @submit.prevent="resetPasswordPost" novalidate>
           <div class="mb-4 tx_bx_out">
@@ -91,8 +94,17 @@ export default {
       }
 
       this.$bus.$emit('notification-progress-start', i18n.t('Resetting the password ... '))
-      this.password = "test123#@!11111"	
-      this.$store.dispatch('user/resetPasswordPost', {password: this.password}).then((response) => {        
+      //this.password = "test123#@!11111"	
+
+      this.token = this.$route.query.token;
+      this.id = this.$route.query.id;
+      console.log("testtttttt",this.token,this.id);
+      this.$store.dispatch('user/resetPasswordPost', {
+              password: this.password,
+              confirmation: this.rPassword,
+              id:this.id,
+              token:this.token
+              }).then((response) => {        
         this.$bus.$emit('notification-progress-stop')
         if (response.code === 200) {
           this.passwordSent = true
