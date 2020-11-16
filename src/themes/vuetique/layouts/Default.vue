@@ -7,6 +7,7 @@
       <announcement />
       <main-header />
       <header-menu />
+      <header-banner-all />
       <transition name="slide-right">
         <sidebar-menu v-if="isSidebarOpen" />
       </transition>
@@ -49,6 +50,7 @@ import MainHeader from 'theme/components/core/blocks/Header/Header.vue'
 import MainFooter from 'theme/components/core/blocks/Footer/Footer.vue'
 
 import HeaderMenu from 'theme/components/core/blocks/HeaderMenu/HeaderMenu.vue'
+import HeaderBannerAll from 'theme/components/core/blocks/Header/HeaderBannerAll.vue'
 
 import Overlay from 'theme/components/core/Overlay.vue'
 import Loader from 'theme/components/core/Loader.vue'
@@ -252,6 +254,7 @@ export default {
     MainHeader,
     MainFooter,
     HeaderMenu,
+    HeaderBannerAll,
     Microcart,
     Wishlist,
     // Boards,

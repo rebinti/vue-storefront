@@ -1,0 +1,32 @@
+<template>
+  <div class="headerbannerall">
+    <div class="menu-under-banner" data-wps-ad="wps_sgdyyKV-nP.1-0" style="background-image: none;">
+        <div data-wps-guard="true" style="position: relative;">
+            <div>        
+                <router-link
+                class="block no-underline product-link"
+                :to="'/search?q=&amp;tag=test'"
+                data-testid="search"
+                >
+                    <div style=" background:#000;text-align: center;padding-top:15px;padding-bottom:10px;font-weight: bold;color: white;font-size:15pt;">
+
+                    <img style=" display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;" src="https://cdn.iclothing.com/media/wysiwyg/2020/black-friday/bf-deals.gif">
+            
+                    </div>
+                </router-link>
+            </div>
+        </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="scss" scoped>
+</style>
