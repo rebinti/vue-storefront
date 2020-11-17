@@ -98,12 +98,12 @@
             </div>
           </div>
         </div>         
-        <div class="col-12" style="margin-bottom: 20px;" v-if="searchRes && searchRes.merchandising.content && searchRes.merchandising.content.banner && searchRes.merchandising.content.banner.length > 0">          
+        <!-- <div class="col-12" style="margin-bottom: 20px;" v-if="searchRes && searchRes.merchandising.content && searchRes.merchandising.content.banner && searchRes.merchandising.content.banner.length > 0">          
           <span v-html="searchRes.merchandising.content.banner[0]"></span>          
         </div>               
         <div class="col-12" style="margin-bottom: 20px;" v-else-if="searchRes && searchRes.merchandising.content && searchRes.merchandising.content.header && searchRes.merchandising.content.header.length > 0">          
           <span v-html="searchRes.merchandising.content.header[0]"></span>          
-        </div>               
+        </div>                -->
         <div class="row gutter-md">     
         <!-- Sidebar For web view   -->   
             <siderbar-filter :viewfilterflag="'web'" 
@@ -197,6 +197,12 @@ export default {
   // },
   beforeMount () {
     //this.searchActiveQueryValueResults()
+    if (this.$route.query.tag) {
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
+      this.searcingLoaderFlag = true;
+      this.getSearchData(false, true, 'searchSpringSearch');
+      console.log("AAAAAAAAAAA333",this.serachedProd)
+    }    
     this.$bus.$on('search-in-search-spring', this.dataFromHeader);
 
     document.addEventListener('scroll', () => {
@@ -220,7 +226,7 @@ export default {
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
       this.searcingLoaderFlag = true;
       this.getSearchData(false, true, 'searchSpringSearch');
-      console.log("AAAAAAAAAAA111",this.serachedProd)
+      console.log("AAAAAAAAAAA222",this.serachedProd)
     }    
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
@@ -251,10 +257,12 @@ export default {
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
         if(this.setTime) { clearTimeout(this.setTime); }
         if ("AbortController" in window) {
+          console.log("TEEEETT",'111111>>>>>>>>')
           this.getSearchData(false, true , 'searchSpringSearch');
           this.searcingLoaderFlag = true;
         } else {
           this.setTime = setTimeout(() => {
+            console.log("fTEEEETT",'22222222>>>>>>')
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
           }, 400);
