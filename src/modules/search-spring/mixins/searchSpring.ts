@@ -114,7 +114,7 @@ export default {
             prodSku.push(val.uid);
           });
           console.log("TEST4444444444444",prodSku.length)
-          
+          console.log("TEST4444444444444newwww",prodSku)
           await this.getDataFromElastic(prodSku, onScroll , searchType); // Here the IM point - prodSku used here before - now the variable is id (prodSku) - value
           this.paginationLoader = false;
           this.searcingLoaderFlag = false;
@@ -175,8 +175,8 @@ export default {
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
       );
-      console.log("TEST88888888888",this.sortedData)
-      console.log("TEST9999999999",this.searchedData)
+      console.log("TEST88888888888",sortedData)
+      console.log("TEST9999999999",searchedData)
       await this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
       console.log("TEST77777777777",this.serachedProd)
       return this.serachedProd;

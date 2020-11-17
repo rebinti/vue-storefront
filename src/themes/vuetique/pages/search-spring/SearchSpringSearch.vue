@@ -130,7 +130,8 @@
           </div>
           <div class="lg:col-3" v-if="serachedProd.length === 0">
           </div>  
-        <div class="col-12 lg:col-9 pr_list_sec_main">
+          <div>{{serachedProd.length}}</div>
+        <div class="col-12 lg:col-9 pr_list_sec_main locallllll">
             <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
       
             <div class="loader loader--style3" title="2" v-if="paginationLoader">
