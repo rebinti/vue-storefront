@@ -106,12 +106,14 @@ export default {
           this.signal = this.controller.signal; 
         }
         const searchResults = await this.$store.dispatch(`${searchType}/searchInSearchSpringPlatform`, {filterData: this.filterData, signal: this.signal })
-
+        console.log("TEST2222222222222","searchResults")
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];
+          console.log("TEST333333333333","searchResults - prdt array in")
           searchResults.results.filter(val => {
             prodSku.push(val.uid);
           });
+          console.log("TEST4444444444444",prodSku.length)
           
           await this.getDataFromElastic(prodSku, onScroll , searchType); // Here the IM point - prodSku used here before - now the variable is id (prodSku) - value
           this.paginationLoader = false;
@@ -162,6 +164,7 @@ export default {
 
     async getDataFromElastic (searchedData, onScroll = false ,  searchType) {
       let query = new SearchQuery();
+      console.log("TEST5555555555","getDataFromElastic ")
       query = query.applyFilter({ key: 'id', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
         'product/list',

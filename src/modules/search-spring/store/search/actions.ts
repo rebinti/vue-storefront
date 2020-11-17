@@ -19,7 +19,7 @@ export const actions: ActionTree<SearchSpringState, any> = {
     },
 
     addFilterItems ({ commit }, filterData) {
-                
+        console.log("TEST11111111","action addFilterItems")      
         if (filterData) {
             commit(types.SET_FILTER_DATA, filterData)
         }

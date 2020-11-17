@@ -1,5 +1,5 @@
 <template>
-  <div class="headerbannerall">
+  <div class="headerbannerall" v-if="this.$route.query.tag!=''">
     <div class="menu-under-banner" data-wps-ad="wps_sgdyyKV-nP.1-0" style="background-image: none;">
         <div data-wps-guard="true" style="position: relative;">
             <div>        
