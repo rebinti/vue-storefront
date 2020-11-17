@@ -98,9 +98,12 @@
             </div>
           </div>
         </div>         
-        <div class="col-12" style="margin-bottom: 20px;" v-if="searchRes && searchRes.merchandising && searchRes.merchandising.content.banner && searchRes.merchandising.content.banner.length > 0">          
+        <div class="col-12" style="margin-bottom: 20px;" v-if="searchRes && searchRes.merchandising.content && searchRes.merchandising.content.banner && searchRes.merchandising.content.banner.length > 0">          
           <span v-html="searchRes.merchandising.content.banner[0]"></span>          
-        </div>             
+        </div>               
+        <div class="col-12" style="margin-bottom: 20px;" v-else-if="searchRes && searchRes.merchandising.content && searchRes.merchandising.content.header && searchRes.merchandising.content.header.length > 0">          
+          <span v-html="searchRes.merchandising.content.header[0]"></span>          
+        </div>               
         <div class="row gutter-md">     
         <!-- Sidebar For web view   -->   
             <siderbar-filter :viewfilterflag="'web'" 
