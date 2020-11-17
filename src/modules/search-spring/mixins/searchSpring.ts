@@ -171,10 +171,12 @@ export default {
         { query, start: 0, size: searchedData.length, updateState: false },
         { root: true }
       );
+      console.log("TEST66666666666",items)
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
       );
       this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
+      console.log("TEST77777777777",this.serachedProd)
       return this.serachedProd;
     },
 
