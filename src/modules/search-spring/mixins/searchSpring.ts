@@ -88,7 +88,7 @@ export default {
     },
 
 
-    async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {
+    async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {      
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
       try {

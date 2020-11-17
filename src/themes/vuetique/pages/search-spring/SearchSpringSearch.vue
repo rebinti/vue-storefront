@@ -97,53 +97,56 @@
               />
             </div>
           </div>
-        </div>       
-      <div class="row gutter-md">     
-      <!-- Sidebar For web view   -->   
-          <siderbar-filter :viewfilterflag="'web'" 
-            :mobileFilters="mobileFilters"
-            :searchRes="searchRes"
-            :categoryHierarchy="categoryHierarchy"
-            :priceSliderData="priceSliderData"
-            :squery="squery"
-            :fixedOrderPanel="fixedOrderPanel"
-            :searchPageType="searchPageType"
-            :serachFrom="serachFrom"
-            @closeFilters="closeFilters"
-            @clearAllFilter="clearAllFilter"
-            @removeFilterFlag="removeFilterFlag"
-            @setFilterData="setFilterData"
-            @priceSliderChanged="priceSliderChanged"
-            @setCategoryFilterHistory="setCategoryFilterHistory"
-            @setCategoryFilterData="setCategoryFilterData"
-         />  
+        </div>         
+        <div class="col-12" style="margin-bottom: 5px;" v-if="searchRes && searchRes.merchandising.content.banner && searchRes.merchandising.content.banner.length > 0">          
+          <span v-html="searchRes.merchandising.content.banner[0]"></span>          
+        </div>             
+        <div class="row gutter-md">     
+        <!-- Sidebar For web view   -->   
+            <siderbar-filter :viewfilterflag="'web'" 
+              :mobileFilters="mobileFilters"
+              :searchRes="searchRes"
+              :categoryHierarchy="categoryHierarchy"
+              :priceSliderData="priceSliderData"
+              :squery="squery"
+              :fixedOrderPanel="fixedOrderPanel"
+              :searchPageType="searchPageType"
+              :serachFrom="serachFrom"
+              @closeFilters="closeFilters"
+              @clearAllFilter="clearAllFilter"
+              @removeFilterFlag="removeFilterFlag"
+              @setFilterData="setFilterData"
+              @priceSliderChanged="priceSliderChanged"
+              @setCategoryFilterHistory="setCategoryFilterHistory"
+              @setCategoryFilterData="setCategoryFilterData"
+          />  
 
-        <div class="lg:col-6 no-result" v-if="serachedProd.length === 0">
-            <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
-            <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
-        </div>
-        <div class="lg:col-3" v-if="serachedProd.length === 0">
-        </div>  
-      <div class="col-12 lg:col-9 pr_list_sec_main">
-          <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
-    
-          <div class="loader loader--style3" title="2" v-if="paginationLoader">
-            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
-              <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-                <animateTransform attributeType="xml"
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 25 25"
-                  to="360 25 25"
-                  dur="0.6s"
-                  repeatCount="indefinite"/>
-              </path>
-            </svg>
-            <h3 style="text-align: center;"> Please wait for loading more... </h3>
+          <div class="lg:col-6 no-result" v-if="serachedProd.length === 0">
+              <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
+              <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
+          </div>
+          <div class="lg:col-3" v-if="serachedProd.length === 0">
+          </div>  
+        <div class="col-12 lg:col-9 pr_list_sec_main">
+            <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
+      
+            <div class="loader loader--style3" title="2" v-if="paginationLoader">
+              <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="50px" height="50px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 0 auto;" xml:space="preserve">
+                <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                  <animateTransform attributeType="xml"
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 25 25"
+                    to="360 25 25"
+                    dur="0.6s"
+                    repeatCount="indefinite"/>
+                </path>
+              </svg>
+              <h3 style="text-align: center;"> Please wait for loading more... </h3>
+            </div>
           </div>
         </div>
-      </div>
     </div>
     <div id="seg-search-reco"></div>
   </div>
@@ -171,6 +174,7 @@ export default {
         searcingLoaderFlag: false,
         searchPageType: 'searchSpringSearch',
         serachFrom: 'search',
+        tagquery:'',
     };
   },
   computed: {
@@ -253,6 +257,31 @@ export default {
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
       }
     },
+    searchDataInSearchSpringTag (squerydata) {
+      if (this.tagquery.length > 2) {
+        this.$store.dispatch('searchSpringSearch/resetFilterData')
+        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+        this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.tagquery)
+        if(this.setTime) { clearTimeout(this.setTime); }
+        if ("AbortController" in window) {
+          this.getSearchData(false, true , 'searchSpringSearch');
+          this.searcingLoaderFlag = true;
+        } else {
+          this.setTime = setTimeout(() => {
+            this.getSearchData(false, true, 'searchSpringSearch');
+            this.searcingLoaderFlag = true;
+          }, 400);
+        }
+       
+      } else {
+        if(this.setTime) clearTimeout(this.setTime);
+        this.$store.dispatch('searchSpringSearch/resetAllFilterResult');
+        this.searchedValue = null;
+        this.$store.dispatch('searchSpringSearch/resetFilterData')
+        this.searcingLoaderFlag = false;
+        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+      }
+    },    
     onBottomScroll () {
       if ( this.findIndexInFilterItems ('page=')) {
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'page=')
@@ -264,10 +293,18 @@ export default {
       }
     }, 
     dataFromHeader (event) {
-      if (event && event !== this.searchedValue) {
-        this.squery= event;
-        this.searchDataInSearchSpring (event)
-      }
+      if(Array.isArray(event)){ // data from the header banner click - tag search            
+            let tagdata = event[0] 
+            this.tagquery = tagdata.tagquerydata; 
+            if (this.tagquery && this.tagquery !== this.searchedValue) {                    
+              this.searchDataInSearchSpringTag (tagdata.tagquerydata)
+            }
+      }else{
+        if (event && event !== this.searchedValue) {
+          this.squery= event;
+          this.searchDataInSearchSpring (event)
+        }
+      }  
     },
   }
 };

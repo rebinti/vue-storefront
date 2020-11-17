@@ -7,6 +7,7 @@
                 class="block no-underline product-link"
                 :to="'/search?q=&amp;tag=test'"
                 data-testid="search"
+                @click.native="headbannerclick"
                 >
                     <div style=" background:#000;text-align: center;padding-top:15px;padding-bottom:10px;font-weight: bold;color: white;font-size:15pt;">
 
@@ -24,7 +25,21 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
+  data () {
+    return {
+      headbannersearch: [],
+    }
+  },
+  methods: {
+    headbannerclick () {
+      if(this.$route.query.tag){
+        let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
+        Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
+      } 
+    }
+  },  
 }
 </script>
 
