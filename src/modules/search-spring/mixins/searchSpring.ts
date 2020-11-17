@@ -175,7 +175,7 @@ export default {
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
       );
-      this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
+      await this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
       console.log("TEST77777777777",this.serachedProd)
       return this.serachedProd;
     },
