@@ -158,6 +158,7 @@
 
 <script>
 import config from 'config'
+import Vue from 'vue'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters } from 'vuex'
 import SearchSpringMixin  from 'src/modules/search-spring/mixins/searchSpring.ts'
