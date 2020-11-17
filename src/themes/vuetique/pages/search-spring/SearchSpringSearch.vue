@@ -279,7 +279,7 @@ export default {
             console.log("TEEEETT",22222222)
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
-          }, 400);
+          }, 1000);
         }
        
       } else {
