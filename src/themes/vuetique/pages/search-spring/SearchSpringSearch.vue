@@ -216,6 +216,12 @@ export default {
      this.$bus.$off('search-in-search-spring');
   },
   mounted () {
+    if (this.$route.query.tag) {
+      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
+      this.searcingLoaderFlag = true;
+      this.getSearchData(false, true, 'searchSpringSearch');
+      console.log("AAAAAAAAAAA111",this.serachedProd)
+    }    
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
       if (this.sortingFilterSelected) {
@@ -276,7 +282,7 @@ export default {
           this.searcingLoaderFlag = true;
         } else {
           this.setTime = setTimeout(() => {
-            console.log("TEEEETT",22222222)
+            console.log("fTEEEETT",22222222)
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
           }, 1000);
