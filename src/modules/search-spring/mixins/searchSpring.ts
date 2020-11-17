@@ -177,7 +177,7 @@ export default {
       );
       console.log("TEST88888888888",sortedData)
       console.log("TEST9999999999",searchedData)
-      await this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
+      this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
       console.log("TEST77777777777",this.serachedProd)
       return this.serachedProd;
     },
