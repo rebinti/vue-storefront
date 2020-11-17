@@ -1,5 +1,5 @@
 <template>
-  <div class="headerbannerall" v-if="isshow">
+  <div class="headerbannerall" v-if="isshow.length<2">
     <div class="menu-under-banner" data-wps-ad="wps_sgdyyKV-nP.1-0" style="background-image: none;">
         <div data-wps-guard="true" style="position: relative;">
             <div>        
@@ -36,7 +36,7 @@ export default {
   methods: {
     headbannerclick () {
       if(this.$route.query.tag){
-        this.isshow = this.$route.query.tag
+        this.isshow = this.$route.query.tag;
         let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
         Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
       } 

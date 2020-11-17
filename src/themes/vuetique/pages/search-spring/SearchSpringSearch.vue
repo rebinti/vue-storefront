@@ -188,6 +188,7 @@ export default {
       this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
       this.searcingLoaderFlag = true;
       this.getSearchData(false, true, 'searchSpringSearch');
+      console.log("AAAAAAAAAAA111",this.serachedProd)
     }
   },
   // watch: {
@@ -208,6 +209,7 @@ export default {
         this.isScrolling = false
       }
     }, 250)
+    console.log("BBBBBBBBBBBBBb111",this.serachedProd)
   },
   beforeDestroy () {
      this.$bus.$off('search-in-search-spring');
@@ -262,6 +264,7 @@ export default {
     },
     searchDataInSearchSpringTag (squerydata) {
       if (this.tagquery.length > 2) {
+        this.squery = this.tagquery;
         this.$store.dispatch('searchSpringSearch/resetFilterData')
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.tagquery)
