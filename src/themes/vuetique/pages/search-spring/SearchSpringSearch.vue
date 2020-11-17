@@ -130,7 +130,7 @@
           </div>
           <div class="lg:col-3" v-if="serachedProd.length === 0">
           </div>  
-          <div>{{serachedProd.length}}</div>
+          <!-- <div>{{serachedProd.length}}</div> -->
         <div class="col-12 lg:col-9 pr_list_sec_main locallllll">
             <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
       
@@ -271,10 +271,12 @@ export default {
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.tagquery)
         if(this.setTime) { clearTimeout(this.setTime); }
         if ("AbortController" in window) {
+          console.log("TEEEETT",111111)
           this.getSearchData(false, true , 'searchSpringSearch');
           this.searcingLoaderFlag = true;
         } else {
           this.setTime = setTimeout(() => {
+            console.log("TEEEETT",22222222)
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
           }, 400);

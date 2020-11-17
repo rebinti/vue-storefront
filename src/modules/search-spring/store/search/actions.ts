@@ -10,7 +10,6 @@ export const actions: ActionTree<SearchSpringState, any> = {
     addProdcutsItems ({ commit }, product) {
         
         if (product) {
-            console.log("FINAL1111111",product)
             commit(types.SET_SERACH_ITEMS, { product })
         }
     },
@@ -20,7 +19,7 @@ export const actions: ActionTree<SearchSpringState, any> = {
     },
 
     addFilterItems ({ commit }, filterData) {
-        console.log("TEST11111111","action addFilterItems")      
+        
         if (filterData) {
             commit(types.SET_FILTER_DATA, filterData)
         }

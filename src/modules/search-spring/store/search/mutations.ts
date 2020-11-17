@@ -4,13 +4,9 @@ import * as types from './mutation-types'
 export const mutations: MutationTree<any> = {
 
   [types.SET_SERACH_ITEMS] (state, product: any) {
-    console.log("FINAL2222222",product)
     if (!product.product.onScroll) {
-      console.log("FINAL3333333",product)
          state.serachedProd = product.product.products
-         console.log("FINAL555555 - state value",state.serachedProd)
     } else {
-      console.log("FINAL4444444",product)
         state.serachedProd.push(...product.product.products);
     }
   },
