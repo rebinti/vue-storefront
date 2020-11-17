@@ -198,10 +198,8 @@ export default {
   beforeMount () {
     //this.searchActiveQueryValueResults()
     if (this.$route.query.tag) {
-      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
-      this.searcingLoaderFlag = true;
-      this.getSearchData(false, true, 'searchSpringSearch');
-      console.log("AAAAAAAAAAA333",this.serachedProd)
+        let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
+        Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
     }    
     this.$bus.$on('search-in-search-spring', this.dataFromHeader);
 
@@ -235,6 +233,9 @@ export default {
       }
     }
     this.setSegmentify()
+  },
+  updated (){
+    this.serachedProd = this.serachedProd
   },
   methods: {
     // searchActiveQueryValueResults() {
