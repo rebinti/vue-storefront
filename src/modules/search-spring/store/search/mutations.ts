@@ -8,6 +8,7 @@ export const mutations: MutationTree<any> = {
     if (!product.product.onScroll) {
       console.log("FINAL3333333",product)
          state.serachedProd = product.product.products
+         console.log("FINAL555555 - state value",state.serachedProd)
     } else {
       console.log("FINAL4444444",product)
         state.serachedProd.push(...product.product.products);
