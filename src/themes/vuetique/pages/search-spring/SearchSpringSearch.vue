@@ -131,6 +131,7 @@
           <div class="lg:col-3" v-if="serachedProd.length === 0">
           </div>  
           <!-- <div>{{serachedProd.length}}</div> -->
+        <no-ssr>  
         <div class="col-12 lg:col-9 pr_list_sec_main locallllll">
             <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
       
@@ -150,6 +151,7 @@
               <h3 style="text-align: center;"> Please wait for loading more... </h3>
             </div>
           </div>
+          <no-ssr/>
         </div>
     </div>
     <div id="seg-search-reco"></div>
@@ -166,6 +168,7 @@ import SiderbarFilter  from "src/modules/search-spring/components/sidebar";
 import MobileSiderbarFilter  from "src/modules/search-spring/components/MobileSidebar";
 import SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
 import { handleScroll } from 'src/modules/search-spring/helpers'
+import NoSSR from 'vue-no-ssr'
 
 export default {
   name: 'SearchSpringSearch',
