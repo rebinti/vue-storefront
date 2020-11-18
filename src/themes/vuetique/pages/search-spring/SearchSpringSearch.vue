@@ -156,7 +156,7 @@
     </div>
     <div id="seg-search-reco"></div>
   </div>
-  <no-ssr/>
+  </no-ssr>
 </template>
 
 <script>
