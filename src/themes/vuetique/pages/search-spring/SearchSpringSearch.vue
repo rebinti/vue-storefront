@@ -1,4 +1,5 @@
 <template>
+  <no-ssr>
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-12 md:col-12 sm:col-12 lg:hidden devicetitle" style="margin:0 auto">
@@ -131,7 +132,7 @@
           <div class="lg:col-3" v-if="serachedProd.length === 0">
           </div>  
           <!-- <div>{{serachedProd.length}}</div> -->
-        <no-ssr>  
+          
         <div class="col-12 lg:col-9 pr_list_sec_main locallllll">
             <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
       
@@ -150,12 +151,12 @@
               </svg>
               <h3 style="text-align: center;"> Please wait for loading more... </h3>
             </div>
-          </div>
-          <no-ssr/>
+          </div>          
         </div>
     </div>
     <div id="seg-search-reco"></div>
   </div>
+  <no-ssr/>
 </template>
 
 <script>
