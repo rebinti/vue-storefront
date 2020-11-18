@@ -36,9 +36,8 @@ export default {
   methods: {
     headbannerclick () {
       if(this.$route.query.tag){
-        this.isshow = this.$route.query.tag;
-        let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
-        Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
+        this.isshow = this.$route.query.tag;        
+        Vue.prototype.$bus.$emit('search-in-search-spring', this.$route.query.tag );
       } 
     }
   },  
