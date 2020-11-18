@@ -1,5 +1,4 @@
-<template>
-  <no-ssr>
+<template>  
   <div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-12 md:col-12 sm:col-12 lg:hidden devicetitle" style="margin:0 auto">
@@ -130,9 +129,7 @@
               <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
           </div>
           <div class="lg:col-3" v-if="serachedProd.length === 0">
-          </div>  
-          <!-- <div>{{serachedProd.length}}</div> -->
-          
+          </div>                      
         <div class="col-12 lg:col-9 pr_list_sec_main locallllll">
             <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
       
@@ -155,8 +152,7 @@
         </div>
     </div>
     <div id="seg-search-reco"></div>
-  </div>
-  </no-ssr>
+  </div>  
 </template>
 
 <script>
@@ -169,7 +165,6 @@ import SiderbarFilter  from "src/modules/search-spring/components/sidebar";
 import MobileSiderbarFilter  from "src/modules/search-spring/components/MobileSidebar";
 import SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
 import { handleScroll } from 'src/modules/search-spring/helpers'
-import NoSSR from 'vue-no-ssr'
 
 export default {
   name: 'SearchSpringSearch',
@@ -190,12 +185,6 @@ export default {
     ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
   },
   created () {
-    if (this.$route.query.tag) {
-      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
-      this.searcingLoaderFlag = true;
-      this.getSearchData(false, true, 'searchSpringSearch');
-      console.log("AAAAAAAAAAA111",this.serachedProd)
-    }
   },
   // watch: {
   //   '$route': 'searchActiveQueryValueResults'
@@ -218,18 +207,15 @@ export default {
         this.hasScrolled()
         this.isScrolling = false
       }
-    }, 250)
-    console.log("BBBBBBBBBBBBBb111",this.serachedProd)
+    }, 250)    
   },
   beforeDestroy () {
      this.$bus.$off('search-in-search-spring');
   },
   mounted () {
     if (this.$route.query.tag) {
-      this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.$route.query.tag)
-      this.searcingLoaderFlag = true;
-      this.getSearchData(false, true, 'searchSpringSearch');
-      console.log("AAAAAAAAAAA222",this.serachedProd)
+      let searchparam = this.$route.query.tag;
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
     }    
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
@@ -238,9 +224,6 @@ export default {
       }
     }
     this.setSegmentify()
-  },
-  updated (){
-    this.serachedProd = this.serachedProd
   },
   methods: {
     // searchActiveQueryValueResults() {
@@ -260,15 +243,17 @@ export default {
       if (this.squery.length > 2) {
         this.$store.dispatch('searchSpringSearch/resetFilterData')
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-        this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)
+        if (this.$route.query.tag) {
+          this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.squery)
+        }else{
+          this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)  
+        }        
         if(this.setTime) { clearTimeout(this.setTime); }
-        if ("AbortController" in window) {
-          console.log("TEEEETT",'111111>>>>>>>>')
+        if ("AbortController" in window) {          
           this.getSearchData(false, true , 'searchSpringSearch');
           this.searcingLoaderFlag = true;
         } else {
-          this.setTime = setTimeout(() => {
-            console.log("fTEEEETT",'22222222>>>>>>')
+          this.setTime = setTimeout(() => {            
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
           }, 400);
@@ -290,13 +275,11 @@ export default {
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
         this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.tagquery)
         if(this.setTime) { clearTimeout(this.setTime); }
-        if ("AbortController" in window) {
-          console.log("TEEEETT",111111)
+        if ("AbortController" in window) {          
           this.getSearchData(false, true , 'searchSpringSearch');
           this.searcingLoaderFlag = true;
         } else {
-          this.setTime = setTimeout(() => {
-            console.log("fTEEEETT",22222222)
+          this.setTime = setTimeout(() => {            
             this.getSearchData(false, true, 'searchSpringSearch');
             this.searcingLoaderFlag = true;
           }, 1000);
