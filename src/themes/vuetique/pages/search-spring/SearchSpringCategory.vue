@@ -320,7 +320,6 @@ export default {
     searchDataInSearchSpring (squerydata=null) {
       let routeString = this.getCurrentCategoryUrlPath() ;      
       this.searchedValue =  routeString;
-      console.log("CATEGORY11111111111",routeString)
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
       }      
