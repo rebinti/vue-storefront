@@ -162,7 +162,10 @@ export default {
           this.searchparam = this.$route.query.q;
           this.search = this.searchparam
         }
-         Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
+        setTimeout(() => {
+            Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
+        }, 50);         
+         
          this.resultsHover = false
          this.searchFocus = false
     }    
@@ -174,8 +177,8 @@ export default {
       }
     })
     if(this.$route.query.q){
-      let searchparam = this.$route.query.q;
-      Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+      let searchparamfromurl = this.$route.query.q;
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );
     }
   },
   async beforeMount () {
