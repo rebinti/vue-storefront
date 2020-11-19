@@ -9,7 +9,7 @@ import ButtonFull from 'theme/components/theme/ButtonFull.vue';
 import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
 import Columns from 'theme/components/core/Columns.vue'
 import BaseSelect from '../components/BaseSelect.vue';
-
+declare const window: any
 export default {
   data () {
     return {
@@ -85,6 +85,8 @@ export default {
 
     setEmarsysTracker (type =  'Category') {
       this.$bus.$emit('send-to-emarsys-tracking', { type: type, categoryData: this.getCurrentCategoryUrlPath(' > ')});
+      // window.ScarabUtil.loadedModules.emarsys_webpersonalization.instance.reload();
+      window.initScarab();
     },
     async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {      
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
