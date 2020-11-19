@@ -86,8 +86,6 @@ export default {
     setEmarsysTracker (type =  'Category') {
       this.$bus.$emit('send-to-emarsys-tracking', { type: type, categoryData: this.getCurrentCategoryUrlPath(' > ')});
     },
-
-
     async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {      
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
@@ -95,31 +93,25 @@ export default {
         if (!onScroll) {
           this.$store.dispatch(`${searchType}/resetSearchedProducts`);
         }
-
          if (this.controller !== null && abortApiCallFlag) {
             // Cancel the previous request
             this.controller.abort(); //default one - to break other apis
         }
-
         if ("AbortController" in window) {
           this.controller = new AbortController();
           this.signal = this.controller.signal; 
         }
-        const searchResults = await this.$store.dispatch(`${searchType}/searchInSearchSpringPlatform`, {filterData: this.filterData, signal: this.signal })
-        console.log("TEST2222222222222","searchResults")
+        const searchResults = await this.$store.dispatch(`${searchType}/searchInSearchSpringPlatform`, {filterData: this.filterData, signal: this.signal })        
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
-          let prodSku = [];
-          console.log("TEST333333333333","searchResults - prdt array in")
+          let prodSku = [];          
           searchResults.results.filter(val => {
             prodSku.push(val.uid);
-          });
-          console.log("TEST4444444444444",prodSku.length)
-          console.log("TEST4444444444444newwww",prodSku)
+          });                    
           await this.getDataFromElastic(prodSku, onScroll , searchType); // Here the IM point - prodSku used here before - now the variable is id (prodSku) - value
           this.paginationLoader = false;
           this.searcingLoaderFlag = false;
           if (this.filterData.length === 1) {
-// price slider once set - not need change
+             // price slider once set - not need change
             const priceSliderData = searchResults.facets.find(
               val => val.field === 'final_price'
             );
@@ -129,7 +121,6 @@ export default {
             }, 100);
             
           }
-
           if ((searchType === 'searchSpringCategory' && this.getStoredCurrentRouterPath !== this.$route.path) || this.initialSearchFlag) { 
               this.initialSearchFlag = false;
               this.$store.dispatch(`${searchType}/set_categoryHierarchy`, searchResults.facets.find(
@@ -163,22 +154,17 @@ export default {
     },
 
     async getDataFromElastic (searchedData, onScroll = false ,  searchType) {
-      let query = new SearchQuery();
-      console.log("TEST5555555555","getDataFromElastic ")
+      let query = new SearchQuery();      
       query = query.applyFilter({ key: 'id', value: { eq: searchedData } });
       const { items } = await this.$store.dispatch(
         'product/list',
         { query, start: 0, size: searchedData.length, updateState: false },
         { root: true }
-      );
-      console.log("TEST66666666666",items)
+      );      
       const sortedData = items.sort((a, b) =>
         searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
-      );
-      console.log("TEST88888888888",sortedData)
-      console.log("TEST9999999999",searchedData)
-      this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})
-      console.log("TEST77777777777",this.serachedProd)
+      );            
+      this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})      
       return this.serachedProd;
     },
 
