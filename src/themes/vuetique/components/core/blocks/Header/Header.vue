@@ -164,8 +164,13 @@ export default {
     changeSerachBoxView () {
       if (window.innerWidth <= 991)  {
         if (this.$route.path === '/search') {
-          this.openSearchPanel = true
-          this.showSearchBoxSection = true
+          if(this.$route.query.q || this.$route.query.tag){
+            this.openSearchPanel = false
+            this.showSearchBoxSection = false
+          }else{
+            this.openSearchPanel = true
+            this.showSearchBoxSection = true
+          }
         } else {
           this.openSearchPanel = false
           this.showSearchBoxSection = false

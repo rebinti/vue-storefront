@@ -185,6 +185,7 @@ export default {
     ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
   },
   created () {
+    this.searcingLoaderFlag = true;
   },
   // watch: {
   //   '$route': 'searchActiveQueryValueResults'
