@@ -51,6 +51,7 @@ export const EmarsysTracker =  {
         if (event && event.type === 'Category') {
           // Passing on the category path being visited. Must match the 'category' values listed in the Product Catalog
           window.ScarabQueue.push(['category', event.categoryData]);
+          window.ScarabUtil.loadedModules.emarsys_webpersonalization.instance.reload();
         }
 
         /* Hits when the event (type = 'Category') 
