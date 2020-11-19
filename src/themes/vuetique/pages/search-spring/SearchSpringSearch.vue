@@ -245,6 +245,7 @@ export default {
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
         if (this.$route.query.tag) {
           this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.squery)
+
         }else{
           this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)  
         }        
@@ -267,33 +268,7 @@ export default {
         this.searcingLoaderFlag = false;
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
       }
-    },
-    searchDataInSearchSpringTag (squerydata) {
-      if (this.tagquery.length > 2) {
-        this.squery = this.tagquery;
-        this.$store.dispatch('searchSpringSearch/resetFilterData')
-        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-        this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.tagquery)
-        if(this.setTime) { clearTimeout(this.setTime); }
-        if ("AbortController" in window) {          
-          this.getSearchData(false, true , 'searchSpringSearch');
-          this.searcingLoaderFlag = true;
-        } else {
-          this.setTime = setTimeout(() => {            
-            this.getSearchData(false, true, 'searchSpringSearch');
-            this.searcingLoaderFlag = true;
-          }, 1000);
-        }
-       
-      } else {
-        if(this.setTime) clearTimeout(this.setTime);
-        this.$store.dispatch('searchSpringSearch/resetAllFilterResult');
-        this.searchedValue = null;
-        this.$store.dispatch('searchSpringSearch/resetFilterData')
-        this.searcingLoaderFlag = false;
-        this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
-      }
-    },    
+    },  
     onBottomScroll () {
       if ( this.findIndexInFilterItems ('page=')) {
         this.$store.dispatch('searchSpringSearch/removeFilterItem', 'page=')
@@ -305,7 +280,9 @@ export default {
       }
     }, 
     dataFromHeader (event) {
+      console.log("INNNNN111",event)
       if (event && event !== this.searchedValue) {
+        console.log("INNNNN222",event)
         this.squery= event;
         this.searchDataInSearchSpring (event)
       }        
