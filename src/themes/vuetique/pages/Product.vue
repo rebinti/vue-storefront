@@ -116,6 +116,7 @@
                           >
                             {{ product.priceInclTax * product.qty | price }}
                           </div>
+                          <div class="promotion-label">{{product.productpromotion_label}}</div>                          
                         </div>
                   </div>      
               </div>  
@@ -262,6 +263,7 @@
                   </div>                   
                   <div class="mob_add_wish_btn">
                       <wishlist-button :product="product" />
+                      
                   </div>
 
                <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
@@ -427,6 +429,7 @@
                 >
                   {{ product.priceInclTax * product.qty | price }}
                 </div>
+                <div class="promotion-label">{{product.productpromotion_label}}</div>
               </div>
               <div
                 class="variants"
@@ -580,7 +583,7 @@
                     <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
                   </div>                   
                   <div class="mob_add_wish_btn web-wishlist-div" >
-                      <wishlist-button :product="product" />
+                      <wishlist-button :product="product" />                      
                   </div>
               </div>
 
@@ -1320,7 +1323,15 @@ export default {
 .error {
   @apply text-error font-bold pb-4;
 }
-
+.promotion-label{
+    border: 1px solid #000000;    
+    display: inline-block;
+    padding: 4px 8px;
+    background: #FBF4DE;
+    border: 1px solid #E2D4C7;
+    margin-top: 7px;
+    font-size: 12px;
+}
 .color-swatch-inner {
    border-radius: 50px;
    width: 33px;
