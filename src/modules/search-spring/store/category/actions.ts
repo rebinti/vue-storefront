@@ -109,21 +109,24 @@ export const actions: ActionTree<SearchSpringCategoryState, any> = {
     },
 
     async searchInSearchSpringPlatform  ({ commit } , searchData) {
-        let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + searchData.filterData.join('&');
+        let searchUrl = config.searchspringcategory.url + config.searchspringcategory.paginationResPerPage + searchData.filterData.join('&');
         const searchResults = await fetch(searchUrl, {
-            method: 'GET',
+            method: 'GET',                    
             headers: {
               Accept: 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/x-www-form-urlencoded',             
+              'searchspring-session-id': '6576ccfc-1294-4e30-878a-77cc2ca5299f',
+              'searchspring-user-id': '3022b347-a272-46c3-b676-62266e335a80',
+              'searchspring-page-load-id': '945ea9d2-f155-4cf1-81f5-f7c60b3ce0db',            
             },
             signal: searchData.signal,
           }).then(res => {
-            return res.json();
+            return res.json();            
         }, err => {
             return err;
         });
         return searchResults
-    },
+    },  
 
     setCurrentRouterPath ({ commit }, fullPath) {
         commit(types.SET_ROUTER_FULL_PATH, fullPath )
