@@ -213,7 +213,7 @@
                 
               </div>
               <!-- size fit part in device -->     
-              <div class="size-fit-part-mob" style="min-height: 30px;margin-bottom: 10px;">
+              <div class="size-fit-part-mob" > <!-- style="min-height: 30px;margin-bottom: 10px;" -->
                 <!-- For TrueFit Review button -->
                 <!-- <div class="fit-label"
                 :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }"
@@ -543,7 +543,7 @@
               v-else-if="product.custom_options && product.custom_options.length > 0 && !loading"
               :product="product"
             />
-            <div class="size-fit-part" style="min-height: 30px;">
+            <div class="size-fit-part" > <!-- style="min-height: 30px;" -->
               <!-- For TrueFit Review button -->
               <!-- <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div> -->
               <div class="truefit-button tfc-fitrec-product" 
