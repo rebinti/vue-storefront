@@ -545,9 +545,9 @@
             />
             <div class="size-fit-part" style="min-height: 30px;">
               <!-- For TrueFit Review button -->
-              <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div>
+              <!-- <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div> -->
               <div class="truefit-button tfc-fitrec-product" 
-              :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':(windowScreenWidth>1400) ? '50%' : '54%'}"
+              :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':(windowScreenWidth>1400) ? '100%' : '100%'}"
                 v-if="getTruefitProd !== null"
                 :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
                   :data-colorid="getTruefitProd.color" 
