@@ -43,8 +43,8 @@ export default {
     .size-selector {
       // height: 50px;
       // min-width: 50px;
-      height: 60px;
-      min-width: 40px; 
+      height: 40px;
+      min-width: 60px; 
       margin-bottom: 10px;     
     }
   }
@@ -52,8 +52,8 @@ export default {
     .size-selector {
       // height: 36px;
       // min-width: 36px;
-      height: 60px;
-      min-width: 40px; 
+      height: 40px;
+      min-width: 60px; 
       margin-bottom: 10px;     
     }    
   } 
