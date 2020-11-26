@@ -41,14 +41,20 @@ export default {
   }
   @media (max-width: 2560px) {
     .size-selector {
-      height: 50px;
-      min-width: 50px;
+      // height: 50px;
+      // min-width: 50px;
+      height: 60px;
+      min-width: 40px; 
+      margin-bottom: 10px;     
     }
   }
   @media (max-width: 1920px) {
     .size-selector {
-      height: 36px;
-      min-width: 36px;
+      // height: 36px;
+      // min-width: 36px;
+      height: 60px;
+      min-width: 40px; 
+      margin-bottom: 10px;     
     }    
   } 
   @media (max-width: 1440px) {
