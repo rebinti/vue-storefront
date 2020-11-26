@@ -116,7 +116,7 @@
                           >
                             {{ product.priceInclTax * product.qty | price }}
                           </div>
-                          <div class="promotion-label">{{product.productpromotion_label}}</div>                          
+                          <div v-if="product.productpromotion_label" class="promotion-label">{{product.productpromotion_label}}</div>                          
                         </div>
                   </div>      
               </div>  
@@ -429,7 +429,7 @@
                 >
                   {{ product.priceInclTax * product.qty | price }}
                 </div>
-                <div class="promotion-label">{{product.productpromotion_label}}</div>
+                <div v-if="product.productpromotion_label" class="promotion-label">{{product.productpromotion_label}}</div>
               </div>
               <div
                 class="variants"
