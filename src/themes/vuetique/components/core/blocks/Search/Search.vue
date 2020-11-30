@@ -146,6 +146,10 @@ export default {
         this.$refs.search.focus()
       }
     })
+    if(this.$route.query.q){
+      let searchparamfromurl = this.$route.query.q;
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );
+    }    
     // window.addEventListener('keydown', this.handleKeyDown); //will attach the event listener to the whole window when the component is created
   },
   async beforeMount () {
