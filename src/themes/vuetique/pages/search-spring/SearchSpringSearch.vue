@@ -192,10 +192,10 @@ export default {
   // },
   beforeMount () {
     //this.searchActiveQueryValueResults()
-    if (this.$route.query.tag) {
-        let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
-        Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
-    }    
+    // if (this.$route.query.tag) {
+    //     let tagsearchdata = [{tagquery: 'tag',tagquerydata: this.$route.query.tag,}];
+    //     Vue.prototype.$bus.$emit('search-in-search-spring', tagsearchdata );
+    // }    
     this.$bus.$on('search-in-search-spring', this.dataFromHeader);
 
     document.addEventListener('scroll', () => {
@@ -217,7 +217,11 @@ export default {
     if (this.$route.query.tag) {
       let searchparam = this.$route.query.tag;
       Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
-    }    
+    }
+    if(this.$route.query.q){
+      let searchparamfromurl = this.$route.query.q;
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );
+    }         
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
       if (this.sortingFilterSelected) {
