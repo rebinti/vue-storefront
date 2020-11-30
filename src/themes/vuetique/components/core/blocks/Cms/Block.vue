@@ -48,7 +48,11 @@ export default {
       queryKey = 'id'
       queryValue = this.id
     } else if (this.identifier) {
-      queryKey = 'identifier'
+      if(this.identifier.includes("brand-")){ //IM* Size guide area* - this condition is added for - block is not loaded without '.keyword' - but one menu block loaded perfectly - Elastic DB related/mapping issue
+        queryKey = 'identifier.keyword'  
+      }else{
+        queryKey = 'identifier'
+      }      
       queryValue = this.identifier
     }
     if (queryKey && queryValue) {

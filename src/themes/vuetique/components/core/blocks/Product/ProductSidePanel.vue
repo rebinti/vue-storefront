@@ -54,7 +54,7 @@
       >
         <template>
             <div>
-               <cms-block :identifier="'how_to_messure'"/>
+               <cms-block :identifier="'how-to-measure'"/>
             </div>
         </template>
     </Accordion>
