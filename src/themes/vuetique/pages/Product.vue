@@ -830,7 +830,8 @@ export default {
       showProducVideoPopupFlag: false,
       fromRelatedProdcutClick: false,
       showShareDiv: false,
-      mobileCartFixedHeight: 0  
+      mobileCartFixedHeight: 0,
+      // removetruefitstyle:false
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -918,6 +919,9 @@ export default {
           }
         }
     });
+    // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
+    //   this.removetruefitstyle = true
+    // }); 
     //  this.$bus.$on('product-after-load', this.refreshStampedReview)
     // document.addEventListener( 'stamped:reviews:loaded', function(e) {
     //   console.log('Stampled addEventListener', e);
@@ -1261,6 +1265,10 @@ export default {
                window&&window.StampedFn&&window.StampedFn.loadBadges()
                window&&window.StampedFn&&window.StampedFn.loadDisplayWidgets()
               this.$forceUpdate();
+
+              // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
+              //   this.removetruefitstyle = true
+              // });               
         }, 800);
 
      /* For reload the TrueFit part */ 
@@ -1461,9 +1469,10 @@ button.no-combination {
 .product-details.mob{
   background-color: #eee;
   line-height: 2.5;
+  margin-top: 15px;
 }
 .product-details.mob .p-list{
-    font-size: 0.90rem;
+    font-size: 0.80rem;
 }
 .product-details .inner{
     margin-left: 15px;
@@ -2395,7 +2404,7 @@ button.no-combination {
     }
     .truefit-button{
       float: left;
-      width: 55%;
+      width: 100%;  // 55%
       font-size: .7rem;
     }
     .size-guide-b{
@@ -2489,7 +2498,7 @@ button.no-combination {
         }
         .truefit-button{
           float: left;
-          width: 52%;
+          width: 100%;   // 52%
         }
         .size-guide-b{
             float: right;
@@ -2592,7 +2601,7 @@ button.no-combination {
         }
         .truefit-button{
           float: left;
-          width: 47%;
+          width: 100%;  // 47%
         }
         .size-guide-b{
             float: right;
