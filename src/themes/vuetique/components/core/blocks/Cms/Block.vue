@@ -44,8 +44,12 @@ export default {
   created () {
     let queryKey = ''
     let queryValue = ''
-    if (this.id) {
-      queryKey = 'id'
+    if (this.id) {      
+      if(this.identifier.includes("brand-")){ //IM* Size guide area* - this condition is added for - block is not loaded without '.keyword' - but one menu block loaded perfectly - Elastic DB related/mapping issue
+        queryKey = 'id.keyword'  
+      }else{
+        queryKey = 'id'
+      }       
       queryValue = this.id
     } else if (this.identifier) {
       if(this.identifier.includes("brand-")){ //IM* Size guide area* - this condition is added for - block is not loaded without '.keyword' - but one menu block loaded perfectly - Elastic DB related/mapping issue

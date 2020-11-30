@@ -43,7 +43,7 @@
               </div>
                <cms-block v-if="!isLoading && selectedBrandSearchTxt.length>0" @cmsDataChangedNew="cmsDataChangedEvent" :identifier="selectedBrandSearchTxt" :sync="true"/>
                <p class="no-data" v-if="isLoading"> Loading... </p>
-              <p class="no-data" v-if="!isCmsDataLoaded && !isLoading"> No data found </p>
+              <!-- <p class="no-data" v-if="!isCmsDataLoaded && !isLoading"> No data found </p> -->
           </div>
         </template>
       </Accordion>
@@ -54,7 +54,7 @@
       >
         <template>
             <div>
-               <cms-block :identifier="'how-to-measure'"/>
+               <cms-block :identifier="'brand-how-to-measure'"/>
             </div>
         </template>
     </Accordion>
@@ -76,7 +76,7 @@ export default {
   data () {
     return {
       selectedBrandID: '',
-      selectedBrandSearchTxt: '',  //`brand-marc-angelo`,   // 'brand-marc-angelo'
+      selectedBrandSearchTxt: 'brand-default-clothing',  //`brand-marc-angelo`,   // 'brand-marc-angelo'
       isLoading: false,
       isCmsDataLoaded: false,
       showTabButtons: false,
@@ -96,7 +96,8 @@ export default {
        product: 'product/productCurrent',
        attributesByCode: 'attribute/attributeListByCode',
        attributesById: 'attribute/attributeListById',
-       brandsList: 'ui/getBrandsList'
+       brandsList: 'ui/getBrandsList',
+      //  getsizeguideblockdata: 'cmsBlock/cmsBlockIdentifier',
      }),
      getAllBrandsList () {
        return this.brandsList.map((val ) => { return {...val,
@@ -173,7 +174,7 @@ export default {
            document.getElementById("inches").classList.remove( "active" );
     },
     cmsDataChangedEvent (event){
-      // console.log('cmsDataChangedEvent', event)
+       console.log('cmsDataChangedEvent', event)
       if (event && event.value) {
           if(event.value.content.includes('bs-example-tabs')) this.showTabButtons = true;
           this.isCmsDataLoaded = true;
@@ -182,6 +183,8 @@ export default {
         for(var i = 1; i < tr.length; i++) {
           tr[i].style.background = i % 2 ? '#ECECEC' : '#FFFFFF';
         }          
+      }else{
+          this.selectedBrandSearchTxt =  'brand-default-clothing';          
       }
     },
     brandChanged () {
@@ -196,6 +199,10 @@ export default {
         let serachString = 'brand-' + selectedData.label.toLowerCase().split(' ').join('-');
         this.selectedBrandSearchTxt =  serachString;
       }
+      // console.log("RRRRRRRRRRRRRRRRr11111122222",this.getblockdata)
+      // if(!this.getblockdata){
+      //   this.selectedBrandSearchTxt =  'brand-default-clothing';
+      // }
       setTimeout(() => {
          this.isLoading = false;
       }, 250);
