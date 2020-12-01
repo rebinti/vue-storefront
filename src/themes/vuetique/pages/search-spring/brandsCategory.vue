@@ -31,7 +31,7 @@
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
-             <h3 style="text-align: center;"> Please wait.finding best results... </h3>
+             <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->
       </div>
       <div class="container onlymobile col-12 lg:hidden " style="margin-bottom: 5px;" 
        :class="classNameTab"
