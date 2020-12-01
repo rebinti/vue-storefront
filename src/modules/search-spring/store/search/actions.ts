@@ -107,7 +107,7 @@ export const actions: ActionTree<SearchSpringState, any> = {
     },
 
     async searchInSearchSpringPlatform  ({ commit } , searchData) {
-        let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + searchData.filterData.join('&');
+        let searchUrl = config.searchspringedgecacheurl.url + config.searchspringedgecacheurl.paginationResPerPage + searchData.filterData.join('&');
         const searchResults = await fetch(searchUrl, {
             method: 'GET',
             headers: {

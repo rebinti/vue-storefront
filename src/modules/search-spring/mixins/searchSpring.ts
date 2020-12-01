@@ -89,9 +89,9 @@ export default {
     async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {       
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       if(searchType=='searchSpringCategory'){
-        let searchUrl = config.searchspringcategory.url + config.searchspringcategory.paginationResPerPage + this.filterData.join('&');  
+        let searchUrl = config.searchspringedgecacheurl.url + config.searchspringedgecacheurl.paginationResPerPage + this.filterData.join('&');  
       }else{
-        let searchUrl = config.searchspring.url + config.searchspring.paginationResPerPage + this.filterData.join('&');
+        let searchUrl = config.searchspringedgecacheurl.url + config.searchspringedgecacheurl.paginationResPerPage + this.filterData.join('&');
       }      
       try {
         if (!onScroll) {
