@@ -69,6 +69,7 @@ $z-index-loader: map-get($z-index, loader);
 
 .loader-message-container {
   @apply bg-primary;
+  background-color: black;
   border-radius: 50px;
   letter-spacing: 0.5px;
 }
