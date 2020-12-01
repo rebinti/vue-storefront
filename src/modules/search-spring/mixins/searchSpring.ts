@@ -86,8 +86,7 @@ export default {
     setEmarsysTracker (type =  'Category') {
       this.$bus.$emit('send-to-emarsys-tracking', { type: type, categoryData: this.getCurrentCategoryUrlPath(' > ')});
     },
-    async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') { 
-      console.log(":PPPPP1111111111111111111","111111111111111111")     
+    async getSearchData (onScroll = false, abortApiCallFlag = false , searchType = 'searchSpringCategory') {       
       // this.$bus.$emit('notification-progress-start', 'Please wait...');
       if(searchType=='searchSpringCategory'){
         let searchUrl = config.searchspringcategory.url + config.searchspringcategory.paginationResPerPage + this.filterData.join('&');  
@@ -105,15 +104,13 @@ export default {
         if ("AbortController" in window) {
           this.controller = new AbortController();
           this.signal = this.controller.signal; 
-        }
-        console.log("PPPPP2222222222222222222","122222222222222222")     
+        }           
         const searchResults = await this.$store.dispatch(`${searchType}/searchInSearchSpringPlatform`, {filterData: this.filterData, signal: this.signal })        
         if (searchResults && searchResults.results && searchResults.results.length > 0) {
           let prodSku = [];          
           searchResults.results.filter(val => {
             prodSku.push(val.uid);
-          });    
-          console.log("PPPPP3333333333333333",prodSku)                     
+          });                                  
           await this.getDataFromElastic(prodSku, onScroll , searchType); // Here the IM point - prodSku used here before - now the variable is id (prodSku) - value
           this.paginationLoader = false;
           this.searcingLoaderFlag = false;
@@ -235,7 +232,7 @@ export default {
 
     showNotificationLoader (showNotificationFlag = false) {
       if (!this.mobileFilters || showNotificationFlag) {
-        this.$bus.$emit('notification-progress-start', 'Please wait...');
+        this.$bus.$emit('notification-progress-start', 'loading....');
         }
     },
     
