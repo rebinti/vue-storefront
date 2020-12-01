@@ -173,8 +173,7 @@ export default {
            document.getElementById("centimetres").classList.add( "active" );
            document.getElementById("inches").classList.remove( "active" );
     },
-    cmsDataChangedEvent (event){
-       console.log('cmsDataChangedEvent', event)
+    cmsDataChangedEvent (event){       
       if (event && event.value) {
           if(event.value.content.includes('bs-example-tabs')) this.showTabButtons = true;
           this.isCmsDataLoaded = true;
@@ -199,10 +198,6 @@ export default {
         let serachString = 'brand-' + selectedData.label.toLowerCase().split(' ').join('-');
         this.selectedBrandSearchTxt =  serachString;
       }
-      // console.log("RRRRRRRRRRRRRRRRr11111122222",this.getblockdata)
-      // if(!this.getblockdata){
-      //   this.selectedBrandSearchTxt =  'brand-default-clothing';
-      // }
       setTimeout(() => {
          this.isLoading = false;
       }, 250);
