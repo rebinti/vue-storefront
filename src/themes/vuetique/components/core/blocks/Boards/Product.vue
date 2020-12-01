@@ -8,7 +8,7 @@
    <!-- v-touch:start="startHandler" 
         v-touch:end="endHandler"  -->
 <div ref="content" class="card-content row pb-3 border-b border-grey-light relative p_list_block">
-    <div class="col-4 bg-grey-lightest">
+    <!-- <div class="col-4 bg-grey-lightest">
       <div @click="closeWishlist">
         <router-link :to="productLink"
                      data-testid="productLink"
@@ -17,7 +17,14 @@
           <img class="image" v-lazy="thumbnail">
         </router-link>
       </div>
-    </div>
+    </div> --> <!-- OLD updated 01/12/2020 -->
+      <router-link
+        class="col-4 bg-grey-lightest imglink"
+        :to="productLink"
+        data-testid="productLink"
+      >
+        <img class="image" v-lazy="thumbnail" alt="">
+      </router-link>      
     <div class="col-8 flex-col justify-start sm:justify-between prdct_cnt">
       <div>
         <div class="font-medium leading-6">
