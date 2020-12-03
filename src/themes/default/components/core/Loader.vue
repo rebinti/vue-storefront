@@ -5,12 +5,13 @@
         <div class="double-bounce1 absolute w-100 brdr-circle bg-cl-th-success" />
         <div class="double-bounce2 absolute w-100 brdr-circle bg-cl-th-success" />
       </div>
-      <div
+      <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 75px;">
+      <!-- <div
         class="loader-message-container mt15 py5 px15 align-center h6 cl-white"
         v-if="message"
       >
         {{ message }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

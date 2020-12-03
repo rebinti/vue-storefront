@@ -83,8 +83,8 @@
       </div> 
     </header>
      <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
-            <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
-             <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->
+            <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 75px;">
+             <!-- <h3 style="text-align: center;"> loading... </h3>  -->
       </div>
       <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;"
         :class="classNameTab"
