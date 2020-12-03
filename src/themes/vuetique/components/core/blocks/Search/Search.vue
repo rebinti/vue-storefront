@@ -3,11 +3,7 @@
     class="relative w-full"
     data-testid="search"
   >
-      <router-link
-      class="block no-underline product-link"
-      :to="'/search'"
-      data-testid="search"
-    >
+
     <div class="flex items-center">
       <base-input
         ref="search"
@@ -27,7 +23,7 @@
         <use xlink:href="#search" />
       </svg>
     </div>
-      </router-link>
+      
 
 
     <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
