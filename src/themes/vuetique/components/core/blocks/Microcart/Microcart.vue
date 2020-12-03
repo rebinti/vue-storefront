@@ -50,7 +50,7 @@
 
     <div class="mb_smry_out_wrap">
     <div v-if="productsInCart.length" class="summary pt-8 mob_summary">
-      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code !== 'grand_total'"> 
+      <div v-for="(segment, index) in totals" :key="index" class="flex justify-between py-2 text-grey-dark font-medium mob_d_item" v-if="segment.code === 'subtotal'"> 
        
         <div class="flex-grow mr-2">
           {{ segment.title }}
@@ -65,7 +65,7 @@
       
     
 
-      <div class="row justify-between py-3 font-serif text-h2 font-bold mob_rw_price" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
+      <!-- <div class="row bbbbbbbbb justify-between py-3 font-serif text-h2 font-bold mob_rw_price" v-for="(segment, index) in totals" :key="index" v-if="segment.code === 'grand_total'">
         <div class="col-auto total-price-label">
           {{ segment.title }}
         </div>
@@ -75,7 +75,7 @@
         <div v-else>
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div
