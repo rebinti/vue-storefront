@@ -9,8 +9,9 @@
     </div>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
-             <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->
+             <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->             
      </div>
+    <legacy-productfrom-search-spring v-if="initialsearchloadFlag && serachedProd.length === 0" :heading="$t('Type what you are looking for...')" />
 
     <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;" 
     :class="classNameTab"
@@ -165,27 +166,38 @@ import SiderbarFilter  from "src/modules/search-spring/components/sidebar";
 import MobileSiderbarFilter  from "src/modules/search-spring/components/MobileSidebar";
 import SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
 import { handleScroll } from 'src/modules/search-spring/helpers'
+import LegacyProductfromSearchSpring from 'theme/components/core/blocks/Product/LegacyProductfromSearchSpring.vue'
 
 export default {
   name: 'SearchSpringSearch',
   components: {
     SiderbarFilter,
-    MobileSiderbarFilter
+    MobileSiderbarFilter,
+    LegacyProductfromSearchSpring
   },
   mixins: [SearchSpringMixin, SidebarMixin, onBottomScroll],
   data () {
     return {
         searcingLoaderFlag: false,
+        initialsearchloadFlag: false,
         searchPageType: 'searchSpringSearch',
         serachFrom: 'search',
-        tagquery:'',
+        tagquery:'',        
     };
-  },
+  }, 
   computed: {
     ...mapGetters('searchSpringSearch', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected'])
   },
   created () {
-    this.searcingLoaderFlag = true;
+    //this.searcingLoaderFlag = true;
+    //this.initialsearchloadFlag= true;
+    if(!this.$route.query.q){
+      this.searcingLoaderFlag = false;
+      this.initialsearchloadFlag= true;        
+    }else{
+      this.searcingLoaderFlag = true;
+      this.initialsearchloadFlag= false;       
+    }    
   },
   // watch: {
   //   '$route': 'searchActiveQueryValueResults'
@@ -220,8 +232,8 @@ export default {
     }
     if(this.$route.query.q){
       let searchparamfromurl = this.$route.query.q;
-      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );
-    }         
+      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );     
+    }        
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
       if (this.sortingFilterSelected) {
@@ -264,7 +276,7 @@ export default {
             this.searcingLoaderFlag = true;
           }, 400);
         }
-       
+        this.initialsearchloadFlag= false;
       } else {
         if(this.setTime) clearTimeout(this.setTime);
         this.$store.dispatch('searchSpringSearch/resetAllFilterResult');
@@ -272,6 +284,7 @@ export default {
         this.$store.dispatch('searchSpringSearch/resetFilterData')
         this.searcingLoaderFlag = false;
         this.$store.dispatch('searchSpringSearch/resetSearchedProducts');
+        this.initialsearchloadFlag= true;
       }
     },  
     onBottomScroll () {

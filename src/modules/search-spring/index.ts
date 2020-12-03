@@ -1,4 +1,5 @@
 import { searchModule } from './store/search'
+import { legacysearchModule } from './store/legacysearch'
 import { categoryModule } from './store/category'
 import { createModule } from '@vue-storefront/core/lib/module'
 
@@ -8,5 +9,6 @@ export const SearchSpring = createModule({
   store: { modules: [
     { key: 'searchSpringSearch', module: searchModule },
     { key: 'searchSpringCategory', module: categoryModule },
+    { key: 'searchSpringLegacy', module: legacysearchModule },
   ] },
 })
