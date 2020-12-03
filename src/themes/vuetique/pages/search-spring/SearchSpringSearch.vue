@@ -11,7 +11,7 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->             
      </div>
-    <legacy-productfrom-search-spring v-if="initialsearchloadFlag && serachedProd.length === 0" typeofview="carousel" :heading="$t('Type what you are looking for...')" />
+    <legacy-productfrom-search-spring v-if="initialsearchloadFlag && serachedProd.length === 0" typeofview="carousel" :heading="$t('Search For More...')" />
 
     <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;" 
     :class="classNameTab"
@@ -124,8 +124,11 @@
               @setCategoryFilterHistory="setCategoryFilterHistory"
               @setCategoryFilterData="setCategoryFilterData"
           />  
-
-          <div class="lg:col-6 no-result" v-if="serachedProd.length === 0">
+          <div class="lg:col-6 no-result" v-if="initialsearchloadFlag && serachedProd.length === 0">
+              <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
+              <h5>If you are not seeing any results,Please check the spelling or try searching for something else..</h5>
+          </div>
+          <div class="lg:col-6 no-result" v-if="!initialsearchloadFlag && serachedProd.length === 0">
               <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
               <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
           </div>
