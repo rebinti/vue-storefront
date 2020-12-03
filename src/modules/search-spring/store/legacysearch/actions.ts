@@ -121,39 +121,6 @@ export const actions: ActionTree<SearchSpringLegacyState, any> = {
         return searchResults
     },
 
-    async getTrendingSearchesFrmSearchSpring ({ commit } ) {
-        let searchUrl =  'https://suggest.searchspring.net/api/suggest/trending?siteId=akjx6f&limit=10';
-        const searchResults = await fetch(searchUrl, {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            }
-          }).then(res => {
-            return res.json();
-        }, err => {
-            return err;
-        });
-        return searchResults
-    },
-
-
-    async getAutoSuggectionsFromSearchSpring ({ commit } , searchData ) {
-        let searchUrl =  `https://suggest.searchspring.net/api/suggest/query?siteId=akjx6f&query=${encodeURIComponent(searchData)}`
-        const searchResults = await fetch(searchUrl, {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            }
-          }).then(res => {
-            return res.json();
-        }, err => {
-            return err;
-        });
-        return searchResults
-    },
-
     resetCategoryFilterData ({ commit }) {
         commit(types.RESET_CATEGORY_FILTER_INNER_DATA)
     },

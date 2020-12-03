@@ -9,36 +9,39 @@
         </h2>
       </header>
       <div class="w-full p-4 text-black font-medium"  v-if="trendingSearches.length">
-        <h3>Trending Searches</h3>
-        <p v-for="trend in trendingSearches" :key="trend.popularity"> {{trend.searchQuery}} </p>
+        <h3 style="text-align:center;">Trending {{randomitem.searchQuery}}</h3>
+        <!-- <p v-for="trend in trendingSearches" :key="trend.popularity"> {{trend.searchQuery}} </p>
         <h3>random Searches</h3>
-        <p>{{randomitem}}</p>
+        <p>{{randomitem}}</p> -->
       </div>      
-    </div>
-    <!-- <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul">
-        <no-ssr>
-          <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
-            <slide 
-              v-for="product in product.related[type].slice(0,20)"
-              :key="product.id"
-            >
-              <product-tile
-                class="collection-product"
-                :product="product"
-                :labels-active="false"
-              />
-            </slide>
-          </carousel>
-        </no-ssr>
-      </div>
-      <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
-    </div> -->
+      <!-- <product-listing columns="4" :products="legacyserachedProd" /> -->
+      <!-- <div>{{legacyserachedProd.length}}</div>  -->
+      <div class="text-center"  v-if="legacyserachedProd && legacyserachedProd.length > 0">
+        <div v-if="typeofview == 'carousel'" class="recent-caroasul">
+          <no-ssr>
+            <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="1">
+              <slide 
+                v-for="product in legacyserachedProd"
+                :key="product.id"
+              >
+                <product-tile
+                  class="collection-product"
+                  :product="product"
+                  :labels-active="false"
+                />
+              </slide>
+            </carousel>
+          </no-ssr>
+        </div>
+        <product-listing v-else columns="4" :products="legacyserachedProd" />
+      </div>       
+    </div>      
   </section>
 </template>
 
 <script>
 import NoSSR from 'vue-no-ssr'
+import { mapGetters } from 'vuex'
 import SearchQuery from '@vue-storefront/core/lib/search/searchQuery';
 import { Carousel, Slide } from 'vue-carousel'
 import ProductListing from 'theme/components/core/ProductListing'
@@ -83,6 +86,9 @@ export default {
   components: {
     ProductListing, Carousel, Slide, 'no-ssr': NoSSR, ProductTile
   },
+  computed: {
+    ...mapGetters('searchSpringLegacy', ['legacyserachedProd', 'legacysearchRes'])
+  },  
   async beforeMount () {
       // GET TRENDING SEARCH RANDOM ITEMS 
       const searchResults = await this.$store.dispatch('searchSpringSearch/getTrendingSearchesFrmSearchSpring')
@@ -92,23 +98,17 @@ export default {
         // Example value '{ "searchQuery": "jacket", "popularity": 5093 }'
       }      
       // GET RANDOM TRENDING ITEMS PRODUCTS
-      const legacysearchResults = await this.$store.dispatch('searchSpringLegacy/getLegacySearchesFrmSearchSpring', {queryparam: this.randomitem.searchQuery })        
-      console.log("AAAAAA111111",legacysearchResults) 
+      const legacysearchResults = await this.$store.dispatch('searchSpringLegacy/getLegacySearchesFrmSearchSpring', {queryparam: this.randomitem.searchQuery })              
 
       if (legacysearchResults && legacysearchResults.products && legacysearchResults.products.length) {        
         let prodSku = [];          
         legacysearchResults.products.filter(val => {
           prodSku.push(val.sku);
-        }); 
-        console.log("AAAAAA",prodSku) 
-        await this.getDataFromElastic(prodSku, false, 'searchSpringSearch'); 
+        });         
+        await this.getDataFromElastic(prodSku, false, 'searchSpringLegacy'); 
       }             
   },
-  mounted () {          
-  },
-  beforeDestroy () {
-  },
-  destroyed () {
+  mounted () {       
   },
   methods: {    
     async getDataFromElastic (searchedData, onScroll = false ,  searchType) {      
@@ -123,10 +123,11 @@ export default {
         searchedData.indexOf(a.id.toString()) - searchedData.indexOf(b.id.toString())
       );             
       this.$store.dispatch(`${searchType}/addProdcutsItems`, {onScroll: onScroll, products: sortedData})      
-      return this.serachedProd;
-    },    
-  },
-  computed: {
+      return this.serachedProd;      
+    },
+    setMuted (currentPage) {
+      this.currentPage = currentPage
+    },        
   }
 }
 </script>

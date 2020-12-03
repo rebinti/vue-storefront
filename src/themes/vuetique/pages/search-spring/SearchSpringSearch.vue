@@ -11,7 +11,7 @@
             <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> loading... </h3> <!-- Please wait.finding best results... -->             
      </div>
-    <legacy-productfrom-search-spring v-if="initialsearchloadFlag && serachedProd.length === 0" :heading="$t('Type what you are looking for...')" />
+    <legacy-productfrom-search-spring v-if="initialsearchloadFlag && serachedProd.length === 0" typeofview="carousel" :heading="$t('Type what you are looking for...')" />
 
     <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;" 
     :class="classNameTab"
