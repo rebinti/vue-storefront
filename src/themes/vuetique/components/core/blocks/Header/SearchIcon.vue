@@ -1,9 +1,9 @@
 <template>
- <router-link
+ <!-- <router-link
       class="block no-underline product-link"
       :to="'/search'"
       data-testid="productLink"
-    >
+    > -->
   <button
     type="button"
     :aria-label="$t('Open search panel')"
@@ -16,7 +16,7 @@
       <use xlink:href="#search" />
     </svg>
   </button>
- </router-link>
+ <!-- </router-link> -->
 </template>
 
 <script>
