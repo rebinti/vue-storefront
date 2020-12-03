@@ -124,7 +124,7 @@ export const actions: ActionTree<SearchSpringState, any> = {
     },
 
     async getTrendingSearchesFrmSearchSpring ({ commit } ) {
-        let searchUrl =  'https://suggest.searchspring.net/api/suggest/trending?siteId=akjx6f&limit=10';
+        let searchUrl =  'https://suggest-cache.searchspring.net/api/suggest/trending?siteId=akjx6f&limit=10';
         const searchResults = await fetch(searchUrl, {
             method: 'GET',
             headers: {
@@ -141,7 +141,7 @@ export const actions: ActionTree<SearchSpringState, any> = {
 
 
     async getAutoSuggectionsFromSearchSpring ({ commit } , searchData ) {
-        let searchUrl =  `https://suggest.searchspring.net/api/suggest/query?siteId=akjx6f&query=${encodeURIComponent(searchData)}`
+        let searchUrl =  `https://suggest-cache.searchspring.net/api/suggest/query?siteId=akjx6f&query=${encodeURIComponent(searchData)}`
         const searchResults = await fetch(searchUrl, {
             method: 'GET',
             headers: {
