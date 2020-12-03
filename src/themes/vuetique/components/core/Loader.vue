@@ -1,12 +1,13 @@
 <template>
   <div class="loader-container fixed" v-if="isVisible">
     <div class="loader-inner-container fixed">
-      <div
+      <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 75px;">
+      <!-- <div
         class="loader-message-container py-3 px-5 text-h6 text-white"
         v-if="message"
       >
         {{ message }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
