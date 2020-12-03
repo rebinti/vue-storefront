@@ -139,7 +139,7 @@ export default {
     }
   },
   mounted() {
-    console.log("GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",this.cmspageseodata)
+    // console.log("GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",this.cmspageseodata)
     this.$bus.$emit('send-to-emarsys-tracking');
     if ('styla' in window) {
     // if (window.styla !== null && window.styla['isReady'] !== undefined) {
