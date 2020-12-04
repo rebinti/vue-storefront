@@ -166,7 +166,7 @@
             @setCategoryFilterData="setCategoryFilterData"
          /> 
 
-        <div class="lg:col-6 no-result" v-if="serachedProd.length === 0">
+        <div class="lg:col-6 no-result" v-if="filterloaderFlag && serachedProd.length === 0">
             <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
             <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
         </div>        
@@ -233,6 +233,7 @@ export default {
         searchPageType: 'searchSpringCategory',  // which store
         serachFrom: 'category', // where from
         initialSearchFlag: true, // category - filter higherachy value manage category page - other for brand and search
+        filterloaderFlag: false,
     };
   },
 

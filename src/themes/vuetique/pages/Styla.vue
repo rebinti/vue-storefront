@@ -6,8 +6,11 @@
     </header> -->
     <div class="container-fluid pb-16 pl-2 pr-2" style="min-height: 100vh;" id="stylaOuter">
         <!-- <div class="col-12 md:col-9 leading-loose static-content"> -->
-
-            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine" ></div>
+            <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
+                  <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">
+                  <!-- <h3 style="text-align: center;"> loading... </h3>  -->
+            </div>
+            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine" v-if="!stylaloaderflag"></div>
             <!-- <div id="stylaMagazine" 
             v-if="changeDiv" ref="stylaMagazine-inspiration" 
             :data-area="this.$route.params.childSlug"> </div>-->
@@ -22,6 +25,7 @@ import { router } from '@vue-storefront/core/app'
 import { LocalizedRoute } from '@vue-storefront/core/lib/types'
 import { localizedRoute, currentStoreView } from '@vue-storefront/core/lib/multistore'
 import i18n from '@vue-storefront/i18n'
+import Vue from 'vue'
 import Breadcrumbs from '../components/core/Breadcrumbs.vue'
 import { vHtmlRouter } from '@vue-storefront/core/modules/url/helpers'
 
@@ -42,7 +46,8 @@ export default {
   data () {
     return {
       changeDiv: true,
-      keyRerendeDiv: 0
+      keyRerendeDiv: 0,
+      stylaloaderflag: true,
     }
   },  
   props: {
@@ -58,7 +63,8 @@ export default {
   methods: {
     activateHashSection () {
       this.keyRerendeDiv += 1;
-      // this.changeDiv = false
+      // this.changeDiv = false      
+      this.stylaloaderflag = true
       console.log('activateHashSection')
       setTimeout(() => {
           // this.changeDiv = true
@@ -119,7 +125,11 @@ export default {
             if (window.styla.isReady) window.styla.init()
           }
         }, 1000);
-      }
+      },
+      showhidestylaloader (message) {
+        console.log("Stylaaaaaaaaaaaaa",message)
+        this.stylaloaderflag = message        
+      },      
   },
   mounted() {
     //  if (window.styla !== null && typeof window.styla.init !== "undefined") {
@@ -127,11 +137,19 @@ export default {
       setTimeout(() => {
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          if (window.styla) window.styla.init()
-      }, 1000);
+      }, 1000);      
     // }
     // console.log('this.$route.params.slug', this.$route ,this.$route.params);
     // this.activateHashSection ()   
-  }  
+  },
+  beforeMount () {
+    this.$bus.$on('styla-loader-check', this.showhidestylaloader)
+    //this.$bus.$on('notification-progress-stop', this.hide)
+  },
+  beforeDestroy () {
+    this.$bus.$off('styla-loader-check', this.showhidestylaloader)
+   // this.$bus.$off('notification-progress-stop', this.hide)
+  }    
 }
 </script>
 

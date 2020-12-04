@@ -135,6 +135,7 @@ export default {
             if (searchType === 'searchSpringSearch') this.searchedValue = this.filterData[0].split('=')[1];
           });
           this.$bus.$emit('notification-progress-stop')
+          this.filterloaderFlag = true;
         } else {
           if (searchResults.pagination.totalResults === 0 ) {
             this.searcingLoaderFlag = false;
@@ -149,11 +150,13 @@ export default {
             this.searcingLoaderFlag = false;
           }
           this.$bus.$emit('notification-progress-stop')
+          this.filterloaderFlag = true;
         }
       } catch (e) { 
         this.$bus.$emit('notification-progress-stop') 
         this.paginationLoader = false;
         this.searcingLoaderFlag = false;
+        this.filterloaderFlag = true;
         }
     },
 
@@ -233,6 +236,7 @@ export default {
     showNotificationLoader (showNotificationFlag = false) {
       if (!this.mobileFilters || showNotificationFlag) {
         this.$bus.$emit('notification-progress-start', 'loading....');
+        this.filterloaderFlag = false;
         }
     },
     
