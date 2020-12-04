@@ -6,11 +6,10 @@
     </header> -->
     <div class="container-fluid pb-16 pl-2 pr-2" style="min-height: 100vh;" id="stylaOuter">
         <!-- <div class="col-12 md:col-9 leading-loose static-content"> -->
-            <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
-                  <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">
-                  <!-- <h3 style="text-align: center;"> loading... </h3>  -->
-            </div>
-            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine" v-if="!stylaloaderflag"></div>
+            <!-- <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
+                  <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
+            </div> -->
+            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine"></div> <!-- v-if="!stylaloaderflag" -->
             <!-- <div id="stylaMagazine" 
             v-if="changeDiv" ref="stylaMagazine-inspiration" 
             :data-area="this.$route.params.childSlug"> </div>-->
@@ -90,6 +89,7 @@ export default {
          if (window.styla !== null && typeof window.styla.init !== "undefined") {
            if (window.styla.isReady) window.styla.init()
          }
+         this.stylaloaderflag = false
       }, 4000);
     },
     vHtmlRouterNew (refs) {
