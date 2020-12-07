@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
+    <div class="loader--style3 mainhomestylaloader" style="" title="2" v-if="stylaloaderflag" >
           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
     </div>    
     <!-- For loading the styla magazine content -->
@@ -240,6 +240,22 @@ menu-list button.btn.btn-primary.p_btn{
     background: #ffffff;
     bottom: 15px;
     border: 1px solid #e2dddd;
+  }
+}
+.mainhomestylaloader{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    top: 500px;
+}
+@media screen and (max-width: 480px) {
+  .mainhomestylaloader{
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      top: 150px;
   }
 }
 </style>
