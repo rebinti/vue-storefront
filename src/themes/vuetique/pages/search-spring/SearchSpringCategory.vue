@@ -709,7 +709,7 @@ input {
   }
   .onlymobile .mfilter .filterexist .filtereditems-count{
         top: 3px;
-    left: 64%;
+    left: 61%;
     min-width: 11px;
     min-height: 11px;
     border-radius: 100%;
@@ -768,7 +768,10 @@ input {
       width: 105px;
       height: 44px;
       font-size: 16px;
-   }   
+   } 
+   .onlymobile .mfilter .filterexist .filtereditems-count{
+     left: 75%;
+   }  
 } 
 
 

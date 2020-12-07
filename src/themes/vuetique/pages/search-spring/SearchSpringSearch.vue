@@ -42,9 +42,15 @@
         <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
           <div class="row gutter-md mt-6">
             <div class="col-12">
-              <button-full class="w-full" @click.native="openFilters">
+              <!-- <button-full class="w-full" @click.native="openFilters">
                 {{ $t('Filters') }}
-              </button-full>
+              </button-full> -->
+              <button-full class="w-full" v-bind:class="[(searchRes && searchRes.filterSummary &&  searchRes.filterSummary.length) ? 'filterexist' : 'nofilterexist']"  @click.native="openFilters" style="">
+                {{ $t('Filters') }}
+                <span data-testid="minicartCount" class="filtereditems-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary">
+                      {{searchRes.filterSummary.length}}
+                </span>
+              </button-full>             
             </div>
           </div>
         </div>        
@@ -574,7 +580,34 @@ input {
       bottom: 515px;
   }
 }
-
+@media (max-width: 768px) {
+  .onlymobile .mfilter .nofilterexist{
+    background-color: #fff !important;
+    color: #000000 !important;
+    border: 1px solid #bdbdbd;
+  }
+  .onlymobile .mfilter .nofilterexist .filtereditems-count{
+    display:none;  
+  }
+  .onlymobile .mfilter .filterexist{
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+  .onlymobile .mfilter .filterexist .filtereditems-count{
+        top: 3px;
+    left: 61%;
+    min-width: 11px;
+    min-height: 11px;
+    border-radius: 100%;
+    float: right;
+    height: 18px;
+    width: 18px;
+    font-size: 9px;
+    background: #fffdfd;
+    color: #000;
+    border: 1px solid #000;
+  }
+}
    .mob-siderbar-footer{
       position: fixed;
       bottom: 0px;
@@ -610,7 +643,10 @@ input {
    }
    .mob-siderbar-footer .reset-button{     
       left: 45px;
-   }   
+   }
+   .onlymobile .mfilter .filterexist .filtereditems-count{
+     left: 75%;
+   }       
 } 
 
   @media (max-width: 380px) {
