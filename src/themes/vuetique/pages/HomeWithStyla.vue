@@ -1,5 +1,8 @@
 <template>
   <div id="home">
+    <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
+          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
+    </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />
 
@@ -73,7 +76,8 @@ export default {
         navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
         navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
       }, 
-      setTimeoutSubscription: null    
+      setTimeoutSubscription: null,
+      stylaloaderflag: false,
     }
   },
   methods: {
@@ -96,6 +100,7 @@ export default {
   created () {
     // Load personal and shipping details for Checkout page from IndexedDB
     this.$store.dispatch('checkout/load')
+    this.stylaloaderflag = true
   },
   async beforeMount () {
     if (this.$store.state.__DEMO_MODE__) {
@@ -142,6 +147,7 @@ export default {
     // console.log("GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",this.cmspageseodata)
     this.$bus.$emit('send-to-emarsys-tracking');
     if ('styla' in window) {
+      console.log("AAAAAAAAAA111", window.styla.callbacks )
     // if (window.styla !== null && window.styla['isReady'] !== undefined) {
       // if (typeof window.styla.init !== "undefined") window.styla.init()
        styla.init !== "undefined"&&styla.init()
@@ -149,12 +155,14 @@ export default {
     this.$nextTick(() => {
       if ('styla' in window) {
         styla.init()
+        this.stylaloaderflag = false
       }
     })
     this.setTimeoutSubscription = setTimeout(() => {
       if ('styla' in window) {
         styla.init()
       }
+      this.stylaloaderflag = false
     }, 5000);
     // For working Segmentify
     this.setSegmentify()
