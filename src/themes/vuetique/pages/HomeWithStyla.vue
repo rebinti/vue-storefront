@@ -249,6 +249,15 @@ menu-list button.btn.btn-primary.p_btn{
     z-index: 1;
     top: 500px;
 }
+@media screen and (max-width: 1024px) {
+  .mainhomestylaloader{
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      top: 350px;
+  }
+}
 @media screen and (max-width: 480px) {
   .mainhomestylaloader{
       position: absolute;

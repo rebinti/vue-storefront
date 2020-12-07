@@ -4,12 +4,12 @@
     <!-- <header class="container mt-2">
 
     </header> -->
+    <div class="loader--style3 mainhomestylaloader" style="" title="2" v-if="stylaloaderflag" >
+          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
+    </div>      
     <div class="container-fluid pb-16 pl-2 pr-2" style="min-height: 100vh;" id="stylaOuter">
         <!-- <div class="col-12 md:col-9 leading-loose static-content"> -->
-            <!-- <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="stylaloaderflag">
-                  <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
-            </div> -->
-            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine"></div> <!-- v-if="!stylaloaderflag" -->
+            <div :class="'testing_' + keyRerendeDiv" id="stylaMagazine"></div> 
             <!-- <div id="stylaMagazine" 
             v-if="changeDiv" ref="stylaMagazine-inspiration" 
             :data-area="this.$route.params.childSlug"> </div>-->
@@ -37,7 +37,8 @@ export default {
        title: this.$route.meta.title || this.$props.title,
     }
   },
-  created () {    
+  created () {
+    this.stylaloaderflag = true    
   },
   watch: {
     '$route': 'activateHashSection',
@@ -46,7 +47,7 @@ export default {
     return {
       changeDiv: true,
       keyRerendeDiv: 0,
-      stylaloaderflag: true,
+      stylaloaderflag: false,
     }
   },  
   props: {
@@ -137,7 +138,12 @@ export default {
       setTimeout(() => {
         // vHtmlRouter(this.$refs['stylaMagazine-inspiration'])
          if (window.styla) window.styla.init()
-      }, 1000);      
+      }, 1000);  
+      setTimeout(() => {        
+         if (window.styla){        // if (typeof window.styla.init !== "undefined")   
+           this.stylaloaderflag = false
+         } 
+      }, 1500);            
     // }
     // console.log('this.$route.params.slug', this.$route ,this.$route.params);
     // this.activateHashSection ()   
@@ -154,5 +160,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.mainhomestylaloader{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    top: 500px;
+}
+@media screen and (max-width: 1024px) {
+  .mainhomestylaloader{
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      top: 350px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .mainhomestylaloader{
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      top: 150px;
+  }
+}
 </style>
