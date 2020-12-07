@@ -116,8 +116,11 @@
         <div v-if="searchRes" class="lg:hidden d_item col-4 mfilter" style=" margin-bottom: 20px;">
           <div class="row gutter-md mt-6">
             <div class="col-12">
-              <button-full class="w-full" @click.native="openFilters" style="background-color: #fff !important;">
+              <button-full class="w-full" v-bind:class="[(searchRes && searchRes.filterSummary &&  searchRes.filterSummary.length) ? 'filterexist' : 'nofilterexist']"  @click.native="openFilters" style="">
                 {{ $t('Filters') }}
+                <span data-testid="minicartCount" class="filtereditems-count absolute flex justify-center items-center text-xs font-bold text-white bg-primary">
+                      {{searchRes.filterSummary.length}}
+                </span>
               </button-full>
             </div>
           </div>
@@ -691,6 +694,32 @@ input {
   .filterdiv{
       width: 228px;
       bottom: 515px;
+  }
+}
+@media (max-width: 768px) {
+  .onlymobile .mfilter .nofilterexist{
+    background-color: #fff !important;
+  }
+  .onlymobile .mfilter .nofilterexist .filtereditems-count{
+    display:none;  
+  }
+  .onlymobile .mfilter .filterexist{
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+  .onlymobile .mfilter .filterexist .filtereditems-count{
+        top: 3px;
+    left: 64%;
+    min-width: 11px;
+    min-height: 11px;
+    border-radius: 100%;
+    float: right;
+    height: 18px;
+    width: 18px;
+    font-size: 9px;
+    background: #fffdfd;
+    color: #000;
+    border: 1px solid #000;
   }
 }
 @media (max-width: 520px) {
