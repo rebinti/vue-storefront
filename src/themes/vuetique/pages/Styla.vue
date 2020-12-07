@@ -143,7 +143,7 @@ export default {
          if (window.styla){        // if (typeof window.styla.init !== "undefined")   
            this.stylaloaderflag = false
          } 
-      }, 1500);            
+      }, 2000);            
     // }
     // console.log('this.$route.params.slug', this.$route ,this.$route.params);
     // this.activateHashSection ()   
