@@ -25,29 +25,26 @@
         <div  class="description"
             v-html="product.description" 
             style="margin-left: 10px;white-space: pre-line;"
-        />
-                                 
-    
-  <div class="mt-10">
-    <!-- <h4>Model Details</h4> -->
-      
-      <div v-if="productModelDetails" class="model flex model-div">
-          <div>
-            <img :src="modelImage" class="model-image" />
-          </div>
-          <div>
-              <p v-if="modelName" class="mb-8 name_sec">Model:&nbsp;  {{modelName.label}} </p>
-                <ul class="modeldata">
-                  <li>Height:&nbsp;  {{productModelDetails.height}} </li>
-                  <li>Hips:&nbsp;  {{productModelDetails.hips}} </li>
-                  <li>Waist:&nbsp;  {{productModelDetails.waist}} </li>
-                  <li>Bust:&nbsp;  {{productModelDetails.bust}} </li>
-                  <li class="mt-8 detail_sec" >Details:&nbsp;  {{productModelDetails.details}} </li>
-              </ul>
-          </div>
-      </div>
-
-  </div>
+        />  
+    <div class="fit" v-if="getFitAttributeValue"><span class="fit-attribute">Fit :</span> {{getFitAttributeValue.label}}</div>                                   
+    <div class="mt-10">
+      <!-- <h4>Model Details</h4> -->  
+        <div v-if="productModelDetails" class="model flex model-div">
+            <div>
+              <img :src="modelImage" class="model-image" />
+            </div>
+            <div>
+                <p v-if="modelName" class="mb-8 name_sec">Model:&nbsp;  {{modelName.label}} </p>
+                  <ul class="modeldata">
+                    <li>Height:&nbsp;  {{productModelDetails.height}} </li>
+                    <li>Hips:&nbsp;  {{productModelDetails.hips}} </li>
+                    <li>Waist:&nbsp;  {{productModelDetails.waist}} </li>
+                    <li>Bust:&nbsp;  {{productModelDetails.bust}} </li>
+                    <li class="mt-8 detail_sec" >Details:&nbsp;  {{productModelDetails.details}} </li>
+                </ul>
+            </div>
+        </div>
+    </div>
           
 
   </div>
@@ -101,9 +98,17 @@ export default {
       } else {
         return null
       }
-    }
+    },
+    getFitAttributeValue () {
+      if (this.attributesByCode && this.attributesByCode.fit) {
+        return this.attributesByCode.fit.options.find(val => val.value == this.product.fit) || null
+      } else {
+        return null
+      }
+    }    
   },
   mounted () {
+      console.log("FFFFFFFF",this.attributesByCode)
       let start = null;
       const touchStart = (event) => {
           if(event.touches.length === 1) start = event.touches.item(0).clientX;
@@ -209,6 +214,14 @@ export default {
 .model-div ul li, .model-div p {
   font-size: 16px;
   font-weight: 400;
+}
+.fit{
+  margin-top: 15px;
+  margin-left: 10px;  
+}
+.fit .fit-attribute{
+  font-weight: 500;
+  text-transform: uppercase;  
 }
 
 @media (max-width: 375px) {
