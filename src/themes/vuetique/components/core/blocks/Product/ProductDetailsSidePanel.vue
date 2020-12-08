@@ -107,8 +107,7 @@ export default {
       }
     }    
   },
-  mounted () {
-      console.log("FFFFFFFF",this.attributesByCode)
+  mounted () {      
       let start = null;
       const touchStart = (event) => {
           if(event.touches.length === 1) start = event.touches.item(0).clientX;
