@@ -236,21 +236,34 @@ export default {
      this.$bus.$off('search-in-search-spring');
   },
   mounted () {
+    console.log("searchfilter DATAAAAAAAAAAAAa",this.filterData)
     if (this.$route.query.tag) {
       let searchparam = this.$route.query.tag;
       Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
-    }
-    if(this.$route.query.q){
-      let searchparamfromurl = this.$route.query.q;
-      Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );     
-    }        
+    }       
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
       if (this.sortingFilterSelected) {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
       }
+      if(this.$route.query.q){
+        let searchparamfromurl = this.$route.query.q;
+        if(this.searchedValue!=searchparamfromurl){
+          Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );  
+          this.searcingLoaderFlag = true;
+        }else{
+          this.searcingLoaderFlag = false;
+        }           
+      }             
+    }else{
+      if(this.$route.query.q){
+          let searchparamfromurl = this.$route.query.q;        
+          Vue.prototype.$bus.$emit('search-in-search-spring', searchparamfromurl );
+          this.searcingLoaderFlag = true;          
+      }       
     }
     this.setSegmentify()
+    console.log("SEARCH PAGE >>>>>>>>>>>>",this.serachedProd)
   },
   methods: {
     // searchActiveQueryValueResults() {
@@ -307,10 +320,8 @@ export default {
         this.getSearchData(true, false, 'searchSpringSearch');
       }
     }, 
-    dataFromHeader (event) {
-      console.log("INNNNN111",event)
-      if (event && event !== this.searchedValue) {
-        console.log("INNNNN222",event)
+    dataFromHeader (event) {      
+      if (event && event !== this.searchedValue) {        
         this.squery= event;
         this.searchDataInSearchSpring (event)
       }        
