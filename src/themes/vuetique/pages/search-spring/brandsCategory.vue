@@ -662,4 +662,18 @@ input {
     max-width: 100%;
 }
 
+.filtertab_pos-fixed{
+    margin-bottom: 5px;
+    position: fixed;
+    top: 178px;
+    -webkit-transform: translate3d(0,-200%,8px);
+    transform: translate3d(0,-200%,8px);
+    z-index: 4;
+    padding: 7px 5px 5px 5px;
+    background: #fff;
+    width: 100%;
+    height: 57px;
+    max-width: 100%;  
+}
+
 </style>

@@ -75,10 +75,10 @@ export default {
       }
       if (this.scrollTop > this.lastScrollTop && this.scrollTop > this.navbarHeight) {
         this.navVisible = true
-        this.classNameTab = 'filtertab_pos-fixed-top-on-bottom' 
+        this.classNameTab = 'filtertab_pos-fixed' // old one filtertab_pos-fixed-top-on-bottom
       } else {
         this.navVisible = false
-        this.classNameTab = 'filtertab_pos-fixed-top-on-top'
+        this.classNameTab = 'filtertab_pos-fixed' // old one filtertab_pos-fixed-top-on-top
       }
       this.lastScrollTop = this.scrollTop
     },

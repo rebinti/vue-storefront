@@ -288,6 +288,12 @@ header {
    .header-placeholder {
     height: 50px;
    }
+   header{
+    height: 50px;
+    top: 0px;
+    z-index: 3;
+    -webkit-transition: top 0.2s ease-in-out;
+   }
 }
  .toogle-search {
     display: block;
