@@ -109,7 +109,16 @@ export default {
   .container .pr_list_sec_main .row.gutter-md .col-4.item-4-3-grid.column4.threecolumn-3{
     padding-left: 0.225rem !important;
     padding-right: 0.625rem !important;
-  }         
+  } 
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-3-6-grid.threecolumn-2{
+    padding-left: 0.625rem !important;
+    padding-right: 0.325rem !important;
+  }    
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-3-6-grid.threecolumn-3{
+    padding-left: 0.325rem !important;
+    padding-right: 0.625rem !important;
+  }  
+
 }
 @media (max-width: 480px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
@@ -130,6 +139,10 @@ export default {
     width: 128.06px;
     height: 182.43px;    
   }
+  .col-6.item-3-6-grid .product-image img.default-image,.col-6.item-3-6-grid .product-image img.hover-image{
+    width: 199.72px;
+    height: 299.58px;    
+  }  
 }
 @media (max-width: 414px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
@@ -139,7 +152,11 @@ export default {
   .item-4-3-grid.column4 .product-image img.default-image,.item-4-3-grid.column4 .product-image img.hover-image{
     width: 124.39px;
     height: 186.585px;    
-  }    
+  }
+  .col-6.item-3-6-grid .product-image img.default-image,.col-6.item-3-6-grid .product-image img.hover-image{
+    width: 191.81px;
+    height: 287.715px;    
+  }       
 }
 @media (max-width: 412px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
@@ -169,7 +186,11 @@ export default {
   .item-4-3-grid.column4 .product-image img.default-image,.item-4-3-grid.column4 .product-image img.hover-image{
     width: 111.41px;
     height: 167.115px;    
-  }    
+  } 
+  .col-6.item-3-6-grid .product-image img.default-image,.col-6.item-3-6-grid .product-image img.hover-image{
+    width: 172.31px;
+    height: 258.465px;    
+  }       
 }
 @media (max-width: 360px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
