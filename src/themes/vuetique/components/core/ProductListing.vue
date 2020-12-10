@@ -90,15 +90,15 @@ export default {
 <style lang="scss" >
 @media (max-width: 768px){
   /* ipad screen 3 column and above */
-  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-1{
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-1,.container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.column3.threecolumn-1{
     padding-left: 0.625rem !important;
     padding-right: 0.325rem !important;
   }
-  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-2{
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-2,.container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.column3.threecolumn-2{
     padding-left: 0.325rem !important;
     padding-right: 0.325rem !important;
   }
-  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-3{
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-3,.container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.column3.threecolumn-3{
     padding-left: 0.325rem !important;
     padding-right: 0.625rem !important;
   } 
@@ -129,10 +129,11 @@ export default {
     padding-right: 0.625rem !important;
   }      
   /* 3 column image size */   
-  .col-3.item-4-3-grid .product-image img.default-image,.col-3.item-4-3-grid .product-image img.hover-image{
+  .col-3.item-4-3-grid .product-image img.default-image,.col-3.item-4-3-grid .product-image img.hover-image,.col-6.item-2-6-grid.column3 .product-image img.default-image,.col-6.item-2-6-grid.column3 .product-image img.hover-image{
     width: 240.81px;
     height: 361.215px;   
-  }
+  }.col-6.item-2-6-grid.column3
+  
   /* 2 column image size */ 
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
     width: 368.81px;
