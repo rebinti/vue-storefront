@@ -4,7 +4,7 @@
       v-for="(product, index) in products"
       :key="product.id"
       v-if="!product._dontShowInListingFlag"
-      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10 +' '+'column'+(12/((12/columns)%10))]" 
+      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10 +' '+'column'+(12/((12/columns)%10))+' '+'style-' + ((index % numberOfPlayers) + 1)]" 
     >
     <!-- :class="['md:col-' + (12/columns)%10]" -->
       <product-tile :product="product"/>
@@ -38,6 +38,11 @@ export default {
       type: [Number, String],
       required: false,
       default:3
+    }
+  },
+  computed: {
+    numberOfPlayers: function() {
+        return 2;
     }
   },
   methods: {
@@ -75,3 +80,34 @@ export default {
   }
 }
 </script>
+<style lang="scss" >
+@media (max-width: 576px) {
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 200px !important;
+    height: 300px !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.style-1{
+    padding-left: 0.550rem !important;
+    padding-right: 0.225rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.style-2{
+    padding-left: 0.275rem !important;
+    padding-right: 0.550rem !important;    
+  }  
+}
+@media (max-width: 425px) {
+
+}
+@media (max-width: 375px) {
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 175.11px !important;
+    height: 262.665px !important;
+  }
+}
+@media (max-width: 320px) {
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 147.61px !important;
+    height: 221.415px !important;      
+  }
+}
+</style>
