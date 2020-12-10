@@ -4,7 +4,7 @@
       v-for="(product, index) in products"
       :key="product.id"
       v-if="!product._dontShowInListingFlag"
-      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10 +' '+'column'+(12/((12/columns)%10))+' '+'style-' + ((index % twoColumnMobile) + 1)+' '+'threecolumn-' + ((index % threeColumnMobile) + 1)]" 
+      :class="['col-' +  checkGridView(index)  +  ' md:col-' + (12/columns)%10 +' '+'column'+(12/((12/columns)%10))+' '+'style-' + ((index % twoColumnMobile) + 1)+' '+'threecolumn-' + ((index % threeColumnMobile) + 1)+' '+'fourcolumn-' + ((index % fourColumn) + 1)]" 
     >
     <!-- :class="['md:col-' + (12/columns)%10]" -->
       <product-tile :product="product"/>
@@ -47,7 +47,10 @@ export default {
     },
     threeColumnMobile: function() {
         return 3;
-    },    
+    },
+    fourColumn: function() {
+        return 4;
+    },        
   },
   methods: {
     checkGridView(index) {
@@ -85,6 +88,62 @@ export default {
 }
 </script>
 <style lang="scss" >
+@media (max-width: 768px){
+  /* ipad screen 3 column and above */
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-1{
+    padding-left: 0.625rem !important;
+    padding-right: 0.325rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-2{
+    padding-left: 0.325rem !important;
+    padding-right: 0.325rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-3{
+    padding-left: 0.325rem !important;
+    padding-right: 0.625rem !important;
+  } 
+  /* ipad screen 2 column and above */
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.style-1{
+    padding-left: 0.625rem !important;
+    padding-right: 0.325rem !important;
+  } 
+  .container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.style-2{
+    padding-left: 0.325rem !important;
+    padding-right: 0.625rem !important;
+  }
+  /* ipad screen 4 column and above */
+  .container .pr_list_sec_main .row.gutter-md .item-4-3-grid.column4.fourcolumn-1{
+    padding-left: 0.625rem !important;
+    padding-right: 0.325rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .item-4-3-grid.column4.fourcolumn-2{
+    padding-left: 0.325rem !important;
+    padding-right: 0.325rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .item-4-3-grid.column4.fourcolumn-3{
+    padding-left: 0.325rem !important;
+    padding-right: 0.325rem !important;
+  }
+  .container .pr_list_sec_main .row.gutter-md .item-4-3-grid.column4.fourcolumn-4{
+    padding-left: 0.325rem !important;
+    padding-right: 0.625rem !important;
+  }      
+  /* 3 column image size */   
+  .col-3.item-4-3-grid .product-image img.default-image,.col-3.item-4-3-grid .product-image img.hover-image{
+    width: 240.81px;
+    height: 361.215px;   
+  }
+  /* 2 column image size */ 
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 368.81px;
+    height: 553.215px;   
+  } 
+  /* 4 column image size */ 
+  .item-4-3-grid.column4 .product-image img.default-image,.item-4-3-grid.column4 .product-image img.hover-image{
+    width: 181.63px;
+    height: 272.445px;   
+  }     
+}
 @media (max-width: 576px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
     width: 275.61px !important;
@@ -117,7 +176,7 @@ export default {
   .container .pr_list_sec_main .row.gutter-md .col-6.item-3-6-grid.threecolumn-3{
     padding-left: 0.325rem !important;
     padding-right: 0.625rem !important;
-  }  
+  }    
 
 }
 @media (max-width: 480px) {
