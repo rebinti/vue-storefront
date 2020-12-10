@@ -83,8 +83,8 @@ export default {
 <style lang="scss" >
 @media (max-width: 576px) {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
-    width: 200px !important;
-    height: 300px !important;
+    width: 275.61px !important;
+    height: 413.415px !important;
   }
   .container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.style-1{
     padding-left: 0.550rem !important;
@@ -111,6 +111,18 @@ export default {
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
     width: 194.61px !important;
     height: 291.915px !important;
+  }
+}
+@media (max-width: 412px) {
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 193.61px !important;
+    height: 290.415px !important;
+  }
+}
+@media (max-width: 393px) {
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 184.11px !important;
+    height: 276.165px !important;
   }
 }
 @media (max-width: 375px) {
