@@ -30,7 +30,7 @@
 
     </header>
      <div class="loader loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
-            <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">
+            <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:75px;">
              <!-- <h3 style="text-align: center;"> loading... </h3>  -->
       </div>
       <div class="container onlymobile col-12 lg:hidden " style="margin-bottom: 5px;" 

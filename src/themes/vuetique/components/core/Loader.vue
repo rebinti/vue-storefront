@@ -1,7 +1,7 @@
 <template>
   <div class="loader-container fixed" v-if="isVisible">
     <div class="loader-inner-container fixed">
-      <img src="/assets/opc-ajax-loader-filter.gif" style="margin: 0 auto;height: 320px;max-width: 320px;">
+      <img src="/assets/opc-ajax-loader-filter.svg" style="margin: 0 auto;height: 75px;max-width: 75px;">
       <!-- <div
         class="loader-message-container py-3 px-5 text-h6 text-white"
         v-if="message"

@@ -42,7 +42,7 @@
                 <button id="inch-btn" @click="inchesClick($event)" class="tab-btn">Inches</button>
               </div>
                <cms-block v-if="!isLoading && selectedBrandSearchTxt.length>0" @cmsDataChangedNew="cmsDataChangedEvent" :identifier="selectedBrandSearchTxt" :sync="true"/>
-               <p class="no-data" v-if="isLoading"> <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;"> </p>
+               <p class="no-data" v-if="isLoading"> <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:75px;"> </p>
               <!-- <p class="no-data" v-if="!isCmsDataLoaded && !isLoading"> No data found </p> -->
           </div>
         </template>

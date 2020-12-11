@@ -5,7 +5,7 @@
 
     </header> -->
     <div class="loader--style3 mainhomestylaloader" style="" title="2" v-if="stylaloaderflag" >
-          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width:75px;">                  
+          <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:75px;">                  
     </div>      
     <div class="container-fluid pb-16 pl-2 pr-2" style="min-height: 100vh;" id="stylaOuter">
         <!-- <div class="col-12 md:col-9 leading-loose static-content"> -->

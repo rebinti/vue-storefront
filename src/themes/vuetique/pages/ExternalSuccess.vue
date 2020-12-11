@@ -3,7 +3,7 @@
     <div class="thank-you-content align-justify py40 pl20" style="text-align: center;">
       <div class="container">
         <div v-if="orderApiCheck" style="height:300px;margin-top:50px;padding-top: 110px;">
-           <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
+           <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width: 25px;">
              <h3 style="text-align: center;"> Please wait... </h3>
         </div>
         <div class="row success-block" v-if="!orderApiCheck">

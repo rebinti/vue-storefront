@@ -16,7 +16,7 @@
      <h3 style="position: absolute;top: 20px;left: 41px;">Product Reviews</h3>
     </div>
       <div v-if="reviewpanelloaded"  style="margin: 150px;">
-          <img src="/assets/opc-ajax-loader.gif" style="margin: 0 auto;width: 25px;">
+          <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width: 25px;">
         </div> 
         <div id="stamped-main-widget" 
                 :data-product-id="originalProduct.id" 
