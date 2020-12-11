@@ -1,5 +1,5 @@
 <template>
-  <div class="collection container">
+  <div class="collection w-full">
     <header class="mb-6">
       <h2 class="text-center">
         {{ title }}
@@ -7,14 +7,14 @@
     </header>
     <no-ssr>
  <carousel v-bind="config"
-    :per-page-custom="[[0, 2], [768, 3], [1024, 4], [1600, 5]]"
+    :per-page-custom="[[0, 2], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]]"
     @pageChange="setMuted">
         <slide
           v-for="product in products"
           v-if="!product._dontShowInListingFlag"
           :key="product.id"
         >
-          <product-tile
+          <product-tile-carousel
             class="collection-product"
             :product="product"
             :labels-active="false"
@@ -29,7 +29,7 @@
 import NoSSR from 'vue-no-ssr'
 // import { Carousel, Slide } from 'vue-carousel'
 
-import ProductTile from 'theme/components/core/ProductTile'
+import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 
 export default {
   name: 'ProductsSlider',
@@ -50,7 +50,7 @@ export default {
   components: {
     'Carousel': () => import('vue-carousel').then(Slider => Slider.Carousel),
     'Slide': () => import('vue-carousel').then(Slider => Slider.Slide),
-    ProductTile,
+    ProductTileCarousel,
     'no-ssr': NoSSR
   },
   data () {

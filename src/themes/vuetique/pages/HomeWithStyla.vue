@@ -7,7 +7,7 @@
     <Styla-home-magazine  />
 
     <!-- For loading the new arrivals Slider -->
-    <section class="new-collection container gggggggggg mb-16">
+    <section class="new-collection w-full mb-16">
       <div>
         <header class="mb-6">
           <h2 class="text-h1 leading-h1 text-center">

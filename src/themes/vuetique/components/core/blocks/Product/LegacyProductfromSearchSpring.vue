@@ -1,6 +1,6 @@
 <template>
   <section 
-    class="container py-8 px-6 new-collection"
+    class="py-8 px-6 new-collection w-full"
   >
     <div> <!-- v-if="product.related[type] && product.related[type].length > 0" -->
       <header>
@@ -17,7 +17,7 @@
       <!-- <product-listing columns="4" :products="legacyserachedProd" /> -->
       <!-- <div>{{legacyserachedProd.length}}</div>  -->
       <div class="text-center"  v-if="legacyserachedProd && legacyserachedProd.length > 0">
-        <div v-if="typeofview == 'carousel'" class="recent-caroasul">
+        <div v-if="typeofview == 'carousel'" class="recent-caroasul ppppppppp">
           <no-ssr>
             <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="1">
               <slide 
@@ -57,7 +57,7 @@ export default {
       currentPage: 0,
       sliderConfig: {
         // perPage: 1,
-        perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
+        perPageCustom: [[0, 2], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]],
         paginationEnabled: false,
         loop: false,
         paginationSize: 5,

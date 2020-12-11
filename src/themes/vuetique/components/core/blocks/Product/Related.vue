@@ -1,6 +1,6 @@
 <template>
   <section 
-    class="container py-8 px-6 new-collection"
+    class="py-8 px-6 new-collection w-full"
   >
     <div v-if="product.related[type] && product.related[type].length > 0">
       <header>
@@ -10,14 +10,14 @@
       </header>
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul">
+      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul eeeeee">
         <no-ssr>
           <carousel v-bind="sliderConfig" @pageChange="setMuted" :key="refresh">
             <slide 
               v-for="product in product.related[type].slice(0,20)"
               :key="product.id"
             >
-              <product-tile
+              <product-tile-carousel
                 class="collection-product"
                 :product="product"
                 :labels-active="false"
@@ -35,7 +35,7 @@
 import NoSSR from 'vue-no-ssr'
 import { Carousel, Slide } from 'vue-carousel'
 import ProductListing from 'theme/components/core/ProductListing'
-import ProductTile from 'theme/components/core/ProductTile'
+import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
 import i18n from '@vue-storefront/i18n'
 import store from '@vue-storefront/core/store'
@@ -47,7 +47,7 @@ export default {
       currentPage: 0,
       sliderConfig: {
         // perPage: 1,
-        perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
+        perPageCustom: [[0, 2], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]],
         paginationEnabled: false,
         loop: false,
         paginationSize: 5,
@@ -81,7 +81,7 @@ export default {
     }
   },
   components: {
-    ProductListing, Carousel, Slide, 'no-ssr': NoSSR, ProductTile
+    ProductListing, Carousel, Slide, 'no-ssr': NoSSR, ProductTileCarousel
   },
   beforeMount () {
     this.$bus.$on('product-after-load', this.refreshList)
