@@ -50,7 +50,7 @@ export default {
       currentPage: 0,
       sliderConfig: {
         // perPage: 1,
-        perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],
+        perPageCustom: [[0, 2], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]],
         paginationEnabled: false,
         loop: false,
         paginationSize: 6,

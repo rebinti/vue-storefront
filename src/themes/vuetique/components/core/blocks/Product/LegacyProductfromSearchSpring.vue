@@ -1,6 +1,6 @@
 <template>
   <section 
-    class="py-8 px-6 new-collection w-full"
+    class="py-8 px-6 new-collection w-full legacysearch-component"
   >
     <div> <!-- v-if="product.related[type] && product.related[type].length > 0" -->
       <header>

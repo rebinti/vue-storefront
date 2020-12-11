@@ -1,5 +1,5 @@
 <template>
-  <div class="collection w-full">
+  <div class="collection w-full main-product-slider">
     <header class="mb-6">
       <h2 class="text-center">
         {{ title }}
