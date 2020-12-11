@@ -13,7 +13,7 @@
               v-if="!product._dontShowInListingFlag"
               :key="product.id"
             >
-              <product-tile
+              <product-tile-carousel
                 class="collection-product"
                 :product="product"
                 :labels-active="false"
@@ -33,18 +33,19 @@ import NoSSR from 'vue-no-ssr'
 import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
 import ProductListing from 'theme/components/core/ProductListing.vue'
-import ProductTile from 'theme/components/core/ProductTile'
+import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { Carousel, Slide } from 'vue-carousel'
 
 
 export default {
   mixins: [RecentlyViewed],
   components: {
+    'no-ssr': NoSSR,
     ProductListing,
-    ProductTile,
+    ProductTileCarousel,
     Carousel,
     Slide
-  },
+  }, 
   data () {
     return {
       currentPage: 0,
@@ -90,9 +91,6 @@ export default {
   },
   beforeDestroy () {
     this.$bus.$off('product-after-load')
-  },
-  components: {
-    'no-ssr': NoSSR, ProductListing, Carousel, Slide, ProductTile
   },
   methods: {
     setMuted (currentPage) {
