@@ -226,18 +226,18 @@ export default {
           url: '/my-account/orders',
           icon: 'fas fa-box'
         },
-        {
-          id: 5,
-          name: i18n.t('My loyalty card'),
-          url: '#',
-          icon: 'fas fa-gift'
-        },
-        {
-          id: 6,
-          name: i18n.t('My product reviews'),
-          url: '#',
-          icon: 'fas fa-star-half-alt'
-        },
+        // {
+        //   id: 5,
+        //   name: i18n.t('My loyalty card'),
+        //   url: '#',
+        //   icon: 'fas fa-gift'
+        // },
+        // {
+        //   id: 6,
+        //   name: i18n.t('My product reviews'),
+        //   url: '#',
+        //   icon: 'fas fa-star-half-alt'
+        // },
         {
           id: 7,
           name: i18n.t('My Recently viewed products'),
