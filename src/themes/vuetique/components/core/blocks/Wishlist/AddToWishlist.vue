@@ -53,19 +53,22 @@ button.wishlist-bx{
   .prod_list .wishlist-bx{ display:none}
   .v-mobile { display:none} */
   .prod_list .wishlist-bx{
-      width:25px;
-      height:25px;
+      width:30px;
+      height:30px;
       /* background: #ffffff; */
-      padding: 2px;
+      /* padding: 2px; */
       position: absolute;
       right:10px;  
-      bottom: 10px;
-      z-index: 2;
+      bottom: 6px;
+      z-index: 2;      
+  }
+  .VueCarousel-inner .VueCarousel-slide .prod_list .wishlist-bx{
+      top: 0px;
   }
 
   .prod_list .wishlist-bx .vt-icon{
-       width: 19px;
-      height: 24px;
+       width: 30px;
+      height: 30px;
       fill: currentColor;
       float: none;
       display: inline-block;

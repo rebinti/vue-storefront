@@ -331,9 +331,9 @@ export default {
           width: 45px;
           position: absolute;
           top: 10px;
-          right: -3px;
+          right: -5px;
           background: #FFFFFF;
-          height: 45px;
+          height: 40px;
           z-index: 1;
         }              
     }   
