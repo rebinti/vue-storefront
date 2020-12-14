@@ -216,7 +216,7 @@ export default {
       display: block;
       color: #525050;
       font-weight: 500;       
-      padding-top: 13px;
+      padding-top: 15px;
       background: #f5f5f5;
       outline: none;
     }
@@ -247,5 +247,21 @@ div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li a{
   .container {
       max-width: 1200px;
   }
+}
+@media (max-width: 1200px){
+  .menu {
+    .menu-link {
+      padding: 10px;
+      &.active,
+      &.router-link-active {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+</style>
+<style>
+.groupmenu-drop-content p.groupdrop-title{
+      font-weight: 500;
 }
 </style>
