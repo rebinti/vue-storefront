@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isCheckoutPage" class="hidden lg:block w-full bg-white border-b border-solid">
+  <div v-if="!isCheckoutPage" class="hidden lg:block w-full border-b border-solid" style="background:#525050">
     <div class="container">
       <ul class="flex menu">
 
@@ -190,7 +190,10 @@ export default {
   list-style: none;
 
   .menu-link {
-    @apply block text-black font-medium;
+    // @apply block text-black font-medium;
+    display: block;
+    color: #f5f5f5;
+    font-weight: 500;
     padding: 15px;
     line-height: 1.25rem;
     text-decoration: none;
@@ -198,14 +201,24 @@ export default {
 
     &:hover,
     &:focus {
-      @apply text-primary bg-grey-lighter;
+      // @apply text-primary bg-grey-lighter;
+      display: block;
+      color: #525050;
+      font-weight: 500;      
+      outline: none;
+      background: #f5f5f5;
       outline: none;
     }
 
     &.active,
     &.router-link-active {
-      @apply text-primary bg-grey-lighter border-t-2 border-solid border-primary;
+      // @apply text-primary bg-grey-lighter border-t-2 border-solid border-primary;
+      display: block;
+      color: #525050;
+      font-weight: 500;       
       padding-top: 13px;
+      background: #f5f5f5;
+      outline: none;
     }
   }
 }
