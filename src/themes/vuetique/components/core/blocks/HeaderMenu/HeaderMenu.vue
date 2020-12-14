@@ -264,4 +264,10 @@ div.groupmenu-drop-content p.groupdrop-title ul.groupdrop-link li a{
 .groupmenu-drop-content p.groupdrop-title{
       font-weight: 500;
 }
+@media (min-width: 992px) and (max-width: 1400px){
+  .cms-block-menu .menu-list ul li .groupmenu-drop-content div.row div{
+    font-size: 12px;
+  }
+}
+
 </style>
