@@ -591,6 +591,43 @@ input {
       bottom: 515px;
   }
 }
+@media (min-width: 769px) and (max-width: 991x){
+  .onlymobile .col-4.mfilter .mt-6 button{
+    height: 46px;
+    background: #FFFFFF !important;
+    border: 1px solid #CCCCCC;
+    color: #000;
+  }  
+  .mfilter .nofilterexist{
+    background-color: #fff !important;
+    color: #000000 !important;
+    border: 1px solid #bdbdbd;   
+  }
+  .mfilter .nofilterexist .filtereditems-count{
+    display:none;  
+  }  
+  .mfilter .filterexist{
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+  .mfilter .filterexist .filtereditems-count{
+        top: 3px;
+    left: 61%;
+    min-width: 11px;
+    min-height: 11px;
+    border-radius: 100%;
+    float: right;
+    height: 18px;
+    width: 18px;
+    font-size: 9px;
+    background: #fffdfd;
+    color: #000;
+    border: 1px solid #000;
+  }  
+   .mfilter .filterexist .filtereditems-count{
+     left: 75%;
+   }  
+}
 @media (max-width: 768px) {
   .onlymobile .mfilter .nofilterexist{
     background-color: #fff !important;
