@@ -88,6 +88,25 @@ export default {
 }
 </script>
 <style lang="scss" >
+@media (min-width: 769px) and (max-width: 1599px){
+  /* 3 column image size */   
+
+  .col-6.item-2-6-grid.column3 .product-image img.default-image,.col-6.item-2-6-grid.column3 .product-image img.hover-image{
+    width: 228px;
+    height: 342px;   
+  }
+  
+  /* 2 column image size */ 
+  .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
+    width: 352px;
+    height: 528px;   
+  } 
+  /* 4 column image size */ 
+  .item-4-3-grid.column4 .product-image img.default-image,.item-4-3-grid.column4 .product-image img.hover-image{
+    width: 166px;
+    height: 249px;   
+  }  
+}
 @media (max-width: 768px){
   /* ipad screen 3 column and above */
   .container .pr_list_sec_main .row.gutter-md .col-3.item-4-3-grid.threecolumn-1,.container .pr_list_sec_main .row.gutter-md .col-6.item-2-6-grid.column3.threecolumn-1{
@@ -132,7 +151,7 @@ export default {
   .col-3.item-4-3-grid .product-image img.default-image,.col-3.item-4-3-grid .product-image img.hover-image,.col-6.item-2-6-grid.column3 .product-image img.default-image,.col-6.item-2-6-grid.column3 .product-image img.hover-image{
     width: 240.81px;
     height: 361.215px;   
-  }.col-6.item-2-6-grid.column3
+  }
   
   /* 2 column image size */ 
   .col-6.item-2-6-grid .product-image img.default-image,.col-6.item-2-6-grid .product-image img.hover-image{
