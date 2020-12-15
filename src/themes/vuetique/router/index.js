@@ -36,7 +36,7 @@ let routes = [
   { name: 'home', path: '/', component: HomeWithStyla, alias: '/pwa.html' },
   { name: 'checkout', path: '/checkout', component: Checkout },
   { name: 'legal', path: '/legal', component: Static, props: { page: 'lorem', title: 'Legal Notice' }, meta: { title: 'Legal Notice', description: 'Legal Notice - example of description usage' } },
-  { name: 'customer-service', path: '/customer-service', component: Static, props: { page: 'lorem', title: 'Customer service', pageidentifierfromindex: 'customer-service' } },
+  { name: 'customer-service', path: '/customer-service-general', component: Static, props: { page: 'lorem', title: 'Customer service', pageidentifierfromindex: 'customer-service-general' } },
   { name: 'privacy', path: '/privacy', component: Static, props: { page: 'lorem', title: 'Privacy', pageidentifierfromindex: 'privacy-policy' } },
   { name: 'faq', path: '/help-faq', component: Static, props: { page: 'lorem', title: 'Help/Faqs', pageidentifierfromindex: 'help-faq' } },
   { name: 'delivery-returns', path: '/delivery-returns', component: Static, props: { page: 'lorem', title: 'Delivery & Return', pageidentifierfromindex: 'delivery-returns' } },

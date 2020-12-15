@@ -163,6 +163,11 @@ export default {
     max-height: 420px;
     overflow: hidden;
 }
-
+.static-content .cms-content.py-10.page-content.container{
+  font-style: italic;
+  /* line-height: 24px; */
+  font-size: 14px;
+  padding: 0px !important;
+}
 
 </style>

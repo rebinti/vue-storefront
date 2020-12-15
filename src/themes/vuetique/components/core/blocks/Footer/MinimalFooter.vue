@@ -62,7 +62,7 @@
                 {{ $t('Help') }}
               </h3>
               <div class="mt15">
-                <router-link class="cl-secondary" :to="localizedRoute('/customer-service')" exact>
+                <router-link class="cl-secondary" :to="localizedRoute('/customer-service-general')" exact>
                   {{ $t('Customer service') }}
                 </router-link>
               </div>

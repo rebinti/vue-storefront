@@ -18,7 +18,7 @@
             </ul>
           </nav>
         </div>
-        <div class="col-12 md:col-9 leading-loose static-content">
+        <div class="col-12 md:col-9 lg:col-10 leading-loose static-content">
           <component :is="activeComponent" :pageidentifier="pageidentifierfromindex"/>
         </div>
       </div>
@@ -80,7 +80,7 @@ export default {
         // { title: i18n.t('Size guide'), link: '/size-guide', component: StaticExample },
         // { title: i18n.t('Contact us'), link: '/contact', component: StaticExample }
         
-        { title: i18n.t('General'), link: '/customer-service', component: MagentoCmsPage },
+        { title: i18n.t('General'), link: '/customer-service-general', component: MagentoCmsPage },
         { title: i18n.t('Contact us'), link: '/contact-us', component: StaticExample },
         { title: i18n.t('My Account'), link: '/account', component: StaticExample },
         { title: i18n.t('Privacy & Security'), link: '/privacy', component: MagentoCmsPage },        
