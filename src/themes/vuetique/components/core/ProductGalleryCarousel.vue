@@ -110,6 +110,9 @@ export default {
       highQualityImagesErrorsMap: {}
     }
   },
+  watch: {
+    '$route': 'setgalleryposzero'
+  },
   computed: {
     placeholderImagesMap () {
       let visibilityMap = {}
@@ -170,7 +173,7 @@ export default {
     slideToAnySlide (index) {
       this.$refs.carousel.slideTo(index);
     },
-    navigate (index) {
+    navigate (index) {      
       if (this.$refs.carousel) {
         this.$refs.carousel.goToPage(index)
       }
@@ -219,7 +222,10 @@ export default {
       else {
           this.Itemshow = 4
       }
-    }
+    },
+    setgalleryposzero(){
+       this.$refs.carousel.slideTo(0);
+    }    
   },
   created () {
     this.windowWidth =  window&&window.innerWidth ? window.innerWidth: 0; 
