@@ -169,5 +169,16 @@ export default {
   font-size: 14px;
   padding: 0px !important;
 }
-
+.static-content .cms-content ul{
+    list-style: disc outside;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;  
+}
+.static-content .cms-content p strong{
+  font-weight: 500;
+  line-height: 2.5rem;  
+}
 </style>
