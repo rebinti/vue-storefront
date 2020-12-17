@@ -2,15 +2,15 @@
   <div>
     <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="$props.title" />
     <header class="container mt-2">
-      <h1>{{ $props.title }}</h1>
+      <h1 class="cms-page-head">{{ $props.title }}</h1>
     </header>
 
-    <div class="container pt-10 pb-16">
+    <div class="container pt-4 pb-16">
       <div class="row gutter-md justify-between">
-        <div class="md:col-3 lg:col-2 mb-8">
+        <div class="md:col-3 lg:col-3 xl:col-2 mb-8">
           <nav class="static-menu">
             <ul class="border-t">
-              <li class="border-b py-2" v-for="page in navigation" :key="page.id">
+              <li class="border-b py-2" v-for="page in navigation" :key="page.id" :class="{ 'active': page.link === '/'+currentRouteName }">
                 <router-link :to="localizedRoute(page.link)" @click.native="setContent(page.component)" class="nav-link">
                   {{ page.title }}
                 </router-link>
@@ -18,7 +18,7 @@
             </ul>
           </nav>
         </div>
-        <div class="col-12 md:col-9 lg:col-10 leading-loose static-content">
+        <div class="col-12 md:col-9 lg:col-9 xl:col-10 leading-loose static-content">
           <component :is="activeComponent" :pageidentifier="pageidentifierfromindex"/>
         </div>
       </div>
@@ -43,6 +43,11 @@ export default {
     return {
       title: this.$route.meta.title || this.$props.title,
       meta: this.$route.meta.description ? [{vmid: 'description', description: this.$route.meta.description}] : []
+    }
+  },
+  computed: {
+    currentRouteName() {
+        return this.$route.name;
     }
   },
   created () {
@@ -83,7 +88,7 @@ export default {
         { title: i18n.t('General'), link: '/customer-service-general', component: MagentoCmsPage },
         { title: i18n.t('Contact us'), link: '/contact-us', component: StaticExample },
         { title: i18n.t('My Account'), link: '/account', component: StaticExample },
-        { title: i18n.t('Privacy & Security'), link: '/privacy', component: MagentoCmsPage },        
+        { title: i18n.t('Privacy & Security'), link: '/privacy-policy-cookie-restriction-mode', component: MagentoCmsPage },        
         { title: i18n.t('Help/Faqs'), link: '/help-faq', component: MagentoCmsPage },
         { title: i18n.t('Delivery & Return'), link: '/delivery-returns', component: MagentoCmsPage },
         { title: i18n.t('Students'), link: '/students', component: MagentoCmsPage },        
@@ -97,15 +102,18 @@ export default {
 
 <style lang="scss" scoped>
 .static-menu {
+  background: rgb(82, 80, 80);  
   .nav-link {
     @apply block text-black font-medium py-1;
 
     &:hover, &:focus {
       @apply text-primary2;
+      color:#525050;
     }
 
     &.router-link-exact-active {
       @apply text-primary2;
+      color:#525050;
 
       &::before {
         content: "\25B8";
@@ -113,11 +121,43 @@ export default {
       }
     }
   }
+  .border-t{
+    .border-b{
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem; 
+      border-color: #808080;     
+      .nav-link{
+        margin-left: 10px;
+        color:#FFFFFF;
+      }
+      .nav-link:hover{        
+        color:#525050;
+      }      
+      .nav-link.router-link-active{
+        color:#525050;
+      }
+    }
+    .border-b:hover{
+      background: #f5f5f5;
+      color:#525050;
+    }
+    .border-b.active{
+      color: #525050 !important;
+      font-weight: 500;    
+      background: #f5f5f5;
+      outline: none;
+      line-height: 1.25rem;      
+    }
+  }
 }
-
 .static-content {
   *:first-of-type {
     margin-top: 0;
   }
+}
+h1.cms-page-head{
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif;
+    font-size: 1.5rem;
 }
 </style>
