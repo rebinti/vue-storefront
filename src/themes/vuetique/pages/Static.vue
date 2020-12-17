@@ -5,9 +5,10 @@
       <h1 class="cms-page-head">{{ $props.title }}</h1>
     </header>
 
-    <div class="container pt-4 pb-16">
+    <div class="container pt-4 pb-16">      
       <div class="row gutter-md justify-between">
-        <div class="md:col-3 lg:col-3 xl:col-2 mb-8">
+        <div class="mobile-only-menu hidden" @click="togglecmsmenu">{{title}}</div>
+        <div v-if="showcmsmenu" class="md:col-3 lg:col-3 xl:col-2 mb-8">
           <nav class="static-menu">
             <ul class="border-t">
               <li class="border-b py-2" v-for="page in navigation" :key="page.id" :class="{ 'active': page.link === '/'+currentRouteName }">
@@ -17,7 +18,7 @@
               </li>
             </ul>
           </nav>
-        </div>
+        </div>        
         <div class="col-12 md:col-9 lg:col-9 xl:col-10 leading-loose static-content">
           <component :is="activeComponent" :pageidentifier="pageidentifierfromindex"/>
         </div>
@@ -48,11 +49,21 @@ export default {
   computed: {
     currentRouteName() {
         return this.$route.name;
-    }
+    },
   },
   created () {
     this.activeComponent = this.navigation.find(nav => nav.link === this.$route.path) ? this.navigation.find(nav => nav.link === this.$route.path).component : null
   },
+  mounted() {
+    window.addEventListener('resize', () => {   
+      this.windowwidth = window.innerWidth   
+      if(window.innerWidth<= 560){
+        this.showcmsmenu = false
+      }else{
+        this.showcmsmenu = true
+      }
+    })
+  },  
   props: {
     title: {
       type: String,
@@ -69,8 +80,18 @@ export default {
   },
   methods: {
     setContent (component) {
-      this.activeComponent = component
-    }
+      this.activeComponent = component      
+      if(window.innerWidth <= 560){        
+         this.showcmsmenu = false   
+      }       
+    },
+    togglecmsmenu () {
+      if (this.showcmsmenu === false) {
+        this.showcmsmenu = true        
+      } else {
+        this.showcmsmenu = false        
+      }
+    },    
   },
   data () {
     return {
@@ -94,7 +115,9 @@ export default {
         { title: i18n.t('Students'), link: '/students', component: MagentoCmsPage },        
         { title: i18n.t('Size guide'), link: '/size-guide', component: MagentoCmsPage },              
       ],
-      activeComponent: null
+      activeComponent: null,
+      showcmsmenu: true,
+      windowwidth:'',      
     }
   }
 }
@@ -159,5 +182,23 @@ h1.cms-page-head{
     text-transform: uppercase;
     font-family: Roboto, sans-serif;
     font-size: 1.5rem;
+}
+@media (max-width: 560px) { 
+  .mobile-only-menu{
+    border: 1px solid #525050;
+    padding: 7px;
+    font-weight: 500;
+    display:block;
+    margin: 10px;
+    width: 100%;
+  }
+  .mobile-only-menu:after{
+    content: '>';
+    color: #525050;   
+    font-weight: 100;
+    float: right;
+    margin-left: 5px;
+    font-size: 25px;     
+  }
 }
 </style>
