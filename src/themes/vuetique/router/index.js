@@ -9,6 +9,7 @@ import SearchSpringSearch from 'theme/pages/search-spring/SearchSpringSearch'
 const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */ 'theme/pages/HomeWithStyla.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
+const PrivacyCentre = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/PrivacyCentre.vue')
 const Product = () => import(/* webpackChunkName: "vsf-product" */ 'theme/pages/Product.vue')
 const GiftCard = () => import(/* webpackChunkName: "vsf-gift-card" */ 'theme/pages/GiftCard.vue')
 const ResetPasswordPost = () => import(/* webpackChunkName: "vsf-reset-password-post" */ 'theme/pages/ResetPasswordPost.vue')
@@ -60,10 +61,10 @@ let routes = [
   { name: 'compare', path: '/compare', component: Compare, props: { title: 'Compare Products' } },
   { name: 'page-not-found', path: '/page-not-found', component: PageNotFound },
   { name: 'error', path: '/error', component: ErrorPage },
+  { name: 'privacy-centre', path: '/privacy-centre', component: PrivacyCentre },
   { name: 'custom-cms-page', path: '/custom-cms-page', component: CustomCmsPage },
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
-  { name: 'privacy-centre', path: '/privacy-centre', component: CmsData, props: { identifier: 'privacy-centre', type: 'Page', sync: true } },
   { name: 'contact-us', path: '/contact-us', component: ContactUs },
   { name: 'gift-cards', path: '/gift-card', component: GiftCard },
   { name: 'reset-password-post', path: '/reset-password-post', component: ResetPasswordPost },
