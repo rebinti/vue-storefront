@@ -61,7 +61,7 @@ let routes = [
   { name: 'compare', path: '/compare', component: Compare, props: { title: 'Compare Products' } },
   { name: 'page-not-found', path: '/page-not-found', component: PageNotFound },
   { name: 'error', path: '/error', component: ErrorPage },
-  { name: 'privacy-centre', path: '/privacy-centre', component: PrivacyCentre },
+  { name: 'privacy-centre', path: '/privacy-centre', component: PrivacyCentre, meta: { layout: 'empty' } },
   { name: 'custom-cms-page', path: '/custom-cms-page', component: CustomCmsPage },
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
