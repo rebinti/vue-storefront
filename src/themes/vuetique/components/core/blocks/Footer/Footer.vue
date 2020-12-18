@@ -37,9 +37,12 @@
                         </router-link>                         
                     </div>
                     <div class="my-3" >
-                        <a href="https://www.iclothing.com/privacy-centre/" aria-current="page" class="menu-link router-link-exact-active router-link-active">
+                        <!-- <a href="https://www.iclothing.com/privacy-centre/" aria-current="page" class="menu-link router-link-exact-active router-link-active">
                             {{ $t('Privacy Centre') }}
-                        </a>                           
+                        </a>                            -->                        
+                        <router-link :to="localizedRoute('/privacy-centre')" class="menu-link footer-nav">
+                          {{ $t('Privacy Centre') }}
+                        </router-link>                           
                     </div>
                     <div class="my-3" >
                         <router-link :to="localizedRoute('/inspiration/pages/covid-19/')" class="menu-link footer-nav">
