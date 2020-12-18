@@ -11,8 +11,42 @@
         <div class="row justify-center md:justify-between">
 
            <div class="footer-menu sm:flex col-12 md:col-6 lg:col-6 justify-around mt-8 lg:mt-0">
-                <cms-block :identifier="'footer_help_block_new'"  style="margin-top:-40px;"/>
-
+                <!-- <cms-block :identifier="'footer_help_block_new'"  style="margin-top:-40px;"/> -->
+                <div>
+                    <h3 >
+                        Help
+                    </h3>
+                    <div class="my-3" >
+                        <router-link :to="localizedRoute('/my-account')" class="menu-link footer-nav">
+                          {{ $t('My Account') }}
+                        </router-link>                           
+                    </div>
+                    <div class="my-3" >
+                        <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
+                          {{ $t('FAQ’s') }}
+                        </router-link>                        
+                    </div>
+                    <div class="my-3" >
+                        <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
+                          {{ $t('Help Centre') }}
+                        </router-link>                        
+                    </div>
+                    <div class="my-3" >
+                        <router-link :to="localizedRoute('/delivery-returns')" class="menu-link footer-nav">
+                          {{ $t('Delivery and Returns') }}
+                        </router-link>                         
+                    </div>
+                    <div class="my-3" >
+                        <a href="https://www.iclothing.com/privacy-centre/" aria-current="page" class="menu-link router-link-exact-active router-link-active">
+                            {{ $t('Privacy Centre') }}
+                        </a>                           
+                    </div>
+                    <div class="my-3" >
+                        <router-link :to="localizedRoute('/inspiration/pages/covid-19/')" class="menu-link footer-nav">
+                          {{ $t('COVID-19 Updates') }}
+                        </router-link>                         
+                    </div>                                        
+                </div>
                 <cms-block :identifier="'footer_quick_links_block_new'" style="margin-top:-40px;" />
           </div>
       
