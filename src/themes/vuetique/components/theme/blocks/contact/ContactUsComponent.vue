@@ -1,41 +1,51 @@
 <template>
-<div>
+<div class="contact-up-page">
 
   <form class="vue-form" @submit.prevent="submit">
 
     <div class="error-message">
       <p v-show="!fields.email.valid">Oh, please enter a valid email address.</p>
     </div>
-
-    <fieldset>
-      <legend>CONTACT US</legend>
-      <div>
-        <label class="label" for="name">Name</label>
-        <input type="text" name="name" id="name" required="" v-model="fields.name">
-      </div>
-      <div>
-        <label class="label" for="email">Email</label>
-        <input type="email" name="email" id="email" required=""
-               :class="{ email , error: !fields.email.valid }"
-               v-model="fields.email.value">
-      </div>
-      <div>
-        <label class="label" for="telephone">Telephone</label>
-        <input type="text" name="telephone" id="telephone" required=""
-               :class="{ telephone , error: !fields.telephone.valid }"
-               v-model="fields.telephone.value">
-      </div>
-      <div>
-        <label class="label" for="comment">Comment</label>
-        <textarea class="message" name="comment" id="comment" required="" 
-                  v-model="fields.comment.text" 
-                  :maxlength="fields.comment.maxlength"></textarea>
-        <span class="counter">{{ fields.comment.text.length }} / {{ fields.comment.maxlength }}</span>
-      </div>
+    
+      <!-- <legend>CONTACT US</legend> -->
+        <base-input
+            class="col-xs-12 col-md-6 mb10"
+            type="text"
+            name="name"
+            autocomplete="given-name"
+            :placeholder="$t('Name')"
+            v-model="fields.name"                   
+        />    
+        <base-input
+            class="col-xs-12 col-md-6 mb10"
+            type="email"
+            name="email"
+            autocomplete="email"
+            :placeholder="$t('Email')"
+            v-model="fields.email.value"           
+        />      
+        <base-input
+            class="col-xs-12 col-md-6 mb10"
+            type="text"
+            name="telephone"
+            autocomplete="telephone"
+            :placeholder="$t('Telephone')"
+            v-model="fields.telephone.value"        
+        />        
+        <div>
+            <span class="counter">{{ fields.comment.text.length }} / {{ fields.comment.maxlength }}</span>
+        </div>
+        <base-textarea
+            class="w-full tx_bx_out"
+            type="text"
+            name="comment"
+            v-model="fields.comment.text"
+            @blur="$v.comment.$touch()"
+            :placeholder="'message'"
+        />      
       <div>
         <input type="submit" value="Submit">
-      </div>
-    </fieldset>
+      </div>    
   </form>
 
   <div class="debug">
@@ -47,14 +57,19 @@
 
 <script>
 import Vue from 'vue'
+import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
+import BaseTextarea from 'theme/components/core/blocks/Form/BaseTextarea.vue'
+import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 // import vSelect from 'vue-select'
 // import VueRecaptcha from 'vue-recaptcha';
 
 export default {
-name: 'ContactUs',
+name: 'ContactUsComponent',
 components: {
-    // 'vue-recaptcha': VueRecaptcha,
-    // 'v-select': vSelect
+    BaseInput,
+    BaseTextarea,
+    ButtonFull,    
 },
 data () {
  return {
@@ -69,13 +84,52 @@ data () {
             valid: true
         },
         comment: {
-            text: `comment,\n...`,
+            text: "",
             maxlength: 255
         },
      },
     submitted: false
   }
 },
+validations: {
+    currentUser: {
+      name: {
+        required,
+        minLength: minLength(2)
+      },
+      phone: {
+        required,
+        minLength: minLength(10)
+      },
+      email: {
+        required,
+        email
+      }
+    },
+    comment: {
+        maxLength: maxLength(220),
+        required
+    },
+},
+  validations: {
+    senderName: {
+
+    },
+    recipientName: {
+      required
+    },
+    recipientEmail: {
+      required,
+      email
+    },
+    customMessage: {
+      maxLength: maxLength(220),
+      required
+    },
+    getEmailNotification: {
+
+    }
+  },
 methods: {
     // submit form handler
     // submit: function() {
@@ -174,16 +228,17 @@ header h1 {
 #app {
   display: flex;
 }
-
+.contact-up-page{
+  max-width:650px;  
+}
 .vue-form {
   font-size: 16px;
-  width: 500px;
+  width: 100%;
   padding: 15px 30px;
   border-radius: 4px;
-  margin: 50px auto;
-  width: 500px;
+  margin: 0px auto;  
   background-color: #fff;
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);
+//   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);
 }
 .vue-form fieldset {
   margin: 24px 0 0 0;
@@ -353,11 +408,10 @@ header h1 {
 }
 .vue-form input[type="submit"] {
   border: none;
-  background: #2c3e50;
-  border-radius: 0.25em;
-  padding: 12px 20px;
+  background-color: #0e0e0e;  
+  padding: 4px 20px;
   color: #ffffff;
-  font-weight: bold;
+  font-weight: 400;
   float: right;
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
@@ -375,8 +429,8 @@ header h1 {
   transform: scale(0.9);
 }
 .vue-form .error-message {
-  height: 35px;
-  margin: 0px;
+//   height: 35px;
+//   margin: 0px;
 }
 .vue-form .error-message p {
   background: #e94b35;

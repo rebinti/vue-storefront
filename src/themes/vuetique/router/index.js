@@ -65,7 +65,7 @@ let routes = [
   { name: 'custom-cms-page', path: '/custom-cms-page', component: CustomCmsPage },
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'about-us', path: '/about-us', component: CmsData, props: { identifier: 'about-us', type: 'Page', sync: true } },
-  { name: 'contact-us', path: '/contact-us', component: ContactUs },
+  { name: 'contact-us', path: '/contact-us', component: Static, props: { page: 'lorem', title: 'Contact Us', pageidentifierfromindex: 'contact-us' } },
   { name: 'gift-cards', path: '/gift-card', component: GiftCard },
   { name: 'reset-password-post', path: '/reset-password-post', component: ResetPasswordPost },
 
