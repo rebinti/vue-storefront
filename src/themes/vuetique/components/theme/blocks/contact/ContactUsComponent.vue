@@ -1,50 +1,71 @@
 <template>
 <div class="contact-up-page">
 
-  <form class="vue-form" @submit.prevent="submit">
-
-    <div class="error-message">
-      <p v-show="!fields.email.valid">Oh, please enter a valid email address.</p>
-    </div>
-    
-      <!-- <legend>CONTACT US</legend> -->
+  <form class="vue-form" @submit.prevent="submitcontactus" novalidate> 
         <base-input
-            class="col-xs-12 col-md-6 mb10"
-            type="text"
-            name="name"
-            autocomplete="given-name"
-            :placeholder="$t('Name')"
-            v-model="fields.name"                   
-        />    
+          class="mb-5 tx_bx_out board_input_box"
+          type="text"
+          name="name"
+          v-model="name"
+          @blur="$v.name.$touch()"
+          :placeholder="$t('Name')"
+          :validation="{
+            condition: !$v.name.required && $v.name.$error,
+            text: $t('Field is required.')
+          }"
+        />  
         <base-input
-            class="col-xs-12 col-md-6 mb10"
-            type="email"
-            name="email"
-            autocomplete="email"
-            :placeholder="$t('Email')"
-            v-model="fields.email.value"           
-        />      
+          class="col-xs-12 col-md-6 mb10"
+          type="email"
+          name="email"
+          autocomplete="email"
+          :placeholder="$t('Email address')"
+          v-model="email"
+          :validations="[
+            {
+              condition: !$v.email.required,
+              text: $t('Field is required')
+            },
+            {
+              condition: !$v.email.email,
+              text: $t('Please provide valid e-mail address.')
+            }
+          ]"
+        />
         <base-input
-            class="col-xs-12 col-md-6 mb10"
-            type="text"
-            name="telephone"
-            autocomplete="telephone"
-            :placeholder="$t('Telephone')"
-            v-model="fields.telephone.value"        
-        />        
+          class="mb-5 tx_bx_out board_input_box"
+          type="number"
+          name="telephone"
+          v-model="telephone"
+          @blur="$v.telephone.$touch()"
+          :placeholder="$t('Telephone')"
+          :validation="{
+            condition: !$v.telephone.required && $v.telephone.$error,
+            text: $t('Field is required.')
+          }"
+        />          
         <div>
-            <span class="counter">{{ fields.comment.text.length }} / {{ fields.comment.maxlength }}</span>
-        </div>
+            <span class="counter">{{ comment.text.length }} / {{ comment.maxlength }}</span>
+            <!-- <small>Characters Remaining: <span id="giftvoucher_char_remaining"> {{ customMessageMaxLength - customMessage.length}} </span></small> -->
+        </div>        
         <base-textarea
-            class="w-full tx_bx_out"
-            type="text"
-            name="comment"
-            v-model="fields.comment.text"
-            @blur="$v.comment.$touch()"
-            :placeholder="'message'"
-        />      
-      <div>
-        <input type="submit" value="Submit">
+          class="w-full tx_bx_out"
+          type="text"
+          name="comment"
+          v-model="comment.text"
+          @blur="$v.comment.$touch()"
+          :placeholder="'message'"
+          :validation="{
+              condition: !$v.comment.required && $v.comment.$error,
+              text: $t('Field is required.')
+          }"
+        />                                    
+      <div>        
+          <button-full class="mb-2 w-full lrge_btn" type="submit" style="background: black;">
+            <div class="flex items-center justify-center">
+              <span class="mr-2"> {{ $t('Submit') }} </span>              
+            </div>
+          </button-full>        
       </div>    
   </form>
 
@@ -58,11 +79,9 @@
 <script>
 import Vue from 'vue'
 import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
-import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
+import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
 import BaseTextarea from 'theme/components/core/blocks/Form/BaseTextarea.vue'
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
-// import vSelect from 'vue-select'
-// import VueRecaptcha from 'vue-recaptcha';
 
 export default {
 name: 'ContactUsComponent',
@@ -73,79 +92,56 @@ components: {
 },
 data () {
  return {
-     fields:{
-        name: "Name",
-        email: {
-            value: "Email",
-            valid: true
-        },
-        telephone: {
-            value: "9999999999",
-            valid: true
-        },
-        comment: {
-            text: "",
-            maxlength: 255
-        },
-     },
+      name: '',
+      email: '',
+      telephone: '', 
+      comment: {
+          text: '',
+          maxlength: 255
+      },
     submitted: false
   }
 },
 validations: {
-    currentUser: {
-      name: {
-        required,
-        minLength: minLength(2)
-      },
-      phone: {
-        required,
-        minLength: minLength(10)
-      },
-      email: {
-        required,
-        email
-      }
-    },
-    comment: {
-        maxLength: maxLength(220),
-        required
-    },
-},
-  validations: {
-    senderName: {
-
-    },
-    recipientName: {
-      required
-    },
-    recipientEmail: {
-      required,
-      email
-    },
-    customMessage: {
-      maxLength: maxLength(220),
-      required
-    },
-    getEmailNotification: {
-
-    }
+  name: {
+    required
   },
+  telephone: {
+    required    
+  },  
+  email: {
+    required,
+    email
+  },
+  comment: {
+    required
+  },    
+},
 methods: {
-    // submit form handler
-    // submit: function() {
-    //   this.submitted = true;
-    // },
-    submit() {
+    onSuccesfulSubmission (msg) {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'success',
+        message: msg,
+        action1: { label: i18n.t('OK') }
+      })
+      this.$bus.$emit('modal-hide', 'modal-outofstocknotification')
+    },
+    submitcontactus() {
+      console.log("UUUUUUUUUUUUUUUUUOOOOOOOOOOOO")
       this.errors = {};
       this.submitted = true;
 
-      this.$axios.post('/submit', this.fields).then(response => {
-        alert('Message sent!');
-      }).catch(error => {
-        if (error.response.status === 422) {
-          this.errors = error.response.data.errors || {};
-        }
-      });
+      if (!this.$v.$invalid) {
+          const contactdata = { name: this.name, email: this.email, telephone: this.telephone, comment: this.comment };
+          this.$store.dispatch('ui/sentContactUs', contactdata).then(res => {
+           if (res == 'Already notified') {
+            this.onSuccesfulSubmission('You are already subscribed!');
+           }
+          }).catch(err => {
+            this.onErrorInSubmission();
+          }
+        )
+      }
     },    
     // validate by type and value
     validate: function(type, value) {

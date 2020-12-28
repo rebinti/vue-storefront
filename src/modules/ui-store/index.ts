@@ -360,7 +360,25 @@ const store = {
       } else {
         return task
       }
-    }
+    },
+    async sentContactUs ({commit}, data) {
+        console.log('sentContactUs>>>>>>>>>>>>>>>>>>',  data)
+        const task = await TaskQueue.execute({ url: '/api/urlcontactus/urlcontactsent', 
+        payload: {  
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
+          body: JSON.stringify(data) 
+        },
+        silent: false
+      });
+      if (task && task.resultCode === 200) {
+        console.log('api dataaaa Sucesss' , task.result)
+        return task.result
+      } else {
+        return task
+      }
+    },    
   }
 }
 
