@@ -54,7 +54,8 @@
       >
         <template>
             <div>
-               <cms-block :identifier="'brand-how-to-measure'"/>
+               <!-- <cms-block :identifier="'brand-how-to-measure'"/> -->
+               <div data-styla-slot="3b8a4bf0-cec5-406a-a489-ee6dabf066dd"></div>
             </div>
         </template>
     </Accordion>
