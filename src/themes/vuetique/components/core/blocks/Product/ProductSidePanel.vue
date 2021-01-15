@@ -54,6 +54,7 @@
       >
         <template>
             <div>
+              <div>FFFFFFFFFFFFFFFFFFFFFFFFFFf</div>
                <!-- <cms-block :identifier="'brand-how-to-measure'"/> -->
                <div data-styla-slot="3b8a4bf0-cec5-406a-a489-ee6dabf066dd"></div>
             </div>
@@ -154,6 +155,18 @@ export default {
         document.removeEventListener('touchstart', touchStart)
         document.removeEventListener('touchend', touchend)
     })
+    this.$nextTick(()=>{
+       window.styla.init();
+        setTimeout(() => {
+              window.styla.init();
+              window.styla.init();
+              window.styla.init();
+              window.styla.init();
+              if ('styla' in window) {
+                styla.init !== "undefined"&&styla.init()
+              }  
+          }, 2500);
+    })    
   },
   methods: {
     onEscapePress () {
