@@ -21,7 +21,15 @@ export default {
 
 <style lang="scss" scoped>
   .size-selector {
-    @apply bg-white border border-grey-light font-medium text-xs text-grey-dark;
+    /* @apply bg-white border border-grey-light font-medium text-xs text-grey-dark;*/
+    background-color: #ffffff;
+    border-width: 1px;
+    border-color: #666666;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #666666; 
+    padding-left: 10px;
+    padding-right: 10px;       
     height: 40px;
     min-width: 40px;
 

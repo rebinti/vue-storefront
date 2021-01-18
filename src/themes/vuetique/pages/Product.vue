@@ -368,6 +368,9 @@
               <div class="review-div">
                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>                  
               </div>
+              <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > 
+                <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+              </div>               
               <!-- <div class="product-top-div">
                   <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
                     @click="showProducVideoPopup">
@@ -579,9 +582,9 @@
                     <img  style="float: left;cursor: pointer; width: 30px;height: 27px;"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
-                  <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->                  
+                  <!-- <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > 
                     <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
-                  </div>                   
+                  </div>                    -->
                   <div class="mob_add_wish_btn web-wishlist-div" >
                       <wishlist-button :product="product" />                      
                   </div>
@@ -1482,14 +1485,13 @@ button.no-combination {
   background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 12px;
-  transition: 0.4s;
-  padding-left: 0px;
+  font-size: 0.875rem;
+  transition: 0.4s;  
   display:inline-block;
 }
 .product-details .p-list.border-bottom{
@@ -1662,9 +1664,8 @@ button.no-combination {
     text-align: center;
     font-weight: 500;
     text-decoration: underline;
-    margin-top: 8px;    
-  }
-
+    margin-top: 8px;  
+  }  
 }
 @media (max-width: 2560px) {
   #product{
@@ -1677,19 +1678,19 @@ button.no-combination {
 	      padding-right: 1.5rem; 	
         box-shadow: 0 7px 20px rgba(0, 0, 0, 0.6);         
         h1{
-          font-size: 1.4rem;
+          font-size: 1rem;
           line-height: 3.8rem;
           text-transform: uppercase;
         }
         div.price{
           padding-bottom: 20px;
           .text-h1{
-            font-size: 24px; 
+            font-size: 1.2rem; 
           }          
-          font-size: 24px;
+          font-size: 1.2rem;
           div{
             span{
-              font-size: 24px;
+              font-size: 1.2rem;
             }
           }            
         }
@@ -1755,6 +1756,13 @@ button.no-combination {
     .review-div{
       margin-top: 15px;
     }
+    .brand-div{
+      p{        
+        a{                
+          font-size: 1rem;
+        }
+      }
+    }    
   }        
 }
 @media (max-width: 1920px) {
@@ -1775,12 +1783,12 @@ button.no-combination {
           margin-top: 5px;
           padding-bottom: 10px !important;
           .text-h1{
-            font-size: 18px; 
+            font-size: 1.2rem; 
           }          
-          font-size: 18px;
+          font-size: 1.2rem;
           div{
             span{
-              font-size: 18px;
+              font-size: 1.2rem;
             }
           }            
         }
@@ -1789,7 +1797,7 @@ button.no-combination {
             p{
               margin-top: 8px !important;
               a{                
-                font-size: 14px;
+                font-size: 1rem;
               }
             }
           }
@@ -1886,7 +1894,7 @@ button.no-combination {
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
-          font-size: 0.85rem;
+          font-size: 1rem;
           line-height: 1.25rem;
           text-transform: uppercase;
         }
@@ -1895,12 +1903,12 @@ button.no-combination {
         }
         div.price{
           .text-h1{
-            font-size: 14px; 
+            font-size: 1.2rem; 
           }          
-          font-size: 14px;
+          font-size: 1.2rem;
           div{
             span{
-              font-size: 14px;
+              font-size: 1.2rem;
             }
           }            
         }
@@ -1922,7 +1930,7 @@ button.no-combination {
             p{
               margin-top: 8px !important;
               a{                
-                font-size: 12px;
+                font-size: 1rem;
               }
             }
           }
@@ -2698,7 +2706,13 @@ button.no-combination {
           padding: 7px 12px 0px;
   }
   .web-share-div {
-    padding: 10px 11px 0px 16px;
+    padding: 6px 0px 0px 2px;
+    float: right;
+    position: relative;
+    width: auto;
+    border: none; 
+    margin-right: 0px;
+    margin-left: 0px;       
   }
 }
 

@@ -34,7 +34,7 @@ export default {
     productname: {
       type: String,
       required: false,
-      default: 'Add to cart'
+      default: 'Add to bag'
     }
   },
   computed: {
@@ -89,5 +89,15 @@ export default {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.details-section{
+  #add-to-cart-button{
+    .items-center{
+      span{
+        font-size: 1rem !important;
+      }
+    }
+  }    
 }
 </style>
