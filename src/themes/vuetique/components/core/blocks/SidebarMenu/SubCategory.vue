@@ -203,8 +203,8 @@ export default {
     top: 0;
     min-height: 100%;
     transform: translateX(-100%);
-    /* margin-bottom: 100px;
-    padding-bottom: 100px; */
+    margin-bottom: 100px;
+    /* padding-bottom: 100px; */
   }
  /* @media (max-width: 767px) { */
     /* .sidebar-submenu {
