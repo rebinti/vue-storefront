@@ -137,8 +137,11 @@ export default {
   computed: {
     children () {
       if (!this.$store.state.config.entities.category.categoriesDynamicPrefetch && (this.categoryLinks && this.categoryLinks.length > 0 && this.categoryLinks[0].name)) { // we're using dynamic prefetching and getting just category.children_data.id from 1.7
+        console.log("CAHNGE>>>>>>>>>>>>>>",this.$store.state.config.entities.category.categoriesDynamicPrefetch)
+        console.log("IF >>>>>>>>>>>>",this.categoryLinks)
         return this.categoryLinks
       } else {
+        console.log("ELSE >>>>>>>>>>>>",this.$store.state.category.list.filter(c => { return c.parent_id === this.id }))
         return this.$store.state.category.list.filter(c => { return c.parent_id === this.id }) // return my child categories
       }
     },

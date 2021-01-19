@@ -209,7 +209,8 @@ export default {
       }
       this.lastScrollTop = this.scrollTop
     },
-    headmenuopen () {      
+    headmenuopen () { 
+      console.log("Header >>>>>>>>>>>>>>>>","Clicked")     
       this.$store.commit('ui/setSubmenu', {
         id:'',
         depth: 0

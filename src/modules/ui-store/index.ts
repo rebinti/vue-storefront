@@ -101,6 +101,10 @@ const store = {
       }
       state.submenu.depth = state.submenu.depth > 0 && depth
     },
+    resetSubmenu (state) { 
+      state.submenu.path = [] 
+      state.submenu.depth = false 
+    },
     setUserInAccountsPageFlag (state, action) {
         state.isUserInAccountsPage = action === true
         state.submenu.path = [];
