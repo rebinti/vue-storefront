@@ -26,7 +26,7 @@
     v-html="cmspageseodata.meta_description"
   />            -->
     </section>
-  <div id='seg-home-reco'></div>
+  <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id='seg-home-reco'></div>
   </div>
 </template>
 
@@ -87,7 +87,38 @@ export default {
         "category": "Home Page",
         "subCategory": ""
       }
-    }
+    },
+    segmentifyhandleClicks (event) {
+      event.preventDefault()
+        // ensure we use the link, in case the click has been received by a subelement        
+        let { target } = event                
+        while (target && target.tagName !== 'A') target = target.parentNode
+        // handle only links that occur inside the component and do not reference external resources
+        if (target && target.matches(".segmentify-dynamic-content a") && target.href) {
+          // some sanity checks taken from vue-router:
+          // https://github.com/vuejs/vue-router/blob/dev/src/components/link.js#L106
+          const { altKey, ctrlKey, metaKey, shiftKey, button, defaultPrevented } = event
+          // don't handle with control keys
+          if (metaKey || altKey || ctrlKey || shiftKey) return
+          // don't handle when preventDefault called
+          //if (defaultPrevented) return
+          // don't handle right clicks
+          if (button !== undefined && button !== 0) return
+          // don't handle if `target="_blank"`
+          if (target && target.getAttribute) {
+            const linkTarget = target.getAttribute('target')
+            if (/\b_blank\b/i.test(linkTarget)) return
+          }
+          // don't handle same page links/anchors
+          const url = new URL(target.href)
+          const to = url.pathname
+          if (window.location.pathname !== to && event.preventDefault) {
+            event.preventDefault()
+            //this.$router.push(to)
+            this.$router.push({ path: to, query: { _sgm_campaign: url.searchParams.get('_sgm_campaign') , _sgm_source: url.searchParams.get('_sgm_source') , _sgm_action: url.searchParams.get('_sgm_action') } })
+          }
+        }
+    },     
   },
   computed: {
     ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
