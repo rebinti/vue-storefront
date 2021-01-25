@@ -179,22 +179,23 @@ export default {
     this.$bus.$emit('send-to-emarsys-tracking');
     if ('styla' in window) {
       console.log("AAAAAAAAAA111", window.styla.callbacks )
-    // if (window.styla !== null && window.styla['isReady'] !== undefined) {
+      // if (window.styla !== null && window.styla['isReady'] !== undefined) {
       // if (typeof window.styla.init !== "undefined") window.styla.init()
        styla.init !== "undefined"&&styla.init()
+       this.stylaloaderflag = false
     }
-    this.$nextTick(() => {
-      if ('styla' in window) {
-        styla.init()
-        this.stylaloaderflag = false
-      }
-    })
-    this.setTimeoutSubscription = setTimeout(() => {
-      if ('styla' in window) {
-        styla.init()
-      }
-      this.stylaloaderflag = false
-    }, 5000);
+    // this.$nextTick(() => {
+    //   if ('styla' in window) {
+    //     styla.init()
+    //     this.stylaloaderflag = false
+    //   }
+    // })
+    // this.setTimeoutSubscription = setTimeout(() => {
+    //   if ('styla' in window) {
+    //     styla.init()
+    //   }
+    //   this.stylaloaderflag = false
+    // }, 5000);
     // For working Segmentify
     this.setSegmentify()
   },
