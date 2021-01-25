@@ -199,7 +199,7 @@ export default {
               };
               anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
             }, 'render' );
-        }, 500);
+        }, 2000);
     }
 
   },
