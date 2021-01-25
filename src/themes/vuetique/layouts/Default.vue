@@ -230,7 +230,7 @@ export default {
       }
     }, 250)
   
-    this.initStyla();
+    // this.initStyla();
   },
   beforeDestroy () {
     EventBus.$off('offline-order-confirmation', this.onOrderConfirmation)
