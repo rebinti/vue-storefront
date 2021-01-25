@@ -130,7 +130,7 @@ export default {
     searchTextData (text) {        
         if((text!="") && (text.length >= 2)){
           this.searchparam = text;
-          this.$router.push({ path: 'search', query: { q: this.searchparam }})
+          this.$router.push({ path: this.localizedRoute('/search'), query: { q: this.searchparam }})
         }else{
           this.searchparam = this.$route.query.q;
           this.search = this.searchparam
