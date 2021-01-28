@@ -501,8 +501,9 @@ export default {
           background-size: 33px 33px !important;      
       }       
       .size-selector{
-        width: 33px;
-        height: 33px;      
+          height: 40px;
+          min-width: 60px;
+          margin-bottom: 10px;     
       }             
     }
   }

@@ -67,14 +67,16 @@ export default {
   } 
   @media (max-width: 1440px) {
     .size-selector {
-      height: 33px;
-      min-width: 33px;
+      height: 40px;
+      min-width: 60px; 
+      margin-bottom: 10px; 
     }      
   }   
   @media (max-width: 768px) {
     .size-selector {
-      height: 33px;
-      min-width: 33px;
+      height: 40px;
+      min-width: 60px; 
+      margin-bottom: 10px; 
     }      
   }   
   .no-config .x {

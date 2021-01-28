@@ -71,6 +71,9 @@
               <div class="review-div">
                    <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
               </div>
+              <div class="social-share-button-mob" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->
+                <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
+              </div>              
             </div>
               <div class="mob_headline_out">
                   <div class="mob_headline">
@@ -257,10 +260,9 @@
                     <img  style="float: left;cursor: pointer"
                     src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
                   </div> 
-                  <div class="social-share-button-mob" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->
-                    
-                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
-                  </div>                   
+                  <!-- <div class="social-share-button-mob" id="right" @click="clicksharediv" > -->  <!-- @click="showShareDiv = !showShareDiv" -->                    
+                    <!-- <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" /> -->
+                  <!-- </div>                    -->
                   <div class="mob_add_wish_btn">
                       <wishlist-button :product="product" />
                       
@@ -2103,7 +2105,7 @@ button.no-combination {
     }
 
     .mob_crt_button_out .no_video_button {
-       width: 71% !important;
+       width: 87% !important;
     }
     
     .mob_add_wish_btn{
@@ -2117,7 +2119,7 @@ button.no-combination {
       text-align: left;
     }
     .social-share-button-mob{
-      float: left;
+      float: right;
       // width: 10% !important;
       text-align: left;
     } 
@@ -2291,16 +2293,19 @@ button.no-combination {
     text-align: left;
   }
   .social-share-button-mob{
-     float: left;
+     float: right;
     // width: 6%;
     text-align: left;
   } 
-  .social-share-button-mob,.video-thum-mob{
+  .video-thum-mob{
     border: 1px solid #000000;
       height: 46px;
     // width: 46px;
       margin: 0px;
       margin-right: 4px;
+  }
+  .social-share-button-mob{
+    border: none;
   }
   .social-share-button-mob img,.video-thum-mob img{
     margin-left: 9px;
@@ -2334,7 +2339,7 @@ button.no-combination {
   
   .mob_pro_varients .mob_size_box .size-selector{
     height: 40px;
-    min-width: 40px;
+    min-width: 60px;
     font-size: 1rem;
     line-height: 20px;
     float: left;
@@ -2345,8 +2350,8 @@ button.no-combination {
     color: #FFFFFF;
   }
   .mob_pro_varients .mob_size_box .leg_length .generic-selector{
-    height: 33px;
-    min-width: 33px;
+    height: 40px;
+    min-width: 60px;
     line-height: 20px;
     float: left;
     border: 1px solid #909090;
@@ -2485,14 +2490,16 @@ button.no-combination {
     width: 52% ;
   }
   .no_video_button{
-    width: 68% ;
+    width: 85% ;
   }
 }
 @media (max-width: 425px) {	
   .container{
     .m_item{
       .size-selector{
-        margin-top: 5px;
+        height: 40px;
+        min-width: 60px;
+        margin-bottom: 5px;
       }
       .size-fit-part-mob{
           overflow: hidden;
@@ -2565,21 +2572,28 @@ button.no-combination {
       text-align: left;
     }
     .social-share-button-mob{
-      float: left;
+      float: right;
       // width: 12%;
       text-align: left;
     }   
-.social-share-button-mob,.video-thum-mob{
+.video-thum-mob{
 	border: 1px solid #000000;
     height: 46px;
    // width: 46px;
     margin: 0px;
     margin-right: 4px;
 }
-.social-share-button-mob img,.video-thum-mob img{
+.social-share-button-mob{
+  border:none;
+}
+.video-thum-mob img{
 	  margin-left: 10px;
     margin-top: 9px;
-}   
+}  
+.social-share-button-mob img{
+	  margin-left: 3px;
+    margin-top: 1px;  
+} 
     // .product-details-mob{
     //   a{
     //       border-bottom: 1px solid rgb(179, 179, 179);
@@ -2595,7 +2609,9 @@ button.no-combination {
   .container{
     .m_item{
       .size-selector{
-        margin-top: 5px;
+        height: 40px;
+        min-width: 60px;
+        margin-bottom: 5px;                
       }
       .size-fit-part-mob{
           overflow: hidden;
@@ -2653,10 +2669,14 @@ button.no-combination {
             padding-top: 8px;
       }     
     }
-    .social-share-button-mob img,.video-thum-mob img{
+    .video-thum-mob img{
       margin-left: 9px;
       margin-top: 9px;
     }     
+    .social-share-button-mob img{
+      margin-left: 10px;
+      margin-top: 2px;      
+    }    
   }
  
 }
@@ -2723,10 +2743,14 @@ a:-webkit-any-link {
 
 
 @media (min-width: 320px) and (max-width: 768px) {
-  .social-share-button-mob, .mob_add_wish_btn, .video-thum-mob  {
+  .mob_add_wish_btn, .video-thum-mob  {
       height: 46px !important;
       width: 46px !important;
   }
+  .social-share-button-mob{
+      height: 32px !important;
+      width: 32px !important;
+  }  
 }
 
 </style>
