@@ -291,9 +291,9 @@ export default {
 
   .p_list_block .text-grey.cl-accent { color: #000;}
 
-  @media (max-width: 576px) {
+   @media (max-width: 576px) {
 
-    .button_bx_link_lrg{
+    /* .button_bx_link_lrg{
       display: none;
       width: 100px;
       height: 100%;
@@ -309,6 +309,6 @@ export default {
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
       color:#fff;
-    }
+    } */
   }
 </style>

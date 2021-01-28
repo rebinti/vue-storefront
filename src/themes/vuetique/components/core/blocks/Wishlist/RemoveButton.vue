@@ -10,11 +10,11 @@
 <style lang="scss" scoped>
 .textt-black { color:#000!important; }
 @media (max-width: 576px) {
-  .button_bx_link_lrg .vt-icon--sm{
-    width:28px;
-    height:28px;
-    color: #fff;
-  }
+  // .button_bx_link_lrg .vt-icon--sm{
+  //   width:28px;
+  //   height:28px;
+  //   color: #000
+  // }
   
 }
 

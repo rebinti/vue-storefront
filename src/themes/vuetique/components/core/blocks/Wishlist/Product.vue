@@ -210,7 +210,7 @@ input {
  
 }
 @media (max-width: 576px) {
-  .button_bx_link_lrg{
+  /* .button_bx_link_lrg{
     display: none;
     width: 85px;
     height: 100%;
@@ -226,6 +226,6 @@ input {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     color:#fff;
-  }
+  } */
 }
 </style>

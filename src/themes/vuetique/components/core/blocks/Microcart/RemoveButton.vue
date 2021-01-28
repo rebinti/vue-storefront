@@ -9,11 +9,11 @@
 <style lang="scss" scoped>
 
 @media (max-width: 576px) {
-  .button_bx_link_lrg .vt-icon--sm{
-    width:28px;
-    height:28px;
-    color: #fff;
-  }
+  // .button_bx_link_lrg .vt-icon--sm{
+  //   width:28px;
+  //   height:28px;
+  //   color: #fff;
+  // }
 }
 
 </style>
