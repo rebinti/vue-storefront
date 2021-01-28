@@ -1,15 +1,15 @@
 <template>
   <div v-if="!isCheckoutPage" class="hidden lg:block w-full border-b border-solid" style="background:#525050">
-    <div class="container">
+    <div class="container" style="padding-right: 0rem; padding-left: 0rem;">
       <ul class="flex menu">
 
       <li v-for="menu in headerMenuList" :key="menu.id" @mouseenter="activeSubMenu = menu.identifier"
            @mouseleave="activeSubMenu = null" v-if="headerMenuList.length && menu.active" :class="menu.className">
           <router-link class="menu-link"  @click.native="onMenuSubCategoryClick($event)" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/'+menu.className)" exact>{{ menu.title }}</router-link>
           <div v-show="activeSubMenu === menu.identifier"
-            class="main-item row cms-block-menu"
+            class="main-item row cms-block-menu container"
             @click="onMenuSubCategoryClick($event)"
-            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px;">
+            style="position: absolute;width: 100%;background: white;z-index: 999; left:0px; right:0px; padding-right: 0rem; padding-left: 0rem;">
              <div class="container">
               <div class="menu-list col-6">
                     <cms-block :identifier="menu.identifier" />
@@ -230,6 +230,7 @@ export default {
 
   > .submenu {
     display: block !important;
+    transition-delay: 2s;
   }
 }
 .groupdrop-banner.img_bg{
