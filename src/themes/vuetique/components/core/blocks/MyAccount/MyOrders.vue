@@ -139,7 +139,7 @@
           </thead>
           <tbody>
             <tr class="border-t" v-for="order in ordersHistory" :key="order.entity_id">
-              <td>{{ order.entity_id }}</td>
+              <td>{{ order.increment_id }}</td>
               <td class="hidden sm:table-cell">
                 {{ order.created_at | date }}
               </td>
@@ -155,13 +155,16 @@
               <td>{{ order.grand_total | price }}</td>
               <td>
                 <span class="relative dropdown">
-                  <i class="material-icons text-grey leading-4 cursor-pointer">more_horiz</i>
+                    <router-link class="text-grey-dark hover:text-black block py-2 px-4" :to="localizedRoute(`/my-account/orders/${order.entity_id}`)">
+                      {{ $t('View order') }}
+                    </router-link>                  
+                  <!-- <i class="material-icons text-grey leading-4 cursor-pointer">more_horiz</i>
                   <div class="dropdown-content bg-grey-lighter shadow">
                     <router-link class="text-grey-dark hover:text-black block py-2 px-4" :to="localizedRoute(`/my-account/orders/${order.entity_id}`)">
                       {{ $t('View order') }}
                     </router-link>
-                    <!-- <a href="#" class="text-grey-dark hover:text-black block py-2 px-4" @click.prevent="remakeOrder(skipGrouped(order.items))">{{ $t('Remake order') }}</a> -->
-                  </div>
+                    <a href="#" class="text-grey-dark hover:text-black block py-2 px-4" @click.prevent="remakeOrder(skipGrouped(order.items))">{{ $t('Remake order') }}</a>
+                  </div> -->
                 </span>
               </td>
             </tr>
