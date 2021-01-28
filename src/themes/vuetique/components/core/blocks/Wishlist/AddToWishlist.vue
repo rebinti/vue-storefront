@@ -107,11 +107,14 @@ button.wishlist-bx{
       /* background: #ffffff; */
       padding: 2px;
       position: absolute;
-      right: 5px;
-      bottom: 5px;
+      right:10px;  
+      bottom: 10px;
       z-index: 2;
     }
-
+    .VueCarousel-slide .prod_list .wishlist-bx{
+      right:5px;  
+      bottom: 5px;      
+    }
     .prod_list .wishlist-bx .vt-icon{
        width: 19px;
       height: 24px;
