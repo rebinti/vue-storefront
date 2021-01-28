@@ -71,7 +71,7 @@ export default {
   data () {
     return {
       config: {
-        perPageCustom: [[0, 2], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]],
+        perPageCustom: [[0, 2.25], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]],
         paginationEnabled: false,
         loop: false,
         paginationSize: 5,
@@ -201,5 +201,13 @@ export default {
     bottom: 15px;
     border: 1px solid #e2dddd;
   }
+}
+@media (max-width: 576px){
+        .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-prev{
+            display:none;     
+        }
+        .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-next{
+            display:none;        
+        }
 }  
 </style>
