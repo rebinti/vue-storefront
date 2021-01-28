@@ -107,8 +107,8 @@ button.wishlist-bx{
       /* background: #ffffff; */
       padding: 2px;
       position: absolute;
-      right:10px;  
-      bottom: 10px;
+      right: 5px;
+      bottom: 5px;
       z-index: 2;
     }
 

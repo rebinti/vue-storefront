@@ -574,7 +574,7 @@ export default {
   .item-4-3-grid.column4 .promotions__stamp-label{
       font-size: 10px;
       padding: 0px 4px 0px 0px;
-   }   
+   }  
 }
 @media (max-width: 425px) {
   .item-2-6-grid .product-image img{
@@ -603,9 +603,13 @@ export default {
         .wish-icon{
           // margin-left:8px;
           // margin-right: 10px;
-          top: 36px;
-          right: -9px;
-        }       
+          top: 10px;
+          right: 0px;
+        }
+        .wish-icon-inside-img{
+          width: 35px;
+          height: 35px;
+        }                
       }   
     }
   }   
@@ -642,10 +646,14 @@ export default {
         .wish-icon{
           // margin-left:5px;
           // margin-right: 10px;
-         top: 36px;
-         right: -9px;
+         top: 10px;
+         right: 0px;
         }       
-      }   
+      }
+      .wish-icon-inside-img{
+        width: 35px;
+        height: 35px;
+      }          
     }
   }    
 }
