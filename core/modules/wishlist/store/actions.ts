@@ -179,11 +179,11 @@ const actions: ActionTree<WishlistState, RootState> = {
            commit(types.WISH_DEL_ITEM, { product })
         }
         rootStore.dispatch('boards/load' , true);
-        rootStore.dispatch('notification/spawnNotification', {
-          type: 'success',
-          message: i18n.t('Product {productName} has been removed from wishlit!', { productName: htmlDecode(product.name) }),
-          action1: { label: i18n.t('OK') }
-        })
+        // rootStore.dispatch('notification/spawnNotification', {
+        //   type: 'success',
+        //   message: i18n.t('Product {productName} has been removed from wishlit!', { productName: htmlDecode(product.name) }),
+        //   action1: { label: i18n.t('OK') }
+        // })
       } else {
         Logger.error(task.result, 'wishlist')
         rootStore.dispatch('notification/spawnNotification', {
