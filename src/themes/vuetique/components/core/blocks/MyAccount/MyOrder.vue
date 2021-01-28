@@ -139,7 +139,7 @@
                   <img v-lazy="thumbnail(item.thumbnail)" alt title />
                 </div>
                 <div class="prd_bx_pic_cnt">
-                  <h5>Shirt</h5>
+                  <h5>{{item.name}}</h5>
                   <div class="prd_bx_details_sec">Item ID: {{ item.sku }}</div>
 
                   <div class="prd_bx_details_sec">
