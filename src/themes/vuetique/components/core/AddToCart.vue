@@ -1,7 +1,7 @@
 <template>
   <button-full @click.native="addToCartWrapper(product)" :disabled="isProductDisabled" data-testid="addToCart" class="w-full" :class="{'bg-primary': isProductDisabled || added}">
     <div class="flex items-center justify-center">
-      <span>{{ failed ? $t('Error while adding') : added ? $t('Added to cart') : $t(productname) }}</span>
+      <span>{{ failed ? $t('Error while adding') : added ? $t('Added to bag') : $t(productname) }}</span>
       <div v-show="isAddingToCart" class="loader ml-1" />
       <svg v-show="added" viewBox="0 0 17.333 9.333" class="vt-icon--sm ml-1">
         <use xlink:href="#success" />
@@ -46,9 +46,15 @@ export default {
     onAfterRemovedVariant () {
       this.$forceUpdate()
     },
-    notifyUser (notificationData) {
-      this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
-
+    notifyUser (notificationData) {      
+      if(notificationData.message!="Product has been added to the cart!"){
+        // no notify
+      }else if(notificationData.message!="Product quantity has been updated!"){
+        // no notify
+      }else{
+        this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
+      }
+      
       if (notificationData.type === 'success') {
         this.added = true
       } else {

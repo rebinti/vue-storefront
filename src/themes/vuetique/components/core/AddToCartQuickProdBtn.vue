@@ -92,7 +92,11 @@ export default {
       this.$forceUpdate()
     },
     notifyUser (notificationData) {
-      this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
+      if((notificationData.message=="Product has been added to the cart!")||(notificationData.message=="Product quantity has been updated!")){
+        // no notify
+      }else{
+        this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
+      }            
       if (notificationData.type === 'success') {
         this.added = true
       } else {
