@@ -118,7 +118,8 @@ export default {
           if(start){
             const end = event.changedTouches.item(0).clientX;
             // if(end > start + offset) console.log('swiped left -> right swipe***')
-            if(end < start - offset ){
+            // if(end < start - offset)  console.log('swiped right -> left swipe***')
+            if(end > start + offset){
               if(this.swipeToClosePanelFlag) return
               this.swipeToClosePanelFlag = true;
               this.closeSearchpanel()
