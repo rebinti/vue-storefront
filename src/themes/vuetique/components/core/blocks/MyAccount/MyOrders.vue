@@ -34,7 +34,7 @@
                           </div>
                           <div class="prd_bx_pic_cnt">
                           
-                          <h5>Shirt</h5>
+                          <h5>{{ item.name }}</h5>
                           <div class="prd_bx_details_sec">Item ID:  {{ item.sku }}</div>
 
                           <div  class="prd_bx_details_sec">
@@ -160,7 +160,7 @@
                     <router-link class="text-grey-dark hover:text-black block py-2 px-4" :to="localizedRoute(`/my-account/orders/${order.entity_id}`)">
                       {{ $t('View order') }}
                     </router-link>
-                    <a href="#" class="text-grey-dark hover:text-black block py-2 px-4" @click.prevent="remakeOrder(skipGrouped(order.items))">{{ $t('Remake order') }}</a>
+                    <!-- <a href="#" class="text-grey-dark hover:text-black block py-2 px-4" @click.prevent="remakeOrder(skipGrouped(order.items))">{{ $t('Remake order') }}</a> -->
                   </div>
                 </span>
               </td>

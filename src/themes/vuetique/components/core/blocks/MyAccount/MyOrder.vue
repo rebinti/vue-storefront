@@ -16,13 +16,13 @@
       <div class="row mb-5">
         <div class="col-12 text-h4">
           <p>{{ order.created_at | date('MMMM D, YYYY') }}</p>
-          <p class="mt-8">
+          <!-- <p class="mt-8">
             <a
               href="#"
               class="underline"
               @click.prevent="remakeOrder(skipGrouped(order.items))"
             >{{ $t('Remake order') }}</a>
-          </p>
+          </p> -->
         </div>
       </div>
       <div class="row mb-8">
