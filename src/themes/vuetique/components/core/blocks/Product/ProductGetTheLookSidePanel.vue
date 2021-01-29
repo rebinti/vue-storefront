@@ -22,7 +22,7 @@
         <!-- <div  v-for ="item in upsellitems">
             <product :product="item" @click="removeItem" @parentevent="getupdateclick" />
         </div> -->
-        <sidepanel-product-listing columns="1" :products="getupsellitems.related['upsell']" />    
+        <sidepanel-product-listing columns="2" :products="getupsellitems.related['upsell']" />    
     </div>
   </div>
 </template>
