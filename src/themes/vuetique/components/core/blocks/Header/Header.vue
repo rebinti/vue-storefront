@@ -227,7 +227,7 @@ export default {
 header {
   height: 70px;
   top: -70px;
-  z-index: 3;
+  z-index: 5;
   transition: top 0.2s ease-in-out;
   &.is-visible {
     top: 0;
