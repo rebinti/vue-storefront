@@ -2735,13 +2735,21 @@ button.no-combination {
     margin-left: 0px;       
   }
 }
-
 a:-webkit-any-link {
   // text-decoration: none !important;
   outline: none !important;;
 }
-
-
+@media (min-width: 768px) and (max-width: 1440px){
+  .web-share-div {
+    padding: 6px 0px 0px 2px;
+    float: right;
+    position: relative;
+    width: auto;
+    border: none; 
+    margin-right: 0px;
+    margin-left: 0px;       
+  }  
+}
 @media (min-width: 320px) and (max-width: 768px) {
   .mob_add_wish_btn, .video-thum-mob  {
       height: 46px !important;
