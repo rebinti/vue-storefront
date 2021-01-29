@@ -19,8 +19,10 @@
     <br>          
     <div>
         <div class="outfit-image"><img :src="getOutFitImageUrl" class="model-image" /></div>
-        <div v-for="prod in upsellitems">{{prod}}</div>
-        <!-- <product-listing columns="1" :products="product.related[type].slice(0,20)" />         -->
+        <!-- <div  v-for ="item in upsellitems">
+            <product :product="item" @click="removeItem" @parentevent="getupdateclick" />
+        </div> -->
+        <sidepanel-product-listing columns="1" :products="getupsellitems.related['upsell']" />    
     </div>
   </div>
 </template>
@@ -28,7 +30,7 @@
 <script>
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
-import ProductListing from 'theme/components/core/ProductListing'
+import SidepanelProductListing from 'theme/components/core/SidepanelProductListing'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
 import NoScrollBackground from 'theme/mixins/noScrollBackground'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
@@ -46,6 +48,9 @@ export default {
         swipeToClosePanelFlag: false,
         upsellitems:[]      
     }
+  },  
+  components: {
+    SidepanelProductListing
   },  
   props: {
   },  
@@ -65,7 +70,10 @@ export default {
     // },    
     productLinks () {
       return this.product.product_links
-    }         
+    }, 
+    getupsellitems (){
+       return this.$store.state.product 
+    }        
     // isProductGetTheLookSidePanelOpen () {
     //   return this.$store.state.ui.productGetTheLookSidePanelFlag
     // }
@@ -143,9 +151,9 @@ export default {
           this.loadingNewProdFlag = false;
       })     
       
-        this.upsellitems = sku
+        this.upsellitems = this.$store.state.product.related.upsell
         console.log("testtEEEEEEEEEEEEEEEE",sku)
-        console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product)        
+        console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product.related.upsell)        
     },    
   },
   beforeCreate () {
