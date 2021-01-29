@@ -323,10 +323,18 @@
                       style=""
                     @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
                     data-testid="productDeliveyReturn">               
-                    <div class="p-list">
+                    <div class="p-list border-bottom">
                       DELIVERY & RETURNS
                     </div>
-                  </a>    
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductGetTheLookSidePanel')" 
+                    data-testid="productGetTheLook">               
+                    <div class="p-list">
+                      GET THE LOOK
+                    </div>
+                  </a>                       
                 </div>          
               </div>               
 
@@ -656,10 +664,18 @@
                        style="text-decoration: none !important; outline: none !important;"
                     @click.prevent="$store.dispatch('ui/toggleProductDeliveyReturnSidePanel')" 
                     data-testid="productDeliveyReturn">               
-                    <div class="p-list">
+                    <div class="p-list border-bottom">
                       DELIVERY & RETURNS
                     </div>
-                  </a>    
+                  </a>
+                  <a href="javascript:void(0);"  
+                      style=""
+                    @click.prevent="$store.dispatch('ui/toggleProductGetTheLookSidePanel')" 
+                    data-testid="productGetTheLook">               
+                    <div class="p-list">
+                      GET THE LOOK
+                    </div>
+                  </a>                      
                 </div>          
               </div> 
           </div>

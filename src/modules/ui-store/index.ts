@@ -50,6 +50,7 @@ const store = {
     productSidePanelFlag: false,
     productDetailsSidePanelFlag: false,
     productDeliveyReturnSidePanelFlag: false,
+    productGetTheLookSidePanelFlag: false,
     checkoutWithoutLogin: false
   },
   getters: {
@@ -194,6 +195,10 @@ const store = {
   setProductDeliveyReturnSidePanelFlag (state, action) {
     state.productDeliveyReturnSidePanelFlag = action === true
     state.overlay = action === true
+  },    
+  setProductGetTheLookSidePanelFlag (state, action) {
+    state.productGetTheLookSidePanelFlag = action === true
+    state.overlay = action === true
   },  
   setCheckoutWithoutLoginFlag (state, payload) {
     state.checkoutWithoutLogin = payload === true
@@ -217,6 +222,9 @@ const store = {
     },
     toggleProductDeliveyReturnSidePanel ({ commit, state }) {
       commit('setProductDeliveyReturnSidePanelFlag', !state.productDeliveyReturnSidePanelFlag)
+    },     
+    toggleProductGetTheLookSidePanel ({ commit, state }) {
+      commit('setProductGetTheLookSidePanelFlag', !state.productGetTheLookSidePanelFlag)
     },            
     updateYoptoProduct ({commit}, state) {
       commit('setYoptoProduct', state)

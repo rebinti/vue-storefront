@@ -32,6 +32,7 @@ export default {
       this.$store.commit('ui/setProductSidePanelFlag', false)
       this.$store.commit('ui/setProductDetailsSidePanelFlag', false)
       this.$store.commit('ui/setProductDeliveyReturnSidePanelFlag', false)
+      this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
     }
   }
 }

@@ -19,6 +19,7 @@
         <productSidePanel v-if="isProductSidePanelOpen" />
         <productDetailsSidePanel v-if="isProductDetailsSidePanelOpen" />
         <productDeliveyReturnSidePanel v-if="isProductDeliveyReturnSidePanelOpen" />
+        <productGetTheLookSidePanel v-if="isProductGetTheLookSidePanelOpen" />
       </transition>
       <slot />
       <main-footer />
@@ -87,6 +88,7 @@ const OrderConfirmation = () => import(/* webpackChunkName: "vsf-order-confirmat
 const ProductSidePanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/Product/ProductSidePanel.vue')
 const ProductDetailsSidePanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/Product/ProductDetailsSidePanel.vue')
 const ProductDeliveyReturnSidePanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/Product/ProductDeliveyReturnSidePanel.vue')
+const ProductGetTheLookSidePanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/Product/ProductGetTheLookSidePanel.vue')
 
 export default {
   data () {
@@ -113,7 +115,8 @@ export default {
       isReviewPanelOpen: state => state.ui.reviewPanel,
       isProductSidePanelOpen: state => state.ui.productSidePanelFlag,
       isProductDetailsSidePanelOpen: state => state.ui.productDetailsSidePanelFlag,
-      isProductDeliveyReturnSidePanelOpen: state => state.ui.productDeliveyReturnSidePanelFlag
+      isProductDeliveyReturnSidePanelOpen: state => state.ui.productDeliveyReturnSidePanelFlag,
+      isProductGetTheLookSidePanelOpen: state => state.ui.productGetTheLookSidePanelFlag
     })
   },
   methods: {
@@ -272,7 +275,8 @@ export default {
     ReviewPanel,
     ProductSidePanel,
     ProductDetailsSidePanel,
-    ProductDeliveyReturnSidePanel
+    ProductDeliveyReturnSidePanel,
+    ProductGetTheLookSidePanel    
   },
    mixins: [EmarsysTracker]
 }
