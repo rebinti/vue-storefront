@@ -199,6 +199,7 @@ export default {
   &__slide {
     height: 100%;
     max-height: 100%;
+    touch-action: pan-x !important;
 
     img {
       max-height: 100%;
