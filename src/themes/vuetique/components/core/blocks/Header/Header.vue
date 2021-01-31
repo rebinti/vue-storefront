@@ -292,7 +292,7 @@ header {
    header{
     height: 50px;
     top: 0px;
-    z-index: 3;
+    z-index: 5;
     -webkit-transition: top 0.2s ease-in-out;
    }
 }

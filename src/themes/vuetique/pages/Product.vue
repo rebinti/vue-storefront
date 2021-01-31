@@ -244,7 +244,7 @@
                   </a> 
                 </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 2,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 10,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
 
                   <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup">
 <!-- disableAddToCartButtonFlag -->
@@ -1685,7 +1685,7 @@ button.no-combination {
     margin-top: 8px;  
   }  
 }
-@media (max-width: 2560px) {
+@media (max-width: 3840px) {
   #product{
     .container{
       .details-section{
@@ -2294,7 +2294,7 @@ button.no-combination {
   }  
   .mob_add_cart_btn{
     float: left;
-    width: 71%;
+    width: 85%;
     padding: 0 2% 0px 10%;
   }
 

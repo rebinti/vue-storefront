@@ -339,7 +339,7 @@ export default {
     clear: both;
   }
 }
-@media (max-width: 2560px) {
+@media (max-width: 3840px) {
   .item-2-6-grid.column2 .product-image img{
       width: 580px;
       height: 870px;

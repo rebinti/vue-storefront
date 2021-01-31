@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="loader--style3 mainhomestylaloader" style="" title="2" v-if="stylaloaderflag" >
-          <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:75px;">                  
+          <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:55px;">                  
     </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />

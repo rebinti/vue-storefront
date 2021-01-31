@@ -156,7 +156,7 @@
                     repeatCount="indefinite"/>
                 </path>
               </svg>
-              <h3 style="text-align: center;"> Please wait for loading more... </h3>
+            <!-- <h3 style="text-align: center;"> Please wait for loading more... </h3> -->
             </div>
           </div>          
         </div>
