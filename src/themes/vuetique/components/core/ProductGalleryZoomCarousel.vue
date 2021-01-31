@@ -203,7 +203,7 @@ export default {
     img {
       max-height: 100%;
       mix-blend-mode: multiply;
-      max-width: 100%;
+      max-width: unset;
       height: auto;
       align-self: center;
       margin: 0 auto;
