@@ -1,5 +1,5 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
+  <swiper class="swiper" :options="swiperOptions">
     <swiper-slide  v-for="product in products"
           v-if="!product._dontShowInListingFlag"
           :key="product.id">
@@ -43,12 +43,14 @@
     },     
     data() {
       return {
-        swiperOption: {
+        swiperOptions: {
           slidesPerView: 6,
           spaceBetween: 2,
           slidesPerGroup: 3,
-          loop: true,
-          loopFillGroupWithBlank: true,
+          lazy: true,
+          loop: false,
+          loopFillGroupWithBlank: false,
+          freeMode: true,
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -84,11 +86,11 @@
             },
             640: {
               slidesPerView: 2,
-              spaceBetween: 5
+              spaceBetween: 2
             },
             320: {
-              slidesPerView: 1,
-              spaceBetween: 5
+              slidesPerView: 2,
+              spaceBetween: 2
             }
           }          
         }
