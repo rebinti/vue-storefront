@@ -3,7 +3,7 @@
     <div
       v-for="(product, index) in products"
       :key="product.id"
-      v-if="!product._dontShowInListingFlag" class="itemlist" style="width:100%;padding-top: 15px;"
+      v-if="!product._dontShowInListingFlag" class="itemlist" style="width:100%;padding-top: 15px;border-bottom: 1px solid #ededed"
     >
     <!-- :class="['md:col-' + (12/columns)%10]" -->
       <sidepanel-product-tile :product="product"/>
@@ -37,7 +37,12 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
+.sidepanelitem{
+  .itemlist{
+    border-bottom: 1px solid #ededed !important;
+  }
+} 
 @media (min-width: 769px) and (max-width: 1599px){
 
 }

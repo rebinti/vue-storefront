@@ -14,7 +14,7 @@
           </svg>
         </button>
         
-        <h2 style="position: absolute;top: 20px;left: 41px;text-transform:uppercase;">GET THE LOOK</h2>
+        <h2 style="text-align: center; line-height: 3.5rem; position: initial;top: 20px;left: 41px;text-transform:uppercase;">GET THE LOOK</h2>
       </div>
     <br>          
     <div>

@@ -5,7 +5,7 @@
    :disabled="isProductDisabled" 
    data-testid="addToCart" class="w-full" :class="{'bg-primary': isProductDisabled || added}">
     <div class="flex items-center justify-center">
-      <span>{{ failed ? $t('Error while adding') : added ? $t('Added to cart') : $t(productname) }}</span>
+      <span>{{ failed ? $t('Error while adding') : added ? $t('Added to bag') : $t(productname) }}</span>
       <div v-show="isAddingToCart" class="loader ml-1" />
       <svg v-show="added" viewBox="0 0 17.333 9.333" class="vt-icon--sm ml-1">
         <use xlink:href="#success" />
@@ -61,7 +61,7 @@ export default {
     productname: {
       type: String,
       required: false,
-      default: 'Add to cart'
+      default: 'Add to bag'
     },
     /* 
       @parms  'Quick-View', 'Text-Only'
