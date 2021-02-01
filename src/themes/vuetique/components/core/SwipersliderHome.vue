@@ -1,13 +1,5 @@
 <template>
-  <swiper
-    :slides-per-view="3"
-    :space-between="50"
-    navigation
-    :pagination="{ clickable: true }"
-    :scrollbar="{ draggable: true }"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
-  >
+  <swiper class="swiper" :options="swiperOption">
     <swiper-slide  v-for="product in products"
           v-if="!product._dontShowInListingFlag"
           :key="product.id">
@@ -17,28 +9,19 @@
             :labels-active="false"
           />          
     </swiper-slide>
+    <div class="swiper-pagination" slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
   </swiper>
 </template>
-<script>
-  // import Swiper core and required components
-  import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-  // Import Swiper Vue.js components
-  //import { Swiper, SwiperSlide } from 'swiper/vue';
+<script>
   import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
   import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-
-  // Import Swiper styles
   import 'swiper/swiper.scss';
-  import 'swiper/components/navigation/navigation.scss';
-  import 'swiper/components/pagination/pagination.scss';
-  import 'swiper/components/scrollbar/scrollbar.scss';
-
-  // install Swiper components
-  SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-
-  // Import Swiper styles
   export default {
+    name: 'swiper-example-loop-group',
+    title: 'Loop mode with multiple slides per group',
     components: {
       Swiper,
       SwiperSlide,
@@ -57,14 +40,27 @@
         type: Object,
         required: true
         }
-    },    
-    methods: {
-      onSwiper(swiper) {
-        console.log(swiper);
-      },
-      onSlideChange() {
-        console.log('slide change');
-      },
-    },
-  };
+    },     
+    data() {
+      return {
+        swiperOption: {
+          slidesPerView: 5,
+          spaceBetween: 2,
+          slidesPerGroup: 3,
+          loop: true,
+          loopFillGroupWithBlank: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        }
+      }
+    }
+  }
 </script>
+<style lang="scss" scoped>  
+</style>
