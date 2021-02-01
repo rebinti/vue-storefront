@@ -8,9 +8,15 @@
     @swiper="onSwiper"
     @slideChange="onSlideChange"
   >
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
+    <swiper-slide  v-for="product in products"
+          v-if="!product._dontShowInListingFlag"
+          :key="product.id">
+          <product-tile-carousel
+            class="collection-product"
+            :product="product"
+            :labels-active="false"
+          />          
+    </swiper-slide>
   </swiper>
 </template>
 <script>
@@ -20,6 +26,7 @@
   // Import Swiper Vue.js components
   //import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 
   // Import Swiper styles
   import 'swiper/swiper.scss';
@@ -35,7 +42,22 @@
     components: {
       Swiper,
       SwiperSlide,
+      ProductTileCarousel,
     },
+    props: {
+        title: {
+        type: String,
+        default: ''
+        },
+        products: {
+        type: Array,
+        required: true
+        },
+        config: {
+        type: Object,
+        required: true
+        }
+    },    
     methods: {
       onSwiper(swiper) {
         console.log(swiper);
