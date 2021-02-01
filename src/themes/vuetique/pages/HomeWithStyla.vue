@@ -19,6 +19,10 @@
           <no-ssr>
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
+      </div>
+      <div class="swiperslider">
+        <h3>test swiper slider</h3>
+        <swiperslider-home :products="newCollection" :config="sliderConfig"/>
       </div> 
   <!-- <div
     class="cms-content py-10 page-content"
@@ -42,6 +46,7 @@ import Home from '@vue-storefront/core/pages/Home'
 // Theme core components
 // import ProductListing from 'theme/components/core/ProductListing'
 import ProductsSlider from 'theme/components/core/ProductsSlider'
+import SwipersliderHome from 'theme/components/core/SwipersliderHome'
 
 
 // Theme local components
@@ -60,7 +65,8 @@ export default {
   components: {
     'no-ssr': NoSSR,
     ProductsSlider,
-    StylaHomeMagazine   
+    StylaHomeMagazine,
+    SwipersliderHome,
   },
   data () {
     return {
