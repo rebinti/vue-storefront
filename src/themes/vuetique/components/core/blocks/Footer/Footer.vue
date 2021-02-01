@@ -45,36 +45,34 @@
                         </router-link>                         
                     </div>             
           </div>
-
           <button class="accordion"><h3>Quick links</h3></button>
           <div class="panel">
                 <div class="my-3" >
-                    <a href="/i/about-us" class="menu-link" >
-                        About Us
-                    </a>
+                    <router-link :to="localizedRoute('/i/about-us')" class="menu-link footer-nav">
+                      {{ $t('About Us') }}
+                    </router-link>                  
                 </div>
                 <div class="my-3" >
-                    <a href="#" class="menu-link" >
-                        Partnerships
-                    </a>
+                    <router-link :to="localizedRoute('#')" class="menu-link footer-nav">
+                      {{ $t('Partnerships') }}
+                    </router-link>                  
                 </div>
                 <div class="my-3" >
-                    <a href="/gift-card" aria-current="page" class="menu-link router-link-exact-active router-link-active">
-                        Gift Card
-                    </a>
+                    <router-link :to="localizedRoute('/gift-card')" class="menu-link footer-nav">
+                      {{ $t('Gift Card') }}
+                    </router-link>                  
                 </div>
                 <div class="my-3" >
-                    <a href="/reviews" aria-current="page" class="menu-link router-link-exact-active router-link-active">
-                      Reviews
-                    </a>
+                    <router-link :to="localizedRoute('/reviews')" class="menu-link footer-nav">
+                      {{ $t('Reviews') }}
+                    </router-link>                  
                 </div>
                 <div class="my-3" >
-                    <a href="/students" aria-current="page" class="menu-link router-link-exact-active router-link-active">
-                      Students
-                    </a>
+                    <router-link :to="localizedRoute('/students')" class="menu-link footer-nav">
+                      {{ $t('Students') }}
+                    </router-link>                  
                 </div>
           </div>
-
           <button class="accordion"><h3> Join in on the chit chat </h3></button>
           <div class="panel">
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
@@ -131,7 +129,6 @@
           </div>
           <button class="accordion"><h3>Download our app</h3></button>
           <div class="panel">
-
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
@@ -548,22 +545,31 @@ export default {
       return (new Date()).getFullYear()
     }
   },
-  mounted () {
-      let acc = document.getElementsByClassName("accordion");
-      let i;
+  beforeMount(){
+    this.footeraccordionchange()
+  },
+  mounted () { 
+    this.footeraccordionchange()
+  }, 
+  methods:{
+      footeraccordionchange: function() {
+        let acc = document.getElementsByClassName("accordion");
+        let i;
 
-      for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          let panel = this.nextElementSibling;
-          if (panel.style.display === "block") {
-            panel.style.display = "none";
-          } else {
-            panel.style.display = "block";
-          }
-        });
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            console.log("accordion innnnnnnnnnnnnnnnnnnnn")
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
       }
-  },  
+  },   
   components: {
     Newsletter,
     LanguageSwitcher,
