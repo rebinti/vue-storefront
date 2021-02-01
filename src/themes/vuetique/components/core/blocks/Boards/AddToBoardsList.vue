@@ -310,7 +310,7 @@ export default {
   }
 }
 
-@media (min-width: 1024px) and (max-width: 2560px) {
+@media (min-width: 1024px) and (max-width: 3840px) {
     .board_bx_out {
         width: auto; 
         height: 100vh;

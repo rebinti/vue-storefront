@@ -218,7 +218,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 1600px) and (max-width: 2560px)  {
+@media screen and (min-width: 1600px) and (max-width: 3840px)  {
   .columns {
     &::after {
           right: 25px;

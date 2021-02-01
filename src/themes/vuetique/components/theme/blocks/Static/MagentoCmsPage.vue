@@ -89,7 +89,7 @@ export default {
     font-size: 22px;
     text-align: center;
     text-transform: uppercase;
-    font-family: 'brandon_grotesque', sans-serif;
+    font-family: sans-serif;
     letter-spacing: 1px;
     font-weight: bold;
 }

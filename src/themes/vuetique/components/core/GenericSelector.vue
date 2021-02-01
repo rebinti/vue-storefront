@@ -39,7 +39,7 @@ export default {
       @apply text-disabled border-disabled cursor-not-allowed;
     }
   }
-  @media (max-width: 2560px) {
+  @media (max-width: 3840px) {
     .generic-selector {
       // height: 50px;
       // min-width: 50px;

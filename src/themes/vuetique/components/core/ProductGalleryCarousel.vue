@@ -359,7 +359,7 @@ img[lazy=loaded] {
     height: 960px;
   }      
 }
-@media (max-width: 2560px) {
+@media (max-width: 3840px) {
   .hooper-slide .product-image-container img{
       width: 640px;
       height: 960px;

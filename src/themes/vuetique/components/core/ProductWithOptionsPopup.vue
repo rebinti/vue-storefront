@@ -464,7 +464,7 @@ export default {
         border: 1px solid #6b6b6b !important;
     }          
   }
-  @media (max-width: 2560px) {
+  @media (max-width: 3840px) {
     .prd-option-popup {
       .no-combination {
           background-size: 50px 50px !important;     

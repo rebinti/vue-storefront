@@ -391,7 +391,7 @@ export default {
     }
 }
 
-@media screen and (min-width: 769px) and (max-width: 2560px) {
+@media screen and (min-width: 769px) and (max-width: 3840px) {
     .div-mobile-acc{
        display: none;
     }

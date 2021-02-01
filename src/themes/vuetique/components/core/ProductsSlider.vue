@@ -105,8 +105,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 120px;
-            height: 180px;
+            width: 100%;
+            height: 100%;
         }
       }
       // .title-and-wish{
@@ -125,8 +125,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 147.5px;
-            height: 221.25px;
+            width: 100%;
+            height: 100%;
         }
       }
       // .title-and-wish{
@@ -145,8 +145,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 172.5px;
-            height: 258.75px;
+            width: 100%;
+            height: 100%;
         }
       }
       // .title-and-wish{
@@ -165,8 +165,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 222.66px;
-            height: 333.99px;
+            width: 100%;
+            height: 100%;
         }
       }
     }
@@ -177,8 +177,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 218px;
-            height: 327px;
+            width: 100%;
+            height: 100%;
         }
       }
     }
@@ -189,8 +189,8 @@ export default {
     .collection-product{
       .product-link{
         .prod_list{
-            width: 292px;
-            height: 438px;
+            width: 100%;
+            height: 100%;
         }
       }
       // .title-and-wish{
