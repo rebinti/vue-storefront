@@ -44,7 +44,7 @@
     data() {
       return {
         swiperOption: {
-          slidesPerView: 5,
+          slidesPerView: 6,
           spaceBetween: 2,
           slidesPerGroup: 3,
           loop: true,
@@ -56,10 +56,44 @@
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
-          }
+          },          
+          breakpoints: {
+            2560: {
+              slidesPerView: 8,
+              spaceBetween: 5
+            },              
+            1920: {
+              slidesPerView: 7,
+              spaceBetween: 5
+            },              
+            1600: {
+              slidesPerView: 6,
+              spaceBetween: 5
+            },              
+            1440: {
+              slidesPerView: 6,
+              spaceBetween: 5
+            },              
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 5
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 5
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 5
+            },
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 5
+            }
+          }          
         }
       }
-    }
+    },  
   }
 </script>
 <style lang="scss" scoped>  
