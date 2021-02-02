@@ -118,6 +118,8 @@
       .product-link{
         padding-left: 0rem;
         padding-right: 0rem;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
         @media (min-width: 320px) {
           .prod_list{              
               height: 238.5px;
