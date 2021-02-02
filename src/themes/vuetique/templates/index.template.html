@@ -6,6 +6,15 @@
 		{{{ meta.inject().link.text() }}}
 		{{{ meta.inject().script.text() }}}
 
+
+		<script type="text/javascript">
+			!function(a,b,c,d,e,f,g,h){a.RaygunObject=e,a[e]=a[e]||function(){
+			(a[e].o=a[e].o||[]).push(arguments)},f=b.createElement(c),g=b.getElementsByTagName(c)[0],
+			f.async=1,f.src=d,g.parentNode.insertBefore(f,g),h=a.onerror,a.onerror=function(b,c,d,f,g){
+			h&&h(b,c,d,f,g),g||(g=new Error(b)),a[e].q=a[e].q||[],a[e].q.push({
+			e:g})}}(window,document,"script","//cdn.raygun.io/raygun4js/raygun.min.js","rg4js");
+		  </script>
+
 	<!--
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
@@ -19,17 +28,6 @@
 	<link rel="dns-prefetch" href="//styla-prod.us.imgix.net">
 	<link rel="dns-prefetch" href="//client-scripts.styla.com">
 	<link rel="dns-prefetch" href="//redpanda.styla.com">
-
-
-
-	
-
-
-
-
-
-
-
  
 	<script src="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" type="text/javascript" async></script>
 	
@@ -69,7 +67,7 @@
 	<!-- <script type="text/javascript">
 	(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/kAufTbS2x5wG440QIWrQTVzAcXPZfU6DpbuFUKym/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
 	</script> -->
-	<script type="text/javascript">
+	<script type="text/javascript" async>
 		function myInit(){
 		   StampedFn.init({ apiKey: 'pubkey-Y55wBte73EjEC0fGTj5RWA8fEEny21',
             storeUrl: 'www.iclothing.com' }); 
@@ -80,7 +78,7 @@
 	
 	<!-- True Fit Script -->
 
-	<script type="text/JavaScript">
+	<script type="text/JavaScript" async>
 		(function(){
 			var a={};
 			function g(l){
@@ -180,5 +178,12 @@
 	</script>
 -->
 	<!-- End of iclothing Zendesk Widget script -->	
+
+
+	<script type="text/javascript">
+		rg4js('apiKey', 'sTwoGytVL0ExleRgs75qjg');
+		rg4js('enablePulse', true);
+	  </script>
+
   </body>
 </html>
