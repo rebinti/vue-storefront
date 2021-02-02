@@ -155,6 +155,14 @@
           .prod_list{              
               height: 473.445px;
           }          
+        }
+        @media (max-width: 576px){
+          .prod_list{
+            .wishlist-bx{
+              right: 0px;
+              bottom: 2px;
+            }
+          }
         }                        
       }
     }
