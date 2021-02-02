@@ -9,44 +9,40 @@
     >
       <div class="container footer-container device-only">
         <div class="">
-          <button class="accordion"><h3>Help</h3></button>
-          <div class="panel">
-                    <div class="my-3" >
-                        <router-link :to="localizedRoute('/my-account')" class="menu-link footer-nav">
-                          {{ $t('My Account') }}
-                        </router-link>                           
-                    </div>
-                    <div class="my-3" >
-                        <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
-                          {{ $t('FAQ’s') }}
-                        </router-link>                        
-                    </div>
-                    <div class="my-3" >
-                        <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
-                          {{ $t('Help Centre') }}
-                        </router-link>                        
-                    </div>
-                    <div class="my-3" >
-                        <router-link :to="localizedRoute('/delivery-returns')" class="menu-link footer-nav">
-                          {{ $t('Delivery and Returns') }}
-                        </router-link>                         
-                    </div>
-                    <div class="my-3" >
-                        <!-- <a href="https://www.iclothing.com/privacy-centre/" aria-current="page" class="menu-link router-link-exact-active router-link-active">
-                            {{ $t('Privacy Centre') }}
-                        </a>                            -->                        
-                        <router-link :to="localizedRoute('/privacy-centre')" class="menu-link footer-nav">
-                          {{ $t('Privacy Centre') }}
-                        </router-link>                           
-                    </div>
-                    <div class="my-3" >
-                        <router-link :to="localizedRoute('/inspiration/pages/covid-19/')" class="menu-link footer-nav">
-                          {{ $t('COVID-19 Updates') }}
-                        </router-link>                         
-                    </div>             
-          </div>
-          <button class="accordion"><h3>Quick links</h3></button>
-          <div class="panel">
+            <Accordion class="md:hidden accordion" :openType=false :title="$t('help')">              
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/my-account')" class="menu-link footer-nav">
+                              {{ $t('My Account') }}
+                            </router-link>                           
+                        </div>
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
+                              {{ $t('FAQ’s') }}
+                            </router-link>                        
+                        </div>
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/help-faq')" class="menu-link footer-nav">
+                              {{ $t('Help Centre') }}
+                            </router-link>                        
+                        </div>
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/delivery-returns')" class="menu-link footer-nav">
+                              {{ $t('Delivery and Returns') }}
+                            </router-link>                         
+                        </div>
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/privacy-centre')" class="menu-link footer-nav">
+                              {{ $t('Privacy Centre') }}
+                            </router-link>                           
+                        </div>
+                        <div class="my-3" >
+                            <router-link :to="localizedRoute('/inspiration/pages/covid-19/')" class="menu-link footer-nav">
+                              {{ $t('COVID-19 Updates') }}
+                            </router-link>                         
+                        </div>                           
+            </Accordion>
+
+            <Accordion class="md:hidden accordion" :openType=false :title="$t('Quick Links')">
                 <div class="my-3" >
                     <router-link :to="localizedRoute('/i/about-us')" class="menu-link footer-nav">
                       {{ $t('About Us') }}
@@ -72,9 +68,8 @@
                       {{ $t('Students') }}
                     </router-link>                  
                 </div>
-          </div>
-          <button class="accordion"><h3> Join in on the chit chat </h3></button>
-          <div class="panel">
+            </Accordion>  
+            <Accordion class="md:hidden accordion" :openType=false :title="$t('Join in on the chit chat')">
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
@@ -125,10 +120,9 @@
               >
                 <i class="fab fa-twitter"></i>
               </a>
-            </div>                        
-          </div>
-          <button class="accordion"><h3>Download our app</h3></button>
-          <div class="panel">
+            </div> 
+            </Accordion>   
+            <Accordion class="md:hidden accordion" :openType=false :title="$t('Download our app')">
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
@@ -152,8 +146,8 @@
                 <i class="fab fa-apple"></i>
               </a>
     
-            </div>            
-          </div>          
+            </div> 
+            </Accordion>                                   
         </div>
       </div>  
       <div class="container footer-container web-only">        
@@ -200,168 +194,6 @@
                 </div>
                 <cms-block :identifier="'footer_quick_links_block_new'" style="margin-top:-40px;" />
           </div>
-      
-          <!-- <div class="footer-menu sm:flex col-12 lg:col-9 justify-around mt-8 lg:mt-0">
-            <div class="hidden md:block">
-              <h3>
-                {{ $t('Shop') }}
-              </h3>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/c/women')" exact>
-                  {{ $t('Women fashion') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/c/men')" exact>
-                  {{ $t("Men's fashion") }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/')" exact>
-                  {{ $t('Kidswear') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/')" exact>
-                  {{ $t('Home') }}
-                </router-link>
-              </div>
-            </div>
-            <Accordion class="md:hidden" :title="$t('Shop')">
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/c/women')" exact>
-                  {{ $t('Women fashion') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/c/men-11')" exact>
-                  {{ $t("Men's fashion") }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/')" exact>
-                  {{ $t('Kidswear') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/')" exact>
-                  {{ $t('Home') }}
-                </router-link>
-              </div>
-            </Accordion>
-            <div class="hidden md:block">
-              <h3>
-                {{ $t('Orders') }}
-              </h3>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/order-tracking')" exact>
-                  {{ $t('Track my order') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <a href="#" class="menu-link" @click.prevent="goToAccount">{{ $t('My account') }}</a>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/delivery')" exact>
-                  {{ $t('Delivery') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/returns')" exact>
-                  {{ $t('Return policy') }}
-                </router-link>
-              </div>
-            </div>
-            <Accordion class="md:hidden" :title="$t('Orders')">
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/order-tracking')" exact>
-                  {{ $t('Track my order') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <a href="#" class="menu-link" @click.prevent="goToAccount">{{ $t('My account') }}</a>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/delivery')" exact>
-                  {{ $t('Delivery') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/returns')" exact>
-                  {{ $t('Return policy') }}
-                </router-link>
-              </div>
-            </Accordion>
-            <div class="hidden md:block">
-              <h3>
-                {{ $t('Help') }}
-              </h3>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/customer-service')" exact>
-                  {{ $t('Customer service') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/size-guide')" exact>
-                  {{ $t('Size guide') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/contact')" exact>
-                  {{ $t('Contact us') }}
-                </router-link>
-              </div>
-            </div>
-            <Accordion class="md:hidden" :title="$t('Help')">
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/customer-service')" exact>
-                  {{ $t('Customer service') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/size-guide')" exact>
-                  {{ $t('Size guide') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/contact')" exact>
-                  {{ $t('Contact us') }}
-                </router-link>
-              </div>
-            </Accordion>
-            <div class="hidden md:block">
-              <h3>
-                {{ $t('About us') }}
-              </h3>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/i/about-magento-demo-store')" exact>
-                  {{ $t('About us (Magento CMS)') }}
-                </router-link>
-              </div>     
-               <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/i/customer-service')" exact>
-                  {{ $t('Customer service (Magento CMS)') }}
-                </router-link>
-              </div>             
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/store-locator')" exact>
-                  {{ $t('Store locator') }}
-                </router-link>
-              </div>
-            </div>
-            <Accordion class="md:hidden" :title="$t('About us')">
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/about-us')" exact>
-                  {{ $t('About us') }}
-                </router-link>
-              </div>
-              <div class="my-3">
-                <router-link class="menu-link" :to="localizedRoute('/store-locator')" exact>
-                  {{ $t('Store locator') }}
-                </router-link>
-              </div>
-            </Accordion>
-          </div> -->
 
           <div class="col-12 md:col-4  lg:col-3 flex flex-col footer-app-dwld-div">
             <div class="">
@@ -544,32 +376,7 @@ export default {
     currentYear () {
       return (new Date()).getFullYear()
     }
-  },
-  beforeMount(){
-    this.footeraccordionchange()
-  },
-  mounted () { 
-    this.footeraccordionchange()
-  }, 
-  methods:{
-      footeraccordionchange: function() {
-        let acc = document.getElementsByClassName("accordion");
-        let i;
-
-        for (i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function() {
-            console.log("accordion innnnnnnnnnnnnnnnnnnnn")
-            this.classList.toggle("active");
-            let panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-              panel.style.display = "none";
-            } else {
-              panel.style.display = "block";
-            }
-          });
-        }
-      }
-  },   
+  },  
   components: {
     Newsletter,
     LanguageSwitcher,
@@ -722,5 +529,18 @@ button.accordion:after {
     padding-top: 0rem !important;
   }
 }
-
+.Accordion .Accordion__trigger{
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+</style>
+<style>
+.footer-container.device-only .Accordion .Accordion__trigger{
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 </style>
