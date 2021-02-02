@@ -219,6 +219,11 @@ export default {
     this.$router.afterEach((to, from) => {
       this.$Progress.finish()
       if(!this.stylaLoaded) this.setStylaPageModuleTracker()
+
+      rg4js('trackEvent', {
+        type: 'pageView',
+        path: to.path
+      });
     })
     EventBus.$on('offline-order-confirmation', this.onOrderConfirmation)
 
