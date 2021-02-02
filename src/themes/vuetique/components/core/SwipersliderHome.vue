@@ -50,10 +50,12 @@
           lazy: true,
           loop: false,
           loopFillGroupWithBlank: false,
+          direction: 'horizontal',
           freeMode: true,
           pagination: {
             el: '.swiper-pagination',
-            clickable: true
+            clickable: true,
+            progressbarOpposite: false,
           },
           navigation: {
             nextEl: '.swiper-button-next',
