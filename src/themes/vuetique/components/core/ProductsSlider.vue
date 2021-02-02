@@ -6,210 +6,179 @@
       </h2>
     </header>
     <no-ssr>
- <carousel v-bind="config"
-    :per-page-custom="[[0, 2.25], [768, 3], [1024, 4],[1440, 6],[1599, 5], [1600, 6], [1920, 7],[2560, 8]]"
-    @pageChange="setMuted">
-        <slide
-          v-for="product in products"
-          v-if="!product._dontShowInListingFlag"
-          :key="product.id"
-        >
-          <product-tile-carousel
-            class="collection-product"
-            :product="product"
-            :labels-active="false"
-          />
-        </slide>
-      </carousel>
+      <swiper class="swiper" :options="swiperOptions">
+        <swiper-slide  v-for="product in products"
+              v-if="!product._dontShowInListingFlag"
+              :key="product.id">
+              <product-tile-carousel
+                class="collection-product"
+                :product="product"
+                :labels-active="false"
+              />          
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
     </no-ssr>
   </div>
 </template>
 
 <script>
-import NoSSR from 'vue-no-ssr'
-// import { Carousel, Slide } from 'vue-carousel'
-
-import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-
-export default {
-  name: 'ProductsSlider',
-  props: {
-    title: {
-      type: String,
-      default: ''
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
+  import 'swiper/swiper.scss';
+  export default {
+    name: 'swiper-product slider',
+    title: '',
+    components: {
+      Swiper,
+      SwiperSlide,
+      ProductTileCarousel,
     },
-    products: {
-      type: Array,
-      required: true
-    },
-    config: {
-      type: Object,
-      required: true
-    }
-  },
-  components: {
-    'Carousel': () => import('vue-carousel').then(Slider => Slider.Carousel),
-    'Slide': () => import('vue-carousel').then(Slider => Slider.Slide),
-    ProductTileCarousel,
-    'no-ssr': NoSSR
-  },
-  data () {
-    return {
-      currentPage: 0
-    }
-  },
-  methods: {
-    setMuted (currentPage) {
-      this.currentPage = currentPage
-    }
+    props: {
+        title: {
+        type: String,
+        default: ''
+        },
+        products: {
+        type: Array,
+        required: true
+        },
+        config: {
+        type: Object,
+        required: true
+        }
+    },     
+    data() {
+      return {
+        swiperOptions: {
+          slidesPerView: 6,
+          spaceBetween: 2,
+          slidesPerGroup: 3,
+          lazy: true,
+          loop: false,
+          loopFillGroupWithBlank: false,
+          direction: 'horizontal',
+          freeMode: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            progressbarOpposite: false,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },          
+          breakpoints: {
+            2560: {
+              slidesPerView: 8,
+              spaceBetween: 5
+            },              
+            1920: {
+              slidesPerView: 7,
+              spaceBetween: 5
+            },              
+            1600: {
+              slidesPerView: 6,
+              spaceBetween: 5
+            },              
+            1440: {
+              slidesPerView: 6,
+              spaceBetween: 5
+            },              
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 5
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 5
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 2
+            },
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 2
+            }
+          }          
+        }
+      }
+    },  
   }
-}
 </script>
-
+<style lang="scss" scoped>
+.swiperslider{
+  .swiper-container{
+    .collection-product{
+      .product-link{
+     
+      }
+    }
+  }
+}
+</style>
 <style lang="scss">
-.product {
-  &.collection-product {
-    padding: 0;
-  }
-}
-
-.collection-product {
-  .product-link {
-    @apply px-sm;
-  }
-
-  .product-image {
-    height: auto;
-    will-change: opacity;
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      height: auto;
-      vertical-align: bottom;
-    }
-  }
-}
-
-.VueCarousel {
-  .VueCarousel-dot {
-    line-height: 1;
-
-    &:focus {
-      outline: none;
-    }
-  }
-}
-@media (min-width: 320px) {   
-  .VueCarousel{    
+.swiperslider{
+  .swiper-container{
     .collection-product{
       .product-link{
-        .prod_list{
-            //width: 100%;
-            height: 100%;
+        padding-left: 0rem;
+        padding-right: 0rem;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+        @media (min-width: 320px) {
+          .prod_list{              
+              height: 238.5px;
+          }          
+        }          
+        @media (min-width: 375px) {
+          .prod_list{              
+              height: 279.75px;
+          }          
+        }          
+        @media (min-width: 425px) {
+          .prod_list{              
+              height: 317.25px;
+          }          
+        }          
+        @media (min-width: 768px) {
+          .prod_list{              
+              height: 379px;
+          }          
+        }          
+        @media (min-width: 1024px) {
+          .prod_list{              
+              height: 378.375px;
+          }          
+        } 
+        @media (min-width: 1440px) {
+          .prod_list{              
+              height: 353.745px;
+          }          
+        }                  
+        @media (min-width: 1600px) {
+          .prod_list{              
+              height: 455.75px;
+          }          
         }
-      }
-      // .title-and-wish{
-        // .ptitle{
-        //   width: 61%;
-        // }
-        // .pwishlist{
-        //   width: 38%;     
-        // }   
-      // }      
-    }
-  }  
-}
-@media (min-width: 375px) { 
-  .VueCarousel{    
-    .collection-product{
-      .product-link{
-        .prod_list{
-            //width: 100%;
-            height: 100%;
+        @media (min-width: 2000px) {
+          .prod_list{              
+              height: 473.445px;
+          }          
         }
+        @media (max-width: 576px){
+          .prod_list{
+            .wishlist-bx{
+              right: 0px;
+              bottom: 2px;
+            }
+          }
+        }                        
       }
-      // .title-and-wish{
-        // .ptitle{
-        //   width: 69%;
-        // }
-        // .pwishlist{
-        //   width: 31%;     
-        // }   
-      // }       
-    }
-  }  
-}
-@media (min-width: 425px) {   
-  .VueCarousel{    
-    .collection-product{
-      .product-link{
-        .prod_list{
-            //width: 100%;
-            height: 100%;
-        }
-      }
-      // .title-and-wish{
-        // .ptitle{
-        //   width: 71%;
-        // }
-        // .pwishlist{
-        //   width: 29%;     
-        // }   
-      // }        
-    }
-  }  
-}
-@media (min-width: 768px) {  
-  .VueCarousel{    
-    .collection-product{
-      .product-link{
-        .prod_list{
-            //width: 100%;
-            height: 100%;
-        }
-      }
-    }
-  }  
-}
-@media (min-width: 1024px) {
-  .VueCarousel{    
-    .collection-product{
-      .product-link{
-        .prod_list{
-           // width: 100%;
-            height: 100%;
-        }
-      }
-    }
-  }  
-}
-@media (min-width: 1600px) {
-  .VueCarousel{    
-    .collection-product{
-      .product-link{
-        .prod_list{
-            //width: 100%;
-            height: 100%;
-        }
-      }
-      // .title-and-wish{
-        // .ptitle{
-        //   width: 80%;
-        // }
-        // .pwishlist{
-        //   width: 20%;     
-        // }   
-      // }      
     }
   }
-} 
-@media (max-width: 576px){
-        .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-prev{
-            display:none;     
-        }
-        .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-next{
-            display:none;        
-        }
 }
 </style>

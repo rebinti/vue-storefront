@@ -15,15 +15,11 @@
           </h2>
         </header>
       </div>
-      <div class="row center-xs">
+      <div class="row center-xs swiperslider">
           <no-ssr>
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
       </div>
-      <div class="swiperslider">
-        <h3>test swiper slider</h3>
-        <swiperslider-home :products="newCollection" :config="sliderConfig"/>
-      </div> 
   <!-- <div
     class="cms-content py-10 page-content"
     v-if="cmspageseodata"
