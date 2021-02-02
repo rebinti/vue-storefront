@@ -98,5 +98,66 @@
     },  
   }
 </script>
-<style lang="scss" scoped>  
+<style lang="scss" scoped>
+.swiperslider{
+  .swiper-container{
+    .collection-product{
+      .product-link{
+     
+      }
+    }
+  }
+}
+</style>
+<style lang="scss">
+.swiperslider{
+  .swiper-container{
+    .collection-product{
+      .product-link{
+        padding-left: 0rem;
+        padding-right: 0rem;
+        @media (min-width: 320px) {
+          .prod_list{              
+              height: 238.5px;
+          }          
+        }          
+        @media (min-width: 375px) {
+          .prod_list{              
+              height: 279.75px;
+          }          
+        }          
+        @media (min-width: 425px) {
+          .prod_list{              
+              height: 317.25px;
+          }          
+        }          
+        @media (min-width: 768px) {
+          .prod_list{              
+              height: 379px;
+          }          
+        }          
+        @media (min-width: 1024px) {
+          .prod_list{              
+              height: 378.375px;
+          }          
+        } 
+        @media (min-width: 1440px) {
+          .prod_list{              
+              height: 353.745px;
+          }          
+        }                  
+        @media (min-width: 1600px) {
+          .prod_list{              
+              height: 455.75px;
+          }          
+        }
+        @media (min-width: 2000px) {
+          .prod_list{              
+              height: 473.445px;
+          }          
+        }                        
+      }
+    }
+  }
+}
 </style>
