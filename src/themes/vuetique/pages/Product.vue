@@ -764,21 +764,21 @@
         </transition>
       </div>
     </div> -->
-    <no-ssr>
+    
       <related-products
         type="upsell"
         typeofview="carousel"
         :fetchRelatedProdctsFlag="fromRelatedProdcutClick"
         :heading="$t('We found other products you might like')"
       />
-    </no-ssr>
+    
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
     <div class="lg:pl-6   my-4 recent-view w-full">
-      <no-ssr>
+      
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
-      </no-ssr>
+      
     </div>
     <div id="seg-prod-reco"></div>
   </div>
