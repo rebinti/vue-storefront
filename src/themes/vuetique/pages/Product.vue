@@ -765,19 +765,19 @@
       </div>
     </div> -->
     
-      <related-products
+      <!-- <related-products
         type="upsell"
         typeofview="carousel"
         :fetchRelatedProdctsFlag="fromRelatedProdcutClick"
         :heading="$t('We found other products you might like')"
-      />
+      /> -->
     
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
-    <related-products type="related" style="display: none;" 
-    :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
+    <!-- <related-products type="related" style="display: none;" 
+    :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/> -->
     <div class="lg:pl-6   my-4 recent-view w-full">
       
-        <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
+        <!-- <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" /> -->
       
     </div>
     <div id="seg-prod-reco"></div>
@@ -789,7 +789,7 @@ import NoSSR from 'vue-no-ssr'
 import Vue from 'vue'
 import Product from '@vue-storefront/core/pages/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
-import RelatedProducts from 'theme/components/core/blocks/Product/Related.vue'
+// import RelatedProducts from 'theme/components/core/blocks/Product/Related.vue'
 import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
 import AddToCart from 'theme/components/core/AddToCart.vue'
 import GenericSelector from 'theme/components/core/GenericSelector'
@@ -802,7 +802,7 @@ import ProductLinks from 'theme/components/core/ProductLinks.vue'
 import ProductCustomOptions from 'theme/components/core/ProductCustomOptions.vue'
 import ProductBundleOptions from 'theme/components/core/ProductBundleOptions.vue'
 import ProductGallery from 'theme/components/core/ProductGallery'
-import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
+// import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
 
 import focusClean from 'theme/components/theme/directives/focusClean'
 import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
@@ -828,10 +828,10 @@ export default {
     ProductLinks,
     ProductTile,
     PromotedOffers,
-    RelatedProducts,
+    // RelatedProducts,
     Reviews,
     SizeSelector,
-    RecentlyViewed,
+    // RecentlyViewed,
     QtyInput,
     ProductShare
   },
