@@ -34,7 +34,7 @@ import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
 import ProductListing from 'theme/components/core/ProductListing.vue'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
 export default {
   mixins: [RecentlyViewed],
@@ -43,7 +43,10 @@ export default {
     ProductTileCarousel,
     Swiper,
     SwiperSlide,    
-  }, 
+  },
+  directives: {
+    swiper: directive
+  },   
   data () {
     return {      
       swiperOptions: {

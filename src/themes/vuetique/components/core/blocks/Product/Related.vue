@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'  
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'  
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
@@ -42,6 +42,9 @@ import store from '@vue-storefront/core/store'
 import 'swiper/swiper.scss';
 export default {
   name: 'Related',
+  directives: {
+    swiper: directive
+  },   
   data () {
     return {      
       swiperOptions: {
