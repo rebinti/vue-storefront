@@ -10,7 +10,8 @@
       </header>
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">        
+      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
+        <no-ssr>
           <swiper class="swiper" :options="swiperOptions">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
@@ -23,7 +24,8 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>                  
+          </swiper>          
+        </no-ssr>
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>

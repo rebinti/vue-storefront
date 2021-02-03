@@ -5,7 +5,8 @@
         {{ $t('Recently viewed') }}
       </h2>
 
-      <div v-if="typeofview == 'carousel'" class="swiperslider">        
+      <div v-if="typeofview == 'carousel'" class="swiperslider">
+        <no-ssr>
           <swiper class="swiper" :options="swiperOptions">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
@@ -19,7 +20,8 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>                   
+          </swiper>           
+        </no-ssr>
       </div>
 
       <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />

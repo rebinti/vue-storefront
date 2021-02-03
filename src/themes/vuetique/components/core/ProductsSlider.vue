@@ -4,7 +4,8 @@
       <h2 class="text-center">
         {{ title }}
       </h2>
-    </header>    
+    </header>
+    <no-ssr>
       <swiper class="swiper" :options="swiperOptions">
         <swiper-slide  v-for="product in products"
               v-if="!product._dontShowInListingFlag"
@@ -18,7 +19,8 @@
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>    
+      </swiper>
+    </no-ssr>
   </div>
 </template>
 
@@ -27,7 +29,7 @@
   import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
   import 'swiper/swiper.scss';
   export default {
-    name: 'swiper-product slider',
+    name: 'swiper-product-slider',
     title: '',
     components: {
       Swiper,
