@@ -7,7 +7,7 @@
 
       <div v-if="typeofview == 'carousel'" class="swiperslider">
         <no-ssr>
-          <swiper class="swiper" :options="swiperOptions">
+          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
                   :key="product.id">
@@ -102,7 +102,8 @@ export default {
           }
         }          
       },
-      refresh: 0
+      refresh: 0,
+      renderComponent: false,
     }
   },
   props: {
@@ -134,7 +135,13 @@ export default {
   },
   beforeDestroy () {
     this.$bus.$off('product-after-load')
+    this.renderComponent = false
   },
+  mounted () {
+    if (typeof window !== 'undefined' && window.document) {
+      this.renderComponent = true
+    }
+  },  
   methods: {
   }
 }

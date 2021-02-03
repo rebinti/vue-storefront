@@ -12,7 +12,7 @@
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
       <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
         <no-ssr>
-          <swiper class="swiper" :options="swiperOptions">
+          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
                   <product-tile-carousel
@@ -101,7 +101,8 @@ export default {
         }          
       },
       loadingNewProdFlag: true,
-      refresh: 0
+      refresh: 0,
+      renderComponent: false,
     }
   },
   props: {
@@ -140,12 +141,16 @@ export default {
   },
   mounted() {     
     console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
+    if (typeof window !== 'undefined' && window.document) {
+      this.renderComponent = true
+    }    
   },  
   beforeDestroy () {
     if (store.state.config.usePriceTiers) {
       this.$bus.$off('user-after-loggedin', this.refreshList)
       this.$bus.$off('user-after-logout', this.refreshList)
     }
+    this.renderComponent = false
   },
   destroyed () {
     this.$bus.$off('product-after-load', this.refreshList)
