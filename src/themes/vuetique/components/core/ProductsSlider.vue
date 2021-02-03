@@ -4,8 +4,7 @@
       <h2 class="text-center">
         {{ title }}
       </h2>
-    </header>
-    <no-ssr>
+    </header>    
       <swiper class="swiper" :options="swiperOptions">
         <swiper-slide  v-for="product in products"
               v-if="!product._dontShowInListingFlag"
@@ -19,8 +18,7 @@
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-    </no-ssr>
+      </swiper>    
   </div>
 </template>
 

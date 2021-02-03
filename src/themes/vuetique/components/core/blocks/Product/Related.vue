@@ -10,8 +10,7 @@
       </header>
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
-        <no-ssr>
+      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">        
           <swiper class="swiper" :options="swiperOptions">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
@@ -24,8 +23,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>          
-        </no-ssr>
+          </swiper>                  
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>
@@ -33,7 +31,6 @@
 </template>
 
 <script>
-import NoSSR from 'vue-no-ssr'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'  
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
@@ -124,7 +121,7 @@ export default {
     }
   },
   components: {
-    ProductListing, Swiper, SwiperSlide, 'no-ssr': NoSSR, ProductTileCarousel
+    ProductListing, Swiper, SwiperSlide, ProductTileCarousel
   },
   beforeMount () {
     this.$bus.$on('product-after-load', this.refreshList)

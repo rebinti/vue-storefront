@@ -5,8 +5,7 @@
         {{ $t('Recently viewed') }}
       </h2>
 
-      <div v-if="typeofview == 'carousel'" class="swiperslider">
-        <no-ssr>
+      <div v-if="typeofview == 'carousel'" class="swiperslider">        
           <swiper class="swiper" :options="swiperOptions">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
@@ -20,8 +19,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>           
-        </no-ssr>
+          </swiper>                   
       </div>
 
       <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />
@@ -30,7 +28,6 @@
 </template>
 
 <script>
-import NoSSR from 'vue-no-ssr'
 import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
 import ProductListing from 'theme/components/core/ProductListing.vue'
@@ -39,8 +36,7 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 export default {
   mixins: [RecentlyViewed],
-  components: {
-    'no-ssr': NoSSR,
+  components: {    
     ProductListing,
     ProductTileCarousel,
     Swiper,
