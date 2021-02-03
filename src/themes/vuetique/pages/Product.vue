@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <!-- mobile product details sec -->
+          <!-- mobile product details sec --> 
           <div class="w-full m_item p_detail_box">
             <div class="brand-review-div">
               <div class="brand-div">
