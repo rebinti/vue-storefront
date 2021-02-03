@@ -292,14 +292,6 @@
       <div class="row items-center justify-between py-6">
         <div class="col-12 md:col-6 flex mb-8 md:mb-0">
           <span class="menu-link text-sm">© {{ currentYear }} ABJB Ltd. Trading As iCLOTHING All Rights Reserved. Registered with the CRO in Ireland: C482932</span>
-
-          <!-- <router-link class="menu-link ml-8 text-sm text-grey-dark" :to="localizedRoute('/terms')" exact>
-            {{ $t('Terms') }}
-          </router-link>
-
-          <router-link class="menu-link ml-8 text-sm text-grey-dark" :to="localizedRoute('/privacy')" exact>
-            {{ $t('Privacy') }}
-          </router-link> -->
         </div>
 
         <div class="col-12 md:col-6 flex md:justify-end">
@@ -321,38 +313,6 @@
         </div>
       </div>
     </div>
-
-    <!--
-    <div class="container mx-auto">
-      <div class="flex items-center px-4 bottom-links">
-        <div class="w-2/5 sm:w-1/4 cl-tertiary">
-          <language-switcher v-if="multistoreEnabled" />
-        </div>
-        <div class="w-auto sm:w-3/4 flex justify-end">
-          <ul class="pl-0 links" data-testid="bottomLinks">
-            <li class="inline-flex">
-              <router-link
-                class="cl-tertiary mr-3 underline"
-                to="/legal"
-                exact
-              >
-                {{ $t('Legal notice') }}
-              </router-link>
-            </li>
-            <li class="inline-flex">
-              <router-link
-                class="cl-tertiary underline"
-                to="/privacy"
-                exact
-              >
-                {{ $t('Privacy policy') }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    -->
   </footer>
 </template>
 
@@ -465,7 +425,7 @@ export default {
 }
 
 .active, .accordion:hover {
-  background-color: #ccc; 
+  background-color: #f7f7f7; 
 }
 .panel {
   padding: 0 18px;
