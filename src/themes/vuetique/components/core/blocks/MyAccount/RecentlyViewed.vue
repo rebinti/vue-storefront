@@ -21,7 +21,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>           
-        <client-only>
+        </client-only>
       </div>
 
       <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />
@@ -32,6 +32,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
+import ClientOnly from 'vue-client-only'
 import ProductListing from 'theme/components/core/ProductListing.vue'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
@@ -42,7 +43,8 @@ export default {
     ProductListing,
     ProductTileCarousel,
     Swiper,
-    SwiperSlide,    
+    SwiperSlide,
+    ClientOnly    
   },
   directives: {
     swiper: directive

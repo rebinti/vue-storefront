@@ -25,7 +25,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>          
-        <client-only>
+        </client-only>
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'  
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import ClientOnly from 'vue-client-only'  
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
@@ -127,7 +128,7 @@ export default {
     }
   },
   components: {
-    ProductListing, Swiper, SwiperSlide, ProductTileCarousel
+    ProductListing, Swiper, SwiperSlide, ProductTileCarousel, ClientOnly
   },
   beforeMount () {
     this.$bus.$on('product-after-load', this.refreshList)

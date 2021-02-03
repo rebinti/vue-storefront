@@ -84,6 +84,7 @@
     "vue-apollo": "^3.0.0-beta.19",
     "vue-awesome-swiper": "^4.1.1",
     "vue-carousel": "^0.6.9",
+    "vue-client-only": "^2.0.0",
     "vue-gtm": "^2.0.0",
     "vue-i18n": "^8.0.0",
     "vue-lazyload": "^1.2.6",
