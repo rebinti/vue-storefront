@@ -102,10 +102,10 @@ const invokeClientEntry = async () => {
     // Mounting app
     if (!RouterManager.isRouteDispatched()) {
       RouterManager.addDispatchCallback(() => {
-        app.$mount('#app')
+        app.$mount('#app',true)
       })
     } else {
-      app.$mount('#app')
+      app.$mount('#app',true)
     }
   })
   registerSyncTaskProcessor()
