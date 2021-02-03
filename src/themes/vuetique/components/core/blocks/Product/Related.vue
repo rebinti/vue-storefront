@@ -11,7 +11,7 @@
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
       <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
-        <no-ssr>
+        <client-only>
           <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
@@ -25,7 +25,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>          
-        </no-ssr>
+        <client-only>
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>

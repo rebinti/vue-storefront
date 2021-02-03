@@ -6,7 +6,7 @@
       </h2>
 
       <div v-if="typeofview == 'carousel'" class="swiperslider">
-        <no-ssr>
+        <client-only>
           <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
@@ -21,7 +21,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>           
-        </no-ssr>
+        <client-only>
       </div>
 
       <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />
