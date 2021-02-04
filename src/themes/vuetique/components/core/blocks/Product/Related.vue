@@ -1,22 +1,41 @@
 <template>
-<no-ssr>
- <div v-swiper:mySwiper="swiperOptions">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" :key="product.id" v-for="product in product.related[type].slice(0,20)">
-            <product-tile-carousel
+  <section 
+    class="new-collection w-full related-component"
+  >
+    <div v-if="product.related[type] && product.related[type].length > 0">
+      <header>
+        <h2 class="text-center py-8">
+          {{ heading }}
+        </h2>
+      </header>
+    </div>
+    <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
+      <no-ssr>
+      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">        
+          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
+            <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
+                  :key="product.id">
+                  <div>
+                  <product-tile-carousel
                     class="collection-product"
                     :product="product"
                     :labels-active="false"
-                  />  
+                  />
+                  </div>          
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>                  
       </div>
+      <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
+      </no-ssr>      
     </div>
-    <div class="swiper-pagination"></div>
-  </div>
-  </no-ssr>  
+  </section>
 </template>
 
 <script>
-import NoSsr from 'vue-no-ssr'
+import NoSSR from 'vue-no-ssr'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
@@ -111,14 +130,13 @@ export default {
     }
   },
   components: {
-    NoSsr,
+    'no-ssr': NoSSR,
     Swiper,
     SwiperSlide,
     ProductListing,
     ProductTileCarousel,
   },
   beforeMount () {
-    this.$bus.$on('product-before-load', this.refreshList)
     this.$bus.$on('product-after-load', this.refreshList)
 
     if (store.state.config.usePriceTiers) {
@@ -133,16 +151,11 @@ export default {
     if (typeof window !== 'undefined' && window.document) {
       this.renderComponent = true
     }    
-    this.refreshList()
-  }, 
-  async asyncData ({ store, route }) { 
-    this.refreshList()
-  }, 
+  },  
   beforeDestroy () {
     if (store.state.config.usePriceTiers) {
       this.$bus.$off('user-after-loggedin', this.refreshList)
       this.$bus.$off('user-after-logout', this.refreshList)
-      this.$bus.$off('product-before-load')
     }
     this.renderComponent = false
   },

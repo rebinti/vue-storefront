@@ -777,11 +777,11 @@
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
     </no-ssr>
-    <!-- <div class="lg:pl-6   my-4 recent-view w-full">
+    <div class="lg:pl-6   my-4 recent-view w-full">
         <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
-        </no-ssr>
-    </div> -->
+        <no-ssr>
+    </div>
     <div id="seg-prod-reco"></div>
   </div>
 </template>
