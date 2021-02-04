@@ -134,7 +134,10 @@ export default {
       this.renderComponent = true
     }    
     this.refreshList()
-  },  
+  }, 
+  async asyncData ({ store, route }) { 
+    this.refreshList()
+  }, 
   beforeDestroy () {
     if (store.state.config.usePriceTiers) {
       this.$bus.$off('user-after-loggedin', this.refreshList)
