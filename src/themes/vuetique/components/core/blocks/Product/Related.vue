@@ -1,4 +1,5 @@
 <template>
+<no-ssr>
  <div v-swiper:mySwiper="swiperOptions">
     <div class="swiper-wrapper">
       <div class="swiper-slide" :key="product.id" v-for="product in product.related[type].slice(0,20)">
@@ -10,11 +11,12 @@
       </div>
     </div>
     <div class="swiper-pagination"></div>
-  </div>  
+  </div>
+  </no-ssr>  
 </template>
 
 <script>
-import NoSSR from 'vue-no-ssr'
+import NoSsr from 'vue-no-ssr'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
@@ -109,7 +111,7 @@ export default {
     }
   },
   components: {
-    'no-ssr': NoSSR,
+    NoSsr,
     Swiper,
     SwiperSlide,
     ProductListing,
