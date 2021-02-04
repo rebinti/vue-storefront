@@ -780,7 +780,7 @@
     <div class="lg:pl-6   my-4 recent-view w-full">
         <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
-        <no-ssr>
+        </no-ssr>
     </div>
     <div id="seg-prod-reco"></div>
   </div>
