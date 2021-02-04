@@ -1,35 +1,16 @@
 <template>
-  <section 
-    class="new-collection w-full related-component"
-  >
-    <div v-if="product.related[type] && product.related[type].length > 0">
-      <header>
-        <h2 class="text-center py-8">
-          {{ heading }}
-        </h2>
-      </header>
-    </div>
-    <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
-      <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
-        <no-ssr>
-          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
-            <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
-                  :key="product.id">
-                  <product-tile-carousel
+ <div v-swiper:mySwiper="swiperOptions">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" :key="product.id" v-for="product in product.related[type].slice(0,20)">
+            <product-tile-carousel
                     class="collection-product"
                     :product="product"
                     :labels-active="false"
-                  />          
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>          
-        </no-ssr>
+                  />  
       </div>
-      <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>
-  </section>
+    <div class="swiper-pagination"></div>
+  </div>  
 </template>
 
 <script>
@@ -144,8 +125,10 @@ export default {
 
     this.refreshList()
   },
-  mounted() {     
-    console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
+  mounted() {  
+      console.log('Current Swiper instance object', this.mySwiper)
+      this.mySwiper.slideTo(3, 1000, false)       
+    // console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
     if (typeof window !== 'undefined' && window.document) {
       this.renderComponent = true
     }    
