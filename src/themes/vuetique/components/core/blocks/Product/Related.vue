@@ -1,8 +1,12 @@
 <template>
  <div v-swiper:mySwiper="swiperOptions">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" :key="banner" v-for="banner in banners">
-        <img :src="banner">
+      <div class="swiper-slide" :key="product.id" v-for="product in product.related[type].slice(0,20)">
+            <product-tile-carousel
+                    class="collection-product"
+                    :product="product"
+                    :labels-active="false"
+                  />  
       </div>
     </div>
     <div class="swiper-pagination"></div>
@@ -24,8 +28,7 @@ export default {
     swiper: directive
   },   
   data () {
-    return {  
-      banners: [ '/1.jpg', '/2.jpg', '/3.jpg' ],    
+    return {      
       swiperOptions: {
         slidesPerView: 6,
         spaceBetween: 2,
@@ -113,6 +116,7 @@ export default {
     ProductTileCarousel,
   },
   beforeMount () {
+    this.$bus.$on('product-before-load', this.refreshList)
     this.$bus.$on('product-after-load', this.refreshList)
 
     if (store.state.config.usePriceTiers) {
@@ -122,18 +126,18 @@ export default {
 
     this.refreshList()
   },
-  mounted() {  
-      console.log('Current Swiper instance object', this.mySwiper)
-      this.mySwiper.slideTo(3, 1000, false)       
-    // console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
+  mounted() {     
+    console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
     if (typeof window !== 'undefined' && window.document) {
       this.renderComponent = true
     }    
+    this.refreshList()
   },  
   beforeDestroy () {
     if (store.state.config.usePriceTiers) {
       this.$bus.$off('user-after-loggedin', this.refreshList)
       this.$bus.$off('user-after-logout', this.refreshList)
+      this.$bus.$off('product-before-load')
     }
     this.renderComponent = false
   },
@@ -181,10 +185,7 @@ export default {
     },
     productLinks () {
       return this.product.current.product_links
-    },
-    // swiper() {
-    //   return this.$refs.mySwiper.$swiper
-    // }    
+    }
   }
 }
 </script>
