@@ -1,12 +1,8 @@
 <template>
  <div v-swiper:mySwiper="swiperOptions">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" :key="product.id" v-for="product in product.related[type].slice(0,20)">
-            <product-tile-carousel
-                    class="collection-product"
-                    :product="product"
-                    :labels-active="false"
-                  />  
+      <div class="swiper-slide" :key="banner" v-for="banner in banners">
+        <img :src="banner">
       </div>
     </div>
     <div class="swiper-pagination"></div>
@@ -28,7 +24,8 @@ export default {
     swiper: directive
   },   
   data () {
-    return {      
+    return {  
+      banners: [ '/1.jpg', '/2.jpg', '/3.jpg' ],    
       swiperOptions: {
         slidesPerView: 6,
         spaceBetween: 2,
@@ -184,7 +181,10 @@ export default {
     },
     productLinks () {
       return this.product.current.product_links
-    }
+    },
+    // swiper() {
+    //   return this.$refs.mySwiper.$swiper
+    // }    
   }
 }
 </script>
