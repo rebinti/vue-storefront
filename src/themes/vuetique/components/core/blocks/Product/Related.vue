@@ -12,7 +12,7 @@
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
       <no-ssr>
       <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">        
-          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
+          <!-- <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
                   <div>
@@ -26,7 +26,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>                  
+          </swiper>                   -->
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
       </no-ssr>      
@@ -36,73 +36,73 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+// import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
 import i18n from '@vue-storefront/i18n'
 import store from '@vue-storefront/core/store'
-import 'swiper/css/swiper.css'
+// import 'swiper/css/swiper.css'
 export default {
   name: 'Related',
-  directives: {
-    swiper: directive
-  },   
+  // directives: {
+  //   swiper: directive
+  // },   
   data () {
     return {      
-      swiperOptions: {
-        slidesPerView: 6,
-        spaceBetween: 2,
-        slidesPerGroup: 3,
-        lazy: true,
-        loop: false,
-        loopFillGroupWithBlank: false,
-        direction: 'horizontal',
-        freeMode: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          progressbarOpposite: false,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },          
-        breakpoints: {
-          2560: {
-            slidesPerView: 8,
-            spaceBetween: 5
-          },              
-          1920: {
-            slidesPerView: 7,
-            spaceBetween: 5
-          },              
-          1600: {
-            slidesPerView: 6,
-            spaceBetween: 5
-          },              
-          1440: {
-            slidesPerView: 6,
-            spaceBetween: 5
-          },              
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 5
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 5
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 2
-          },
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 2
-          }
-        }          
-      },
+      // swiperOptions: {
+      //   slidesPerView: 6,
+      //   spaceBetween: 2,
+      //   slidesPerGroup: 3,
+      //   lazy: true,
+      //   loop: false,
+      //   loopFillGroupWithBlank: false,
+      //   direction: 'horizontal',
+      //   freeMode: true,
+      //   pagination: {
+      //     el: '.swiper-pagination',
+      //     clickable: true,
+      //     progressbarOpposite: false,
+      //   },
+      //   navigation: {
+      //     nextEl: '.swiper-button-next',
+      //     prevEl: '.swiper-button-prev'
+      //   },          
+      //   breakpoints: {
+      //     2560: {
+      //       slidesPerView: 8,
+      //       spaceBetween: 5
+      //     },              
+      //     1920: {
+      //       slidesPerView: 7,
+      //       spaceBetween: 5
+      //     },              
+      //     1600: {
+      //       slidesPerView: 6,
+      //       spaceBetween: 5
+      //     },              
+      //     1440: {
+      //       slidesPerView: 6,
+      //       spaceBetween: 5
+      //     },              
+      //     1024: {
+      //       slidesPerView: 4,
+      //       spaceBetween: 5
+      //     },
+      //     768: {
+      //       slidesPerView: 3,
+      //       spaceBetween: 5
+      //     },
+      //     640: {
+      //       slidesPerView: 2,
+      //       spaceBetween: 2
+      //     },
+      //     320: {
+      //       slidesPerView: 2,
+      //       spaceBetween: 2
+      //     }
+      //   }          
+      // },
       loadingNewProdFlag: true,
       refresh: 0,
       renderComponent: false,
@@ -131,8 +131,8 @@ export default {
   },
   components: {
     'no-ssr': NoSSR,
-    Swiper,
-    SwiperSlide,
+    // Swiper,
+    // SwiperSlide,
     ProductListing,
     ProductTileCarousel,
   },

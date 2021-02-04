@@ -7,7 +7,7 @@
 
       <div v-if="typeofview == 'carousel'" class="swiperslider">
         <no-ssr>
-          <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
+          <!-- <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
                   :key="product.id">
@@ -20,7 +20,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>           
+          </swiper>            -->
         </no-ssr>
       </div>
 
@@ -31,80 +31,80 @@
 
 <script>
 import NoSSR from 'vue-no-ssr'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+// import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
 import ProductListing from 'theme/components/core/ProductListing.vue'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-import 'swiper/css/swiper.css'
+// import 'swiper/css/swiper.css'
 
 export default {
   mixins: [RecentlyViewed],
   components: {    
     'no-ssr': NoSSR,
-    Swiper,
-    SwiperSlide,    
+    // Swiper,
+    // SwiperSlide,    
     ProductListing,
     ProductTileCarousel,
   },
-  directives: {
-    swiper: directive
-  },   
+  // directives: {
+  //   swiper: directive
+  // },   
   data () {
     return {      
-      swiperOptions: {
-        slidesPerView: 6,
-        spaceBetween: 2,
-        slidesPerGroup: 3,
-        lazy: true,
-        loop: false,
-        loopFillGroupWithBlank: false,
-        direction: 'horizontal',
-        freeMode: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          progressbarOpposite: false,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },          
-        breakpoints: {
-          2560: {
-            slidesPerView: 8,
-            spaceBetween: 5
-          },              
-          1920: {
-            slidesPerView: 7,
-            spaceBetween: 5
-          },              
-          1600: {
-            slidesPerView: 6,
-            spaceBetween: 5
-          },              
-          1440: {
-            slidesPerView: 6,
-            spaceBetween: 5
-          },              
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 5
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 5
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 2
-          },
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 2
-          }
-        }          
-      },
+      // swiperOptions: {
+      //   slidesPerView: 6,
+      //   spaceBetween: 2,
+      //   slidesPerGroup: 3,
+      //   lazy: true,
+      //   loop: false,
+      //   loopFillGroupWithBlank: false,
+      //   direction: 'horizontal',
+      //   freeMode: true,
+      //   pagination: {
+      //     el: '.swiper-pagination',
+      //     clickable: true,
+      //     progressbarOpposite: false,
+      //   },
+      //   navigation: {
+      //     nextEl: '.swiper-button-next',
+      //     prevEl: '.swiper-button-prev'
+      //   },          
+      //   breakpoints: {
+      //     2560: {
+      //       slidesPerView: 8,
+      //       spaceBetween: 5
+      //     },              
+      //     1920: {
+      //       slidesPerView: 7,
+      //       spaceBetween: 5
+      //     },              
+      //     1600: {
+      //       slidesPerView: 6,
+      //       spaceBetween: 5
+      //     },              
+      //     1440: {
+      //       slidesPerView: 6,
+      //       spaceBetween: 5
+      //     },              
+      //     1024: {
+      //       slidesPerView: 4,
+      //       spaceBetween: 5
+      //     },
+      //     768: {
+      //       slidesPerView: 3,
+      //       spaceBetween: 5
+      //     },
+      //     640: {
+      //       slidesPerView: 2,
+      //       spaceBetween: 2
+      //     },
+      //     320: {
+      //       slidesPerView: 2,
+      //       spaceBetween: 2
+      //     }
+      //   }          
+      // },
       refresh: 0,
       renderComponent: false,
     }
