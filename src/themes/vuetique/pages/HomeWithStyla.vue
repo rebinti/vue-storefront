@@ -6,7 +6,7 @@
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />
 
-    <!-- For loading the new arrivals Slider -->
+    <!-- For loading the new arrivals Slider 
     <section class="new-collection w-full home-new-arrival mb-16">
       <div>
         <header class="mb-6">
@@ -20,12 +20,16 @@
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
       </div>
+-->
+
   <!-- <div
     class="cms-content py-10 page-content"
     v-if="cmspageseodata"
     v-html="cmspageseodata.meta_description"
-  />            -->
-    </section>
+  />    
+   </section>
+           -->
+   
   <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id='seg-home-reco'></div>
   </div>
 </template>
