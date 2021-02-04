@@ -11,7 +11,7 @@
     </div>
     <div class="text-center"  v-if="product.related[type] && product.related[type].length > 0">
       <div v-if="typeofview == 'carousel' && !loadingNewProdFlag" class="recent-caroasul swiperslider">
-        <client-only>
+        <no-ssr>
           <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in product.related[type].slice(0,20)"                  
                   :key="product.id">
@@ -25,7 +25,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>          
-        </client-only>
+        </no-ssr>
       </div>
       <product-listing v-else columns="4" :products="product.related[type].slice(0,20)" />
     </div>
@@ -33,14 +33,14 @@
 </template>
 
 <script>
+import NoSSR from 'vue-no-ssr'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import ClientOnly from 'vue-client-only'  
 import ProductListing from 'theme/components/core/ProductListing'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related'
 import i18n from '@vue-storefront/i18n'
 import store from '@vue-storefront/core/store'
-import 'swiper/swiper.scss';
+import 'swiper/css/swiper.css'
 export default {
   name: 'Related',
   directives: {
@@ -128,7 +128,11 @@ export default {
     }
   },
   components: {
-    ProductListing, Swiper, SwiperSlide, ProductTileCarousel, ClientOnly
+    'no-ssr': NoSSR,
+    Swiper,
+    SwiperSlide,
+    ProductListing,
+    ProductTileCarousel,
   },
   beforeMount () {
     this.$bus.$on('product-after-load', this.refreshList)

@@ -25,13 +25,15 @@
 </template>
 
 <script>
+  import NoSSR from 'vue-no-ssr'
   import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
   import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-  import 'swiper/swiper.scss';
+  import 'swiper/css/swiper.css'
   export default {
     name: 'swiper-product-slider',
     title: '',
     components: {
+      'no-ssr': NoSSR,
       Swiper,
       SwiperSlide,
       ProductTileCarousel,

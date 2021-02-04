@@ -6,7 +6,7 @@
       </h2>
 
       <div v-if="typeofview == 'carousel'" class="swiperslider">
-        <client-only>
+        <no-ssr>
           <swiper class="swiper" :options="swiperOptions" v-if="renderComponent">
             <swiper-slide  v-for="product in getrecentwithoutcurrent"
                   v-if="!product._dontShowInListingFlag"
@@ -21,7 +21,7 @@
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>           
-        </client-only>
+        </no-ssr>
       </div>
 
       <product-listing v-else columns="4" :products="getrecentwithoutcurrent" />
@@ -30,21 +30,22 @@
 </template>
 
 <script>
+import NoSSR from 'vue-no-ssr'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import { mapGetters } from 'vuex'
 import RecentlyViewed from '@vue-storefront/core/modules/recently-viewed/components/RecentlyViewed'
-import ClientOnly from 'vue-client-only'
 import ProductListing from 'theme/components/core/ProductListing.vue'
 import ProductTileCarousel from 'theme/components/core/ProductTileCarousel'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 export default {
   mixins: [RecentlyViewed],
   components: {    
+    'no-ssr': NoSSR,
+    Swiper,
+    SwiperSlide,    
     ProductListing,
     ProductTileCarousel,
-    Swiper,
-    SwiperSlide,
-    ClientOnly    
   },
   directives: {
     swiper: directive
