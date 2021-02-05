@@ -199,7 +199,7 @@
           <!-- <div v-html="footerbanner"></div> -->
         </div>
       </div>
-       <div id="seg-cat-reco"></div>
+       <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-cat-reco"></div>
     </div>
   </div>
 </template>
@@ -378,7 +378,9 @@ export default {
       this.showNotificationLoader();
       this.getSearchData();
     },
-
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    }, 
   }
   
 };

@@ -782,7 +782,7 @@
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
         </no-ssr>
     </div> -->
-    <div id="seg-prod-reco"></div>
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
   </div>
 </template>
 
@@ -1318,7 +1318,10 @@ export default {
         else val.activeProd= false;
         return val; });
       this.fromRelatedProdcutClick= true;
-    }
+    },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    },    
   },
   beforeDestroy () {
     this.$bus.$off('product-after-related')

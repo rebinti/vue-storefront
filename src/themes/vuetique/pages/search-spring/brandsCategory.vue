@@ -146,7 +146,7 @@
         </div>
       </div>
     </div>
-    <div id="seg-brand-reco"></div>
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-brand-reco"></div>
   </div>
 </template>
 
@@ -278,6 +278,9 @@ export default {
          this.getSearchData(true, false, 'searchSpringCategory');
       }
     },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    },     
 
   }
 

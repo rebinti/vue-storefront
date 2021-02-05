@@ -53,7 +53,7 @@
         </section>
       </div>
     </section>
-    <div id="seg-404-reco"></div>
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-404-reco"></div>
   </div>
 </template>
 
@@ -95,7 +95,10 @@ export default {
   methods: {
     toggleSearchpanel () {
       document.querySelector('#search input[type="text"]').focus()
-    }
+    },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    },     
   },
   mixins: [Error],
   asyncData ({ store, route, context }) { // this is for SSR purposes to prefetch data

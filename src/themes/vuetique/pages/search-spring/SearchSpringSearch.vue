@@ -161,7 +161,7 @@
           </div>          
         </div>
     </div>
-    <div id="seg-search-reco"></div>
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-search-reco"></div>
   </div>  
 </template>
 
@@ -326,6 +326,9 @@ export default {
         this.searchDataInSearchSpring (event)
       }        
     },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    },     
   }
 };
 </script>
