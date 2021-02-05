@@ -37,7 +37,7 @@ export default {
       crossorigin: 'anonymous'
     },
     {
-      src: '/assets/js/swiper-bundle.min.js',
+      src: '/assets/js/swiper-bundle.min.js'
     }
   ]
 }
