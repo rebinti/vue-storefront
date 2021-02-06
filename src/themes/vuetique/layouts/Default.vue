@@ -48,33 +48,54 @@ import { router } from '@vue-storefront/core/app'
 import { localizedRoute, currentStoreView } from '@vue-storefront/core/lib/multistore'
 
 import MainHeader from 'theme/components/core/blocks/Header/Header.vue'
-import MainFooter from 'theme/components/core/blocks/Footer/Footer.vue'
+// import MainFooter from 'theme/components/core/blocks/Footer/Footer.vue'
+// const MainHeader = () => import(/* webpackChunkName: "header" */ 'theme/components/core/blocks/Header/Header.vue')
+const MainFooter = () => import(/* webpackChunkName: "footer" */ 'theme/components/core/blocks/Footer/Footer.vue')
 
-import HeaderMenu from 'theme/components/core/blocks/HeaderMenu/HeaderMenu.vue'
+
+// import HeaderMenu from 'theme/components/core/blocks/HeaderMenu/HeaderMenu.vue'
+const HeaderMenu = () => import(/* webpackChunkName: "menu" */ 'theme/components/core/blocks/HeaderMenu/HeaderMenu.vue')
+
 // import HeaderBannerAll from 'theme/components/core/blocks/Header/HeaderBannerAll.vue'
 
-import Overlay from 'theme/components/core/Overlay.vue'
-import Loader from 'theme/components/core/Loader.vue'
-import Modal from 'theme/components/core/Modal.vue'
-import Notification from 'theme/components/core/Notification.vue'
-import SignUp from 'theme/components/core/blocks/Auth/SignUp.vue'
-import NewsletterPopup from 'theme/components/core/NewsletterPopup.vue'
-import OutOfStockPopup from 'theme/components/core/OutOfStockPopup.vue'
-import ProductWithOptionsPopup from 'theme/components/core/ProductWithOptionsPopup.vue'
-import ProductSocialShare from 'theme/components/core/ProductSocialShare.vue'
-import ProductVideoPopup from 'theme/components/core/ProductVideoPopup.vue'
-//import CookieNotification from 'theme/components/core/CookieNotification.vue'
+// import Overlay from 'theme/components/core/Overlay.vue'
+// import Loader from 'theme/components/core/Loader.vue'
+// import Modal from 'theme/components/core/Modal.vue'
+// import Notification from 'theme/components/core/Notification.vue'
+// import SignUp from 'theme/components/core/blocks/Auth/SignUp.vue'
+// import NewsletterPopup from 'theme/components/core/NewsletterPopup.vue'
+// import OutOfStockPopup from 'theme/components/core/OutOfStockPopup.vue'
+// import ProductWithOptionsPopup from 'theme/components/core/ProductWithOptionsPopup.vue'
+// import ProductSocialShare from 'theme/components/core/ProductSocialShare.vue'
+// import ProductVideoPopup from 'theme/components/core/ProductVideoPopup.vue'
+
+const Overlay = () => import(/* webpackChunkName: "overlay" */ 'theme/components/core/Overlay.vue')
+const Loader = () => import(/* webpackChunkName: "loader" */ 'theme/components/core/Loader.vue')
+const Modal = () => import(/* webpackChunkName: "modal" */ 'theme/components/core/Modal.vue')
+const Notification = () => import(/* webpackChunkName: "notification" */ 'theme/components/core/Notification.vue')
+const SignUp = () => import(/* webpackChunkName: "signup" */ 'theme/components/core/blocks/Auth/SignUp.vue')
+const NewsletterPopup = () => import(/* webpackChunkName: "newsletter-popup" */ 'theme/components/core/NewsletterPopup.vue')
+const OutOfStockPopup = () => import(/* webpackChunkName: "outofstock" */ 'theme/components/core/OutOfStockPopup.vue')
+const ProductWithOptionsPopup = () => import(/* webpackChunkName: "product-options" */ 'theme/components/core/ProductWithOptionsPopup.vue')
+const ProductSocialShare = () => import(/* webpackChunkName: "social-share" */ 'theme/components/core/ProductSocialShare.vue')
+const ProductVideoPopup = () => import(/* webpackChunkName: "product-video" */ 'theme/components/core/ProductVideoPopup.vue')
+const Announcement = () => import(/* webpackChunkName: "announcement" */ 'theme/components/theme/blocks/Header/Announcement.vue')
+
+
 import OfflineBadge from 'theme/components/core/OfflineBadge.vue'
 import ModalSwitcher from 'theme/components/core/blocks/Switcher/Language.vue'
 
-import Announcement from 'theme/components/theme/blocks/Header/Announcement.vue'
+// import Announcement from 'theme/components/theme/blocks/Header/Announcement.vue'
 import Icons from 'theme/components/theme/Icons.vue'
 
 import {EmarsysTracker} from 'theme/mixins/emarsys/EmarsysTracker'
 
 import Head from 'theme/head'
-import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
-import PopupBoards  from 'theme/components/core/blocks/Boards/PopupBoards.vue'
+//import ReviewPanel from 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue'
+const ReviewPanel = () => import(/* webpackChunkName: "vsf-reviews-panel" */ 'theme/components/core/blocks/ReviewsPanel/ReviewsPanel.vue')
+
+//import PopupBoards  from 'theme/components/core/blocks/Boards/PopupBoards.vue'
+const PopupBoards = () => import(/* webpackChunkName: "vsf-boards" */ 'theme/components/core/blocks/Boards/PopupBoards.vue')
 
 const SearchPanel = () => import(/* webpackChunkName: "vsf-search-panel" */ 'theme/components/core/blocks/SearchPanel/SearchPanel.vue')
 const SidebarMenu = () => import(/* webpackChunkName: "vsf-sidebar-menu" */ 'theme/components/core/blocks/SidebarMenu/SidebarMenu.vue')

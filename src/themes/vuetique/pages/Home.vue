@@ -101,11 +101,11 @@ import Home from '@vue-storefront/core/pages/Home'
 // import MainSlider from 'theme/components/core/blocks/MainSlider/MainSlider-bkp1'  // MainSlider'
 
 // Theme local components
-import Onboard from 'theme/components/theme/blocks/Home/Onboard'
+//import Onboard from 'theme/components/theme/blocks/Home/Onboard'
 // import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
-import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
+// import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
 // import { Logger } from '@vue-storefront/core/lib/logger'
-import CmsBlock from '../components/core/blocks/Cms/Block'
+// import CmsBlock from '../components/core/blocks/Cms/Block'
 // import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
 // import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
 import config from 'config'
@@ -114,19 +114,19 @@ import { mapGetters } from 'vuex'
 // import { Progress as HooperProgress} from 'hooper'
 // import { Navigation as HooperNavigation} from 'hooper'
 // import 'hooper/dist/hooper.css';
-import ProductTile from 'theme/components/core/ProductTile'
+// import ProductTile from 'theme/components/core/ProductTile'
 
 export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
   components: {
     'no-ssr': NoSSR,
     // MainSlider,
-    Onboard,
+    // Onboard,
     // ProductListing,
     // ProductsSlider,
     // PromotedOffers,
-    TileLinks,
-    CmsBlock,
+    // TileLinks,
+    // CmsBlock,
     // PrismicCmsBlock,
     // PrismicCmsPage,
     // Hooper,
@@ -134,7 +134,7 @@ export default {
     // HooperProgress,
     // HooperPagination,
     // HooperNavigation,
-    ProductTile     
+    // ProductTile     
   },
   data () {
     return {
