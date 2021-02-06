@@ -96,18 +96,18 @@ import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/commo
 import Home from '@vue-storefront/core/pages/Home'
 
 // Theme core components
-import ProductListing from 'theme/components/core/ProductListing'
-import ProductsSlider from 'theme/components/core/ProductsSlider'
-import MainSlider from 'theme/components/core/blocks/MainSlider/MainSlider-bkp1'  // MainSlider'
+// import ProductListing from 'theme/components/core/ProductListing'
+// import ProductsSlider from 'theme/components/core/ProductsSlider'
+// import MainSlider from 'theme/components/core/blocks/MainSlider/MainSlider-bkp1'  // MainSlider'
 
 // Theme local components
 import Onboard from 'theme/components/theme/blocks/Home/Onboard'
-import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
+// import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
 import TileLinks from 'theme/components/theme/blocks/TileLinks/TileLinks'
-import { Logger } from '@vue-storefront/core/lib/logger'
+// import { Logger } from '@vue-storefront/core/lib/logger'
 import CmsBlock from '../components/core/blocks/Cms/Block'
-import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
-import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
+// import PrismicCmsBlock from 'src/modules/dnd-prismic-cms/components/CmsBlock/View.vue'
+// import PrismicCmsPage from 'src/modules/dnd-prismic-cms/components/CmsPage/View.vue'
 import config from 'config'
 import { mapGetters } from 'vuex'
 // import { Hooper,Slide,Pagination as HooperPagination} from 'hooper'
@@ -120,15 +120,15 @@ export default {
   mixins: [Home , CmsBlock  ],  // PrismicCmsBlock , PrismicCmsPage
   components: {
     'no-ssr': NoSSR,
-    MainSlider,
+    // MainSlider,
     Onboard,
-    ProductListing,
-    ProductsSlider,
-    PromotedOffers,
+    // ProductListing,
+    // ProductsSlider,
+    // PromotedOffers,
     TileLinks,
     CmsBlock,
-    PrismicCmsBlock,
-    PrismicCmsPage,
+    // PrismicCmsBlock,
+    // PrismicCmsPage,
     // Hooper,
     // Slide,
     // HooperProgress,
