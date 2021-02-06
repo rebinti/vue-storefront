@@ -25,9 +25,9 @@ export default {
     { rel: 'apple-touch-startup-image', href: '/assets/apple_splash_750.png', sizes: '750x1334' },
     { rel: 'apple-touch-startup-image', href: '/assets/apple_splash_640.png', sizes: '640x1136' },
     { rel: 'manifest', href: '/assets/manifest.json' },
-    // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' },
-    { rel: 'stylesheet', href: '/assets/css/swiper-bundle.min.css' }
-    // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' },
+    { rel: 'stylesheet', href: '/assets/css/swiper-bundle.min.css' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
   ],
   script: [
     {
