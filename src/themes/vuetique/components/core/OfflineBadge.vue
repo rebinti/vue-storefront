@@ -1,7 +1,7 @@
 <template>
   <no-ssr>
     <div
-      v-show="OfflineOnly"
+      v-if="OfflineOnly"
       class="offline-badge fixed w-100 p10 bg-cl-th-error cl-white center-xs"
     >
       {{ $t('You are offline, some of the functionalities are limited') }}

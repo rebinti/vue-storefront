@@ -4,7 +4,7 @@
   <form class="vue-form" @submit.prevent="submit">
 
     <div class="error-message">
-      <p v-show="!fields.email.valid">Oh, please enter a valid email address.</p>
+      <p v-if="!fields.email.valid">Oh, please enter a valid email address.</p>
     </div>
 
     <fieldset>

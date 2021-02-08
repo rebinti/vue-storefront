@@ -1,7 +1,7 @@
 <template>
   <div class="product-video absolute w-full h-full flex">
     <div
-      v-show="!videoStarted"
+      v-if="!videoStarted"
       class="gallery-video absolute w-full h-full"
       @click="initVideo"
     >

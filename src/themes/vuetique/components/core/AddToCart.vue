@@ -2,11 +2,11 @@
   <button-full @click.native="addToCartWrapper(product)" :disabled="isProductDisabled" data-testid="addToCart" class="w-full" :class="{'bg-primary': isProductDisabled || added}">
     <div class="flex items-center justify-center">
       <span>{{ failed ? $t('Error while adding') : added ? $t('Added to bag') : $t(productname) }}</span>
-      <div v-show="isAddingToCart" class="loader ml-1" />
-      <svg v-show="added" viewBox="0 0 17.333 9.333" class="vt-icon--sm ml-1">
+      <div v-if="isAddingToCart" class="loader ml-1" />
+      <svg v-if="added" viewBox="0 0 17.333 9.333" class="vt-icon--sm ml-1">
         <use xlink:href="#success" />
       </svg>
-      <svg v-show="failed" viewBox="0 0 17.313 17.311" class="vt-icon--sm ml-1 fill-white">
+      <svg v-if="failed" viewBox="0 0 17.313 17.311" class="vt-icon--sm ml-1 fill-white">
         <use xlink:href="#error" />
       </svg>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="image" v-on="$listeners">
     <img
-      v-show="showPlaceholder"
+      v-if="showPlaceholder"
       src="/assets/placeholder.svg"
       :alt="alt"
       key="placeholder"

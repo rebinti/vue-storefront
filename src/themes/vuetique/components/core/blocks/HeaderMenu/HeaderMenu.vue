@@ -6,7 +6,7 @@
       <li v-for="menu in headerMenuList" :key="menu.id" @mouseenter="activeSubMenu = menu.identifier"
            @mouseleave="activeSubMenu = null" v-if="headerMenuList.length && menu.active" :class="menu.className">
           <router-link class="menu-link"  @click.native="onMenuSubCategoryClick($event)" :class="{active: activeSubMenu == menu.identifier}"  :to="localizedRoute('/'+menu.className)" exact>{{ menu.title }}</router-link>
-          <div v-show="activeSubMenu === menu.identifier"
+          <div v-if="activeSubMenu === menu.identifier"
             class="main-item row cms-block-menu container"
             @click="onMenuSubCategoryClick($event)"
             style="position: absolute;width: 100%;background: white;z-index: 999; left:0px; right:0px; padding-right: 0rem; padding-left: 0rem;">
@@ -42,7 +42,7 @@
           >{{ category.name }}</router-link>
 
           <sub-category
-            v-show="activeSubMenu === category.id"
+            v-if="activeSubMenu === category.id"
             :category-links="category.children_data"
             :id="category.id"
             :parent-slug="category.slug"

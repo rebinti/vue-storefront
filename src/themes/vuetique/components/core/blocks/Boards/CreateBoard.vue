@@ -36,7 +36,7 @@
             style="background: black;">
             <div class="flex items-center justify-center">
               <span class="mr-2"> {{ $t('Create Board') }} </span>
-              <div v-show="isSubmitBoard" class="loader ml-1" />
+              <div v-if="isSubmitBoard" class="loader ml-1" />
             </div>
           </button-full>
         </div>

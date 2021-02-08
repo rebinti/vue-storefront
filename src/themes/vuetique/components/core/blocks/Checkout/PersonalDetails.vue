@@ -174,7 +174,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-end pb-3 md:pb-8" v-show="isActive">
+    <div class="flex flex-wrap justify-end pb-3 md:pb-8" v-if="isActive">
       <div class="w-full md:w-11/12">
         <div class="mt-6 flex justify-between items-center text_full">
           <div class="mr-2 button-container main_sub_btn_out">

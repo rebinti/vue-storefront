@@ -708,7 +708,7 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'details'" class="details mt-10">
+          <section v-if="detailsAccordion == 'details'" class="details mt-10">
             <div
               class="details-wrapper"
               :class="{'details-wrapper--open': detailsOpen}"
@@ -735,7 +735,7 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'specs'" class="specs mt-10">
+          <section v-if="detailsAccordion == 'specs'" class="specs mt-10">
             <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
               <product-attribute
                 :key="attr.attribute_code"
@@ -758,8 +758,8 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'reviews'" class="mt-10">
-            <reviews v-show="OnlineOnly" />
+          <section v-if="detailsAccordion == 'reviews'" class="mt-10">
+            <reviews v-if="OnlineOnly" />
           </section>
         </transition>
       </div>

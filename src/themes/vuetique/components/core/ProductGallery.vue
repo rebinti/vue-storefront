@@ -7,7 +7,7 @@
       :gallery="gallery"
       @close="toggleZoom"
     />
-    <div v-show="OfflineOnly">
+    <div v-if="OfflineOnly">
       <transition name="fade" appear>
         <img class="offline-image w-full" v-lazy="offline" :src="offline.src" ref="offline" alt="">
       </transition>

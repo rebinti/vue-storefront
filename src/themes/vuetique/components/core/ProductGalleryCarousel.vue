@@ -8,7 +8,7 @@
         <div class="product-image-container" :class="{'video-container w-full h-full flex relative': images.video}" 
         @click="openOverlay" style="cursor: pointer;">
           <img
-            v-show="placeholderImagesMap[index]"
+            v-if="placeholderImagesMap[index]"
             key="placeholderImage"
             class="product-image inline-flex cursor-pointer mw-full"
             src="/assets/placeholder.png"

@@ -1,7 +1,7 @@
 <template>
   <div id="checkout" class="check_out_hd">
     <div class="container mx-auto">
-      <div class="flex flex-wrap justify-between w-full" v-show="!isThankYouPage">
+      <div class="flex flex-wrap justify-between w-full" v-if="!isThankYouPage">
         <div class="w-full md:w-3/5 lg:w-1/2 md:px-3">
           <div class="checkout-title mt-5 md:mt-0 pb-5">
             <h1>
@@ -26,7 +26,7 @@
         </div>
       </div> 
     </div>
-    <thank-you-page v-show="isThankYouPage" :cart="productsInCartList"  :totals="totalsAll"/>  
+    <thank-you-page v-if="isThankYouPage" :cart="productsInCartList"  :totals="totalsAll"/>  
   </div>
 </template>
 

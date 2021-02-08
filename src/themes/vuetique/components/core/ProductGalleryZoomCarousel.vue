@@ -30,7 +30,7 @@
                  :class="{'video-container h-full flex relative': images.video}"
             >
               <img
-                v-show="hideImageAtIndex !== index"
+                v-if="hideImageAtIndex !== index"
                 class="product-image inline-flex pointer mw-full"
                 v-lazy="images"
                 ref="images"

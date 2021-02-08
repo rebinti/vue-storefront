@@ -10,7 +10,7 @@
     </div>
     <!-- My orders body -->
     <div class="row">
-      <div class="col-12" v-show="!isHistoryEmpty">
+      <div class="col-12" v-if="!isHistoryEmpty">
 
         <div class="thanks_page_mbl inner_prd_box bg-gray">
            <div class="inner_thanks_bottom"  v-for="order in ordersHistory" :key="order.entity_id">
@@ -172,7 +172,7 @@
         </table>
       </div>
 
-      <div class="col-12 text-h4" v-show="isHistoryEmpty" >
+      <div class="col-12 text-h4" v-if="isHistoryEmpty" >
 
 
 

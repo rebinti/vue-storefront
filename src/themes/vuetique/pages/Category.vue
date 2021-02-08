@@ -120,7 +120,7 @@
         </div>
       </div>
     </header>
-    <div class="mobile-filters lg:hidden mobile_filter" v-show="mobileFilters">
+    <div class="mobile-filters lg:hidden mobile_filter" v-if="mobileFilters">
       <div class="mobile-filters_new">
       <!-- <button
         type="button"

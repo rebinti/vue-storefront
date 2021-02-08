@@ -52,7 +52,7 @@
               <span class="text-grey-dark font-medium" :class="{ hidden: isEditing }" data-testid="productQty">
                 {{ product.qty }}
               </span>
-              <div v-show="isEditing" class="inline-flex">
+              <div v-if="isEditing" class="inline-flex">
                 <qty-input
                   :value="product.qty"
                   @input="val => product.qty = val"
@@ -62,7 +62,7 @@
                 />
                 <apply-button @click.native="applyQuantity" class="ml-1 ht_bx" />
               </div>
-              <edit-button v-show="!isEditing" @click.native="switchEdit" class="align-text-bottom ml-1" />
+              <edit-button v-if="!isEditing" @click.native="switchEdit" class="align-text-bottom ml-1" />
             </div>
 
             <div class="col-auto font-bold text-right leading-6 price_left_out pb_b_text">

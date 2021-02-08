@@ -25,7 +25,7 @@
     </div>
     <!-- HEADER END -->
 
-    <div class="flex flex-wrap justify-end form_after_filled" v-show="isActive">
+    <div class="flex flex-wrap justify-end form_after_filled" v-if="isActive">
       <div class="w-full md:w-11/12">
         <div id="checkout-order-review-additional-container" class="edit_phone_num">
           <div id="checkout-order-review-additional" class="ed_phone_num">
@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-end mt-5 " v-show="isActive">
+    <div class="flex flex-wrap justify-end mt-5 " v-if="isActive">
       <div class="w-full lg:w-11/12">
         <div class="flex flex-wrap -mx-3">
           <div class="w-full lg:w-1/2 px-3 main_sub_btn_out">

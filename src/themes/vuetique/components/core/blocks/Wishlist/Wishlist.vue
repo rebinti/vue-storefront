@@ -16,18 +16,18 @@
       </svg>
     </button>
 
-    <h2 v-show="viewType === 'wishlist'"      
+    <h2 v-if="viewType === 'wishlist'"      
       class="mb-8 upper-letter"
       style="margin-bottom: 1rem !important;"
     >
       {{ $t('Wishlist') }}
     </h2>
 
-    <h2 v-show="viewType === 'boards'" class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
+    <h2 v-if="viewType === 'boards'" class="mb-8 upper-letter" style="margin-bottom: 1rem !important;">
       {{ $t('Boards') }}
     </h2>
 
-    <div class="wishlist-top-button-row clearfix" v-show="!hideWishListForBoardFlag">
+    <div class="wishlist-top-button-row clearfix" v-if="!hideWishListForBoardFlag">
       <span class="button-blck">
         <button
           class="button-type1"
@@ -48,7 +48,7 @@
     <div
       class="wish_wrap_box"
       :class="{'item-in-it': productsInWishlist.length>0}"
-      v-show="viewType === 'wishlist'"
+      v-if="viewType === 'wishlist'"
     >
       <div v-if="!productsInWishlist.length " class="wish_ico_box">
         <img src="/assets/wishlisticon.png" alt>
@@ -85,10 +85,10 @@
       </template>
     </div>
 
-    <boards v-show="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
+    <boards v-if="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
     <div
       class="add_more_btn"
-      v-show="viewType === 'boards'"
+      v-if="viewType === 'boards'"
       @click="openCreateBoardPopup"
     >
       <a href="#" class="add_more_pls">

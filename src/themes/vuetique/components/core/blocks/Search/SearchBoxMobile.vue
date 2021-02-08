@@ -52,7 +52,7 @@
       </div>
     </div> -->
     <div class="absolute z-20 w-full mobile-autocomplete" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
-      <div v-show="showDrop" class="bg-white border border-grey border-t-0">
+      <div v-if="showDrop" class="bg-white border border-grey border-t-0">
         <transition name="fade">
           <div v-if="emptyResults" class="w-full p-4 text-black font-medium">
             {{ $t('No results were found.') }}
