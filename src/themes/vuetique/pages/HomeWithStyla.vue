@@ -20,7 +20,7 @@
             <products-slider :products="newCollection" :config="sliderConfig"/>
           </no-ssr>
       </div>
--->
+    -->
 
   <!-- <div
     class="cms-content py-10 page-content"
@@ -31,8 +31,6 @@
            -->
    
   <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id='seg-home-reco'></div>
-
-  <div @click="testclick" class="testclick" id='testclick'>test click</div>
   </div>
 </template>
 
@@ -56,9 +54,7 @@ import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
 import { mapGetters } from 'vuex'
 import ProductTile from 'theme/components/core/ProductTile'
-
 import StylaHomeMagazine from "theme/components/theme/blocks/Styla/StylaHomeMagazine";
-
 import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
 import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
 
@@ -98,40 +94,7 @@ export default {
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
-      // event.preventDefault()
-      //   // ensure we use the link, in case the click has been received by a subelement        
-      //   let { target } = event                
-      //   while (target && target.tagName !== 'A') target = target.parentNode
-      //   // handle only links that occur inside the component and do not reference external resources
-      //   if (target && target.matches(".segmentify-dynamic-content a") && target.href) {
-      //     // some sanity checks taken from vue-router:
-      //     // https://github.com/vuejs/vue-router/blob/dev/src/components/link.js#L106
-      //     const { altKey, ctrlKey, metaKey, shiftKey, button, defaultPrevented } = event
-      //     // don't handle with control keys
-      //     if (metaKey || altKey || ctrlKey || shiftKey) return
-      //     // don't handle when preventDefault called
-      //     //if (defaultPrevented) return
-      //     // don't handle right clicks
-      //     if (button !== undefined && button !== 0) return
-      //     // don't handle if `target="_blank"`
-      //     if (target && target.getAttribute) {
-      //       const linkTarget = target.getAttribute('target')
-      //       if (/\b_blank\b/i.test(linkTarget)) return
-      //     }
-      //     // don't handle same page links/anchors
-      //     const url = new URL(target.href)
-      //     const to = url.pathname
-      //     if (window.location.pathname !== to && event.preventDefault) {
-      //       event.preventDefault()
-      //       //this.$router.push(to)
-      //       this.$router.push({ path: to, query: { _sgm_campaign: url.searchParams.get('_sgm_campaign') , _sgm_source: url.searchParams.get('_sgm_source') , _sgm_action: url.searchParams.get('_sgm_action') } })
-      //     }
-      //   }
-    },
-    testclick (event) {
-      console.log("testttttttttttttttttt 000000000000007")
-      
-    }     
+    } 
   },
   computed: {
     ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
