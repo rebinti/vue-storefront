@@ -5,7 +5,6 @@
     </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />
-
     <!-- For loading the new arrivals Slider 
     <section class="new-collection w-full home-new-arrival mb-16">
       <div>
@@ -21,15 +20,13 @@
           </no-ssr>
       </div>
     -->
-
-  <!-- <div
-    class="cms-content py-10 page-content"
-    v-if="cmspageseodata"
-    v-html="cmspageseodata.meta_description"
-  />    
-   </section>
-           -->
-   
+    <!-- <div
+      class="cms-content py-10 page-content"
+      v-if="cmspageseodata"
+      v-html="cmspageseodata.meta_description"
+    />    
+    </section>
+    -->
   <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id='seg-home-reco'></div>
   </div>
 </template>
@@ -38,22 +35,19 @@
 import NoSSR from 'vue-no-ssr'
 // 3rd party dependecies
 import { isServer } from '@vue-storefront/core/helpers'
-import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/common'
-
+// import { prepareQuery } from '@vue-storefront/core/modules/catalog/queries/common'
 // Core pages
 import Home from '@vue-storefront/core/pages/Home'
-
 // Theme core components
 // import ProductListing from 'theme/components/core/ProductListing'
-import ProductsSlider from 'theme/components/core/ProductsSlider'
-import SwipersliderHome from 'theme/components/core/SwipersliderHome'
-
+// import ProductsSlider from 'theme/components/core/ProductsSlider'
+// import SwipersliderHome from 'theme/components/core/SwipersliderHome'
+// import ProductTile from 'theme/components/core/ProductTile'
 
 // Theme local components
 import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
 import { mapGetters } from 'vuex'
-import ProductTile from 'theme/components/core/ProductTile'
 import StylaHomeMagazine from "theme/components/theme/blocks/Styla/StylaHomeMagazine";
 import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
 import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
@@ -62,26 +56,26 @@ export default {
   mixins: [Home ],
   components: {
     'no-ssr': NoSSR,
-    ProductsSlider,
     StylaHomeMagazine,
-    SwipersliderHome,
+    // ProductsSlider,
+    // SwipersliderHome,
   },
   data () {
     return {
       loading: true,
-      cmspageidentifier:'amphomepage',
-      sliderConfig: {
-        perPage: 5,
-        // perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],  // Use this in product slider - to fix an infinte load issue
-        paginationEnabled: false,
-        loop: true,
-        paginationSize: 6,
-        navigationEnabled: true,
-        navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
-        navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
-      }, 
-      setTimeoutSubscription: null,
       stylaloaderflag: false,
+      // setTimeoutSubscription: null,      
+      // cmspageidentifier:'amphomepage',            
+      // sliderConfig: {
+      //   perPage: 5,
+      //   perPageCustom: [[0, 2], [768, 3], [1024, 4], [1600, 5]],  // Use this in product slider - to fix an infinte load issue
+      //   paginationEnabled: false,
+      //   loop: true,
+      //   paginationSize: 6,
+      //   navigationEnabled: true,
+      //   navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
+      //   navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
+      // }, 
     }
   },
   methods: {
@@ -97,11 +91,9 @@ export default {
     } 
   },
   computed: {
-    ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
-    cmspageseodata () {
-        
-            return this.$store.getters[`cmsPage/cmsPageIdentifier`]('amphomepage')
-        
+    // ...mapGetters('homepage', ['newCollection', 'salesCollection' ]),
+    cmspageseodata () {        
+            return this.$store.getters[`cmsPage/cmsPageIdentifier`]('amphomepage')        
     },
   },
   created () {
@@ -132,23 +124,23 @@ export default {
       //     key: '_type',
       //     value: "banner"
       // }),
-      store.dispatch('homepage/fetchNewCollection'),
-      store.dispatch('homepage/loadBestsellers'),
+      // store.dispatch('homepage/fetchNewCollection'),
+      // store.dispatch('homepage/loadBestsellers'),
       store.dispatch('cmsPage/single', {key: 'identifier.keyword',
         value: 'amphomepage',
         skipCache: true }),
     ])
   },
   beforeRouteEnter (to, from, next) {
-    if (!isServer && !from.name) { // Loading products to cache on SSR render
-      next(vm =>
-        vm.$store.dispatch('homepage/fetchNewCollection').then(res => {
-          vm.loading = false
-        })
-      )
-    } else {
-      next()
-    }
+    // if (!isServer && !from.name) { // Loading products to cache on SSR render
+    //   next(vm =>
+    //     vm.$store.dispatch('homepage/fetchNewCollection').then(res => {
+    //       vm.loading = false
+    //     })
+    //   )
+    // } else {
+    //   next()
+    // }
   },
   mounted() {
     // console.log("GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",this.cmspageseodata)
@@ -176,7 +168,7 @@ export default {
     this.setSegmentify()
   },
   beforeDestroy () {
-    if (this.setTimeoutSubscription) clearTimeout(this.setTimeoutSubscription)
+    // if (this.setTimeoutSubscription) clearTimeout(this.setTimeoutSubscription)
   },
   metaInfo () {
     const storeView = currentStoreView()
@@ -191,7 +183,7 @@ export default {
           }, storeView.storeCode)).href
         }
       ],
-      title: htmlDecode(this.cmspageseodata.meta_title || 'Iclothing Homeee'),
+      title: htmlDecode(this.cmspageseodata.meta_title || 'Iclothing Home'),
       meta: this.cmspageseodata.meta_description ? [{ vmid: 'description', name: 'description', content: htmlDecode(this.cmspageseodata.meta_description) }] : []
     }
   }  
