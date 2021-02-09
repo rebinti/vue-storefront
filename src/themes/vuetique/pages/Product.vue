@@ -773,11 +773,11 @@
       />
     </no-ssr> -->
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
-    <!-- <no-ssr>
+    <no-ssr>
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
     </no-ssr>
-    <div class="lg:pl-6   my-4 recent-view w-full">
+    <!-- <div class="lg:pl-6   my-4 recent-view w-full">
         <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
         </no-ssr>
@@ -791,29 +791,28 @@ import NoSSR from 'vue-no-ssr'
 import Vue from 'vue'
 import Product from '@vue-storefront/core/pages/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
-import RelatedProducts from 'theme/components/core/blocks/Product/Related.vue'
-import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
 import AddToCart from 'theme/components/core/AddToCart.vue'
 import GenericSelector from 'theme/components/core/GenericSelector'
 import ColorSelector from 'theme/components/core/ColorSelector.vue'
 import SizeSelector from 'theme/components/core/SizeSelector.vue'
-import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
-import ProductAttribute from 'theme/components/core/ProductAttribute.vue'
-import ProductTile from 'theme/components/core/ProductTile.vue'
-import ProductLinks from 'theme/components/core/ProductLinks.vue'
-import ProductCustomOptions from 'theme/components/core/ProductCustomOptions.vue'
-import ProductBundleOptions from 'theme/components/core/ProductBundleOptions.vue'
 import ProductGallery from 'theme/components/core/ProductGallery'
-import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
-
 import focusClean from 'theme/components/theme/directives/focusClean'
-import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
-import QtyInput from 'theme/components/theme/QtyInput'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
-import {  findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
+import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
 
-import ProductShare from 'theme/components/core/blocks/Product/ProductShare.vue'
+const RelatedProducts = () => import('theme/components/core/blocks/Product/Related.vue')
+const Breadcrumbs = () => import('theme/components/core/Breadcrumbs.vue')
+const ProductLinks = () => import('theme/components/core/ProductLinks.vue')
+const ProductCustomOptions = () => import('theme/components/core/ProductCustomOptions.vue')
+const ProductBundleOptions = () => import('theme/components/core/ProductBundleOptions.vue')
+const QtyInput = () => import('theme/components/theme/QtyInput')
+const ProductShare = () => import('theme/components/core/blocks/Product/ProductShare.vue')
+// import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
+// import ProductAttribute from 'theme/components/core/ProductAttribute.vue'
+// import ProductTile from 'theme/components/core/ProductTile.vue'
+// import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
+// import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
 
 export default {
   components: {
@@ -823,19 +822,19 @@ export default {
     Breadcrumbs,
     ColorSelector,
     GenericSelector,
-    ProductAttribute,
     ProductBundleOptions,
     ProductCustomOptions,
     ProductGallery,
     ProductLinks,
-    ProductTile,
-    PromotedOffers,
     RelatedProducts,
-    Reviews,
-    SizeSelector,
-    RecentlyViewed,
+    SizeSelector,    
     QtyInput,
-    ProductShare
+    ProductShare,
+    // ProductAttribute,    
+    // ProductTile,
+    // PromotedOffers,    
+    // Reviews,
+    // RecentlyViewed,
   },
   mixins: [Product, VueOfflineMixin],
   data () {
