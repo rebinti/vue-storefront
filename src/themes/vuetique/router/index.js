@@ -3,10 +3,11 @@ import config from 'config'
 // import SplashScreen from 'theme/pages/SplashScreen'
 // import Brands from 'theme/pages/brands'
 // import BrandsCategory from 'theme/pages/search-spring/brandsCategory'
-import SearchSpringSearch from 'theme/pages/search-spring/SearchSpringSearch'
+// import SearchSpringSearch from 'theme/pages/search-spring/SearchSpringSearch'
 
 // const Home = () => import(/* webpackChunkName: "vsf-home" */ 'theme/pages/Home.vue')
-const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */ 'theme/pages/HomeWithStyla.vue')
+import HomeWithStyla from 'theme/pages/HomeWithStyla.vue'
+// const HomeWithStyla = () => import(/* webpackChunkName: "vsf-home-with-styla" */ 'theme/pages/HomeWithStyla.vue')
 const PageNotFound = () => import(/* webpackChunkName: "vsf-not-found" */ 'theme/pages/PageNotFound.vue')
 const ErrorPage = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/Error.vue')
 const PrivacyCentre = () => import(/* webpackChunkName: "vsf-error" */ 'theme/pages/PrivacyCentre.vue')
@@ -26,9 +27,9 @@ const CustomCmsPage = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'the
 const CmsData = () => import(/* webpackChunkName: "vsf-data" */ 'theme/pages/CmsData.vue')
 const ContactUs = () => import(/* webpackChunkName: "vsf-custom-cms" */ 'theme/pages/ContactUs.vue')
 const SocialLogin = () => import(/* webpackChunkName: "vsf-social-login" */ 'theme/pages/SocialLogin.vue')
-// const SearchSpringSearch = () => import(/* webpackChunkName: "search-spring" */ 'theme/pages/SearchSpringSearch')
-const Brands = () => import(/* webpackChunkName: "brands" */ 'theme/pages/brands')
-const BrandsCategory = () => import(/* webpackChunkName: "brand-category" */ 'theme/pages/brandsCategory')
+const SearchSpringSearch = () => import(/* webpackChunkName: "search-spring" */ 'theme/pages/search-spring/SearchSpringSearch.vue')
+const Brands = () => import(/* webpackChunkName: "brands" */ 'theme/pages/brands.vue')
+const BrandsCategory = () => import(/* webpackChunkName: "brand-category" */ 'theme/pages/search-spring/brandsCategory.vue')
 const ExternalThankYouPage = () => import(/* webpackChunkName: "vsf-ext-order-success" */ 'theme/pages/ExternalSuccess.vue')
 
 let routes = [
