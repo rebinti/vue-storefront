@@ -158,9 +158,9 @@ import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import SearchSpringMixin  from 'src/modules/search-spring/mixins/searchSpring.ts'
 import  SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
-import  SiderbarFilter  from "src/modules/search-spring/components/sidebar";
-import  MobileSiderbarFilter  from "src/modules/search-spring/components/MobileSidebar";
 import  { handleScroll }  from 'src/modules/search-spring/helpers'
+const SiderbarFilter = () => import('src/modules/search-spring/components/sidebar')
+const MobileSiderbarFilter = () => import('src/modules/search-spring/components/MobileSidebar')
 
 export default {
   name: 'brandsCategory', 
