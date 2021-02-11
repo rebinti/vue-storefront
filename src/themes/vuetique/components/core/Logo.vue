@@ -3,12 +3,12 @@
     <img
       class="logo hidden md:block"
       src="/assets/logo.svg"
-      alt="Vuetique logo"
+      alt="Iclothing logo"
     >
     <img
       class="logo-text block md:hidden"
       src="/assets/logo_text.svg"
-      alt="Vuetique"
+      alt="Iclothing"
     >
   </router-link>
 </template>
