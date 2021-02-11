@@ -468,7 +468,7 @@
                           <div class="clr_img_out">
                              <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                             <img style="border-radius: 50px;width: 28px;height: 28px;" 
-                            :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                            :src="getproductswatchimage(prod)"                             
                               @error="imgUrlAlt" alt="" >
                             </div>
                           </div>
@@ -907,7 +907,7 @@ export default {
       } else {
         return null
       }
-    }      
+    }    
   },
   beforeMount () { 
     this.mobileCartFixedHeight= window.innerHeight-65;
@@ -983,6 +983,13 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
+    getproductswatchimage (prodobj){      
+      if(prodobj.color_swatch_image=='no_selection'){
+        return '/assets/colour/' + prodobj.colorSwatch.label.toLowerCase() +'.png'
+      }else{
+        return this.$store.state.config.images.baseUrl+'25/25/resize'+prodobj.color_swatch_image
+      }            
+    },      
     openProductOptionsPopup () {
       if(!this.disableAddToCartButtonFlag) return 
       if(this.product.type_id == 'configurable' && this.product.configurable_children === undefined) return
