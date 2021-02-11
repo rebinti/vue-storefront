@@ -292,6 +292,7 @@ i {
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
+  padding-bottom: 75px;
 }
 .wishlist.wishlist_out .wish_wrap_box.item-in-it .swipeout {
   margin-right: 15px !important;
