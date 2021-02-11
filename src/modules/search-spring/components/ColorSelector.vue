@@ -1,8 +1,9 @@
 <template>
   <button
-    :class="['border border-transparent opacity-50 hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3', value ? 'active' : '']"
+    :class="['border border-transparent opacity-75 hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3', value ? 'active' : '']"
     @click="$emit('click')"
     :aria-label="$t('Select color ') + label"
+    :title="$t(label)"
   >
 
   <div class="clr_img_out">

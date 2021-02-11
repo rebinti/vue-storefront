@@ -1,8 +1,9 @@
 <template>
   <button
-    :class="['border border-transparent opacity-50 hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3', active ? 'active' : '']"
+    :class="['border border-transparent opacity-75 hover:opacity-100 rounded-full relative inline-flex pointer color mr-3 mb-3', active ? 'active' : '']"
     @click="switchFilter(id, label)"
-    :aria-label="$t('Select color ') + label"
+    :aria-label="$t('Select color ') + label"    
+    :title="$t(label)"
   >
     <div
       class="absolute rounded-full color-inside"
