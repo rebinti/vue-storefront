@@ -8,9 +8,8 @@
 <script>
 import { mapState } from 'vuex'
 import Modal from 'theme/components/core/Modal'
-import AddToBoardsList from 'theme/components/core/blocks/Boards/AddToBoardsList.vue'
-import CreateBoard from 'theme/components/core/blocks/Boards/CreateBoard.vue'
-
+const AddToBoardsList = () => import('theme/components/core/blocks/Boards/AddToBoardsList.vue')
+const CreateBoard = () => import('theme/components/core/blocks/Boards/CreateBoard.vue')
 
 export default {
   name: 'PopupBoards',
