@@ -381,13 +381,13 @@ export default {
   .product{
     .title-and-wish{
       .ptitle{
-        width: 90%;
+        width: 86%;
         padding-right: 10px;
       }
       .pwishlist{
-        width: 10%;
+        width: 13%;
           .cart-icon{
-            width: 20px;
+            width: 24px;
             .vt-icon{
               width: 20px;
               height: 20px;
