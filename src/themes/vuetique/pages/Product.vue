@@ -148,7 +148,7 @@
                               <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                               <img 
                              class="color-swatch-inner"
-                              :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                              :src="getproductswatchimage(prod)"    
                                  @error="imgUrlAlt" alt="" >
                               </div>
                             </div>
