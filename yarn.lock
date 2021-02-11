@@ -1379,20 +1379,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@braintree/asset-loader@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@braintree/asset-loader/-/asset-loader-0.2.0.tgz#f30f039df98bb3662677a88828fa36dde082cea8"
-  integrity sha512-tz/0a2nZvoLpUlGWLEJqqT4ITLFvM7WUWVvC8rgM33CiOmJLFUdYClpnoIvR0bXA2i1uxC/i7D67ghEhrg8BuA==
-  dependencies:
-    promise-polyfill "^8.1.0"
-
-"@braintree/asset-loader@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@braintree/asset-loader/-/asset-loader-0.2.1.tgz#1f744aada54321ff591e846d707a7b7d58d7ca9f"
-  integrity sha512-KNzByHqcZKHm6lss1dGCbLs9K4XrmLqn5YNdL0e7g7A0dzUU4mhXmZF+7rLAqX+XP9gE6nSaf7xh+TBj7oo24w==
-  dependencies:
-    promise-polyfill "^8.1.0"
-
 "@braintree/asset-loader@0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@braintree/asset-loader/-/asset-loader-0.3.1.tgz#2ee703193fba9f479e674e76ac83f2ccfd6e7a9e"
@@ -1400,12 +1386,7 @@
   dependencies:
     promise-polyfill "^8.1.0"
 
-"@braintree/browser-detection@1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@braintree/browser-detection/-/browser-detection-1.7.0.tgz#895ba64b700c3f36cab5c54591caf71a41171dd8"
-  integrity sha1-iVumS3AMPzbKtcVFkcr3GkEXHdg=
-
-"@braintree/browser-detection@1.9.0", "@braintree/browser-detection@^1.5.0", "@braintree/browser-detection@^1.9.0":
+"@braintree/browser-detection@1.9.0", "@braintree/browser-detection@^1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@braintree/browser-detection/-/browser-detection-1.9.0.tgz#bbaca6965a0685d0d91fd6e9194db034857d1d46"
   integrity sha512-EEj6I9vRuxfvWRo4se5b13BP2nBVOJS9qoMKjFLJAMW+84/xgCaN6pYbZH8G6rDXhPUdkzqUPEGB3n+VdNFjTQ==
@@ -1430,20 +1411,10 @@
   resolved "https://registry.yarnpkg.com/@braintree/iframer/-/iframer-1.0.3.tgz#21dd1fd4cebd4154aeab1efa4d5b0d5f4384364e"
   integrity sha1-Id0f1M69QVSuqx76TVsNX0OENk4=
 
-"@braintree/sanitize-url@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-2.1.0.tgz#549a9d1f923c9bc7953a585d3e9aa9429be8fe28"
-  integrity sha1-VJqdH5I8m8eVOlhdPpqpQpvo/ig=
-
 "@braintree/sanitize-url@4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-4.0.0.tgz#2cda79ffd67b6ea919a63b5e1a883b92d636e844"
   integrity sha512-bOoFoTxuEUuri/v1q0OXN0HIrZ2EiZlRSKdveU8vS5xf2+g0TmpXhmxkTc1s+XWR5xZNoVU4uvf/Mher98tfLw==
-
-"@braintree/wrap-promise@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@braintree/wrap-promise/-/wrap-promise-1.1.1.tgz#d22c76855e6d4b4012610060421fae1a37ec90b0"
-  integrity sha1-0ix2hV5tS0ASYQBgQh+uGjfskLA=
 
 "@braintree/wrap-promise@2.0.0":
   version "2.0.0"
@@ -1549,11 +1520,6 @@
     tar "^4.4.10"
     unique-filename "^1.1.1"
     which "^1.3.1"
-
-"@fortawesome/fontawesome-free@^5.11.2":
-  version "5.11.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.11.2.tgz#8644bc25b19475779a7b7c1fc104bc0a794f4465"
-  integrity sha512-XiUPoS79r1G7PcpnNtq85TJ7inJWe0v+b5oZJZKb0pGHNIV6+UiNeQWiFGmuQ0aj7GEhnD/v9iqxIsjuRKtEnQ==
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -2681,11 +2647,6 @@
   integrity sha512-SudIN9TRJ+v8g5pTG8RRCqfqTMNqgWCKKd3vtynhGzkIIjxaicNAMuY5TRadJ6tzDu3Dotf3ngaMILtmOdmWEQ==
   dependencies:
     source-map "^0.6.1"
-
-"@types/uuid@^8.0.0":
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.0.tgz#215c231dff736d5ba92410e6d602050cce7e273f"
-  integrity sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==
 
 "@types/webpack-dev-server@^3.1.1":
   version "3.4.0"
@@ -4510,18 +4471,6 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braintree-web-drop-in@1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/braintree-web-drop-in/-/braintree-web-drop-in-1.14.1.tgz#ac414c5f0c8ab14f233dbc43f27342b31d900917"
-  integrity sha512-VxBexaLRHpf/nONtqz+SXTx4hpzsB6G415LYYh4hO+jLquQq0uIq3+CvjconyprE9Yzptxhu46HLaXuDlDXWWg==
-  dependencies:
-    "@braintree/asset-loader" "0.2.0"
-    "@braintree/browser-detection" "1.7.0"
-    "@braintree/class-list" "0.1.0"
-    "@braintree/wrap-promise" "1.1.1"
-    braintree-web "3.39.0"
-    promise-polyfill "8.1.0"
-
 braintree-web-drop-in@^1.14.1:
   version "1.22.0"
   resolved "https://registry.yarnpkg.com/braintree-web-drop-in/-/braintree-web-drop-in-1.22.0.tgz#6e7fd8dff85f1c7e7abc00904b3d2047914dd3cb"
@@ -4534,42 +4483,6 @@ braintree-web-drop-in@^1.14.1:
     "@braintree/wrap-promise" "2.0.0"
     braintree-web "3.57.0"
     promise-polyfill "8.1.3"
-
-braintree-web@3.39.0:
-  version "3.39.0"
-  resolved "https://registry.yarnpkg.com/braintree-web/-/braintree-web-3.39.0.tgz#b5dd494c8d1f0a730b52bf043cd14fc975e0f65d"
-  integrity sha512-3j5eTQf9WrGaooAEK2OhBnTnvdnZT+gigooMdAUD6Ll1NWRlRmS7OC5G1kkWEr+KXWgE63IqyDy4sLtP5GsYaQ==
-  dependencies:
-    "@braintree/asset-loader" "0.2.0"
-    "@braintree/browser-detection" "1.7.0"
-    "@braintree/class-list" "0.1.0"
-    "@braintree/iframer" "1.0.3"
-    "@braintree/sanitize-url" "2.1.0"
-    "@braintree/wrap-promise" "1.1.1"
-    card-validator "6.0.0"
-    credit-card-type "8.0.0"
-    framebus "3.0.1"
-    inject-stylesheet "1.0.0"
-    promise-polyfill "8.1.0"
-    restricted-input "1.2.7"
-
-braintree-web@3.40.0:
-  version "3.40.0"
-  resolved "https://registry.yarnpkg.com/braintree-web/-/braintree-web-3.40.0.tgz#6ab2d1a366ad889df1ca5f1a753565edd6f69065"
-  integrity sha512-idB3lAmgaizc3mVUflR+CFnKlCkCiOW1FtSGG4tv6FiI3wK316XHre+BZ9H6n7UCyBdCunzfErJwaZXSysvW5Q==
-  dependencies:
-    "@braintree/asset-loader" "0.2.1"
-    "@braintree/browser-detection" "1.7.0"
-    "@braintree/class-list" "0.1.0"
-    "@braintree/iframer" "1.0.3"
-    "@braintree/sanitize-url" "2.1.0"
-    "@braintree/wrap-promise" "1.1.1"
-    card-validator "6.0.0"
-    credit-card-type "8.0.0"
-    framebus "3.0.2"
-    inject-stylesheet "1.0.0"
-    promise-polyfill "8.1.0"
-    restricted-input "1.2.7"
 
 braintree-web@3.57.0, braintree-web@^3.40.0:
   version "3.57.0"
@@ -4590,19 +4503,6 @@ braintree-web@3.57.0, braintree-web@^3.40.0:
     inject-stylesheet "2.0.0"
     promise-polyfill "8.1.3"
     restricted-input "2.1.0"
-
-braintree@2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/braintree/-/braintree-2.14.0.tgz#3f71f6221c5a5837010cc54e3dfb8b6d22005db8"
-  integrity sha512-n2P+ViBo3aWfWdJyPPTYeBW/OTIlT0xrd/2OFSojY9ssmw110Jko+rEPSqSieMh5ZHGVJQhsxvD45jPsyG/LmQ==
-  dependencies:
-    "@braintree/wrap-promise" "1.1.1"
-    dateformat "1.0.1-1.2.3"
-    depd "~1.1.0"
-    readable-stream "1.1.10"
-    semver "5.1.0"
-    underscore "1.8.3"
-    xml2js "0.1.13"
 
 braintree@^2.14.0:
   version "2.21.0"
@@ -4988,13 +4888,6 @@ capture-stack-trace@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
-
-card-validator@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-6.0.0.tgz#ed35134e3545bfb9ab88204778f8007fc023ea80"
-  integrity sha512-M0f9AR//drteDaoXXv/TnvPSwYhIZp86CBLwNZ1T89mNkFMxcgKRJnSYJvQ+MSRJjIaVNRapPHdi4NVhxfB67Q==
-  dependencies:
-    credit-card-type "^8.0.0"
 
 card-validator@6.2.0:
   version "6.2.0"
@@ -5733,11 +5626,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-credit-card-type@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-8.0.0.tgz#e65347bcdb979b4deb3107cd43a1cd9da802cd50"
-  integrity sha512-q3k5fbLJJIkPTBLr03Wo2Ui8cF5vHE8eTT/3K7BUW1ROoyns2vHoglWrzjmU/8JKA0X7JFlYlUVuDRwn7l2ldw==
-
 credit-card-type@8.3.0, credit-card-type@^8.0.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-8.3.0.tgz#f93c187c9362411544158c91d552efcc443aa87a"
@@ -6074,11 +5962,6 @@ date-fns@^1.27.2:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
-
-dateformat@1.0.1-1.2.3:
-  version "1.0.1-1.2.3"
-  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.1-1.2.3.tgz#2e5d03039eca89f9d8797f99389de5fb0f4aa2fc"
-  integrity sha1-Ll0DA57KifnYeX+ZOJ3l+w9Kovw=
 
 dateformat@^3.0.0, dateformat@^3.0.3:
   version "3.0.3"
@@ -6436,13 +6319,6 @@ dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
   integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
-
-dom7@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.1.5.tgz#a79411017800b31d8400070cdaebbfc92c1f6377"
-  integrity sha512-xnhwVgyOh3eD++/XGtH+5qBwYTgCm0aW91GFgPJ3XG+jlsRLyJivnbP0QmUBFhI+Oaz9FV0s7cxgXHezwOEBYA==
-  dependencies:
-    ssr-window "^2.0.0"
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -7653,11 +7529,6 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framebus@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/framebus/-/framebus-3.0.1.tgz#dbabc3b08e39bf33d248e9af754bd8ffb05cfcce"
-  integrity sha1-26vDsI45vzPSSOmvdUvY/7Bc/M4=
-
 framebus@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/framebus/-/framebus-3.0.2.tgz#0c99c70cb507522aae6ed485e1317fc913873a8a"
@@ -8653,11 +8524,6 @@ init-package-json@^1.10.3:
     semver "2.x || 3.x || 4 || 5"
     validate-npm-package-license "^3.0.1"
     validate-npm-package-name "^3.0.0"
-
-inject-stylesheet@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/inject-stylesheet/-/inject-stylesheet-1.0.0.tgz#f673047458ee58f109fee4cfb66b09f362ccc261"
-  integrity sha1-9nMEdFjuWPEJ/uTPtmsJ82LMwmE=
 
 inject-stylesheet@2.0.0:
   version "2.0.0"
@@ -12642,11 +12508,6 @@ promise-inflight@^1.0.1:
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
 
-promise-polyfill@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.1.0.tgz#30059da54d1358ce905ac581f287e184aedf995d"
-  integrity sha512-OzSf6gcCUQ01byV4BgwyUCswlaQQ6gzXc23aLQWhicvfX9kfsUiUhgt3CCQej8jDnl8/PhGF31JdHX2/MzF3WA==
-
 promise-polyfill@8.1.3, promise-polyfill@^8.1.0:
   version "8.1.3"
   resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.1.3.tgz#8c99b3cf53f3a91c68226ffde7bde81d7f904116"
@@ -13477,13 +13338,6 @@ restore-cursor@^2.0.0:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
 
-restricted-input@1.2.7:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/restricted-input/-/restricted-input-1.2.7.tgz#e1298f5fd8c430cc2d8e6bb1175524023205cb34"
-  integrity sha1-4SmPX9jEMMwtjmuxF1UkAjIFyzQ=
-  dependencies:
-    "@braintree/browser-detection" "^1.5.0"
-
 restricted-input@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/restricted-input/-/restricted-input-2.1.0.tgz#3e2ff79e8fee53d3152cf859063701ded206582f"
@@ -14112,11 +13966,6 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-ssr-window@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-2.0.0.tgz#98c301aef99523317f8d69618f0010791096efc4"
-  integrity sha512-NXzN+/HPObKAx191H3zKlYomE5WrVIkoCB5IaSdvKokxTpjBdWfr0RaP+1Z5KOfDT0ZVz+2tdtiBkhsEQ9p+0A==
-
 ssri@^5.2.4:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-5.3.0.tgz#ba3872c9c6d33a0704a7d71ff045e5ec48999d06"
@@ -14480,14 +14329,6 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
-swiper@5.x:
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-5.4.5.tgz#a350f654bf68426dbb651793824925512d223c0f"
-  integrity sha512-7QjA0XpdOmiMoClfaZ2lYN6ICHcMm72LXiY+NF4fQLFidigameaofvpjEEiTQuw3xm5eksG5hzkaRsjQX57vtA==
-  dependencies:
-    dom7 "^2.1.5"
-    ssr-window "^2.0.0"
-
 symbol-observable@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
@@ -14717,11 +14558,6 @@ timers-browserify@^2.0.4:
   integrity sha512-60aV6sgJ5YEbzUdn9c8kYGIqOubPoUdqQCul3SBAsRCZ40s6Y5cMcrW4dt3/k/EsbLVJNl9n6Vz3fTc+k2GeKQ==
   dependencies:
     setimmediate "^1.0.4"
-
-tiny-cookie@^1.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/tiny-cookie/-/tiny-cookie-1.0.1.tgz#753786079c642a3c3d0b2accad600f8de119ac2a"
-  integrity sha1-dTeGB5xkKjw9CyrMrWAPjeEZrCo=
 
 tiny-emitter@^2.0.0:
   version "2.1.0"
@@ -15045,11 +14881,6 @@ umask@^1.1.0:
   resolved "https://registry.yarnpkg.com/umask/-/umask-1.1.0.tgz#f29cebf01df517912bb58ff9c4e50fde8e33320d"
   integrity sha1-8pzr8B31F5ErtY/5xOUP3o4zMg0=
 
-underscore@1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
-  integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
-
 underscore@^1.9.1:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.2.tgz#0c8d6f536d6f378a5af264a72f7bec50feb7cf2f"
@@ -15288,11 +15119,6 @@ uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
 
-uuid@^8.1.0:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
-  integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
-
 v8-compile-cache@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.3.tgz#00f7494d2ae2b688cfe2899df6ed2c54bef91dbe"
@@ -15368,11 +15194,6 @@ vue-apollo@^3.0.0-beta.19:
     serialize-javascript "^2.1.0"
     throttle-debounce "^2.1.0"
 
-vue-awesome-swiper@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-4.1.1.tgz#8f7ab221ad003021d756b86aa618f429924900fe"
-  integrity sha512-50um10t6N+lJaORkpwSi1wWuMmBI1sgFc9Znsi5oUykw2cO5DzLaBHcO2JNX21R+Ue4TGoIJDhhxjBHtkFrTEQ==
-
 vue-carousel@^0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/vue-carousel/-/vue-carousel-0.17.0.tgz#aada1f63a99352ba9581fc70d60f6bb0e6eee24d"
@@ -15391,18 +15212,6 @@ vue-client-only@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.0.0.tgz#ddad8d675ee02c761a14229f0e440e219de1da1c"
   integrity sha512-arhk1wtWAfLsJyxGMoEYhoBowM87/i6HLSG2LH/03Yog6i2d9JEN1peMP0Ceis+/n9DxdenGYZZTxbPPJyHciA==
-
-vue-cookie@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/vue-cookie/-/vue-cookie-1.1.4.tgz#b8b46d112bda9f93a2f47017c2ed5282d2064fda"
-  integrity sha1-uLRtESvan5Oi9HAXwu1SgtIGT9o=
-  dependencies:
-    tiny-cookie "^1.0"
-
-vue-cookies@^1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/vue-cookies/-/vue-cookies-1.7.4.tgz#d241d0a0431da0795837651d10b4d73e7c8d3e8d"
-  integrity sha512-mOS5Btr8V9zvAtkmQ7/TfqJIropOx7etDAgBywPCmHjvfJl2gFbH2XgoMghleLoyyMTi5eaJss0mPN7arMoslA==
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
@@ -15572,14 +15381,6 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
-
-vue-uuid@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/vue-uuid/-/vue-uuid-2.0.2.tgz#0cfb739e660a3af1d4e3342743578114f79b2438"
-  integrity sha512-PRf1CHg3uKi77bVRyAuW2u/T2PO9LxMr7cw9t9rNdpZTkNDyw1Fx6eJVL+8JOtM9VxxPkoZ/rwhXJ5l+X5AYzQ==
-  dependencies:
-    "@types/uuid" "^8.0.0"
-    uuid "^8.1.0"
 
 vue2-touch-events@^2.0.1:
   version "2.0.1"
