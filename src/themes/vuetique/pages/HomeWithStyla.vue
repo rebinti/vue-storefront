@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { isServer } from '@vue-storefront/core/helpers'
+// import { isServer } from '@vue-storefront/core/helpers'
 import Home from '@vue-storefront/core/pages/Home'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
@@ -49,7 +49,7 @@ export default {
   },
   created () {
     // Load personal and shipping details for Checkout page from IndexedDB
-    this.$store.dispatch('checkout/load')
+    // this.$store.dispatch('checkout/load')
     this.stylaloaderflag = true
   },
   async beforeMount () {
@@ -64,11 +64,11 @@ export default {
   async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
     Logger.info('Calling asyncData in Home (theme)')()
     await Promise.all([
-      store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }),
-      store.dispatch('attribute/list', { // load filter attributes for this specific category
-          filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
-          includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
-      }),
+      // store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }),
+      // store.dispatch('attribute/list', { // load filter attributes for this specific category
+      //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+      //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+      // }),
       store.dispatch('cmsPage/single', {key: 'identifier.keyword',
         value: 'amphomepage',
         skipCache: true }),
