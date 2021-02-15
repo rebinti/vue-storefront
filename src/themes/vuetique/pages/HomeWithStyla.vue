@@ -30,6 +30,9 @@ export default {
       stylaloaderflag: false,      
     }
   },
+  watch: {
+    '$route': 'fromhomerouterwatch'
+  },  
   methods: {
     setSegmentify() {
       // For working Segmentify
@@ -40,7 +43,10 @@ export default {
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
-    },   
+    },
+    fromhomerouterwatch () {       
+      this.setSegmentify()
+    },       
   },
   computed: {
     cmspageseodata () {        
