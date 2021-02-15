@@ -51,7 +51,6 @@ export default {
     // Load personal and shipping details for Checkout page from IndexedDB
     // this.$store.dispatch('checkout/load')
     this.stylaloaderflag = true
-    this.setSegmentify() 
   },
   async beforeMount () {
     if (this.$store.state.__DEMO_MODE__) {
