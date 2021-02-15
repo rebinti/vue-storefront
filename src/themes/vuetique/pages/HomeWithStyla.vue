@@ -5,7 +5,7 @@
     </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  /> 
-    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id='seg-home-reco'></div>  
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-home-reco"></div>      
   </div>
 </template>
 
