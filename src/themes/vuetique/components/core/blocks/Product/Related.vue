@@ -147,7 +147,7 @@ export default {
     this.refreshList()
   },
   mounted() {     
-    console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
+    //console.log("DATAAAAAAAAAAAAAAA",this.$store.state)
     if (typeof window !== 'undefined' && window.document) {
       this.renderComponent = true
     }    
