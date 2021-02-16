@@ -42,6 +42,7 @@ export default {
       }
       setTimeout(() => {
         window.waitSegmentifyAndjQuery() 
+        window.waitSegmentifyJquery()
       }, 1500);
 
     },
