@@ -41,8 +41,8 @@ export default {
         "subCategory": ""
       }
       setTimeout(() => {
-        window.waitSegmentifyAndjQuery() 
-        window.waitSegmentifyJquery()
+        window.waitSegmentifyAndjQuery(); 
+        window.waitSegmentifyJquery();
       }, 1500);
 
     },
@@ -93,8 +93,8 @@ export default {
        this.stylaloaderflag = false
     }
     this.setSegmentify() 
-        window.waitSegmentifyAndjQuery() 
-        window.waitSegmentifyJquery()    
+        window.waitSegmentifyAndjQuery(); 
+        window.waitSegmentifyJquery();    
   },
   metaInfo () {
     const storeView = currentStoreView()
