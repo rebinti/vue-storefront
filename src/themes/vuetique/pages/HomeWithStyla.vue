@@ -93,6 +93,8 @@ export default {
        this.stylaloaderflag = false
     }
     this.setSegmentify() 
+        window.waitSegmentifyAndjQuery() 
+        window.waitSegmentifyJquery()    
   },
   metaInfo () {
     const storeView = currentStoreView()
