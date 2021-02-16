@@ -4,7 +4,7 @@
           <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:55px;">                  
     </div>    
     <!-- For loading the styla magazine content -->
-    <Styla-home-magazine  /> 
+    <!-- <Styla-home-magazine  />  -->
     <cms-pagecustom :identifier="'page-styla-home'" />
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-home-reco"></div>      
   </div>
