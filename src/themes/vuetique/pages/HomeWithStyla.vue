@@ -40,6 +40,10 @@ export default {
         "category": "Home Page",
         "subCategory": ""
       }
+      setTimeout(() => {
+        window.waitSegmentifyAndjQuery() 
+      }, 1500);
+
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
