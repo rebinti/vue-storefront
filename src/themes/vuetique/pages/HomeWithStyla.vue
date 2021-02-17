@@ -40,11 +40,11 @@ export default {
         "category": "Home Page",
         "subCategory": ""
       }
-      setTimeout(() => {
-        window.waitSegmentifyAndjQuery(); 
-        window.waitSegmentifyJquery();
-        window.segJquery.fn.init()
-      }, 1500);
+      // setTimeout(() => {
+      //   window.waitSegmentifyAndjQuery(); 
+      //   window.waitSegmentifyJquery();
+      //   window.segJquery.fn.init()
+      // }, 1500);
 
     },
     segmentifyhandleClicks (event) {
@@ -93,9 +93,9 @@ export default {
        styla.init !== "undefined"&&styla.init()
        this.stylaloaderflag = false
     }
-    this.setSegmentify() 
-        window.waitSegmentifyAndjQuery(); 
-        window.waitSegmentifyJquery();    
+    // this.setSegmentify() 
+    //     window.waitSegmentifyAndjQuery(); 
+    //     window.waitSegmentifyJquery();    
   },
   metaInfo () {
     const storeView = currentStoreView()
