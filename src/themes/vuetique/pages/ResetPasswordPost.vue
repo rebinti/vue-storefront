@@ -104,10 +104,16 @@ export default {
               confirmation: this.rPassword,
               id:this.id,
               token:this.token
-              }).then((response) => {        
+              }).then((response) => { 
+                console.log("testtttttt123",response);       
         this.$bus.$emit('notification-progress-stop')
         if (response.code === 200) {
           this.passwordSent = true
+          this.$store.dispatch('notification/spawnNotification', {
+            type: 'success',
+            message: i18n.t(response.result) || i18n.t('Your password has been updated'),
+            action1: { label: i18n.t('OK') }
+          })          
         } else {
           this.$store.dispatch('notification/spawnNotification', {
             type: 'error',
