@@ -124,7 +124,34 @@
 	</script> 
 
   	<!-- for segmentify product recommendations widgets --> 
-		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" charset="UTF-8" ></script>	
+		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" charset="UTF-8" ></script>
+		<!-- SEGMENTIFY BEGIN -->
+		<!-- DNS Prefetching to increase loading performance -->
+		<!-- Change second dns prefetch-url with your data center url -->
+		<link rel='dns-prefetch' href='https//cdn.segmentify.com'>
+		<link rel='dns-prefetch' href='gandalf-eu.segmentify.com'> 
+		<script type='text/javascript'> 
+			// Place this code before other javascript inside head tag 
+			(function(namespace) { 
+				window['SegmentifyTrackingObject'] = namespace; 
+				window[namespace] = window[namespace] || function () { 
+					(window[namespace].q = window[namespace].q || []) .push(arguments);
+				};
+				// Used for advanced configuration options
+				// Update following information for configuration:
+				//   * YOUR_DATA_CENTER_URL
+				//   * YOUR_WEBSITE_DOMAIN
+				window[namespace].config = {
+					'segmentifyApiUrl': 'gandalf-eu.segmentify.com',
+					'domain': 'YOUR_WEBSITE_DOMAIN'
+				}; 
+			}) ("Segmentify");
+
+			// Initialize Segmentify with your Api Key and change with your api key
+			Segmentify('apikey', '3eb32483-e5a6-403f-b355-909ba225968e');
+		</script>
+		<script src='https//cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
+		<!-- SEGMENTIFY END --> 			
 	
 	<!-- >> DATASHIPS START  << -->
 	<!-- <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="5daad7a0-072e-4a66-875c-c0f2f1d7f698" data-blockingmode="auto" type="text/javascript"></script> -->
