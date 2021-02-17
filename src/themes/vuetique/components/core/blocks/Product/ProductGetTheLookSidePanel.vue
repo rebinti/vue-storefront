@@ -19,10 +19,10 @@
     <br>          
     <div>
         <div class="outfit-image"><img :src="getOutFitImageUrl" class="model-image" /></div>
-        <!-- <div  v-for ="item in upsellitems">
+        <!-- <div  v-for ="item in crosssellitems">
             <product :product="item" @click="removeItem" @parentevent="getupdateclick" />
         </div> -->
-        <sidepanel-product-listing columns="2" :products="getupsellitems.related['upsell']" />    
+        <sidepanel-product-listing columns="2" :products="getcrosssellitems.related['crosssell']" />    
     </div>
   </div>
 </template>
@@ -43,10 +43,10 @@ export default {
     return {
         loadingNewProdFlag: true,
         refresh: 0,
-        type:'upsell',
+        type:'crosssell',
         detailsOpen: false,                
         swipeToClosePanelFlag: false,
-        upsellitems:[]      
+        crosssellitems:[]      
     }
   },  
   components: {
@@ -71,7 +71,7 @@ export default {
     productLinks () {
       return this.product.product_links
     }, 
-    getupsellitems (){
+    getcrosssellitems (){
        return this.$store.state.product 
     }        
     // isProductGetTheLookSidePanelOpen () {
@@ -104,7 +104,7 @@ export default {
         document.removeEventListener('touchstart', touchStart)
         document.removeEventListener('touchend', touchend)
     })
-    this.getallupsellproducts();
+    this.getallcrosssellproducts();
   },
   mixins: [onEscapePress, NoScrollBackground],
   methods: {
@@ -125,15 +125,15 @@ export default {
       this.detailsOpen = true
       event.target.classList.add('hidden')
     },
-    getallupsellproducts() {
+    getallcrosssellproducts() {
       this.loadingNewProdFlag = true;
       let sku = this.productLinks ? this.productLinks
-        .filter(pl => pl.link_type === 'upsell')
+        .filter(pl => pl.link_type === 'crosssell')
         .map(pl => pl.linked_product_sku) : null
       let key = 'sku.keyword'
-      let upsellProductsQuery = prepareRelatedQuery(key, sku)
+      let crosssellProductsQuery = prepareRelatedQuery(key, sku)
       this.$store.dispatch('product/list', {
-        query: upsellProductsQuery,
+        query: crosssellProductsQuery,
         size: 25,
         prefetchGroupProducts: false,
         updateState: false
@@ -151,9 +151,9 @@ export default {
           this.loadingNewProdFlag = false;
       })     
       
-        this.upsellitems = this.$store.state.product.related.upsell
+        this.crosssellitems = this.$store.state.product.related.crosssell
         console.log("testtEEEEEEEEEEEEEEEE",sku)
-        console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product.related.upsell)        
+        console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product.related.crosssell)        
     },    
   },
   beforeCreate () {
