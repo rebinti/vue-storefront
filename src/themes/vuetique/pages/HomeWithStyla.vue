@@ -93,7 +93,7 @@ export default {
        styla.init !== "undefined"&&styla.init()
        this.stylaloaderflag = false
     }
-    // this.setSegmentify() 
+    this.setSegmentify() 
     //     window.waitSegmentifyAndjQuery(); 
     //     window.waitSegmentifyJquery();    
   },
