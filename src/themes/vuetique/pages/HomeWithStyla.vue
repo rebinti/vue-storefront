@@ -46,12 +46,6 @@ export default {
               subCategory: ''
           }
       };      
-      // setTimeout(() => {
-      //   window.waitSegmentifyAndjQuery(); 
-      //   window.waitSegmentifyJquery();
-      //   window.segJquery.fn.init()
-      // }, 1500);
-
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
@@ -100,8 +94,6 @@ export default {
        this.stylaloaderflag = false
     }
     this.setSegmentify() 
-    //     window.waitSegmentifyAndjQuery(); 
-    //     window.waitSegmentifyJquery();    
   },
   metaInfo () {
     const storeView = currentStoreView()
