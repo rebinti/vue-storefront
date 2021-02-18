@@ -57,11 +57,17 @@ export default {
       
       if (notificationData.type === 'success') {        
         this.added = true
+        let pqty = 0;
+            if (this.product.qty === undefined) {
+                pqty = 1;
+            }else{
+                pqty = this.product.qty;
+            }
             window.sgfLayer = {
               'basket': {
                   step: 'add',
                   productId: this.product.sku,
-                  quantity: this.product.qty, 
+                  quantity: pqty, 
                   price: this.product.price
               }
             }        
