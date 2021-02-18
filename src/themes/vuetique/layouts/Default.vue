@@ -31,7 +31,7 @@
       <product-with-options-popup />
       <product-social-share />
       <product-video-popup />
-      <cookie-notification />
+      <!-- <cookie-notification /> -->
       <offline-badge />
       <modal-switcher />
       <order-confirmation :orders-data="ordersData" v-if="loadOrderConfirmation" />
@@ -68,6 +68,7 @@ const HeaderMenu = () => import(/* webpackChunkName: "menu" */ 'theme/components
 // import ProductWithOptionsPopup from 'theme/components/core/ProductWithOptionsPopup.vue'
 // import ProductSocialShare from 'theme/components/core/ProductSocialShare.vue'
 // import ProductVideoPopup from 'theme/components/core/ProductVideoPopup.vue'
+// import CookieNotification from 'theme/components/core/CookieNotification.vue'
 
 const Overlay = () => import(/* webpackChunkName: "overlay" */ 'theme/components/core/Overlay.vue')
 const Loader = () => import(/* webpackChunkName: "loader" */ 'theme/components/core/Loader.vue')
