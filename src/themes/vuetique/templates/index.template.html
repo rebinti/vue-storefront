@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html data-vue-meta-server-rendered {{{ meta.inject().htmlAttrs.text() }}}>
-  <head><!-- index for default theme* -->
+	<head><!-- index for default theme* -->
+		<link rel='dns-prefetch' href='//cdn.segmentify.com'>
+		<link rel='dns-prefetch' href='//gandalf-eu.segmentify.com/'> 
+  	<!-- for segmentify product recommendations widgets --> 
+		<!-- <script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" charset="UTF-8" ></script> -->
+		<!-- SEGMENTIFY BEGIN --> 
+		<script type='text/javascript'> 
+			(function(namespace) { 
+				window['SegmentifyTrackingObject'] = namespace; 
+				window[namespace] = window[namespace] || function () { 
+					(window[namespace].q = window[namespace].q || []) .push(arguments);
+				};
+				window[namespace].config = {
+					'segmentifyApiUrl': '//gandalf-eu.segmentify.com/', // segmentifyApiUrl:"//rest.segmentify.com/"
+					'domain': 'vue.iclothing.com'
+				}; 
+			}) ("Segmentify");
+
+			Segmentify('apikey', '3eb32483-e5a6-403f-b355-909ba225968e');
+		</script>
+		<script src='cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
+		<!-- SEGMENTIFY END --> 		
   	{{{ meta.inject().title.text() }}}
   	{{{ meta.inject().meta.text() }}}
 		{{{ meta.inject().link.text() }}}
@@ -18,8 +39,6 @@
 	<link rel="dns-prefetch" href="//styla-prod.us.imgix.net">
 	<link rel="dns-prefetch" href="//client-scripts.styla.com">
 	<link rel="dns-prefetch" href="//redpanda.styla.com">
-	<link rel='dns-prefetch' href='//cdn.segmentify.com'>
-	<link rel='dns-prefetch' href='//rest.segmentify.com'> 
 
 	<script src="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" type="text/javascript" async></script>
 
@@ -27,27 +46,6 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
 	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
-
-
-  	<!-- for segmentify product recommendations widgets --> 
-		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" charset="UTF-8" ></script>
-		<!-- SEGMENTIFY BEGIN --> 
-		<script type='text/javascript'> 
-			(function(namespace) { 
-				window['SegmentifyTrackingObject'] = namespace; 
-				window[namespace] = window[namespace] || function () { 
-					(window[namespace].q = window[namespace].q || []) .push(arguments);
-				};
-				window[namespace].config = {
-					'segmentifyApiUrl': '//rest.segmentify.com/', // segmentifyApiUrl:"//rest.segmentify.com/"
-					'domain': 'vue.iclothing.com'
-				}; 
-			}) ("Segmentify");
-
-			Segmentify('apikey', '3eb32483-e5a6-403f-b355-909ba225968e');
-		</script>
-		<script src='cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
-		<!-- SEGMENTIFY END --> 
 
 
 	<script type="text/javascript" async>
