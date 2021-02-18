@@ -251,7 +251,15 @@ export default {
       // }
     },
     removeFromCart (product) {
-      this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })
+      this.$store.dispatch('cart/removeItem', { product: this.selectedRemoveProduct })      
+      window.sgfLayer = {
+        'basket': {
+          step: 'remove',
+          productId: this.selectedRemoveProduct.sku,
+          quantity: this.selectedRemoveProduct.qty,
+          price: this.selectedRemoveProduct.price
+        }
+      }
       this.forceRerender()
     },
     forceRerender () {
