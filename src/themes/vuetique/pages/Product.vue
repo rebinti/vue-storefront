@@ -1007,6 +1007,12 @@ export default {
         "category": "Product Page",
         "subCategory": this.product.parentSku
       }
+      window.sgfLayer = {
+          'page': {
+              category: 'Product Page',
+              subCategory: ''
+          }
+      }      
     },
     setBreadCrumbToSamePath () { 
       this.showBreadCrumbsToSamePath = true; 

@@ -55,8 +55,16 @@ export default {
         this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
       }
       
-      if (notificationData.type === 'success') {
+      if (notificationData.type === 'success') {        
         this.added = true
+            window.sgfLayer = {
+              'basket': {
+                  step: 'add',
+                  productId: this.product.sku,
+                  quantity: this.product.qty, 
+                  price: this.product.price
+              }
+            }        
       } else {
         this.failed = true
       }
