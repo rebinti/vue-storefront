@@ -179,10 +179,9 @@ export default {
     }    
   },
   beforeMount () { 
-      // PAPERPLANES - MICRO CART
-      console.log("PAPERPLANE MICRO CART BBBBBBBBBB INNN",this.$store.state.cart)
+      // PAPERPLANES - MICRO CART      
       if (window && window._paq != undefined) {
-          console.log("PAPERPLANE MICRO CART BBBBBBBBBB",this.$store.state.cart)
+          //console.log("PAPERPLANE MICRO CART BBBBBBBBBB",this.$store.state.cart)
           this.$store.state.cart.cartItems.forEach(product => {
             window._paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
           })              
