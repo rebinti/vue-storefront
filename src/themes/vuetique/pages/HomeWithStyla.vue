@@ -40,6 +40,12 @@ export default {
         "category": "Home Page",
         "subCategory": ""
       }
+      window.sgfLayer = {
+          'page': {
+              category: 'Home Page',
+              subCategory: ''
+          }
+      };      
       // setTimeout(() => {
       //   window.waitSegmentifyAndjQuery(); 
       //   window.waitSegmentifyJquery();
