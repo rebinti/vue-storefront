@@ -141,6 +141,9 @@ export default {
       bottom: auto;
       height: auto;
     }
+    @media (min-width: 1024px) {
+      height: 100%;
+    }
   }
 
   &__thumbs {
