@@ -236,7 +236,7 @@ export default {
         updatedShippingDetails.addresses = [];
         // updatedShippingDetails.addresses.push({delete_address: true, address_id: selectedAddress.id})
         updatedShippingDetails.addresses.push({ ...selectedAddress, ...{delete_address: true, address_id: selectedAddress.id}})
-        console.log('Delete Shipping Details', updatedShippingDetails);
+        // console.log('Delete Shipping Details', updatedShippingDetails);
         this.$bus.$emit('notification-progress-start', this.$t('Please wait ...'))
         this.$bus.$emit('myAccount-before-updateUser', updatedShippingDetails)
         this.$bus.$emit('modal-hide', 'modal-addressFromPopup')

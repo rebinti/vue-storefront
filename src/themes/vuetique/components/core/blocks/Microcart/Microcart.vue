@@ -224,13 +224,13 @@ export default {
     },
     swipeLeftHandler (param) {
       return function (dir) {
-        console.log('swipeLeftHandler ' , param);
+        // console.log('swipeLeftHandler ' , param);
         param.swipedElement = true;
       }
     },
     swipeRightHandler (param) {
       return function (dir) {
-        console.log('swipeRightHandler ' , param);
+        // console.log('swipeRightHandler ' , param);
         param.swipedElement = false;
       }
     },

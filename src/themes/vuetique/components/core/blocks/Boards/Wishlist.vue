@@ -215,7 +215,7 @@ export default {
         const result = await this.$store.dispatch('boards/removeItem', {...product, board: this.selectedBoardItem});
         this.forceRerenderProduct();
       } catch (err) {
-        console.log('error while deleting', err);
+        // console.log('error while deleting', err);
       } finally {
         this.swipedValue = 0;
       }
@@ -238,7 +238,7 @@ export default {
   },
   watch: {
     rerender () {
-      console.log('The rerender has changed!' , this.rerender);
+      // console.log('The rerender has changed!' , this.rerender);
       if (this.rerender) {
         setTimeout(() => {
           this.forceRerenderBoards()

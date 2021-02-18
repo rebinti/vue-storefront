@@ -151,7 +151,7 @@ export default {
     },
     applyQuantity () {
       this.updateQuantity(this.product.qty)
-      console.log("ttttttttttt",this.product);      
+      // console.log("ttttttttttt",this.product);      
       this.isEditing = false
       this.$emit('parentevent')
     },

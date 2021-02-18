@@ -25,7 +25,7 @@ export const AddToCart = {
     async addToCart (product: Product) {
           // PAPERPLANES - ADD TO CART
           //let _paq = window._paq;
-          console.log("PAPERPLANE AAAAAAAAA",this.$store.state.cart)
+          // console.log("PAPERPLANE AAAAAAAAA",this.$store.state.cart)
           if (window && _paq != undefined) {
             this.$store.state.cart.cartItems.forEach(product => {
               _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     

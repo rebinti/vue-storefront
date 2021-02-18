@@ -126,8 +126,7 @@ methods: {
       })
       this.$bus.$emit('modal-hide', 'modal-outofstocknotification')
     },
-    submitcontactus() {
-      console.log("UUUUUUUUUUUUUUUUUOOOOOOOOOOOO")
+    submitcontactus() {      
       this.errors = {};
       this.submitted = true;
 

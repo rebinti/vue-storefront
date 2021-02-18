@@ -99,7 +99,7 @@ export const AddAddress = {
            updatedShippingDetails.addresses = []
            updatedShippingDetails.addresses.push({ ...selectedAddress, ...updatedShippingDetailsAddress })
 
-          console.log('updatedShippingDetails', updatedShippingDetails);
+          // console.log('updatedShippingDetails', updatedShippingDetails);
           // return;
             this.$bus.$emit('notification-progress-start', this.$t('Please wait ...'))
           this.$bus.$emit('myAccount-before-updateUser', updatedShippingDetails)

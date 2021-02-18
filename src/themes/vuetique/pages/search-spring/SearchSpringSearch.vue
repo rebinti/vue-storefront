@@ -236,7 +236,7 @@ export default {
      this.$bus.$off('search-in-search-spring');
   },
   mounted () {
-    console.log("searchfilter DATAAAAAAAAAAAAa",this.filterData)
+    // console.log("searchfilter data",this.filterData)
     if (this.$route.query.tag) {
       let searchparam = this.$route.query.tag;
       Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
@@ -263,7 +263,7 @@ export default {
       }       
     }
     this.setSegmentify()
-    console.log("SEARCH PAGE >>>>>>>>>>>>",this.serachedProd)
+    // console.log("SEARCH PAGE serachedProd",this.serachedProd)
   },
   methods: {
     // searchActiveQueryValueResults() {

@@ -226,8 +226,7 @@ export default {
     //         }, 'render' );
     //     }, 2000);
     // },
-    segmentifyclickupdate (event) {
-      console.log("YYYYYWWWWWWW")
+    segmentifyclickupdate (event) {      
       event.preventDefault()
         // ensure we use the link, in case the click has been received by a subelement        
         let { target } = event                

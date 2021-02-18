@@ -230,7 +230,7 @@ export default {
       }
     }
     this.setSegmentify();    
-    console.log('getBrandPageTitle >>>>>>>>>',this.getBrandPageTitle)
+    // console.log('getBrandPageTitle >>>>>>>>>',this.getBrandPageTitle)
     // For Google Tag Manager - brand click    
 
     Vue.gtm.trackEvent({

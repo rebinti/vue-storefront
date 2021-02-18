@@ -78,7 +78,7 @@ export default {
   methods: {
     close (e) {
       if (e) localStorage.removeItem('redirect')
-      console.log('this.selectedBoardItem', this.selectedBoardItem);
+      // console.log('this.selectedBoardItem', this.selectedBoardItem);
       if (this.selectedBoardItem === null) {
         this.$store.commit('ui/setSelectedBoardItem', null);
         this.$bus.$emit('modal-hide', 'modal-create-boards')
@@ -100,7 +100,7 @@ export default {
         return
       }
       this.isSubmitBoard = true;
-      console.log('this.selectedBoardItem', this.selectedBoardItem);
+      // console.log('this.selectedBoardItem', this.selectedBoardItem);
       let Boarddata = { name: this.boardname, items: [] };
       if (this.selectedBoardItem) Boarddata.items.push(this.selectedBoardItem);
       try {
@@ -119,7 +119,7 @@ export default {
         }
         return
       } catch (err) {
-        console.log('resultttttt errr', err);
+        // console.log('resultttttt errr', err);
         this.$store.dispatch('notification/spawnNotification', {
           type: 'error',
           message: this.$t('Please try again!'),

@@ -148,7 +148,7 @@ export default {
       if (this.name === fieldName) {
         this.$refs[this.name].focus()
       }
-      console.log(this.condition, this.conditions)
+      // console.log(this.condition, this.conditions)
     },
     keyup ($event) {
       this.$emit('keyup', $event)

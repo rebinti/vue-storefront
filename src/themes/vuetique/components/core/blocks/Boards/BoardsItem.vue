@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     thumbnail (image) {
-      console.log('imageee', image)
+      // console.log('imageee', image)
       return this.getThumbnail(image, 150, 150)
     },
     movingHandler() {

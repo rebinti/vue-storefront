@@ -60,7 +60,7 @@ export function afterRegistration ({ Vue, config, store, isServer }) {
 
       // Measuring Views of Product Details
       if (type === 'product/product/SET_PRODUCT_CURRENT') {
-        console.log("state ???????",state)
+        // console.log("state ???????",state)
         let brandlabel;
         const branditem = state.ui.brandsList.find(f => f.option_id == payload.label)
         if(branditem && branditem.name){

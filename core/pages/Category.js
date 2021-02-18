@@ -133,7 +133,7 @@ export default {
     }
   },
   mounted () {
-    console.log('CATEGORY DESCCCCCCCC', this.category)
+    // console.log('CATEGORY DESCCCCCCCC', this.category)
   },
   beforeDestroy () {
     this.$bus.$off('list-change-sort', this.onSortOrderChanged)

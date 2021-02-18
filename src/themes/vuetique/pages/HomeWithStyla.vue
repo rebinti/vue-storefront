@@ -86,8 +86,7 @@ export default {
         skipCache: true }),
     ])
   },
-  mounted() {   
-    console.log("HOME MOUNTED ----- AAAAA") 
+  mounted() {       
     this.$bus.$emit('send-to-emarsys-tracking');    
     if ('styla' in window) {
        styla.init !== "undefined"&&styla.init()

@@ -1269,7 +1269,7 @@ export default {
         } else {
           this.getTruefitProd = null;
         }
-        console.log('TrueFit Integration value', this.getTruefitProd)
+        // console.log('TrueFit Integration value', this.getTruefitProd)
 
       /* For reload the stamped review section */ 
         // this.$forceUpdate();
@@ -1343,8 +1343,7 @@ export default {
     this.$bus.$off('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
-  mounted() {
-    console.log("PRODUCT MOUNTED ----- AAAAA")
+  mounted() {    
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;

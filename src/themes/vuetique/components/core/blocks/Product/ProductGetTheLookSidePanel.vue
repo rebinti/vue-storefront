@@ -79,7 +79,7 @@ export default {
     // }
   },
   mounted () {
-      console.log("NEW SIDEEEEEEEEEEEEEEEEE 1111",this.product)
+      // console.log("NEW SIDEEEEEEEEEEEEEEEEE 1111",this.product)
     let start = null;
     const touchStart = (event) => {
         if(event.touches.length === 1) start = event.touches.item(0).clientX;
@@ -152,8 +152,8 @@ export default {
       })     
       
         this.crosssellitems = this.$store.state.product.related.crosssell
-        console.log("testtEEEEEEEEEEEEEEEE",sku)
-        console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product.related.crosssell)        
+        // console.log("testtEEEEEEEEEEEEEEEE",sku)
+        // console.log("testtEEEEEEEEEEEEEEEE111111111111111",this.$store.state.product.related.crosssell)        
     },    
   },
   beforeCreate () {

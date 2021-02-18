@@ -197,9 +197,9 @@ export default {
     async submitOrderDataforEmarsysandSegmentify () {
      if (this.$route.query.orderid) {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
-       console.log('order details Newwww  111111', res);
-       console.log('order details Newwww 222222', res.itemsresult);
-       console.log('order details Newwww 3333333', res.grandtotal);
+      //  console.log('res', res);
+      //  console.log('itemsresult', res.itemsresult);
+      //  console.log('grandtotal', res.grandtotal);
        if (res && res.itemsresult.length > 0) {
             this.orderApiCheck = false;
             let productList= [];
@@ -227,7 +227,7 @@ export default {
             };
             // PAPERPLANES - ORDER SUCCESS PAGE
             if (window && window._paq  != undefined) {
-                console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
+                // console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
                 window._paq.push(paperplane_productList);                                 
                // window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
                 if(res.guest_email_md5){

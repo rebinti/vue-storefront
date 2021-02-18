@@ -97,15 +97,13 @@ export default {
       //this.password = "test123#@!11111"	
 
       this.token = this.$route.query.token;
-      this.id = this.$route.query.id;
-      console.log("testtttttt",this.token,this.id);
+      this.id = this.$route.query.id;      
       this.$store.dispatch('user/resetPasswordPost', {
               password: this.password,
               confirmation: this.rPassword,
               id:this.id,
               token:this.token
-              }).then((response) => { 
-                console.log("testtttttt123",response);       
+              }).then((response) => {                     
         this.$bus.$emit('notification-progress-stop')
         if (response.code === 200) {
           this.passwordSent = true
