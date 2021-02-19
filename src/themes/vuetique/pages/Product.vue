@@ -1923,9 +1923,9 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-        width: 423px;
+        width: 420px;
         height: 635px;
-        margin-right: 180px!important;
+        margin-right: 165px !important;
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
@@ -2036,9 +2036,9 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-        width: 423px;
+        width: 390px;
         height: 635px;
-        margin-right: 55px!important;
+        margin-right: 45px !important;
         padding-left: 1.5rem;
         padding-right: 1.5rem; 
         // width: 341px;
