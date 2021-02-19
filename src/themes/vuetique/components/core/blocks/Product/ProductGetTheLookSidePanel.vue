@@ -190,4 +190,14 @@ export default {
         }         
     }
   }
+  @media (max-width: 768px) {
+      .getthelook.right-sidebar.max-w-full.fixed{
+        padding-bottom: 65px;
+      } 
+  } 
+  @media (max-width: 425px){
+    .sidepanelitem .title-and-wish button.btn_box_lnk div.items-center span {
+        font-size: 0.625rem;
+    } 
+  }  
 </style>
