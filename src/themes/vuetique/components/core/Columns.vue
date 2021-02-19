@@ -221,14 +221,14 @@ export default {
 @media screen and (min-width: 1600px) and (max-width: 3840px)  {
   .columns {
     &::after {
-          right: 25px;
+          right: 17px;
     }
   }
 
   .search_page_size_div {
     .columns {
         &::after {
-              right: 132px;
+              right: 39px;
         }
     }
   }

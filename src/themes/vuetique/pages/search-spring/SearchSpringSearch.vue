@@ -77,7 +77,7 @@
     /> 
 
     <div class="container pb-16" v-if="!searcingLoaderFlag">
-        <div class="col-12 lg:col-9 sm:col-12 pr_list_sec_main">
+        <div class="col-12 lg:col-9 sm:col-12 pr_list_sec_main top-filter">
           <div class="row">
             <div class="col-12 lg:col-8 searchtitle" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <h2 style="width:100%;padding-bottom:25px;">
@@ -85,13 +85,13 @@
                 <sub v-if="searchRes && searchRes.pagination">({{ searchRes.pagination.totalResults }} Products)</sub>
               </h2>
             </div>
-             <div class="col-2 hidden lg:block xs:col-6">
+             <div class="col-2 hidden filter-col lg:block xs:col-6">
                  <div v-if="searchRes && searchRes.facets && searchRes.facets.length > 0" class="search_page_size_div">
                     <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                     <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
                  </div>   
               </div>
-            <div class="col-2 hidden xs:col-6 lg:block" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
+            <div class="col-2 hidden filter-sort xs:col-6 lg:block" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
               <base-select
                 v-if="sortingFilterOptions && sortingFilterOptions.length"
                 class="col-12 md:col-6 mb-6 txt_blk_select"
@@ -582,7 +582,21 @@ input {
    .selectedone{
      clear: both;
      overflow: hidden;
-   }  
+   } 
+@media screen and (min-width: 1600px) and (max-width: 3840px)  {
+  .top-filter .searchtitle.lg\:col-8{
+    flex-basis: 75%;
+    max-width: 75%;      
+  }
+  .top-filter .filter-col.col-2{
+    flex-basis: 10%;
+    max-width: 10%;      
+  }  
+  .top-filter .filter-sort.col-2{
+    flex-basis: 15%;
+    max-width: 15%;      
+  }   
+} 
 @media screen and (min-width: 768px) and (max-width: 1600px)  {
   .sidebar .filterdata{
     width:225px;
