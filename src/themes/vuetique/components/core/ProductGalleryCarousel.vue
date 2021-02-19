@@ -379,30 +379,35 @@ img[lazy=loaded] {
 }
 @media (max-width: 1440px) {
   .hooper-slide .product-image-container img{
-      width: 360px;
-      height: 540px;
+      width: 423px;
+      height: 635px;
   }      
   .hooper {
-    height: 540px;
+    height: 635px;
   }      
 }
 @media (max-width: 1280px) {
   .hooper-slide .product-image-container img{
-      width: 320px;
-      height: 480px;
+      width: 423px;
+      height: 635px;
   }      
   .hooper {
-    height: 480px;
+    height: 635px;
   }      
 }
 @media (max-width: 1024px) {
   .hooper-slide .product-image-container img{
-      width: 341px;
-      height: 511.5px;
+      width: 423px;
+      height: 635px;
   }      
   .hooper {
-    height: 511.5px;
+    height: 635px;
   }      
+}
+@media (min-width: 769px) and (max-width: 1440px) {
+    .hooper-slide{
+      width: 423px !important;
+  }
 }
 @media (max-width: 768px) {
   .hooper-slide .product-image-container img{

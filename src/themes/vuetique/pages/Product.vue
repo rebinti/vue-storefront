@@ -1923,14 +1923,14 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-        width: 360px;
-        height: 540px;
+        width: 423px;
+        height: 635px;
         margin-right: 180px!important;
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
           font-size: 1rem;
-          line-height: 1.25rem;
+          line-height: 2rem;
           text-transform: uppercase;
         }
         h5 {
@@ -2005,7 +2005,7 @@ button.no-combination {
       }
     }
     .top-main{
-      height: 540px;
+      height: 635px;
     }
     button.no-combination {
         // display:none !important;
@@ -2036,8 +2036,8 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-       width: 360px;
-        height: 540px;
+        width: 423px;
+        height: 635px;
         margin-right: 55px!important;
         padding-left: 1.5rem;
         padding-right: 1.5rem; 
@@ -2047,8 +2047,8 @@ button.no-combination {
         // padding-left: 1.5rem;
         // padding-right: 1.5rem;                
         h1{
-          font-size: 0.85rem;
-          line-height: 1.25rem;
+          font-size: 1rem;
+          line-height: 2rem;
           text-transform: uppercase;
         }
         h5 {
@@ -2056,12 +2056,12 @@ button.no-combination {
         }
         div.price{
           .text-h1{
-            font-size: 14px; 
+            font-size: 1.2rem;
           }          
-          font-size: 14px;
+          font-size: 1.2rem;
           div{
             span{
-              font-size: 14px;
+              font-size: 1.2rem;
             }
           }            
         }
@@ -2083,7 +2083,7 @@ button.no-combination {
             p{
               margin-top: 8px !important;
               a{                
-                font-size: 12px;
+                font-size: 1rem;
               }
             }
           }
@@ -2126,7 +2126,7 @@ button.no-combination {
       }
     }
     .top-main{
-      height: 512px;
+      height: 635px;
     }    
   }      
 }
