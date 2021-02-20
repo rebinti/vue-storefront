@@ -14,16 +14,20 @@
 	<!-- New Relic Start --> 
 	
 	<!-- New Relic Stop -->	
-	
-	<link rel="dns-prefetch" href="//styla-prod.us.imgix.net">
+
 	<link rel="dns-prefetch" href="//client-scripts.styla.com">
 	<link rel="dns-prefetch" href="//redpanda.styla.com">
+	<link rel="dns-prefetch" href="//styla-prod.us.imgix.net">
+	<link rel="dns-prefetch"href="https://config.a8.styla.com">
 	<link rel='dns-prefetch' href='//cdn.segmentify.com'>
 	<link rel='dns-prefetch' href='//gandalf-eu.segmentify.com/'> 
 
 	<link rel="preload" href="https://cdn.iclothing.com/skin/frontend/codazon_fastest/baby/css/fonts/brandon_med-webfont.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="https://cdn.iclothing.com/skin/frontend/codazon_fastest/baby/css/fonts/brandon_reg-webfont.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="https://cdn.iclothing.com/skin/frontend/codazon_fastest/baby/css/fonts/brandon_light-webfont.woff2" as="font" type="font/woff2" crossorigin>
+
+	<link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
 
 	<!-- <link href="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" rel="prefetch" as="script"> -->
 
@@ -33,11 +37,11 @@
 
 	<link href="/assets/css/swiper-bundle.min.css" rel="prefetch" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="prefetch" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 	
-	<script type="text/javascript" defer>
+	<!-- <script type="text/javascript" defer>
 			WebFontConfig = {
 				google: { families: [ 'Noto+Serif+SC:700:latin', 'Roboto:300,400,500:latin' ] }
 			};
@@ -50,7 +54,7 @@
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(wf, s);
 			})();
-    </script>
+    </script> -->
 	<!-- <script>document.getElementsByTagName("html")[0].className += " js";</script> -->
 	
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -99,7 +103,7 @@
             storeUrl: 'www.iclothing.com' }); 
 		}
 	</script>
-	<script onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js" async></script>
+	<script onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js" defer></script>
 
 	<!-- True Fit Script -->
 	<script type="text/JavaScript" defer>
