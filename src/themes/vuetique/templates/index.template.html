@@ -23,11 +23,13 @@
 
 	<!-- <link href="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" rel="prefetch" as="script"> -->
 
-	<script rel="prefetch" src="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" type="text/javascript" async></script>
+	<!-- <link rel="preload" href="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" as="script" crossorigin="anonymous"> -->
 
-	<link href="/assets/css/swiper-bundle.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
+	<script rel="preload" src="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" type="text/javascript"></script>
+
+	<link href="/assets/css/swiper-bundle.min.css" rel="prefetch" as="style" onload="this.rel='stylesheet'">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
-	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
+	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="prefetch" as="style" onload="this.rel='stylesheet'">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
 
 
@@ -67,7 +69,7 @@
 
 	<!-- for segmentify product recommendations widgets --> 
 		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" async charset="UTF-8" ></script>
-		<!-- SEGMENTIFY BEGIN --> 
+		<!-- SEGMENTIFY BEGIN 
 		<script type='text/javascript'> 
 			(function(namespace) { 
 				window['SegmentifyTrackingObject'] = namespace; 
@@ -83,7 +85,7 @@
 			Segmentify('apikey', '3eb32483-e5a6-403f-b355-909ba225968e');
 		</script>
 		<script src='cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
-	<!-- SEGMENTIFY END --> 	
+	 SEGMENTIFY END --> 	
 		
 		
 	<!-- ########## STAMPED ######### -->
@@ -122,7 +124,7 @@
 	</script>
 
 
-	<script type="text/javascript" defer>
+	<script type="text/javascript" async>
 		var ScarabQueue = ScarabQueue || [];
 		(function(id) {
 		  if (document.getElementById(id)) return;
