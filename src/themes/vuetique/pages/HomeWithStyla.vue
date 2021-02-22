@@ -75,11 +75,11 @@ export default {
   async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data
     Logger.info('Calling asyncData in Home (theme)')()
     await Promise.all([
-      // store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }),
-      // store.dispatch('attribute/list', { // load filter attributes for this specific category
-      //     filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
-      //     includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
-      // }),
+      store.dispatch('category/list', { includeFields: config.entities.optimize ? config.entities.category.includeFields : null }),
+      store.dispatch('attribute/list', { // load filter attributes for this specific category
+          filterValues: config.products.defaultFilters, // TODO: assign specific filters/ attribute codes dynamicaly to specific categories
+          includeFields: config.entities.optimize && isServer ? config.entities.attribute.includeFields : null
+      }),
       store.dispatch('cmsPage/single', {key: 'identifier.keyword',
         value: 'amphomepage',
         skipCache: true }),
