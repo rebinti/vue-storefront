@@ -4,8 +4,8 @@
           <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:55px;">                  
     </div>    
     <!-- For loading the styla magazine content -->
-    <Styla-home-magazine  />     
-    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-home-reco"></div>      
+    <Styla-home-magazine  />   
+    <Segmentify-home-slider />               
   </div>
 </template>
 
@@ -15,13 +15,16 @@ import Home from '@vue-storefront/core/pages/Home'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
 import StylaHomeMagazine from 'theme/components/theme/blocks/Styla/StylaHomeMagazine'
+import SegmentifyHomeSlider from 'theme/components/theme/blocks/Home/SegmentifyHomeSlider'
 import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
 import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
+const SegmentifyHomeSlider = () => import(/*  webpackPrefetch: true */ 'theme/components/theme/blocks/Home/SegmentifyHomeSlider.vue')
 
 export default {
   mixins: [Home ],
   components: {
-      StylaHomeMagazine,      
+      StylaHomeMagazine,
+      SegmentifyHomeSlider,      
   },
   data () {
     return {
@@ -46,9 +49,6 @@ export default {
               subCategory: ''
           }
       };      
-    },
-    segmentifyhandleClicks (event) {
-      this.$bus.$emit('segmentify-block-router-update',event);
     },
     fromhomerouterwatch () {       
       this.setSegmentify()
