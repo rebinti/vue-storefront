@@ -13,20 +13,20 @@ import { RecentlyViewed } from '@vue-storefront/core/modules/recently-viewed'
 import { Url } from '@vue-storefront/core/modules/url'
 import { Homepage } from './homepage'
 import { Claims } from './claims'
-// import { PromotedOffers } from './promoted-offers'
+import { PromotedOffers } from './promoted-offers'
 import { Ui } from './ui-store'
-import { GoogleAnalytics } from './google-analytics';
+// import { GoogleAnalytics } from './google-analytics';
 // import { Hotjar } from './hotjar';
 import { googleTagManager } from './google-tag-manager';
 // import { VsfGoogleTagManager } from './vsf-google-tag-manager'
 import { AmpRenderer } from './amp-renderer';
-// import { PaymentBackendMethods } from './payment-backend-methods';
-// import { PaymentCashOnDelivery } from './payment-cash-on-delivery';
+import { PaymentBackendMethods } from './payment-backend-methods';
+import { PaymentCashOnDelivery } from './payment-cash-on-delivery';
 import { RawOutputExample } from './raw-output-example'
 // import { InstantCheckout } from './instant-checkout'
 import { OrderHistory } from './order-history'
 
-// import { DndPrismicCMS } from './dnd-prismic-cms'
+import { DndPrismicCMS } from './dnd-prismic-cms'
 // import { Braintree } from './payment-braintree';  // M2
 
 // import { PaymentBraintreeModule } from './payment-braintree'
@@ -90,19 +90,19 @@ export const registerModules: VueStorefrontModule[] = [
   RecentlyViewed,
   Homepage,
   Claims,
-  // PromotedOffers,
+  PromotedOffers,
   googleTagManager,
   // VsfGoogleTagManager,
   // GoogleAnalytics,
   // Hotjar,
-  // PaymentBackendMethods,
-  // PaymentCashOnDelivery,
-  // RawOutputExample,
+  PaymentBackendMethods,
+  PaymentCashOnDelivery,
+  RawOutputExample,
   AmpRenderer,
   // InstantCheckout,
   Url,
   OrderHistory,
-  // DndPrismicCMS,
+  DndPrismicCMS,
   // Paypal,
   // PaymentBraintreeModule
   // Braintree,
