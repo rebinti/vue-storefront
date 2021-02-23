@@ -54,13 +54,7 @@
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(wf, s);
 			})();
-	</script>
-	
-	{{{ renderResourceHints() }}}
-	{{{ renderStyles() }}}
-	{{{ output.appendHead() }}}
-
-	
+    </script>
 	<!-- <script>document.getElementsByTagName("html")[0].className += " js";</script> -->
 	
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -171,7 +165,9 @@
 	</script> -->
 	<!-- >> DATASHIPS ENDS  << -->	
 
-
+		{{{ renderResourceHints() }}}
+		{{{ renderStyles() }}}
+		{{{ output.appendHead() }}}
 	</head>
   <body>
 		<!--vue-ssr-outlet-->
