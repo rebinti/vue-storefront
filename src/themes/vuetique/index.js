@@ -11,8 +11,8 @@ import { once } from '@vue-storefront/core/helpers'
 import { extendModule } from '@vue-storefront/core/lib/module'
 import uiStore from 'theme/store/ui'
 // import Vue2TouchEvents from 'vue2-touch-events'
-import '@fortawesome/fontawesome-free/css/all.css'
-import '@fortawesome/fontawesome-free/js/all.js'
+// import '@fortawesome/fontawesome-free/css/all.css'
+// import '@fortawesome/fontawesome-free/js/all.js'
 
 once('__VUE_EXTEND_DROPPOINT_VPB__', () => {
   Vue.use(VueProgressBar);
