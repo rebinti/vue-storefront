@@ -15,9 +15,9 @@ import Home from '@vue-storefront/core/pages/Home'
 import { Logger } from '@vue-storefront/core/lib/logger'
 import config from 'config'
 import StylaHomeMagazine from 'theme/components/theme/blocks/Styla/StylaHomeMagazine'
+import SegmentifyHomeSlider from 'theme/components/theme/blocks/Home/SegmentifyHomeSlider'
 import { htmlDecode } from '@vue-storefront/core/filters/html-decode'
 import { currentStoreView, localizedRoute } from '@vue-storefront/core/lib/multistore'
-const SegmentifyHomeSlider = () => import(/*  webpackPrefetch: true */ 'theme/components/theme/blocks/Home/SegmentifyHomeSlider.vue')
 
 export default {
   mixins: [Home ],
