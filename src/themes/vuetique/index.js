@@ -1,4 +1,4 @@
-// import { setupMultistoreRoutes } from '@vue-storefront/core/lib/multistore'
+import { setupMultistoreRoutes } from '@vue-storefront/core/lib/multistore'
 import App from './App.vue'
 import routes from './router'
 import Vue from 'vue'
@@ -11,8 +11,8 @@ import { once } from '@vue-storefront/core/helpers'
 import { extendModule } from '@vue-storefront/core/lib/module'
 import uiStore from 'theme/store/ui'
 // import Vue2TouchEvents from 'vue2-touch-events'
-// import '@fortawesome/fontawesome-free/css/all.css'
-// import '@fortawesome/fontawesome-free/js/all.js'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 
 once('__VUE_EXTEND_DROPPOINT_VPB__', () => {
   Vue.use(VueProgressBar);
@@ -36,7 +36,7 @@ function initTheme (app, router, store, config, ssrContext) {
   // You can do it on your own and then be able to customize the components used for example for German storeView checkout
   // To do so please execlude the desired storeView from the config.storeViews.mapStoreUrlsFor and map the urls by Your own like:
   // { name: 'de-checkout', path: '/checkout', component: CheckoutCustomized },
-  // setupMultistoreRoutes(config, router, routes)
+  setupMultistoreRoutes(config, router, routes)
   RouterManager.addRoutes(routes, router)
 }
 

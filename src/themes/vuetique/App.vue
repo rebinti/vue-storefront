@@ -1,5 +1,5 @@
 <template>
-  <div id="app" data-server-rendered="true">
+  <div id="app">
     <component :is="layout">
       <router-view />
     </component>
