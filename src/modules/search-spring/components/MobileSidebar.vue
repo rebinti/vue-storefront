@@ -558,7 +558,7 @@ input {
 @media (max-width: 1440px) {
   .filterdiv {
     width: 228px;
-    bottom: 515px;
+    bottom: 625px;
   }
 }
 @media (max-width: 520px) {

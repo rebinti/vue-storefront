@@ -397,7 +397,7 @@ export default {
 }
 .footerreached{
     position: fixed;
-    bottom: 515px;
+    bottom: 625px;
     width: 380px;
     top: auto;
 }
@@ -695,7 +695,7 @@ input {
 @media (max-width: 1440px) {
   .filterdiv{
       width: 228px;
-      bottom: 515px;
+      bottom: 625px;
   }
 }
 @media (min-width: 769px) and (max-width: 991x){
