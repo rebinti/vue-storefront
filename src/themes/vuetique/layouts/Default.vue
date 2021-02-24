@@ -164,67 +164,6 @@ export default {
     fetchCmsBlockData () {
        return this.$store.dispatch('cmsBlock/list', {filterValues: config.cmsBlocksDataFetchConfig.cmsBLockList})
     },
-    stylaScriptsInsatallation (f, b, e, v, callback) {
-      let t, s;
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-      t.onload = callback;
-    },
-    initStyla() {
-      this.stylaScriptsInsatallation(
-      window,
-      document,
-      "script",
-      "https://client-scripts.styla.com/scripts/clients/iclothing-import.js",
-      () => { 
-                 if(this.$route.path === '/' || this.$route.path.includes('inspiration')){
-                   this.setStylaPageModuleTracker() 
-                 } 
-        }
-     )
-    },
-    /*
-      For managing Styla module pages contents and its routing href tags
-      and changing those href tags to Vue.js based internel routing.
-    */
-    setStylaPageModuleTracker() {
-         if(this.stylaLoaded) return
-         window.styla.init()
-         setTimeout(() => {
-                if(this.stylaLoaded) return
-                if(window.styla && window.styla.hooks) this.stylaLoaded = true;
-                else return
-                  window.styla.hooks.register( 'moduleRender', function( _data, domNode ) {
-                  if (!domNode) {
-                    return;
-                  }
-                  // Apply here any desired intervention over the module's DOM structure
-                  let anchors = domNode.querySelectorAll('a');
-                  let anchorClickLogic = (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    let target = event.target          
-                    while (target) {
-                        if (target instanceof HTMLAnchorElement) {
-                          let link = target.getAttribute('href')
-                          if (link.substr(0, 4) === 'http') {
-                          const newLocation = link.replace('https://www.iclothing.com', '')
-                            router.push(localizedRoute(newLocation, currentStoreView().storeCode))
-                          } else {
-                            router.push(localizedRoute(target.getAttribute('href'), currentStoreView().storeCode))
-                          }
-                          break
-                    }
-                    target = target.parentNode
-                  }
-              };
-              anchors.forEach(anchor => anchor.onclick = anchorClickLogic);
-            }, 'render' );
-        }, 2000);
-    }
 
   },
   serverPrefetch () {
