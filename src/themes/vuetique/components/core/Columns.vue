@@ -232,5 +232,10 @@ export default {
         }
     }
   }
+  .select-wrapper {
+    select{
+      width: 37%;
+    }
+  }
 }
 </style>
