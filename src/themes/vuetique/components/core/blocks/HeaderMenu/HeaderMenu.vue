@@ -221,6 +221,9 @@ export default {
       outline: none;
     }
   }
+  .cms-block-menu{
+    box-shadow: 0 5px 5px rgba(0,0,0,.19);
+  }  
 }
 
 .with-submenu:hover {
