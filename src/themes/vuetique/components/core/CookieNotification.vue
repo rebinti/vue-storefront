@@ -88,6 +88,7 @@ $bg-icon: color(suva-gray);
   text-align: center;
   font-weight: bold;
   line-height: 35px;
+  box-shadow: 5px 0px 5px 5px rgba(0,0,0,.19);
 
   a,
   a:hover {
