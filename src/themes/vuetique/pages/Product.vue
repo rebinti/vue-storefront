@@ -343,7 +343,7 @@
           </div>
           <!-- mobile product details sec ends -->
 
-          <div class="w-full md:w-2/5 md:px-10 ds_item details-section"
+          <div class="w-full md:w-2/5 md:px-10 ds_item details-section video-main-section"
              style="z-index:1" v-if="showProducVideoPopupFlag && productVideoData">
               <i
                 slot="close"
@@ -1778,6 +1778,10 @@ button.no-combination {
           }          
         }                                   
       }
+      .video-main-section{
+        width: 541px;
+        margin-right: 912px !important;
+      }
     }
     .top-main{
       height: 908px;
@@ -1897,6 +1901,10 @@ button.no-combination {
           }             
         }
       }
+      .video-main-section{
+        width: 390px;
+        margin-right: 693px !important;
+      }      
     }
     .top-main{
       height: 691px;
@@ -2010,6 +2018,10 @@ button.no-combination {
           }
         }                         
       }
+      .video-main-section{
+          width: 357px;
+          margin-right: 585px !important;
+      }      
     }
     .top-main{
       height: 635px;
@@ -2131,6 +2143,10 @@ button.no-combination {
           }
         }         
       }
+      .video-main-section{
+        width: 356px;
+          margin-right: 435px !important;
+      }      
     }
     .top-main{
       height: 635px;
