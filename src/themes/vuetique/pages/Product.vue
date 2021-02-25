@@ -71,6 +71,9 @@
               <div class="review-div">
                    <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
               </div>
+              <!-- <div class="video-thum-mob" id="left" v-if="productVideoData" @click="clickvideodiv">  
+                <img  style="float: left;cursor: pointer" src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
+              </div>               -->
               <div class="social-share-button-mob" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->
                 <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
               </div>              
@@ -148,7 +151,7 @@
                               <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                               <img 
                              class="color-swatch-inner"
-                              :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                              :src="getproductswatchimage(prod)"    
                                  @error="imgUrlAlt" alt="" >
                               </div>
                             </div>
@@ -244,7 +247,7 @@
                   </a> 
                 </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 2,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
+              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
 
                   <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup">
 <!-- disableAddToCartButtonFlag -->
@@ -255,7 +258,7 @@
                      :style="product.type_id == 'configurable' && product.configurable_children === undefined ? { backgroundColor: '#bdbdbd !important'} : ''"
                      />
                   </div>
-                  <!-- <div class="video-thum-mob" id="left" v-if="productVideoData" @click="clickvideodiv"> --> <!--  @click="changeToVideoCarouselSlide" -->
+                  <!-- <div class="video-thum-mob" id="left" v-if="productVideoData" @click="clickvideodiv"> -->  <!-- @click="changeToVideoCarouselSlide" -->
                     <!-- <img  style="float: left;cursor: pointer" src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" /> -->
                   <!-- </div>  -->
                   <!-- <div class="social-share-button-mob" id="right" @click="clicksharediv" > -->  <!-- @click="showShareDiv = !showShareDiv" -->                    
@@ -378,12 +381,12 @@
               </div>
               <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > 
                 <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
-              </div>   
+              </div>  
               <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
                 @click="showProducVideoPopup" style="float: right; margin-top: 9px;">
                 <img  style="float: left;cursor: pointer"
                 src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
-              </div>                           
+              </div>                              
               <!-- <div class="product-top-div">
                   <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
                     @click="showProducVideoPopup">
@@ -471,7 +474,7 @@
                           <div class="clr_img_out">
                              <div class="clr_img_inner" :class="{'color-swatch-active': prod.activeProd }" >
                             <img style="border-radius: 50px;width: 28px;height: 28px;" 
-                            :src="'/assets/colour/' + prod.colorSwatch.label.toLowerCase() +'.png'" 
+                            :src="getproductswatchimage(prod)"                             
                               @error="imgUrlAlt" alt="" >
                             </div>
                           </div>
@@ -711,7 +714,7 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'details'" class="details mt-10">
+          <section v-if="detailsAccordion == 'details'" class="details mt-10">
             <div
               class="details-wrapper"
               :class="{'details-wrapper--open': detailsOpen}"
@@ -738,7 +741,7 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'specs'" class="specs mt-10">
+          <section v-if="detailsAccordion == 'specs'" class="specs mt-10">
             <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
               <product-attribute
                 :key="attr.attribute_code"
@@ -761,29 +764,31 @@
           </svg>
         </h3>
         <transition name="fade">
-          <section v-show="detailsAccordion == 'reviews'" class="mt-10">
-            <reviews v-show="OnlineOnly" />
+          <section v-if="detailsAccordion == 'reviews'" class="mt-10">
+            <reviews v-if="OnlineOnly" />
           </section>
         </transition>
       </div>
     </div> -->
-    <no-ssr>
+    <!-- <no-ssr>
       <related-products
         type="upsell"
         typeofview="carousel"
         :fetchRelatedProdctsFlag="fromRelatedProdcutClick"
         :heading="$t('We found other products you might like')"
       />
-    </no-ssr>
+    </no-ssr> -->
     <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
+    <no-ssr>
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
-    <div class="lg:pl-6   my-4 recent-view w-full">
-      <no-ssr>
+    </no-ssr>
+    <!-- <div class="lg:pl-6   my-4 recent-view w-full">
+        <no-ssr>
         <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
-      </no-ssr>
-    </div>
-    <div id="seg-prod-reco"></div>
+        </no-ssr>
+    </div> -->
+    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
   </div>
 </template>
 
@@ -792,29 +797,28 @@ import NoSSR from 'vue-no-ssr'
 import Vue from 'vue'
 import Product from '@vue-storefront/core/pages/Product'
 import VueOfflineMixin from 'vue-offline/mixin'
-import RelatedProducts from 'theme/components/core/blocks/Product/Related.vue'
-import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
 import AddToCart from 'theme/components/core/AddToCart.vue'
 import GenericSelector from 'theme/components/core/GenericSelector'
 import ColorSelector from 'theme/components/core/ColorSelector.vue'
 import SizeSelector from 'theme/components/core/SizeSelector.vue'
-import Breadcrumbs from 'theme/components/core/Breadcrumbs.vue'
-import ProductAttribute from 'theme/components/core/ProductAttribute.vue'
-import ProductTile from 'theme/components/core/ProductTile.vue'
-import ProductLinks from 'theme/components/core/ProductLinks.vue'
-import ProductCustomOptions from 'theme/components/core/ProductCustomOptions.vue'
-import ProductBundleOptions from 'theme/components/core/ProductBundleOptions.vue'
 import ProductGallery from 'theme/components/core/ProductGallery'
-import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
-
 import focusClean from 'theme/components/theme/directives/focusClean'
-import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
-import QtyInput from 'theme/components/theme/QtyInput'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
-import {  findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
+import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
 
-import ProductShare from 'theme/components/core/blocks/Product/ProductShare.vue'
+const RelatedProducts = () => import('theme/components/core/blocks/Product/Related.vue')
+const Breadcrumbs = () => import('theme/components/core/Breadcrumbs.vue')
+const ProductLinks = () => import('theme/components/core/ProductLinks.vue')
+const ProductCustomOptions = () => import('theme/components/core/ProductCustomOptions.vue')
+const ProductBundleOptions = () => import('theme/components/core/ProductBundleOptions.vue')
+const QtyInput = () => import('theme/components/theme/QtyInput')
+const ProductShare = () => import('theme/components/core/blocks/Product/ProductShare.vue')
+// import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
+// import ProductAttribute from 'theme/components/core/ProductAttribute.vue'
+// import ProductTile from 'theme/components/core/ProductTile.vue'
+// import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
+// import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
 
 export default {
   components: {
@@ -824,19 +828,19 @@ export default {
     Breadcrumbs,
     ColorSelector,
     GenericSelector,
-    ProductAttribute,
     ProductBundleOptions,
     ProductCustomOptions,
     ProductGallery,
     ProductLinks,
-    ProductTile,
-    PromotedOffers,
     RelatedProducts,
-    Reviews,
-    SizeSelector,
-    RecentlyViewed,
+    SizeSelector,    
     QtyInput,
-    ProductShare
+    ProductShare,
+    // ProductAttribute,    
+    // ProductTile,
+    // PromotedOffers,    
+    // Reviews,
+    // RecentlyViewed,
   },
   mixins: [Product, VueOfflineMixin],
   data () {
@@ -909,7 +913,7 @@ export default {
       } else {
         return null
       }
-    }      
+    }    
   },
   beforeMount () { 
     this.mobileCartFixedHeight= window.innerHeight-65;
@@ -985,6 +989,13 @@ export default {
     // this.refreshStampedReview();
   // },
   methods: {
+    getproductswatchimage (prodobj){      
+      if(prodobj.color_swatch_image=='no_selection'){
+        return '/assets/colour/' + prodobj.colorSwatch.label.toLowerCase() +'.png'
+      }else{
+        return this.$store.state.config.images.baseUrl+'25/25/resize'+prodobj.color_swatch_image
+      }            
+    },      
     openProductOptionsPopup () {
       if(!this.disableAddToCartButtonFlag) return 
       if(this.product.type_id == 'configurable' && this.product.configurable_children === undefined) return
@@ -1002,6 +1013,12 @@ export default {
         "category": "Product Page",
         "subCategory": this.product.parentSku
       }
+      window.sgfLayer = {
+          'page': {
+              category: 'Product Page',
+              subCategory: ''
+          }
+      }      
     },
     setBreadCrumbToSamePath () { 
       this.showBreadCrumbsToSamePath = true; 
@@ -1258,7 +1275,7 @@ export default {
         } else {
           this.getTruefitProd = null;
         }
-        console.log('TrueFit Integration value', this.getTruefitProd)
+        // console.log('TrueFit Integration value', this.getTruefitProd)
 
       /* For reload the stamped review section */ 
         // this.$forceUpdate();
@@ -1319,7 +1336,10 @@ export default {
         else val.activeProd= false;
         return val; });
       this.fromRelatedProdcutClick= true;
-    }
+    },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
+    },    
   },
   beforeDestroy () {
     this.$bus.$off('product-after-related')
@@ -1329,7 +1349,7 @@ export default {
     this.$bus.$off('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
-  mounted() {
+  mounted() {    
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;
@@ -1909,14 +1929,14 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-        width: 360px;
-        height: 540px;
-        margin-right: 180px!important;
+        width: 420px;
+        height: 635px;
+        margin-right: 165px !important;
         padding-left: 1.5rem;
         padding-right: 1.5rem;        
         h1{
           font-size: 1rem;
-          line-height: 1.25rem;
+          line-height: 2rem;
           text-transform: uppercase;
         }
         h5 {
@@ -1991,7 +2011,7 @@ button.no-combination {
       }
     }
     .top-main{
-      height: 540px;
+      height: 635px;
     }
     button.no-combination {
         // display:none !important;
@@ -2022,9 +2042,9 @@ button.no-combination {
   #product{
     .container{
       .details-section{
-       width: 360px;
-        height: 540px;
-        margin-right: 55px!important;
+        width: 390px;
+        height: 635px;
+        margin-right: 45px !important;
         padding-left: 1.5rem;
         padding-right: 1.5rem; 
         // width: 341px;
@@ -2033,8 +2053,8 @@ button.no-combination {
         // padding-left: 1.5rem;
         // padding-right: 1.5rem;                
         h1{
-          font-size: 0.85rem;
-          line-height: 1.25rem;
+          font-size: 1rem;
+          line-height: 2rem;
           text-transform: uppercase;
         }
         h5 {
@@ -2042,12 +2062,12 @@ button.no-combination {
         }
         div.price{
           .text-h1{
-            font-size: 14px; 
+            font-size: 1.2rem;
           }          
-          font-size: 14px;
+          font-size: 1.2rem;
           div{
             span{
-              font-size: 14px;
+              font-size: 1.2rem;
             }
           }            
         }
@@ -2069,7 +2089,7 @@ button.no-combination {
             p{
               margin-top: 8px !important;
               a{                
-                font-size: 12px;
+                font-size: 1rem;
               }
             }
           }
@@ -2112,7 +2132,7 @@ button.no-combination {
       }
     }
     .top-main{
-      height: 512px;
+      height: 635px;
     }    
   }      
 }
