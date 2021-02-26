@@ -273,6 +273,7 @@ header {
 
     &.header-visible header {
       top: 0;
+      box-shadow: 0 8px 14px -11px black;
     }
   }
 }
