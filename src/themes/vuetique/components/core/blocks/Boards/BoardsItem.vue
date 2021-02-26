@@ -326,6 +326,42 @@ input {
   padding-top: 13px;
   display: inline-block;
 }
+@media (max-width: 320px) {
+  .image-block-wrapper-out .image-block-col .typeone-img{
+    width:88px;
+    height:132px;
+  }
+  .image-block-wrapper-out .image-block-col .typethree-img ,.image-block-wrapper-out .image-block-col .typetwo-img{
+    width:40px;
+    height:63.5px;
+  }    
+}
+@media (min-width: 425px) and (max-width: 767px) {
+  .image-block-wrapper-out .image-block-col .typeone-img{
+    width:123px;
+    height:184.5px;
+  }
+  .image-block-wrapper-out .image-block-col .typethree-img{
+    width:56.5px;
+    height:85px;
+  } 
+  .image-block-wrapper-out .image-block-col .typetwo-img{
+    width:56.5px;
+    height:85px;
+  }
+  .image-block-wrapper-out .image-block-col .div-one{
+    width: 56.5px;
+    height: 82px;
+    overflow: hidden;
+    margin-bottom: 5px;   
+  }
+  .image-block-wrapper-out .image-block-col .div-two{
+    width:56.5px;
+    height:62px;   
+    overflow: hidden;
+    margin-bottom: 5px;         
+  } 
+}
 @media (min-width: 768px) and (max-width: 3500px) {
   .image-block-wrapper-out .image-block-col .typeone-img{
     width:140px;
