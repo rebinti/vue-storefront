@@ -302,6 +302,7 @@ export default {
    max-width: 480px;
    padding: 10px 15px;
    z-index: 100;
+   box-shadow: #121212 0px 4px 5px 2px;
  }
  .p_crt_list{
    width:100%;
