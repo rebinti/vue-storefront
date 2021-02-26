@@ -10,31 +10,37 @@
 
 
                 <div class="image-block-col">
-                  <img class="image" v-if="product.items.length > 0" v-lazy="thumbnail(product.items[0].image)" alt="" title="">
-                  <img v-else src="/assets/large_1.png"/>
+                  <img class="image typeone-img" v-if="product.items.length > 0" v-lazy="thumbnail(product.items[0].image)" alt="" title="">
+                  <img class="typeone-img" v-else src="/assets/large_1.png"/>
                 </div>
 
                 <div class="image-block-col">
-                 <img class="image" v-if="product.items.length > 1" v-lazy="thumbnail(product.items[1].image)" alt="" title="">
-                 <img v-else src="/assets/large_1.png"/>
+                 <img class="image typeone-img" v-if="product.items.length > 1" v-lazy="thumbnail(product.items[1].image)" alt="" title="">
+                 <img class="typeone-img" v-else src="/assets/large_1.png"/>
                 </div>
 
                 <div class="image-block-col">
                  <div class="img_col_2 lg_img_one" >
-                    <img class="image" v-if="product.items.length > 2" v-lazy="thumbnail(product.items[2].image)" alt="" title="">
-                    <img v-else src="/assets/mid_1.png"/>
-
-                    <img class="image" v-if="product.items.length > 3" v-lazy="thumbnail(product.items[3].image)" alt="" title="">
-                    <img v-else src="/assets/small_1.png"/>
+                  <div class="div-one">
+                    <img class="image typetwo-img" v-if="product.items.length > 2" v-lazy="thumbnail(product.items[2].image)" alt="" title="">
+                    <img class="typetwo-img" v-else src="/assets/mid_1.png"/>
+                  </div> 
+                  <div class="div-two">
+                    <img class="image typethree-img" v-if="product.items.length > 3" v-lazy="thumbnail(product.items[3].image)" alt="" title="">
+                    <img class="typethree-img" v-else src="/assets/small_1.png"/>
+                  </div> 
                  </div>
 
                  <div class="img_col_2 lg_img_two">
-                    <img class="image" v-if="product.items.length > 4" v-lazy="thumbnail(product.items[4].image)" alt="" title="">
-                    <img v-else src="/assets/small_1.png"/>
-
-                    <img class="image" v-if="product.items.length > 5" v-lazy="thumbnail(product.items[5].image)" alt="" title="">
-                    <img v-else src="/assets/mid_1.png"/>
-                 </div>
+                    <div class="div-two">
+                      <img class="image typethree-img" v-if="product.items.length > 4" v-lazy="thumbnail(product.items[4].image)" alt="" title="">
+                      <img class="typethree-img" v-else src="/assets/small_1.png"/>
+                    </div> 
+                    <div class="div-one">
+                      <img class="image typetwo-img" v-if="product.items.length > 5" v-lazy="thumbnail(product.items[5].image)" alt="" title="">
+                      <img class="typetwo-img" v-else src="/assets/mid_1.png"/>
+                    </div> 
+                 </div>                
                 </div>
               </div>
 
@@ -94,7 +100,7 @@ export default {
   methods: {
     thumbnail (image) {
       // console.log('imageee', image)
-      return this.getThumbnail(image, 150, 150)
+      return this.getThumbnail(image, 142, 213)
     },
     movingHandler() {
         if( !this.swipedLeft && (this.swipedValue > -80  && this.swipedValue <= 0)  && this.windowWidth <= 760 ) {
@@ -319,6 +325,32 @@ input {
   color: #fff;
   padding-top: 13px;
   display: inline-block;
+}
+@media (min-width: 768px) and (max-width: 3500px) {
+  .image-block-wrapper-out .image-block-col .typeone-img{
+    width:140px;
+    height:210px;
+  }
+  .image-block-wrapper-out .image-block-col .typethree-img{
+    width:63px;
+    height:90px;
+  }
+  .image-block-wrapper-out .image-block-col .typetwo-img{
+    width:63px;
+    height:90px;
+  }  
+  .image-block-wrapper-out .image-block-col .div-one{
+    width: 63px;
+    height: 88px;
+    overflow: hidden;
+    margin-bottom: 5px;   
+  }
+  .image-block-wrapper-out .image-block-col .div-two{
+    width:63px;
+    height:58px;   
+    overflow: hidden;
+    margin-bottom: 5px;         
+  }      
 }
 
 /** End */
