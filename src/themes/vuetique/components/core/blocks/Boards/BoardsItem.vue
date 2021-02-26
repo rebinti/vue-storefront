@@ -222,7 +222,7 @@ input {
 }
 .wishlist-top-button-row .button-blck .button-type1 {
   border:1px solid #000000;
-  padding: 4px 48px;
+  padding: 4px 15px;
   color: #000000;
   width:157px;
 }
