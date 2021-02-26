@@ -30,7 +30,7 @@
       <!-- </router-link> -->
 
 
-    <div class="absolute z-20 w-full" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
+    <div class="absolute z-20 w-full search-suggestion" @mouseenter="resultsHover = true" @mouseleave="resultsHover = false">
       <div v-if="showDrop" class="bg-white border border-grey border-t-0">
         <!-- <product :key="product.id" v-for="product in results" :product="product" @click.native="resultsHover = false" /> -->
         <!-- <transition name="fade">
@@ -159,4 +159,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-suggestion{
+  box-shadow: 0 5px 5px rgba(0,0,0,.19);
+}
 </style>
