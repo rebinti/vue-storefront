@@ -81,7 +81,7 @@ $color-icon: color(black);
 $bg-icon: color(suva-gray);
 
 .cookie {
-  z-index: 2;
+  z-index: 3;
   bottom: 0;
   width: 100%;
   color: #fff;
