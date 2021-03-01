@@ -11,14 +11,15 @@
           </p>
           <base-input
             focus
-            type="email"
+            type="text"
             name="email"
             v-model="email"
+            @blur="$v.email.$touch()"
             autocomplete="email"
             :placeholder="$t('E-mail address *')"
             :validations="[
               {
-                condition: $v.email.$error && !$v.email.required,
+                condition: !$v.email.required && $v.email.$error,
                 text: $t('Field is required.')
               },
               {

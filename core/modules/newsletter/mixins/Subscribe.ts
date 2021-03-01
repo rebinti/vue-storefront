@@ -14,14 +14,14 @@ export default {
   name: 'NewsletterSubscribe',
   data () {
     return {
-      email: ''
+      email: '',
     }
   },
   validations: {
     email: {
       required,
       email
-    }
+    },
   },
   methods: {
     subscribe (success?: Function, failure?: Function) {
