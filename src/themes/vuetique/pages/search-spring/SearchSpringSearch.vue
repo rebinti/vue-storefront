@@ -171,11 +171,11 @@ import Vue from 'vue'
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll'
 import { mapGetters } from 'vuex'
 import SearchSpringMixin  from 'src/modules/search-spring/mixins/searchSpring.ts'
+import SiderbarFilter  from "src/modules/search-spring/components/sidebar";
+import MobileSiderbarFilter  from "src/modules/search-spring/components/MobileSidebar";
 import SidebarMixin from 'src/modules/search-spring/mixins/sidebar.ts'
 import { handleScroll } from 'src/modules/search-spring/helpers'
-const LegacyProductfromSearchSpring = () => import('theme/components/core/blocks/Product/LegacyProductfromSearchSpring.vue')
-const SiderbarFilter = () => import('src/modules/search-spring/components/sidebar')
-const MobileSiderbarFilter = () => import('src/modules/search-spring/components/MobileSidebar')
+import LegacyProductfromSearchSpring from 'theme/components/core/blocks/Product/LegacyProductfromSearchSpring.vue'
 
 export default {
   name: 'SearchSpringSearch',
