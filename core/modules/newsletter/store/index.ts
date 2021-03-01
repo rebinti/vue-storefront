@@ -82,6 +82,25 @@ export const module: Module<NewsletterState, any> = {
           })
         })
       }
-    }
+    },
+    magentosubscribe ({ commit, state }, data): Promise<Response> {
+      if (!state.isSubscribed) {
+        return new Promise((resolve, reject) => {
+          fetch(processURLAddress(config.newsletter.magentosubscibeendpoint) , {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify(data)
+          }).then(res => {
+            // commit(types.NEWSLETTER_SUBSCRIBE)
+            // commit(types.SET_EMAIL, email)
+            // cacheStorage.setItem('email', email)
+            resolve(res)
+          }).catch(err => {
+            reject(err)
+          })
+        })
+      }
+    },       
   }
 }
