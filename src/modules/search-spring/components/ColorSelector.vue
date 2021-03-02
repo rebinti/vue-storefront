@@ -60,7 +60,8 @@ export default {
 
     &.active {
       @apply border-black opacity-100;
-      border: 2px solid #222;
+      border: 0px solid #222;
+      border-radius: 50%;
     }
 
     &.out-of-stock {
