@@ -176,6 +176,9 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">    
+          <div v-if="getMerchandisingContent && getMerchandisingContent.header"
+           v-html="getMerchandisingContent.header[0]" style="margin-bottom: 20px;">
+           </div>        
           <div v-if="getMerchandisingContent && getMerchandisingContent.banner"
            v-html="getMerchandisingContent.banner[0]" style="margin-bottom: 20px;">
            </div>             
