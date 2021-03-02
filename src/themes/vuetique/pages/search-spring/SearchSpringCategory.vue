@@ -1,7 +1,7 @@
 <template>
   <div class="st_brd">
           <div v-if="getMerchandisingContent && getMerchandisingContent.header"
-           v-html="getMerchandisingContent.header[0]" style="margin-bottom: 20px;">
+           v-html="getMerchandisingContent.header[0]" >
            </div>      
      <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
