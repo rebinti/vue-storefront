@@ -13,7 +13,11 @@
     }
     if (!isHeaderCategoryShow) {
       if(!viewFooterReachedflag) {
-        if(filterdiv) filterdiv.classList.add("fixed");
+        const scrollTop = window.scrollY || window.pageYOffset        
+        const filterdivheight = document.getElementById('expand-filterdiv').offsetHeight        
+        if(scrollTop>=filterdivheight){
+          if(filterdiv) filterdiv.classList.add("fixed");
+        }        
       }
     } else {
        if(filterdiv) filterdiv.classList.remove("fixed");

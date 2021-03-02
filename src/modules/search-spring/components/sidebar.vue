@@ -31,7 +31,7 @@
           </div>
         </div>
         <div
-          class="container leading-loose static-content customm"
+          class="container leading-loose static-content customm" id="expand-filterdiv"
           v-if="filteredSearchRes && filteredSearchRes.facets && filteredSearchRes.facets.length > 0"
         >
           <Accordion
