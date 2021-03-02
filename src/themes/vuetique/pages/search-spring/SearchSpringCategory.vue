@@ -1,6 +1,9 @@
 <template>
   <div class="st_brd">
-     <div class="b_crumb" v-html="getMerchandisingContent.header[0]">
+          <div v-if="getMerchandisingContent && getMerchandisingContent.header"
+           v-html="getMerchandisingContent.header[0]" style="margin-bottom: 20px;">
+           </div>      
+     <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div>
     <header class="row bg-grey-lightest mb-6 head_category"> <!-- pb-5 -->
@@ -176,9 +179,6 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">    
-          <div v-if="getMerchandisingContent && getMerchandisingContent.header"
-           v-html="getMerchandisingContent.header[0]" style="margin-bottom: 20px;">
-           </div>        
           <div v-if="getMerchandisingContent && getMerchandisingContent.banner"
            v-html="getMerchandisingContent.banner[0]" style="margin-bottom: 20px;">
            </div>             
