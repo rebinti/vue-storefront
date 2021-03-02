@@ -1,6 +1,6 @@
 <template>
   <div class="st_brd">
-     <div class="b_crumb">
+     <div class="b_crumb" v-html="getMerchandisingContent.header[0]">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div>
     <header class="row bg-grey-lightest mb-6 head_category"> <!-- pb-5 -->
