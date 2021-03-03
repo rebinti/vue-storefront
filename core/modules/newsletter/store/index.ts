@@ -86,6 +86,7 @@ export const module: Module<NewsletterState, any> = {
     magentosubscribestatus ({ commit, state }, data): Promise<Response> {
       if (!state.isSubscribed) {
         return new Promise((resolve, reject) => {
+          console.log("magento - subscribe - status DATAAAAAAAAAAAAAAAA",data)
           fetch(processURLAddress(config.newsletter.magentosubscibeendpoint) , {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -110,6 +111,7 @@ export const module: Module<NewsletterState, any> = {
     magentosubscribe ({ commit, state }, data): Promise<Response> {
       if (!state.isSubscribed) {
         return new Promise((resolve, reject) => {
+          console.log("magento - subscribe DATAAAAAAAAAAAAAAAA",data)
           fetch(processURLAddress(config.newsletter.magentosubscibeendpoint) , {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -125,6 +127,24 @@ export const module: Module<NewsletterState, any> = {
           })
         })
       }
-    },       
+    },
+    magentounsubscribe ({ commit, state }, data): Promise<Response> {
+      if (state.isSubscribed) {
+        return new Promise((resolve, reject) => {
+          console.log("magento - unsubscribe DATAAAAAAAAAAAAAAAA",data)
+          fetch(processURLAddress(config.newsletter.magentosubscibeendpoint), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify({ data })
+          }).then(res => {
+            commit(types.NEWSLETTER_UNSUBSCRIBE)
+            resolve(res)
+          }).catch(err => {
+            reject(err)
+          })
+        })
+      }
+    },     
   }
 }

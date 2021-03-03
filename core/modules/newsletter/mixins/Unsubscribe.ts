@@ -14,7 +14,8 @@ export default {
   name: 'NewsletterUnsubscribe',
   data () {
     return {
-      email: ''
+      email: '',
+      user_id: '',
     }
   },
   validations: {
@@ -27,7 +28,11 @@ export default {
     unsubscribe () {
       // argument omitted for validation purposes
       if (!this.$v.$invalid) {
-        return this.$store.dispatch('newsletter/unsubscribe', this.email).then(res => {
+        if(this.$store.state.user.current !== null){
+          this.user_id = this.$store.state.user.current.id;      
+        }        
+        const sendData = { userid: this.user_id ,email: this.email,type: 'unsubscribe'}         
+        return this.$store.dispatch('newsletter/magentounsubscribe', sendData).then(res => {
           this.$emit('unsubscribed', res)
         }).catch(err =>
           this.$emit('unsubscription-error', err)
