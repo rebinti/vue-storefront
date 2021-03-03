@@ -18,6 +18,7 @@ export default {
   data () {
     return {
       email: '',
+      user_id: '',      
       user: {
         isSubscribed: false
       }
@@ -39,7 +40,11 @@ export default {
     checkStatus (success?: Function, failure?: Function) {
       // argument omitted for validation purposes
       if (!this.$v.$invalid) {
-        return this.$store.dispatch('newsletter/status', this.email).then(res => {
+        if(this.$store.state.user.current !== null){
+          this.user_id = this.$store.state.user.current.id;      
+        }        
+        const sendData = { userid: this.user_id ,email: this.email,type: 'status'} 
+        return this.$store.dispatch('newsletter/magentosubscribestatus', sendData).then(res => {
           if (success) success(res)
         }).catch(err => {
           if (failure) failure(err)

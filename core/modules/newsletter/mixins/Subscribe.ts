@@ -31,7 +31,7 @@ export default {
         if(this.$store.state.user.current !== null){
           this.user_id = this.$store.state.user.current.id;      
         }
-        const sendData = { userid: this.user_id ,email: this.email}        
+        const sendData = { userid: this.user_id ,email: this.email,type: 'subscribe'}        
         return this.$store.dispatch('newsletter/magentosubscribe', sendData).then(res  => { return res.json() })
         .then((res) => {
           if (success) success(res)

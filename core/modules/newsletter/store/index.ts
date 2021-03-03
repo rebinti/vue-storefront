@@ -83,6 +83,30 @@ export const module: Module<NewsletterState, any> = {
         })
       }
     },
+    magentosubscribestatus ({ commit, state }, data): Promise<Response> {
+      if (!state.isSubscribed) {
+        return new Promise((resolve, reject) => {
+          fetch(processURLAddress(config.newsletter.magentosubscibeendpoint) , {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify(data)
+          }).then(res => res.json())
+          .then(res => {
+            console.log("FFFFFFFFFFFFFFFFF",res)
+            if (res.result === 'subscribed') {
+              commit(types.SET_EMAIL, data.email)
+              commit(types.NEWSLETTER_SUBSCRIBE)
+            } else {
+              commit(types.NEWSLETTER_UNSUBSCRIBE)
+            }
+            resolve(res)
+          }).catch(err => {
+            reject(err)
+          })
+        })
+      }
+    },         
     magentosubscribe ({ commit, state }, data): Promise<Response> {
       if (!state.isSubscribed) {
         return new Promise((resolve, reject) => {
@@ -91,10 +115,10 @@ export const module: Module<NewsletterState, any> = {
             headers: { 'Content-Type': 'application/json' },
             mode: 'cors',
             body: JSON.stringify(data)
-          }).then(res => {
-            // commit(types.NEWSLETTER_SUBSCRIBE)
-            // commit(types.SET_EMAIL, email)
-            // cacheStorage.setItem('email', email)
+          }).then(res => {            
+            commit(types.NEWSLETTER_SUBSCRIBE)
+            commit(types.SET_EMAIL, data.email)
+            cacheStorage.setItem('email', data.email)
             resolve(res)
           }).catch(err => {
             reject(err)
