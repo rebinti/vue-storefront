@@ -31,6 +31,7 @@
         class="col-12 mb-6"
         id="generalAgreement"
         v-model="user.isSubscribed"
+        :value="true"
         @click="isEdited ? user.isSubscribed = !user.isSubscribed : null"
         :disabled="!isEdited"
       >

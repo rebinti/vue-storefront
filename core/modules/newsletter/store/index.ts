@@ -84,8 +84,11 @@ export const module: Module<NewsletterState, any> = {
       }
     },
     magentosubscribestatus ({ commit, state }, data): Promise<Response> {
+      console.log("test 6666666666",state.isSubscribed)
       if (!state.isSubscribed) {
+        console.log("test 77777777777",'INNNNNN')
         return new Promise((resolve, reject) => {
+          console.log("test 888888888",data)
           console.log("magento - subscribe - status DATAAAAAAAAAAAAAAAA",data)
           fetch(processURLAddress(config.newsletter.magentosubscibeendpoint) , {
             method: 'POST',
@@ -96,6 +99,7 @@ export const module: Module<NewsletterState, any> = {
           .then(res => {
             console.log("FFFFFFFFFFFFFFFFF",res)
             if (res.result === 'subscribed') {
+              console.log("FFFFFFFFFFFFFFFFF INNNNNNNNNNNNN",res)
               commit(types.SET_EMAIL, data.email)
               commit(types.NEWSLETTER_SUBSCRIBE)
             } else {
@@ -136,7 +140,7 @@ export const module: Module<NewsletterState, any> = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             mode: 'cors',
-            body: JSON.stringify({ data })
+            body: JSON.stringify(data)
           }).then(res => {
             commit(types.NEWSLETTER_UNSUBSCRIBE)
             resolve(res)
