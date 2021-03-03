@@ -116,7 +116,8 @@ export default {
     &:hover,
     &:focus {
       outline: none;
-      border-color: $color-puerto-rico;
+      // border-color: $color-puerto-rico;
+      border-color: #9a9a9a !important;
     }
 
     &:disabled,

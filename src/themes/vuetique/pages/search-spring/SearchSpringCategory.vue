@@ -517,6 +517,7 @@ input {
     margin-top: 0px; 
     height: 46px;
     border: 1px solid #CCC; 
+    border-left: 0px;
 }
 .onlymobile .col-4.mgrid div span{
     position: absolute;
