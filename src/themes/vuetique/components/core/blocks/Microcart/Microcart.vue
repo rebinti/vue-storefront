@@ -20,7 +20,15 @@
     </button>
 
     <h2 v-if="productsInCart.length" class="mb-8 h_title" style="margin-top: 2px;">
-     <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
+      <div class="col-xs-12 col-sm mt35 mb35 mt0 end-sm clearcart-col clear-button">
+        <clear-cart-button
+          v-if="productsInCart.length"
+          @click.native="clearCart"
+        />
+      </div>      
+     <div class="items-head"> 
+        <span v-if="productsInCart.length > 0"> {{productsInCart.length}} </span> {{ $t('Items') }}
+     </div>
     </h2>
   </div>
 
@@ -120,6 +128,7 @@ import Microcart from '@vue-storefront/core/compatibility/components/blocks/Micr
 import VueOfflineMixin from 'vue-offline/mixin'
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'
 
+import ClearCartButton from 'theme/components/core/blocks/Microcart/ClearCartButton'
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput'
 import ButtonFull from 'theme/components/theme/ButtonFull'
 import ButtonOutline from 'theme/components/theme/ButtonOutline'
@@ -135,6 +144,7 @@ export default {
     Product,
     ButtonFull,
     ButtonOutline,
+    ClearCartButton,
     BaseInput,
     Accordion,
     SwipeList,
@@ -281,6 +291,19 @@ export default {
     getupdateclick () {
       this.loadtotals = false
     },
+    clearCart () {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'warning',
+        message: i18n.t('Are you sure you would like to remove all the items from the shopping cart?'),
+        action1: { label: i18n.t('OK'),
+          action: () => {
+            this.$store.dispatch('cart/clear')
+          }
+        },
+        action2: { label: i18n.t('Cancel'), action: 'close' },
+        hasNoTimeout: true
+      })
+    },    
   }
 }
 </script>
@@ -499,6 +522,49 @@ export default {
 .swipeout-right {
   padding-left: 15px;
 }
+.clearcart {
+  &-col {
+    display: flex;
+    align-self: center;
+        line-height: initial;
+        top: -2px;
+        position: relative;
+        font-size: 0.9375rem;
+        font-family: Roboto, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-seri    
+  }
+}
+.h_title{
+  .clear-button{
+    width: 45%;
+    float: left;
+    button{
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background: #ffffff !important;
+      color: #0e0e0e !important;
+      border: 2px solid #0e0e0e;
+      /* left: 15px; */
+      margin-left: 15px;
+      height: 35px;
+      margin-top: 8px; 
+      // .clearcart-btn{
+      //   line-height: initial;
+      //   top: -3px;
+      //   position: relative;
+      //   font-size: 0.9375rem;
+      //   font-family: Roboto, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      // }     
+    }
+  }
+  .items-head{
+    width: 55%;
+    float: left;
+    text-align: left;    
+  }
+}
+
 // .microcart .btn-primary{
 //   background: #4fce76 !important;
 // }
