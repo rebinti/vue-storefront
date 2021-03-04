@@ -1,5 +1,8 @@
 <template>
   <div class="st_brd">
+      <div v-if="getMerchandisingContent && getMerchandisingContent.header"
+        v-html="getMerchandisingContent.header[0]" >
+      </div>     
      <!-- <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div> -->
@@ -126,6 +129,9 @@
         <div class="lg:col-3" v-if="serachedProd.length === 0">
         </div>  
       <div class="col-12 lg:col-9 pr_list_sec_main">
+          <div v-if="getMerchandisingContent && getMerchandisingContent.banner"
+           v-html="getMerchandisingContent.banner[0]" style="margin-bottom: 20px;">
+           </div>         
           <product-listing :mob-columns="defaultColumnMobile" :columns="defaultColumnWeb" :products="serachedProd" />
 
           <div class="loader loader--style3" title="2" v-if="paginationLoader">
@@ -181,7 +187,7 @@ export default {
       // specificBrandsList: state => state.ui.specificBrandsList,
       brandsList: state => state.ui.brandsList,
     }),
-    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath']),
+    ...mapGetters('searchSpringCategory', ['serachedProd', 'filterData', 'searchRes', 'categoryHierarchy', 'priceSliderData', 'priceSliderActiveRange', 'sortingFilterOptions', 'sortingFilterSelected' , 'getStoredCurrentRouterPath','getMerchandisingContent']),
     getBrandPageTitle () {
       if (this.$route.params.brandName) {
         return this.$store.getters[`ui/brandPageTitle`](this.$route.params.brandName)
