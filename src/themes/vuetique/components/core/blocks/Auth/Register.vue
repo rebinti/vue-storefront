@@ -7,7 +7,17 @@
       <h2 class="to-uppercase-text">{{ $t('Register') }}</h2>
     </header>
 
-    <div class="modal-content pt30 pb60 px65 cl-secondary" style="padding-bottom: 80px;">
+    <div class="modal-content pt30 pb60 px65 cl-secondary" style="padding-bottom: 80px;padding-top: 25px">
+
+       <div class="login_box_out" style="padding-bottom: 25px;">
+           <facebook-sign-in></facebook-sign-in>
+            <google-sign-in></google-sign-in>
+        </div>
+        <div class="login_box_out_web" style="padding-bottom: 65px;">
+          <facebook-sign-in></facebook-sign-in>
+          <google-sign-in></google-sign-in>
+        </div>
+
       <form @submit.prevent="register" novalidate style="padding-bottom: 15px;">
         <base-input
           class="mb-5 tx_bx_out"
@@ -98,7 +108,7 @@
             }
           ]"
         />
-         <base-input
+         <!-- <base-input
           class="mb-5 tx_bx_out"
           type="text"
           name="mobile"
@@ -113,7 +123,7 @@
               text: $t('Field is required.')
             },
           ]"
-        />
+        /> -->
         <div class="chk_out_blk">
         <base-checkbox
           class="mb-3 text-black"
@@ -142,7 +152,7 @@
             text: $t('You must accept the news.')
           }"
         >
-          {{ $t('I would like to receive the latest news from iCLOTHING by email') }} *
+          {{ $t('I would like to receive the latest news from iCLOTHING by email') }}
         </base-checkbox>
         </div>
 
@@ -166,15 +176,6 @@
         </div>
       </form>
 
-
-       <div class="login_box_out">
-           <facebook-sign-in></facebook-sign-in>
-            <google-sign-in></google-sign-in>
-        </div>
-        <div class="login_box_out_web">
-          <facebook-sign-in></facebook-sign-in>
-          <google-sign-in></google-sign-in>
-        </div>
 
     </div>
   </div>
@@ -210,9 +211,9 @@ export default {
       required,
       sameAsPassword: sameAs('password')
     },
-    mobile: {
-      required
-    },
+    // mobile: {
+    //   required
+    // },
     conditions: {
       required
     },

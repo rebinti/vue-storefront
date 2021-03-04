@@ -6,7 +6,18 @@
       </svg>
       <h2 class="to-uppercase-text">{{ $t('Login') }}</h2>
     </header>
-    <div class="modal-content" style="padding-bottom: 65px;">
+    <div class="modal-content" style="padding-bottom: 65px;padding-top: 25px;">
+
+        <div class="login_box_out" style="padding-bottom: 20px;">
+           <facebook-sign-in></facebook-sign-in>
+            <google-sign-in></google-sign-in>
+
+        </div>
+        <div class="login_box_out_web" style="padding-bottom: 65px;">
+          <facebook-sign-in></facebook-sign-in>
+          <google-sign-in></google-sign-in>
+        </div>      
+
       <div class="mobile-signup">
         <p>Dont have an account? 
           <b>  
@@ -82,19 +93,7 @@
         
 
         </div>
-      </form>
-
-
-        <div class="login_box_out">
-           <facebook-sign-in></facebook-sign-in>
-            <google-sign-in></google-sign-in>
-
-        </div>
-        <div class="login_box_out_web">
-          <facebook-sign-in></facebook-sign-in>
-          <google-sign-in></google-sign-in>
-        </div>
-      
+      </form>      
     </div>
   </div>
 </template>

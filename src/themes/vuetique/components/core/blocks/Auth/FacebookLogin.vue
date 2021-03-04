@@ -210,6 +210,9 @@ export default {
 
 <style scoped>
 .login_box_out_web .fb-view {
-  width: 45%;float: left;margin: 6px 25px 0 10px;
+  /* width: 45%;float: left;margin: 6px 25px 0 10px; */
+  margin: 6px 18px 0 2px;
+  width: 48%;
+  float: left;
 }
 </style>

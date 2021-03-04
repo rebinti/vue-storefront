@@ -151,6 +151,9 @@ export default {
 
 <style scoped>
 .login_box_out_web .google-view {
-  width: 45%; float: left; margin: 6px 0 0 0;
+  /* width: 45%; float: left; margin: 6px 0 0 0; */
+    width: 48%;
+    float: left;
+    margin: 6px 0 0 0;  
 }
 </style>
