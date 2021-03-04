@@ -188,7 +188,9 @@ export default {
           For Subscribe the Newsletter subscription Action to Server
           */
           if(social_data.email){  // if(this.newsLatest && social_data.email){
-            this.$store.dispatch('newsletter/subscribe', social_data.email).then(res => {
+            const sendData = { userid: '' ,email: social_data.email,type: 'subscribe'}            
+            this.$store.dispatch('newsletter/magentosubscribe', sendData).then(res  => { return res.json() })
+            .then((res) => {              
               console.log('Newsletter Subscribed', res);
             }).catch(err => {
               console.log('Error in subscripton', err);

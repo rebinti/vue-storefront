@@ -51,7 +51,13 @@ export const Register = {
           For Subscribe the Newsletter subscription Action to Server
           */
           if(this.newsLatest && this.email){
-            this.$store.dispatch('newsletter/subscribe', this.email).then(res => {
+            if(this.$store.state.user.current !== null){
+              this.user_id = this.$store.state.user.current.id;      
+              console.log("CUSTOMEREEEEEEEEEEEEEEEE",this.user_id)
+            }            
+            const sendData = { userid: '' ,email: this.email,type: 'subscribe'} 
+            this.$store.dispatch('newsletter/magentosubscribe', sendData).then(res  => { return res.json() })
+            .then((res) => {
               console.log('Newsletter Subscribed', res);
             }).catch(err => {
               console.log('Error in subscripton', err);
