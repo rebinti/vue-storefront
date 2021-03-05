@@ -130,7 +130,7 @@ export default {
     right: 0;
     margin: auto;
     overflow: hidden;
-    padding: 20px;
+    // padding: 20px;
     height: 750px;
     max-height: 100%;
     justify-content: space-evenly;
