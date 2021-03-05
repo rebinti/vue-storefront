@@ -248,17 +248,24 @@
                   </a> 
                 </div>              -->
               </div>
-              <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}">
-
-                  <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup">
+              <!-- <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}"> -->
+              <div style="height: 50px;margin-top: 15px;">  
+                  <!-- <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup"> -->
 <!-- disableAddToCartButtonFlag -->
-                    <add-to-cart :product="product"
+                    <!-- <add-to-cart :product="product"
                      :disabled="disableAddToCartButtonFlag || (product.type_id == 'configurable' && product.configurable_children === undefined)" 
                      :configuration="configuration"                     
                      class="py-3 text-sm"  
                      :style="product.type_id == 'configurable' && product.configurable_children === undefined ? { backgroundColor: '#bdbdbd !important'} : ''"
-                     />
-                  </div>
+                     /> -->
+                  <!-- </div> -->
+                  <div class="mob_add_cart_btn">
+
+                    <add-to-cart :product="product"
+                     :disabled="disableAddToCartButtonFlag" 
+                     :configuration="configuration"                     
+                     class="py-3 text-sm"  />
+                  </div>                
                   <!-- <div class="video-thum-mob" id="left" v-if="productVideoData" @click="clickvideodiv"> -->  <!-- @click="changeToVideoCarouselSlide" -->
                     <!-- <img  style="float: left;cursor: pointer" src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" /> -->
                   <!-- </div>  -->
@@ -2620,7 +2627,7 @@ button.no-combination {
     .mob_add_cart_btn{
       float: left;
       // width: 61%;
-      padding: 0 3% 0px 5%;
+      padding: 0 3% 0px 0%;
     }
     .mob_add_wish_btn{
       float: left;
