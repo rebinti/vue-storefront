@@ -11,7 +11,7 @@ export default {
   mixins: [CurrentPage],
   computed: {
     announcement () {
-      return 'Free standard shipping on all United States orders over $100'
+      return 'Free standard shipping on all Irish orders over €60'
     }
   }
 }

@@ -374,6 +374,7 @@ export default {
     padding-top: 30px;
     padding-bottom: 40px;
     background: #000;
+    margin-top: 125px;
 }
 
 .footer-menu {
