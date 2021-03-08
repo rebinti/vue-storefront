@@ -24,6 +24,8 @@ export default {
     min-width: 40px;
     padding-left: 8px;
     padding-right: 8px;
+    font-size: 1rem;
+    border: 1px solid #666666;
 
     &.active {
        @apply border-black text-white;
@@ -59,14 +61,14 @@ export default {
   }    
   @media (max-width: 1440px) {
     .generic-selector {
-      height: 33px;
-      min-width: 33px;
+      height: 40px;
+      min-width: 60px; 
     }      
   }
   @media (max-width: 768px) {
     .generic-selector {
-      height: 33px;
-      min-width: 33px;
+      height: 40px;
+      min-width: 60px; 
     }      
   }
    .no-config .x {
