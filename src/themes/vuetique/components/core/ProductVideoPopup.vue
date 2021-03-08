@@ -9,7 +9,7 @@
             preload autoplay >
               <source :src="productvideo.video" type="video/mp4" />
             </video>
-            <!-- src="https://checkout.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
+            <!-- src="https://www.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
         </div>
   </modal>
 </template>
@@ -21,7 +21,7 @@ export default {
     return {
       productvideo: {},
       transEffect: 'fade-in-down',
-      productVideoData:'https://checkout.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4',
+      productVideoData:'https://www.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4',
       videoPlayCount: 0
     }
   },

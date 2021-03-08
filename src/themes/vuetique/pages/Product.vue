@@ -368,7 +368,7 @@
                 loop controls autoPictureInPicture preload autoplay="true" >
                   <source :src="productVideoData.video" type="video/mp4" />
                 </video>
-                <!-- src="https://checkout.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
+                <!-- src="https://www.iclothing.com/media/iwd_video/video/5aa3c6c788aec.mp4" -->
             </div>
           </div>
 
