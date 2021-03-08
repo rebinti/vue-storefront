@@ -120,15 +120,15 @@
 			x=d.getElementsByTagName('script')[0];
 			s=d.createElement('script');
 			s.type='text/javascript';s.async=true;
-			s.src='https://'+r+'-cdn'+(e==='dev'||e==='prod'?'.'+e:'')+
+			s.src='https://'+r+'-cdn'+(e==='dev'||e==='staging'?'.'+e:'')+
 			'.truefitcorp.com/fitrec/'+r+'/js/'+l+'.js?'+p.join('&');
 			x.parentNode.insertBefore(s,x);}}
 			g('fitrec');
 			g('tracker');
 			return a;
 			// Don't change anything above this line
-	 })().fitrec('icl','prod',{autoCalculate:false});
-	//  .fitrec('icl','staging'); 
+			// })().fitrec('icl','staging',{autoCalculate:false});
+	 })().tracker('icl','prod');	
 	</script>
 
 
