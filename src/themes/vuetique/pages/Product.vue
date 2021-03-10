@@ -955,6 +955,12 @@ export default {
           }
         }
     });
+
+    this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
+    this.$store.commit('ui/setMicrocart', false)
+    this.$store.commit('ui/setWishlist', false)
+    this.$store.commit('ui/setOverlay', false)
+    this.$store.commit('ui/setSidebar', false)
     // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
     //   this.removetruefitstyle = true
     // }); 
@@ -1031,6 +1037,11 @@ export default {
     setBreadCrumbToSamePath () { 
       this.showBreadCrumbsToSamePath = true; 
       this.setSegmentify()
+      this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
+      this.$store.commit('ui/setMicrocart', false)
+      this.$store.commit('ui/setWishlist', false)
+      this.$store.commit('ui/setOverlay', false)
+      this.$store.commit('ui/setSidebar', false)      
     },
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
