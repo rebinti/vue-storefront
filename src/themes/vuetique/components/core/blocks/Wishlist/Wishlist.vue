@@ -291,7 +291,7 @@ i {
 .wishlist.wishlist_out .wish_wrap_box.item-in-it {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100%;
+  height: 90%;
   padding-bottom: 75px;
 }
 .wishlist.wishlist_out .wish_wrap_box.item-in-it .swipeout {

@@ -363,6 +363,7 @@ export default {
   }
   .sidebar-menu{
     z-index: 100;
+    padding-bottom: 4rem;
   }
   .sidebar-menu__list .menu_li_it{
     position: relative;
