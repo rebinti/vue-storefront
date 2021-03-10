@@ -1031,11 +1031,6 @@ export default {
     setBreadCrumbToSamePath () { 
       this.showBreadCrumbsToSamePath = true; 
       this.setSegmentify()
-
-    // this.$store.dispatch('ui/toggleProductGetTheLookSidePanel' , false)
-      this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
-      this.$store.dispatch('ui/closeWishlist');  
-      this.$store.dispatch('ui/toggleMicrocart')       
     },
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
