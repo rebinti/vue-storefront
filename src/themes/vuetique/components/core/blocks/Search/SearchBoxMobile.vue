@@ -154,21 +154,33 @@ export default {
           this.autoCompleteResults = null
        }      
     },
+    // searchTextData (text) {        
+    //     if((text!="") && (text.length >= 2)){
+    //       this.searchparam = text;
+    //       this.$router.push({ path: 'search', query: { q: this.searchparam }})
+    //     }else{
+    //       this.searchparam = this.$route.query.q;
+    //       this.search = this.searchparam
+    //     }
+    //     setTimeout(() => {
+    //         Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
+    //     }, 50);         
+         
+    //      this.resultsHover = false
+    //      this.searchFocus = false
+    // },
     searchTextData (text) {        
         if((text!="") && (text.length >= 2)){
           this.searchparam = text;
-          this.$router.push({ path: 'search', query: { q: this.searchparam }})
+          this.$router.push({ path: this.localizedRoute('/search'), query: { q: this.searchparam }})
         }else{
           this.searchparam = this.$route.query.q;
           this.search = this.searchparam
         }
-        setTimeout(() => {
-            Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
-        }, 50);         
-         
+         Vue.prototype.$bus.$emit('search-in-search-spring', this.searchparam );
          this.resultsHover = false
          this.searchFocus = false
-    }    
+    },        
   },
   mounted () {
     this.$bus.$on('focusSearchInput', () => {
