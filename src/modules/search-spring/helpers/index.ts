@@ -4,6 +4,12 @@
     const viewFooterReachedflag = checkElemetReachedInViewPort(footerClass)
     const isHeaderCategoryShow = checkElemetReachedInViewPort(headerClass)
     let filterdiv = document.querySelector('.filterdiv') 
+
+    // let parent = document.getElementById('container1');
+    let child = document.getElementById('container2');
+    child.style.paddingRight = child.offsetWidth - child.clientWidth + "px";
+
+
     if (isHeaderCategoryShow && viewFooterReachedflag ) {
       if(filterdiv) {
           filterdiv.classList.remove("fixed");

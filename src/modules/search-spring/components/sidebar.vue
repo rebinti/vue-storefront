@@ -2,7 +2,8 @@
   <!-- Sidebar For web view   -->
   <div v-if="viewfilterflag  === 'web'" class="col-3 hidden lg:block">
     <div class>
-      <div class="sidebar filterdiv" :class="{ fixed: fixedOrderPanel }">
+      <div id="parent-block" class="sidebar filterdiv" :class="{ fixed: fixedOrderPanel }">
+        <div id="child-block">
         <!-- <h1 class="filterhead" v-if="searchRes" >Filters</h1> -->
         <span
           class="filter-box clearall-filter"
@@ -110,6 +111,7 @@
           v-if="getMerchandisingContent && getMerchandisingContent.left"
           v-html="getMerchandisingContent.left[0]"
         ></div>
+        </div>
       </div>
     </div>
   </div>
@@ -462,6 +464,36 @@ input {
 .selectedone {
   clear: both;
   overflow: hidden;
+}
+#parent-block{
+    height: 100%;
+   /* width: 100%;*/
+    // border: 1px solid green;
+    overflow: hidden;
+}
+#child-block{
+    width: 100%;
+    height: 99%;
+    border: 1px solid #000;
+    overflow: auto;
+    padding-right: 0px; /* exact value is given in JavaScript code */
+}
+#child-block::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#child-block::-webkit-scrollbar
+{
+	width: 2px;
+	background-color: #F5F5F5;
+}
+
+#child-block::-webkit-scrollbar-thumb
+{
+	background-color: #a09e9e;
+	// border: 2px solid #555555;
 }
 @media screen and (min-width: 768px) and (max-width: 1600px) {
   .sidebar .filterdata {
