@@ -5,7 +5,7 @@
   <button
     :class="{'active': value}"
      @click="$emit('click')"
-    class="border border-grey-light font-medium text-xs text-grey-dark generic-selector generic-select mr-3 mb-3"
+    class="border border-grey-light font-medium text-m text-grey-dark generic-selector generic-select mr-3 mb-3"
   >
       <slot />
   </button>  

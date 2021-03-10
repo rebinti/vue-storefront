@@ -63,7 +63,7 @@ import OutOfStockPopup from 'theme/components/core/OutOfStockPopup.vue'
 import ProductWithOptionsPopup from 'theme/components/core/ProductWithOptionsPopup.vue'
 import ProductSocialShare from 'theme/components/core/ProductSocialShare.vue'
 import ProductVideoPopup from 'theme/components/core/ProductVideoPopup.vue'
-import CookieNotification from 'theme/components/core/CookieNotification.vue'
+// import CookieNotification from 'theme/components/core/CookieNotification.vue'
 import OfflineBadge from 'theme/components/core/OfflineBadge.vue'
 import ModalSwitcher from 'theme/components/core/blocks/Switcher/Language.vue'
 
@@ -228,7 +228,7 @@ export default {
     ProductSocialShare,
     ProductVideoPopup,
     PopupBoards,
-    CookieNotification,
+    // CookieNotification,
     OfflineBadge,
     ModalSwitcher,
     OrderConfirmation,
