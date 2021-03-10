@@ -474,7 +474,7 @@ input {
 #child-block{
     width: 100%;
     height: 99%;
-    border: 1px solid #000;
+    // border: 1px solid #000;
     overflow: auto;
     padding-right: 0px; /* exact value is given in JavaScript code */
 }
