@@ -106,7 +106,7 @@ export const actions: ActionTree<SearchSpringLegacyState, any> = {
     },
 
     async getLegacySearchesFrmSearchSpring  ({ commit } , searchData) {           
-        let searchUrl =  'https://suggest-cache.searchspring.net/api/suggest/legacy?siteId=vdwzmz&productCount=20&query='+searchData.queryparam;        
+        let searchUrl =  'https://suggest-cache.searchspring.net/api/suggest/legacy?siteId=akjx6f&productCount=20&query='+searchData.queryparam;        
         const searchResults = await fetch(searchUrl, {
             method: 'GET',
             headers: {
