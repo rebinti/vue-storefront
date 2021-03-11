@@ -7,9 +7,9 @@
 
     let parent = document.getElementById('parent-block');
     let child = document.getElementById('child-block');
-    child.style.paddingRight = child.offsetWidth - child.clientWidth + "px";
-
-
+    if(child){
+      child.style.paddingRight = child.offsetWidth - child.clientWidth + "px";
+    }    
     if (isHeaderCategoryShow && viewFooterReachedflag ) {
       if(filterdiv) {
           filterdiv.classList.remove("fixed");
