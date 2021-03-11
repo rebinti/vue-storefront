@@ -302,7 +302,7 @@ export default {
    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.searchedValue.replace("/", " > ") });
   
   // For working Segmentify
-    this.setSegmentify();
+    this.setSegmentify();    
   },
   methods: {
     setSegmentify() {
@@ -329,7 +329,8 @@ export default {
       this.searchedValue =  routeString;
       if(routeString.includes('&')) {
         routeString = encodeURIComponent(routeString)
-      }      
+      } 
+      routeString = routeString.trim();     
       this.$store.dispatch('searchSpringCategory/setCurrentRouterPath' ,  this.$route.path);
       this.$store.dispatch('searchSpringCategory/resetFilterData')
       this.$store.dispatch('searchSpringCategory/resetSearchedProducts');
@@ -370,6 +371,7 @@ export default {
         if(routeString.includes('&')) {
           routeString = encodeURIComponent(routeString);
         }
+        routeString = routeString.trim();
         this.$store.dispatch('searchSpringCategory/addFilterItems', 'filter.category_hierarchy=' + routeString)
         this.setEmarsysTracker ()
       } else {
