@@ -1005,9 +1005,19 @@ export default {
   methods: {
     getproductswatchimage (prodobj){      
       if(prodobj.color_swatch_image=='no_selection'){
-        return '/assets/colour/' + prodobj.colorSwatch.label.toLowerCase() +'.png'
-      }else{
-        return this.$store.state.config.images.baseUrl+'25/25/resize'+prodobj.color_swatch_image
+        if(prodobj.colorSwatch && prodobj.colorSwatch!=""){        
+          return '/assets/colour/' + prodobj.colorSwatch.label.toLowerCase() +'.png'
+        }else{          
+          let colorlabel = this.attributesByCode.color.options.find(val => val.value == prodobj.color)          
+          return '/assets/colour/' + colorlabel.label.toLowerCase() +'.png'
+        }        
+      }else{        
+        if(prodobj.color_swatch_image){
+          return this.$store.state.config.images.baseUrl+'25/25/resize'+prodobj.color_swatch_image
+        }else{
+          let colorlabel = this.attributesByCode.color.options.find(val => val.value == prodobj.color)          
+          return '/assets/colour/' + colorlabel.label.toLowerCase() +'.png'          
+        }        
       }            
     },      
     openProductOptionsPopup () {
