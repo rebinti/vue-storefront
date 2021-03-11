@@ -287,7 +287,7 @@ export default {
           this.$store.dispatch('searchSpringSearch/addFilterItems', 'tag=' + this.squery)
 
         }else{
-          this.$store.dispatch('searchSpringSearch/addFilterItems', 'rq=' + this.squery)  
+          this.$store.dispatch('searchSpringSearch/addFilterItems', 'q=' + this.squery)  
         }        
         if(this.setTime) { clearTimeout(this.setTime); }
         if ("AbortController" in window) {          
