@@ -329,7 +329,7 @@ const store = {
     },
     getOrderDeatilsById ({commit}, orderId) {
         return new Promise((resolve, reject) => {
-            fetch( 'https://vue.iclothing.com/api/urlorderdetails/urlorderdetails', {
+            fetch( 'https://www.iclothing.com/api/urlorderdetails/urlorderdetails', {
               method: 'POST',
               mode: 'cors',
               headers: { 'Content-Type': 'application/json' },
