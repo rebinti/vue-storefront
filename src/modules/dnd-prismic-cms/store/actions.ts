@@ -10,7 +10,7 @@ const CMS_BLOCK_ENTITY_TYPE = 'prismicCmsBlocks'
 const CMS_PAGES_ENTITY_TYPE = 'prismicCmsPages'
 const HOME_PAGE_ENTITY_TYPE = 'prismicHomePages'
 // const GRAPHQL_URL = config.server.protocol + '://' + config.graphql.host + ':' + config.graphql.port + '/graphql'
-const GRAPHQL_URL = 'https://vue.iclothing.com/graphql'
+const GRAPHQL_URL = 'https://www.iclothing.com/graphql'
 
 const storeView = currentStoreView()
 const searchQuery = new SearchQuery()
