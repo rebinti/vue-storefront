@@ -16,7 +16,7 @@ const ResetPasswordPost = () => import(/* webpackChunkName: "vsf-reset-password-
 const Category = () => import(/* webpackChunkName: "vsf-category" */ 'theme/pages/search-spring/SearchSpringCategory.vue') // Category.vue
 const CmsPage = () => import(/* webpackChunkName: "vsf-cms" */ 'theme/pages/CmsPage.vue')
 const CmsBlockDemoPageSsr = () => import(/* webpackChunkName: "vsf-cms-demo" */ 'theme/pages/CmsBlockDemoPageSsr.vue')
-// const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/pages/Checkout.vue')
+const Checkout = () => import(/* webpackChunkName: "vsf-checkout" */ 'theme/pages/Checkout.vue')
 const Compare = () => import(/* webpackChunkName: "vsf-compare" */ 'theme/pages/Compare.vue')
 const MyAccount = () => import(/* webpackChunkName: "vsf-my-account" */ 'theme/pages/MyAccount.vue')
 const MyAccountMenu = () => import(/* webpackChunkName: "vsf-my-account-menu" */ 'theme/pages/MyAccountMenu.vue')
@@ -35,7 +35,7 @@ const ExternalThankYouPage = () => import(/* webpackChunkName: "vsf-ext-order-su
 
 let routes = [
   { name: 'home', path: '/', component: HomeWithStyla, alias: '/pwa.html' },
-  // { name: 'checkout', path: '/checkout', component: Checkout },
+  { name: 'checkout', path: '/checkout', component: Checkout },
   { name: 'legal', path: '/legal', component: Static, props: { page: 'lorem', title: 'Legal Notice' }, meta: { title: 'Legal Notice', description: 'Legal Notice - example of description usage' } },
   { name: 'customer-service-general', path: '/customer-service-general', component: Static, props: { page: 'lorem', title: 'Customer service', pageidentifierfromindex: 'customer-service-general' } },
   { name: 'privacy-policy-cookie-restriction-mode', path: '/privacy-policy-cookie-restriction-mode', component: Static, props: { page: 'lorem', title: 'Privacy Policy', pageidentifierfromindex: 'privacy-policy-cookie-restriction-mode' } },
