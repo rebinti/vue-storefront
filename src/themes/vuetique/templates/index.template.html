@@ -37,11 +37,12 @@
 
 	<link href="/assets/css/swiper-bundle.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-	<link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<!-- <link href="//cdn-stamped-io.azureedge.net/files/widget.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-	
-	<script type="text/javascript" async>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Serif+SC:700:latin|Roboto:300,400,500:latin">
+
+	<!-- <script type="text/javascript" async>
 			WebFontConfig = {
 				google: { families: [ 'Noto+Serif+SC:700:latin', 'Roboto:300,400,500:latin' ] }
 			};
@@ -54,7 +55,7 @@
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(wf, s);
 			})();
-    </script>
+    </script> -->
 	<!-- <script>document.getElementsByTagName("html")[0].className += " js";</script> -->
 	
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -76,7 +77,7 @@
 
 
 	<!-- for segmentify product recommendations widgets --> 
-	<!-- <script src="https://cdn.segmentify.com/67442d88-7c08-40ef-8327-168557375db2/segmentify.js" async charset="UTF-8" ></script> -->
+		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" async charset="UTF-8" ></script>
 		<!-- SEGMENTIFY BEGIN 
 		<script type='text/javascript'> 
 			(function(namespace) { 
@@ -86,27 +87,27 @@
 				};
 				window[namespace].config = {
 					'segmentifyApiUrl': '//gandalf-eu.segmentify.com/', // segmentifyApiUrl:"//rest.segmentify.com/"
-					'domain': 'www.iclothing.com'
+					'domain': 'vue.iclothing.com'
 				}; 
 			}) ("Segmentify");
 
-			Segmentify('apikey', '67442d88-7c08-40ef-8327-168557375db2');
+			Segmentify('apikey', '3eb32483-e5a6-403f-b355-909ba225968e');
 		</script>
 		<script src='cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
 	 SEGMENTIFY END --> 	
 		
 		
 	<!-- ########## STAMPED ######### -->
-	<!-- <script type="text/javascript" defer>
+	<script type="text/javascript" defer>
 		function myInit(){
 		   StampedFn.init({ apiKey: 'pubkey-Y55wBte73EjEC0fGTj5RWA8fEEny21',
             storeUrl: 'www.iclothing.com' }); 
 		}
 	</script>
-	<script onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js" defer></script> -->
+	<script onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js" defer></script>
 
 	<!-- True Fit Script -->
-	<!-- <script type="text/JavaScript" defer>
+	<script type="text/JavaScript" defer>
 		(function(){
 			var a={};
 			function g(l){
@@ -127,12 +128,12 @@
 			g('tracker');
 			return a;
 			// Don't change anything above this line
-			// })().fitrec('icl','staging',{autoCalculate:false});
-	 })().tracker('icl','prod');	
-	</script> -->
+	 })().fitrec('icl','staging',{autoCalculate:false});
+	//  .fitrec('icl','staging'); 
+	</script>
 
 
-	<!-- <script type="text/javascript" async>
+	<script type="text/javascript" async>
 		var ScarabQueue = ScarabQueue || [];
 		(function(id) {
 		  if (document.getElementById(id)) return;
@@ -142,21 +143,21 @@
 		  fs.parentNode.insertBefore(js, fs);
 		})('scarab-js-api');
 	</script>
-	<script src="https://d22q3dafggn5rg.cloudfront.net/emarsys-m1.js" async></script>	 -->
+	<script src="https://d22q3dafggn5rg.cloudfront.net/emarsys-m1.js" async></script>	
 
 	<!-- >> PAPERPLANES - CORE TAG -->
-	<!-- <script defer type="text/javascript"> 
+	<script defer type="text/javascript"> 
 		var _paq = window._paq || [];
 		_paq.push(['trackPageView']); 
 		_paq.push(['enableLinkTracking']); 
 		(function() { var u="//paperplaneslive.com/Paperplanes/";
 			_paq.push(['setTrackerUrl', u+'js/tracker.php']); 
-			_paq.push(['setSiteId', '4067']); 
+			_paq.push(['setSiteId', '4108']); 
 		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; 
 		g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/tracker.php'; s.parentNode.insertBefore(g,s); 
 		})(); 
 	</script> 
-			 -->
+			
 	
 	<!-- >> DATASHIPS START  << -->
 	<!-- <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="5daad7a0-072e-4a66-875c-c0f2f1d7f698" data-blockingmode="auto" type="text/javascript"></script> -->
