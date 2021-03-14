@@ -14,7 +14,7 @@
           </svg>
         </button>
         
-        <h3 style="position: absolute;top: 20px;left: 41px;">Delivey & Return</h3>
+        <h3 style="position: absolute;top: 20px;left: 41px;">Delivey & Returns</h3>
       </div>
     <br>          
     <div data-styla-slot="09f5c950-74a6-405e-9c11-20f841e3a08a"></div>
