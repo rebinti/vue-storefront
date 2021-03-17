@@ -130,6 +130,7 @@ export default {
     })
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
     this.submitOrderDataforEmarsysandSegmentify()    
+    this.submitOrderDataforAffiliateCommissionJunction()  
   },
   mounted() {
     window.segPageInf = {
@@ -256,7 +257,39 @@ export default {
       } else {
            this.$router.push(this.localizedRoute('/'))
       }           
-    }    
+    },        
+    async submitOrderDataforAffiliateCommissionJunction () {
+
+      let count;
+      let url = 'https://www.emjcd.com/tags/c?containerTagId=1560239&CID=5398294&TYPE=421000&CURRENCY=EUR';
+      /* https://www.emjcd.com/tags/c?containerTagId=1560239&ITEM1=seg-test&AMT1=0.82&QTY1=2[…]5763&TYPE=421000&CURRENCY=EUR&COUPON=ab50&DISCOUNT=11&CJEVENT= */
+
+      if (this.$route.query.orderid) {
+      url += '&OID=' + this.$route.query.orderid;
+       if (res && res.itemsresult.length > 0) {          
+            res.itemsresult.filter(val => {
+              if (val.Price != 0) {  
+                count++;                
+                url += '&ITEM' + count + '=' +val.Sku;
+                url += '&AMT' + count + '=' + val.Price;
+                url += '&QTY' + count + '=' + val.Qty;
+              } 
+            })   
+            if(res.is_coupon){
+              url += '&COUPON=' + res.coupon_code;              
+            }            
+            document.write('<iframe height="1" width="1" frameborder="0" scrolling="no" name="cj_conversion" src="' + url +'"></iframe>');
+            console.log( ' AffiliateCJ',  {
+                orderNo: this.$route.query.orderid, // only on the thank you page
+                url: url,                
+            });                 
+       } else {
+          this.$router.push(this.localizedRoute('/'))
+       }
+      } else {
+           this.$router.push(this.localizedRoute('/'))
+      }           
+    },    
   }
   // async asyncData ({ store, route, context }) { // this is for SSR purposes to prefetch data
   //   // return new Promise((resolve, reject) => {
