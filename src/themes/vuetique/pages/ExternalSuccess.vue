@@ -260,8 +260,8 @@ export default {
     },        
     async submitOrderDataforAffiliateCommissionJunction () {
 
-      let count;
-      let url = 'https://www.emjcd.com/tags/c?containerTagId=1560239&CID=5398294&TYPE=421000&CURRENCY=EUR';
+      let count;      
+      let url = 'https://www.emjcd.com/tags/c?containerTagId=5398294&CID=1560239&TYPE=421000&CURRENCY=EUR';
       /* https://www.emjcd.com/tags/c?containerTagId=1560239&ITEM1=seg-test&AMT1=0.82&QTY1=2[…]5763&TYPE=421000&CURRENCY=EUR&COUPON=ab50&DISCOUNT=11&CJEVENT= */
 
       if (this.$route.query.orderid) {
