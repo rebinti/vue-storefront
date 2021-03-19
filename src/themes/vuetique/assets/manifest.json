@@ -7,39 +7,59 @@
     "start_url": "/",
     "icons": [
       {
-        "src": "/assets/android-icon-48x48.png",
+        "src": "/assets/appleicons/16.png",
         "type": "image/png",
-        "sizes": "48x48"
+        "sizes": "16x16"
       },
       {
-        "src": "/assets/android-icon-72x72.png",
+        "src": "/assets/appleicons/20.png",
+        "type": "image/png",
+        "sizes": "20x20"
+      },
+      {
+        "src": "/assets/appleicons/32.png",
+        "type": "image/png",
+        "sizes": "32x32"
+      },
+      {
+        "src": "/assets/appleicons/64.png",
+        "type": "image/png",
+        "sizes": "64x64"
+      },
+      {
+        "src": "/assets/appleicons/72.png",
         "type": "image/png",
         "sizes": "72x72"
       },
       {
-        "src": "/assets/android-icon-96x96.png",
+        "src": "/assets/appleicons/100.png",
         "type": "image/png",
-        "sizes": "96x96"
+        "sizes": "100x100"
       },
       {
-        "src": "/assets/android-icon-144x144.png",
+        "src": "/assets/appleicons/128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      },      
+      {
+        "src": "/assets/appleicons/144.png",
         "type": "image/png",
         "sizes": "144x144"
       },
       {
-        "src": "/assets/android-icon-168x168.png",
+        "src": "/assets/appleicons/256.png",
         "type": "image/png",
-        "sizes": "168x168"
+        "sizes": "256x256"
       },
-      {
-        "src": "/assets/android-icon-192x192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
-      {
-        "src": "/assets/android-icon-512x512.png",
+                  {
+        "src": "/assets/appleicons/512.png",
         "type": "image/png",
         "sizes": "512x512"
-      }
+      },
+      {
+        "src": "/assets/appleicons/1024.png",
+        "type": "image/png",
+        "sizes": "1024x1024"
+      }      
     ]
   }
