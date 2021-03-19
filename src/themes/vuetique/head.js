@@ -16,7 +16,17 @@ export default {
   link: [
     { rel: 'icon', type: 'image/png', href: '/assets/favicon-32x32.png', sizes: '32x32' },
     { rel: 'icon', type: 'image/png', href: '/assets/favicon-16x16.png', sizes: '16x16' },
-    { rel: 'apple-touch-icon', href: '/assets/apple-touch-icon.png' },
+    // { rel: 'apple-touch-icon', href: '/assets/apple-touch-icon.png' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/16.png', sizes: '16x16' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/32.png', sizes: '32x32' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/29.png', sizes: '29x29' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/40.png', sizes: '40x40' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/50.png', sizes: '50x50' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/64.png', sizes: '64x64' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/72.png', sizes: '72x72' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/80.png', sizes: '80x80' },
+    { rel: 'apple-touch-icon', type: 'image/png', href: '/assets/appleicons/256.png', sizes: '256x256' },
+
     { rel: 'apple-touch-startup-image', href: '/assets/apple_splash_2048.png', sizes: '2048x2732' },
     { rel: 'apple-touch-startup-image', href: '/assets/apple_splash_1668.png', sizes: '1668x2224' },
     { rel: 'apple-touch-startup-image', href: '/assets/apple_splash_1536.png', sizes: '1536x2048' },
