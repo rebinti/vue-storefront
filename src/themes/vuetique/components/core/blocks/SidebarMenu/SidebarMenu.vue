@@ -326,6 +326,9 @@ export default {
   .sidebar-menu{
     z-index: 100;
     padding-bottom: 4rem;
+    .menu-link{
+      font-size: 1rem !important;
+    }
   }
   .sidebar-menu__list .menu_li_it{
     position: relative;
