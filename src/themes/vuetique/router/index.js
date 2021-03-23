@@ -41,6 +41,7 @@ let routes = [
   { name: 'privacy-policy-cookie-restriction-mode', path: '/privacy-policy-cookie-restriction-mode', component: Static, props: { page: 'lorem', title: 'Privacy Policy', pageidentifierfromindex: 'privacy-policy-cookie-restriction-mode' } },
   { name: 'help-faq', path: '/help-faq', component: Static, props: { page: 'lorem', title: 'Help/Faqs', pageidentifierfromindex: 'help-faq' } },
   { name: 'delivery-returns', path: '/delivery-returns', component: Static, props: { page: 'lorem', title: 'Delivery & Return', pageidentifierfromindex: 'delivery-returns' } },
+  { name: 'reviews', path: '/reviews', component: Static, props: { page: 'lorem', title: 'Reviews', pageidentifierfromindex: 'reviews' } },
   { name: 'students', path: '/students', component: Static, props: { page: 'lorem', title: 'Students', pageidentifierfromindex: 'students' } },
   { name: 'size-guide', path: '/size-guide', component: Static, props: { page: 'lorem', title: 'Size guide', pageidentifierfromindex: 'size-guide' } },
   { name: 'magazine', path: '/magazine', component: Static, props: { page: 'lorem', title: 'Magazine' } },
