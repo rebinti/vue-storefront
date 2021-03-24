@@ -1530,7 +1530,7 @@ button.no-combination {
     color: #dad0d0;
     background: url(../assets/no-size.png); 
     background-repeat: no-repeat;
-    background-size: 33px 33px;       
+    background-size: 60px 40px;      
 }
 .no-combination.active {           
     color: #6b6b6b !important;           
@@ -1819,7 +1819,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 50px 50px;   
+        background-size: 60px 40px;   
         border:none;    
     }         
   }
@@ -1942,7 +1942,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 36px 36px;   
+        background-size: 60px 40px;  
         border:none;    
     }    
   }
@@ -2059,7 +2059,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 33px 33px;   
+        background-size: 60px 40px;   
         border:none;    
     }         
   }
