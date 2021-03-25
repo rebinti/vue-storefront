@@ -583,6 +583,12 @@
                 >
               </div>          
             </div>
+            <div>
+            <div v-if="product.notes" class="col-sm-24 nopadding productnote">
+              <span class="product-note-label">Please Note:</span>
+              <span class="product-note">{{product.notes}}</span>
+            </div>
+            </div>          
             <div class="flex mt-6 pb-5 border-b">
               <qty-input
                 v-if="product.type_id !== 'grouped' && product.type_id !== 'bundle'"
@@ -1577,6 +1583,26 @@ button.no-combination {
     float: right;
     margin-left: 5px;  
 }
+.productnote{
+      min-height: 85px;
+      overflow-y: auto;
+}
+.productnote .product-note-label {
+    padding-top: 10px;
+    color: #f29eb8;
+    float: left;
+    text-transform: uppercase;
+    font-family: 'brandon_grotesque';
+    font-size: .850rem; 
+}
+.productnote .product-note {
+    padding-top: 2px;
+    float: left;
+    padding-left: 0px;
+    text-transform: uppercase;
+    font-family: 'brandon_grotesque';
+    font-size: .850rem;
+}  
 .variants-wrapper {
  .sizes {
     @media (max-width: 767px) {
