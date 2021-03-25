@@ -248,6 +248,12 @@
                   </a> 
                 </div>              -->
               </div>
+              <div>
+              <div v-if="product.notes" class="col-sm-24 nopadding productnote">
+                <span class="product-note-label">Please Note:</span>
+                <span class="product-note">{{product.notes}}</span>
+              </div>
+              </div>              
               <!-- <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}"> -->
               <div style="height: 50px;margin-top: 15px;">  
                   <!-- <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup"> -->
