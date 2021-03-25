@@ -1590,7 +1590,7 @@ button.no-combination {
     margin-left: 5px;  
 }
 .productnote{
-      min-height: 85px;
+      min-height: 60px;
       overflow-y: auto;
 }
 .productnote .product-note-label {
@@ -1600,6 +1600,7 @@ button.no-combination {
     text-transform: uppercase;
     font-family: 'brandon_grotesque';
     font-size: .850rem; 
+    width:320px;
 }
 .productnote .product-note {
     padding-top: 2px;
