@@ -14,6 +14,7 @@ import { mapState } from 'vuex'
 import i18n from '@vue-storefront/i18n'
 import config from 'config'
 import facebookLogin from 'facebook-login-vuejs'
+const md5 = require('md5');
 
 export default {
   name: 'FacebookLogin',
@@ -188,6 +189,11 @@ export default {
           this.$bus.$emit('notification-progress-stop', {})
         } else {
           this.onSuccess()
+          console.log("GUUUUUUUUUUU - email fb",social_data.email)
+          console.log("GUUUUUUUUUUU - email uppper fb",social_data.email.toUpperCase())
+          console.log("GUUUUUUUUUUU - email md5 fb",md5(social_data.email.toUpperCase()))
+          _paq.push(["setUserId",md5(social_data.email.toUpperCase())]);  
+          _paq.push(["trackPageView"]);          
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
         }
