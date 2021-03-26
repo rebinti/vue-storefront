@@ -249,7 +249,7 @@
                 </div>              -->
               </div>
               <div>
-              <div v-if="product.notes" class="col-sm-24 nopadding productnote">
+              <div v-if="product.notes  && getNoteexpiry" class="col-sm-24 nopadding productnote">
                 <span class="product-note-label">Please Note:</span>
                 <span class="product-note">{{product.notes}}</span>
               </div>
@@ -590,7 +590,7 @@
               </div>          
             </div>
             <div>
-            <div v-if="product.notes" class="col-sm-24 nopadding productnote">
+            <div v-if="product.notes && getNoteexpiry" class="col-sm-24 nopadding productnote">
               <span class="product-note-label">Please Note:</span>
               <span class="product-note">{{product.notes}}</span>
             </div>
@@ -933,6 +933,21 @@ export default {
       } else {
         return null
       }
+    },
+    getNoteexpiry () {
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+
+      let todaydate =  new Date(yyyy + '-' + mm + '-' + dd + ' ' + '00:00:00');
+      let startdate = new Date(this.product.startdate);
+      let enddate = new Date(this.product.enddate);
+      if ((todaydate >= startdate ) && (todaydate <= enddate )){
+        return true;
+      }else{
+        return false;
+      }      
     }    
   },
   beforeMount () { 
@@ -943,7 +958,6 @@ export default {
     this.$bus.$on('product-before-load', this.changeProd)
     this.$bus.$on('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$on('user-after-logout', this.reloadTruefitValues)
-
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
     var self = this;
     tfcapi('event','tfc-fitrec-register','addtobag',function(context) {
