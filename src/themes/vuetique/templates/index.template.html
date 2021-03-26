@@ -63,8 +63,25 @@
 
 
 	<!-- for segmentify product recommendations widgets --> 
-	<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" async charset="UTF-8" ></script>
-		
+		<script src="https://cdn.segmentify.com/3eb32483-e5a6-403f-b355-909ba225968e/segmentify.js" async charset="UTF-8" ></script>
+		<!-- SEGMENTIFY BEGIN 
+		<script type='text/javascript'> 
+			(function(namespace) { 
+				window['SegmentifyTrackingObject'] = namespace; 
+				window[namespace] = window[namespace] || function () { 
+					(window[namespace].q = window[namespace].q || []) .push(arguments);
+				};
+				window[namespace].config = {
+					'segmentifyApiUrl': '//gandalf-eu.segmentify.com/', // segmentifyApiUrl:"//rest.segmentify.com/"
+					'domain': 'vue.iclothing.com'
+				}; 
+			}) ("Segmentify");
+
+			Segmentify('apikey', '67442d88-7c08-40ef-8327-168557375db2');
+		</script>
+		<script src='cdn.segmentify.com/segmentify.js' charset='UTF-8'></script>
+	 SEGMENTIFY END --> 	
+
 		
 	<!-- ########## STAMPED ######### -->
 	<script type="text/javascript" defer>
@@ -114,19 +131,24 @@
 	</script>
 	<script src="https://d22q3dafggn5rg.cloudfront.net/emarsys-m1.js" async></script>	
 
-	<!-- >> PAPERPLANES - CORE TAG -->
-	<script defer type="text/javascript"> 
+	<!-- Paperplanes -->
+	<script type="text/javascript">
 		var _paq = window._paq || [];
-		_paq.push(['trackPageView']); 
-		_paq.push(['enableLinkTracking']); 
-		(function() { var u="//paperplaneslive.com/Paperplanes/";
-			_paq.push(['setTrackerUrl', u+'js/tracker.php']); 
-			_paq.push(['setSiteId', '4067']); 
-		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; 
-		g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/tracker.php'; s.parentNode.insertBefore(g,s); 
-		})(); 
-	</script> 
-			
+		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="https://paperplaneslive.com/paperplanes/";
+			_paq.push(['setTrackerUrl', u+'js/tracker.php']);
+			_paq.push(['setSiteId', '4067']);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/tracker.php'; s.parentNode.insertBefore(g,s);
+		})();
+	</script>
+	<!-- End Paperplanes Code -->
+	<!-- SEARCHSPRING TRACK START-->
+	<script type="text/javascript" src="//cdn.searchspring.net/intellisuggest/is.min.js"></script>
+	<!-- SEARCHSPRING TRACK START-->			
 	
 	<!-- >> DATASHIPS START  << -->
 	<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="5daad7a0-072e-4a66-875c-c0f2f1d7f698" data-blockingmode="auto" type="text/javascript"></script>
@@ -134,7 +156,9 @@
 		document.write("<script id='pc' type='text/javascript' src='https://api.dataships.io/js/pc.js?apikey=f4nIJ0NEbIKN4Qs2jVsAnouSqJkWjaah&v="+Date.now()+"' async defer></scr"+"ipt>");
 	</script>
 	<!-- >> DATASHIPS ENDS  << -->	
-
+	<!-- TrustBox script -->
+	<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async="" ></script>
+	<!-- End TrustBox script -->
 		{{{ renderResourceHints() }}}
 		{{{ renderStyles() }}}
 		{{{ output.appendHead() }}}

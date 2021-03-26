@@ -87,24 +87,12 @@
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
-          :to="localizedRoute('/sale')"
-          exact
-        >
-
-          {{ $t('Sale') }}
-        </router-link>
-      </li>
-
-      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
-        <router-link
-          class="menu-link"
           :to="localizedRoute('/brands')"
           exact
         >
           {{ $t('Brands') }}
         </router-link>
       </li>
-
       <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
         <router-link
           class="menu-link"
@@ -114,31 +102,13 @@
           Gift Card
         </router-link>
       </li>
-
-      <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
-        <router-link
-          class="menu-link"
-          :to="localizedRoute('/magazine')"
-          exact
-        >
-          
-          {{ $t('Magazine') }}
-        </router-link>
-      </li> --> 
-      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b md:hidden">
-        <!-- <button
-          class="menu-link text-left"
-          type="button"
-          @click="toggleSearchpanel"
-        >
-          {{ $t('Search') }}
-        </button> -->
+      <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
          <router-link
           class="menu-link"
-          :to="localizedRoute('/search')"
+          :to="localizedRoute('/inspiration-landing')"
           exact
         >
-          {{ $t('Search') }}
+          {{ $t('Inspiration') }}
         </router-link>
       </li>
       <li @click="closeMenu" v-if="compareIsActive && isCurrentMenuShowed" class="border-b">
@@ -150,15 +120,6 @@
           {{ $t('Compare products') }}
         </router-link>
       </li>
-      <!-- <li @click="closeMenu" v-if="isCurrentMenuShowed" class="border-b">
-        <router-link
-          class="menu-link"
-          :to="localizedRoute('/order-tracking')"
-          exact
-        >
-          {{ $t('Track my order') }}
-        </router-link>
-      </li> -->
       <li @click="closeMenu" class="flex border-b menu_li_it div-web-acc" >
         <sub-btn
           v-if="currentUser"
@@ -329,6 +290,7 @@ export default {
 
   .menu-link {
     @apply block w-full px-5 py-4 text-grey-dark text-sm font-medium bg-grey-lighter;
+    font-size: .900rem !important;
 
     &:hover, &:focus {
       @apply text-black;
@@ -364,6 +326,9 @@ export default {
   .sidebar-menu{
     z-index: 100;
     padding-bottom: 4rem;
+    .menu-link{
+      font-size: 1rem !important;
+    }
   }
   .sidebar-menu__list .menu_li_it{
     position: relative;

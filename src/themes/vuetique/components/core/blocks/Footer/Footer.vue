@@ -287,7 +287,15 @@
         </div>
       </div>
     </div>
-
+      <div class="container mx-auto">
+        <div class="row items-center justify-between py-6">    
+          <!-- TrustBox widget - Micro Star -->
+          <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b732fbfb950b10de65e5" data-businessunit-id="58adae0b0000ff00059d2b0a" data-style-height="24px" data-style-width="100%" data-theme="light">
+            <a href="https://uk.trustpilot.com/review/iclothing.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+          <!-- End TrustBox widget -->
+        </div>
+      </div>
     <div class="container mx-auto">
       <div class="row items-center justify-between py-6">
         <div class="col-12 md:col-6 flex mb-8 md:mb-0">

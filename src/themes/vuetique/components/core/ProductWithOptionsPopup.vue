@@ -467,10 +467,10 @@ export default {
   @media (max-width: 3840px) {
     .prd-option-popup {
       .no-combination {
-          background-size: 50px 50px !important;     
+          background-size: 60px 40px !important;     
       } 
       .no-combination.active {
-          background-size: 50px 50px !important;     
+          background-size: 60px 40px !important;     
       }       
       .size-selector{
         width: 50px;
@@ -481,10 +481,10 @@ export default {
   @media (max-width: 1920px) {
     .prd-option-popup {
       .no-combination {
-          background-size: 36px 36px !important;     
+          background-size: 60px 40px !important;     
       }
       .no-combination.active {
-          background-size: 36px 36px !important;     
+          background-size: 60px 40px !important;     
       }        
       .size-selector{
         width: 36px;
@@ -495,10 +495,10 @@ export default {
   @media (max-width: 1440px) {
     .prd-option-popup {
       .no-combination {
-          background-size: 33px 33px !important;     
+          background-size: 60px 40px !important;     
       }
       .no-combination.active {
-          background-size: 33px 33px !important;      
+          background-size: 60px 40px !important;      
       }       
       .size-selector{
           height: 40px;
@@ -510,7 +510,7 @@ export default {
   @media (max-width: 1024px) {
     .prd-option-popup {
       .no-combination {
-          background-size: 33px 33px !important;     
+          background-size: 60px 40px !important;     
       }       
     }
   }      

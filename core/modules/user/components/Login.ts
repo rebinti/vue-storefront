@@ -1,5 +1,7 @@
 import i18n from '@vue-storefront/i18n'
 import { Logger } from '@vue-storefront/core/lib/logger'
+const md5 = require('md5');
+declare const _paq
 
 export const Login = {
   name: 'Login',
@@ -26,6 +28,11 @@ export const Login = {
           this.onFailure(result)
           this.$bus.$emit('notification-progress-stop', {})
         } else {
+          console.log("GUUUUUUUUUUU - email",this.email)
+          console.log("GUUUUUUUUUUU - email uppper",this.email.toUpperCase())
+          console.log("GUUUUUUUUUUU - email md5",md5(this.email.toUpperCase()))
+          _paq.push(["setUserId",md5(this.email.toUpperCase())]);  
+          _paq.push(["trackPageView"]);          
           this.onSuccess()
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {

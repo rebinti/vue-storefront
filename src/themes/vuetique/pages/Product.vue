@@ -248,6 +248,12 @@
                   </a> 
                 </div>              -->
               </div>
+              <div>
+              <div v-if="product.notes  && getNoteexpiry" class="col-sm-24 nopadding productnote">
+                <span class="product-note-label">Please Note:</span>
+                <span class="product-note">{{product.notes}}</span>
+              </div>
+              </div>              
               <!-- <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}"> -->
               <div style="height: 50px;margin-top: 15px;">  
                   <!-- <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup"> -->
@@ -586,6 +592,12 @@
                 >
               </div>          
             </div>
+            <div>
+            <div v-if="product.notes && getNoteexpiry" class="col-sm-24 nopadding productnote">
+              <span class="product-note-label">Please Note:</span>
+              <span class="product-note">{{product.notes}}</span>
+            </div>
+            </div>          
             <div class="flex mt-6 pb-5 border-b">
               <qty-input
                 v-if="product.type_id !== 'grouped' && product.type_id !== 'bundle'"
@@ -929,6 +941,21 @@ export default {
       } else {
         return null
       }
+    },
+    getNoteexpiry () {
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      let yyyy = today.getFullYear();
+
+      let todaydate =  new Date(yyyy + '-' + mm + '-' + dd + ' ' + '00:00:00');
+      let startdate = new Date(this.product.startdate);
+      let enddate = new Date(this.product.enddate);
+      if ((todaydate >= startdate ) && (todaydate <= enddate )){
+        return true;
+      }else{
+        return false;
+      }      
     }    
   },
   beforeMount () { 
@@ -939,7 +966,6 @@ export default {
     this.$bus.$on('product-before-load', this.changeProd)
     this.$bus.$on('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$on('user-after-logout', this.reloadTruefitValues)
-
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
     var self = this;
     tfcapi('event','tfc-fitrec-register','addtobag',function(context) {
@@ -1538,7 +1564,7 @@ button.no-combination {
     color: #dad0d0;
     background: url(../assets/no-size.png); 
     background-repeat: no-repeat;
-    background-size: 33px 33px;       
+    background-size: 60px 40px;      
 }
 .no-combination.active {           
     color: #6b6b6b !important;           
@@ -1585,6 +1611,28 @@ button.no-combination {
     float: right;
     margin-left: 5px;  
 }
+.productnote{
+      min-height: 55px;
+      overflow-y: auto;
+}
+.productnote .product-note-label {
+    padding-top: 10px;
+    color: #f29eb8;
+    float: left;
+    text-transform: uppercase;
+    font-family: 'brandon_grotesque';
+    font-size: .850rem; 
+    width:320px;
+}
+.productnote .product-note {
+    padding-top: 2px;
+    float: left;
+    padding-left: 0px;
+    text-transform: uppercase;
+    font-family: 'brandon_grotesque';
+    font-size: .750rem;
+    line-height: 1.5;
+}  
 .variants-wrapper {
  .sizes {
     @media (max-width: 767px) {
@@ -1827,7 +1875,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 50px 50px;   
+        background-size: 60px 40px;   
         border:none;    
     }         
   }
@@ -1950,7 +1998,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 36px 36px;   
+        background-size: 60px 40px;  
         border:none;    
     }    
   }
@@ -2067,7 +2115,7 @@ button.no-combination {
         color: #dad0d0;
         background: url(../assets/no-size.png); 
         background-repeat: no-repeat;
-        background-size: 33px 33px;   
+        background-size: 60px 40px;   
         border:none;    
     }         
   }
