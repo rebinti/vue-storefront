@@ -10,7 +10,7 @@
           <div class="col-md-6 pl20 pr20">
             <h2 class="category-title" style="text-transform: uppercase;">Your order has been received.</h2>
             <h3 class="mt-4" style="text-transform: uppercase;"> Thank you for your purchase! </h3>
-            <!-- <p class="mt-4"> Your order # is: <span style="color: #787878;"> {{$route.query.orderid}}. </span> </p> -->
+            <p class="mt-4"> Your order # is: <span style="color: #787878;"> {{orderincremetid}}. </span> </p>
             <p>You will receive an order confirmation email with details of your order and a link to track its progress.</p>
             <div class="mb-8"> <p> <a href="#" class="print-order">Click here </a> print a copy of your order confirmation. </p> </div>
             <router-link class="continue-button" :to="localizedRoute('/')">
@@ -93,7 +93,8 @@ export default {
   data () {
     return {
       feedback: '',
-      orderApiCheck: true
+      orderApiCheck: true,
+      orderincremetid: '',
     }
   },
   computed: {
@@ -198,13 +199,15 @@ export default {
     async submitOrderDataforEmarsysandSegmentify () {
      if (this.$route.query.orderid) {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
-      //  console.log('res', res);
+       this.orderincremetid = res.incrementid
+        console.log('UUUUUUUUUUUUUUUUres', res);
       //  console.log('itemsresult', res.itemsresult);
       //  console.log('grandtotal', res.grandtotal);
        if (res && res.itemsresult.length > 0) {
             this.orderApiCheck = false;
             let productList= [];
             let paperplane_productList= [];
+            let searchspring_intellisuggestCart = [];
             const emarsys = {
                   orderId: this.$route.query.orderid,
                   items: []
@@ -214,6 +217,7 @@ export default {
                 emarsys.items.push({item: val.Sku, price: val.Price, quantity: val.Qty})              
                 productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
                 paperplane_productList.push({0:'addEcommerceItem',1:val.Sku, 2:val.Name,3:'',4:val.Price,5:val.Qty})
+                // searchspring_intellisuggestCart.push({sku: val.Sku, qty: val.Qty, price: val.Price})
               } 
             })            
             console.log( ' Segmentify',  {
@@ -250,7 +254,21 @@ export default {
                 window._paq.push(['trackPageView']);  
               }                
             console.log(' emarsys', emarsys);
-            this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });                    
+            this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });  
+            // SEARCHSPRING TRACK
+             if(window && window.IntelliSuggest  != undefined) {
+                  window.IntelliSuggest.init({siteId:'akjx6f'});
+                  res.itemsresult.filter(val => {
+                    console.log("peechapeechaaaaaa", val.Sku)
+                    window.IntelliSuggest.haveItem({
+                        sku:val.Sku,
+                        qty:val.Qty,
+                        price:val.Price
+                    });              
+                  })
+                  window.IntelliSuggest.inSale();
+             }
+                                
        } else {
           this.$router.push(this.localizedRoute('/'))
        }
