@@ -266,6 +266,7 @@ export default {
 
       if (this.$route.query.orderid) {
       url += '&OID=' + this.$route.query.orderid;
+      const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
        if (res && res.itemsresult.length > 0) {          
             res.itemsresult.filter(val => {
               if (val.Price != 0) {  
