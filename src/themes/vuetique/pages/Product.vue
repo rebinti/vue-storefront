@@ -433,6 +433,9 @@
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
               <meta itemprop="price" :content="parseFloat(product.priceInclTax).toFixed(2)">
+              <meta itemprop="availability" :content="structuredData.availability">
+              <meta itemprop="url" :content="product.url_path">
+              
               <div
                 class="font-serif font-bold text-h1 pb-5 price ds_item"
                 v-if="product.type_id !== 'grouped'"
@@ -894,6 +897,11 @@ export default {
   },
   directives: { focusClean },
   computed: {
+    structuredData () {
+      return {
+        availability: (this.product.stock.is_in_stock) ? 'InStock' : 'OutOfStock'
+      }
+    },
     getBrandLabelDetails () {
       if (this.attributesByCode && this.attributesByCode.label) {
         const brand = this.attributesByCode.label.options.find(val => val.value == this.product.label)
