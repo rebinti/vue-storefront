@@ -93,7 +93,7 @@ export const registerModules: VueStorefrontModule[] = [
   // PromotedOffers,
   googleTagManager,
   // VsfGoogleTagManager,
-  // GoogleAnalytics,
+  GoogleAnalytics,
   // Hotjar,
   // PaymentBackendMethods,
   // PaymentCashOnDelivery,
