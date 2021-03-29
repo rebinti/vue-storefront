@@ -258,8 +258,7 @@ export default {
             // SEARCHSPRING TRACK
              if(window && window.IntelliSuggest  != undefined) {
                   window.IntelliSuggest.init({siteId:'akjx6f'});
-                  res.itemsresult.filter(val => {
-                    console.log("peechapeechaaaaaa", val.Sku)
+                  res.itemsresult.filter(val => {                    
                     window.IntelliSuggest.haveItem({
                         sku:val.Sku,
                         qty:val.Qty,
@@ -268,6 +267,25 @@ export default {
                   })
                   window.IntelliSuggest.inSale();
              }
+            // GOOGLE TAG MANAGER
+            Vue.gtm.trackEvent({
+              'event': 'purchase',
+              'ecommerce': {
+                'purchase': {
+                  'actionField': {
+                    'id': res.id,
+                    'affiliation': 'Default',
+                    'revenue': res.total,
+                    'subtotal': res.subtotal,
+                    'tax': res.tax,
+                    'shipping': res.shipping,
+                    'discount': res.discount,
+                    'coupon': res.coupon_code
+                  },
+                  'products': res.itemsresult
+                }
+              }
+            })             
                                 
        } else {
           this.$router.push(this.localizedRoute('/'))
