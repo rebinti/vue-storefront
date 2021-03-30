@@ -80,7 +80,40 @@ export default {
           window.StampedFn&&window.StampedFn.loadDisplayWidgets()
           //this.reviewpanelloaded = true
           document.addEventListener( 'stamped:reviews:loaded', () => {
-            this.reviewpanelloaded = false;
+                this.reviewpanelloaded = false;
+
+
+                let tdChild = document.getElementsByTagName("meta");
+                for(let i=0; i<tdChild.length; i++){ 
+                    if(tdChild[i].getAttribute("itemprop")=="reviewCount")  {                        
+                          console.log("STAMPED reviewCount","INNN"+ tdChild[i].content)
+                          var ratingCount = tdChild[i].content;
+                    }                 
+                    if(tdChild[i].getAttribute("itemprop")=="ratingValue")  {
+                          console.log("STAMPED ratingValue","INNN"+ tdChild[i].content)
+                          var ratingValue = tdChild[i].content;                
+                    }                   
+                }
+                console.log("originalProduct.url_path INNN",this.$store.state.config.frontend.url+'/'+this.originalProduct.url_path)
+                let richSnippet = {
+                    "@context": "http://schema.org",
+                    "@type": "Review",
+                    "@id": this.$store.state.config.frontend.url+'/'+this.originalProduct.url_path
+                }
+                // "@id": "HTTPS://STORE.COM/URL/#product"
+                if (parseInt(ratingValue) > 0){
+                  richSnippet.aggregateRating = {
+                      "@type": "AggregateRating",
+                      "ratingValue": ratingValue,
+                      "reviewCount": ratingCount
+                  }
+                }
+                let script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.innerHTML = JSON.stringify(richSnippet);
+                document.getElementsByTagName('head')[0].appendChild(script);  
+                //document.head.appendChild(stripeScript);
+
           }); 
           let start = null;
           const touchStart = (event) => {
