@@ -1430,8 +1430,7 @@ export default {
     // document.addEventListener('scroll', scrollHandler)
     // this.$once('hook:destroyed', () => {
     //   document.removeEventListener('scroll', scrollHandler)
-    // })
-    console.log('SEO product data >>>>>>>>',this.getJsonLd)
+    // })    
   }
 }
 </script>
