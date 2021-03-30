@@ -955,8 +955,9 @@ export default {
         return false;
       }      
     },
-    getJsonLd () {      
-      return productJsonLd(this.getCurrentProduct, this.configuration.size.label, this.$store.state.storeView.i18n.currencyCode)
+    getJsonLd () {    
+      //return true;  
+      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode)
     }        
   },
   beforeMount () {     
@@ -1080,6 +1081,7 @@ export default {
       }      
     },
     setBreadCrumbToSamePath () { 
+      console.log("INNNNNNNNNNNNNNNNNNNNNNNN",this.configuration)
       this.showBreadCrumbsToSamePath = true; 
       this.setSegmentify()
       this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
