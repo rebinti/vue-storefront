@@ -130,8 +130,8 @@ export default {
       }
     })
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
-    this.submitOrderDataforEmarsysandSegmentify()    
-    this.submitOrderDataforAffiliateCommissionJunction()  
+    //this.submitOrderDataforEmarsysandSegmentify()    
+    //this.submitOrderDataforAffiliateCommissionJunction()  
   },
   mounted() {
     window.segPageInf = {
