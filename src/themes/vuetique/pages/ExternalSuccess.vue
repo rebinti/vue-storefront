@@ -10,7 +10,7 @@
           <div class="col-md-6 pl20 pr20">
             <h2 class="category-title" style="text-transform: uppercase;">Your order has been received.</h2>
             <h3 class="mt-4" style="text-transform: uppercase;"> Thank you for your purchase! </h3>
-            <p class="mt-4"> Your order # is: <span style="color: #787878;"> {{orderincremetid}}. </span> </p>
+            <!-- <p class="mt-4"> Your order # is: <span style="color: #787878;"> {{orderincremetid}}. </span> </p> -->
             <p>You will receive an order confirmation email with details of your order and a link to track its progress.</p>
             <div class="mb-8"> <p> <a href="#" class="print-order">Click here </a> print a copy of your order confirmation. </p> </div>
             <router-link class="continue-button" :to="localizedRoute('/')">
