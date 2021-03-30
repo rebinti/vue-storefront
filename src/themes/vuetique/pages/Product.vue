@@ -1,5 +1,5 @@
 <template>
-  <div id="product" itemscope itemtype="http://schema.org/Product">
+  <div id="product">
     <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out"
       :routes="breadcrumbs.routes"
       :active-route="breadcrumbs.name"
@@ -89,7 +89,7 @@
                         >{{ getBrandLabelDetails.label }}
                         </router-link>
                    </p> -->
-                    <h1 data-testid="productName" itemprop="name" class="product-title-d">
+                    <h1 data-testid="productName" class="product-title-d">
                       {{ product.name | htmlDecode }}
                     </h1>
                     <!-- <div class="text-grey text-sm sku_txt">
@@ -419,7 +419,7 @@
             class="share-box bg-grey-lighter shadow-box">
                 <product-share :product="product" :imgpath="image.src"/>
             </div>         
-            <h1 data-testid="productName" itemprop="name">
+            <h1 data-testid="productName" >
               {{ product.name | htmlDecode }}
             </h1>
             <!-- <div class="text-grey text-sm mb-3 uppercase">
@@ -436,11 +436,7 @@
                     data-image-url="product.image">
             </div> -->
 
-            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-              <meta itemprop="priceCurrency" :content="currentStore.i18n.currencyCode">
-              <meta itemprop="price" :content="parseFloat(product.priceInclTax).toFixed(2)">
-              <meta itemprop="availability" :content="structuredData.availability">
-              <meta itemprop="url" :content="product.url_path">
+            <div>
               
               <div
                 class="font-serif font-bold text-h1 pb-5 price ds_item"
@@ -812,6 +808,7 @@
         </no-ssr>
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
+    <script v-html="getJsonLd" type="application/ld+json" />
   </div>
 </template>
 
@@ -826,6 +823,7 @@ import ColorSelector from 'theme/components/core/ColorSelector.vue'
 import SizeSelector from 'theme/components/core/SizeSelector.vue'
 import ProductGallery from 'theme/components/core/ProductGallery'
 import focusClean from 'theme/components/theme/directives/focusClean'
+import { productJsonLd } from '@vue-storefront/core/helpers'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { currentStoreView } from '@vue-storefront/core/lib/multistore'
 import { findConfigurableChildAsync } from '@vue-storefront/core/modules/catalog/helpers/index'
@@ -956,9 +954,12 @@ export default {
       }else{
         return false;
       }      
-    }    
+    },
+    getJsonLd () {      
+      return productJsonLd(this.getCurrentProduct, this.configuration.size.label, this.$store.state.storeView.i18n.currencyCode)
+    }        
   },
-  beforeMount () { 
+  beforeMount () {     
     this.mobileCartFixedHeight= window.innerHeight-65;
     this.windowScreenWidth = window.innerWidth;   
     this.$bus.$on('product-after-related', this.getRelatedProduct)
@@ -1430,6 +1431,7 @@ export default {
     // this.$once('hook:destroyed', () => {
     //   document.removeEventListener('scroll', scrollHandler)
     // })
+    console.log('SEO product data >>>>>>>>',this.getJsonLd)
   }
 }
 </script>

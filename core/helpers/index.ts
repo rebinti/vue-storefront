@@ -213,3 +213,38 @@ export const isBottomVisible = () => {
 export const calcItemsHmac = (items, token) => {
   return sha3_224(JSON.stringify({ items, token: token }))
 }
+
+export function productJsonLd ({ category, image, name, id, sku, mpn, description, price, url_path, stock, is_in_stock }, size, priceCurrency) {
+  return {
+    '@context': 'http://schema.org',
+    '@type': 'Product',
+    category: category
+      ? category
+        .map(({ name }) => name || null)
+        .filter(name => name !== null)
+      : null,
+    size,
+    description,
+    image,
+    itemCondition: 'http://schema.org/NewCondition',    
+    name,
+    productID: id,
+    sku,
+    mpn,
+    offers: {
+      '@type': 'Offer',
+      category: category
+        ? category
+          .map(({ name }) => name || null)
+          .filter(name => name !== null)
+        : null,
+      mpn,
+      url: url_path,
+      priceCurrency,
+      price,
+      itemCondition: 'https://schema.org/NewCondition',
+      availability: stock && is_in_stock ? 'InStock' : 'OutOfStock',
+      sku
+    }
+  }
+}

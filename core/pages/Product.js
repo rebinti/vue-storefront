@@ -25,6 +25,7 @@ export default {
   computed: {
     ...mapGetters({
       product: 'product/productCurrentFilterSwaped',
+      getCurrentProduct: 'product/productCurrent',
       originalProduct: 'product/productOriginal',
       parentProduct: 'product/productParent',
       attributesByCode: 'attribute/attributeListByCode',
