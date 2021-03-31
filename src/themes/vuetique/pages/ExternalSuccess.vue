@@ -130,6 +130,7 @@ export default {
       }
     })
     // if(!this.user) this.$router.push(this.localizedRoute('/'))
+    this.getorderdetails()
     //this.submitOrderDataforEmarsysandSegmentify()    
     //this.submitOrderDataforAffiliateCommissionJunction()  
   },
@@ -196,6 +197,19 @@ export default {
         action1: { label: this.$t('OK') }
       })
     },
+    async getorderdetails () {
+     if (this.$route.query.orderid) {
+       const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)    
+        if (res && res.itemsresult.length > 0) {
+        this.orderApiCheck = false;  
+        }
+         else {
+          this.$router.push(this.localizedRoute('/'))
+        }
+      } else {
+           this.$router.push(this.localizedRoute('/'))
+      }  
+    },
     async submitOrderDataforEmarsysandSegmentify () {
      if (this.$route.query.orderid) {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)
@@ -231,28 +245,28 @@ export default {
                 productList: productList
             };
             // PAPERPLANES - ORDER SUCCESS PAGE
-            // if (window && window._paq  != undefined) {
-            //     // console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
-            //     window._paq.push(paperplane_productList);                                 
-            //    // window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
-            //     if(res.guest_email_md5){
-            //       window._paq.push(['setUserId', res.guest_email_md5]);  
-            //     }else if(res.customer_email_md5){
-            //       window._paq.push(['setUserId', res.customer_email_md5]);  
-            //     }
+            if (window && window._paq  != undefined) {
+                // console.log("PAPERPLANE ORDER SUCCESS CCCCCCCCCC",this.$store.state.cart)
+                window._paq.push(paperplane_productList);                                 
+               // window._paq.push(['trackEcommerceOrder', res.grandtotal ? res.grandtotal : '']);
+                if(res.guest_email_md5){
+                  window._paq.push(['setUserId', res.guest_email_md5]);  
+                }else if(res.customer_email_md5){
+                  window._paq.push(['setUserId', res.customer_email_md5]);  
+                }
 
-            //     let couponst = res.is_coupon ? true : false              
-            //     window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
-            //     window._paq.push(['setCustomVariable', 1, "First_Name", res.first_name, 'visit']);
-            //     window._paq.push(['setCustomVariable', 2, "Last_Name", res.last_name, 'visit']);
-            //     window._paq.push(['setCustomVariable', 3, "Address1", res.address1, 'visit']);
-            //     window._paq.push(['setCustomVariable', 4, "Address2", res.address2, 'visit']);
-            //     window._paq.push(['setCustomVariable', 5, "Address3", res.address3, 'visit']);
-            //     window._paq.push(['setCustomVariable', 6, "Address4", res.address4, 'visit']);
-            //     window._paq.push(['setCustomVariable', 7, "Address5", res.address5, 'visit']);  
-            //     window._paq.push(['trackEvent', 'Ecommerce', 'DiscountCode', res.coupon_code]);	                                               
-            //     window._paq.push(['trackPageView']);  
-            //   }                
+                let couponst = res.is_coupon ? true : false              
+                window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
+                window._paq.push(['setCustomVariable', 1, "First_Name", res.first_name, 'visit']);
+                window._paq.push(['setCustomVariable', 2, "Last_Name", res.last_name, 'visit']);
+                window._paq.push(['setCustomVariable', 3, "Address1", res.address1, 'visit']);
+                window._paq.push(['setCustomVariable', 4, "Address2", res.address2, 'visit']);
+                window._paq.push(['setCustomVariable', 5, "Address3", res.address3, 'visit']);
+                window._paq.push(['setCustomVariable', 6, "Address4", res.address4, 'visit']);
+                window._paq.push(['setCustomVariable', 7, "Address5", res.address5, 'visit']);  
+                window._paq.push(['trackEvent', 'Ecommerce', 'DiscountCode', res.coupon_code]);	                                               
+                window._paq.push(['trackPageView']);  
+              }                
             console.log(' emarsys', emarsys);
             this.$bus.$emit('send-to-emarsys-tracking', { type: 'Purchase', purchaseData: emarsys });  
             // SEARCHSPRING TRACK
