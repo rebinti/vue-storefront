@@ -41,12 +41,6 @@ export default {
       window.segPageInf = {
         "category": "Home Page",
         "subCategory": ""
-      }
-      window.sgfLayer = {
-          'page': {
-              category: 'Home Page',
-              subCategory: ''
-          }
       };      
     },
     fromhomerouterwatch () {       

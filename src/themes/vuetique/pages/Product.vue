@@ -1072,13 +1072,7 @@ export default {
       window.segPageInf = {
         "category": "Product Page",
         "subCategory": this.product.parentSku
-      }
-      window.sgfLayer = {
-          'page': {
-              category: 'Product Page',
-              subCategory: ''
-          }
-      }      
+      }    
     },
     setBreadCrumbToSamePath () { 
       console.log("INNNNNNNNNNNNNNNNNNNNNNNN",this.configuration)
