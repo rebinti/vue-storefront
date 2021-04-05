@@ -808,7 +808,7 @@
         </no-ssr>
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
-    <script v-html="getJsonLd" type="application/ld+json" />
+    <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>
   </div>
 </template>
 
