@@ -1,10 +1,10 @@
 <template>
   <div id="product">
-    <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out firsttttttttt"
+    <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out first"
       :routes="breadcrumbs.routes"
       :active-route="breadcrumbs.name"
     />
-  <breadcrumbs v-else class="brd_out secondddddddddddddddd"
+  <breadcrumbs v-else class="brd_out second"
       :routes="[{name:'Default Category',route_link:'/undefined'}]"
       :active-route="product.name"
     />
@@ -809,6 +809,7 @@
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
     <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>
+    <script v-html="JSON.stringify(getJsonLdBreadcrumbs)" type="application/ld+json"/>
   </div>
 </template>
 
@@ -880,6 +881,7 @@ export default {
       fromRelatedProdcutClick: false,
       showShareDiv: false,
       mobileCartFixedHeight: 0,
+      Breadcrumbsresults: [],
       // removetruefitstyle:false
     }
   },
@@ -954,6 +956,56 @@ export default {
       }else{
         return false;
       }      
+    },
+    getJsonLdBreadcrumbs () {    
+      //return true;  
+      let itemListElement = [];
+      if(!this.showDefaultBreadCrumbs){
+          itemListElement = [
+              {
+                "@type":"ListItem",
+                "item":{
+                    "@id":this.$store.state.config.frontend.url,
+                    "name":"Home 111"
+                },
+                "position":0
+              },
+              {
+                "@type":"ListItem",
+                "item":{
+                    "@id":this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path,
+                    "name":this.getCurrentProduct.name ? this.getCurrentProduct.name : ''
+                },
+                "position":1
+              }
+          ]
+      }else{
+         //this.Breadcrumbsresults.concat(response.data.data); 
+          itemListElement = [
+              {
+                "@type":"ListItem",
+                "item":{
+                    "@id":this.$store.state.config.frontend.url,
+                    "name":"Home 222"
+                },
+                "position":0
+              },
+              {
+                "@type":"ListItem",
+                "item":{
+                    "@id":this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path,
+                    "name":this.getCurrentProduct.name ? this.getCurrentProduct.name : ''
+                },
+                "position":1
+              }
+          ]
+      }
+      this.Breadcrumbsresults =  {
+           "@context":"http://schema.org",
+           "@type":"BreadcrumbList",
+           "itemListElement":itemListElement,
+      }            
+      return this.Breadcrumbsresults;
     },
     getJsonLd () {    
       // return true;  
@@ -1423,7 +1475,7 @@ export default {
     console.log("ITEM DATAAAAAAAAAA 1111111111",this.getCurrentProduct)
     console.log("ITEM DATAAAAAAAAAA attribuecode 1111111111",this.attributesByCode)
     
-    console.log("ITEM DATAAAAAAAAAA breadcrumb 1111111111",this.breadcrumbs)
+    console.log("ITEM DATAAAAAAAAAA breadcrumb 1111111111",this.breadcrumbs.routes)
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;
