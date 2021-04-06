@@ -202,11 +202,13 @@ export default {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)    
         if (res && res.itemsresult.length > 0) {
           this.orderApiCheck = false;  
-          /* SEGMENTIFY TRACK UPDATE START*/
+          /* SEGMENTIFY AND PAPERPLANE TRACK UPDATE START*/
           let productList= [];
+          let paperplane_productList= [];
           res.itemsresult.filter(val => {
             if (val.Price != 0) {                           
               productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
+              paperplane_productList.push({0:'addEcommerceItem',1:val.Sku, 2:val.Name,3:'',4:val.Price,5:val.Qty})
             } 
           })
           window.sgfCheckoutObj = {
@@ -214,7 +216,27 @@ export default {
               totalPrice: res.grandtotal,
               productList: productList
           };
-          /* SEGMENTIFY TRACK UPDATE ENDS*/           
+          if (window && window._paq  != undefined) {              
+              window._paq.push(paperplane_productList);                                               
+              if(res.guest_email_md5){
+                window._paq.push(['setUserId', res.guest_email_md5]);  
+              }else if(res.customer_email_md5){
+                window._paq.push(['setUserId', res.customer_email_md5]);  
+              }
+
+              let couponst = res.is_coupon ? true : false              
+              window._paq.push(['trackEcommerceOrder', res.id,res.total,res.subtotal,res.tax,res.shipping,couponst]);  
+              window._paq.push(['setCustomVariable', 1, "First_Name", res.first_name, 'visit']);
+              window._paq.push(['setCustomVariable', 2, "Last_Name", res.last_name, 'visit']);
+              window._paq.push(['setCustomVariable', 3, "Address1", res.address1, 'visit']);
+              window._paq.push(['setCustomVariable', 4, "Address2", res.address2, 'visit']);
+              window._paq.push(['setCustomVariable', 5, "Address3", res.address3, 'visit']);
+              window._paq.push(['setCustomVariable', 6, "Address4", res.address4, 'visit']);
+              window._paq.push(['setCustomVariable', 7, "Address5", res.address5, 'visit']);  
+              window._paq.push(['trackEvent', 'Ecommerce', 'DiscountCode', res.coupon_code]);	                                               
+              window._paq.push(['trackPageView']);  
+          }  
+          /* SEGMENTIFY AND PAPERPLANE TRACK UPDATE ENDS*/           
         }
          else {
           this.$router.push(this.localizedRoute('/'))
