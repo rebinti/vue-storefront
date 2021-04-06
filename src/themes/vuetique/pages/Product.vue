@@ -957,7 +957,9 @@ export default {
     },
     getJsonLd () {    
       //return true;  
-      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode)
+      let colorlabel = this.attributesByCode.color.options.find(val => val.value == this.getCurrentProduct.color).label  
+      let brand = this.attributesByCode.brand.options.find(val => val.value == this.getCurrentProduct.brand).label
+      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorlabel,brand)
     }        
   },
   beforeMount () {     
@@ -1410,6 +1412,7 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {    
+    //console.log("ITEM DATAAAAAAAAAA 1111111111",this.getCurrentProduct)
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;
