@@ -1,10 +1,10 @@
 <template>
   <div id="product">
-    <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out"
+    <breadcrumbs v-if="breadcrumbs.routes && breadcrumbs.routes.length && !showDefaultBreadCrumbs"  class="brd_out firsttttttttt"
       :routes="breadcrumbs.routes"
       :active-route="breadcrumbs.name"
     />
-  <breadcrumbs v-else class="brd_out"
+  <breadcrumbs v-else class="brd_out secondddddddddddddddd"
       :routes="[{name:'Default Category',route_link:'/undefined'}]"
       :active-route="product.name"
     />
@@ -956,10 +956,18 @@ export default {
       }      
     },
     getJsonLd () {    
-      //return true;  
-      let colorlabel = this.attributesByCode.color.options.find(val => val.value == this.getCurrentProduct.color).label  
-      let brand = this.attributesByCode.brand.options.find(val => val.value == this.getCurrentProduct.brand).label
-      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorlabel,brand)
+      // return true;  
+      const colorlabel = this.attributesByCode.color.options.find(val => val.value == this.getCurrentProduct.color) 
+      let colorname = ''      
+      if(colorlabel){
+        colorname = colorlabel.label ? colorlabel.label : "" 
+      }
+      const brand = this.attributesByCode.brand.options.find(val => val.value == this.getCurrentProduct.brand)
+      let brandname = ''
+      if(brand){
+        brandname = brand.label ? brand.label : "" 
+      }      
+      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorname,brandname,(this.product.stock.is_in_stock) ? 'InStock' : 'OutOfStock')
     }        
   },
   beforeMount () {     
@@ -1412,7 +1420,10 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {    
-    //console.log("ITEM DATAAAAAAAAAA 1111111111",this.getCurrentProduct)
+    console.log("ITEM DATAAAAAAAAAA 1111111111",this.getCurrentProduct)
+    console.log("ITEM DATAAAAAAAAAA attribuecode 1111111111",this.attributesByCode)
+    
+    console.log("ITEM DATAAAAAAAAAA breadcrumb 1111111111",this.breadcrumbs)
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;

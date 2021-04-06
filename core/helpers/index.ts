@@ -214,7 +214,7 @@ export const calcItemsHmac = (items, token) => {
   return sha3_224(JSON.stringify({ items, token: token }))
 }
 
-export function productJsonLd ({ category, image, name, id, sku, mpn, description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand) {
+export function productJsonLd ({ category, image, name, id, sku, mpn, description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand,stockstatus) {
   return {
     '@context': 'http://schema.org',
     '@type': 'Product',
@@ -240,7 +240,7 @@ export function productJsonLd ({ category, image, name, id, sku, mpn, descriptio
       priceCurrency,
       price,
       itemCondition: 'https://schema.org/NewCondition',
-      availability: stock && is_in_stock ? 'InStock' : 'OutOfStock',
+      availability: stockstatus,
       sku
     },
     brand: {
