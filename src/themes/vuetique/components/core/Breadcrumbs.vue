@@ -14,6 +14,7 @@
         {{ activeRoute | htmlDecode }}
       </span>
     </div>
+    <script v-html="JSON.stringify(getJsonLdBreadcrumbs)" type="application/ld+json"/>
   </div>
 </template>
 
@@ -21,6 +22,55 @@
 import Breadcrumbs from '@vue-storefront/core/compatibility/components/Breadcrumbs'
 
 export default {
-  mixins: [Breadcrumbs]
+  mixins: [Breadcrumbs],
+  data () {
+    return {
+      Breadcrumbsresults: [],
+      BreadcrumbsFullresults: []
+    }
+  },  
+  mounted () {  
+    let count = -1; 
+    this.routes.filter((op) => {
+      ++count;
+      let itemcontent  = {
+        '@type':'ListItem',
+        'item':{
+           '@id':(op.name=='Default Category') ? 'https://www.iclothing.com/' : 'https://www.iclothing.com'+op.route_link,
+           'name':(op.name=='Default Category') ? 'Home' : op.name
+        },
+        'position':count
+      }      
+      this.Breadcrumbsresults.push(itemcontent);    
+    })
+    this.BreadcrumbsFullresults =  {
+          "@context":"http://schema.org",
+          "@type":"BreadcrumbList",
+          "itemListElement":this.Breadcrumbsresults,
+    }      
+  },
+  computed: {
+    getJsonLdBreadcrumbs () {    
+      let count = -1; 
+      this.routes.filter((op) => {
+        ++count;
+        let itemcontent  = {
+          '@type':'ListItem',
+          'item':{
+            '@id':(op.name=='Default Category') ? 'https://www.iclothing.com/' : 'https://www.iclothing.com'+op.route_link,
+            'name':(op.name=='Default Category') ? 'Home' : op.name
+          },
+          'position':count
+        }      
+        this.Breadcrumbsresults.push(itemcontent);    
+      })
+      this.BreadcrumbsFullresults =  {
+            "@context":"http://schema.org",
+            "@type":"BreadcrumbList",
+            "itemListElement":this.Breadcrumbsresults,
+      }  
+      return this.BreadcrumbsFullresults  
+    },
+  }
 }
 </script>

@@ -808,8 +808,7 @@
         </no-ssr>
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
-    <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>
-    <script v-html="JSON.stringify(getJsonLdBreadcrumbs)" type="application/ld+json"/>
+    <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>    
   </div>
 </template>
 
@@ -957,56 +956,6 @@ export default {
         return false;
       }      
     },
-    getJsonLdBreadcrumbs () {    
-      //return true;  
-      let itemListElement = [];
-      if(!this.showDefaultBreadCrumbs){
-          itemListElement = [
-              {
-                "@type":"ListItem",
-                "item":{
-                    "@id":this.$store.state.config.frontend.url,
-                    "name":"Home 111"
-                },
-                "position":0
-              },
-              {
-                "@type":"ListItem",
-                "item":{
-                    "@id":this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path,
-                    "name":this.getCurrentProduct.name ? this.getCurrentProduct.name : ''
-                },
-                "position":1
-              }
-          ]
-      }else{
-         //this.Breadcrumbsresults.concat(response.data.data); 
-          itemListElement = [
-              {
-                "@type":"ListItem",
-                "item":{
-                    "@id":this.$store.state.config.frontend.url,
-                    "name":"Home 222"
-                },
-                "position":0
-              },
-              {
-                "@type":"ListItem",
-                "item":{
-                    "@id":this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path,
-                    "name":this.getCurrentProduct.name ? this.getCurrentProduct.name : ''
-                },
-                "position":1
-              }
-          ]
-      }
-      this.Breadcrumbsresults =  {
-           "@context":"http://schema.org",
-           "@type":"BreadcrumbList",
-           "itemListElement":itemListElement,
-      }            
-      return this.Breadcrumbsresults;
-    },
     getJsonLd () {    
       // return true;  
       const colorlabel = this.attributesByCode.color.options.find(val => val.value == this.getCurrentProduct.color) 
@@ -1136,8 +1085,7 @@ export default {
         "subCategory": this.product.parentSku
       }    
     },
-    setBreadCrumbToSamePath () { 
-      console.log("INNNNNNNNNNNNNNNNNNNNNNNN",this.configuration)
+    setBreadCrumbToSamePath () {       
       this.showBreadCrumbsToSamePath = true; 
       this.setSegmentify()
       this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
@@ -1472,10 +1420,6 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {    
-    console.log("ITEM DATAAAAAAAAAA 1111111111",this.getCurrentProduct)
-    console.log("ITEM DATAAAAAAAAAA attribuecode 1111111111",this.attributesByCode)
-    
-    console.log("ITEM DATAAAAAAAAAA breadcrumb 1111111111",this.breadcrumbs.routes)
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;
