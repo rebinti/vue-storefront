@@ -6,7 +6,8 @@
     </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />   
-    <Segmentify-home-slider />               
+    <Segmentify-home-slider />       
+    <script v-html="JSON.stringify(getJsonLdSearchbox)" type="application/ld+json"/>        
   </div>
 </template>
 
@@ -30,7 +31,17 @@ export default {
     return {
       loading: true,
       cmspageidentifier:'amphomepage',      
-      stylaloaderflag: false,      
+      stylaloaderflag: false, 
+      getJsonLdSearchbox: {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": config.frontend.url,
+          "potentialAction": [{
+            "@type": "SearchAction",
+            "target": config.frontend.url+"/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }]
+        },     
     }
   },
   watch: {
