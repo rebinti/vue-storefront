@@ -201,7 +201,20 @@ export default {
      if (this.$route.query.orderid) {
        const res =   await this.$store.dispatch('ui/getOrderedDetails', this.$route.query.orderid)    
         if (res && res.itemsresult.length > 0) {
-        this.orderApiCheck = false;  
+          this.orderApiCheck = false;  
+          /* SEGMENTIFY TRACK UPDATE START*/
+          let productList= [];
+          res.itemsresult.filter(val => {
+            if (val.Price != 0) {                           
+              productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
+            } 
+          })
+          window.sgfCheckoutObj = {
+              orderNo: this.$route.query.orderid, // only on the thank you page
+              totalPrice: res.grandtotal,
+              productList: productList
+          };
+          /* SEGMENTIFY TRACK UPDATE ENDS*/           
         }
          else {
           this.$router.push(this.localizedRoute('/'))
