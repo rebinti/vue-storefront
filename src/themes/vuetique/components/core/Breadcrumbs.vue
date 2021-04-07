@@ -29,25 +29,7 @@ export default {
       BreadcrumbsFullresults: []
     }
   },  
-  mounted () {  
-    let count = -1; 
-    this.routes.filter((op) => {
-      ++count;
-      let itemcontent  = {
-        '@type':'ListItem',
-        'item':{
-           '@id':(op.name=='Default Category') ? 'https://www.iclothing.com/' : 'https://www.iclothing.com'+op.route_link,
-           'name':(op.name=='Default Category') ? 'Home' : op.name
-        },
-        'position':count
-      }      
-      this.Breadcrumbsresults.push(itemcontent);    
-    })
-    this.BreadcrumbsFullresults =  {
-          "@context":"http://schema.org",
-          "@type":"BreadcrumbList",
-          "itemListElement":this.Breadcrumbsresults,
-    }      
+  mounted () {        
   },
   computed: {
     getJsonLdBreadcrumbs () {    
@@ -57,13 +39,25 @@ export default {
         let itemcontent  = {
           '@type':'ListItem',
           'item':{
-            '@id':(op.name=='Default Category') ? 'https://www.iclothing.com/' : 'https://www.iclothing.com'+op.route_link,
+            '@id':(op.name=='Default Category') ? this.$store.state.config.frontend.url : this.$store.state.config.frontend.url+''+op.route_link,
             'name':(op.name=='Default Category') ? 'Home' : op.name
           },
           'position':count
-        }      
+        }    
         this.Breadcrumbsresults.push(itemcontent);    
       })
+      if((this.routes.length<=1) && (this.$router.currentRoute.path)){
+        ++count;
+        let itemcontent  = {
+          '@type':'ListItem',
+          'item':{
+            '@id':this.$store.state.config.frontend.url+''+this.$router.currentRoute.path,
+            'name':this.$router.currentRoute.path
+          },
+          'position':count
+        } 
+        this.Breadcrumbsresults.push(itemcontent);
+      }  
       this.BreadcrumbsFullresults =  {
             "@context":"http://schema.org",
             "@type":"BreadcrumbList",
