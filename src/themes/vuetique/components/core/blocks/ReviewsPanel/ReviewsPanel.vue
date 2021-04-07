@@ -26,7 +26,7 @@
                 :data-description="originalProduct.description" 
                 :data-product-sku="originalProduct.sku"> 
         </div>
-         
+    <script v-html="JSON.stringify(getJsonLdReview)" type="application/ld+json"/>     
   </div>  
 </template>
 
@@ -39,7 +39,8 @@ export default {
   name: 'ReviewPanel',
   data () {
     return {
-      reviewpanelloaded:true
+      reviewpanelloaded:true,
+      getJsonLdReview: []
     }
   },  
   props: {
@@ -108,10 +109,11 @@ export default {
                       "reviewCount": ratingCount
                   }
                 }
-                let script = document.createElement('script');
-                script.type = 'application/ld+json';
-                script.innerHTML = JSON.stringify(richSnippet);
-                document.getElementsByTagName('head')[0].appendChild(script);  
+                this.getJsonLdReview = richSnippet;
+                // let script = document.createElement('script');
+                // script.type = 'application/ld+json';
+                // script.innerHTML = JSON.stringify(richSnippet);
+                // document.getElementsByTagName('body')[0].appendChild(script);  
                 //document.head.appendChild(stripeScript);
 
           }); 

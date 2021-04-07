@@ -809,6 +809,7 @@
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
     <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>    
+    <script v-html="JSON.stringify(getJsonLdReview)" type="application/ld+json"/>
   </div>
 </template>
 
@@ -881,6 +882,7 @@ export default {
       showShareDiv: false,
       mobileCartFixedHeight: 0,
       Breadcrumbsresults: [],
+      getJsonLdReview: [],
       // removetruefitstyle:false
     }
   },
@@ -1377,6 +1379,24 @@ export default {
                window&&window.StampedFn&&window.StampedFn.loadDisplayWidgets()
               this.$forceUpdate();
 
+              let richSnippet = {
+                  "@context": "http://schema.org",
+                  "@type": "Review",
+                  "@id": this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path
+              }
+              let element = document.querySelectorAll('.stamped-badge-caption')              
+              if(element.length > 0){                
+              let datareviews = element[0].getAttribute('data-reviews')
+              let datarating = element[0].getAttribute('data-rating') 
+                if (datareviews > 0){
+                  richSnippet.aggregateRating = {
+                      "@type": "AggregateRating",
+                      "ratingValue": datarating,
+                      "reviewCount": datareviews
+                  }
+                }                             
+              }                 
+              this.getJsonLdReview = richSnippet;              
               // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
               //   this.removetruefitstyle = true
               // });               
