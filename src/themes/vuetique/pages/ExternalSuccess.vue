@@ -207,7 +207,7 @@ export default {
           let paperplane_productList= [];
           res.itemsresult.filter(val => {
             if (val.Price != 0) {                           
-              productList.push({productId: val.Sku, price: val.Price, quantity: val.Qty})
+              productList.push({productId: val.ParentSku,Sku: val.Sku, price: val.Price, quantity: val.Qty})
               paperplane_productList.push({0:'addEcommerceItem',1:val.Sku, 2:val.Name,3:'',4:val.Price,5:val.Qty})
             } 
           })
