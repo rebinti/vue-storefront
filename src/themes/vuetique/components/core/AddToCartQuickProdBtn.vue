@@ -97,8 +97,17 @@ export default {
       }else{
         this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
       }            
-      if (notificationData.type === 'success') {
+      if (notificationData.type === 'success') {         
         this.added = true
+        // segmentify 
+        window.sgfLayer = {
+          'basket': {
+              step: 'add',
+              productId: this.product.parentSku,
+              quantity: 1, 
+              price: this.product.price
+          }
+        }          
       } else {
         this.failed = true
       }
@@ -117,7 +126,7 @@ export default {
       } else {
         if((this.product.type_id === 'configurable')&&(product.configurable_children)){
           this.openProductOptionsPopup()
-        }else{
+        }else{          
           this.addToCart(product)
         }        
       }

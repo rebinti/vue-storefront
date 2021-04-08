@@ -55,8 +55,9 @@ export default {
         this.$store.dispatch('notification/spawnNotification', notificationData, { root: true })
       }
       
-      if (notificationData.type === 'success') {        
+      if (notificationData.type === 'success') {               
         this.added = true
+        // segmentify 
         let pqty = 0;
             if (this.product.qty === undefined) {
                 pqty = 1;
@@ -66,7 +67,7 @@ export default {
             window.sgfLayer = {
               'basket': {
                   step: 'add',
-                  productId: this.product.sku,
+                  productId: this.product.parentSku,
                   quantity: pqty, 
                   price: this.product.price
               }

@@ -265,7 +265,7 @@ export default {
       window.sgfLayer = {
         'basket': {
           step: 'remove',
-          productId: this.selectedRemoveProduct.sku,
+          productId: this.selectedRemoveProduct.parentSku,
           quantity: this.selectedRemoveProduct.qty,
           price: this.selectedRemoveProduct.price
         }
