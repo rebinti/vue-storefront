@@ -199,10 +199,28 @@ export default {
           window._paq.push(['trackPageView']);  
         }     
   },
-  mounted () {
+  mounted () {    
     this.$nextTick(() => {
       this.componentLoaded = true
     })
+          // segmentify basket
+          let productList= [];
+          if(this.productsInCart.length>0){
+            this.productsInCart.filter(val => {
+              if (val.Price != 0) {                           
+                productList.push({productId: val.parentSku,Sku: val.sku, price: val.price, quantity: val.qty,currency:'EUR'})                
+              } 
+            })
+            window.sgfLayer = {
+                'checkout': {
+                    step: 'basket',
+                    totalPrice: this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '',
+                    currency: 'EUR', 
+                    cartUrl: 'the cart side panel is effectively our cart page',
+                    products: productList
+                }
+            };            
+          }          
   },
   methods: {
     addDiscountCoupon () {
