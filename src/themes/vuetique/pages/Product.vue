@@ -1440,6 +1440,7 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {    
+    console.log("testDDDDDDDDDDDDDDDD",this.getCurrentProduct)
     this.setSegmentify();
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;

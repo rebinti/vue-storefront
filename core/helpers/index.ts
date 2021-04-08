@@ -214,16 +214,16 @@ export const calcItemsHmac = (items, token) => {
   return sha3_224(JSON.stringify({ items, token: token }))
 }
 
-export function productJsonLd ({ category, image, name, id, sku, mpn, description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand,stockstatus) {
+export function productJsonLd ({ category, image, name, id, parentSku, mpn, short_description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand,stockstatus) {
   return {
     '@context': 'http://schema.org',
     '@type': 'Product',
     name,
-    description,
-    image,
-    colorlabel,
+    'description':short_description,
+    'image':config.models_Image_Base_Url+'catalog/product'+image,
+    'color':colorlabel,
     size,
-    url_path,
+    'url':config.frontend.url+'/'+url_path,
     category: category
       ? category
         .map(({ name }) => name || null)
@@ -231,21 +231,22 @@ export function productJsonLd ({ category, image, name, id, sku, mpn, descriptio
       : null,
     itemCondition: 'http://schema.org/NewCondition',        
     productID: id,
-    sku,
+    sku:parentSku,
     mpn,
     offers: {
       '@type': 'Offer',
       mpn,
-      url: url_path,
+      url: config.frontend.url+'/'+url_path,
       priceCurrency,
       price,
       itemCondition: 'https://schema.org/NewCondition',
       availability: stockstatus,
-      sku
+      sku:parentSku
     },
     brand: {
       '@type': 'Thing',
-      brand,    
+      brand,
+      name:brand,    
     },    
   }
 }
