@@ -1,5 +1,5 @@
 <template>
-  <div class="login_out_bx">  
+  <div class="login_out_bx contactusnew">  
     <div class="modal-content pt30 pb60 px65 cl-secondary">
       <template v-if="!passwordSent">
         <form @submit.prevent="sendEmail" novalidate>
@@ -156,5 +156,13 @@ export default {
   }
   .telephone{
     margin-top: 20px;
+  }
+  .contactusnew{
+        width: 60%;
+  }
+  @media (max-width: 768px) {
+    .contactusnew{
+          width: 100% !important;
+    }    
   }
 </style>
