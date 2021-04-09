@@ -1,33 +1,31 @@
 <template>
 <div class="contact-up-page">
 
-  <form class="vue-form" @submit.prevent="submitcontactus" novalidate> 
-        <base-input
+  <form class="vue-form contact-form" @submit.prevent="sendEmail" novalidate> 
+         <base-input
           class="mb-5 tx_bx_out board_input_box"
           type="text"
-          name="name"
-          v-model="name"
-          @blur="$v.name.$touch()"
+          name="user_name"
+          v-model="user_name"
           :placeholder="$t('Name')"
-          :validation="{
-            condition: !$v.name.required && $v.name.$error,
-            text: $t('Field is required.')
-          }"
-        />  
+          required
+        />         
+        <input type="hidden" name="from_name" v-model="user_name">
         <base-input
           class="col-xs-12 col-md-6 mb10"
           type="email"
-          name="email"
+          name="user_email"
           autocomplete="email"
           :placeholder="$t('Email address')"
-          v-model="email"
+          @blur="$v.user_email.$touch()"
+          v-model="user_email"
           :validations="[
             {
-              condition: !$v.email.required,
+              condition: !$v.user_email.required,
               text: $t('Field is required')
             },
             {
-              condition: !$v.email.email,
+              condition: !$v.user_email.email,
               text: $t('Please provide valid e-mail address.')
             }
           ]"
@@ -36,48 +34,35 @@
           class="mb-5 tx_bx_out board_input_box"
           type="number"
           name="telephone"
-          v-model="telephone"
-          @blur="$v.telephone.$touch()"
+          v-model="telephone"          
           :placeholder="$t('Telephone')"
-          :validation="{
-            condition: !$v.telephone.required && $v.telephone.$error,
-            text: $t('Field is required.')
-          }"
         />          
         <div>
-            <span class="counter">{{ comment.text.length }} / {{ comment.maxlength }}</span>
-            <!-- <small>Characters Remaining: <span id="giftvoucher_char_remaining"> {{ customMessageMaxLength - customMessage.length}} </span></small> -->
+            <span class="counter">{{ message.text.length }} / {{ message.maxlength }}</span>           
         </div>        
         <base-textarea
           class="w-full tx_bx_out"
           type="text"
-          name="comment"
-          v-model="comment.text"
-          @blur="$v.comment.$touch()"
+          name="message"
+          v-model="message.text"
+          @blur="$v.message.$touch()"
           :placeholder="'message'"
           :validation="{
-              condition: !$v.comment.required && $v.comment.$error,
+              condition: !$v.message.required && $v.message.$error,
               text: $t('Field is required.')
           }"
         />                                    
       <div>        
-          <button-full class="mb-2 w-full lrge_btn" type="submit" style="background: black;">
-            <div class="flex items-center justify-center">
-              <span class="mr-2"> {{ $t('Submit') }} </span>              
-            </div>
-          </button-full>        
+          <input type="submit" value="Send">
       </div>    
   </form>
-
-  <!-- <div class="debug">
-    <pre><code>{{ $data }}</code></pre>
-  </div> -->
-
 </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import emailjs from 'emailjs-com';
+import { mapState } from 'vuex'
 import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 import BaseInput from 'theme/components/core/blocks/Form/BaseInput.vue'
 import BaseTextarea from 'theme/components/core/blocks/Form/BaseTextarea.vue'
@@ -92,10 +77,11 @@ components: {
 },
 data () {
  return {
-      name: '',
-      email: '',
+      user_name: '',
+      user_email: '',
       telephone: '', 
-      comment: {
+      from_name: '',
+      message: {
           text: '',
           maxlength: 255
       },
@@ -103,49 +89,43 @@ data () {
   }
 },
 validations: {
-  name: {
+  user_name: {
     required
   },
   telephone: {
     required    
   },  
-  email: {
+  user_email: {
     required,
     email
   },
-  comment: {
+  message: {
     required
   },    
 },
 methods: {
-    onSuccesfulSubmission (msg) {
-      this.$store.dispatch('notification/spawnNotification', {
-        type: 'success',
-        message: msg,
-        action1: { label: i18n.t('OK') }
-      })
-      this.$bus.$emit('modal-hide', 'modal-outofstocknotification')
-    },
-    submitcontactus() {      
-      this.errors = {};
-      this.submitted = true;
-
-      if (!this.$v.$invalid) {
-          const contactdata = { name: this.name, email: this.email, telephone: this.telephone, comment: this.comment };
-          this.$store.dispatch('ui/sentContactUs', contactdata).then(res => {
-           if (res == 'Already notified') {
-            this.onSuccesfulSubmission('You are already subscribed!');
-           }
-          }).catch(err => {
-            this.onErrorInSubmission();
-          }
-        )
-      }
-    },    
+    sendEmail: (e) => {
+      //  if (!this.$v.$invalid) {
+      //    console.log("validation OK 111111111111")
+        emailjs.sendForm('service_enncvri', 'template_8d1n9ve', e.target, 'user_lb184Q42IBxTG3sAUHnvk')
+          .then((result) => {
+              console.log('SUCCESS!', result.status, result.text);
+              this.$store.dispatch('notification/spawnNotification', {
+                type: 'success',
+                message: 'contact successfully sent',
+                action1: { label: i18n.t('OK') }
+              })            
+          }, (error) => {
+              console.log('FAILED...', error);
+          });
+      //  }else{
+      //    console.log("validation NOT OK 111111111111")
+      //  }
+    }, 
     // validate by type and value
     validate: function(type, value) {
       if (type === "email") {
-        this.email.valid = this.isEmail(value) ? true : false;
+        this.user_email.valid = this.isEmail(value) ? true : false;
       }
     },
     // check for valid email adress
@@ -159,8 +139,8 @@ methods: {
   },
   watch: {
     // watching nested property
-    "email.value": function(value) {
-      this.validate("email", value);
+    "user_email.value": function(value) {
+      this.validate("user_email", value);
     }
   }
 }
