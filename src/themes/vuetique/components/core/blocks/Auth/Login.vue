@@ -83,21 +83,14 @@
         </button-full>
 
         
-        <div class="text-center">          
+        <div class="text-center">
+          {{ $t('or') }}
           <a href="#" @click.prevent="switchElem" data-testid="registerLink">
             {{ $t('register an account') }}
           </a>
-        </div> 
-        <div class="text-center" style="">
-          {{ $t('or') }}
-        </div>         
-        <div    
-          v-if="checkoutWithoutLogin"     
-          class="btn-primary py-3 px-6 guest-button"          
-          @click.prevent="disablecheckoutlogin"         
-        >
-          {{ $t('Guest checkout') }}          
-        </div>              
+        </div>
+
+        
 
         </div>
       </form>      
@@ -178,17 +171,6 @@ export default {
         message: this.$t(result.result),
         action1: { label: this.$t('OK') }
       })
-    },
-    disablecheckoutlogin (){
-      const cartToken  = this.$store.state.cart.cartServerToken;
-      const cmsUrl = this.$store.state.config.externalCheckout.cmsUrl;
-      if(cartToken){
-        window.location.replace(cmsUrl + '/vue/cart/sync/cart/' + cartToken)
-      }else{
-        if (this.checkoutWithoutLogin) {
-         this.$store.commit('ui/setCheckoutWithoutLoginFlag', false);         
-       }
-      }  
     }
   },
   components: {
@@ -200,18 +182,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.guest-button{
-  text-align: center;
-    text-transform: uppercase;
-    color: #000;
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid #000000;
-    margin-top: 15px;
-    line-height: 1.5;
-    cursor: pointer;
-}
-</style>
