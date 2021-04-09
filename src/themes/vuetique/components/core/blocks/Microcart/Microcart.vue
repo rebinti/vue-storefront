@@ -295,11 +295,13 @@ export default {
     },
     loginBeforeCheckout () {
       if (!this.userlogin) {
+        /*
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
           message: 'Please Register/Sign-in to Checkout!',
           action1: { label: i18n.t('OK') }
         }) 
+        */
         this.closeMicrocartExtend();       
         this.$store.commit('ui/setAuthElem', 'login')
         this.$store.commit('ui/setCheckoutWithoutLoginFlag', true);
