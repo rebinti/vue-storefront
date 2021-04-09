@@ -1,5 +1,5 @@
 <template>
-  <div class="login_out_bx">
+  <div class="login_out_bx">  
     <div class="modal-content pt30 pb60 px65 cl-secondary">
       <template v-if="!passwordSent">
         <form @submit.prevent="sendEmail" novalidate>
@@ -36,19 +36,22 @@
                 }
               ]"
             />
-            <base-input
+            <!-- <base-input
               class="mb-5 tx_bx_out board_input_box telephone"
               type="number"
               name="telephone"
               v-model="telephone"          
               :placeholder="$t('Telephone')"
-            />             
+            />              -->
           </div>
           <span>comments:</span>
           <textarea class="formtextarea" name="message" v-model="message"  :validations="[{condition: !$v.name.required && $v.name.$error,text: $t('Field is required.')}]"></textarea>          
-          <button-full class="mb-5 w-full l_login" type="submit" style="display:block;">
+          <button-full class="mb-5 w-full l_login" type="submit" style="display:block;" v-if="!stylaloaderflag">
             {{ $t('Send') }}
           </button-full>
+          <div class="loader--style3 mainhomestylaloader" style="" title="2" v-if="stylaloaderflag" >
+                <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width:35px;">                  
+          </div>           
         </form>
       </template>
     </div>
@@ -97,18 +100,23 @@ export default {
         })
         return
       }
-
-        emailjs.sendForm('service_enncvri', 'template_8d1n9ve', e.target, 'user_lb184Q42IBxTG3sAUHnvk')
-          .then((result) => {
-              console.log('SUCCESS!', result.status, result.text);
-              this.$store.dispatch('notification/spawnNotification', {
-                type: 'success',
-                message: 'contact successfully sent',
-                action1: { label: i18n.t('OK') }
-              })            
-          }, (error) => {
-              console.log('FAILED...', error);
-          });
+      this.stylaloaderflag = true;     
+      emailjs.sendForm('service_enncvri', 'template_8d1n9ve', e.target, 'user_lb184Q42IBxTG3sAUHnvk')
+        .then((result) => {
+            console.log('SUCCESS!', result.status, result.text);
+            this.$store.dispatch('notification/spawnNotification', {
+              type: 'success',
+              message: 'contact successfully sent',
+              action1: { label: i18n.t('OK') }
+            })   
+            this.stylaloaderflag = false; 
+            this.email = '';        
+            this.name = '';
+            this.message = '';
+        }, (error) => {
+            console.log('FAILED...', error);
+            this.stylaloaderflag = true;
+        });
     }
   },
   name: 'ForgotPass',
@@ -116,9 +124,10 @@ export default {
     return {
       email: '',
       name:'',
-      telephone:'',
+      // telephone:'',
       message:'',
-      passwordSent: false
+      passwordSent: false,
+      stylaloaderflag: false, 
     }
   },
   components: {
