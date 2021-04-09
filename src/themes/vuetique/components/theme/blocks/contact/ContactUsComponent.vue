@@ -9,7 +9,7 @@
               type="text"
               name="user_name"
               v-model="name"
-              :placeholder="$t('Name')"
+              :placeholder="$t('Name*')"
               :validations="[
                 {
                   condition: !$v.name.required && $v.name.$error,
@@ -24,7 +24,7 @@
               name="user_email"
               v-model="email"
               focus
-              :placeholder="$t('E-mail address *')"
+              :placeholder="$t('E-mail*')"
               :validations="[
                 {
                   condition: !$v.email.required && $v.email.$error,
@@ -44,16 +44,11 @@
               :placeholder="$t('Telephone')"
             />             
           </div>
-          <textarea class="formtextarea" name="message" required></textarea>          
+          <span>comments:</span>
+          <textarea class="formtextarea" name="message" v-model="message"  :validations="[{condition: !$v.name.required && $v.name.$error,text: $t('Field is required.')}]"></textarea>          
           <button-full class="mb-5 w-full l_login" type="submit" style="display:block;">
             {{ $t('Send') }}
           </button-full>
-          <div class="text-center t_mrg">
-            {{ $t('or') }}
-            <a href="#" @click.prevent="switchElem">
-              {{ $t('return to log in') }}
-            </a>
-          </div>
         </form>
       </template>
     </div>
@@ -74,12 +69,12 @@ export default {
       required,
       email
     },
-    telephone: {
-      required      
-    },
     name: {
       required      
-    },  
+    },
+    message: {
+      required      
+    },       
   },
   methods: {
     sendEmail (e) {
@@ -87,6 +82,14 @@ export default {
 
       if (this.$v.$invalid) {
         this.$v.$touch()
+        if(this.message==''){
+            this.$store.dispatch('notification/spawnNotification', {
+              type: 'error',
+              message: i18n.t('Please enter any comments!'),
+              action1: { label: i18n.t('OK') }
+            })
+            return
+        }
         this.$store.dispatch('notification/spawnNotification', {
           type: 'error',
           message: i18n.t('Please fix the validation errors'),
