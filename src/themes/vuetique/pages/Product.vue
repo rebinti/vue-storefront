@@ -808,8 +808,7 @@
         </no-ssr>
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
-    <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>    
-    <script v-html="JSON.stringify(getreviewJsonLd)" type="application/ld+json"/>        
+    <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>           
   </div>
 </template>
 
@@ -974,22 +973,6 @@ export default {
       }      
       return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorname,brandname,(this.product.stock.is_in_stock) ? 'InStock' : 'OutOfStock',this.ratingValue,this.reviewCount)
     },
-    getreviewJsonLd () {
-        let richSnippet = {
-            "@context": "http://schema.org",
-            "@type": "Review",
-            "@id": this.$store.state.config.frontend.url+'/'+this.originalProduct.url_path,
-            "id": this.originalProduct.id,
-        }
-        if(this.reviewCount>0){          
-            richSnippet.aggregateRating = {
-                "@type": "AggregateRating",
-                "ratingValue": this.ratingValue,
-                "reviewCount": this.reviewCount
-            }          
-        }      
-        return richSnippet  
-    }
   },
   beforeMount () {    
     this.mobileCartFixedHeight= window.innerHeight-65;
