@@ -6,7 +6,7 @@ export default {
   },
   meta: [
     { charset: 'utf-8' },
-    { vmid: 'description', name: 'description', content: 'A simple tee, perfect for teaming with jeans, trainers and an oversized blazer for a stylish day look.' },
+    { vmid: 'description', name: 'description', content: "Discover the latest trends in women's fashion at iCLOTHING. Shop this season's collection of dresses, tops, footwear and accessories, we have you covered - all with next day delivery!" },
     { name: 'viewport', content: 'width=device-width, initial-scale=1, minimal-ui' },
     { name: 'robots', content: 'index, follow' },
     { name: 'mobile-web-app-capable', content: 'yes' },
