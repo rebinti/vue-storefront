@@ -214,7 +214,7 @@ export const calcItemsHmac = (items, token) => {
   return sha3_224(JSON.stringify({ items, token: token }))
 }
 
-export function productJsonLd ({ category, image, name, id, parentSku, mpn, short_description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand,stockstatus) {
+export function productJsonLd ({ category, image, name, id, parentSku, mpn, short_description, price, url_path, stock, is_in_stock }, size, priceCurrency,colorlabel,brand,stockstatus,reviewrating,reviewcount) {
   return {
     '@context': 'http://schema.org',
     '@type': 'Product',
@@ -233,6 +233,11 @@ export function productJsonLd ({ category, image, name, id, parentSku, mpn, shor
     productID: id,
     sku:parentSku,
     mpn,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      "ratingValue": reviewrating,
+      "reviewCount": reviewcount
+    },    
     offers: {
       '@type': 'Offer',
       mpn,

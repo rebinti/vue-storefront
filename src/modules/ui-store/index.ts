@@ -390,7 +390,27 @@ const store = {
       } else {
         return task
       }
-    },    
+    },
+    getstampedreviewdataforseo ({ commit } , data ) {               
+      let searchUrl =  'https://stamped.io/api/widget/badges?isIncludeBreakdown=true&isincludehtml=true'
+      const searchResults = fetch(searchUrl, {
+          method: 'POST',          
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data) 
+        }).then(response => 
+          response.json().then(data => ({
+              data: data,
+              status: response.status
+          })          
+      ).then(res => {
+          console.log('CHECK STAMPED REVIEW DATA', res.data)          
+          return res.data          
+      }));        
+        return searchResults        
+    },
   }
 }
 

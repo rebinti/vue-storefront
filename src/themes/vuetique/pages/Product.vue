@@ -809,7 +809,7 @@
     </div> -->
     <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
     <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>    
-    <script v-html="JSON.stringify(getJsonLdReview)" type="application/ld+json"/>
+    <script v-html="JSON.stringify(getreviewJsonLd)" type="application/ld+json"/>        
   </div>
 </template>
 
@@ -883,6 +883,8 @@ export default {
       mobileCartFixedHeight: 0,
       Breadcrumbsresults: [],
       getJsonLdReview: [],
+      ratingValue:0,
+      reviewCount:0,   
       // removetruefitstyle:false
     }
   },
@@ -970,10 +972,26 @@ export default {
       if(brand){
         brandname = brand.label ? brand.label : "" 
       }      
-      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorname,brandname,(this.product.stock.is_in_stock) ? 'InStock' : 'OutOfStock')
-    }        
+      return productJsonLd(this.getCurrentProduct, this.configuration.size ? this.configuration.size.label ? this.configuration.size.label : '' : '' , this.$store.state.storeView.i18n.currencyCode,colorname,brandname,(this.product.stock.is_in_stock) ? 'InStock' : 'OutOfStock',this.ratingValue,this.reviewCount)
+    },
+    getreviewJsonLd () {
+        let richSnippet = {
+            "@context": "http://schema.org",
+            "@type": "Review",
+            "@id": this.$store.state.config.frontend.url+'/'+this.originalProduct.url_path,
+            "id": this.originalProduct.id,
+        }
+        if(this.reviewCount>0){          
+            richSnippet.aggregateRating = {
+                "@type": "AggregateRating",
+                "ratingValue": this.ratingValue,
+                "reviewCount": this.reviewCount
+            }          
+        }      
+        return richSnippet  
+    }
   },
-  beforeMount () {     
+  beforeMount () {    
     this.mobileCartFixedHeight= window.innerHeight-65;
     this.windowScreenWidth = window.innerWidth;   
     this.$bus.$on('product-after-related', this.getRelatedProduct)
@@ -1010,6 +1028,20 @@ export default {
     this.$store.commit('ui/setWishlist', false)
     this.$store.commit('ui/setOverlay', false)
     this.$store.commit('ui/setSidebar', false)
+    
+    // STAMPED REVIEW SEO DATA API CALL
+    let reviewreqdata ={
+      apiKey: "pubkey-Y55wBte73EjEC0fGTj5RWA8fEEny21",
+      productIds: [{productId: this.originalProduct.id}],
+      storeUrl: "www.iclothing.com"
+      }      
+    const stampedreviewData = this.$store.dispatch('ui/getstampedreviewdataforseo',reviewreqdata)    
+    stampedreviewData.then(response => {
+        const reviewdata = response;
+        this.ratingValue = reviewdata[0].rating
+        this.reviewCount = reviewdata[0].count         
+    });
+
     // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
     //   this.removetruefitstyle = true
     // }); 
@@ -1094,7 +1126,7 @@ export default {
       this.$store.commit('ui/setMicrocart', false)
       this.$store.commit('ui/setWishlist', false)
       this.$store.commit('ui/setOverlay', false)
-      this.$store.commit('ui/setSidebar', false)      
+      this.$store.commit('ui/setSidebar', false)
     },
     getBrandUrlPath (brandName) {
       return brandName.toLowerCase().split(' ').join('-');
@@ -1378,25 +1410,7 @@ export default {
                window&&window.StampedFn&&window.StampedFn.loadBadges()
                window&&window.StampedFn&&window.StampedFn.loadDisplayWidgets()
               this.$forceUpdate();
-
-              let richSnippet = {
-                  "@context": "http://schema.org",
-                  "@type": "Review",
-                  "@id": this.$store.state.config.frontend.url+'/'+this.getCurrentProduct.url_path
-              }
-              let element = document.querySelectorAll('.stamped-badge-caption')              
-              if(element.length > 0){                
-              let datareviews = element[0].getAttribute('data-reviews')
-              let datarating = element[0].getAttribute('data-rating') 
-                if (datareviews > 0){
-                  richSnippet.aggregateRating = {
-                      "@type": "AggregateRating",
-                      "ratingValue": datarating,
-                      "reviewCount": datareviews
-                  }
-                }                             
-              }                 
-              this.getJsonLdReview = richSnippet;              
+                            
               // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
               //   this.removetruefitstyle = true
               // });               
@@ -1440,8 +1454,7 @@ export default {
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
   mounted() {    
-    console.log("testDDDDDDDDDDDDDDDD",this.getCurrentProduct)
-    this.setSegmentify();
+    this.setSegmentify();    
     this.windowScreenWidth = window.innerWidth; 
     //  this.mobileCartFixedHeight= window.innerHeight-65;
     //  this.$nextTick(()=> {
