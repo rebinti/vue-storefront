@@ -6,7 +6,7 @@
      <add-to-cart-quick-prod-btn  v-if="product !== null"
         :product="product"  
         class="cart-icon" :addtocarttype="'Text-Only'" />    -->
-<div  class="container-fluid">
+<div  class="container-fluid">     
      <breadcrumbs :routes="[{name: 'Homepage', route_link: '/'}]" :active-route="'Gift card'" />
    <section class="pt-2 pl-20 pr-10 content-mob-section">
      <div class="row"> 
@@ -16,7 +16,7 @@
             <div class="background-popup" style="cursor: pointer; -moz-transform-origin: left top;" onclick="getPreview()">
                 <div id="giftcard-template-back" style="">           
                       <div class="giftcard-template-content" style="display: none; background-image: url('https://cdn.iclothing.com/media/giftvoucher/template/background/default.png');"></div>
-                      <div class="giftcard-change-image-background-popup giftcard-change-image" style=" background-image: url('https://www.iclothing.com/media/giftcard/gift-background.jpeg');background-repeat: no-repeat;background-size: cover;
+                      <div class="giftcard-change-image-background-popup giftcard-change-image" style=" background-image: url('http://vue.local:3000/assets/giftcardnew.png');background-repeat: no-repeat;background-size: cover;
                       ">          
                             <div class="giftcard-logo"><img src="https://cdn.iclothing.com/media/giftvoucher/pdf/logo/default/giftlogowhite.png"></div>
                             <div class="expire-day expire-day-top" id="expire-day-background" style="font-size: 10px; float: right; margin-top: 5px;margin-right: 5px; color: white; font-weight: bold; "></div> 
@@ -24,7 +24,7 @@
                                 <div class="giftcard-style-color giftcard-title">Gift Card</div>
                                 <div class="giftcard-value-color">
                                     <span class="giftcard-style-color">Value</span>
-                                    <span class="giftcard-style-color giftcard-price-change">€{{giftCardAmount}}.00</span>
+                                    <span class="giftcard-style-color giftcard-price-change">€{{giftCardUserValue}}.00</span>
                                 </div>
                             </div>
                             <div class="from-to-barcode-background">
@@ -321,7 +321,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .gift-card .cart-icon {
     width: 200px;
     margin-left: 10px;
@@ -397,7 +397,7 @@ export default {
     text-align: center;
     vertical-align: middle;
     margin-top: 8px;
-    height: 30px;
+    height: 45px;
 }
 .giftcard-note-background .form-note {
     width: 100%;
@@ -470,15 +470,15 @@ export default {
 .giftcard-box-background .giftcard-text-box {
     display: inherit !important;
     background-size: 100% !important;
-    width: 100% !important;
-    height: 98px;
+    width: 98% !important;
+    height: 86px;
     text-align: left;
 }
 .giftcard-box-background .giftcard-text-box {
     background: #fff;
     border-radius: 5px;
     border: 1px solid #cccccc;
-    padding: 0;
+    padding: 12px;
     padding-bottom: 10px;
     padding-top: 3px;
     display: table-cell;
@@ -560,7 +560,7 @@ input.input-text {
     transform: scale(1.76167);
     height: 643.008px;
 }
-@media screen (max-width: 320px) {
+@media (max-width: 320px) {
     .card-style-div {
         width: 100% !important;
         max-width: 100% !important;
@@ -593,6 +593,9 @@ input.input-text {
     .giftcard-title {
         line-height: 27px !important;
         color: #fff !important;
+    }
+    .giftcard-box-background .giftcard-text-box {
+        width: 93% !important;
     }
 }
 @media screen and (min-width: 320px) and (max-width: 375px) {
@@ -630,6 +633,9 @@ input.input-text {
         line-height: 27px !important;
         color: #fff !important;
     }
+    .giftcard-box-background .giftcard-text-box {
+        width: 93% !important;
+    }    
 }
 @media screen and (min-width: 375px) and (max-width: 425px) {
     .card-style-div {
@@ -667,6 +673,9 @@ input.input-text {
         line-height: 36px !important;
         color: #fff !important;
     }
+    .giftcard-box-background .giftcard-text-box {
+        width: 93% !important;
+    }    
 }
 @media screen and (min-width: 425px) and (max-width: 768px) {
     .card-style-div {
@@ -713,13 +722,15 @@ input.input-text {
 .giftcard-style-color {
     color: #fff !important;
 }
-
+#giftcard-from.giftcard-style-color,#giftcard-to.giftcard-style-color{
+    color: #5a5a5a !important;
+}
  .giftcard-title {
            color: #fff !important;
     }
 
  .giftcard-text-color {
-      color: #fff !important;
+      color: #000 !important;
  }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -742,6 +753,27 @@ input.input-text {
 @media (min-width: 1440px) {
  .scalling-div {
         transform: scale(1.82) !important;
+    }
+    .giftcard-box-background {
+        padding: 5px 2%;
+    }
+}
+@media screen and (min-width: 1910px) {
+    .pt-2.pl-20.pr-10.content-mob-section{
+        padding-right: 350px !important;
+        padding-left: 350px !important;
+    }
+    .col-9.card-style-div{
+        flex-basis: 70%;
+        max-width: 70%;
+        .flex{
+            padding: 20px;
+        }
+    }
+    .col-3.card-data-div{
+        flex-basis: 30%;
+        max-width: 30%;         
+        padding: 50px;                       
     }
 }
 
