@@ -112,6 +112,10 @@ const actions: ActionTree<UserState, RootState> = {
             rootStore.state["boards"] ? rootStore.dispatch('boards/load' , true) : null;
             // For working Segmentify UserObject      
             if (rootStore.state.user.current) {
+              let createdate = rootStore.state.user.current.created_at;
+              let firstdatepart = createdate.split("T");
+              let alldate  = firstdatepart[0].split("-");
+              let finalcreatedate = alldate[2]+'.'+alldate[1]+'.'+alldate[0];              
               window['segUserObject'] = {
                   email:  rootStore.state.user.current.email || '',
                   userId:  rootStore.state.user.current.id || '',
@@ -120,7 +124,8 @@ const actions: ActionTree<UserState, RootState> = {
                   isLogin:true,
                   emailPermission:  rootStore.state.user.current.is_subscribed || '',
                   birthDate: "Nill",
-                  gender: "Nill"
+                  gender: "Nill",
+                  memberSince: finalcreatedate
               }
             }
           })

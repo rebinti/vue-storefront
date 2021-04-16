@@ -149,6 +149,11 @@ export default {
     setSegmentifyUserObject() {
       // For working Segmentify UserObject      
       if(this.currentUser){
+        let createdate = this.currentUser.created_at;
+        let firstdatepart = createdate.split("T");
+        let alldate  = firstdatepart[0].split("-");
+        let finalcreatedate = alldate[2]+'.'+alldate[1]+'.'+alldate[0];
+        
         window.segUserObject = {
             email: this.currentUser.email,
             userId: this.currentUser.id,
@@ -157,7 +162,8 @@ export default {
             isLogin:true,
             emailPermission: this.currentUser.is_subscribed,
             birthDate: "Nill",
-            gender: "Nill"
+            gender: "Nill",
+            memberSince: finalcreatedate
         }
       }
     },
