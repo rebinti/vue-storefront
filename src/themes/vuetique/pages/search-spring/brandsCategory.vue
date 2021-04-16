@@ -28,7 +28,8 @@
                 @input="sortingFilterChange"
               />
           </div>
-        </div> 
+        </div>         
+        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-brand-reco"></div>
       </div>
 
     </header>
@@ -151,8 +152,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-brand-reco"></div>
+    </div>    
   </div>
 </template>
 

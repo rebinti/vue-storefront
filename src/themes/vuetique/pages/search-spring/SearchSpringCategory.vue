@@ -34,7 +34,8 @@
           </div>
           <!-- <div v-html="headerbanner"></div> -->
            <!-- <active-filters :filters="filters.available" /> -->
-        </div> 
+        </div>         
+        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-cat-reco"></div>
       </div>
 
        <!-- New Category filter box section Mobile view -->
@@ -201,8 +202,7 @@
           </div>
           <!-- <div v-html="footerbanner"></div> -->
         </div>
-      </div>
-       <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-cat-reco"></div>
+      </div>       
     </div>
   </div>
 </template>

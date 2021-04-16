@@ -76,7 +76,8 @@
             @setCategoryFilterData="setCategoryFilterData"
     /> 
 
-    <div class="container pb-16" v-if="!searcingLoaderFlag">
+    <div class="container pb-16" v-if="!searcingLoaderFlag">        
+        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-search-reco"></div>
         <div class="col-12 lg:col-9 sm:col-12 pr_list_sec_main top-filter">
           <div class="row">
             <div class="col-12 lg:col-8 searchtitle" v-if="searchRes && searchRes.facets && searchRes.facets.length > 0">
@@ -160,8 +161,7 @@
             </div>
           </div>          
         </div>
-    </div>
-    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-search-reco"></div>
+    </div>    
   </div>  
 </template>
 
