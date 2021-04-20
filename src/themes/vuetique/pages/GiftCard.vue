@@ -78,6 +78,7 @@
                 <input :value="giftCardUserValue" id="amount_range"
                 :min="product.gift_from" :max="product.gift_to" name="amount"
                 type="number" 
+                placeholder="Gift Amount"
                 class="input-text required-entry validate-greater-than-zero form-control" 
                 @change="isWithinTheLimit" > <br/>
                 <span style="font-size: 12px;">
@@ -180,7 +181,7 @@
 
       <add-to-cart-quick-prod-btn  v-if="isGiftCardDataFetchedFlag && !sendGiftCardToFriendFlag"
             :product="product"  
-            class="cart-icon mt-10" :addtocarttype="'Text-Only'" />  
+            class="cart-icon mt-10" :addtocarttype="'Text-Only'" @click.native="addTOCartBeforeTrigget" />  
       </div>
      </div>
    </section>
@@ -260,6 +261,9 @@ export default {
   created () {
       this.getGiftCardProductData()
   },
+  beforeMount () {
+      this.product['price'] = 10;
+  },
   methods: {
       addTOCartBefore () {
         if (this.$v.$invalid) {
@@ -289,6 +293,7 @@ export default {
             this.product = items.items[0];
             this.giftCardAmount  = this.product.gift_from;
             this.giftCardUserValue = this.product.gift_from;
+            this.product['price'] =  this.giftCardUserValue
             this.isGiftCardDataFetchedFlag = true;
         }, err => {
             this.isGiftCardDataFetchedFlag = false;
@@ -300,7 +305,8 @@ export default {
                     this.giftCardAmount =  (addedCardAmt*this.product.gift_price)/100;
                     this.product['price'] =  this.giftCardAmount
                 } else {
-                    this.giftCardAmount = 0
+                    //this.giftCardAmount = 0
+                     this.giftCardAmount = this.product.gift_from
                 }
             }
       },
@@ -315,6 +321,9 @@ export default {
                 else this.giftCardUserValue = this.product.gift_from
                 this.checkGiftCardPriceAmount(this.giftCardUserValue)
             }
+      },
+      addTOCartBeforeTrigget () {            
+            this.product['price'] =  this.giftCardUserValue
       }
   },
 
