@@ -1,12 +1,16 @@
 <template>
   <div class="st_brd">
-          <div v-if="getMerchandisingContent && getMerchandisingContent.header"
+      <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
+            <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width: 55px;">
+             <!-- <h3 style="text-align: center;"> loading... </h3>  -->
+      </div>
+          <div v-if="getMerchandisingContent && getMerchandisingContent.header && !searcingLoaderFlag"
            v-html="getMerchandisingContent.header[0]" >
            </div>      
-     <div class="b_crumb">
+     <div class="b_crumb" v-if="!searcingLoaderFlag">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div>
-    <header class="row bg-grey-lightest mb-6 head_category"> <!-- pb-5 -->
+    <header class="row bg-grey-lightest mb-6 head_category" v-if="!searcingLoaderFlag"> <!-- pb-5 -->
       <div class="container d_item">
         <div class="row items-center mt-2">
           <h1 class="col-8 md:col-8 lg:col-8 xl:col-10 hidden lg:block">
@@ -86,10 +90,6 @@
         </div>
       </div> 
     </header>
-     <div class="loader--style3" style="margin-top: 180px; margin-bottom: 180px;" title="2" v-if="searcingLoaderFlag">
-            <img src="/assets/opc-ajax-loader.svg" style="margin: 0 auto;width: 55px;">
-             <!-- <h3 style="text-align: center;"> loading... </h3>  -->
-      </div>
       <div class="container lg:hidden onlymobile col-12" style="margin-bottom: 5px;"
         :class="classNameTab"
        v-if="!searcingLoaderFlag">

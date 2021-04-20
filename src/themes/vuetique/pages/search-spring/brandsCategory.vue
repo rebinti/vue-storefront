@@ -1,12 +1,12 @@
 <template>
   <div class="st_brd">
-      <div v-if="getMerchandisingContent && getMerchandisingContent.header"
+      <div v-if="getMerchandisingContent && getMerchandisingContent.header && !searcingLoaderFlag"
         v-html="getMerchandisingContent.header[0]" >
       </div>     
      <!-- <div class="b_crumb">
       <breadcrumbs :routes="breadcrumbs.routes" :active-route="category.name" />     
     </div> -->
-    <header class="pb-10 row bg-grey-lightest mb-6 head_category">
+    <header class="pb-10 row bg-grey-lightest mb-6 head_category" v-if="!searcingLoaderFlag">
       <div class="container d_item">
         <div class="row items-center mt-2">
           <h2 v-if="getBrandPageTitle.name" class="col-8 md:col-8 lg:col-8 xl:col-10">
