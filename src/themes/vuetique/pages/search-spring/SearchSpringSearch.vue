@@ -135,7 +135,7 @@
               <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
               <h5>If you are not seeing any results,Please check the spelling or try searching for something else..</h5>
           </div>
-          <div class="lg:col-6 no-result" v-if="filterloaderFlag && serachedProd.length === 0">
+          <div class="lg:col-6 no-result" v-if="filterloaderFlag && serachedProd.length === 0 && !searcingLoaderFlag">
               <h3>NO RESULTS FOUND <span v-if="squery.length>2">FOR {{ squery }} </span>!.</h3>
               <h5>If you are not seeing any results, try removing some of your selected filters above..</h5>
           </div>
@@ -201,17 +201,20 @@ export default {
   created () {
     //this.searcingLoaderFlag = true;
     //this.initialsearchloadFlag= true;
-    if(!this.$route.query.q){
-      this.searcingLoaderFlag = false;
-      this.initialsearchloadFlag= true;        
-    }else{
+    if(this.$route.query.q){
       this.searcingLoaderFlag = true;
-      this.initialsearchloadFlag= false;       
+      this.initialsearchloadFlag= false;        
+    }else if(this.$route.query.tag){      
+      this.searcingLoaderFlag = true;
+      this.initialsearchloadFlag= false;
+    }else{
+      this.searcingLoaderFlag = false;
+      this.initialsearchloadFlag= true;       
     }    
   },
-  // watch: {
-  //   '$route': 'searchActiveQueryValueResults'
-  // },
+  watch: {
+    '$route': 'validateRouteSearch'
+  },
   beforeMount () {
     //this.searchActiveQueryValueResults()
     // if (this.$route.query.tag) {
@@ -240,6 +243,7 @@ export default {
     if (this.$route.query.tag) {
       let searchparam = this.$route.query.tag;
       Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+      this.searcingLoaderFlag = true;
     }       
     if (this.filterData && this.filterData.length > 0) {
        this.searchedValue = this.filterData[0].split('=')[1];
@@ -272,6 +276,16 @@ export default {
     //       this.searchDataInSearchSpring (this.$route.query.q)
     //     }
     // },
+    validateRouteSearch(){
+      console.log("ROUTER CHANGES AAAAAAAAAAAAAAAAA INNNNNNNNNNNNNN")
+      this.searcingLoaderFlag = true;
+      if (this.$route.query.tag) {
+        let searchparam = this.$route.query.tag;
+        Vue.prototype.$bus.$emit('search-in-search-spring', searchparam );
+        this.searcingLoaderFlag = true;
+      }            
+      this.setSegmentify()            
+    },
     setSegmentify() {
       // For working Segmentify
       window.segPageInf = {
