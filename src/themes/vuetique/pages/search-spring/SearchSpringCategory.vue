@@ -388,7 +388,7 @@ export default {
     }, 
   },
   beforeDestroy () {
-    window.removeEventListener("scroll", null);    
+    window.removeEventListener('scroll', null);    
   },  
   
 };
