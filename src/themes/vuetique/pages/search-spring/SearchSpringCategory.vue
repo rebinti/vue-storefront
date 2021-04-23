@@ -386,7 +386,10 @@ export default {
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
     }, 
-  }
+  },
+  beforeDestroy () {
+    window.removeEventListener("scroll", null);    
+  },  
   
 };
 </script>
