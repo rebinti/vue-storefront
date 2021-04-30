@@ -73,7 +73,7 @@
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/iclothingie"
                 :aria-label="$t('Go to Facebook')"
@@ -83,7 +83,7 @@
               </a>
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.instagram.com/iclothing"
                 :aria-label="$t('Go to Instagram')"
@@ -93,7 +93,7 @@
               </a>
                <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.youtube.com/user/iclothingie"
                 :aria-label="$t('Go to Youtube')"
@@ -103,7 +103,7 @@
               </a>
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.pinterest.com/iclothing"
                 :aria-label="$t('Go to Pinterest')"
@@ -113,7 +113,7 @@
               </a> 
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://twitter.com/iclothing"
                 :aria-label="$t('Go to Twitter')"
@@ -126,7 +126,7 @@
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/"
                 :aria-label="$t('Go to Facebook')"
@@ -137,7 +137,7 @@
 
                <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/"
                 :aria-label="$t('Go to Facebook')"
@@ -204,7 +204,7 @@
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/iclothingie"
                 :aria-label="$t('Go to Facebook')"
@@ -214,7 +214,7 @@
               </a>
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.instagram.com/iclothing"
                 :aria-label="$t('Go to Instagram')"
@@ -224,7 +224,7 @@
               </a>
                <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.youtube.com/user/iclothingie"
                 :aria-label="$t('Go to Youtube')"
@@ -234,7 +234,7 @@
               </a>
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://www.pinterest.com/iclothing"
                 :aria-label="$t('Go to Pinterest')"
@@ -244,7 +244,7 @@
               </a> 
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mx-1 rounded-full new_footer_icons"
                 href="https://twitter.com/iclothing"
                 :aria-label="$t('Go to Twitter')"
@@ -262,7 +262,7 @@
             <div class="flex justify-start lg:justify-start social-footer mt-6 app-share-div">
               <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/"
                 :aria-label="$t('Go to Facebook')"
@@ -273,7 +273,7 @@
 
                <a
                 target="_blank"
-                rel="noopener"
+                rel="nofollow"
                 class="social-icon mr-1 rounded-full new_footer_icons"
                 href="https://www.facebook.com/"
                 :aria-label="$t('Go to Facebook')"
@@ -291,7 +291,7 @@
         <div class="row items-center justify-between py-6">    
           <!-- TrustBox widget - Micro Star -->
           <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b732fbfb950b10de65e5" data-businessunit-id="58adae0b0000ff00059d2b0a" data-style-height="24px" data-style-width="100%" data-theme="light">
-            <a href="https://uk.trustpilot.com/review/iclothing.com" target="_blank" rel="noopener">Trustpilot</a>
+            <a href="https://uk.trustpilot.com/review/iclothing.com" target="_blank" rel="nofollow">Trustpilot</a>
           </div>
           <!-- End TrustBox widget -->
         </div>
