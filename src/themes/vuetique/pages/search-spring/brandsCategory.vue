@@ -177,7 +177,7 @@ export default {
   },
   metaInfo () {
     return {
-      title: this.$route.params.brandName || this.getBrandPageTitle.meta_title,      
+      title: this.getBrandPageTitle.meta_title ? this.getBrandPageTitle.meta_title : this.$route.params.brandName,
       meta: this.getBrandPageTitle.meta_description ? [{ vmid: 'description', name: 'description', content: this.getBrandPageTitle.meta_description }] : [{ vmid: 'description', name: 'description', content: this.getBrandPageTitle.description }]      
     }
   },  
