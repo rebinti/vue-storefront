@@ -9,9 +9,9 @@
     <header class="pb-10 row bg-grey-lightest mb-6 head_category" v-if="!searcingLoaderFlag">
       <div class="container d_item">
         <div class="row items-center mt-2">
-          <h2 v-if="getBrandPageTitle.name" class="col-8 md:col-8 lg:col-8 xl:col-10">
+          <h1 v-if="getBrandPageTitle.name" class="col-8 md:col-8 lg:col-8 xl:col-10">
              {{getBrandPageTitle.name}}
-          </h2>
+          </h1>
            <div class="col-2 md:col-2 lg:col-2 xl:col-1 hidden lg:block">
                 <label class="mr10 columns-label">{{ $t('Columns') }}:</label>
                 <columns @change-column="columnChangeWeb" :products-columns="[2, 3, 4]" :dcolumn="defaultColumnWeb" :type="'lg'"/>
@@ -175,6 +175,12 @@ export default {
      SiderbarFilter,
     MobileSiderbarFilter,
   },
+  metaInfo () {
+    return {
+      title: this.$route.params.brandName || this.getBrandPageTitle.meta_title,      
+      meta: this.getBrandPageTitle.meta_description ? [{ vmid: 'description', name: 'description', content: this.getBrandPageTitle.meta_description }] : [{ vmid: 'description', name: 'description', content: this.getBrandPageTitle.description }]      
+    }
+  },  
   async asyncData ({ store, route }) { // this is for SSR purposes to prefetch data - and it's always executed before parent component methods
       await store.dispatch('ui/getBrandList', { // this is just an example how can you modify the search criteria in child components
        key: '_type',
@@ -229,7 +235,7 @@ export default {
   watch: {
     '$route': 'validateRouteCategory'
   },
-  mounted () {
+  mounted () {    
     if (this.filterData && this.filterData.length > 0) {
       if (this.sortingFilterSelected) {
           this.sortingFilterSelectedValue = this.sortingFilterSelected;
@@ -308,7 +314,9 @@ export default {
     width: 380px;
     top: auto;
 }
-
+.st_brd h1{
+    font-size: 1.5rem;
+}
 .mobile-filters { 
   @apply fixed overflow-auto bg-white z-modal left-0 w-screen p-4;
   
