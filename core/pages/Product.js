@@ -38,8 +38,11 @@ export default {
       modelsList: 'ui/getModelsList'
     }),
     productVideoData () {
-      if (this.gallery.length) return this.gallery.find(val => (val.video && val.video !== undefined)) || null
-      else return null
+      if (this.getCurrentProduct.video_link) {
+        return { video: this.getCurrentProduct.video_link }
+      } else {
+        return null
+      }
     },
     galleryDataFilter () {
       if (this.gallery.length) {
