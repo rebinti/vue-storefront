@@ -5,7 +5,7 @@
       <div class="row mb-4">
         <div class="col-12 sm:col-6">
           <h2 class="mb-1">
-            {{ $t('Order #') }}{{ order.entity_id }}
+            {{ $t('Order #') }}{{ order.increment_id }}
             <span
               class="border py-1 px-2 ml-5 text-sm leading-sm text-grey-dark"
             >{{ order.status | capitalize }}</span>
