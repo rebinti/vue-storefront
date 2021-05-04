@@ -156,6 +156,20 @@
         </base-checkbox>
         </div>
 
+
+        <p style="
+            font-size: 12px;
+            margin-bottom: 10px;
+        ">
+        This site is protected by reCAPTCHA and the Google
+            <a href="https://policies.google.com/privacy" style="
+            color: #3c8ac5;
+        ">Privacy Policy</a> and
+            <a href="https://policies.google.com/terms" style="
+            color: #3c8ac5;
+        ">Terms of Service</a> apply.    
+        </p>
+
        
         <button-full class="mb-2 w-full l_login" type="submit">
           {{ $t('Register an account') }}

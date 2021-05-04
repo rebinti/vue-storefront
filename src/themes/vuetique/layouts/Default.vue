@@ -262,4 +262,8 @@ export default {
   .slide-right-leave-to {
     transform: translateX(-100%);
   }
+  .grecaptcha-badge { visibility: hidden; }
+</style>
+<style>
+  .grecaptcha-badge { visibility: hidden; }
 </style>
