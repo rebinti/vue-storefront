@@ -41,8 +41,8 @@ export const Register = {
           message: this.$t('captcha is not verified'),
           action1: { label: this.$t('OK') }
         })
-        this.$bus.$emit('notification-progress-stop')
-        return          
+       // this.$bus.$emit('notification-progress-stop')
+       // return          
       }      
       this.$store.dispatch('user/register', { email: this.email, password: this.password, firstname: this.firstName, lastname: this.lastName, mobile: this.mobile }).then((result) => {
         Logger.debug(result, 'user')()

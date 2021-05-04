@@ -245,7 +245,7 @@ export default {
         })
         return
       }
-      this.$store.dispatch('googleRecaptcha/isVerifiedCaptcha')
+      //this.$store.dispatch('googleRecaptcha/isVerifiedCaptcha')
       this.callRegister()
     },
     onSuccess () {
@@ -262,6 +262,9 @@ export default {
         action1: { label: this.$t('OK') }
       })
     }
-  }
+  },
+  mounted() {  
+    this.$store.dispatch('googleRecaptcha/isVerifiedCaptcha')
+  },  
 }
 </script>
