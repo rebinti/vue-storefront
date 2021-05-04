@@ -5,12 +5,12 @@
     </p>
     <div slot="content">
       <form @submit.prevent="subscribe(onSuccesfulSubmission)" novalidate>
-        <div>
+        <div @click="captchacallevent">
           <p class="mb-2">
             {{ $t('Sign up to our newsletter and receive a coupon for 10% off!') }}
           </p>
           <base-input
-            focus
+            focus            
             type="text"
             name="email"
             v-model="email"
@@ -54,14 +54,27 @@ export default {
   beforeDestroy () {
     this.$off('validation-error')
   },
+  data () {
+    return {
+      captchacall: false
+    }
+  },  
   methods: {
     onSuccesfulSubmission () {
       // this.$store.dispatch('notification/spawnNotification', {
       //   type: 'success',
       //   message: i18n.t('You have been successfully subscribed to our newsletter!'),
       //   action1: { label: i18n.t('OK') }
-      // })
+      // })      
       this.$bus.$emit('modal-hide', 'modal-newsletter')
+    },
+    captchacallevent () {     
+      if(this.captchacall==false){
+        this.captchacall = true
+        console.log('data  55555555555 AAAAAAAA','11111111111')
+        this.$store.dispatch('googleRecaptcha/isVerifiedCaptcha')
+      }
+      
     }
   },
   components: {
