@@ -35,14 +35,14 @@ export const Register = {
       this.$bus.$emit('notification-progress-start', i18n.t('Registering the account ...'))
       if (!this.$store.state.googleRecaptcha.is_verified) {
         //captcha is not verified
-        console.log("testt register captcha aaaaaaaaaaaaaaaa - invalid","1111")
+        console.log("register captcha - invalid","1111")
         this.$store.dispatch('notification/spawnNotification', {
           type: 'error',
           message: this.$t('captcha is not verified'),
           action1: { label: this.$t('OK') }
         })
-       // this.$bus.$emit('notification-progress-stop')
-       // return          
+        this.$bus.$emit('notification-progress-stop')
+        return          
       }      
       this.$store.dispatch('user/register', { email: this.email, password: this.password, firstname: this.firstName, lastname: this.lastName, mobile: this.mobile }).then((result) => {
         Logger.debug(result, 'user')()
