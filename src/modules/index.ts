@@ -36,6 +36,8 @@ import { FacebookPixel } from './vsf-facebook-pixel'
 
 import { ExternalCheckout } from './vsf-external-checkout'
 
+import { GoogleRecaptcha } from './google-recaptcha'
+
 // import { SearchSpringSearch } from './search-spring-search';
 
 // import { SearchSpringCategory } from './search-spring-category';
@@ -94,6 +96,7 @@ export const registerModules: VueStorefrontModule[] = [
   googleTagManager,
   // VsfGoogleTagManager,
   GoogleAnalytics,
+  GoogleRecaptcha,
   // Hotjar,
   // PaymentBackendMethods,
   // PaymentCashOnDelivery,

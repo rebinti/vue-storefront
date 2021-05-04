@@ -245,6 +245,7 @@ export default {
         })
         return
       }
+      this.$store.dispatch('googleRecaptcha/isVerifiedCaptcha')
       this.callRegister()
     },
     onSuccess () {
