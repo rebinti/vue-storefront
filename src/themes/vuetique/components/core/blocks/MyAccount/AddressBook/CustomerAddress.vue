@@ -20,9 +20,9 @@
         </h3>
         <div v-if="getBillingAddress">
             <p class="mb15"><strong>{{ getBillingAddress.firstname }} {{ getBillingAddress.lastname }}</strong></p>
-            <p v-if="getBillingAddress.company">
+            <!-- <p v-if="getBillingAddress.company">
               {{ getBillingAddress.company }}
-            </p>
+            </p> -->
             <p>
               {{ getBillingAddress.street[0] }}
               <span v-if="getBillingAddress.street[1]"> {{ getBillingAddress.street[1] }}</span>
@@ -62,9 +62,9 @@
         </h3>
         <div v-if="getShippingAddress">
           <p class="mb15"><strong>{{ getShippingAddress.firstname }} {{ getShippingAddress.lastname }}</strong></p>
-            <p v-if="getShippingAddress.company">
+            <!-- <p v-if="getShippingAddress.company">
               {{ getShippingAddress.company }}
-            </p>
+            </p> -->
             <p>
               {{ getShippingAddress.street[0] }}
               <span v-if="getShippingAddress.street[1]"> {{ getShippingAddress.street[1] }}</span>

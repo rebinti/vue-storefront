@@ -321,7 +321,9 @@ const actions: ActionTree<UserState, RootState> = {
         userData.customer.addresses.map((val) => {
           if (val.postcode) val.postcode = val.postcode.toString();
           if (val.vat_id) val.vat_id = val.vat_id.toString();
+          if (val.company) val.company = val.company.toString();
           if (val.telephone) val.telephone = val.telephone.toString();
+          val.company = 'No';
       });
     }
     await TaskQueue.queue({

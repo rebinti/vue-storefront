@@ -79,6 +79,8 @@ export const AddAddress = {
         let updatedShippingDetailsAddress = {
             firstname: this.customer.firstName,
             lastname: this.customer.lastName,
+            company:'No',
+            vat_id:'Nodata',
             street: [this.customer.street, this.customer.house],
             city: this.customer.city,
             ...(this.customer.region ? { region: { region: this.customer.region } } : {}),
