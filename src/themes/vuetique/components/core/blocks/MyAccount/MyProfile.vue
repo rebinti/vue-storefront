@@ -250,7 +250,7 @@
           @change="$v.userCompany.country.$touch()"
         />
 
-        <base-input
+        <!-- <base-input
           class="col-12 sm:col-6 mb-6 txt_blk_out"
           type="text"
           name="taxId"
@@ -268,7 +268,7 @@
               text: $t('Tax ID must have at least 3 letters.')
             }
           ]"
-        />
+        /> -->
 
         <base-input
           class="col-12 sm:col-6 mb-6 txt_blk_out"
@@ -336,9 +336,9 @@
               {{ getCountryName() }}
             </span>
           </p>
-          <p class="mb-6" v-if="userCompany.taxId">
+          <!-- <p class="mb-6" v-if="userCompany.taxId">
             {{ userCompany.taxId }}
-          </p>
+          </p> -->
           <div class="mb-6">
             {{ userCompany.phone }}
             <tooltip v-if="userCompany.phone">
@@ -432,15 +432,15 @@ export default {
       },
       postcode: {
         required,
-        minLength: minLength(5)
+        minLength: minLength(3)
       },
       city: {
         required
       },
-      taxId: {
-        required,
-        minLength: minLength(3)
-      }
+      // taxId: {
+      //   required,
+      //   minLength: minLength(3)
+      // }
     }
   }
 }
