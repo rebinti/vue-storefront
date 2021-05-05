@@ -31,7 +31,7 @@ export default {
         if(this.$store.state.user.current !== null){
           this.user_id = this.$store.state.user.current.id;      
         }        
-        const sendData = { userid: this.user_id ,email: this.email,type: 'unsubscribe'}         
+        const sendData = { userid: this.user_id ,email: this.email,type: 'unsubscribe',from: 'account'}
         return this.$store.dispatch('newsletter/magentounsubscribe', sendData).then(res => {
           this.$emit('unsubscribed', res)
         }).catch(err =>

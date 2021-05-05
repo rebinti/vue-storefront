@@ -44,7 +44,7 @@ export default {
           return          
         }   
         this.captchacall = false      
-        const sendData = { userid: this.user_id ,email: this.email,type: 'subscribe'}        
+        const sendData = { userid: this.user_id ,email: this.email,type: 'subscribe',from: 'footer'}        
         return this.$store.dispatch('newsletter/magentosubscribe', sendData).then(res  => { return res.json() })
         .then((res) => {
           if (success) success(res)
@@ -54,6 +54,29 @@ export default {
             message: res.result,
             action1: { label:'OK' }
           })          
+        }).catch(err => {
+          if (failure) failure(err)
+        }
+        )
+      }
+    },
+    subscribefromacccount (success?: Function, failure?: Function) {
+      //this.captchacall = false
+      // argument omitted for validation purposes
+      if (!this.$v.$invalid) {
+        if(this.$store.state.user.current !== null){
+          this.user_id = this.$store.state.user.current.id;
+        }
+        this.captchacall = false
+        const sendData = { userid: this.user_id ,email: this.email,type: 'subscribe',from: 'account'}
+        return this.$store.dispatch('newsletter/magentosubscribe', sendData).then(res  => { return res.json() })
+        .then((res) => {
+          if (success) success(res)
+          this.$store.dispatch('notification/spawnNotification', {
+            type: 'success',
+            message: res.result,
+            action1: { label:'OK' }
+          })
         }).catch(err => {
           if (failure) failure(err)
         }
