@@ -110,7 +110,7 @@ export default {
         { title: i18n.t('General'), link: '/customer-service-general', component: MagentoCmsPage },
         // { title: i18n.t('Contact us'), link: '/contact-us', component: ContactUsComponent },
         { title: i18n.t('Contact us'), link: '/contact-us', component: MagentoCmsPage },
-        { title: i18n.t('My Account'), link: '/account', component: StaticExample },
+        { title: i18n.t('My Account'), link: '/my-account', component: StaticExample },
         { title: i18n.t('Privacy & Security'), link: '/privacy-policy-cookie-restriction-mode', component: MagentoCmsPage },        
         { title: i18n.t('Help/Faqs'), link: '/help-faq', component: MagentoCmsPage },
         { title: i18n.t('Delivery & Return'), link: '/delivery-returns', component: MagentoCmsPage },
