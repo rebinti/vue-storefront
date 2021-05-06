@@ -90,6 +90,12 @@ export default {
       }
     }
   },
+  mounted() {
+    
+    console.log("test newsletter data AAAAAAAAAAAAAAAAAAAAa on componet  NEW load!!!! - ",this.isSubscribed)
+    this.user.isSubscribed = this.isSubscribed
+    console.log("test newsletter data AAAAAAAAAAAAAAAAAAAAa on componet load!!!! - ",this.user.isSubscribed)
+  },
   mixins: [Newsletter]
 }
 </script>
