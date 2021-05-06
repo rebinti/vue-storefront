@@ -59,6 +59,9 @@ export default {
       captchacall: false
     }
   },  
+  beforeMount () {
+    this.email = "";
+  },
   methods: {
     onSuccesfulSubmission () {
       // this.$store.dispatch('notification/spawnNotification', {
