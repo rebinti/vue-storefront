@@ -34,6 +34,11 @@ export default {
         const sendData = { userid: this.user_id ,email: this.email,type: 'unsubscribe',from: 'account'}
         return this.$store.dispatch('newsletter/magentounsubscribe', sendData).then(res => {
           this.$emit('unsubscribed', res)
+          this.$store.dispatch('notification/spawnNotification', {
+            type: 'success',
+            message: 'successfully unsubscribed!',
+            action1: { label:'OK' }
+          })           
         }).catch(err =>
           this.$emit('unsubscription-error', err)
         )

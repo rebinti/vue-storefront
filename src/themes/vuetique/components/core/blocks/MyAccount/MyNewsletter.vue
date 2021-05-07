@@ -7,7 +7,7 @@
           {{ $t('My newsletter') }}
         </h2>
       </div>
-      <div class="col-12 sm:col-6">
+      <!-- <div class="col-12 sm:col-6">
         <div class="leading-loose flex md:justify-end" v-if="!isEdited">
           <a href="#" class="text-grey flex" @click.prevent="edit">
             <span class="pr-1">
@@ -16,7 +16,7 @@
             <i class="material-icons">edit</i>
           </a>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- My newsletter body (both modes) -->
@@ -34,7 +34,7 @@
         v-model="user.isSubscribed"
         :value="true"
         @click="isEdited ? user.isSubscribed = !user.isSubscribed : null"
-        :disabled="!isEdited"
+        @click.native="updateNewsletter"        
       >
         {{ $t('I want to receive a newsletter, and agree to its terms') }}
       </base-checkbox>
@@ -43,7 +43,7 @@
         <hr class="border-t mt-4 mb-10">
       </div>
 
-      <div class="col-12" v-if="isEdited">
+      <!-- <div class="col-12" v-if="isEdited">
         <div class="inline-block mr-5">
           <button-full @click.native="updateNewsletter">
             {{ $t('Update my preferences') }}
@@ -53,7 +53,7 @@
         <a href="#" @click="exitSection" class="inline-block text-grey-dark bg-grey-lighter py-2 px-3">
           {{ $t('Cancel') }}
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -62,6 +62,7 @@
 import { Newsletter } from '@vue-storefront/core/modules/newsletter/components/Newsletter'
 import ButtonFull from 'theme/components/theme/ButtonFull.vue'
 import BaseCheckbox from 'theme/components/core/blocks/Form/BaseCheckbox'
+import i18n from '@vue-storefront/i18n'
 
 export default {
   components: {
@@ -70,7 +71,7 @@ export default {
   },
   data () {
     return {
-      isEdited: false
+      isEdited: true
     }
   },
   methods: {
@@ -81,12 +82,15 @@ export default {
       this.isEdited = true
     },
     updateNewsletter () {
-      if (this.user.isSubscribed) {
+      this.user.isSubscribed = this.isSubscribed
+      if(!this.user.isSubscribed && !this.isSubscribed) {
         console.log("test newsletter data AAAAAAAAAAAAAAAAAAAAa NEWWW",'SUBSCRIBED')
         this.subscribefromacccount()
-      } else {
+        this.user.isSubscribed = true
+      }else{
         console.log("test newsletter data AAAAAAAAAAAAAAAAAAAAa NEWWW",'UN-SUBSCRIBED')
         this.unsubscribe()
+        this.user.isSubscribed = false    
       }
     }
   },
