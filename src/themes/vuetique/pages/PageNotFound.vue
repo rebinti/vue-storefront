@@ -35,7 +35,8 @@
     </section>
     <section class="mb-20">
       <div class="container">
-        <section class="container">
+        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-pagenotfount-reco"></div>
+        <!-- <section class="container">
           <header class="col-md-12 py-4 mt-12 mb-6">
             <h2 class="text-center text-h2">
               {{ $t('See our bestsellers') }}
@@ -62,7 +63,7 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
     </section>
   </div>

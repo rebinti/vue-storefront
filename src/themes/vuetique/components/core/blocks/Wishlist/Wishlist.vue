@@ -83,6 +83,7 @@
         </template>
       </swipe-list>
       </template>
+      <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-wishlist-reco"></div>
     </div>
 
     <boards v-if="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
