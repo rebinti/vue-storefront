@@ -21,7 +21,6 @@ export const AddAddress = {
   methods: {
 
     addNewAddress (address: Address) {
-
        let updatedShippingDetails;
         updatedShippingDetails = JSON.parse(JSON.stringify(this.$store.state.user.current))
         let updatedShippingDetailsAddress = {
@@ -44,7 +43,7 @@ export const AddAddress = {
                     )
             }
          }
-         if (this.customer.default_billing ) {
+        if (this.customer.default_billing ) {
             if (this.currentUser.hasOwnProperty('default_billing')) {
                  updatedShippingDetails.addresses = updatedShippingDetails.addresses.map((address) =>
                     toString(address.id) === toString(this.currentUser.default_billing)
@@ -52,13 +51,23 @@ export const AddAddress = {
                       : address
                   )
             }
-        } 
+        }
 
         // if (this.currentUser.hasOwnProperty('default_shipping') || this.currentUser.hasOwnProperty('default_billing')) {
             if (this.customer.default_shipping) updatedShippingDetailsAddress['default_shipping'] = true;
             if (this.customer.default_billing) updatedShippingDetailsAddress['default_billing'] = true;
-            if (!this.customer.default_shipping && !this.customer.default_billing) {  
-               updatedShippingDetailsAddress['plane_address'] = true;
+            if (!this.customer.default_shipping && !this.customer.default_billing) { 
+              if(!this.currentUser.default_shipping && !this.currentUser.default_billing){
+                updatedShippingDetailsAddress['default_shipping'] = true;
+                updatedShippingDetailsAddress['default_billing'] = true;
+              }else{
+                updatedShippingDetailsAddress['plane_address'] = true;
+              }                
+            }else{
+              if(!this.currentUser.default_shipping && !this.currentUser.default_billing){
+                updatedShippingDetailsAddress['default_shipping'] = true;
+                updatedShippingDetailsAddress['default_billing'] = true;
+              }
             }
             updatedShippingDetails.addresses = []
             updatedShippingDetails.addresses.push(updatedShippingDetailsAddress)
