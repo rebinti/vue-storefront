@@ -985,15 +985,36 @@ export default {
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
     var self = this;
     tfcapi('event','tfc-fitrec-register','addtobag',function(context) {
-          console.log('addtobag data' , context) // var size = e.size; //{color:"multi",size:"8",style: "8397"}
-          if (self.options['size']) {
-            const recommendatedOption = self.options['size'].find(val => val.label == context.size)
-            if (recommendatedOption) {
-              const addToCartButton = document.getElementById("add-to-cart-button");
-              if(addToCartButton) addToCartButton.click();
-            }
-         }
-    });
+        console.log('addtobag data' , context) // var size = e.size; //{color:"multi",size:"8",style: "8397"}
+        var size = context.size;
+        // Try to select the size 
+        if(!fitrec_selectSize(size)) {
+          // The size the user was recommended does not match one on the retailer’s site
+            this.$store.dispatch('notification/spawnNotification', {
+              type: 'error',
+              message: this.$t('The recommended size does not match for this item!'),
+              action1: { label: this.$t('OK') }
+            })    
+        }
+        else if(!is_in_stock(size)) {
+          // The size the user was recommended is out of stock
+            this.$store.dispatch('notification/spawnNotification', {
+              type: 'error',
+              message: this.$t('Recommended size is in out of stock!'),
+              action1: { label: this.$t('OK') }
+            })    
+        }
+        else {
+          // ... Try to add the item to cart ...
+            if (self.options['size']) {
+                const recommendatedOption = self.options['size'].find(val => val.label == context.size)
+                if (recommendatedOption) {
+                    const addToCartButton = document.getElementById("add-to-cart-button");
+                    if(addToCartButton) addToCartButton.click();
+                }
+            }    
+        }
+    });    
     tfcapi('event', 'tfc-fitrec-product', 'success' , function(context )  {
         console.log('fitRecommendation success' , context)
         if (self.options['size']) {
@@ -1004,6 +1025,10 @@ export default {
             self.$bus.$emit('filter-changed-product', { attribute_code: recommendatedOption.attribute_code, id: recommendatedOption.id, label: recommendatedOption.label })
           }
         }
+        if (typeof fitrec_selectSize === 'function') {
+            fitrec_selectSize(context.fitRecommendation.size,   
+              context.fitRecommendation.score);
+        }        
     });
 
     this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
@@ -1423,6 +1448,14 @@ export default {
         else val.activeProd= false;
         return val; });
       this.fromRelatedProdcutClick= true;
+      tfcapi('update', 'tfc-fitrec-product', {
+        products: {
+          'the-style-id': {
+            colorId: prod.color,
+            availableSizes: this.getTruefitProd.availablesizes
+          }
+        }
+      });      
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
