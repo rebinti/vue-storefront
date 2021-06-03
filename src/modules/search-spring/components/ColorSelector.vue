@@ -8,8 +8,10 @@
 
   <div class="clr_img_out">
 		<div class="clr_img_inner">
-		 <img :width="'50px'" :height="'50px'" :src="'/assets/colour/' + label.toLowerCase() +'.png'" 
+		  <img :width="'50px'" :height="'50px'" :src="'/assets/colour/' + label.toLowerCase() +'.png'" 
                       @error="imgUrlAlt" alt="" >
+      <span v-if="label.length<8" style="font-size: 10px;">{{ label }}</span>
+      <span v-else style="font-size: 8px;">{{ label.substring(0,6)+".." }}</span>                                             
 		</div>
 	</div>
     
