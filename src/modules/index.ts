@@ -15,7 +15,7 @@ import { Homepage } from './homepage'
 import { Claims } from './claims'
 // import { PromotedOffers } from './promoted-offers'
 import { Ui } from './ui-store'
-import { GoogleAnalytics } from './google-analytics';
+// import { GoogleAnalytics } from './google-analytics';
 // import { Hotjar } from './hotjar';
 import { googleTagManager } from './google-tag-manager';
 // import { VsfGoogleTagManager } from './vsf-google-tag-manager'
@@ -95,7 +95,7 @@ export const registerModules: VueStorefrontModule[] = [
   // PromotedOffers,
   googleTagManager,
   // VsfGoogleTagManager,
-  GoogleAnalytics,
+  // GoogleAnalytics,
   GoogleRecaptcha,
   // Hotjar,
   // PaymentBackendMethods,
