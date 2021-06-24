@@ -57,6 +57,7 @@ export default {
       
       if (notificationData.type === 'success') {               
         this.added = true
+	this.$store.dispatch('ui/toggleMicrocart')
         // segmentify 
         let pqty = 0;
             if (this.product.qty === undefined) {
@@ -80,6 +81,9 @@ export default {
         this.added = false
         this.failed = false
       }, 2000)
+      setTimeout(() => {
+        this.$store.commit('ui/setOverlay', true); 
+      }, 300); 
     },
     addToCartWrapper (product) {
       this.added = false
