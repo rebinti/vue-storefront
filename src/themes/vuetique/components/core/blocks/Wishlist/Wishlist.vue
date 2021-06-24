@@ -213,6 +213,9 @@ export default {
         }
         this.$store.commit('ui/setBoardsElem', 'create-board');
         this.$bus.$emit('modal-show', 'modal-create-boards');
+    },
+    segmentifyhandleClicks (event) {
+      this.$bus.$emit('segmentify-block-router-update',event);
     }
   }
 };
