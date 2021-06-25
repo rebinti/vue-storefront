@@ -54,10 +54,16 @@ export default {
 	      // For working Segmentify
 	      this.cookiebotSegmentifyrender = true;	
 	      window.segPageInf = {
-		"category": "Home Page",
-		"subCategory": ""
-	      };
+          "category": "Home Page",
+          "subCategory": ""
+        };        
       }	 	      
+    },
+    EventHandlerCookieconsentTrigger(){
+      if (window && window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.preferences) {	
+       this.setSegmentify()
+       window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+      }
     },
     fromhomerouterwatch () {       
       this.setSegmentify()
@@ -101,8 +107,17 @@ export default {
        styla.init !== "undefined"&&styla.init()
        this.stylaloaderflag = false
     }
-    this.setSegmentify() 
+    this.setSegmentify()    
+    this.$nextTick(function () {
+          setTimeout(() => {      
+            this.EventHandlerCookieconsentTrigger();        
+          }, 500);
+    });
+    window.addEventListener("click", this.EventHandlerCookieconsentTrigger);     
   },
+  destroyed () {
+    window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+  },  
   metaInfo () {
     const storeView = currentStoreView()
     return {
