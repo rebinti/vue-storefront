@@ -27,12 +27,12 @@ import { RawOutputExample } from './raw-output-example'
 import { OrderHistory } from './order-history'
 
 // import { DndPrismicCMS } from './dnd-prismic-cms'
-// import { Braintree } from './payment-braintree';  // M2
+// import { Braintree } from './payment-braintree';  // M2 
 
 // import { PaymentBraintreeModule } from './payment-braintree'
 
 // import { Paypal } from './paypal'
-import { FacebookPixel } from './vsf-facebook-pixel'
+// import { FacebookPixel } from './vsf-facebook-pixel'
 
 import { ExternalCheckout } from './vsf-external-checkout'
 
@@ -109,7 +109,7 @@ export const registerModules: VueStorefrontModule[] = [
   // Paypal,
   // PaymentBraintreeModule
   // Braintree,
-  FacebookPixel,
+  // FacebookPixel,
   ExternalCheckout,
   // SearchSpringSearch,
   // SearchSpringCategory
