@@ -62,19 +62,21 @@ export const AddToCart = {
             action1: { label: this.$t('OK') },
             action2: null
           })
-          this.$bus.$emit('modal-hide', 'modal-productwithoptions')      
+          this.$bus.$emit('modal-hide', 'modal-productwithoptions')
+        }
           // PAPERPLANES - ADD TO CART
           //let _paq = window._paq;
           // console.log("PAPERPLANE AAAAAAAAA",this.$store.state.cart)
           console.log("cart AAAAAAAAA 11111111111",Cookiebot.consent.marketing)
-          if (window && _paq && _paq != undefined && Cookiebot.consent.marketing) {
-            this.$store.state.cart.cartItems.forEach(product => {
-              _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
-            })              
-            _paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '']);
-            _paq.push(['trackPageView']);          
-          }             
-        }
+          if(window && Cookiebot.consent.marketing){
+            if (window && _paq && _paq != undefined ) {
+              this.$store.state.cart.cartItems.forEach(product => {
+                _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);
+              })
+              _paq.push(['trackEcommerceCartUpdate', this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '']);
+              _paq.push(['trackPageView']);
+            }
+          }
         return diffLog
         
       } catch (err) {
