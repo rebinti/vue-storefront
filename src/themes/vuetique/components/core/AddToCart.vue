@@ -59,7 +59,8 @@ export default {
         this.added = true
 	this.$store.dispatch('ui/toggleMicrocart')
         // segmentify 
-        let pqty = 0;
+        if (window && window.Cookiebot.consent.preferences) {
+			let pqty = 0;
             if (this.product.qty === undefined) {
                 pqty = 1;
             }else{
@@ -72,7 +73,8 @@ export default {
                   quantity: pqty, 
                   price: this.product.price
               }
-            }        
+            }
+        }            
       } else {
         this.failed = true
       }

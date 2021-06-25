@@ -29,7 +29,7 @@
               />
           </div>
         </div>         
-        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-brand-reco"></div>
+        <div @click="segmentifyhandleClicks" v-if="cookiebotSegmentifyrender" class="segmentify-dynamic-content"  id="seg-brand-reco"></div>
       </div>
 
     </header>
@@ -207,6 +207,7 @@ export default {
       searchPageType: 'searchSpringCategory',
       serachFrom: 'brand',
       filterloaderFlag: false,
+      cookiebotSegmentifyrender:false,
     };
   },
 
@@ -249,6 +250,20 @@ export default {
       'event': 'brandClick',
       'brand': this.getBrandPageTitle.name,
     });  
+    window.addEventListener("load", function(event) {
+          setTimeout(() => {            
+            this.EventHandlerCookieconsentTrigger();     
+          }, 500);      
+    });
+    this.$nextTick(function () {
+          setTimeout(() => {      
+            this.EventHandlerCookieconsentTrigger();        
+          }, 500);
+    });
+    window.addEventListener("click", this.EventHandlerCookieconsentTrigger);
+  },
+  destroyed () {
+    window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
   },
   methods: {
     setSegmentify() {      
@@ -292,7 +307,14 @@ export default {
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
-    },     
+    },
+	  EventHandlerCookieconsentTrigger (){	
+		  if(window && window.Cookiebot.consent.preferences)
+		  {
+			this.cookiebotSegmentifyrender = true;
+			window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+		  }
+	  },       
 
   }
 

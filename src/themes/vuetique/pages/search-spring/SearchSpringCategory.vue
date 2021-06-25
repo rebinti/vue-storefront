@@ -39,7 +39,7 @@
           <!-- <div v-html="headerbanner"></div> -->
            <!-- <active-filters :filters="filters.available" /> -->
         </div>         
-        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-cat-reco"></div>
+        <div @click="segmentifyhandleClicks" v-if="cookiebotSegmentifyrender" class="segmentify-dynamic-content"  id="seg-cat-reco"></div>
       </div>
 
        <!-- New Category filter box section Mobile view -->
@@ -240,6 +240,7 @@ export default {
         serachFrom: 'category', // where from
         initialSearchFlag: true, // category - filter higherachy value manage category page - other for brand and search
         filterloaderFlag: false,
+	cookiebotSegmentifyrender:false,
     };
   },
 
@@ -302,7 +303,23 @@ export default {
    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Category', categoryData: this.searchedValue.replace("/", " > ") });
   
   // For working Segmentify
-    this.setSegmentify();    
+    this.setSegmentify();
+        window.addEventListener("load", function(event) {
+          console.log('category change for seg load AAAAAAAAAAAAAAA','1111')
+          setTimeout(() => {            
+            this.EventHandlerCookieconsentTrigger();     
+          }, 500);      
+    });
+    this.$nextTick(function () {
+          setTimeout(() => {      
+            this.EventHandlerCookieconsentTrigger();        
+          }, 500);
+    });
+    window.addEventListener("click", this.EventHandlerCookieconsentTrigger);
+
+  },
+  destroyed () {
+    window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
   },
   methods: {
     setSegmentify() {
@@ -385,7 +402,16 @@ export default {
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
-    }, 
+    },
+	  EventHandlerCookieconsentTrigger (){	
+			console.log('category change for seg load AAAAAAAAAAAAAAA','000000')
+		  if(window && window.Cookiebot.consent.preferences)
+		  {
+			console.log('category change for seg load AAAAAAAAAAAAAAA','INNNNNNN - show')
+			this.cookiebotSegmentifyrender = true;
+			window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+		  }
+	  },  
   },
   beforeDestroy () {
     window.removeEventListener('scroll', null);    

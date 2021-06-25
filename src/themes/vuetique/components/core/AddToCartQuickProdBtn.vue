@@ -100,14 +100,16 @@ export default {
       if (notificationData.type === 'success') {         
         this.added = true
         // segmentify 
-        window.sgfLayer = {
-          'basket': {
-              step: 'add',
-              productId: this.product.parentSku,
-              quantity: 1, 
-              price: this.product.price
-          }
-        }          
+	if (window && window.Cookiebot.consent.preferences) {
+		window.sgfLayer = {
+		  'basket': {
+		      step: 'add',
+		      productId: this.product.parentSku,
+		      quantity: 1, 
+		      price: this.product.price
+		  }
+		}          
+        }
       } else {
         this.failed = true
       }

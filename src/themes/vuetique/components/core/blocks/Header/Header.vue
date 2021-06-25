@@ -148,7 +148,7 @@ export default {
   methods: {
     setSegmentifyUserObject() {
       // For working Segmentify UserObject      
-      if(this.currentUser){
+      if(this.currentUser && window && window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.preferences){
         let createdate = this.currentUser.created_at;
         let firstdatepart = createdate.split("T");
         let alldate  = firstdatepart[0].split("-");

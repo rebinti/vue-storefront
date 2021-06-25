@@ -83,7 +83,7 @@
         </template>
       </swipe-list>
       </template>
-      <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-wishlist-reco"></div>
+	<div @click="segmentifyhandleClicks" v-if="cookiebotSegmentifyrender" class="segmentify-dynamic-content"  id="seg-wishlist-reco"></div>
     </div>
 
     <boards v-if="viewType === 'boards'" @chagesInView="chagesInView" :rerender="reRendBoards" @chageRenderFlag="chageRenderFlag" />
@@ -124,7 +124,8 @@ export default {
       hideWishListForBoardFlag: false,
       page: 0,
       componentKey: 0,
-      reRendBoards: false
+      reRendBoards: false,
+      cookiebotSegmentifyrender: window && window.Cookiebot.consent.preferences ? window.Cookiebot.consent.preferences : false	
     };
   },
   components: {
@@ -216,7 +217,7 @@ export default {
     },
     segmentifyhandleClicks (event) {
       this.$bus.$emit('segmentify-block-router-update',event);
-    }
+    },     
   }
 };
 </script>
@@ -459,3 +460,4 @@ i {
 
    
 </style>
+
