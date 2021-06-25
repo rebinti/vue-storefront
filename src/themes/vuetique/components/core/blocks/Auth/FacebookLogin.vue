@@ -115,7 +115,7 @@ export default {
       window.fbAsyncInit = function() {
         window.FB.init({
           appId: config.socialLogin.facebook.appID, // You will need to change this
-          cookie: true, // This is important, it's not enabled by default
+         // cookie: true, // This is important, it's not enabled by default
           version: "v6.0"
         });
       };
@@ -192,7 +192,7 @@ export default {
           console.log("GUUUUUUUUUUU - email fb",social_data.email)
           console.log("GUUUUUUUUUUU - email uppper fb",social_data.email.toUpperCase())
           console.log("GUUUUUUUUUUU - email md5 fb",md5(social_data.email.toUpperCase()))
-          if (window && window._paq  != undefined) {
+          if (window && window._paq  != undefined && window.Cookiebot.consent.marketing) {
           window._paq.push(["setUserId",md5(social_data.email.toUpperCase())]);  
           window._paq.push(["trackPageView"]);   
           }       

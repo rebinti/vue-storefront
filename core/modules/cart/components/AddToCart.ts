@@ -1,5 +1,5 @@
 import Product from '@vue-storefront/core/modules/catalog/types/Product'
-declare const _paq
+declare const _paq,Cookiebot
 export const AddToCart = {
   name: 'AddToCart',
   data () {
@@ -26,7 +26,8 @@ export const AddToCart = {
           // PAPERPLANES - ADD TO CART
           //let _paq = window._paq;
           // console.log("PAPERPLANE AAAAAAAAA",this.$store.state.cart)
-          if (window && _paq != undefined) {
+          console.log("cart AAAAAAAAA 11111111111",Cookiebot.consent.marketing)
+          if (window && _paq != undefined && Cookiebot.consent.marketing) {
             this.$store.state.cart.cartItems.forEach(product => {
               _paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
             })              
