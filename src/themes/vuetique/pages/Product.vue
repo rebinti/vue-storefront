@@ -23,35 +23,6 @@
         <section class="md:flex">     
           <div class="w-full md:w-3/5">
             <div class="flex">
-              <!-- <div v-if="gallery.length > 1" class="product-thumbnails w-1/12 hidden md:block">
-                <ul>
-                  <li
-                    v-for="(images, key) in gallery"
-                    :key="images.src"
-                    class="mb-1 bg-grey-lighter"
-                  >
-                    <img
-                      :src="images.src"
-                      ref="images"
-                      @click="$refs.gallery.$refs.carousel.navigate(key)"
-                      :alt="product.name"
-                      class="block border cursor-pointer"
-                      :class="currentGalleryPage === key ? 'border-black' : 'border-grey-light'"
-                    >
-                  </li>
-                </ul>
-              </div> -->
-
-              <!-- <div class="w-full md:w-11/12">
-                <product-gallery
-                  ref="gallery"
-                  :gallery="gallery"
-                  :offline="offlineImage"
-                  :configuration="configuration"
-                  :product="product"
-                  @page-change="(page) => currentGalleryPage = page"
-                />
-              </div> -->
             </div>
           </div>
 
@@ -69,7 +40,7 @@
                 </p>
               </div>
               <div class="review-div">
-                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>
+                   <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id && cookiebotStampedrender"></span>
               </div>
             
               <div class="social-share-button-mob" id="right" @click="clicksharediv" > <!-- @click="showShareDiv = !showShareDiv" -->
@@ -81,23 +52,10 @@
             </div>
               <div class="mob_headline_out">
                   <div class="mob_headline">
-                    <!-- <p v-if="getBrandLabelDetails && getBrandLabelDetails.label" style="font-size: 18px;font-weight: 600;text-decoration: underline;margin-top: 15px;">   
-                      <router-link
-                          class="menu-link"
-                          :to="localizedRoute('/brands/' + getBrandLabelDetails.label)"
-                          exact
-                        >{{ getBrandLabelDetails.label }}
-                        </router-link>
-                   </p> -->
                     <h1 data-testid="productName" class="product-title-d">
                       {{ product.name | htmlDecode }}
                     </h1>
-                    <!-- <div class="text-grey text-sm sku_txt">
-                      sku: {{ product.sku }}
-                    </div> -->
-                    <!-- <span id="stamped-badge-mobile"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="getProductId" v-if="getProductId"></span> -->
                   </div>
-
                   <div class="mob_price">
                         <div
                           class="font-serif font-bold text-h1 pb-5 price"
@@ -227,26 +185,13 @@
                 >FIND YOUR SIZE</div> -->
                 <div class="truefit-button tfc-fitrec-product" 
                 :style="{ display: product.type_id =='configurable'? 'block':'none' }"
-                  v-if="getTruefitProd !== null"
+                  v-if="(getTruefitProd !== null) && cookiebotTruefitrender"
                   :id="getTruefitProd.id" :data-userid="getCurrentUserId"
                   :data-colorid="getTruefitProd.color" 
                   :data-availablesizes="getTruefitProd.availablesizes"
                   data-locale="en_GB"
                   >
                 </div>
-                <!-- <div class="size-guide-b">
-                  <a href="javascript:void(0);"  
-                      style="position: absolute;
-                          right: 0;
-                          top: 0;
-                          color: #000;
-                          border-bottom: 1px solid #b3b3b3;
-                          font-weight: 400;"
-                    @click.prevent="$store.dispatch('ui/toggleProductSidePanel')" 
-                    data-testid="sizeGuide">
-                      Size Guide
-                  </a> 
-                </div>              -->
               </div>
               <div>
               <div v-if="product.notes  && getNoteexpiry" class="col-sm-24 nopadding productnote">
@@ -256,15 +201,6 @@
               </div>              
               <!-- <div class="mob_crt_button_out" :style="{position: 'fixed',background: '#fff',zIndex: 6,bottom: '0px', right: '10px', display: 'flex', flexDirection: 'row'}"> -->
               <div style="height: 50px;margin-top: 15px;">  
-                  <!-- <div class="mob_add_cart_btn" :class="{no_video_button: !productVideoData}" @click="openProductOptionsPopup"> -->
-<!-- disableAddToCartButtonFlag -->
-                    <!-- <add-to-cart :product="product"
-                     :disabled="disableAddToCartButtonFlag || (product.type_id == 'configurable' && product.configurable_children === undefined)" 
-                     :configuration="configuration"                     
-                     class="py-3 text-sm"  
-                     :style="product.type_id == 'configurable' && product.configurable_children === undefined ? { backgroundColor: '#bdbdbd !important'} : ''"
-                     /> -->
-                  <!-- </div> -->
                   <div class="mob_add_cart_btn">
 
                     <add-to-cart :product="product"
@@ -272,12 +208,6 @@
                      :configuration="configuration"                     
                      class="py-3 text-sm"  />
                   </div>                
-                  <!-- <div class="video-thum-mob" id="left" v-if="productVideoData" @click="clickvideodiv"> -->  <!-- @click="changeToVideoCarouselSlide" -->
-                    <!-- <img  style="float: left;cursor: pointer" src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" /> -->
-                  <!-- </div>  -->
-                  <!-- <div class="social-share-button-mob" id="right" @click="clicksharediv" > -->  <!-- @click="showShareDiv = !showShareDiv" -->                    
-                    <!-- <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" /> -->
-                  <!-- </div>                    -->
                   <div class="mob_add_wish_btn">
                       <wishlist-button :product="product" />
                       
@@ -297,25 +227,8 @@
                     </svg>
                     </button>
                   <product-share :product="product" :imgpath="image.src"/>
+              </div>                                 
               </div> 
-                
-                
-              </div> 
-              <!-- <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
-                class="share-box bg-grey-lighter shadow-box">
-                  <button
-                    type="button"
-                    @click="showShareDiv = !showShareDiv"
-                    :aria-label="$t('Close')"
-                    class="absolute top-0 right-0 m-4 h-4"
-                    style="top: -9px;right: -6px;"
-                    >
-                    <svg viewBox="0 0 25 25" class="vt-icon--sm">
-                        <use xlink:href="#close" />
-                    </svg>
-                    </button>
-                  <product-share :product="product" :imgpath="image.src"/>
-              </div>  -->
               <div class="product-details mob">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
@@ -391,7 +304,7 @@
                 </p>
               </div>
               <div class="review-div">
-                  <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id"></span>                  
+                  <span id="stamped-badge-web"  @click="toggleReviewPanel" class="stamped-product-reviews-badge stamped-main-badge"  :data-id="originalProduct.id" v-if="originalProduct.id && cookiebotStampedrender"></span>                  
               </div>
               <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > 
                 <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
@@ -401,19 +314,6 @@
                 <img  style="float: left;cursor: pointer"
                 src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
               </div>                              
-              <!-- <div class="product-top-div">
-                  <div class="video-thum" id="left" v-if="productVideoData && !isInMobileView"
-                    @click="showProducVideoPopup">
-                    <img  style="float: left;cursor: pointer"
-                    src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
-                  </div> 
-                  <div class="social-share-button" id="right" @click="showShareDiv = !showShareDiv" >
-                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
-                  </div>                                   
-                  <div class="wishlist-button" id="center">
-                    <wishlist-button :product="product" />
-                  </div>                                                          
-              </div>   -->
             </div>    
             <div v-if="showShareDiv" @mouseleave="showShareDiv = !showShareDiv"
             class="share-box bg-grey-lighter shadow-box">
@@ -422,19 +322,6 @@
             <h1 data-testid="productName" >
               {{ product.name | htmlDecode }}
             </h1>
-            <!-- <div class="text-grey text-sm mb-3 uppercase">
-              sku: {{ product.sku }}
-            </div> -->   
-
-              <!-- <div
-                    class="yotpo yotpo-main-widget"
-                    data-product-id="product.id"
-                    data-price="product.price"
-                    data-currency="product.currency"
-                    data-name="product.name"
-                    data-url="product.url_path"
-                    data-image-url="product.image">
-            </div> -->
 
             <div>
               
@@ -520,14 +407,7 @@
                       />
                     </div>
                     <div class="sizes" v-else-if="option.label == 'Size'">
-                      <!-- <router-link
-                        to="/size-guide"
-                        target="_blank"
-                        v-if="option.label == 'Size'"
-                        class="text-sm font-medium text-black pt-4 absolute top-0 right-0"
-                      >
-                        {{ $t('Size guide') }}
-                      </router-link> -->
+
                       <size-selector
                         v-for="(s, i) in options[option.attribute_code]"
                       
@@ -580,7 +460,7 @@
               <!-- <div class="fit-label"  :style="{ display: (product.type_id !=='configurable' || isProductHavRecommOptFrmTrufitFlag)? 'none':'block' }">FIND YOUR SIZE</div> -->
               <div class="truefit-button tfc-fitrec-product" 
               :style="{ display: product.type_id =='configurable'? 'block':'none' , width: isProductHavRecommOptFrmTrufitFlag ? '75%':(windowScreenWidth>1400) ? '100%' : '100%'}"
-                v-if="getTruefitProd !== null"
+                v-if="(getTruefitProd !== null) && cookiebotTruefitrender"
                 :id="getTruefitProd.id" :data-userid="getCurrentUserId"                
                   :data-colorid="getTruefitProd.color" 
                   :data-availablesizes="getTruefitProd.availablesizes"
@@ -612,14 +492,6 @@
                   id="add-to-cart-button"
                 />
 
-                  <!-- <div class="video-thum-mob web-video-div" id="left" v-if="productVideoData && !isInMobileView"
-                     @click="showProducVideoPopup">   // @click="changeToVideoCarouselSlide" 
-                    <img  style="float: left;cursor: pointer; width: 30px;height: 27px;"
-                    src="https://cdn.iclothing.com/skin/frontend/base/default/images/play.jpeg" />
-                  </div>  -->
-                  <!-- <div class="social-share-button-mob web-share-div" id="right" @click="clicksharediv" > 
-                    <img class="vt-icon fa-icon-list" src="/assets/icons/shareicon.png" alt="" />
-                  </div>                    -->
                   <div class="mob_add_wish_btn web-wishlist-div" >
                       <wishlist-button :product="product" />                      
                   </div>
@@ -627,46 +499,6 @@
 
             </div>
 
-            <!-- <div class="row text-sm md:py-5 text-center add-to-buttons">
-              <div class="col-6">
-                <wishlist-button :product="product" />
-              </div>
-
-              <div class="col-6">
-                <button
-                  @click="isOnCompare ? removeFromList('compare') : addToList('compare')"
-                  class="inline-flex items-center text-grey-dark"
-                  type="button"
-                  data-testid="addToCompare"
-                >
-                  <svg viewBox="0 0 25 25" class="vt-icon pr-1">
-                    <use xlink:href="#compare" />
-                  </svg>
-                  <template v-if="!isOnCompare">
-                    {{ $t('Add to compare') }}
-                  </template>
-                  <template v-else>
-                    {{ $t('Remove from compare') }}
-                  </template>
-                </button>
-              </div>
-            </div> -->
-
-            <!-- <div class="row text-sm md:py-5 text-center add-to-buttons">
-               <div class="col-6">
-                <button
-                  @click="toggleReviewPanel"
-                  class="inline-flex items-center text-grey-dark"
-                  type="button"
-                  data-testid="showReviews"
-                  style="border: 1px solid;
-                  padding: 5px;
-                  border-radius: 5px;"
-                >
-                    {{ $t('Show Reviews') }}
-                </button>
-              </div>
-            </div> -->
               <div class="product-details desk">   
                 <div class="inner">                                 
                   <a href="javascript:void(0);"  
@@ -708,106 +540,12 @@
       </div>
     </section>
 
-    <!-- <section>
-       <div class="container my-4" style="margin-top:50px;margin-bottom:50px;display:none;" v-if="getProductId">
-                <div id="stamped-main-widget" 
-                  :data-product-id="getProductId" 
-                  :data-name="product.name" 
-                  :data-url="product.url_path" 
-                  :data-image-url="product.image" 
-                  :data-description="'Testing prduct'" 
-                  :data-product-sku="product.sku"> 
-                </div>
-      </div>
-    </section> -->
-
-    <!-- <div class="container my-4">
-      <div class="border-b border-grey-light mt-5 pb-5" />
-
-      <div class="border-b border-grey-light mt-5 pb-5">
-        <h3 @click.prevent="detailsAccordion != 'details' ? detailsAccordion = 'details' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
-          <span>{{ $t('Product details') }}</span>
-          <svg viewBox="0 0 25 25" class="vt-icon">
-            <use v-if="detailsAccordion != 'details'" xlink:href="#down" />
-            <use v-else xlink:href="#up" />
-          </svg>
-        </h3>
-        <transition name="fade">
-          <section v-if="detailsAccordion == 'details'" class="details mt-10">
-            <div
-              class="details-wrapper"
-              :class="{'details-wrapper--open': detailsOpen}"
-            >
-              <div
-                class="text-h5 leading-loose"
-                itemprop="description"
-                v-html="product.description"
-              />
-              <div
-                class="details-overlay"
-                @click="showDetails"
-              />
-            </div>
-          </section>
-        </transition>
-      </div>
-      <div class="border-b border-grey-light mt-5 pb-5">
-        <h3 @click.prevent="detailsAccordion != 'specs' ? detailsAccordion = 'specs' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
-          <span>{{ $t('Specifications') }}</span>
-          <svg viewBox="0 0 25 25" class="vt-icon">
-            <use v-if="detailsAccordion != 'specs'" xlink:href="#down" />
-            <use v-else xlink:href="#up" />
-          </svg>
-        </h3>
-        <transition name="fade">
-          <section v-if="detailsAccordion == 'specs'" class="specs mt-10">
-            <ul class="p-0 m-0 my-2 md:my-0 leading-normal attributes">
-              <product-attribute
-                :key="attr.attribute_code"
-                v-for="attr in customAttributes"
-                :product="product"
-                :attribute="attr"
-                empty-placeholder="N/A"
-              />
-            </ul>
-          </section>
-        </transition>
-      </div>
-
-      <div class="border-b border-grey-light mt-5 pb-5">
-        <h3 @click.prevent="detailsAccordion != 'reviews' ? detailsAccordion = 'reviews' : detailsAccordion = null" class="flex justify-between cursor-pointer font-normal">
-          <span>{{ $t('Reviews') }}</span>
-          <svg viewBox="0 0 25 25" class="vt-icon">
-            <use v-if="detailsAccordion != 'reviews'" xlink:href="#down" />
-            <use v-else xlink:href="#up" />
-          </svg>
-        </h3>
-        <transition name="fade">
-          <section v-if="detailsAccordion == 'reviews'" class="mt-10">
-            <reviews v-if="OnlineOnly" />
-          </section>
-        </transition>
-      </div>
-    </div> -->
-    <!-- <no-ssr>
-      <related-products
-        type="upsell"
-        typeofview="carousel"
-        :fetchRelatedProdctsFlag="fromRelatedProdcutClick"
-        :heading="$t('We found other products you might like')"
-      />
-    </no-ssr> -->
-    <!-- <promoted-offers collection="productBanners" class="my-8 px-6" /> -->
     <no-ssr>
     <related-products type="related" style="display: none;" 
     :fetchRelatedProdctsFlag="fromRelatedProdcutClick"/>
     </no-ssr>
-    <!-- <div class="lg:pl-6   my-4 recent-view w-full">
-        <no-ssr>
-        <recently-viewed  :currentproductsku="product.sku" typeofview="carousel" />
-        </no-ssr>
-    </div> -->
-    <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
+
+    <div @click="segmentifyhandleClicks" v-if="cookiebotSegmentifyrender" class="segmentify-dynamic-content" id="seg-prod-reco"></div>
     <script v-html="JSON.stringify(getJsonLd)" type="application/ld+json"/>           
   </div>
 </template>
@@ -835,11 +573,6 @@ const ProductCustomOptions = () => import('theme/components/core/ProductCustomOp
 const ProductBundleOptions = () => import('theme/components/core/ProductBundleOptions.vue')
 const QtyInput = () => import('theme/components/theme/QtyInput')
 const ProductShare = () => import('theme/components/core/blocks/Product/ProductShare.vue')
-// import Reviews from 'theme/components/core/blocks/Reviews/Reviews.vue'
-// import ProductAttribute from 'theme/components/core/ProductAttribute.vue'
-// import ProductTile from 'theme/components/core/ProductTile.vue'
-// import PromotedOffers from 'theme/components/theme/blocks/PromotedOffers/PromotedOffers'
-// import RecentlyViewed from 'theme/components/core/blocks/MyAccount/RecentlyViewed'
 
 export default {
   components: {
@@ -857,11 +590,6 @@ export default {
     SizeSelector,    
     QtyInput,
     ProductShare,
-    // ProductAttribute,    
-    // ProductTile,
-    // PromotedOffers,    
-    // Reviews,
-    // RecentlyViewed,
   },
   mixins: [Product, VueOfflineMixin],
   data () {
@@ -883,8 +611,14 @@ export default {
       Breadcrumbsresults: [],
       getJsonLdReview: [],
       ratingValue:0,
-      reviewCount:0,   
-      // removetruefitstyle:false
+      reviewCount:0,
+      cookiebotTruefitrender: false,
+      cookiebotStampedrender: false,
+      cookiebotSegmentifyrender: false,
+      clickEventHandlerdone: false,
+      // cookiebotPreferences : Cookiebot ? Cookiebot.consent ? Cookiebot.consent.preferences : false : false,
+      // cookiebotStatistics : Cookiebot ? Cookiebot.consent ? Cookiebot.consent.statistics : false : false,
+      // cookiebotMarketing : Cookiebot ? Cookiebot.consent ? Cookiebot.consent.marketing : false : false,
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -907,8 +641,10 @@ export default {
       })
   },
   watch: {
-    '$route': 'setBreadCrumbToSamePath'
+    '$route': 'setBreadCrumbToSamePath',      
   },
+  created() {    
+  },  
   directives: { focusClean },
   computed: {
     structuredData () {
@@ -983,46 +719,48 @@ export default {
     this.$bus.$on('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$on('user-after-logout', this.reloadTruefitValues)
     // tfcapi('event','tfc-fitrec-product','render',function(){alert('Hello World!');})
-    	var self = this;
-	tfcapi('event','tfc-fitrec-register','addtobag',function(context) {                
-	var size = context.size;
-
-	// Try to select the size 
-	const checkoptionexist = self.options['size'].find(val => val.label == context.size) 
-	if(!checkoptionexist) {
-	  // The size the user was recommended does not match one on the retailer’s site
-	    this.$store.dispatch('notification/spawnNotification', {
-	      type: 'error',
-	      message: this.$t('The recommended size does not match for this item!'),
-	      action1: { label: this.$t('OK') }
-	    })    
-	}
-	else {
-	  // ... Try to add the item to cart ...
-	    if (self.options['size']) {
-		const recommendatedOption = self.options['size'].find(val => val.label == context.size)
-		if (recommendatedOption) {
-		    const addToCartButton = document.getElementById("add-to-cart-button");
-		    if(addToCartButton){
-		      addToCartButton.click();
-		    } 
-		}
-	    }    
-	}
-	});    
-	tfcapi('event', 'tfc-fitrec-product', 'success' , function(context )  {
-	if (self.options['size']) {
-	  const recommendatedOption = self.options['size'].find(val => val.label == context.fitRecommendation.size)
-	  if (recommendatedOption) {
-	    self.isProductHavRecommOptFrmTrufitFlag = true;
-	    self.$bus.$emit('filter-changed-product', { attribute_code: recommendatedOption.attribute_code, id: recommendatedOption.id, label: recommendatedOption.label })
-	  }
-	}
-	if (typeof fitrec_selectSize === 'function') {
-	    fitrec_selectSize(context.fitRecommendation.size,   
-	      context.fitRecommendation.score);
-	}        
-	});
+    var self = this;
+    if (window && window.tfcapi != undefined){
+            tfcapi('event','tfc-fitrec-register','addtobag',function(context) {                
+                var size = context.size;
+                
+                // Try to select the size 
+                const checkoptionexist = self.options['size'].find(val => val.label == context.size) 
+                if(!checkoptionexist) {
+                  // The size the user was recommended does not match one on the retailer’s site
+                    this.$store.dispatch('notification/spawnNotification', {
+                      type: 'error',
+                      message: this.$t('The recommended size does not match for this item!'),
+                      action1: { label: this.$t('OK') }
+                    })    
+                }
+                else {
+                  // ... Try to add the item to cart ...
+                    if (self.options['size']) {
+                        const recommendatedOption = self.options['size'].find(val => val.label == context.size)
+                        if (recommendatedOption) {
+                            const addToCartButton = document.getElementById("add-to-cart-button");
+                            if(addToCartButton){
+                              addToCartButton.click();
+                            } 
+                        }
+                    }    
+                }
+            });    
+            tfcapi('event', 'tfc-fitrec-product', 'success' , function(context )  {
+                if (self.options['size']) {
+                  const recommendatedOption = self.options['size'].find(val => val.label == context.fitRecommendation.size)
+                  if (recommendatedOption) {
+                    self.isProductHavRecommOptFrmTrufitFlag = true;
+                    self.$bus.$emit('filter-changed-product', { attribute_code: recommendatedOption.attribute_code, id: recommendatedOption.id, label: recommendatedOption.label })
+                  }
+                }
+                if (typeof fitrec_selectSize === 'function') {
+                    fitrec_selectSize(context.fitRecommendation.size,   
+                      context.fitRecommendation.score);
+                }        
+            });
+    } 
 
     this.$store.commit('ui/setProductGetTheLookSidePanelFlag', false)
     this.$store.commit('ui/setMicrocart', false)
@@ -1042,49 +780,8 @@ export default {
         this.ratingValue = reviewdata[0].rating
         this.reviewCount = reviewdata[0].count         
     });
-
-    // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
-    //   this.removetruefitstyle = true
-    // }); 
-    //  this.$bus.$on('product-after-load', this.refreshStampedReview)
-    // document.addEventListener( 'stamped:reviews:loaded', function(e) {
-    //   console.log('Stampled addEventListener', e);
-
-      // document.getElementById("stamped-main-widget").contentWindow.location.reload(true);
-// id="stamped-badge-mobile"  stamped-main-widget
-      // document.getElementById("stamped-badge-mobile").contentWindow.location.reload(true);
-      // document.getElementById("stamped-badge-web").contentWindow.location.reload(true);
-
-      //  let stampedBadge = document.querySelectorAll(".stamped-badge");
-      //     if (stampedBadge.length > 0) {
-      //       stampedBadge.forEach(el => el.remove())
-      //     }
-
-      //     let elements = document.querySelectorAll(".stamped-container");
-      //     if (elements.length > 0) {
-      //       elements.forEach(el => el.remove())
-      //     }
-
-          // window.StampedFn.loadWidget()
-          // window.StampedFn.loadBadges()
-          // window.StampedFn.loadDisplayWidgets()
-    // })
-   },  
-  // mounted () {
-    // console.log('window.StampedFn', window.StampedFn)
-      // setTimeout(() => {
-      //   window.StampedFn.reloadUGC()
-      //   window.StampedFn.loadWidget()
-      //   window.StampedFn.loadBadges()
-      //   window.StampedFn.loadDisplayWidgets()
-      // }, 100);
-
-    // addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
-    //       console.log('stamped:reviews:loaded', e);
-    //   });
-    // this.refreshStampedReview();
-  // },
-  methods: {
+  }, 
+  methods: {    
     getproductswatchimage (prodobj){      
       if(prodobj.color_swatch_image=='no_selection'){
         if(prodobj.colorSwatch && prodobj.colorSwatch!=""){        
@@ -1257,48 +954,7 @@ export default {
     productLink (product) {
       return formatProductLink(product, currentStoreView().storeCode)
     },
-
-    // refreshStampedReview () {
-    //  const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-    //  this.getProductId = prod_ids[Math.floor((Math.random() * 5))];
-    //  console.log('Stamped getProductId value', this.getProductId)
-
-    // let stampedContainer = document.querySelectorAll(".stamped-container");
-    // if (stampedContainer.length > 0) {
-    //   stampedContainer.forEach(el => el.remove())
-    // }
-
-    // let stampedBadge = document.querySelectorAll(".stamped-badge");  // .stamped-badge
-    // if (stampedBadge.length > 0) {
-    //   stampedBadge.forEach(el => el.remove())
-    // }
-
-    // window.StampedFn.reloadUGC()
-    // // this.$forceUpdate();
-
-    //  setTimeout(() => {
-    //        let stampedBadge = document.querySelectorAll(".stamped-badge");
-    //       if (stampedBadge.length > 0) {
-    //         stampedBadge.forEach(el => el.remove())
-    //       }
-
-    //       let elements = document.querySelectorAll(".stamped-container");
-    //       if (elements.length > 0) {
-    //         elements.forEach(el => el.remove())
-    //       }
-
-    //       window.StampedFn.reloadUGC()
-          
-    //       window.StampedFn.loadWidget()
-    //       window.StampedFn.loadBadges()
-    //       window.StampedFn.loadDisplayWidgets()
-    //       this.$forceUpdate();
-
-    //  }, 1500);
-
-    // },
     changeProd (val) {
-      // console.log('changeProd when another product clicked', val)
       if (val.route !== null) {
         this.getProductId = null;
         if(!this.fromRelatedProdcutClick) this.colorSwatchRelateProduct = [];
@@ -1328,28 +984,88 @@ export default {
       */
         this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: 'g/'+this.product.parentSku});
 
-      /* 
-        For Stamped Review
-      */
-      // this.getProductId =  null
-        // const prod_ids = ['145954' , '145961' ,'161420', '145965', '148392' ,'159645'] 
-        // this.getProductId = prod_ids[Math.floor((Math.random() * 6))];
-        // console.log('Stamped getProductId value', this.getProductId)
-        // this.$store.dispatch('ui/updateYoptoProduct' , this.getProductId)
+    // to load Cookiebot consent popup - initial load
+    // CookiebotCallback_OnAccept
+      if (window && window.Cookiebot != undefined){
+        if(Cookiebot && Cookiebot.consent){
+                  if(Cookiebot.consent.statistics && Cookiebot.consent.preferences && Cookiebot.consent.marketing)
+                  {
+                    console.log('homepage Cookiebot trigger', 'All consent' );
+                    this.cookiebotTruefitrender = true;
+                    this.cookiebotStampedrender = true;
+                    this.cookiebotSegmentifyrender = true;
+                    this.loadTrueFitconsent();
+                    this.loadStampedReviewconsent();
 
-      /* 
-        For TrueFit Integration
-      */
-        // let trufitIds = [{ id: 'DS20', color: 'navy'},
-        //                 { id: 'MA810108-P3022', color: 'green'},
-        //                 { id: 'KP0336', color: 'blue'  },
-        //                 { id: 'PD51162', color: 'orange'  },
-        //                 { id: 'MA810236', color: 'navy' },
-        //                 { id: '10222417', color: 'mustard'},
-        //                 { id: 'PD810608', color: 'navy' },
-        //                 {id: 'D146985', color: 'navy' }
-        //                 ];
-        // this.getTruefitProd = trufitIds[Math.floor((Math.random() * 7))];
+                  }else if(Cookiebot.consent.statistics){
+
+                    console.log('homepage Cookiebot trigger', '>> statistics' );
+                    this.cookiebotTruefitrender = false;
+                    this.cookiebotSegmentifyrender = false;
+                    this.cookiebotStampedrender = false;
+
+                  }else if(Cookiebot.consent.preferences){
+
+                    console.log('homepage Cookiebot trigger', '>> preferences' );
+                    this.cookiebotTruefitrender = true;
+                    this.cookiebotSegmentifyrender = true;
+                    this.cookiebotStampedrender = false;
+                    this.loadTrueFitconsent();
+
+                  }else if(Cookiebot.consent.marketing){
+                    console.log('homepage Cookiebot trigger', '>> marketing' );
+                    this.cookiebotTruefitrender = false;
+                    this.cookiebotSegmentifyrender = false;
+                    this.cookiebotStampedrender = true;
+                    this.loadStampedReviewconsent();
+
+                  }  
+        } 
+      }   
+    },
+    EventHandlerCookieconsentTrigger (){
+      console.log("test chage aaaaaaaaaaaaaaaaaaa", Cookiebot.consent.preferences);
+      if(Cookiebot.consent.statistics && Cookiebot.consent.preferences && Cookiebot.consent.marketing)
+      {
+        console.log('reload Cookiebot trigger', 'All consent' );
+        this.cookiebotTruefitrender = true;
+        this.cookiebotStampedrender = true;
+        this.cookiebotSegmentifyrender = true;
+        this.clickEventHandlerdone = true;
+        this.loadTrueFitconsent();
+        this.loadStampedReviewconsent();
+        window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+
+      }else if(Cookiebot.consent.statistics){
+
+        console.log('reload Cookiebot trigger', '>> statistics' );
+        this.cookiebotTruefitrender = false;
+        this.cookiebotStampedrender = false;
+        this.cookiebotSegmentifyrender = false;
+        this.clickEventHandlerdone = true;
+        window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+
+      }else if(Cookiebot.consent.preferences){
+
+        console.log('reload Cookiebot trigger', '>> preferences' );
+        this.cookiebotTruefitrender = true;
+        this.cookiebotSegmentifyrender = true;
+        this.cookiebotStampedrender = false;
+        this.clickEventHandlerdone = true;
+        this.loadTrueFitconsent();
+        window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+
+      }else if(Cookiebot.consent.marketing){
+        console.log('reload Cookiebot trigger', '>> marketing' );
+        this.cookiebotTruefitrender = false;
+        this.cookiebotSegmentifyrender = false;
+        this.cookiebotStampedrender = true;
+        this.clickEventHandlerdone = true;
+        this.loadStampedReviewconsent();
+        window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+      }      
+    },    
+    loadTrueFitconsent () {
         if (this.attributesByCode.color && this.product.color) {
           const colorSwatch = this.attributesByCode.color.options.find(code => parseInt(code.value) === this.product.color)
           let availablesizes = [];
@@ -1380,10 +1096,14 @@ export default {
         } else {
           this.getTruefitProd = null;
         }
-        // console.log('TrueFit Integration value', this.getTruefitProd)
+        /* For reload the TrueFit part */ 
+        window&&window.tfcapi&&window.tfcapi('calculate');
 
-      /* For reload the stamped review section */ 
-        // this.$forceUpdate();
+        setTimeout(() => {
+          window&&window.tfcapi&&window.tfcapi('calculate');
+        }, 1500);        
+    },
+    loadStampedReviewconsent () {
         let stampedContainer = document.querySelectorAll(".stamped-container");
         if (stampedContainer.length > 0) {
           stampedContainer.forEach(el => el.remove())
@@ -1392,36 +1112,20 @@ export default {
         if (stampedBadge.length > 0) {
           stampedBadge.forEach(el => el.remove())
         }
-        window&&window.StampedFn&&window.StampedFn.reloadUGC()
+        if (window && window.StampedFn != undefined){
+          StampedFn.init({ apiKey: 'pubkey-Y55wBte73EjEC0fGTj5RWA8fEEny21',
+              storeUrl: 'www.iclothing.com' });
+        }         
+        // window&&window.StampedFn&&window.StampedFn.reloadUGC()
         // this.$forceUpdate();
         setTimeout(() => {
-              //  let stampedBadge = document.querySelectorAll(".stamped-badge");
-              // if (stampedBadge.length > 0) {
-              //   stampedBadge.forEach(el => el.remove())
-              // }
-
-              // let elements = document.querySelectorAll(".stamped-container");
-              // if (elements.length > 0) {
-              //   elements.forEach(el => el.remove())
-              // }
-
-              // window.StampedFn.reloadUGC()
-              // window.StampedFn.reloadUGC()
                window&&window.StampedFn&&window.StampedFn.loadWidget()
                window&&window.StampedFn&&window.StampedFn.loadBadges()
                window&&window.StampedFn&&window.StampedFn.loadDisplayWidgets()
-              this.$forceUpdate();
-                            
-              // tfcapi('event', 'tfc-fitrec-product', 'nostylenouser' , function(context )  {
-              //   this.removetruefitstyle = true
-              // });               
-        }, 800);
-
-     /* For reload the TrueFit part */ 
-         window&&window.tfcapi&&window.tfcapi('calculate');
+              this.$forceUpdate();                                          
+        }, 800);      
     },
     reloadTruefitValues () {
-      console.log('onLoggedIn the user')
       setTimeout(() => {
        window&&window.tfcapi&&window.tfcapi('calculate');
       }, 250);
@@ -1462,25 +1166,33 @@ export default {
     this.$bus.$off('user-after-loggedin', this.reloadTruefitValues)
     this.$bus.$off('user-after-logout', this.reloadTruefitValues)
   },
-  mounted() {    
+  mounted() { 
+    window.addEventListener("load", function(event) {
+          setTimeout(() => {
+            console.log("EVENT LOAD","NEWAAAAAAAAAAAAAAAAAAA11111");      
+            this.EventHandlerCookieconsentTrigger();            
+          }, 500);      
+    });    
+    this.$nextTick(function () {
+          setTimeout(() => {
+            console.log("NEXT TRICK","NEWAAAAAAAAAAAAAAAAAAA22222");
+            this.EventHandlerCookieconsentTrigger();            
+          }, 500);      
+    });       
+    if(this.clickEventHandlerdone===false){
+      window.addEventListener("click", this.EventHandlerCookieconsentTrigger);  
+    }else{
+      window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+    }    
     this.setSegmentify();    
     this.windowScreenWidth = window.innerWidth; 
-    //  this.mobileCartFixedHeight= window.innerHeight-65;
-    //  this.$nextTick(()=> {
-    //     this.mobileCartFixedHeight= window.innerHeight-65;
-    //  });
-    this.getDataFromThirdPartyModules();
-    // this.$bus.$emit('send-to-emarsys-tracking', { type: 'Product', productSku: this.product.sku});
+    this.getDataFromThirdPartyModules();    
     if (this.product.type_id !== 'configurable') this.disableAddToCartButtonFlag = false;
-    // const scrollHandler = () => {
-    //   this.mobileCartFixedHeight= window.innerHeight-65;
-    //   console.log('mobileCartFixedHeight', this.mobileCartFixedHeight)
-    // }
-    // document.addEventListener('scroll', scrollHandler)
-    // this.$once('hook:destroyed', () => {
-    //   document.removeEventListener('scroll', scrollHandler)
-    // })    
-  }
+
+  },
+  destroyed() {    
+      window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);    
+  },   
 }
 </script>
 
@@ -2957,3 +2669,4 @@ a:-webkit-any-link {
 }
 
 </style>
+
