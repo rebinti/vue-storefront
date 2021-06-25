@@ -6,7 +6,7 @@
     </div>    
     <!-- For loading the styla magazine content -->
     <Styla-home-magazine  />   
-    <Segmentify-home-slider />       
+    <Segmentify-home-slider v-if="cookiebotSegmentifyrender" />       
     <script v-html="JSON.stringify(getJsonLdSearchbox)" type="application/ld+json"/>        
   </div>
 </template>
@@ -31,7 +31,8 @@ export default {
     return {
       loading: true,
       cmspageidentifier:'amphomepage',      
-      stylaloaderflag: false, 
+      stylaloaderflag: false,
+      cookiebotSegmentifyrender: false, 
       getJsonLdSearchbox: {
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -49,11 +50,14 @@ export default {
   },  
   methods: {
     setSegmentify() {
-      // For working Segmentify
-      window.segPageInf = {
-        "category": "Home Page",
-        "subCategory": ""
-      };      
+      if (window && window.Cookiebot && window.Cookiebot.consent && window.Cookiebot.consent.preferences) {	
+	      // For working Segmentify
+	      this.cookiebotSegmentifyrender = true;	
+	      window.segPageInf = {
+		"category": "Home Page",
+		"subCategory": ""
+	      };
+      }	 	      
     },
     fromhomerouterwatch () {       
       this.setSegmentify()

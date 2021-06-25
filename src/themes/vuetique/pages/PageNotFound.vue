@@ -35,7 +35,7 @@
     </section>
     <section class="mb-20">
       <div class="container">
-        <div @click="segmentifyhandleClicks" class="segmentify-dynamic-content"  id="seg-pagenotfount-reco"></div>
+        <div @click="segmentifyhandleClicks" v-if="cookiebotSegmentifyrender" class="segmentify-dynamic-content"  id="seg-pagenotfount-reco"></div>
         <!-- <section class="container">
           <header class="col-md-12 py-4 mt-12 mb-6">
             <h2 class="text-center text-h2">
@@ -87,7 +87,8 @@ export default {
         navigationEnabled: true,
         navigationNextLabel: `<button type="button" class="carousel-nav-nxt"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M.75 11h22.5m-10.5 10.5L23.25 11 12.75.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`,
         navigationPrevLabel: `<button type="button" class="carousel-nav-pre"><svg width="1em" height="1em" fill="currentColor" viewBox="0 0 24 22"><path d="M23.25 11H.75M11.25.5L.75 11l10.5 10.5" stroke="#0C1214" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`        
-      }
+      },
+      cookiebotSegmentifyrender: window && window.Cookiebot.consent.preferences ? window.Cookiebot.consent.preferences : false 	
     }
   },
   computed: {
