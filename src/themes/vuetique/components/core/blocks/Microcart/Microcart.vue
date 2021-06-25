@@ -190,7 +190,7 @@ export default {
   },
   beforeMount () { 
       // PAPERPLANES - MICRO CART      
-      if (window && window._paq != undefined) {
+          if (window && window._paq  != undefined && window.Cookiebot.consent.marketing) {
           //console.log("PAPERPLANE MICRO CART BBBBBBBBBB",this.$store.state.cart)
           this.$store.state.cart.cartItems.forEach(product => {
             window._paq.push(['addEcommerceItem',product.parentSku,product.name,'',product.price,product.qty]);                     
@@ -211,15 +211,17 @@ export default {
                 productList.push({productId: val.parentSku,Sku: val.sku, price: val.price, quantity: val.qty,currency:'EUR'})                
               } 
             })
-            window.sgfLayer = {
-                'checkout': {
-                    step: 'basket',
-                    totalPrice: this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '',
-                    currency: 'EUR', 
-                    cartUrl: 'the cart side panel is effectively our cart page',
-                    products: productList
-                }
-            };            
+            if (window && window.Cookiebot.consent.preferences) { 		
+		    window.sgfLayer = {
+		        'checkout': {
+		            step: 'basket',
+		            totalPrice: this.$store.state.cart.platformTotals && this.$store.state.cart.platformTotals.grand_total ? this.$store.state.cart.platformTotals.grand_total : '',
+		            currency: 'EUR', 
+		            cartUrl: 'the cart side panel is effectively our cart page',
+		            products: productList
+		        }
+		    };
+            } 		            
           }          
   },
   methods: {
