@@ -133,10 +133,12 @@ export default {
           console.log("GUUUUUUUUUUU - email google",social_data.email)
           console.log("GUUUUUUUUUUU - email uppper google",social_data.email.toUpperCase())
           console.log("GUUUUUUUUUUU - email md5 google",md5(social_data.email.toUpperCase()))
-          if (window && window._paq  != undefined && window.Cookiebot.consent.marketing) {
-            window._paq.push(["setUserId",md5(social_data.email.toUpperCase())]);  
-            window._paq.push(["trackPageView"]);
-          }
+          if(window && Cookiebot && Cookiebot.consent && Cookiebot.consent.marketing){
+            if (window && window._paq != undefined ) {
+              window._paq.push(["setUserId",md5(social_data.email.toUpperCase())]);  
+              window._paq.push(["trackPageView"]); 
+            }
+          }          
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) this.$bus.$emit('notification-progress-start', i18n.t('Checkout in progress ...'))
         }

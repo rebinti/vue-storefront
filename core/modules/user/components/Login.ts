@@ -31,10 +31,12 @@ export const Login = {
           console.log("GUUUUUUUUUUU - email",this.email)
           console.log("GUUUUUUUUUUU - email uppper",this.email.toUpperCase())
           console.log("GUUUUUUUUUUU - email md5",md5(this.email.toUpperCase()))
-          if (window && _paq != undefined && Cookiebot.consent.marketing) {
-			  _paq.push(["setUserId",md5(this.email.toUpperCase())]);
-			  _paq.push(["trackPageView"]);
-          }
+          if(window && Cookiebot && Cookiebot.consent && Cookiebot.consent.marketing){
+            if (window && _paq != undefined ) {
+              _paq.push(["setUserId",md5(this.email.toUpperCase())]);
+              _paq.push(["trackPageView"]);
+            }
+          }          
           this.onSuccess()
           if (!this.checkoutWithoutLogin) this.close()
           if (this.checkoutWithoutLogin) {
