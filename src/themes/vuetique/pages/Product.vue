@@ -723,7 +723,6 @@ export default {
     if (window && window.tfcapi != undefined){
             tfcapi('event','tfc-fitrec-register','addtobag',function(context) {                
                 var size = context.size;
-                
                 // Try to select the size 
                 const checkoptionexist = self.options['size'].find(val => val.label == context.size) 
                 if(!checkoptionexist) {
@@ -997,6 +996,14 @@ export default {
                     this.loadTrueFitconsent();
                     this.loadStampedReviewconsent();
 
+                  }else if(Cookiebot.consent.preferences && Cookiebot.consent.marketing){
+        
+                    this.cookiebotTruefitrender = true;
+                    this.cookiebotStampedrender = true;
+                    this.cookiebotSegmentifyrender = true;
+                    this.loadTrueFitconsent();
+                    this.loadStampedReviewconsent();      
+
                   }else if(Cookiebot.consent.statistics){
 
                     console.log('homepage Cookiebot trigger', '>> statistics' );
@@ -1035,6 +1042,16 @@ export default {
         this.loadTrueFitconsent();
         this.loadStampedReviewconsent();
         window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);
+
+      }else if(Cookiebot.consent.preferences && Cookiebot.consent.marketing){
+
+        this.cookiebotTruefitrender = true;
+        this.cookiebotSegmentifyrender = true;
+        this.cookiebotStampedrender = true;
+        this.clickEventHandlerdone = true;
+        this.loadTrueFitconsent();
+        this.loadStampedReviewconsent();
+        window.removeEventListener("click", this.EventHandlerCookieconsentTrigger);        
 
       }else if(Cookiebot.consent.statistics){
 
