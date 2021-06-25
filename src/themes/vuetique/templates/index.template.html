@@ -8,7 +8,7 @@
 	<link rel="dns-prefetch" href="//client-scripts.styla.com">
 	<link rel="dns-prefetch" href="//redpanda.styla.com">
 	<link rel="dns-prefetch" href="//styla-prod.us.imgix.net">
-	<link rel="dns-prefetch"href="https://config.a8.styla.com">	
+	<link rel="dns-prefetch" href="https://config.a8.styla.com">	
 	<link rel='dns-prefetch' href='//cdn.segmentify.com'>
 	<link rel='dns-prefetch' href='//gandalf-eu.segmentify.com/'> 
 	<link rel="preload" href="https://cdn.iclothing.com/skin/frontend/codazon_fastest/baby/css/fonts/brandon_med-webfont.woff2" as="font" type="font/woff2" crossorigin>
@@ -23,33 +23,32 @@
 
 
 	<script rel="preload" src="https://client-scripts.styla.com/scripts/clients/iclothing-import.js" type="text/javascript" data-cookieconsent="ignore" ></script>	
+
 	<!-- >> DATASHIPS START  << -->	
-	
-	<script type="text/javascript">		
-		document.write("<script id='pc' type='text/javascript' src='https://api.dataships.io/js/pc.js?apikey=f4nIJ0NEbIKN4Qs2jVsAnouSqJkWjaah&v="+Date.now()+"' async defer></scr"+"ipt>");
+	<script defer type="text/javascript">		
+		document.write("<script id='pc' type='text/javascript' src='https://api.dataships.io/js/pc.js?apikey=f4nIJ0NEbIKN4Qs2jVsAnouSqJkWjaah&v="+Date.now()+"'></scr"+"ipt>");
 	</script>
-	
 	<!-- >> DATASHIPS ENDS  << -->	
+
 	<script data-cookieconsent="ignore">
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+	
 		gtag("consent", "default", {
-		ad_storage: "denied",
-		analytics_storage: "denied",
-		wait_for_update: 500
+			ad_storage: "denied",
+			analytics_storage: "denied",
+			functionality_storage: "denied",
+			personalization_storage: "denied",
+			security_storage: "granted",
+			wait_for_update: 500,
 		});
 		gtag("set", "ads_data_redaction", true);
-		gtag('js', new Date());
-		gtag('config', 'G-D2VZ2XSDDS');
-	</script>
-
-	<!-- SEARCHSPRING TRACK START-->
-	<script type="text/javascript" src="//cdn.searchspring.net/intellisuggest/is.min.js"></script>
-	<!-- SEARCHSPRING TRACK START-->			
+	</script>		
 	
-	<!-- TrustBox script -->
-	<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async="" ></script>
-	<!-- End TrustBox script -->
+
 	<script type="application/ld+json">
 		{
 			"@context":"http:\/\/schema.org",
@@ -95,18 +94,5 @@
 		<!--vue-ssr-outlet-->
     {{{ renderState() }}}
 	{{{ renderScripts() }}}
-	<!-- Start of iclothing Zendesk Widget script  -->
-	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=627921cd-e179-4337-86af-1469e5c327f2" async> </script>
-	<script type="text/javascript">
-		window.zESettings = {
-			webWidget: {
-				zIndex: 5,
-				chat: {
-					connectOnPageLoad: false
-				}
-			}
-		};
-	</script>
-	 <!-- End of iclothing Zendesk Widget script	 -->
   </body>
 </html>
