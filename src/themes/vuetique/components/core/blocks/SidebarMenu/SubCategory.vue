@@ -86,7 +86,7 @@
       </li>
       <li class="border-b flex">
         <a href="#" class="menu-link" @click.prevent="logout">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="sprite sprite-logout-icon"></i>
           {{ $t('Logout') }}
         </a>
       </li>
@@ -208,6 +208,44 @@ export default {
     transform: translateX(-100%);
     margin-bottom: 100px;
     /* padding-bottom: 100px; */
+  }
+  .sprite {
+    background-image: url(/assets/account_sprite.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-size: 190px;  
+  }
+  .sprite.sprite-user-icon {
+      background-position: 0px 0px;
+      float: left;
+      margin-right: 5px;
+  }
+  .sprite.sprite-shipping-icon {
+      background-position: -41px 0px;
+      float: left;
+      margin-right: 5px;
+  }
+  .sprite.sprite-newsletter-icon {
+      background-position: -77px 1px;
+      float: left;
+      margin-right: 5px;
+  }
+  .sprite.sprite-order-icon {
+      background-position: -110px 2px;
+      float: left;
+      margin-right: 5px;
+  }
+  .sprite.sprite-review-icon {
+      background-position: -138px 2px;
+      float: left;
+      margin-right: 5px;
+  }
+  .sprite.sprite-logout-icon {
+      background-position: -167px 2px;
+      float: left;
+      margin-right: 5px;
   }
  /* @media (max-width: 767px) { */
     /* .sidebar-submenu {

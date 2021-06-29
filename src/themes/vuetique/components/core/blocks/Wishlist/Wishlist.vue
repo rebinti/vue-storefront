@@ -92,7 +92,7 @@
       v-if="viewType === 'boards'"
       @click="openCreateBoardPopup"
     >
-      <a href="#" class="add_more_pls">
+      <a href="#" class="sprite sprite-addmore-icon">
         <i class="fas fa-plus" />
       </a>
     </div>
@@ -235,7 +235,17 @@ i {
 .add-now-button {
   width: 100px;
 }
-
+.sprite.sprite-addmore-icon {
+    background-image: url(/assets/add_board.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
+}
+.sprite.sprite-addmore-icon:hover{
+    opacity: 0.6;
+}
 .wish_wrap_box {
   text-align: center;
 }

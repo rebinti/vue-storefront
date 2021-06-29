@@ -167,25 +167,25 @@ export default {
           id: 1,
           name: i18n.t('My profile'),
           url: '/my-account',
-          icon: 'fas fa-user-alt'
+          icon: 'sprite sprite-user-icon'
         },
         {
           id: 2,
           name: i18n.t('My shipping details'),
           url: '/my-account/shipping-details',
-          icon: 'fas fa-shipping-fast'
+          icon: 'sprite sprite-shipping-icon'
         },
         {
           id: 3,
           name: i18n.t('My newsletter'),
           url: '/my-account/newsletter',
-          icon: 'fas fa-newspaper'
+          icon: 'sprite sprite-newsletter-icon'
         },
         {
           id: 4,
           name: i18n.t('My orders'),
           url: '/my-account/orders',
-          icon: 'fas fa-box'
+          icon: 'sprite sprite-order-icon'
         },
         // {
         //   id: 5,
@@ -203,7 +203,7 @@ export default {
           id: 7,
           name: i18n.t('My Recently viewed products'),
           url: '/my-account/recently-viewed',
-          icon: 'fas fa-star-half-alt'
+          icon: 'sprite sprite-review-icon'
         }
       ],
       componentLoaded: false
@@ -247,7 +247,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 @import "~theme/css/animations/transitions";
 
@@ -257,7 +256,6 @@ export default {
     max-height: calc(100vh - 70px);
   }
 }
-
 .sidebar-menu {
   width: 100vh;
   top: 0px;

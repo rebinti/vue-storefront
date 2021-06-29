@@ -79,7 +79,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-facebook-f"></i>
+                <!-- <i class="fab fa-facebook-f"></i> -->
+            		<i class="sprite sprite-facebookicon"></i>
               </a>
               <a
                 target="_blank"
@@ -89,7 +90,8 @@
                 :aria-label="$t('Go to Instagram')"
               >
                 <!-- <img src="/assets/icons/social-i.svg" alt=""> -->
-                <i class="fab fa-instagram"></i>
+                <!-- <i class="fab fa-instagram"></i> -->
+                <i class="sprite sprite-instaicon"></i>
               </a>
                <a
                 target="_blank"
@@ -99,7 +101,8 @@
                 :aria-label="$t('Go to Youtube')"
               >
                 <!-- <img src="/assets/icons/social-y.svg" alt=""> -->
-                <i class="fab fa-youtube"></i>
+                <!-- <i class="fab fa-youtube"></i> -->
+                <i class="sprite sprite-youtubeicon"></i>
               </a>
               <a
                 target="_blank"
@@ -109,7 +112,8 @@
                 :aria-label="$t('Go to Pinterest')"
               >
                 <!-- <img src="/assets/icons/social-p.svg" alt=""> -->
-                <i class="fab fa-pinterest-p"></i>
+                <!-- <i class="fab fa-pinterest-p"></i> -->
+                <i class="sprite sprite-pinteresticon"></i>
               </a> 
               <a
                 target="_blank"
@@ -118,7 +122,8 @@
                 href="https://twitter.com/iclothing"
                 :aria-label="$t('Go to Twitter')"
               >
-                <i class="fab fa-twitter"></i>
+                <!-- <i class="fab fa-twitter"></i> -->
+                <i class="sprite sprite-twittericon"></i>
               </a>
             </div> 
             </Accordion>   
@@ -132,7 +137,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-android"></i>
+                <!-- <i class="fab fa-android"></i> -->
+                <i class="sprite sprite-androidcon"></i>
               </a>
 
                <a
@@ -143,7 +149,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-apple"></i>
+                <!-- <i class="fab fa-apple"></i> -->
+                <i class="sprite sprite-applecon"></i>
               </a>
     
             </div> 
@@ -210,7 +217,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-facebook-f"></i>
+                <!-- <i class="fab fa-facebook-f"></i> -->
+		            <i class="sprite sprite-facebookicon"></i>
               </a>
               <a
                 target="_blank"
@@ -220,7 +228,8 @@
                 :aria-label="$t('Go to Instagram')"
               >
                 <!-- <img src="/assets/icons/social-i.svg" alt=""> -->
-                <i class="fab fa-instagram"></i>
+                <!-- <i class="fab fa-instagram"></i> -->
+                <i class="sprite sprite-instaicon"></i>              
               </a>
                <a
                 target="_blank"
@@ -230,7 +239,9 @@
                 :aria-label="$t('Go to Youtube')"
               >
                 <!-- <img src="/assets/icons/social-y.svg" alt=""> -->
-                <i class="fab fa-youtube"></i>
+                <!-- <i class="fab fa-youtube"></i> -->
+                <i class="sprite sprite-youtubeicon"></i>
+                 
               </a>
               <a
                 target="_blank"
@@ -240,7 +251,9 @@
                 :aria-label="$t('Go to Pinterest')"
               >
                 <!-- <img src="/assets/icons/social-p.svg" alt=""> -->
-                <i class="fab fa-pinterest-p"></i>
+                <!-- <i class="fab fa-pinterest-p"></i> -->
+                <i class="sprite sprite-pinteresticon"></i>
+            
               </a> 
               <a
                 target="_blank"
@@ -249,7 +262,8 @@
                 href="https://twitter.com/iclothing"
                 :aria-label="$t('Go to Twitter')"
               >
-                <i class="fab fa-twitter"></i>
+                <!-- <i class="fab fa-twitter"></i> -->
+                <i class="sprite sprite-twittericon"></i>                
               </a>
             </div>
           </div>
@@ -268,7 +282,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-android"></i>
+                <!-- <i class="fab fa-android"></i> -->
+                <i class="sprite sprite-androidcon"></i>                
               </a>
 
                <a
@@ -279,7 +294,8 @@
                 :aria-label="$t('Go to Facebook')"
               >
                 <!-- <img src="/assets/icons/social-f.svg" alt=""> -->
-                <i class="fab fa-apple"></i>
+                <!-- <i class="fab fa-apple"></i> -->
+                <i class="sprite sprite-applecon"></i>                     
               </a>
     
             </div>
@@ -356,10 +372,39 @@ export default {
 
 <style lang="scss" scoped>
 
+.sprite {
+    background-image: url(/assets/social_sprite_new.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 35px;
+    height: 35px; 
+    background-size: 335px; 
+}
+
+.sprite-facebookicon {
+    background-position: -7px -3px;
+}
+.sprite-instaicon{
+    background-position: -54px -3px;
+}
+.sprite-youtubeicon{
+    background-position: -101px -3px;
+}
+.sprite-pinteresticon{
+    background-position: -148px -3px;
+}
+.sprite-twittericon{
+    background-position: -195px -3px;
+}
+.sprite-androidcon{
+    background-position: -246px -3px;
+}
+.sprite-applecon{
+    background-position: -293px -3px;
+}
 .icon {
   transition: 0.3s all;
 }
-
 .social-icon {
   width: 40px;
   height: 40px;
@@ -396,11 +441,11 @@ export default {
     /* height: 25px; */
     line-height: 26px;
     margin-right: 5px;
-    background-color: #282828;
+    /* background-color: #282828; */
     color: #FFF;
     border-radius: 25px;
     border: 1px solid;
-    border-color: #282828;
+    /* border-color: #282828; */
     display: inline-block;
     vertical-align: top;
     width: 35px;
