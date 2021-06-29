@@ -320,19 +320,19 @@
 
         <div class="col-12 md:col-6 flex md:justify-end">
           <div class="footer-pay-item">
-            <img src="/assets/icons/pay-visa.png" alt="">
+            <i class="spritepayment sprite-pay-visa"></i>
           </div>
           <div class="footer-pay-item">
-            <img src="/assets/icons/pay-master-card.png" alt="">
+            <i class="spritepayment sprite-pay-master-card"></i>
           </div>
           <div class="footer-pay-item">
-            <img src="/assets/icons/pay-amex.png" alt="">
+            <i class="spritepayment sprite-pay-amex"></i>
           </div>
           <div class="footer-pay-item">
-            <img src="/assets/icons/pay-disc.png" alt="">
+            <i class="spritepayment sprite-pay-disc"></i>
           </div>
           <div class="footer-pay-item">
-            <img src="/assets/icons/pay-paypal.png" alt="">
+            <i class="spritepayment sprite-pay-paypal"></i>
           </div>
         </div>
       </div>
@@ -401,6 +401,36 @@ export default {
 }
 .sprite-applecon{
     background-position: -293px -3px;
+}
+.spritepayment {
+    background-image: url(/assets/sprite_payment.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+.sprite-pay-amex {
+    width: 30px;
+    height: 7px;
+    background-position: -10px -10px;
+}
+.sprite-pay-disc {
+    width: 20px;
+    height: 8px;
+    background-position: -10px -37px;
+}
+.sprite-pay-master-card {
+    width: 22px;
+    height: 14px;
+    background-position: -10px -65px;
+}
+.sprite-pay-paypal {
+    width: 14px;
+    height: 16px;
+    background-position: -10px -99px;
+}
+.sprite-pay-visa {
+    width: 26px;
+    height: 8px;
+    background-position: -10px -135px;
 }
 .icon {
   transition: 0.3s all;
